@@ -1,0 +1,82 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Spotted\ServiceContracts\Users;
+
+use Spotted\Core\Exceptions\APIException;
+use Spotted\CursorURLPage;
+use Spotted\RequestOptions;
+use Spotted\SimplifiedPlaylistObject;
+use Spotted\Users\Playlists\PlaylistNewResponse;
+
+use const Spotted\Core\OMIT as omit;
+
+interface PlaylistsContract
+{
+    /**
+     * @api
+     *
+     * @param string $name The name for the new playlist, for example `"Your Coolest Playlist"`. This name does not need to be unique; a user may have several playlists with the same name.
+     * @param bool $collaborative Defaults to `false`. If `true` the playlist will be collaborative. _**Note**: to create a collaborative playlist you must also set `public` to `false`. To create collaborative playlists you must have granted `playlist-modify-private` and `playlist-modify-public` [scopes](/documentation/web-api/concepts/scopes/#list-of-scopes)._
+     * @param string $description value for playlist description as displayed in Spotify Clients and in the Web API
+     * @param bool $public Defaults to `true`. The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private. To be able to create private playlists, the user must have granted the `playlist-modify-private` [scope](/documentation/web-api/concepts/scopes/#list-of-scopes). For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
+     *
+     * @throws APIException
+     */
+    public function create(
+        string $userID,
+        $name,
+        $collaborative = omit,
+        $description = omit,
+        $public = omit,
+        ?RequestOptions $requestOptions = null,
+    ): PlaylistNewResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @throws APIException
+     */
+    public function createRaw(
+        string $userID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): PlaylistNewResponse;
+
+    /**
+     * @api
+     *
+     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param int $offset The index of the first playlist to return. Default:
+     * 0 (the first object). Maximum offset: 100.000\. Use with `limit` to get the
+     * next set of playlists.
+     *
+     * @return CursorURLPage<SimplifiedPlaylistObject>
+     *
+     * @throws APIException
+     */
+    public function list(
+        string $userID,
+        $limit = omit,
+        $offset = omit,
+        ?RequestOptions $requestOptions = null,
+    ): CursorURLPage;
+
+    /**
+     * @api
+     *
+     * @param array<string, mixed> $params
+     *
+     * @return CursorURLPage<SimplifiedPlaylistObject>
+     *
+     * @throws APIException
+     */
+    public function listRaw(
+        string $userID,
+        array $params,
+        ?RequestOptions $requestOptions = null
+    ): CursorURLPage;
+}

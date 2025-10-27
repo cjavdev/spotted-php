@@ -1,0 +1,103 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Spotted\Tracks;
+
+use Spotted\Core\Attributes\Api;
+use Spotted\Core\Concerns\SdkModel;
+use Spotted\Core\Concerns\SdkParams;
+use Spotted\Core\Contracts\BaseModel;
+
+/**
+ * Get Spotify catalog information for multiple tracks based on their Spotify IDs.
+ *
+ * @see Spotted\Tracks->list
+ *
+ * @phpstan-type track_list_params = array{ids: string, market?: string}
+ */
+final class TrackListParams implements BaseModel
+{
+    /** @use SdkModel<track_list_params> */
+    use SdkModel;
+    use SdkParams;
+
+    /**
+     * A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M`. Maximum: 50 IDs.
+     */
+    #[Api]
+    public string $ids;
+
+    /**
+     * An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     *   If a country code is specified, only content that is available in that market will be returned.<br/>
+     *   If a valid user access token is specified in the request header, the country associated with
+     *   the user account will take priority over this parameter.<br/>
+     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
+     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     */
+    #[Api(optional: true)]
+    public ?string $market;
+
+    /**
+     * `new TrackListParams()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * TrackListParams::with(ids: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new TrackListParams)->withIDs(...)
+     * ```
+     */
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     */
+    public static function with(string $ids, ?string $market = null): self
+    {
+        $obj = new self;
+
+        $obj->ids = $ids;
+
+        null !== $market && $obj->market = $market;
+
+        return $obj;
+    }
+
+    /**
+     * A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M`. Maximum: 50 IDs.
+     */
+    public function withIDs(string $ids): self
+    {
+        $obj = clone $this;
+        $obj->ids = $ids;
+
+        return $obj;
+    }
+
+    /**
+     * An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     *   If a country code is specified, only content that is available in that market will be returned.<br/>
+     *   If a valid user access token is specified in the request header, the country associated with
+     *   the user account will take priority over this parameter.<br/>
+     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
+     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     */
+    public function withMarket(string $market): self
+    {
+        $obj = clone $this;
+        $obj->market = $market;
+
+        return $obj;
+    }
+}
