@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Audiobooks->save
  *
- * @phpstan-type audiobook_save_params = array{ids: string}
+ * @phpstan-type AudiobookSaveParamsShape = array{ids: string}
  */
 final class AudiobookSaveParams implements BaseModel
 {
-    /** @use SdkModel<audiobook_save_params> */
+    /** @use SdkModel<AudiobookSaveParamsShape> */
     use SdkModel;
     use SdkParams;
 

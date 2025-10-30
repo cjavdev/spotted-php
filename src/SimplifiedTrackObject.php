@@ -9,7 +9,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type simplified_track_object = array{
+ * @phpstan-type SimplifiedTrackObjectShape = array{
  *   id?: string,
  *   artists?: list<SimplifiedArtistObject>,
  *   availableMarkets?: list<string>,
@@ -31,7 +31,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class SimplifiedTrackObject implements BaseModel
 {
-    /** @use SdkModel<simplified_track_object> */
+    /** @use SdkModel<SimplifiedTrackObjectShape> */
     use SdkModel;
 
     /**

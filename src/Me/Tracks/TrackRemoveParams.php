@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Tracks->remove
  *
- * @phpstan-type track_remove_params = array{ids?: list<string>}
+ * @phpstan-type TrackRemoveParamsShape = array{ids?: list<string>}
  */
 final class TrackRemoveParams implements BaseModel
 {
-    /** @use SdkModel<track_remove_params> */
+    /** @use SdkModel<TrackRemoveParamsShape> */
     use SdkModel;
     use SdkParams;
 

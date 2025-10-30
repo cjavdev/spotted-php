@@ -11,11 +11,11 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type track_add_response = array{snapshotID?: string}
+ * @phpstan-type TrackAddResponseShape = array{snapshotID?: string}
  */
 final class TrackAddResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<track_add_response> */
+    /** @use SdkModel<TrackAddResponseShape> */
     use SdkModel;
 
     use SdkResponse;

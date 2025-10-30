@@ -9,7 +9,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type linked_track_object = array{
+ * @phpstan-type LinkedTrackObjectShape = array{
  *   id?: string,
  *   externalURLs?: ExternalURLObject,
  *   href?: string,
@@ -19,7 +19,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class LinkedTrackObject implements BaseModel
 {
-    /** @use SdkModel<linked_track_object> */
+    /** @use SdkModel<LinkedTrackObjectShape> */
     use SdkModel;
 
     /**

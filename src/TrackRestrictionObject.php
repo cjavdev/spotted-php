@@ -9,11 +9,11 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type track_restriction_object = array{reason?: string}
+ * @phpstan-type TrackRestrictionObjectShape = array{reason?: string}
  */
 final class TrackRestrictionObject implements BaseModel
 {
-    /** @use SdkModel<track_restriction_object> */
+    /** @use SdkModel<TrackRestrictionObjectShape> */
     use SdkModel;
 
     /**

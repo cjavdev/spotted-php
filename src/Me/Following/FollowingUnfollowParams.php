@@ -15,13 +15,13 @@ use Spotted\Me\Following\FollowingUnfollowParams\Type;
  *
  * @see Spotted\Me\Following->unfollow
  *
- * @phpstan-type following_unfollow_params = array{
+ * @phpstan-type FollowingUnfollowParamsShape = array{
  *   ids?: list<string>, type: Type|value-of<Type>
  * }
  */
 final class FollowingUnfollowParams implements BaseModel
 {
-    /** @use SdkModel<following_unfollow_params> */
+    /** @use SdkModel<FollowingUnfollowParamsShape> */
     use SdkModel;
     use SdkParams;
 

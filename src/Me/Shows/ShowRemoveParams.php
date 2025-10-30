@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Shows->remove
  *
- * @phpstan-type show_remove_params = array{ids?: list<string>, market?: string}
+ * @phpstan-type ShowRemoveParamsShape = array{ids?: list<string>, market?: string}
  */
 final class ShowRemoveParams implements BaseModel
 {
-    /** @use SdkModel<show_remove_params> */
+    /** @use SdkModel<ShowRemoveParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -16,7 +16,7 @@ use Spotted\ShowBase\Type;
 use Spotted\Shows\ShowGetResponse\Episodes;
 
 /**
- * @phpstan-type show_get_response = array{
+ * @phpstan-type ShowGetResponseShape = array{
  *   id: string,
  *   availableMarkets: list<string>,
  *   copyrights: list<CopyrightObject>,
@@ -39,7 +39,7 @@ use Spotted\Shows\ShowGetResponse\Episodes;
  */
 final class ShowGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<show_get_response> */
+    /** @use SdkModel<ShowGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

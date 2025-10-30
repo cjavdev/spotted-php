@@ -9,7 +9,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type paging_playlist_object = array{
+ * @phpstan-type PagingPlaylistObjectShape = array{
  *   href: string,
  *   items: list<SimplifiedPlaylistObject>,
  *   limit: int,
@@ -21,7 +21,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class PagingPlaylistObject implements BaseModel
 {
-    /** @use SdkModel<paging_playlist_object> */
+    /** @use SdkModel<PagingPlaylistObjectShape> */
     use SdkModel;
 
     /**

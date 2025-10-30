@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Albums->check
  *
- * @phpstan-type album_check_params = array{ids: string}
+ * @phpstan-type AlbumCheckParamsShape = array{ids: string}
  */
 final class AlbumCheckParams implements BaseModel
 {
-    /** @use SdkModel<album_check_params> */
+    /** @use SdkModel<AlbumCheckParamsShape> */
     use SdkModel;
     use SdkParams;
 

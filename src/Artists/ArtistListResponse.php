@@ -12,11 +12,11 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type artist_list_response = array{artists: list<ArtistObject>}
+ * @phpstan-type ArtistListResponseShape = array{artists: list<ArtistObject>}
  */
 final class ArtistListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<artist_list_response> */
+    /** @use SdkModel<ArtistListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

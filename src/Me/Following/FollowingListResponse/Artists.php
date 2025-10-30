@@ -11,7 +11,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Me\Following\FollowingListResponse\Artists\Cursors;
 
 /**
- * @phpstan-type artists_alias = array{
+ * @phpstan-type ArtistsShape = array{
  *   cursors?: Cursors,
  *   href?: string,
  *   items?: list<ArtistObject>,
@@ -22,7 +22,7 @@ use Spotted\Me\Following\FollowingListResponse\Artists\Cursors;
  */
 final class Artists implements BaseModel
 {
-    /** @use SdkModel<artists_alias> */
+    /** @use SdkModel<ArtistsShape> */
     use SdkModel;
 
     /**

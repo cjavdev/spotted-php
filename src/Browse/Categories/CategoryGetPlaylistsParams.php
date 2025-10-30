@@ -15,11 +15,11 @@ use Spotted\Core\Contracts\BaseModel;
  * @deprecated
  * @see Spotted\Browse\Categories->getPlaylists
  *
- * @phpstan-type category_get_playlists_params = array{limit?: int, offset?: int}
+ * @phpstan-type CategoryGetPlaylistsParamsShape = array{limit?: int, offset?: int}
  */
 final class CategoryGetPlaylistsParams implements BaseModel
 {
-    /** @use SdkModel<category_get_playlists_params> */
+    /** @use SdkModel<CategoryGetPlaylistsParamsShape> */
     use SdkModel;
     use SdkParams;
 

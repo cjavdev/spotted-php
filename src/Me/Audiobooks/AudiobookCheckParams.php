@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Audiobooks->check
  *
- * @phpstan-type audiobook_check_params = array{ids: string}
+ * @phpstan-type AudiobookCheckParamsShape = array{ids: string}
  */
 final class AudiobookCheckParams implements BaseModel
 {
-    /** @use SdkModel<audiobook_check_params> */
+    /** @use SdkModel<AudiobookCheckParamsShape> */
     use SdkModel;
     use SdkParams;
 

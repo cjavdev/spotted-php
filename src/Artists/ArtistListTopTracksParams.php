@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Artists->listTopTracks
  *
- * @phpstan-type artist_list_top_tracks_params = array{market?: string}
+ * @phpstan-type ArtistListTopTracksParamsShape = array{market?: string}
  */
 final class ArtistListTopTracksParams implements BaseModel
 {
-    /** @use SdkModel<artist_list_top_tracks_params> */
+    /** @use SdkModel<ArtistListTopTracksParamsShape> */
     use SdkModel;
     use SdkParams;
 

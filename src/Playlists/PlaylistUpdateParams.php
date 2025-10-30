@@ -15,13 +15,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Playlists->update
  *
- * @phpstan-type playlist_update_params = array{
+ * @phpstan-type PlaylistUpdateParamsShape = array{
  *   collaborative?: bool, description?: string, name?: string, public?: bool
  * }
  */
 final class PlaylistUpdateParams implements BaseModel
 {
-    /** @use SdkModel<playlist_update_params> */
+    /** @use SdkModel<PlaylistUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

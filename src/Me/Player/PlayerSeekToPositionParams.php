@@ -14,13 +14,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player->seekToPosition
  *
- * @phpstan-type player_seek_to_position_params = array{
+ * @phpstan-type PlayerSeekToPositionParamsShape = array{
  *   positionMs: int, deviceID?: string
  * }
  */
 final class PlayerSeekToPositionParams implements BaseModel
 {
-    /** @use SdkModel<player_seek_to_position_params> */
+    /** @use SdkModel<PlayerSeekToPositionParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -15,7 +15,7 @@ use Spotted\ImageObject;
 use Spotted\Me\MeGetResponse\ExplicitContent;
 
 /**
- * @phpstan-type me_get_response = array{
+ * @phpstan-type MeGetResponseShape = array{
  *   id?: string,
  *   country?: string,
  *   displayName?: string,
@@ -32,7 +32,7 @@ use Spotted\Me\MeGetResponse\ExplicitContent;
  */
 final class MeGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<me_get_response> */
+    /** @use SdkModel<MeGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -11,7 +11,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Allows to update the user interface based on which playback actions are available within the current context.
  *
- * @phpstan-type actions_alias = array{
+ * @phpstan-type ActionsShape = array{
  *   interruptingPlayback?: bool,
  *   pausing?: bool,
  *   resuming?: bool,
@@ -26,7 +26,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class Actions implements BaseModel
 {
-    /** @use SdkModel<actions_alias> */
+    /** @use SdkModel<ActionsShape> */
     use SdkModel;
 
     /**

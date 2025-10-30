@@ -14,13 +14,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player->getState
  *
- * @phpstan-type player_get_state_params = array{
+ * @phpstan-type PlayerGetStateParamsShape = array{
  *   additionalTypes?: string, market?: string
  * }
  */
 final class PlayerGetStateParams implements BaseModel
 {
-    /** @use SdkModel<player_get_state_params> */
+    /** @use SdkModel<PlayerGetStateParamsShape> */
     use SdkModel;
     use SdkParams;
 

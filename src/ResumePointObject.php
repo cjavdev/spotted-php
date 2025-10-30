@@ -9,13 +9,13 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type resume_point_object = array{
+ * @phpstan-type ResumePointObjectShape = array{
  *   fullyPlayed?: bool, resumePositionMs?: int
  * }
  */
 final class ResumePointObject implements BaseModel
 {
-    /** @use SdkModel<resume_point_object> */
+    /** @use SdkModel<ResumePointObjectShape> */
     use SdkModel;
 
     /**

@@ -16,13 +16,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Users\Playlists->create
  *
- * @phpstan-type playlist_create_params = array{
+ * @phpstan-type PlaylistCreateParamsShape = array{
  *   name: string, collaborative?: bool, description?: string, public?: bool
  * }
  */
 final class PlaylistCreateParams implements BaseModel
 {
-    /** @use SdkModel<playlist_create_params> */
+    /** @use SdkModel<PlaylistCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 

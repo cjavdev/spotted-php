@@ -16,7 +16,7 @@ use Spotted\ImageObject;
 use Spotted\SimplifiedArtistObject;
 
 /**
- * @phpstan-type item_alias = array{
+ * @phpstan-type ItemShape = array{
  *   id: string,
  *   albumType: value-of<AlbumType>,
  *   artists: list<SimplifiedArtistObject>,
@@ -35,7 +35,7 @@ use Spotted\SimplifiedArtistObject;
  */
 final class Item implements BaseModel
 {
-    /** @use SdkModel<item_alias> */
+    /** @use SdkModel<ItemShape> */
     use SdkModel;
 
     /**

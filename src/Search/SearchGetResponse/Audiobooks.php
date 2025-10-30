@@ -10,7 +10,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type audiobooks_alias = array{
+ * @phpstan-type AudiobooksShape = array{
  *   href: string,
  *   items: list<AudiobookBase>,
  *   limit: int,
@@ -22,7 +22,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class Audiobooks implements BaseModel
 {
-    /** @use SdkModel<audiobooks_alias> */
+    /** @use SdkModel<AudiobooksShape> */
     use SdkModel;
 
     /**

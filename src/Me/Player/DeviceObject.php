@@ -9,7 +9,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type device_object = array{
+ * @phpstan-type DeviceObjectShape = array{
  *   id?: string|null,
  *   isActive?: bool,
  *   isPrivateSession?: bool,
@@ -22,7 +22,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class DeviceObject implements BaseModel
 {
-    /** @use SdkModel<device_object> */
+    /** @use SdkModel<DeviceObjectShape> */
     use SdkModel;
 
     /**

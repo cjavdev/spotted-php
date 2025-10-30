@@ -15,13 +15,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Albums->listTracks
  *
- * @phpstan-type album_list_tracks_params = array{
+ * @phpstan-type AlbumListTracksParamsShape = array{
  *   limit?: int, market?: string, offset?: int
  * }
  */
 final class AlbumListTracksParams implements BaseModel
 {
-    /** @use SdkModel<album_list_tracks_params> */
+    /** @use SdkModel<AlbumListTracksParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -11,13 +11,13 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type recommendation_list_available_genre_seeds_response = array{
+ * @phpstan-type RecommendationListAvailableGenreSeedsResponseShape = array{
  *   genres: list<string>
  * }
  */
 final class RecommendationListAvailableGenreSeedsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<recommendation_list_available_genre_seeds_response> */
+    /** @use SdkModel<RecommendationListAvailableGenreSeedsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -12,13 +12,13 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\Me\Albums\AlbumListResponse\Album;
 
 /**
- * @phpstan-type album_list_response = array{
+ * @phpstan-type AlbumListResponseShape = array{
  *   addedAt?: \DateTimeInterface, album?: Album
  * }
  */
 final class AlbumListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<album_list_response> */
+    /** @use SdkModel<AlbumListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

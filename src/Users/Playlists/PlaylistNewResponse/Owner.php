@@ -13,7 +13,7 @@ use Spotted\PlaylistUserObject\Type;
 /**
  * The user who owns the playlist.
  *
- * @phpstan-type owner_alias = array{
+ * @phpstan-type OwnerShape = array{
  *   id?: string,
  *   externalURLs?: ExternalURLObject,
  *   href?: string,
@@ -24,7 +24,7 @@ use Spotted\PlaylistUserObject\Type;
  */
 final class Owner implements BaseModel
 {
-    /** @use SdkModel<owner_alias> */
+    /** @use SdkModel<OwnerShape> */
     use SdkModel;
 
     /**

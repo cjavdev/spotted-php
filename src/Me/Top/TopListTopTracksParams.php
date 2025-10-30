@@ -14,13 +14,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Top->listTopTracks
  *
- * @phpstan-type top_list_top_tracks_params = array{
+ * @phpstan-type TopListTopTracksParamsShape = array{
  *   limit?: int, offset?: int, timeRange?: string
  * }
  */
 final class TopListTopTracksParams implements BaseModel
 {
-    /** @use SdkModel<top_list_top_tracks_params> */
+    /** @use SdkModel<TopListTopTracksParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -9,11 +9,11 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type narrator_object = array{name?: string}
+ * @phpstan-type NarratorObjectShape = array{name?: string}
  */
 final class NarratorObject implements BaseModel
 {
-    /** @use SdkModel<narrator_object> */
+    /** @use SdkModel<NarratorObjectShape> */
     use SdkModel;
 
     /**

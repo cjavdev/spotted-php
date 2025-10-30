@@ -16,7 +16,7 @@ use Spotted\ImageObject;
 use Spotted\ResumePointObject;
 
 /**
- * @phpstan-type chapter_alias = array{
+ * @phpstan-type ChapterShape = array{
  *   id: string,
  *   audioPreviewURL: string|null,
  *   audiobook: AudiobookBase,
@@ -42,7 +42,7 @@ use Spotted\ResumePointObject;
  */
 final class Chapter implements BaseModel
 {
-    /** @use SdkModel<chapter_alias> */
+    /** @use SdkModel<ChapterShape> */
     use SdkModel;
 
     /**

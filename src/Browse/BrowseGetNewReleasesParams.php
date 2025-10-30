@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Browse->getNewReleases
  *
- * @phpstan-type browse_get_new_releases_params = array{limit?: int, offset?: int}
+ * @phpstan-type BrowseGetNewReleasesParamsShape = array{limit?: int, offset?: int}
  */
 final class BrowseGetNewReleasesParams implements BaseModel
 {
-    /** @use SdkModel<browse_get_new_releases_params> */
+    /** @use SdkModel<BrowseGetNewReleasesParamsShape> */
     use SdkModel;
     use SdkParams;
 

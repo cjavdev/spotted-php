@@ -10,7 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\SimplifiedPlaylistObject\Owner;
 
 /**
- * @phpstan-type simplified_playlist_object = array{
+ * @phpstan-type SimplifiedPlaylistObjectShape = array{
  *   id?: string,
  *   collaborative?: bool,
  *   description?: string,
@@ -28,7 +28,7 @@ use Spotted\SimplifiedPlaylistObject\Owner;
  */
 final class SimplifiedPlaylistObject implements BaseModel
 {
-    /** @use SdkModel<simplified_playlist_object> */
+    /** @use SdkModel<SimplifiedPlaylistObjectShape> */
     use SdkModel;
 
     /**

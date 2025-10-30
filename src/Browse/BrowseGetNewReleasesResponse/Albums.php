@@ -10,7 +10,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type albums_alias = array{
+ * @phpstan-type AlbumsShape = array{
  *   href: string,
  *   items: list<Item>,
  *   limit: int,
@@ -22,7 +22,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class Albums implements BaseModel
 {
-    /** @use SdkModel<albums_alias> */
+    /** @use SdkModel<AlbumsShape> */
     use SdkModel;
 
     /**

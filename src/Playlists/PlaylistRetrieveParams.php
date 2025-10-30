@@ -14,13 +14,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Playlists->retrieve
  *
- * @phpstan-type playlist_retrieve_params = array{
+ * @phpstan-type PlaylistRetrieveParamsShape = array{
  *   additionalTypes?: string, fields?: string, market?: string
  * }
  */
 final class PlaylistRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<playlist_retrieve_params> */
+    /** @use SdkModel<PlaylistRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

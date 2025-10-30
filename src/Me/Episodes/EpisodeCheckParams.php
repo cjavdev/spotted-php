@@ -15,11 +15,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Episodes->check
  *
- * @phpstan-type episode_check_params = array{ids: string}
+ * @phpstan-type EpisodeCheckParamsShape = array{ids: string}
  */
 final class EpisodeCheckParams implements BaseModel
 {
-    /** @use SdkModel<episode_check_params> */
+    /** @use SdkModel<EpisodeCheckParamsShape> */
     use SdkModel;
     use SdkParams;
 

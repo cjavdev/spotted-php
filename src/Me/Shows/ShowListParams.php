@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Shows->list
  *
- * @phpstan-type show_list_params = array{limit?: int, offset?: int}
+ * @phpstan-type ShowListParamsShape = array{limit?: int, offset?: int}
  */
 final class ShowListParams implements BaseModel
 {
-    /** @use SdkModel<show_list_params> */
+    /** @use SdkModel<ShowListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Playlists\Followers->follow
  *
- * @phpstan-type follower_follow_params = array{public?: bool}
+ * @phpstan-type FollowerFollowParamsShape = array{public?: bool}
  */
 final class FollowerFollowParams implements BaseModel
 {
-    /** @use SdkModel<follower_follow_params> */
+    /** @use SdkModel<FollowerFollowParamsShape> */
     use SdkModel;
     use SdkParams;
 

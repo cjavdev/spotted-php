@@ -15,13 +15,13 @@ use Spotted\Playlists\Tracks\TrackRemoveParams\Track;
  *
  * @see Spotted\Playlists\Tracks->remove
  *
- * @phpstan-type track_remove_params = array{
+ * @phpstan-type TrackRemoveParamsShape = array{
  *   tracks: list<Track>, snapshotID?: string
  * }
  */
 final class TrackRemoveParams implements BaseModel
 {
-    /** @use SdkModel<track_remove_params> */
+    /** @use SdkModel<TrackRemoveParamsShape> */
     use SdkModel;
     use SdkParams;
 

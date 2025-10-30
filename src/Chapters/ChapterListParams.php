@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Chapters->list
  *
- * @phpstan-type chapter_list_params = array{ids: string, market?: string}
+ * @phpstan-type ChapterListParamsShape = array{ids: string, market?: string}
  */
 final class ChapterListParams implements BaseModel
 {
-    /** @use SdkModel<chapter_list_params> */
+    /** @use SdkModel<ChapterListParamsShape> */
     use SdkModel;
     use SdkParams;
 

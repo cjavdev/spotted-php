@@ -10,7 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\ShowBase\Type;
 
 /**
- * @phpstan-type show_base = array{
+ * @phpstan-type ShowBaseShape = array{
  *   id: string,
  *   availableMarkets: list<string>,
  *   copyrights: list<CopyrightObject>,
@@ -32,7 +32,7 @@ use Spotted\ShowBase\Type;
  */
 final class ShowBase implements BaseModel
 {
-    /** @use SdkModel<show_base> */
+    /** @use SdkModel<ShowBaseShape> */
     use SdkModel;
 
     /**

@@ -15,7 +15,7 @@ use Spotted\Me\Player\PlayerGetCurrentlyPlayingResponse\Item;
 use Spotted\TrackObject;
 
 /**
- * @phpstan-type player_get_currently_playing_response = array{
+ * @phpstan-type PlayerGetCurrentlyPlayingResponseShape = array{
  *   actions?: Actions,
  *   context?: ContextObject,
  *   currentlyPlayingType?: string,
@@ -27,7 +27,7 @@ use Spotted\TrackObject;
  */
 final class PlayerGetCurrentlyPlayingResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<player_get_currently_playing_response> */
+    /** @use SdkModel<PlayerGetCurrentlyPlayingResponseShape> */
     use SdkModel;
 
     use SdkResponse;

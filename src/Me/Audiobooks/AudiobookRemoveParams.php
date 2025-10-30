@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Audiobooks->remove
  *
- * @phpstan-type audiobook_remove_params = array{ids: string}
+ * @phpstan-type AudiobookRemoveParamsShape = array{ids: string}
  */
 final class AudiobookRemoveParams implements BaseModel
 {
-    /** @use SdkModel<audiobook_remove_params> */
+    /** @use SdkModel<AudiobookRemoveParamsShape> */
     use SdkModel;
     use SdkParams;
 

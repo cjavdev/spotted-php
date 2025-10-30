@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Shows->list
  *
- * @phpstan-type show_list_params = array{ids: string, market?: string}
+ * @phpstan-type ShowListParamsShape = array{ids: string, market?: string}
  */
 final class ShowListParams implements BaseModel
 {
-    /** @use SdkModel<show_list_params> */
+    /** @use SdkModel<ShowListParamsShape> */
     use SdkModel;
     use SdkParams;
 

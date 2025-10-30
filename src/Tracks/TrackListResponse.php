@@ -12,11 +12,11 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\TrackObject;
 
 /**
- * @phpstan-type track_list_response = array{tracks: list<TrackObject>}
+ * @phpstan-type TrackListResponseShape = array{tracks: list<TrackObject>}
  */
 final class TrackListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<track_list_response> */
+    /** @use SdkModel<TrackListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

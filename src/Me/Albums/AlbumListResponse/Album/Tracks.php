@@ -12,7 +12,7 @@ use Spotted\SimplifiedTrackObject;
 /**
  * The tracks of the album.
  *
- * @phpstan-type tracks_alias = array{
+ * @phpstan-type TracksShape = array{
  *   href: string,
  *   items: list<SimplifiedTrackObject>,
  *   limit: int,
@@ -24,7 +24,7 @@ use Spotted\SimplifiedTrackObject;
  */
 final class Tracks implements BaseModel
 {
-    /** @use SdkModel<tracks_alias> */
+    /** @use SdkModel<TracksShape> */
     use SdkModel;
 
     /**

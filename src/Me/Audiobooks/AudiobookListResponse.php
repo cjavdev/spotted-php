@@ -12,13 +12,13 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\Me\Audiobooks\AudiobookListResponse\Audiobook;
 
 /**
- * @phpstan-type audiobook_list_response = array{
+ * @phpstan-type AudiobookListResponseShape = array{
  *   addedAt?: \DateTimeInterface, audiobook?: Audiobook
  * }
  */
 final class AudiobookListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<audiobook_list_response> */
+    /** @use SdkModel<AudiobookListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

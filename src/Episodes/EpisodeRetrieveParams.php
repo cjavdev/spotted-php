@@ -15,11 +15,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Episodes->retrieve
  *
- * @phpstan-type episode_retrieve_params = array{market?: string}
+ * @phpstan-type EpisodeRetrieveParamsShape = array{market?: string}
  */
 final class EpisodeRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<episode_retrieve_params> */
+    /** @use SdkModel<EpisodeRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

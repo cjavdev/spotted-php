@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player\Queue->add
  *
- * @phpstan-type queue_add_params = array{uri: string, deviceID?: string}
+ * @phpstan-type QueueAddParamsShape = array{uri: string, deviceID?: string}
  */
 final class QueueAddParams implements BaseModel
 {
-    /** @use SdkModel<queue_add_params> */
+    /** @use SdkModel<QueueAddParamsShape> */
     use SdkModel;
     use SdkParams;
 

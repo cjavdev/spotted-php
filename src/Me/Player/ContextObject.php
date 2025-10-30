@@ -10,13 +10,13 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
 
 /**
- * @phpstan-type context_object = array{
+ * @phpstan-type ContextObjectShape = array{
  *   externalURLs?: ExternalURLObject, href?: string, type?: string, uri?: string
  * }
  */
 final class ContextObject implements BaseModel
 {
-    /** @use SdkModel<context_object> */
+    /** @use SdkModel<ContextObjectShape> */
     use SdkModel;
 
     /**

@@ -9,11 +9,11 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type copyright_object = array{text?: string, type?: string}
+ * @phpstan-type CopyrightObjectShape = array{text?: string, type?: string}
  */
 final class CopyrightObject implements BaseModel
 {
-    /** @use SdkModel<copyright_object> */
+    /** @use SdkModel<CopyrightObjectShape> */
     use SdkModel;
 
     /**

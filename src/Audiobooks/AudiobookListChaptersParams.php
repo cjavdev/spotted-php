@@ -14,13 +14,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Audiobooks->listChapters
  *
- * @phpstan-type audiobook_list_chapters_params = array{
+ * @phpstan-type AudiobookListChaptersParamsShape = array{
  *   limit?: int, market?: string, offset?: int
  * }
  */
 final class AudiobookListChaptersParams implements BaseModel
 {
-    /** @use SdkModel<audiobook_list_chapters_params> */
+    /** @use SdkModel<AudiobookListChaptersParamsShape> */
     use SdkModel;
     use SdkParams;
 

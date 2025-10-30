@@ -9,7 +9,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type track_alias = array{
+ * @phpstan-type TrackShape = array{
  *   analysisChannels?: int,
  *   analysisSampleRate?: int,
  *   codeVersion?: float,
@@ -40,7 +40,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class Track implements BaseModel
 {
-    /** @use SdkModel<track_alias> */
+    /** @use SdkModel<TrackShape> */
     use SdkModel;
 
     /**

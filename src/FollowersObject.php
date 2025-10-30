@@ -9,11 +9,11 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type followers_object = array{href?: string|null, total?: int}
+ * @phpstan-type FollowersObjectShape = array{href?: string|null, total?: int}
  */
 final class FollowersObject implements BaseModel
 {
-    /** @use SdkModel<followers_object> */
+    /** @use SdkModel<FollowersObjectShape> */
     use SdkModel;
 
     /**

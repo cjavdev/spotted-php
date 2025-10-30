@@ -15,13 +15,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player->listRecentlyPlayed
  *
- * @phpstan-type player_list_recently_played_params = array{
+ * @phpstan-type PlayerListRecentlyPlayedParamsShape = array{
  *   after?: int, before?: int, limit?: int
  * }
  */
 final class PlayerListRecentlyPlayedParams implements BaseModel
 {
-    /** @use SdkModel<player_list_recently_played_params> */
+    /** @use SdkModel<PlayerListRecentlyPlayedParamsShape> */
     use SdkModel;
     use SdkParams;
 

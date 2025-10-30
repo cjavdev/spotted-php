@@ -21,7 +21,7 @@ use Spotted\ImageObject;
 use Spotted\SimplifiedArtistObject;
 
 /**
- * @phpstan-type album_get_response = array{
+ * @phpstan-type AlbumGetResponseShape = array{
  *   id: string,
  *   albumType: value-of<AlbumType>,
  *   availableMarkets: list<string>,
@@ -46,7 +46,7 @@ use Spotted\SimplifiedArtistObject;
  */
 final class AlbumGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<album_get_response> */
+    /** @use SdkModel<AlbumGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

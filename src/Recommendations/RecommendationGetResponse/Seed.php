@@ -9,7 +9,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type seed_alias = array{
+ * @phpstan-type SeedShape = array{
  *   id?: string,
  *   afterFilteringSize?: int,
  *   afterRelinkingSize?: int,
@@ -20,7 +20,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class Seed implements BaseModel
 {
-    /** @use SdkModel<seed_alias> */
+    /** @use SdkModel<SeedShape> */
     use SdkModel;
 
     /**

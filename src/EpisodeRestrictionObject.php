@@ -9,11 +9,11 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type episode_restriction_object = array{reason?: string}
+ * @phpstan-type EpisodeRestrictionObjectShape = array{reason?: string}
  */
 final class EpisodeRestrictionObject implements BaseModel
 {
-    /** @use SdkModel<episode_restriction_object> */
+    /** @use SdkModel<EpisodeRestrictionObjectShape> */
     use SdkModel;
 
     /**

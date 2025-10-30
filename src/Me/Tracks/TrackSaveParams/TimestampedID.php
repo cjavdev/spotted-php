@@ -9,11 +9,13 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type timestamped_id = array{id: string, addedAt: \DateTimeInterface}
+ * @phpstan-type TimestampedIDShape = array{
+ *   id: string, addedAt: \DateTimeInterface
+ * }
  */
 final class TimestampedID implements BaseModel
 {
-    /** @use SdkModel<timestamped_id> */
+    /** @use SdkModel<TimestampedIDShape> */
     use SdkModel;
 
     /**

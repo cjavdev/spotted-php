@@ -10,7 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\TrackObject;
 
 /**
- * @phpstan-type tracks_alias = array{
+ * @phpstan-type TracksShape = array{
  *   href: string,
  *   items: list<TrackObject>,
  *   limit: int,
@@ -22,7 +22,7 @@ use Spotted\TrackObject;
  */
 final class Tracks implements BaseModel
 {
-    /** @use SdkModel<tracks_alias> */
+    /** @use SdkModel<TracksShape> */
     use SdkModel;
 
     /**

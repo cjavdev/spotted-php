@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Albums->remove
  *
- * @phpstan-type album_remove_params = array{ids?: list<string>}
+ * @phpstan-type AlbumRemoveParamsShape = array{ids?: list<string>}
  */
 final class AlbumRemoveParams implements BaseModel
 {
-    /** @use SdkModel<album_remove_params> */
+    /** @use SdkModel<AlbumRemoveParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -12,13 +12,13 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\PagingPlaylistObject;
 
 /**
- * @phpstan-type browse_get_featured_playlists_response = array{
+ * @phpstan-type BrowseGetFeaturedPlaylistsResponseShape = array{
  *   message?: string, playlists?: PagingPlaylistObject
  * }
  */
 final class BrowseGetFeaturedPlaylistsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<browse_get_featured_playlists_response> */
+    /** @use SdkModel<BrowseGetFeaturedPlaylistsResponseShape> */
     use SdkModel;
 
     use SdkResponse;

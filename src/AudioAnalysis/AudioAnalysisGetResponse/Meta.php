@@ -9,7 +9,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type meta_alias = array{
+ * @phpstan-type MetaShape = array{
  *   analysisTime?: float,
  *   analyzerVersion?: string,
  *   detailedStatus?: string,
@@ -21,7 +21,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class Meta implements BaseModel
 {
-    /** @use SdkModel<meta_alias> */
+    /** @use SdkModel<MetaShape> */
     use SdkModel;
 
     /**

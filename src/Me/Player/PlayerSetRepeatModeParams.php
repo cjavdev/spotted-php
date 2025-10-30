@@ -14,13 +14,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player->setRepeatMode
  *
- * @phpstan-type player_set_repeat_mode_params = array{
+ * @phpstan-type PlayerSetRepeatModeParamsShape = array{
  *   state: string, deviceID?: string
  * }
  */
 final class PlayerSetRepeatModeParams implements BaseModel
 {
-    /** @use SdkModel<player_set_repeat_mode_params> */
+    /** @use SdkModel<PlayerSetRepeatModeParamsShape> */
     use SdkModel;
     use SdkParams;
 

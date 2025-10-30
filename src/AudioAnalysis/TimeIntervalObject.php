@@ -9,13 +9,13 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type time_interval_object = array{
+ * @phpstan-type TimeIntervalObjectShape = array{
  *   confidence?: float, duration?: float, start?: float
  * }
  */
 final class TimeIntervalObject implements BaseModel
 {
-    /** @use SdkModel<time_interval_object> */
+    /** @use SdkModel<TimeIntervalObjectShape> */
     use SdkModel;
 
     /**

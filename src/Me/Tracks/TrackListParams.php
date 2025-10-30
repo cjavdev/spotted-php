@@ -14,13 +14,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Tracks->list
  *
- * @phpstan-type track_list_params = array{
+ * @phpstan-type TrackListParamsShape = array{
  *   limit?: int, market?: string, offset?: int
  * }
  */
 final class TrackListParams implements BaseModel
 {
-    /** @use SdkModel<track_list_params> */
+    /** @use SdkModel<TrackListParamsShape> */
     use SdkModel;
     use SdkParams;
 

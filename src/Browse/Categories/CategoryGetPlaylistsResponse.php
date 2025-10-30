@@ -12,13 +12,13 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\PagingPlaylistObject;
 
 /**
- * @phpstan-type category_get_playlists_response = array{
+ * @phpstan-type CategoryGetPlaylistsResponseShape = array{
  *   message?: string, playlists?: PagingPlaylistObject
  * }
  */
 final class CategoryGetPlaylistsResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<category_get_playlists_response> */
+    /** @use SdkModel<CategoryGetPlaylistsResponseShape> */
     use SdkModel;
 
     use SdkResponse;
