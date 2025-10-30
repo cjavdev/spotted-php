@@ -10,7 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\ShowBase;
 
 /**
- * @phpstan-type shows_alias = array{
+ * @phpstan-type ShowsShape = array{
  *   href: string,
  *   items: list<ShowBase>,
  *   limit: int,
@@ -22,7 +22,7 @@ use Spotted\ShowBase;
  */
 final class Shows implements BaseModel
 {
-    /** @use SdkModel<shows_alias> */
+    /** @use SdkModel<ShowsShape> */
     use SdkModel;
 
     /**

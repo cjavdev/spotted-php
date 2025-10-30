@@ -12,13 +12,13 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\EpisodeObject;
 
 /**
- * @phpstan-type episode_list_response = array{
+ * @phpstan-type EpisodeListResponseShape = array{
  *   addedAt?: \DateTimeInterface, episode?: EpisodeObject
  * }
  */
 final class EpisodeListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<episode_list_response> */
+    /** @use SdkModel<EpisodeListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

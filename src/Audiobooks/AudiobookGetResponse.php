@@ -18,7 +18,7 @@ use Spotted\ImageObject;
 use Spotted\NarratorObject;
 
 /**
- * @phpstan-type audiobook_get_response = array{
+ * @phpstan-type AudiobookGetResponseShape = array{
  *   id: string,
  *   authors: list<AuthorObject>,
  *   availableMarkets: list<string>,
@@ -43,7 +43,7 @@ use Spotted\NarratorObject;
  */
 final class AudiobookGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<audiobook_get_response> */
+    /** @use SdkModel<AudiobookGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -12,13 +12,13 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\TrackObject;
 
 /**
- * @phpstan-type player_list_recently_played_response = array{
+ * @phpstan-type PlayerListRecentlyPlayedResponseShape = array{
  *   context?: ContextObject, playedAt?: \DateTimeInterface, track?: TrackObject
  * }
  */
 final class PlayerListRecentlyPlayedResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<player_list_recently_played_response> */
+    /** @use SdkModel<PlayerListRecentlyPlayedResponseShape> */
     use SdkModel;
 
     use SdkResponse;

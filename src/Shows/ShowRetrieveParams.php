@@ -15,11 +15,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Shows->retrieve
  *
- * @phpstan-type show_retrieve_params = array{market?: string}
+ * @phpstan-type ShowRetrieveParamsShape = array{market?: string}
  */
 final class ShowRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<show_retrieve_params> */
+    /** @use SdkModel<ShowRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -10,7 +10,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type artist_object = array{
+ * @phpstan-type ArtistObjectShape = array{
  *   id?: string,
  *   externalURLs?: ExternalURLObject,
  *   followers?: FollowersObject,
@@ -25,7 +25,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class ArtistObject implements BaseModel
 {
-    /** @use SdkModel<artist_object> */
+    /** @use SdkModel<ArtistObjectShape> */
     use SdkModel;
 
     /**

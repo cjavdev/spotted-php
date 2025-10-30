@@ -9,11 +9,11 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type track_alias = array{uri?: string}
+ * @phpstan-type TrackShape = array{uri?: string}
  */
 final class Track implements BaseModel
 {
-    /** @use SdkModel<track_alias> */
+    /** @use SdkModel<TrackShape> */
     use SdkModel;
 
     /**

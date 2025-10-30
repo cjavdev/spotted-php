@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player->skipPrevious
  *
- * @phpstan-type player_skip_previous_params = array{deviceID?: string}
+ * @phpstan-type PlayerSkipPreviousParamsShape = array{deviceID?: string}
  */
 final class PlayerSkipPreviousParams implements BaseModel
 {
-    /** @use SdkModel<player_skip_previous_params> */
+    /** @use SdkModel<PlayerSkipPreviousParamsShape> */
     use SdkModel;
     use SdkParams;
 

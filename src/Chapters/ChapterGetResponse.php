@@ -18,7 +18,7 @@ use Spotted\ImageObject;
 use Spotted\ResumePointObject;
 
 /**
- * @phpstan-type chapter_get_response = array{
+ * @phpstan-type ChapterGetResponseShape = array{
  *   id: string,
  *   audioPreviewURL: string|null,
  *   audiobook: AudiobookBase,
@@ -44,7 +44,7 @@ use Spotted\ResumePointObject;
  */
 final class ChapterGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<chapter_get_response> */
+    /** @use SdkModel<ChapterGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

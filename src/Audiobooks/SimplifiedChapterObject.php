@@ -17,7 +17,7 @@ use Spotted\ImageObject;
 use Spotted\ResumePointObject;
 
 /**
- * @phpstan-type simplified_chapter_object = array{
+ * @phpstan-type SimplifiedChapterObjectShape = array{
  *   id: string,
  *   audioPreviewURL: string|null,
  *   chapterNumber: int,
@@ -42,7 +42,7 @@ use Spotted\ResumePointObject;
  */
 final class SimplifiedChapterObject implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<simplified_chapter_object> */
+    /** @use SdkModel<SimplifiedChapterObjectShape> */
     use SdkModel;
 
     use SdkResponse;

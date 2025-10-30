@@ -14,13 +14,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player->toggleShuffle
  *
- * @phpstan-type player_toggle_shuffle_params = array{
+ * @phpstan-type PlayerToggleShuffleParamsShape = array{
  *   state: bool, deviceID?: string
  * }
  */
 final class PlayerToggleShuffleParams implements BaseModel
 {
-    /** @use SdkModel<player_toggle_shuffle_params> */
+    /** @use SdkModel<PlayerToggleShuffleParamsShape> */
     use SdkModel;
     use SdkParams;
 

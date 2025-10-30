@@ -10,7 +10,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type audiobook_base = array{
+ * @phpstan-type AudiobookBaseShape = array{
  *   id: string,
  *   authors: list<AuthorObject>,
  *   availableMarkets: list<string>,
@@ -34,7 +34,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class AudiobookBase implements BaseModel
 {
-    /** @use SdkModel<audiobook_base> */
+    /** @use SdkModel<AudiobookBaseShape> */
     use SdkModel;
 
     /**

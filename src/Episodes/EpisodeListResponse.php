@@ -12,11 +12,11 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\EpisodeObject;
 
 /**
- * @phpstan-type episode_list_response = array{episodes: list<EpisodeObject>}
+ * @phpstan-type EpisodeListResponseShape = array{episodes: list<EpisodeObject>}
  */
 final class EpisodeListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<episode_list_response> */
+    /** @use SdkModel<EpisodeListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -12,7 +12,7 @@ use Spotted\PlaylistTrackObject;
 /**
  * The tracks of the playlist.
  *
- * @phpstan-type tracks_alias = array{
+ * @phpstan-type TracksShape = array{
  *   href: string,
  *   items: list<PlaylistTrackObject>,
  *   limit: int,
@@ -24,7 +24,7 @@ use Spotted\PlaylistTrackObject;
  */
 final class Tracks implements BaseModel
 {
-    /** @use SdkModel<tracks_alias> */
+    /** @use SdkModel<TracksShape> */
     use SdkModel;
 
     /**

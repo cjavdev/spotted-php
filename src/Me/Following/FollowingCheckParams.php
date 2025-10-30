@@ -15,13 +15,13 @@ use Spotted\Me\Following\FollowingCheckParams\Type;
  *
  * @see Spotted\Me\Following->check
  *
- * @phpstan-type following_check_params = array{
+ * @phpstan-type FollowingCheckParamsShape = array{
  *   ids: string, type: Type|value-of<Type>
  * }
  */
 final class FollowingCheckParams implements BaseModel
 {
-    /** @use SdkModel<following_check_params> */
+    /** @use SdkModel<FollowingCheckParamsShape> */
     use SdkModel;
     use SdkParams;
 

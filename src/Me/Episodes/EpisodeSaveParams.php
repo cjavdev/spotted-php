@@ -15,11 +15,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Episodes->save
  *
- * @phpstan-type episode_save_params = array{ids: list<string>}
+ * @phpstan-type EpisodeSaveParamsShape = array{ids: list<string>}
  */
 final class EpisodeSaveParams implements BaseModel
 {
-    /** @use SdkModel<episode_save_params> */
+    /** @use SdkModel<EpisodeSaveParamsShape> */
     use SdkModel;
     use SdkParams;
 

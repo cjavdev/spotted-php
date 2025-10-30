@@ -12,11 +12,11 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type chapter_list_response = array{chapters: list<Chapter>}
+ * @phpstan-type ChapterListResponseShape = array{chapters: list<Chapter>}
  */
 final class ChapterListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<chapter_list_response> */
+    /** @use SdkModel<ChapterListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -15,7 +15,7 @@ use Spotted\Core\Conversion\Contracts\Converter;
 use Spotted\Core\Conversion\Contracts\ConverterSource;
 
 /**
-  * @phpstan-type cursor_url_page = array{
+  * @phpstan-type CursorURLPageShape = array{
   *   next?: string|null, items?: list<mixed>|null
   * }
   * @template TItem
@@ -24,7 +24,7 @@ use Spotted\Core\Conversion\Contracts\ConverterSource;
  */
 final class CursorURLPage implements BaseModel, BasePage
 {
-  /** @use SdkModel<cursor_url_page> */
+  /** @use SdkModel<CursorURLPageShape> */
   use SdkModel;
 
   /** @use SdkPage<TItem> */

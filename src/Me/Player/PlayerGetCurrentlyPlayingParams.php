@@ -14,13 +14,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player->getCurrentlyPlaying
  *
- * @phpstan-type player_get_currently_playing_params = array{
+ * @phpstan-type PlayerGetCurrentlyPlayingParamsShape = array{
  *   additionalTypes?: string, market?: string
  * }
  */
 final class PlayerGetCurrentlyPlayingParams implements BaseModel
 {
-    /** @use SdkModel<player_get_currently_playing_params> */
+    /** @use SdkModel<PlayerGetCurrentlyPlayingParamsShape> */
     use SdkModel;
     use SdkParams;
 

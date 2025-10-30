@@ -11,7 +11,7 @@ use Spotted\TrackObject\Album;
 use Spotted\TrackObject\Type;
 
 /**
- * @phpstan-type track_object = array{
+ * @phpstan-type TrackObjectShape = array{
  *   id?: string,
  *   album?: Album,
  *   artists?: list<SimplifiedArtistObject>,
@@ -36,7 +36,7 @@ use Spotted\TrackObject\Type;
  */
 final class TrackObject implements BaseModel
 {
-    /** @use SdkModel<track_object> */
+    /** @use SdkModel<TrackObjectShape> */
     use SdkModel;
 
     /**

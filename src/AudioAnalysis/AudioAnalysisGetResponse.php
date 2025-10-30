@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type audio_analysis_get_response = array{
+ * @phpstan-type AudioAnalysisGetResponseShape = array{
  *   bars?: list<TimeIntervalObject>,
  *   beats?: list<TimeIntervalObject>,
  *   meta?: Meta,
@@ -27,7 +27,7 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
  */
 final class AudioAnalysisGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<audio_analysis_get_response> */
+    /** @use SdkModel<AudioAnalysisGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

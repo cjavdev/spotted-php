@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Playlists\Tracks->add
  *
- * @phpstan-type track_add_params = array{position?: int, uris?: list<string>}
+ * @phpstan-type TrackAddParamsShape = array{position?: int, uris?: list<string>}
  */
 final class TrackAddParams implements BaseModel
 {
-    /** @use SdkModel<track_add_params> */
+    /** @use SdkModel<TrackAddParamsShape> */
     use SdkModel;
     use SdkParams;
 

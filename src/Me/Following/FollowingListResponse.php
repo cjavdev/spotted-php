@@ -12,11 +12,11 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\Me\Following\FollowingListResponse\Artists;
 
 /**
- * @phpstan-type following_list_response = array{artists: Artists}
+ * @phpstan-type FollowingListResponseShape = array{artists: Artists}
  */
 final class FollowingListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<following_list_response> */
+    /** @use SdkModel<FollowingListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

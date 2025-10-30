@@ -10,13 +10,13 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\ImageObject;
 
 /**
- * @phpstan-type item_alias = array{
+ * @phpstan-type ItemShape = array{
  *   id: string, href: string, icons: list<ImageObject>, name: string
  * }
  */
 final class Item implements BaseModel
 {
-    /** @use SdkModel<item_alias> */
+    /** @use SdkModel<ItemShape> */
     use SdkModel;
 
     /**

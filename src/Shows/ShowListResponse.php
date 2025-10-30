@@ -12,11 +12,11 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ShowBase;
 
 /**
- * @phpstan-type show_list_response = array{shows: list<ShowBase>}
+ * @phpstan-type ShowListResponseShape = array{shows: list<ShowBase>}
  */
 final class ShowListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<show_list_response> */
+    /** @use SdkModel<ShowListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

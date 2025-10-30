@@ -18,7 +18,7 @@ use Spotted\TrackObject\Album\Type;
 /**
  * The album on which the track appears. The album object includes a link in `href` to full information about the album.
  *
- * @phpstan-type album_alias = array{
+ * @phpstan-type AlbumShape = array{
  *   id: string,
  *   albumType: value-of<AlbumType>,
  *   artists: list<SimplifiedArtistObject>,
@@ -37,7 +37,7 @@ use Spotted\TrackObject\Album\Type;
  */
 final class Album implements BaseModel
 {
-    /** @use SdkModel<album_alias> */
+    /** @use SdkModel<AlbumShape> */
     use SdkModel;
 
     /**

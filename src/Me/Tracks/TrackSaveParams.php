@@ -15,13 +15,13 @@ use Spotted\Me\Tracks\TrackSaveParams\TimestampedID;
  *
  * @see Spotted\Me\Tracks->save
  *
- * @phpstan-type track_save_params = array{
+ * @phpstan-type TrackSaveParamsShape = array{
  *   ids: list<string>, timestampedIDs?: list<TimestampedID>
  * }
  */
 final class TrackSaveParams implements BaseModel
 {
-    /** @use SdkModel<track_save_params> */
+    /** @use SdkModel<TrackSaveParamsShape> */
     use SdkModel;
     use SdkParams;
 

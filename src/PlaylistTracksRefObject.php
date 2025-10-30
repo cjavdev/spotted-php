@@ -9,11 +9,11 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type playlist_tracks_ref_object = array{href?: string, total?: int}
+ * @phpstan-type PlaylistTracksRefObjectShape = array{href?: string, total?: int}
  */
 final class PlaylistTracksRefObject implements BaseModel
 {
-    /** @use SdkModel<playlist_tracks_ref_object> */
+    /** @use SdkModel<PlaylistTracksRefObjectShape> */
     use SdkModel;
 
     /**

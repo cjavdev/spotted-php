@@ -10,7 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\PlaylistUserObject\Type;
 
 /**
- * @phpstan-type playlist_user_object = array{
+ * @phpstan-type PlaylistUserObjectShape = array{
  *   id?: string,
  *   externalURLs?: ExternalURLObject,
  *   href?: string,
@@ -20,7 +20,7 @@ use Spotted\PlaylistUserObject\Type;
  */
 final class PlaylistUserObject implements BaseModel
 {
-    /** @use SdkModel<playlist_user_object> */
+    /** @use SdkModel<PlaylistUserObjectShape> */
     use SdkModel;
 
     /**

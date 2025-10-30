@@ -14,13 +14,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player->setVolume
  *
- * @phpstan-type player_set_volume_params = array{
+ * @phpstan-type PlayerSetVolumeParamsShape = array{
  *   volumePercent: int, deviceID?: string
  * }
  */
 final class PlayerSetVolumeParams implements BaseModel
 {
-    /** @use SdkModel<player_set_volume_params> */
+    /** @use SdkModel<PlayerSetVolumeParamsShape> */
     use SdkModel;
     use SdkParams;
 

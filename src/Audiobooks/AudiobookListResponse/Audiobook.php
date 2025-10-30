@@ -16,7 +16,7 @@ use Spotted\ImageObject;
 use Spotted\NarratorObject;
 
 /**
- * @phpstan-type audiobook_alias = array{
+ * @phpstan-type AudiobookShape = array{
  *   id: string,
  *   authors: list<AuthorObject>,
  *   availableMarkets: list<string>,
@@ -41,7 +41,7 @@ use Spotted\NarratorObject;
  */
 final class Audiobook implements BaseModel
 {
-    /** @use SdkModel<audiobook_alias> */
+    /** @use SdkModel<AudiobookShape> */
     use SdkModel;
 
     /**

@@ -15,11 +15,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Episodes->remove
  *
- * @phpstan-type episode_remove_params = array{ids?: list<string>}
+ * @phpstan-type EpisodeRemoveParamsShape = array{ids?: list<string>}
  */
 final class EpisodeRemoveParams implements BaseModel
 {
-    /** @use SdkModel<episode_remove_params> */
+    /** @use SdkModel<EpisodeRemoveParamsShape> */
     use SdkModel;
     use SdkParams;
 

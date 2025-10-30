@@ -11,11 +11,11 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type player_get_devices_response = array{devices: list<DeviceObject>}
+ * @phpstan-type PlayerGetDevicesResponseShape = array{devices: list<DeviceObject>}
  */
 final class PlayerGetDevicesResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<player_get_devices_response> */
+    /** @use SdkModel<PlayerGetDevicesResponseShape> */
     use SdkModel;
 
     use SdkResponse;

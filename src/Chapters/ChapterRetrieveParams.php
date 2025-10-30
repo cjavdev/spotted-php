@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Chapters->retrieve
  *
- * @phpstan-type chapter_retrieve_params = array{market?: string}
+ * @phpstan-type ChapterRetrieveParamsShape = array{market?: string}
  */
 final class ChapterRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<chapter_retrieve_params> */
+    /** @use SdkModel<ChapterRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

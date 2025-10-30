@@ -15,13 +15,13 @@ use Spotted\Core\Contracts\BaseModel;
  * @deprecated
  * @see Spotted\Browse->getFeaturedPlaylists
  *
- * @phpstan-type browse_get_featured_playlists_params = array{
+ * @phpstan-type BrowseGetFeaturedPlaylistsParamsShape = array{
  *   limit?: int, locale?: string, offset?: int
  * }
  */
 final class BrowseGetFeaturedPlaylistsParams implements BaseModel
 {
-    /** @use SdkModel<browse_get_featured_playlists_params> */
+    /** @use SdkModel<BrowseGetFeaturedPlaylistsParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -12,13 +12,13 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type audio_feature_list_response = array{
+ * @phpstan-type AudioFeatureListResponseShape = array{
  *   audioFeatures: list<AudioFeature>
  * }
  */
 final class AudioFeatureListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<audio_feature_list_response> */
+    /** @use SdkModel<AudioFeatureListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -15,11 +15,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Tracks->retrieve
  *
- * @phpstan-type track_retrieve_params = array{market?: string}
+ * @phpstan-type TrackRetrieveParamsShape = array{market?: string}
  */
 final class TrackRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<track_retrieve_params> */
+    /** @use SdkModel<TrackRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

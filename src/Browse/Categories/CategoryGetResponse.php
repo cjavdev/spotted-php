@@ -12,13 +12,13 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ImageObject;
 
 /**
- * @phpstan-type category_get_response = array{
+ * @phpstan-type CategoryGetResponseShape = array{
  *   id: string, href: string, icons: list<ImageObject>, name: string
  * }
  */
 final class CategoryGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<category_get_response> */
+    /** @use SdkModel<CategoryGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

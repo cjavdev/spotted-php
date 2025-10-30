@@ -18,7 +18,7 @@ use Spotted\Search\SearchGetResponse\Shows;
 use Spotted\Search\SearchGetResponse\Tracks;
 
 /**
- * @phpstan-type search_get_response = array{
+ * @phpstan-type SearchGetResponseShape = array{
  *   albums?: Albums,
  *   artists?: Artists,
  *   audiobooks?: Audiobooks,
@@ -30,7 +30,7 @@ use Spotted\Search\SearchGetResponse\Tracks;
  */
 final class SearchGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<search_get_response> */
+    /** @use SdkModel<SearchGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

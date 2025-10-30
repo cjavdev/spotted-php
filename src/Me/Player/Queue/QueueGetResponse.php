@@ -15,14 +15,14 @@ use Spotted\Me\Player\Queue\QueueGetResponse\Queue;
 use Spotted\TrackObject;
 
 /**
- * @phpstan-type queue_get_response = array{
+ * @phpstan-type QueueGetResponseShape = array{
  *   currentlyPlaying?: TrackObject|EpisodeObject,
  *   queue?: list<TrackObject|EpisodeObject>,
  * }
  */
 final class QueueGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<queue_get_response> */
+    /** @use SdkModel<QueueGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Shows->check
  *
- * @phpstan-type show_check_params = array{ids: string}
+ * @phpstan-type ShowCheckParamsShape = array{ids: string}
  */
 final class ShowCheckParams implements BaseModel
 {
-    /** @use SdkModel<show_check_params> */
+    /** @use SdkModel<ShowCheckParamsShape> */
     use SdkModel;
     use SdkParams;
 

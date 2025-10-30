@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player->skipNext
  *
- * @phpstan-type player_skip_next_params = array{deviceID?: string}
+ * @phpstan-type PlayerSkipNextParamsShape = array{deviceID?: string}
  */
 final class PlayerSkipNextParams implements BaseModel
 {
-    /** @use SdkModel<player_skip_next_params> */
+    /** @use SdkModel<PlayerSkipNextParamsShape> */
     use SdkModel;
     use SdkParams;
 

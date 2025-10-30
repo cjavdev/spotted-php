@@ -14,13 +14,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Browse\Categories->list
  *
- * @phpstan-type category_list_params = array{
+ * @phpstan-type CategoryListParamsShape = array{
  *   limit?: int, locale?: string, offset?: int
  * }
  */
 final class CategoryListParams implements BaseModel
 {
-    /** @use SdkModel<category_list_params> */
+    /** @use SdkModel<CategoryListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Albums->save
  *
- * @phpstan-type album_save_params = array{ids?: list<string>}
+ * @phpstan-type AlbumSaveParamsShape = array{ids?: list<string>}
  */
 final class AlbumSaveParams implements BaseModel
 {
-    /** @use SdkModel<album_save_params> */
+    /** @use SdkModel<AlbumSaveParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -11,7 +11,7 @@ use Spotted\EpisodeObject\ReleaseDatePrecision;
 use Spotted\EpisodeObject\Type;
 
 /**
- * @phpstan-type episode_object = array{
+ * @phpstan-type EpisodeObjectShape = array{
  *   id: string,
  *   audioPreviewURL: string|null,
  *   description: string,
@@ -37,7 +37,7 @@ use Spotted\EpisodeObject\Type;
  */
 final class EpisodeObject implements BaseModel
 {
-    /** @use SdkModel<episode_object> */
+    /** @use SdkModel<EpisodeObjectShape> */
     use SdkModel;
 
     /**

@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Shows->save
  *
- * @phpstan-type show_save_params = array{ids?: list<string>}
+ * @phpstan-type ShowSaveParamsShape = array{ids?: list<string>}
  */
 final class ShowSaveParams implements BaseModel
 {
-    /** @use SdkModel<show_save_params> */
+    /** @use SdkModel<ShowSaveParamsShape> */
     use SdkModel;
     use SdkParams;
 

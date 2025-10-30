@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player->startPlayback
  *
- * @phpstan-type player_start_playback_params = array{
+ * @phpstan-type PlayerStartPlaybackParamsShape = array{
  *   deviceID?: string,
  *   contextUri?: string,
  *   offset?: array<string, mixed>,
@@ -24,7 +24,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class PlayerStartPlaybackParams implements BaseModel
 {
-    /** @use SdkModel<player_start_playback_params> */
+    /** @use SdkModel<PlayerStartPlaybackParamsShape> */
     use SdkModel;
     use SdkParams;
 

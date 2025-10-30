@@ -20,7 +20,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Playlists\Tracks->update
  *
- * @phpstan-type track_update_params = array{
+ * @phpstan-type TrackUpdateParamsShape = array{
  *   uris?: list<string>,
  *   insertBefore?: int,
  *   rangeLength?: int,
@@ -30,7 +30,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class TrackUpdateParams implements BaseModel
 {
-    /** @use SdkModel<track_update_params> */
+    /** @use SdkModel<TrackUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

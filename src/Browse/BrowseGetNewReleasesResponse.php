@@ -12,11 +12,11 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type browse_get_new_releases_response = array{albums: Albums}
+ * @phpstan-type BrowseGetNewReleasesResponseShape = array{albums: Albums}
  */
 final class BrowseGetNewReleasesResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<browse_get_new_releases_response> */
+    /** @use SdkModel<BrowseGetNewReleasesResponseShape> */
     use SdkModel;
 
     use SdkResponse;

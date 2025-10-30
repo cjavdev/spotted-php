@@ -10,7 +10,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type audio_feature = array{
+ * @phpstan-type AudioFeatureShape = array{
  *   id?: string,
  *   acousticness?: float,
  *   analysisURL?: string,
@@ -33,7 +33,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class AudioFeature implements BaseModel
 {
-    /** @use SdkModel<audio_feature> */
+    /** @use SdkModel<AudioFeatureShape> */
     use SdkModel;
 
     /**

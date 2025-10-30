@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Tracks->check
  *
- * @phpstan-type track_check_params = array{ids: string}
+ * @phpstan-type TrackCheckParamsShape = array{ids: string}
  */
 final class TrackCheckParams implements BaseModel
 {
-    /** @use SdkModel<track_check_params> */
+    /** @use SdkModel<TrackCheckParamsShape> */
     use SdkModel;
     use SdkParams;
 

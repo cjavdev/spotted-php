@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type audio_feature_get_response = array{
+ * @phpstan-type AudioFeatureGetResponseShape = array{
  *   id?: string,
  *   acousticness?: float,
  *   analysisURL?: string,
@@ -35,7 +35,7 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
  */
 final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<audio_feature_get_response> */
+    /** @use SdkModel<AudioFeatureGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

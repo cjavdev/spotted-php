@@ -13,13 +13,13 @@ use Spotted\Recommendations\RecommendationGetResponse\Seed;
 use Spotted\TrackObject;
 
 /**
- * @phpstan-type recommendation_get_response = array{
+ * @phpstan-type RecommendationGetResponseShape = array{
  *   seeds: list<Seed>, tracks: list<TrackObject>
  * }
  */
 final class RecommendationGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<recommendation_get_response> */
+    /** @use SdkModel<RecommendationGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

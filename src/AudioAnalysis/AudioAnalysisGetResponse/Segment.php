@@ -9,7 +9,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type segment_alias = array{
+ * @phpstan-type SegmentShape = array{
  *   confidence?: float,
  *   duration?: float,
  *   loudnessEnd?: float,
@@ -23,7 +23,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class Segment implements BaseModel
 {
-    /** @use SdkModel<segment_alias> */
+    /** @use SdkModel<SegmentShape> */
     use SdkModel;
 
     /**

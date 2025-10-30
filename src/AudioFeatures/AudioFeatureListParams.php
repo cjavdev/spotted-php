@@ -15,11 +15,11 @@ use Spotted\Core\Contracts\BaseModel;
  * @deprecated
  * @see Spotted\AudioFeatures->list
  *
- * @phpstan-type audio_feature_list_params = array{ids: string}
+ * @phpstan-type AudioFeatureListParamsShape = array{ids: string}
  */
 final class AudioFeatureListParams implements BaseModel
 {
-    /** @use SdkModel<audio_feature_list_params> */
+    /** @use SdkModel<AudioFeatureListParamsShape> */
     use SdkModel;
     use SdkParams;
 

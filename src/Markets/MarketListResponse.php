@@ -11,11 +11,11 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type market_list_response = array{markets?: list<string>}
+ * @phpstan-type MarketListResponseShape = array{markets?: list<string>}
  */
 final class MarketListResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<market_list_response> */
+    /** @use SdkModel<MarketListResponseShape> */
     use SdkModel;
 
     use SdkResponse;

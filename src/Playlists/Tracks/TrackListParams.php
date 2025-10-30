@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Playlists\Tracks->list
  *
- * @phpstan-type track_list_params = array{
+ * @phpstan-type TrackListParamsShape = array{
  *   additionalTypes?: string,
  *   fields?: string,
  *   limit?: int,
@@ -24,7 +24,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class TrackListParams implements BaseModel
 {
-    /** @use SdkModel<track_list_params> */
+    /** @use SdkModel<TrackListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Users\Playlists->list
  *
- * @phpstan-type playlist_list_params = array{limit?: int, offset?: int}
+ * @phpstan-type PlaylistListParamsShape = array{limit?: int, offset?: int}
  */
 final class PlaylistListParams implements BaseModel
 {
-    /** @use SdkModel<playlist_list_params> */
+    /** @use SdkModel<PlaylistListParamsShape> */
     use SdkModel;
     use SdkParams;
 

@@ -9,11 +9,11 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type chapter_restriction_object = array{reason?: string}
+ * @phpstan-type ChapterRestrictionObjectShape = array{reason?: string}
  */
 final class ChapterRestrictionObject implements BaseModel
 {
-    /** @use SdkModel<chapter_restriction_object> */
+    /** @use SdkModel<ChapterRestrictionObjectShape> */
     use SdkModel;
 
     /**

@@ -10,7 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\SimplifiedArtistObject\Type;
 
 /**
- * @phpstan-type simplified_artist_object = array{
+ * @phpstan-type SimplifiedArtistObjectShape = array{
  *   id?: string,
  *   externalURLs?: ExternalURLObject,
  *   href?: string,
@@ -21,7 +21,7 @@ use Spotted\SimplifiedArtistObject\Type;
  */
 final class SimplifiedArtistObject implements BaseModel
 {
-    /** @use SdkModel<simplified_artist_object> */
+    /** @use SdkModel<SimplifiedArtistObjectShape> */
     use SdkModel;
 
     /**

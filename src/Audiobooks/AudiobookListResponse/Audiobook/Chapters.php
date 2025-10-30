@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * The chapters of the audiobook.
  *
- * @phpstan-type chapters_alias = array{
+ * @phpstan-type ChaptersShape = array{
  *   href: string,
  *   items: list<SimplifiedChapterObject>,
  *   limit: int,
@@ -24,7 +24,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class Chapters implements BaseModel
 {
-    /** @use SdkModel<chapters_alias> */
+    /** @use SdkModel<ChaptersShape> */
     use SdkModel;
 
     /**

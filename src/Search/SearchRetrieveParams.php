@@ -17,7 +17,7 @@ use Spotted\Search\SearchRetrieveParams\Type;
  *
  * @see Spotted\Search->retrieve
  *
- * @phpstan-type search_retrieve_params = array{
+ * @phpstan-type SearchRetrieveParamsShape = array{
  *   q: string,
  *   type: list<Type|value-of<Type>>,
  *   includeExternal?: IncludeExternal|value-of<IncludeExternal>,
@@ -28,7 +28,7 @@ use Spotted\Search\SearchRetrieveParams\Type;
  */
 final class SearchRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<search_retrieve_params> */
+    /** @use SdkModel<SearchRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

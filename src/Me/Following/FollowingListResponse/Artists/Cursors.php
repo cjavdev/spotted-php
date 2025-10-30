@@ -11,11 +11,11 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * The cursors used to find the next set of items.
  *
- * @phpstan-type cursors_alias = array{after?: string, before?: string}
+ * @phpstan-type CursorsShape = array{after?: string, before?: string}
  */
 final class Cursors implements BaseModel
 {
-    /** @use SdkModel<cursors_alias> */
+    /** @use SdkModel<CursorsShape> */
     use SdkModel;
 
     /**

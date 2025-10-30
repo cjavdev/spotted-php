@@ -15,7 +15,7 @@ use Spotted\ImageObject;
 use Spotted\Users\UserGetProfileResponse\Type;
 
 /**
- * @phpstan-type user_get_profile_response = array{
+ * @phpstan-type UserGetProfileResponseShape = array{
  *   id?: string,
  *   displayName?: string|null,
  *   externalURLs?: ExternalURLObject,
@@ -28,7 +28,7 @@ use Spotted\Users\UserGetProfileResponse\Type;
  */
 final class UserGetProfileResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<user_get_profile_response> */
+    /** @use SdkModel<UserGetProfileResponseShape> */
     use SdkModel;
 
     use SdkResponse;

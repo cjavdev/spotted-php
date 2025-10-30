@@ -14,13 +14,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Artists->listAlbums
  *
- * @phpstan-type artist_list_albums_params = array{
+ * @phpstan-type ArtistListAlbumsParamsShape = array{
  *   includeGroups?: string, limit?: int, market?: string, offset?: int
  * }
  */
 final class ArtistListAlbumsParams implements BaseModel
 {
-    /** @use SdkModel<artist_list_albums_params> */
+    /** @use SdkModel<ArtistListAlbumsParamsShape> */
     use SdkModel;
     use SdkParams;
 

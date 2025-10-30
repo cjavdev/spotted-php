@@ -14,13 +14,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player->transfer
  *
- * @phpstan-type player_transfer_params = array{
+ * @phpstan-type PlayerTransferParamsShape = array{
  *   deviceIDs: list<string>, play?: bool
  * }
  */
 final class PlayerTransferParams implements BaseModel
 {
-    /** @use SdkModel<player_transfer_params> */
+    /** @use SdkModel<PlayerTransferParamsShape> */
     use SdkModel;
     use SdkParams;
 

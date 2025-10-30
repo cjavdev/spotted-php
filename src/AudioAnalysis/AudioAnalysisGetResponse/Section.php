@@ -9,7 +9,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type section_alias = array{
+ * @phpstan-type SectionShape = array{
  *   confidence?: float,
  *   duration?: float,
  *   key?: int,
@@ -26,7 +26,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class Section implements BaseModel
 {
-    /** @use SdkModel<section_alias> */
+    /** @use SdkModel<SectionShape> */
     use SdkModel;
 
     /**

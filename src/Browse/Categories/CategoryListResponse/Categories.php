@@ -10,7 +10,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type categories_alias = array{
+ * @phpstan-type CategoriesShape = array{
  *   href: string,
  *   items: list<Item>,
  *   limit: int,
@@ -22,7 +22,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class Categories implements BaseModel
 {
-    /** @use SdkModel<categories_alias> */
+    /** @use SdkModel<CategoriesShape> */
     use SdkModel;
 
     /**

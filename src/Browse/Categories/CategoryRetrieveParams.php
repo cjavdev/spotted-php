@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Browse\Categories->retrieve
  *
- * @phpstan-type category_retrieve_params = array{locale?: string}
+ * @phpstan-type CategoryRetrieveParamsShape = array{locale?: string}
  */
 final class CategoryRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<category_retrieve_params> */
+    /** @use SdkModel<CategoryRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

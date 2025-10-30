@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Playlists\Images->update
  *
- * @phpstan-type image_update_params = array{body: string}
+ * @phpstan-type ImageUpdateParamsShape = array{body: string}
  */
 final class ImageUpdateParams implements BaseModel
 {
-    /** @use SdkModel<image_update_params> */
+    /** @use SdkModel<ImageUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 

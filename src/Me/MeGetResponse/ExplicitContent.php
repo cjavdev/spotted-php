@@ -11,13 +11,13 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * The user's explicit content settings. _This field is only available when the current user has granted access to the [user-read-private](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
  *
- * @phpstan-type explicit_content = array{
+ * @phpstan-type ExplicitContentShape = array{
  *   filterEnabled?: bool, filterLocked?: bool
  * }
  */
 final class ExplicitContent implements BaseModel
 {
-    /** @use SdkModel<explicit_content> */
+    /** @use SdkModel<ExplicitContentShape> */
     use SdkModel;
 
     /**

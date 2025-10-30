@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player->pausePlayback
  *
- * @phpstan-type player_pause_playback_params = array{deviceID?: string}
+ * @phpstan-type PlayerPausePlaybackParamsShape = array{deviceID?: string}
  */
 final class PlayerPausePlaybackParams implements BaseModel
 {
-    /** @use SdkModel<player_pause_playback_params> */
+    /** @use SdkModel<PlayerPausePlaybackParamsShape> */
     use SdkModel;
     use SdkParams;
 

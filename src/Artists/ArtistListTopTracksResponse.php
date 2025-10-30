@@ -12,11 +12,13 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\TrackObject;
 
 /**
- * @phpstan-type artist_list_top_tracks_response = array{tracks: list<TrackObject>}
+ * @phpstan-type ArtistListTopTracksResponseShape = array{
+ *   tracks: list<TrackObject>
+ * }
  */
 final class ArtistListTopTracksResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<artist_list_top_tracks_response> */
+    /** @use SdkModel<ArtistListTopTracksResponseShape> */
     use SdkModel;
 
     use SdkResponse;

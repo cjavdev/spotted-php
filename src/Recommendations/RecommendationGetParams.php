@@ -17,7 +17,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @deprecated
  * @see Spotted\Recommendations->get
  *
- * @phpstan-type recommendation_get_params = array{
+ * @phpstan-type RecommendationGetParamsShape = array{
  *   limit?: int,
  *   market?: string,
  *   maxAcousticness?: float,
@@ -69,7 +69,7 @@ use Spotted\Core\Contracts\BaseModel;
  */
 final class RecommendationGetParams implements BaseModel
 {
-    /** @use SdkModel<recommendation_get_params> */
+    /** @use SdkModel<RecommendationGetParamsShape> */
     use SdkModel;
     use SdkParams;
 

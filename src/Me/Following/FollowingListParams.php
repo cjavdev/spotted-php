@@ -15,13 +15,13 @@ use Spotted\Me\Following\FollowingListParams\Type;
  *
  * @see Spotted\Me\Following->list
  *
- * @phpstan-type following_list_params = array{
+ * @phpstan-type FollowingListParamsShape = array{
  *   type: Type|value-of<Type>, after?: string, limit?: int
  * }
  */
 final class FollowingListParams implements BaseModel
 {
-    /** @use SdkModel<following_list_params> */
+    /** @use SdkModel<FollowingListParamsShape> */
     use SdkModel;
     use SdkParams;
 

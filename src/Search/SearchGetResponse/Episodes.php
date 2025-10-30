@@ -10,7 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\SimplifiedEpisodeObject;
 
 /**
- * @phpstan-type episodes_alias = array{
+ * @phpstan-type EpisodesShape = array{
  *   href: string,
  *   items: list<SimplifiedEpisodeObject>,
  *   limit: int,
@@ -22,7 +22,7 @@ use Spotted\SimplifiedEpisodeObject;
  */
 final class Episodes implements BaseModel
 {
-    /** @use SdkModel<episodes_alias> */
+    /** @use SdkModel<EpisodesShape> */
     use SdkModel;
 
     /**

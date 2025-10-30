@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Albums->retrieve
  *
- * @phpstan-type album_retrieve_params = array{market?: string}
+ * @phpstan-type AlbumRetrieveParamsShape = array{market?: string}
  */
 final class AlbumRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<album_retrieve_params> */
+    /** @use SdkModel<AlbumRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 

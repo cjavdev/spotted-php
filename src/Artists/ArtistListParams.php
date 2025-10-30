@@ -14,11 +14,11 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Artists->list
  *
- * @phpstan-type artist_list_params = array{ids: string}
+ * @phpstan-type ArtistListParamsShape = array{ids: string}
  */
 final class ArtistListParams implements BaseModel
 {
-    /** @use SdkModel<artist_list_params> */
+    /** @use SdkModel<ArtistListParamsShape> */
     use SdkModel;
     use SdkParams;
 

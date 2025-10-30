@@ -9,13 +9,13 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type external_id_object = array{
+ * @phpstan-type ExternalIDObjectShape = array{
  *   ean?: string, isrc?: string, upc?: string
  * }
  */
 final class ExternalIDObject implements BaseModel
 {
-    /** @use SdkModel<external_id_object> */
+    /** @use SdkModel<ExternalIDObjectShape> */
     use SdkModel;
 
     /**

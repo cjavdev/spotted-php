@@ -10,11 +10,11 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type album_restriction_object = array{reason?: value-of<Reason>}
+ * @phpstan-type AlbumRestrictionObjectShape = array{reason?: value-of<Reason>}
  */
 final class AlbumRestrictionObject implements BaseModel
 {
-    /** @use SdkModel<album_restriction_object> */
+    /** @use SdkModel<AlbumRestrictionObjectShape> */
     use SdkModel;
 
     /**

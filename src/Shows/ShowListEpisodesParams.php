@@ -14,13 +14,13 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Shows->listEpisodes
  *
- * @phpstan-type show_list_episodes_params = array{
+ * @phpstan-type ShowListEpisodesParamsShape = array{
  *   limit?: int, market?: string, offset?: int
  * }
  */
 final class ShowListEpisodesParams implements BaseModel
 {
-    /** @use SdkModel<show_list_episodes_params> */
+    /** @use SdkModel<ShowListEpisodesParamsShape> */
     use SdkModel;
     use SdkParams;
 

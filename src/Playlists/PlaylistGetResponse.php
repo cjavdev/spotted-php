@@ -16,7 +16,7 @@ use Spotted\Playlists\PlaylistGetResponse\Owner;
 use Spotted\Playlists\PlaylistGetResponse\Tracks;
 
 /**
- * @phpstan-type playlist_get_response = array{
+ * @phpstan-type PlaylistGetResponseShape = array{
  *   id?: string,
  *   collaborative?: bool,
  *   description?: string|null,
@@ -35,7 +35,7 @@ use Spotted\Playlists\PlaylistGetResponse\Tracks;
  */
 final class PlaylistGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<playlist_get_response> */
+    /** @use SdkModel<PlaylistGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;

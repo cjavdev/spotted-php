@@ -10,7 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\PlaylistTrackObject\Track;
 
 /**
- * @phpstan-type playlist_track_object = array{
+ * @phpstan-type PlaylistTrackObjectShape = array{
  *   addedAt?: \DateTimeInterface,
  *   addedBy?: PlaylistUserObject,
  *   isLocal?: bool,
@@ -19,7 +19,7 @@ use Spotted\PlaylistTrackObject\Track;
  */
 final class PlaylistTrackObject implements BaseModel
 {
-    /** @use SdkModel<playlist_track_object> */
+    /** @use SdkModel<PlaylistTrackObjectShape> */
     use SdkModel;
 
     /**
