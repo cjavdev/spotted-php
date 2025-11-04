@@ -13,7 +13,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [community.spotify.com](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
+The REST API documentation can be found on [spotted.stldocs.com](https://spotted.stldocs.com).
 
 ## Installation
 
