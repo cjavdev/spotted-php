@@ -23,7 +23,6 @@ use Spotted\Services\SearchService;
 use Spotted\Services\ShowsService;
 use Spotted\Services\TracksService;
 use Spotted\Services\UsersService;
-use Spotted\Services\WebhooksService;
 
 class Client extends BaseClient
 {
@@ -109,11 +108,6 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public WebhooksService $webhooks;
-
-    /**
-     * @api
-     */
     public MarketsService $markets;
 
     public function __construct(
@@ -166,7 +160,6 @@ class Client extends BaseClient
         $this->audioFeatures = new AudioFeaturesService($this);
         $this->audioAnalysis = new AudioAnalysisService($this);
         $this->recommendations = new RecommendationsService($this);
-        $this->webhooks = new WebhooksService($this);
         $this->markets = new MarketsService($this);
     }
 

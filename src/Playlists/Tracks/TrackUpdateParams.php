@@ -21,11 +21,11 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Playlists\Tracks->update
  *
  * @phpstan-type TrackUpdateParamsShape = array{
- *   uris?: list<string>,
  *   insertBefore?: int,
  *   rangeLength?: int,
  *   rangeStart?: int,
  *   snapshotID?: string,
+ *   uris?: list<string>,
  * }
  */
 final class TrackUpdateParams implements BaseModel
@@ -33,10 +33,6 @@ final class TrackUpdateParams implements BaseModel
     /** @use SdkModel<TrackUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
-
-    /** @var list<string>|null $uris */
-    #[Api(list: 'string', optional: true)]
-    public ?array $uris;
 
     /**
      * The position where the items should be inserted.<br/>To reorder the items to the end of the playlist, simply set _insert_before_ to the position after the last item.<br/>Examples:<br/>To reorder the first item to the last position in a playlist with 10 items, set _range_start_ to 0, and _insert_before_ to 10.<br/>To reorder the last item in a playlist with 10 items to the start of the playlist, set _range_start_ to 9, and _insert_before_ to 0.
@@ -62,6 +58,10 @@ final class TrackUpdateParams implements BaseModel
     #[Api('snapshot_id', optional: true)]
     public ?string $snapshotID;
 
+    /** @var list<string>|null $uris */
+    #[Api(list: 'string', optional: true)]
+    public ?array $uris;
+
     public function __construct()
     {
         $this->initialize();
@@ -75,30 +75,19 @@ final class TrackUpdateParams implements BaseModel
      * @param list<string> $uris
      */
     public static function with(
-        ?array $uris = null,
         ?int $insertBefore = null,
         ?int $rangeLength = null,
         ?int $rangeStart = null,
         ?string $snapshotID = null,
+        ?array $uris = null,
     ): self {
         $obj = new self;
 
-        null !== $uris && $obj->uris = $uris;
         null !== $insertBefore && $obj->insertBefore = $insertBefore;
         null !== $rangeLength && $obj->rangeLength = $rangeLength;
         null !== $rangeStart && $obj->rangeStart = $rangeStart;
         null !== $snapshotID && $obj->snapshotID = $snapshotID;
-
-        return $obj;
-    }
-
-    /**
-     * @param list<string> $uris
-     */
-    public function withUris(array $uris): self
-    {
-        $obj = clone $this;
-        $obj->uris = $uris;
+        null !== $uris && $obj->uris = $uris;
 
         return $obj;
     }
@@ -143,6 +132,17 @@ final class TrackUpdateParams implements BaseModel
     {
         $obj = clone $this;
         $obj->snapshotID = $snapshotID;
+
+        return $obj;
+    }
+
+    /**
+     * @param list<string> $uris
+     */
+    public function withUris(array $uris): self
+    {
+        $obj = clone $this;
+        $obj->uris = $uris;
 
         return $obj;
     }

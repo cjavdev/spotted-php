@@ -76,13 +76,11 @@ interface FollowingContract
      *
      * @param list<string> $ids A JSON array of the artist or user [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids).
      * For example: `{ids:["74ASZWbe4lXaubB36ztrGX", "08td7MxkoHQkXnWAYD8d6Q"]}`. A maximum of 50 IDs can be sent in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._
-     * @param \Spotted\Me\Following\FollowingFollowParams\Type|value-of<\Spotted\Me\Following\FollowingFollowParams\Type> $type the ID type
      *
      * @throws APIException
      */
     public function follow(
         $ids,
-        $type,
         ?RequestOptions $requestOptions = null
     ): mixed;
 
@@ -101,13 +99,11 @@ interface FollowingContract
     /**
      * @api
      *
-     * @param \Spotted\Me\Following\FollowingUnfollowParams\Type|value-of<\Spotted\Me\Following\FollowingUnfollowParams\Type> $type the ID type: either `artist` or `user`
      * @param list<string> $ids A JSON array of the artist or user [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `{ids:["74ASZWbe4lXaubB36ztrGX", "08td7MxkoHQkXnWAYD8d6Q"]}`. A maximum of 50 IDs can be sent in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._
      *
      * @throws APIException
      */
     public function unfollow(
-        $type,
         $ids = omit,
         ?RequestOptions $requestOptions = null
     ): mixed;
