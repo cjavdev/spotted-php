@@ -8,16 +8,13 @@ use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Me\Following\FollowingUnfollowParams\Type;
 
 /**
  * Remove the current user as a follower of one or more artists or other Spotify users.
  *
  * @see Spotted\Me\Following->unfollow
  *
- * @phpstan-type FollowingUnfollowParamsShape = array{
- *   ids?: list<string>, type: Type|value-of<Type>
- * }
+ * @phpstan-type FollowingUnfollowParamsShape = array{ids?: list<string>}
  */
 final class FollowingUnfollowParams implements BaseModel
 {
@@ -33,28 +30,6 @@ final class FollowingUnfollowParams implements BaseModel
     #[Api(list: 'string', optional: true)]
     public ?array $ids;
 
-    /**
-     * The ID type: either `artist` or `user`.
-     *
-     * @var value-of<Type> $type
-     */
-    #[Api(enum: Type::class)]
-    public string $type;
-
-    /**
-     * `new FollowingUnfollowParams()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * FollowingUnfollowParams::with(type: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new FollowingUnfollowParams)->withType(...)
-     * ```
-     */
     public function __construct()
     {
         $this->initialize();
@@ -65,14 +40,11 @@ final class FollowingUnfollowParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
      * @param list<string> $ids
      */
-    public static function with(Type|string $type, ?array $ids = null): self
+    public static function with(?array $ids = null): self
     {
         $obj = new self;
-
-        $obj['type'] = $type;
 
         null !== $ids && $obj->ids = $ids;
 
@@ -88,19 +60,6 @@ final class FollowingUnfollowParams implements BaseModel
     {
         $obj = clone $this;
         $obj->ids = $ids;
-
-        return $obj;
-    }
-
-    /**
-     * The ID type: either `artist` or `user`.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $obj = clone $this;
-        $obj['type'] = $type;
 
         return $obj;
     }

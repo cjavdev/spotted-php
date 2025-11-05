@@ -91,10 +91,7 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->follow(
-            ids: ['string'],
-            type: 'artist'
-        );
+        $result = $this->client->me->following->follow(['string']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -106,10 +103,7 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->follow(
-            ids: ['string'],
-            type: 'artist'
-        );
+        $result = $this->client->me->following->follow(['string']);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -121,19 +115,7 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->unfollow(type: 'artist');
-
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
-    }
-
-    #[Test]
-    public function testUnfollowWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
-        $result = $this->client->me->following->unfollow(type: 'artist');
+        $result = $this->client->me->following->unfollow();
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

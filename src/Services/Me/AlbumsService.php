@@ -162,14 +162,12 @@ final class AlbumsService implements AlbumsContract
             $params,
             $requestOptions
         );
-        $query_params = ['ids'];
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'delete',
             path: 'me/albums',
-            query: array_diff_key($parsed, $query_params),
-            body: (object) array_diff_key($parsed, $query_params),
+            body: (object) $parsed,
             options: $options,
             convert: null,
         );
@@ -208,14 +206,12 @@ final class AlbumsService implements AlbumsContract
             $params,
             $requestOptions
         );
-        $query_params = ['ids'];
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'put',
             path: 'me/albums',
-            query: array_diff_key($parsed, $query_params),
-            body: (object) array_diff_key($parsed, $query_params),
+            body: (object) $parsed,
             options: $options,
             convert: null,
         );

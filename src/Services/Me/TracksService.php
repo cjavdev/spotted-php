@@ -163,14 +163,12 @@ final class TracksService implements TracksContract
             $params,
             $requestOptions
         );
-        $query_params = ['ids'];
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'delete',
             path: 'me/tracks',
-            query: array_diff_key($parsed, $query_params),
-            body: (object) array_diff_key($parsed, $query_params),
+            body: (object) $parsed,
             options: $options,
             convert: null,
         );

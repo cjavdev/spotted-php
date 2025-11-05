@@ -165,14 +165,12 @@ final class EpisodesService implements EpisodesContract
             $params,
             $requestOptions
         );
-        $query_params = ['ids'];
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'delete',
             path: 'me/episodes',
-            query: array_diff_key($parsed, $query_params),
-            body: (object) array_diff_key($parsed, $query_params),
+            body: (object) $parsed,
             options: $options,
             convert: null,
         );
@@ -210,14 +208,12 @@ final class EpisodesService implements EpisodesContract
             $params,
             $requestOptions
         );
-        $query_params = ['ids'];
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'put',
             path: 'me/episodes',
-            query: array_diff_key($parsed, $query_params),
-            body: (object) array_diff_key($parsed, $query_params),
+            body: (object) $parsed,
             options: $options,
             convert: null,
         );

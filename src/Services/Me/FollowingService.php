@@ -130,16 +130,12 @@ final class FollowingService implements FollowingContract
      *
      * @param list<string> $ids A JSON array of the artist or user [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids).
      * For example: `{ids:["74ASZWbe4lXaubB36ztrGX", "08td7MxkoHQkXnWAYD8d6Q"]}`. A maximum of 50 IDs can be sent in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._
-     * @param FollowingFollowParams\Type|value-of<FollowingFollowParams\Type> $type the ID type
      *
      * @throws APIException
      */
-    public function follow(
-        $ids,
-        $type,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = ['ids' => $ids, 'type' => $type];
+    public function follow($ids, ?RequestOptions $requestOptions = null): mixed
+    {
+        $params = ['ids' => $ids];
 
         return $this->followRaw($params, $requestOptions);
     }
@@ -159,14 +155,12 @@ final class FollowingService implements FollowingContract
             $params,
             $requestOptions
         );
-        $query_params = array_flip(['ids', 'type']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'put',
             path: 'me/following',
-            query: array_diff_key($parsed, $query_params),
-            body: (object) array_diff_key($parsed, $query_params),
+            body: (object) $parsed,
             options: $options,
             convert: null,
         );
@@ -177,17 +171,15 @@ final class FollowingService implements FollowingContract
      *
      * Remove the current user as a follower of one or more artists or other Spotify users.
      *
-     * @param FollowingUnfollowParams\Type|value-of<FollowingUnfollowParams\Type> $type the ID type: either `artist` or `user`
      * @param list<string> $ids A JSON array of the artist or user [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `{ids:["74ASZWbe4lXaubB36ztrGX", "08td7MxkoHQkXnWAYD8d6Q"]}`. A maximum of 50 IDs can be sent in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._
      *
      * @throws APIException
      */
     public function unfollow(
-        $type,
         $ids = omit,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = ['ids' => $ids, 'type' => $type];
+        $params = ['ids' => $ids];
 
         return $this->unfollowRaw($params, $requestOptions);
     }
@@ -207,14 +199,12 @@ final class FollowingService implements FollowingContract
             $params,
             $requestOptions
         );
-        $query_params = array_flip(['ids', 'type']);
 
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'delete',
             path: 'me/following',
-            query: array_diff_key($parsed, $query_params),
-            body: (object) array_diff_key($parsed, $query_params),
+            body: (object) $parsed,
             options: $options,
             convert: null,
         );
