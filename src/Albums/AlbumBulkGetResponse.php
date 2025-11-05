@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Albums;
 
-use Spotted\Albums\AlbumListResponse\Album;
+use Spotted\Albums\AlbumBulkGetResponse\Album;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkResponse;
@@ -12,11 +12,11 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type AlbumListResponseShape = array{albums: list<Album>}
+ * @phpstan-type AlbumBulkGetResponseShape = array{albums: list<Album>}
  */
-final class AlbumListResponse implements BaseModel, ResponseConverter
+final class AlbumBulkGetResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<AlbumListResponseShape> */
+    /** @use SdkModel<AlbumBulkGetResponseShape> */
     use SdkModel;
 
     use SdkResponse;
@@ -26,17 +26,17 @@ final class AlbumListResponse implements BaseModel, ResponseConverter
     public array $albums;
 
     /**
-     * `new AlbumListResponse()` is missing required properties by the API.
+     * `new AlbumBulkGetResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AlbumListResponse::with(albums: ...)
+     * AlbumBulkGetResponse::with(albums: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new AlbumListResponse)->withAlbums(...)
+     * (new AlbumBulkGetResponse)->withAlbums(...)
      * ```
      */
     public function __construct()

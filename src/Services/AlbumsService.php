@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Spotted\Services;
 
+use Spotted\Albums\AlbumBulkGetResponse;
+use Spotted\Albums\AlbumBulkRetrieveParams;
 use Spotted\Albums\AlbumGetResponse;
-use Spotted\Albums\AlbumListParams;
-use Spotted\Albums\AlbumListResponse;
 use Spotted\Albums\AlbumListTracksParams;
 use Spotted\Albums\AlbumRetrieveParams;
 use Spotted\Client;
@@ -91,14 +91,14 @@ final class AlbumsService implements AlbumsContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         $market = omit,
         ?RequestOptions $requestOptions = null
-    ): AlbumListResponse {
+    ): AlbumBulkGetResponse {
         $params = ['ids' => $ids, 'market' => $market];
 
-        return $this->listRaw($params, $requestOptions);
+        return $this->bulkRetrieveRaw($params, $requestOptions);
     }
 
     /**
@@ -108,11 +108,11 @@ final class AlbumsService implements AlbumsContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): AlbumListResponse {
-        [$parsed, $options] = AlbumListParams::parseRequest(
+    ): AlbumBulkGetResponse {
+        [$parsed, $options] = AlbumBulkRetrieveParams::parseRequest(
             $params,
             $requestOptions
         );
@@ -123,7 +123,7 @@ final class AlbumsService implements AlbumsContract
             path: 'albums',
             query: $parsed,
             options: $options,
-            convert: AlbumListResponse::class,
+            convert: AlbumBulkGetResponse::class,
         );
     }
 

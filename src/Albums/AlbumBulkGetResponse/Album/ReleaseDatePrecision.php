@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Spotted\Albums\AlbumListResponse\Album;
+namespace Spotted\Albums\AlbumBulkGetResponse\Album;
 
 /**
  * The precision with which `release_date` value is known.

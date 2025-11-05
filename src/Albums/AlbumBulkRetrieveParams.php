@@ -12,13 +12,13 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get Spotify catalog information for multiple albums identified by their Spotify IDs.
  *
- * @see Spotted\Albums->list
+ * @see Spotted\Albums->bulkRetrieve
  *
- * @phpstan-type AlbumListParamsShape = array{ids: string, market?: string}
+ * @phpstan-type AlbumBulkRetrieveParamsShape = array{ids: string, market?: string}
  */
-final class AlbumListParams implements BaseModel
+final class AlbumBulkRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<AlbumListParamsShape> */
+    /** @use SdkModel<AlbumBulkRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -40,17 +40,17 @@ final class AlbumListParams implements BaseModel
     public ?string $market;
 
     /**
-     * `new AlbumListParams()` is missing required properties by the API.
+     * `new AlbumBulkRetrieveParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AlbumListParams::with(ids: ...)
+     * AlbumBulkRetrieveParams::with(ids: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new AlbumListParams)->withIDs(...)
+     * (new AlbumBulkRetrieveParams)->withIDs(...)
      * ```
      */
     public function __construct()

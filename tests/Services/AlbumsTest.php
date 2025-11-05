@@ -43,13 +43,13 @@ final class AlbumsTest extends TestCase
     }
 
     #[Test]
-    public function testList(): void
+    public function testBulkRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->albums->list(
+        $result = $this->client->albums->bulkRetrieve(
             ids: '382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc',
         );
 
@@ -57,13 +57,13 @@ final class AlbumsTest extends TestCase
     }
 
     #[Test]
-    public function testListWithOptionalParams(): void
+    public function testBulkRetrieveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->albums->list(
+        $result = $this->client->albums->bulkRetrieve(
             ids: '382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc',
         );
 
