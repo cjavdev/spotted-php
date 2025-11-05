@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Spotted\Albums\AlbumListResponse;
+namespace Spotted\Albums\AlbumBulkGetResponse;
 
 use Spotted\AlbumRestrictionObject;
-use Spotted\Albums\AlbumListResponse\Album\AlbumType;
-use Spotted\Albums\AlbumListResponse\Album\ReleaseDatePrecision;
-use Spotted\Albums\AlbumListResponse\Album\Tracks;
-use Spotted\Albums\AlbumListResponse\Album\Type;
+use Spotted\Albums\AlbumBulkGetResponse\Album\AlbumType;
+use Spotted\Albums\AlbumBulkGetResponse\Album\ReleaseDatePrecision;
+use Spotted\Albums\AlbumBulkGetResponse\Album\Tracks;
+use Spotted\Albums\AlbumBulkGetResponse\Album\Type;
 use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;

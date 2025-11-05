@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\ServiceContracts;
 
+use Spotted\Albums\AlbumBulkGetResponse;
 use Spotted\Albums\AlbumGetResponse;
-use Spotted\Albums\AlbumListResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
@@ -59,11 +59,11 @@ interface AlbumsContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         $market = omit,
         ?RequestOptions $requestOptions = null
-    ): AlbumListResponse;
+    ): AlbumBulkGetResponse;
 
     /**
      * @api
@@ -72,10 +72,10 @@ interface AlbumsContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): AlbumListResponse;
+    ): AlbumBulkGetResponse;
 
     /**
      * @api
