@@ -12,13 +12,11 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\TrackObject;
 
 /**
- * @phpstan-type ArtistListTopTracksResponseShape = array{
- *   tracks: list<TrackObject>
- * }
+ * @phpstan-type ArtistTopTracksResponseShape = array{tracks: list<TrackObject>}
  */
-final class ArtistListTopTracksResponse implements BaseModel, ResponseConverter
+final class ArtistTopTracksResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<ArtistListTopTracksResponseShape> */
+    /** @use SdkModel<ArtistTopTracksResponseShape> */
     use SdkModel;
 
     use SdkResponse;
@@ -28,17 +26,17 @@ final class ArtistListTopTracksResponse implements BaseModel, ResponseConverter
     public array $tracks;
 
     /**
-     * `new ArtistListTopTracksResponse()` is missing required properties by the API.
+     * `new ArtistTopTracksResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ArtistListTopTracksResponse::with(tracks: ...)
+     * ArtistTopTracksResponse::with(tracks: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new ArtistListTopTracksResponse)->withTracks(...)
+     * (new ArtistTopTracksResponse)->withTracks(...)
      * ```
      */
     public function __construct()
