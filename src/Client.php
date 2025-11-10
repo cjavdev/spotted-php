@@ -30,6 +30,8 @@ class Client extends BaseClient
 
     public string $clientSecret;
 
+    public string $accessToken;
+
     /**
      * @api
      */
@@ -113,10 +115,12 @@ class Client extends BaseClient
     public function __construct(
         ?string $clientID = null,
         ?string $clientSecret = null,
+        ?string $accessToken = null,
         ?string $baseUrl = null,
     ) {
         $this->clientID = (string) ($clientID ?? getenv('SPOTIFY_CLIENT_ID'));
         $this->clientSecret = (string) ($clientSecret ?? getenv('SPOTIFY_CLIENT_SECRET'));
+        $this->accessToken = (string) ($accessToken ?? getenv('SPOTIFY_ACCESS_TOKEN'));
 
         $baseUrl ??= getenv('SPOTTED_BASE_URL') ?: 'https://api.spotify.com/v1';
 
@@ -164,7 +168,15 @@ class Client extends BaseClient
     }
 
     /** @return array<string, string> */
-    protected function authHeaders(): array
+    protected function bearerAuth(): array
+    {
+        return $this->accessToken ? [
+            'Authorization' => "Bearer {$this->accessToken}",
+        ] : [];
+    }
+
+    /** @return array<string, string> */
+    protected function oauth2_0(): array
     {
         throw new \BadMethodCallException;
     }

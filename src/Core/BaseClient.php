@@ -103,7 +103,16 @@ abstract class BaseClient
     }
 
     /** @return array<string, string> */
-    abstract protected function authHeaders(): array;
+    protected function authHeaders(): array
+    {
+        return [...$this->bearerAuth(), ...$this->oauth2_0()];
+    }
+
+    /** @return array<string, string> */
+    abstract protected function bearerAuth(): array;
+
+    /** @return array<string, string> */
+    abstract protected function oauth2_0(): array;
 
     protected function getNormalizedOS(): string
     {
