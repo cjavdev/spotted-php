@@ -10,8 +10,8 @@ use Spotted\Artists\ArtistBulkRetrieveParams;
 use Spotted\Artists\ArtistListAlbumsParams;
 use Spotted\Artists\ArtistListAlbumsResponse;
 use Spotted\Artists\ArtistListRelatedArtistsResponse;
-use Spotted\Artists\ArtistListTopTracksParams;
-use Spotted\Artists\ArtistListTopTracksResponse;
+use Spotted\Artists\ArtistTopTracksParams;
+use Spotted\Artists\ArtistTopTracksResponse;
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
@@ -195,14 +195,14 @@ final class ArtistsService implements ArtistsContract
      *
      * @throws APIException
      */
-    public function listTopTracks(
+    public function topTracks(
         string $id,
         $market = omit,
         ?RequestOptions $requestOptions = null
-    ): ArtistListTopTracksResponse {
+    ): ArtistTopTracksResponse {
         $params = ['market' => $market];
 
-        return $this->listTopTracksRaw($id, $params, $requestOptions);
+        return $this->topTracksRaw($id, $params, $requestOptions);
     }
 
     /**
@@ -212,12 +212,12 @@ final class ArtistsService implements ArtistsContract
      *
      * @throws APIException
      */
-    public function listTopTracksRaw(
+    public function topTracksRaw(
         string $id,
         array $params,
         ?RequestOptions $requestOptions = null
-    ): ArtistListTopTracksResponse {
-        [$parsed, $options] = ArtistListTopTracksParams::parseRequest(
+    ): ArtistTopTracksResponse {
+        [$parsed, $options] = ArtistTopTracksParams::parseRequest(
             $params,
             $requestOptions
         );
@@ -228,7 +228,7 @@ final class ArtistsService implements ArtistsContract
             path: ['artists/%1$s/top-tracks', $id],
             query: $parsed,
             options: $options,
-            convert: ArtistListTopTracksResponse::class,
+            convert: ArtistTopTracksResponse::class,
         );
     }
 }

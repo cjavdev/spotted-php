@@ -12,13 +12,13 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get Spotify catalog information about an artist's top tracks by country.
  *
- * @see Spotted\Artists->listTopTracks
+ * @see Spotted\Artists->topTracks
  *
- * @phpstan-type ArtistListTopTracksParamsShape = array{market?: string}
+ * @phpstan-type ArtistTopTracksParamsShape = array{market?: string}
  */
-final class ArtistListTopTracksParams implements BaseModel
+final class ArtistTopTracksParams implements BaseModel
 {
-    /** @use SdkModel<ArtistListTopTracksParamsShape> */
+    /** @use SdkModel<ArtistTopTracksParamsShape> */
     use SdkModel;
     use SdkParams;
 

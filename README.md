@@ -60,6 +60,36 @@ and named parameters to initialize value objects.
 
 However, builders are also provided `(new Dog)->withName("Joey")`.
 
+### Pagination
+
+List methods in the Spotted API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```php
+<?php
+
+use Spotted\Client;
+
+$client = new Client(
+  clientID: getenv("SPOTIFY_CLIENT_ID") ?: "My Client ID",
+  clientSecret: getenv("SPOTIFY_CLIENT_SECRET") ?: "My Client Secret",
+);
+
+$page = $client->shows->listEpisodes("38bS44xjbVVZ3No3ByF1dJ");
+
+var_dump($page);
+
+// fetch items from the current page
+foreach ($page->getItems() as $item) {
+  var_dump($item->id);
+}
+// make additional network requests to fetch items from all pages, including and after the current page
+foreach ($page->pagingEachItem() as $item) {
+  var_dump($item->id);
+}
+```
+
 ### Handling errors
 
 When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Spotted\Core\Exceptions\APIException` will be thrown:

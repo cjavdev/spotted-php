@@ -8,7 +8,7 @@ use Spotted\ArtistObject;
 use Spotted\Artists\ArtistBulkGetResponse;
 use Spotted\Artists\ArtistListAlbumsResponse;
 use Spotted\Artists\ArtistListRelatedArtistsResponse;
-use Spotted\Artists\ArtistListTopTracksResponse;
+use Spotted\Artists\ArtistTopTracksResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
@@ -117,11 +117,11 @@ interface ArtistsContract
      *
      * @throws APIException
      */
-    public function listTopTracks(
+    public function topTracks(
         string $id,
         $market = omit,
         ?RequestOptions $requestOptions = null
-    ): ArtistListTopTracksResponse;
+    ): ArtistTopTracksResponse;
 
     /**
      * @api
@@ -130,9 +130,9 @@ interface ArtistsContract
      *
      * @throws APIException
      */
-    public function listTopTracksRaw(
+    public function topTracksRaw(
         string $id,
         array $params,
         ?RequestOptions $requestOptions = null
-    ): ArtistListTopTracksResponse;
+    ): ArtistTopTracksResponse;
 }

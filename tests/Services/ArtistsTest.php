@@ -97,13 +97,13 @@ final class ArtistsTest extends TestCase
     }
 
     #[Test]
-    public function testListTopTracks(): void
+    public function testTopTracks(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->artists->listTopTracks('0TnOYISbd1XYRBk9myaseg');
+        $result = $this->client->artists->topTracks('0TnOYISbd1XYRBk9myaseg');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
