@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Spotted\Search\SearchSearchResponse;
+namespace Spotted\Search\SearchQueryResponse;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\TrackObject;
+use Spotted\ShowBase;
 
 /**
- * @phpstan-type TracksShape = array{
+ * @phpstan-type ShowsShape = array{
  *   href: string,
- *   items: list<TrackObject>,
+ *   items: list<ShowBase>,
  *   limit: int,
  *   next: string|null,
  *   offset: int,
@@ -20,9 +20,9 @@ use Spotted\TrackObject;
  *   total: int,
  * }
  */
-final class Tracks implements BaseModel
+final class Shows implements BaseModel
 {
-    /** @use SdkModel<TracksShape> */
+    /** @use SdkModel<ShowsShape> */
     use SdkModel;
 
     /**
@@ -31,8 +31,8 @@ final class Tracks implements BaseModel
     #[Api]
     public string $href;
 
-    /** @var list<TrackObject> $items */
-    #[Api(list: TrackObject::class)]
+    /** @var list<ShowBase> $items */
+    #[Api(list: ShowBase::class)]
     public array $items;
 
     /**
@@ -66,11 +66,11 @@ final class Tracks implements BaseModel
     public int $total;
 
     /**
-     * `new Tracks()` is missing required properties by the API.
+     * `new Shows()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Tracks::with(
+     * Shows::with(
      *   href: ...,
      *   items: ...,
      *   limit: ...,
@@ -84,7 +84,7 @@ final class Tracks implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Tracks)
+     * (new Shows)
      *   ->withHref(...)
      *   ->withItems(...)
      *   ->withLimit(...)
@@ -104,7 +104,7 @@ final class Tracks implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TrackObject> $items
+     * @param list<ShowBase> $items
      */
     public static function with(
         string $href,
@@ -140,7 +140,7 @@ final class Tracks implements BaseModel
     }
 
     /**
-     * @param list<TrackObject> $items
+     * @param list<ShowBase> $items
      */
     public function withItems(array $items): self
     {

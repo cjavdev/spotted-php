@@ -31,13 +31,13 @@ final class SearchTest extends TestCase
     }
 
     #[Test]
-    public function testSearch(): void
+    public function testQuery(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->search->search(
+        $result = $this->client->search->query(
             q: 'remaster%20track:Doxy%20artist:Miles%20Davis',
             type: ['album']
         );
@@ -46,13 +46,13 @@ final class SearchTest extends TestCase
     }
 
     #[Test]
-    public function testSearchWithOptionalParams(): void
+    public function testQueryWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->search->search(
+        $result = $this->client->search->query(
             q: 'remaster%20track:Doxy%20artist:Miles%20Davis',
             type: ['album']
         );

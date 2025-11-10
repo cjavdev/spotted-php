@@ -7,10 +7,10 @@ namespace Spotted\Services;
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
-use Spotted\Search\SearchSearchParams;
-use Spotted\Search\SearchSearchParams\IncludeExternal;
-use Spotted\Search\SearchSearchParams\Type;
-use Spotted\Search\SearchSearchResponse;
+use Spotted\Search\SearchQueryParams;
+use Spotted\Search\SearchQueryParams\IncludeExternal;
+use Spotted\Search\SearchQueryParams\Type;
+use Spotted\Search\SearchQueryResponse;
 use Spotted\ServiceContracts\SearchContract;
 
 use const Spotted\Core\OMIT as omit;
@@ -54,7 +54,7 @@ final class SearchService implements SearchContract
      *
      * @throws APIException
      */
-    public function search(
+    public function query(
         $q,
         $type,
         $includeExternal = omit,
@@ -62,7 +62,7 @@ final class SearchService implements SearchContract
         $market = omit,
         $offset = omit,
         ?RequestOptions $requestOptions = null,
-    ): SearchSearchResponse {
+    ): SearchQueryResponse {
         $params = [
             'q' => $q,
             'type' => $type,
@@ -72,7 +72,7 @@ final class SearchService implements SearchContract
             'offset' => $offset,
         ];
 
-        return $this->searchRaw($params, $requestOptions);
+        return $this->queryRaw($params, $requestOptions);
     }
 
     /**
@@ -82,11 +82,11 @@ final class SearchService implements SearchContract
      *
      * @throws APIException
      */
-    public function searchRaw(
+    public function queryRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): SearchSearchResponse {
-        [$parsed, $options] = SearchSearchParams::parseRequest(
+    ): SearchQueryResponse {
+        [$parsed, $options] = SearchQueryParams::parseRequest(
             $params,
             $requestOptions
         );
@@ -97,7 +97,7 @@ final class SearchService implements SearchContract
             path: 'search',
             query: $parsed,
             options: $options,
-            convert: SearchSearchResponse::class,
+            convert: SearchQueryResponse::class,
         );
     }
 }
