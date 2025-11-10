@@ -7,10 +7,10 @@ namespace Spotted\Services;
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
-use Spotted\Search\SearchGetResponse;
-use Spotted\Search\SearchRetrieveParams;
-use Spotted\Search\SearchRetrieveParams\IncludeExternal;
-use Spotted\Search\SearchRetrieveParams\Type;
+use Spotted\Search\SearchSearchParams;
+use Spotted\Search\SearchSearchParams\IncludeExternal;
+use Spotted\Search\SearchSearchParams\Type;
+use Spotted\Search\SearchSearchResponse;
 use Spotted\ServiceContracts\SearchContract;
 
 use const Spotted\Core\OMIT as omit;
@@ -54,7 +54,7 @@ final class SearchService implements SearchContract
      *
      * @throws APIException
      */
-    public function retrieve(
+    public function search(
         $q,
         $type,
         $includeExternal = omit,
@@ -62,7 +62,7 @@ final class SearchService implements SearchContract
         $market = omit,
         $offset = omit,
         ?RequestOptions $requestOptions = null,
-    ): SearchGetResponse {
+    ): SearchSearchResponse {
         $params = [
             'q' => $q,
             'type' => $type,
@@ -72,7 +72,7 @@ final class SearchService implements SearchContract
             'offset' => $offset,
         ];
 
-        return $this->retrieveRaw($params, $requestOptions);
+        return $this->searchRaw($params, $requestOptions);
     }
 
     /**
@@ -82,11 +82,11 @@ final class SearchService implements SearchContract
      *
      * @throws APIException
      */
-    public function retrieveRaw(
+    public function searchRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): SearchGetResponse {
-        [$parsed, $options] = SearchRetrieveParams::parseRequest(
+    ): SearchSearchResponse {
+        [$parsed, $options] = SearchSearchParams::parseRequest(
             $params,
             $requestOptions
         );
@@ -97,7 +97,7 @@ final class SearchService implements SearchContract
             path: 'search',
             query: $parsed,
             options: $options,
-            convert: SearchGetResponse::class,
+            convert: SearchSearchResponse::class,
         );
     }
 }

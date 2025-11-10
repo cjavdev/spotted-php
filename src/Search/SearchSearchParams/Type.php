@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Spotted\Search\SearchRetrieveParams;
+namespace Spotted\Search\SearchSearchParams;
 
 enum Type: string
 {

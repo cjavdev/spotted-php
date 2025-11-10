@@ -10,15 +10,15 @@ use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\PagingPlaylistObject;
-use Spotted\Search\SearchGetResponse\Albums;
-use Spotted\Search\SearchGetResponse\Artists;
-use Spotted\Search\SearchGetResponse\Audiobooks;
-use Spotted\Search\SearchGetResponse\Episodes;
-use Spotted\Search\SearchGetResponse\Shows;
-use Spotted\Search\SearchGetResponse\Tracks;
+use Spotted\Search\SearchSearchResponse\Albums;
+use Spotted\Search\SearchSearchResponse\Artists;
+use Spotted\Search\SearchSearchResponse\Audiobooks;
+use Spotted\Search\SearchSearchResponse\Episodes;
+use Spotted\Search\SearchSearchResponse\Shows;
+use Spotted\Search\SearchSearchResponse\Tracks;
 
 /**
- * @phpstan-type SearchGetResponseShape = array{
+ * @phpstan-type SearchSearchResponseShape = array{
  *   albums?: Albums,
  *   artists?: Artists,
  *   audiobooks?: Audiobooks,
@@ -28,9 +28,9 @@ use Spotted\Search\SearchGetResponse\Tracks;
  *   tracks?: Tracks,
  * }
  */
-final class SearchGetResponse implements BaseModel, ResponseConverter
+final class SearchSearchResponse implements BaseModel, ResponseConverter
 {
-    /** @use SdkModel<SearchGetResponseShape> */
+    /** @use SdkModel<SearchSearchResponseShape> */
     use SdkModel;
 
     use SdkResponse;

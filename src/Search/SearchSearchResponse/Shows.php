@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Spotted\Search\SearchGetResponse;
+namespace Spotted\Search\SearchSearchResponse;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\SimplifiedEpisodeObject;
+use Spotted\ShowBase;
 
 /**
- * @phpstan-type EpisodesShape = array{
+ * @phpstan-type ShowsShape = array{
  *   href: string,
- *   items: list<SimplifiedEpisodeObject>,
+ *   items: list<ShowBase>,
  *   limit: int,
  *   next: string|null,
  *   offset: int,
@@ -20,9 +20,9 @@ use Spotted\SimplifiedEpisodeObject;
  *   total: int,
  * }
  */
-final class Episodes implements BaseModel
+final class Shows implements BaseModel
 {
-    /** @use SdkModel<EpisodesShape> */
+    /** @use SdkModel<ShowsShape> */
     use SdkModel;
 
     /**
@@ -31,8 +31,8 @@ final class Episodes implements BaseModel
     #[Api]
     public string $href;
 
-    /** @var list<SimplifiedEpisodeObject> $items */
-    #[Api(list: SimplifiedEpisodeObject::class)]
+    /** @var list<ShowBase> $items */
+    #[Api(list: ShowBase::class)]
     public array $items;
 
     /**
@@ -66,11 +66,11 @@ final class Episodes implements BaseModel
     public int $total;
 
     /**
-     * `new Episodes()` is missing required properties by the API.
+     * `new Shows()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Episodes::with(
+     * Shows::with(
      *   href: ...,
      *   items: ...,
      *   limit: ...,
@@ -84,7 +84,7 @@ final class Episodes implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Episodes)
+     * (new Shows)
      *   ->withHref(...)
      *   ->withItems(...)
      *   ->withLimit(...)
@@ -104,7 +104,7 @@ final class Episodes implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedEpisodeObject> $items
+     * @param list<ShowBase> $items
      */
     public static function with(
         string $href,
@@ -140,7 +140,7 @@ final class Episodes implements BaseModel
     }
 
     /**
-     * @param list<SimplifiedEpisodeObject> $items
+     * @param list<ShowBase> $items
      */
     public function withItems(array $items): self
     {

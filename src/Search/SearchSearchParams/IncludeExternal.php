@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Spotted\Search\SearchRetrieveParams;
+namespace Spotted\Search\SearchSearchParams;
 
 /**
  * If `include_external=audio` is specified it signals that the client can play externally hosted audio content, and marks
