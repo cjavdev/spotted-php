@@ -8,16 +8,16 @@ use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Search\SearchRetrieveParams\IncludeExternal;
-use Spotted\Search\SearchRetrieveParams\Type;
+use Spotted\Search\SearchSearchParams\IncludeExternal;
+use Spotted\Search\SearchSearchParams\Type;
 
 /**
  * Get Spotify catalog information about albums, artists, playlists, tracks, shows, episodes or audiobooks
  * that match a keyword string. Audiobooks are only available within the US, UK, Canada, Ireland, New Zealand and Australia markets.
  *
- * @see Spotted\Search->retrieve
+ * @see Spotted\Search->search
  *
- * @phpstan-type SearchRetrieveParamsShape = array{
+ * @phpstan-type SearchSearchParamsShape = array{
  *   q: string,
  *   type: list<Type|value-of<Type>>,
  *   includeExternal?: IncludeExternal|value-of<IncludeExternal>,
@@ -26,9 +26,9 @@ use Spotted\Search\SearchRetrieveParams\Type;
  *   offset?: int,
  * }
  */
-final class SearchRetrieveParams implements BaseModel
+final class SearchSearchParams implements BaseModel
 {
-    /** @use SdkModel<SearchRetrieveParamsShape> */
+    /** @use SdkModel<SearchSearchParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -90,17 +90,17 @@ final class SearchRetrieveParams implements BaseModel
     public ?int $offset;
 
     /**
-     * `new SearchRetrieveParams()` is missing required properties by the API.
+     * `new SearchSearchParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * SearchRetrieveParams::with(q: ..., type: ...)
+     * SearchSearchParams::with(q: ..., type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new SearchRetrieveParams)->withQ(...)->withType(...)
+     * (new SearchSearchParams)->withQ(...)->withType(...)
      * ```
      */
     public function __construct()

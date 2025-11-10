@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Spotted\Search\SearchGetResponse\Albums;
+namespace Spotted\Search\SearchSearchResponse\Albums;
 
 use Spotted\AlbumRestrictionObject;
 use Spotted\Core\Attributes\Api;
@@ -10,9 +10,9 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
-use Spotted\Search\SearchGetResponse\Albums\Item\AlbumType;
-use Spotted\Search\SearchGetResponse\Albums\Item\ReleaseDatePrecision;
-use Spotted\Search\SearchGetResponse\Albums\Item\Type;
+use Spotted\Search\SearchSearchResponse\Albums\Item\AlbumType;
+use Spotted\Search\SearchSearchResponse\Albums\Item\ReleaseDatePrecision;
+use Spotted\Search\SearchSearchResponse\Albums\Item\Type;
 use Spotted\SimplifiedArtistObject;
 
 /**

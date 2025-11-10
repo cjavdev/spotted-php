@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Spotted\Search\SearchGetResponse;
+namespace Spotted\Search\SearchSearchResponse;
 
 use Spotted\ArtistObject;
 use Spotted\Core\Attributes\Api;

@@ -6,9 +6,9 @@ namespace Spotted\ServiceContracts;
 
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
-use Spotted\Search\SearchGetResponse;
-use Spotted\Search\SearchRetrieveParams\IncludeExternal;
-use Spotted\Search\SearchRetrieveParams\Type;
+use Spotted\Search\SearchSearchParams\IncludeExternal;
+use Spotted\Search\SearchSearchParams\Type;
+use Spotted\Search\SearchSearchResponse;
 
 use const Spotted\Core\OMIT as omit;
 
@@ -43,7 +43,7 @@ interface SearchContract
      *
      * @throws APIException
      */
-    public function retrieve(
+    public function search(
         $q,
         $type,
         $includeExternal = omit,
@@ -51,7 +51,7 @@ interface SearchContract
         $market = omit,
         $offset = omit,
         ?RequestOptions $requestOptions = null,
-    ): SearchGetResponse;
+    ): SearchSearchResponse;
 
     /**
      * @api
@@ -60,8 +60,8 @@ interface SearchContract
      *
      * @throws APIException
      */
-    public function retrieveRaw(
+    public function searchRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): SearchGetResponse;
+    ): SearchSearchResponse;
 }
