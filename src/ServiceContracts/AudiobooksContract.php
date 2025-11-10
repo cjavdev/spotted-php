@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\ServiceContracts;
 
+use Spotted\Audiobooks\AudiobookBulkGetResponse;
 use Spotted\Audiobooks\AudiobookGetResponse;
-use Spotted\Audiobooks\AudiobookListResponse;
 use Spotted\Audiobooks\SimplifiedChapterObject;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
@@ -59,11 +59,11 @@ interface AudiobooksContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         $market = omit,
         ?RequestOptions $requestOptions = null
-    ): AudiobookListResponse;
+    ): AudiobookBulkGetResponse;
 
     /**
      * @api
@@ -72,10 +72,10 @@ interface AudiobooksContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): AudiobookListResponse;
+    ): AudiobookBulkGetResponse;
 
     /**
      * @api

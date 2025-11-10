@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Spotted\Services;
 
+use Spotted\Audiobooks\AudiobookBulkGetResponse;
+use Spotted\Audiobooks\AudiobookBulkRetrieveParams;
 use Spotted\Audiobooks\AudiobookGetResponse;
 use Spotted\Audiobooks\AudiobookListChaptersParams;
-use Spotted\Audiobooks\AudiobookListParams;
-use Spotted\Audiobooks\AudiobookListResponse;
 use Spotted\Audiobooks\AudiobookRetrieveParams;
 use Spotted\Audiobooks\SimplifiedChapterObject;
 use Spotted\Client;
@@ -91,14 +91,14 @@ final class AudiobooksService implements AudiobooksContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         $market = omit,
         ?RequestOptions $requestOptions = null
-    ): AudiobookListResponse {
+    ): AudiobookBulkGetResponse {
         $params = ['ids' => $ids, 'market' => $market];
 
-        return $this->listRaw($params, $requestOptions);
+        return $this->bulkRetrieveRaw($params, $requestOptions);
     }
 
     /**
@@ -108,11 +108,11 @@ final class AudiobooksService implements AudiobooksContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): AudiobookListResponse {
-        [$parsed, $options] = AudiobookListParams::parseRequest(
+    ): AudiobookBulkGetResponse {
+        [$parsed, $options] = AudiobookBulkRetrieveParams::parseRequest(
             $params,
             $requestOptions
         );
@@ -123,7 +123,7 @@ final class AudiobooksService implements AudiobooksContract
             path: 'audiobooks',
             query: $parsed,
             options: $options,
-            convert: AudiobookListResponse::class,
+            convert: AudiobookBulkGetResponse::class,
         );
     }
 

@@ -43,13 +43,13 @@ final class EpisodesTest extends TestCase
     }
 
     #[Test]
-    public function testList(): void
+    public function testBulkRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->episodes->list(
+        $result = $this->client->episodes->bulkRetrieve(
             ids: '77o6BIVlYM3msb4MMIL1jH,0Q86acNRm6V9GYx55SXKwf'
         );
 
@@ -57,13 +57,13 @@ final class EpisodesTest extends TestCase
     }
 
     #[Test]
-    public function testListWithOptionalParams(): void
+    public function testBulkRetrieveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->episodes->list(
+        $result = $this->client->episodes->bulkRetrieve(
             ids: '77o6BIVlYM3msb4MMIL1jH,0Q86acNRm6V9GYx55SXKwf'
         );
 

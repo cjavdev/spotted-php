@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Spotted\Services;
 
+use Spotted\AudioFeatures\AudioFeatureBulkGetResponse;
+use Spotted\AudioFeatures\AudioFeatureBulkRetrieveParams;
 use Spotted\AudioFeatures\AudioFeatureGetResponse;
-use Spotted\AudioFeatures\AudioFeatureListParams;
-use Spotted\AudioFeatures\AudioFeatureListResponse;
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
@@ -54,13 +54,13 @@ final class AudioFeaturesService implements AudioFeaturesContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         ?RequestOptions $requestOptions = null
-    ): AudioFeatureListResponse {
+    ): AudioFeatureBulkGetResponse {
         $params = ['ids' => $ids];
 
-        return $this->listRaw($params, $requestOptions);
+        return $this->bulkRetrieveRaw($params, $requestOptions);
     }
 
     /**
@@ -72,11 +72,11 @@ final class AudioFeaturesService implements AudioFeaturesContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): AudioFeatureListResponse {
-        [$parsed, $options] = AudioFeatureListParams::parseRequest(
+    ): AudioFeatureBulkGetResponse {
+        [$parsed, $options] = AudioFeatureBulkRetrieveParams::parseRequest(
             $params,
             $requestOptions
         );
@@ -87,7 +87,7 @@ final class AudioFeaturesService implements AudioFeaturesContract
             path: 'audio-features',
             query: $parsed,
             options: $options,
-            convert: AudioFeatureListResponse::class,
+            convert: AudioFeatureBulkGetResponse::class,
         );
     }
 }

@@ -43,13 +43,13 @@ final class AudioFeaturesTest extends TestCase
     }
 
     #[Test]
-    public function testList(): void
+    public function testBulkRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->audioFeatures->list(
+        $result = $this->client->audioFeatures->bulkRetrieve(
             '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B'
         );
 
@@ -57,13 +57,13 @@ final class AudioFeaturesTest extends TestCase
     }
 
     #[Test]
-    public function testListWithOptionalParams(): void
+    public function testBulkRetrieveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->audioFeatures->list(
+        $result = $this->client->audioFeatures->bulkRetrieve(
             '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B'
         );
 

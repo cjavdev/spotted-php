@@ -31,25 +31,25 @@ final class FollowingTest extends TestCase
     }
 
     #[Test]
-    public function testList(): void
+    public function testBulkRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->list(type: 'artist');
+        $result = $this->client->me->following->bulkRetrieve(type: 'artist');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
 
     #[Test]
-    public function testListWithOptionalParams(): void
+    public function testBulkRetrieveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->list(type: 'artist');
+        $result = $this->client->me->following->bulkRetrieve(type: 'artist');
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

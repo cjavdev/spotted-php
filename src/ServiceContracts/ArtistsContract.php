@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Spotted\ServiceContracts;
 
 use Spotted\ArtistObject;
+use Spotted\Artists\ArtistBulkGetResponse;
 use Spotted\Artists\ArtistListAlbumsResponse;
 use Spotted\Artists\ArtistListRelatedArtistsResponse;
-use Spotted\Artists\ArtistListResponse;
 use Spotted\Artists\ArtistListTopTracksResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
@@ -34,10 +34,10 @@ interface ArtistsContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         ?RequestOptions $requestOptions = null
-    ): ArtistListResponse;
+    ): ArtistBulkGetResponse;
 
     /**
      * @api
@@ -46,10 +46,10 @@ interface ArtistsContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): ArtistListResponse;
+    ): ArtistBulkGetResponse;
 
     /**
      * @api

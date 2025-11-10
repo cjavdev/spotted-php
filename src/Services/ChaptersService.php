@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Spotted\Services;
 
+use Spotted\Chapters\ChapterBulkGetResponse;
+use Spotted\Chapters\ChapterBulkRetrieveParams;
 use Spotted\Chapters\ChapterGetResponse;
-use Spotted\Chapters\ChapterListParams;
-use Spotted\Chapters\ChapterListResponse;
 use Spotted\Chapters\ChapterRetrieveParams;
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
@@ -88,14 +88,14 @@ final class ChaptersService implements ChaptersContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         $market = omit,
         ?RequestOptions $requestOptions = null
-    ): ChapterListResponse {
+    ): ChapterBulkGetResponse {
         $params = ['ids' => $ids, 'market' => $market];
 
-        return $this->listRaw($params, $requestOptions);
+        return $this->bulkRetrieveRaw($params, $requestOptions);
     }
 
     /**
@@ -105,11 +105,11 @@ final class ChaptersService implements ChaptersContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): ChapterListResponse {
-        [$parsed, $options] = ChapterListParams::parseRequest(
+    ): ChapterBulkGetResponse {
+        [$parsed, $options] = ChapterBulkRetrieveParams::parseRequest(
             $params,
             $requestOptions
         );
@@ -120,7 +120,7 @@ final class ChaptersService implements ChaptersContract
             path: 'chapters',
             query: $parsed,
             options: $options,
-            convert: ChapterListResponse::class,
+            convert: ChapterBulkGetResponse::class,
         );
     }
 }
