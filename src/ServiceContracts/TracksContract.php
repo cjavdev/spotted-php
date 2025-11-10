@@ -7,7 +7,7 @@ namespace Spotted\ServiceContracts;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\TrackObject;
-use Spotted\Tracks\TrackListResponse;
+use Spotted\Tracks\TrackBulkGetResponse;
 
 use const Spotted\Core\OMIT as omit;
 
@@ -57,11 +57,11 @@ interface TracksContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         $market = omit,
         ?RequestOptions $requestOptions = null
-    ): TrackListResponse;
+    ): TrackBulkGetResponse;
 
     /**
      * @api
@@ -70,8 +70,8 @@ interface TracksContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): TrackListResponse;
+    ): TrackBulkGetResponse;
 }

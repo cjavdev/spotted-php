@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Spotted\ServiceContracts\Me;
 
 use Spotted\Core\Exceptions\APIException;
-use Spotted\Me\Following\FollowingListParams\Type;
-use Spotted\Me\Following\FollowingListResponse;
+use Spotted\Me\Following\FollowingBulkGetResponse;
+use Spotted\Me\Following\FollowingBulkRetrieveParams\Type;
 use Spotted\RequestOptions;
 
 use const Spotted\Core\OMIT as omit;
@@ -22,12 +22,12 @@ interface FollowingContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $type,
         $after = omit,
         $limit = omit,
         ?RequestOptions $requestOptions = null,
-    ): FollowingListResponse;
+    ): FollowingBulkGetResponse;
 
     /**
      * @api
@@ -36,10 +36,10 @@ interface FollowingContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): FollowingListResponse;
+    ): FollowingBulkGetResponse;
 
     /**
      * @api

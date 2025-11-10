@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Spotted\Services;
 
 use Spotted\ArtistObject;
+use Spotted\Artists\ArtistBulkGetResponse;
+use Spotted\Artists\ArtistBulkRetrieveParams;
 use Spotted\Artists\ArtistListAlbumsParams;
 use Spotted\Artists\ArtistListAlbumsResponse;
-use Spotted\Artists\ArtistListParams;
 use Spotted\Artists\ArtistListRelatedArtistsResponse;
-use Spotted\Artists\ArtistListResponse;
 use Spotted\Artists\ArtistListTopTracksParams;
 use Spotted\Artists\ArtistListTopTracksResponse;
 use Spotted\Client;
@@ -56,13 +56,13 @@ final class ArtistsService implements ArtistsContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         ?RequestOptions $requestOptions = null
-    ): ArtistListResponse {
+    ): ArtistBulkGetResponse {
         $params = ['ids' => $ids];
 
-        return $this->listRaw($params, $requestOptions);
+        return $this->bulkRetrieveRaw($params, $requestOptions);
     }
 
     /**
@@ -72,11 +72,11 @@ final class ArtistsService implements ArtistsContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): ArtistListResponse {
-        [$parsed, $options] = ArtistListParams::parseRequest(
+    ): ArtistBulkGetResponse {
+        [$parsed, $options] = ArtistBulkRetrieveParams::parseRequest(
             $params,
             $requestOptions
         );
@@ -87,7 +87,7 @@ final class ArtistsService implements ArtistsContract
             path: 'artists',
             query: $parsed,
             options: $options,
-            convert: ArtistListResponse::class,
+            convert: ArtistBulkGetResponse::class,
         );
     }
 

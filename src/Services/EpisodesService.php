@@ -7,8 +7,8 @@ namespace Spotted\Services;
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\EpisodeObject;
-use Spotted\Episodes\EpisodeListParams;
-use Spotted\Episodes\EpisodeListResponse;
+use Spotted\Episodes\EpisodeBulkGetResponse;
+use Spotted\Episodes\EpisodeBulkRetrieveParams;
 use Spotted\Episodes\EpisodeRetrieveParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\EpisodesContract;
@@ -89,14 +89,14 @@ final class EpisodesService implements EpisodesContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         $market = omit,
         ?RequestOptions $requestOptions = null
-    ): EpisodeListResponse {
+    ): EpisodeBulkGetResponse {
         $params = ['ids' => $ids, 'market' => $market];
 
-        return $this->listRaw($params, $requestOptions);
+        return $this->bulkRetrieveRaw($params, $requestOptions);
     }
 
     /**
@@ -106,11 +106,11 @@ final class EpisodesService implements EpisodesContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): EpisodeListResponse {
-        [$parsed, $options] = EpisodeListParams::parseRequest(
+    ): EpisodeBulkGetResponse {
+        [$parsed, $options] = EpisodeBulkRetrieveParams::parseRequest(
             $params,
             $requestOptions
         );
@@ -121,7 +121,7 @@ final class EpisodesService implements EpisodesContract
             path: 'episodes',
             query: $parsed,
             options: $options,
-            convert: EpisodeListResponse::class,
+            convert: EpisodeBulkGetResponse::class,
         );
     }
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\ServiceContracts;
 
+use Spotted\Chapters\ChapterBulkGetResponse;
 use Spotted\Chapters\ChapterGetResponse;
-use Spotted\Chapters\ChapterListResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 
@@ -57,11 +57,11 @@ interface ChaptersContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         $market = omit,
         ?RequestOptions $requestOptions = null
-    ): ChapterListResponse;
+    ): ChapterBulkGetResponse;
 
     /**
      * @api
@@ -70,8 +70,8 @@ interface ChaptersContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): ChapterListResponse;
+    ): ChapterBulkGetResponse;
 }

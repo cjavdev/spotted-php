@@ -9,10 +9,10 @@ use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\ShowsContract;
+use Spotted\Shows\ShowBulkGetResponse;
+use Spotted\Shows\ShowBulkRetrieveParams;
 use Spotted\Shows\ShowGetResponse;
 use Spotted\Shows\ShowListEpisodesParams;
-use Spotted\Shows\ShowListParams;
-use Spotted\Shows\ShowListResponse;
 use Spotted\Shows\ShowRetrieveParams;
 use Spotted\SimplifiedEpisodeObject;
 
@@ -92,14 +92,14 @@ final class ShowsService implements ShowsContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         $market = omit,
         ?RequestOptions $requestOptions = null
-    ): ShowListResponse {
+    ): ShowBulkGetResponse {
         $params = ['ids' => $ids, 'market' => $market];
 
-        return $this->listRaw($params, $requestOptions);
+        return $this->bulkRetrieveRaw($params, $requestOptions);
     }
 
     /**
@@ -109,11 +109,11 @@ final class ShowsService implements ShowsContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): ShowListResponse {
-        [$parsed, $options] = ShowListParams::parseRequest(
+    ): ShowBulkGetResponse {
+        [$parsed, $options] = ShowBulkRetrieveParams::parseRequest(
             $params,
             $requestOptions
         );
@@ -124,7 +124,7 @@ final class ShowsService implements ShowsContract
             path: 'shows',
             query: $parsed,
             options: $options,
-            convert: ShowListResponse::class,
+            convert: ShowBulkGetResponse::class,
         );
     }
 

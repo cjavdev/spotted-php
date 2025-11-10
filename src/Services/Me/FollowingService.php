@@ -7,11 +7,11 @@ namespace Spotted\Services\Me;
 use Spotted\Client;
 use Spotted\Core\Conversion\ListOf;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Me\Following\FollowingBulkGetResponse;
+use Spotted\Me\Following\FollowingBulkRetrieveParams;
+use Spotted\Me\Following\FollowingBulkRetrieveParams\Type;
 use Spotted\Me\Following\FollowingCheckParams;
 use Spotted\Me\Following\FollowingFollowParams;
-use Spotted\Me\Following\FollowingListParams;
-use Spotted\Me\Following\FollowingListParams\Type;
-use Spotted\Me\Following\FollowingListResponse;
 use Spotted\Me\Following\FollowingUnfollowParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\FollowingContract;
@@ -36,15 +36,15 @@ final class FollowingService implements FollowingContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $type,
         $after = omit,
         $limit = omit,
         ?RequestOptions $requestOptions = null
-    ): FollowingListResponse {
+    ): FollowingBulkGetResponse {
         $params = ['type' => $type, 'after' => $after, 'limit' => $limit];
 
-        return $this->listRaw($params, $requestOptions);
+        return $this->bulkRetrieveRaw($params, $requestOptions);
     }
 
     /**
@@ -54,11 +54,11 @@ final class FollowingService implements FollowingContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): FollowingListResponse {
-        [$parsed, $options] = FollowingListParams::parseRequest(
+    ): FollowingBulkGetResponse {
+        [$parsed, $options] = FollowingBulkRetrieveParams::parseRequest(
             $params,
             $requestOptions
         );
@@ -69,7 +69,7 @@ final class FollowingService implements FollowingContract
             path: 'me/following',
             query: $parsed,
             options: $options,
-            convert: FollowingListResponse::class,
+            convert: FollowingBulkGetResponse::class,
         );
     }
 

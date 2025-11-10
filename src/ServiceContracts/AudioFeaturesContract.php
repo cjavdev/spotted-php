@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\ServiceContracts;
 
+use Spotted\AudioFeatures\AudioFeatureBulkGetResponse;
 use Spotted\AudioFeatures\AudioFeatureGetResponse;
-use Spotted\AudioFeatures\AudioFeatureListResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 
@@ -33,10 +33,10 @@ interface AudioFeaturesContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         ?RequestOptions $requestOptions = null
-    ): AudioFeatureListResponse;
+    ): AudioFeatureBulkGetResponse;
 
     /**
      * @deprecated
@@ -47,8 +47,8 @@ interface AudioFeaturesContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): AudioFeatureListResponse;
+    ): AudioFeatureBulkGetResponse;
 }

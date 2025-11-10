@@ -7,8 +7,8 @@ namespace Spotted\ServiceContracts;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
+use Spotted\Shows\ShowBulkGetResponse;
 use Spotted\Shows\ShowGetResponse;
-use Spotted\Shows\ShowListResponse;
 use Spotted\SimplifiedEpisodeObject;
 
 use const Spotted\Core\OMIT as omit;
@@ -59,11 +59,11 @@ interface ShowsContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         $market = omit,
         ?RequestOptions $requestOptions = null
-    ): ShowListResponse;
+    ): ShowBulkGetResponse;
 
     /**
      * @api
@@ -72,10 +72,10 @@ interface ShowsContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): ShowListResponse;
+    ): ShowBulkGetResponse;
 
     /**
      * @api

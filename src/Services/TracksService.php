@@ -9,8 +9,8 @@ use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\TracksContract;
 use Spotted\TrackObject;
-use Spotted\Tracks\TrackListParams;
-use Spotted\Tracks\TrackListResponse;
+use Spotted\Tracks\TrackBulkGetResponse;
+use Spotted\Tracks\TrackBulkRetrieveParams;
 use Spotted\Tracks\TrackRetrieveParams;
 
 use const Spotted\Core\OMIT as omit;
@@ -89,14 +89,14 @@ final class TracksService implements TracksContract
      *
      * @throws APIException
      */
-    public function list(
+    public function bulkRetrieve(
         $ids,
         $market = omit,
         ?RequestOptions $requestOptions = null
-    ): TrackListResponse {
+    ): TrackBulkGetResponse {
         $params = ['ids' => $ids, 'market' => $market];
 
-        return $this->listRaw($params, $requestOptions);
+        return $this->bulkRetrieveRaw($params, $requestOptions);
     }
 
     /**
@@ -106,11 +106,11 @@ final class TracksService implements TracksContract
      *
      * @throws APIException
      */
-    public function listRaw(
+    public function bulkRetrieveRaw(
         array $params,
         ?RequestOptions $requestOptions = null
-    ): TrackListResponse {
-        [$parsed, $options] = TrackListParams::parseRequest(
+    ): TrackBulkGetResponse {
+        [$parsed, $options] = TrackBulkRetrieveParams::parseRequest(
             $params,
             $requestOptions
         );
@@ -121,7 +121,7 @@ final class TracksService implements TracksContract
             path: 'tracks',
             query: $parsed,
             options: $options,
-            convert: TrackListResponse::class,
+            convert: TrackBulkGetResponse::class,
         );
     }
 }
