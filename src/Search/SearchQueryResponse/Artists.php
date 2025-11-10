@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Spotted\Search\SearchSearchResponse;
+namespace Spotted\Search\SearchQueryResponse;
 
+use Spotted\ArtistObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ShowBase;
 
 /**
- * @phpstan-type ShowsShape = array{
+ * @phpstan-type ArtistsShape = array{
  *   href: string,
- *   items: list<ShowBase>,
+ *   items: list<ArtistObject>,
  *   limit: int,
  *   next: string|null,
  *   offset: int,
@@ -20,9 +20,9 @@ use Spotted\ShowBase;
  *   total: int,
  * }
  */
-final class Shows implements BaseModel
+final class Artists implements BaseModel
 {
-    /** @use SdkModel<ShowsShape> */
+    /** @use SdkModel<ArtistsShape> */
     use SdkModel;
 
     /**
@@ -31,8 +31,8 @@ final class Shows implements BaseModel
     #[Api]
     public string $href;
 
-    /** @var list<ShowBase> $items */
-    #[Api(list: ShowBase::class)]
+    /** @var list<ArtistObject> $items */
+    #[Api(list: ArtistObject::class)]
     public array $items;
 
     /**
@@ -66,11 +66,11 @@ final class Shows implements BaseModel
     public int $total;
 
     /**
-     * `new Shows()` is missing required properties by the API.
+     * `new Artists()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Shows::with(
+     * Artists::with(
      *   href: ...,
      *   items: ...,
      *   limit: ...,
@@ -84,7 +84,7 @@ final class Shows implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Shows)
+     * (new Artists)
      *   ->withHref(...)
      *   ->withItems(...)
      *   ->withLimit(...)
@@ -104,7 +104,7 @@ final class Shows implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ShowBase> $items
+     * @param list<ArtistObject> $items
      */
     public static function with(
         string $href,
@@ -140,7 +140,7 @@ final class Shows implements BaseModel
     }
 
     /**
-     * @param list<ShowBase> $items
+     * @param list<ArtistObject> $items
      */
     public function withItems(array $items): self
     {

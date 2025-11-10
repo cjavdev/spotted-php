@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Spotted\Search\SearchSearchResponse;
+namespace Spotted\Search\SearchQueryResponse;
 
-use Spotted\ArtistObject;
+use Spotted\AudiobookBase;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ArtistsShape = array{
+ * @phpstan-type AudiobooksShape = array{
  *   href: string,
- *   items: list<ArtistObject>,
+ *   items: list<AudiobookBase>,
  *   limit: int,
  *   next: string|null,
  *   offset: int,
@@ -20,9 +20,9 @@ use Spotted\Core\Contracts\BaseModel;
  *   total: int,
  * }
  */
-final class Artists implements BaseModel
+final class Audiobooks implements BaseModel
 {
-    /** @use SdkModel<ArtistsShape> */
+    /** @use SdkModel<AudiobooksShape> */
     use SdkModel;
 
     /**
@@ -31,8 +31,8 @@ final class Artists implements BaseModel
     #[Api]
     public string $href;
 
-    /** @var list<ArtistObject> $items */
-    #[Api(list: ArtistObject::class)]
+    /** @var list<AudiobookBase> $items */
+    #[Api(list: AudiobookBase::class)]
     public array $items;
 
     /**
@@ -66,11 +66,11 @@ final class Artists implements BaseModel
     public int $total;
 
     /**
-     * `new Artists()` is missing required properties by the API.
+     * `new Audiobooks()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Artists::with(
+     * Audiobooks::with(
      *   href: ...,
      *   items: ...,
      *   limit: ...,
@@ -84,7 +84,7 @@ final class Artists implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Artists)
+     * (new Audiobooks)
      *   ->withHref(...)
      *   ->withItems(...)
      *   ->withLimit(...)
@@ -104,7 +104,7 @@ final class Artists implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ArtistObject> $items
+     * @param list<AudiobookBase> $items
      */
     public static function with(
         string $href,
@@ -140,7 +140,7 @@ final class Artists implements BaseModel
     }
 
     /**
-     * @param list<ArtistObject> $items
+     * @param list<AudiobookBase> $items
      */
     public function withItems(array $items): self
     {
