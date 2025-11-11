@@ -8,7 +8,6 @@ use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Me\Following\FollowingBulkRetrieveParams\Type;
 
 /**
  * Get the current user's followed artists.
@@ -16,7 +15,7 @@ use Spotted\Me\Following\FollowingBulkRetrieveParams\Type;
  * @see Spotted\Me\Following->bulkRetrieve
  *
  * @phpstan-type FollowingBulkRetrieveParamsShape = array{
- *   type: Type|value-of<Type>, after?: string, limit?: int
+ *   type: string, after?: string, limit?: int
  * }
  */
 final class FollowingBulkRetrieveParams implements BaseModel
@@ -27,11 +26,9 @@ final class FollowingBulkRetrieveParams implements BaseModel
 
     /**
      * The ID type: currently only `artist` is supported.
-     *
-     * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
-    public string $type;
+    #[Api]
+    public string $type = 'artist';
 
     /**
      * The last artist ID retrieved from the previous request.
@@ -45,20 +42,6 @@ final class FollowingBulkRetrieveParams implements BaseModel
     #[Api(optional: true)]
     public ?int $limit;
 
-    /**
-     * `new FollowingBulkRetrieveParams()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * FollowingBulkRetrieveParams::with(type: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new FollowingBulkRetrieveParams)->withType(...)
-     * ```
-     */
     public function __construct()
     {
         $this->initialize();
@@ -68,33 +51,13 @@ final class FollowingBulkRetrieveParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param Type|value-of<Type> $type
      */
-    public static function with(
-        Type|string $type,
-        ?string $after = null,
-        ?int $limit = null
-    ): self {
+    public static function with(?string $after = null, ?int $limit = null): self
+    {
         $obj = new self;
-
-        $obj['type'] = $type;
 
         null !== $after && $obj->after = $after;
         null !== $limit && $obj->limit = $limit;
-
-        return $obj;
-    }
-
-    /**
-     * The ID type: currently only `artist` is supported.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $obj = clone $this;
-        $obj['type'] = $type;
 
         return $obj;
     }

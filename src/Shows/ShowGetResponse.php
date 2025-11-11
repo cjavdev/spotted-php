@@ -12,7 +12,6 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
-use Spotted\ShowBase\Type;
 use Spotted\Shows\ShowGetResponse\Episodes;
 
 /**
@@ -32,7 +31,7 @@ use Spotted\Shows\ShowGetResponse\Episodes;
  *   name: string,
  *   publisher: string,
  *   totalEpisodes: int,
- *   type: value-of<Type>,
+ *   type: string,
  *   uri: string,
  *   episodes: Episodes,
  * }
@@ -43,6 +42,12 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     use SdkModel;
 
     use SdkResponse;
+
+    /**
+     * The object type.
+     */
+    #[Api]
+    public string $type = 'show';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the show.
@@ -140,14 +145,6 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     public int $totalEpisodes;
 
     /**
-     * The object type.
-     *
-     * @var value-of<Type> $type
-     */
-    #[Api(enum: Type::class)]
-    public string $type;
-
-    /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the show.
      */
     #[Api]
@@ -180,7 +177,6 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
      *   name: ...,
      *   publisher: ...,
      *   totalEpisodes: ...,
-     *   type: ...,
      *   uri: ...,
      *   episodes: ...,
      * )
@@ -205,7 +201,6 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
      *   ->withName(...)
      *   ->withPublisher(...)
      *   ->withTotalEpisodes(...)
-     *   ->withType(...)
      *   ->withUri(...)
      *   ->withEpisodes(...)
      * ```
@@ -224,7 +219,6 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
      * @param list<CopyrightObject> $copyrights
      * @param list<ImageObject> $images
      * @param list<string> $languages
-     * @param Type|value-of<Type> $type
      */
     public static function with(
         string $id,
@@ -242,7 +236,6 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
         string $name,
         string $publisher,
         int $totalEpisodes,
-        Type|string $type,
         string $uri,
         Episodes $episodes,
     ): self {
@@ -263,7 +256,6 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
         $obj->name = $name;
         $obj->publisher = $publisher;
         $obj->totalEpisodes = $totalEpisodes;
-        $obj['type'] = $type;
         $obj->uri = $uri;
         $obj->episodes = $episodes;
 
@@ -436,19 +428,6 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     {
         $obj = clone $this;
         $obj->totalEpisodes = $totalEpisodes;
-
-        return $obj;
-    }
-
-    /**
-     * The object type.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $obj = clone $this;
-        $obj['type'] = $type;
 
         return $obj;
     }

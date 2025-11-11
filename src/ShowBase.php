@@ -7,7 +7,6 @@ namespace Spotted;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ShowBase\Type;
 
 /**
  * @phpstan-type ShowBaseShape = array{
@@ -26,7 +25,7 @@ use Spotted\ShowBase\Type;
  *   name: string,
  *   publisher: string,
  *   totalEpisodes: int,
- *   type: value-of<Type>,
+ *   type: string,
  *   uri: string,
  * }
  */
@@ -34,6 +33,12 @@ final class ShowBase implements BaseModel
 {
     /** @use SdkModel<ShowBaseShape> */
     use SdkModel;
+
+    /**
+     * The object type.
+     */
+    #[Api]
+    public string $type = 'show';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the show.
@@ -134,14 +139,6 @@ final class ShowBase implements BaseModel
     public int $totalEpisodes;
 
     /**
-     * The object type.
-     *
-     * @var value-of<Type> $type
-     */
-    #[Api(enum: Type::class)]
-    public string $type;
-
-    /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the show.
      */
     #[Api]
@@ -168,7 +165,6 @@ final class ShowBase implements BaseModel
      *   name: ...,
      *   publisher: ...,
      *   totalEpisodes: ...,
-     *   type: ...,
      *   uri: ...,
      * )
      * ```
@@ -192,7 +188,6 @@ final class ShowBase implements BaseModel
      *   ->withName(...)
      *   ->withPublisher(...)
      *   ->withTotalEpisodes(...)
-     *   ->withType(...)
      *   ->withUri(...)
      * ```
      */
@@ -210,7 +205,6 @@ final class ShowBase implements BaseModel
      * @param list<CopyrightObject> $copyrights
      * @param list<ImageObject> $images
      * @param list<string> $languages
-     * @param Type|value-of<Type> $type
      */
     public static function with(
         string $id,
@@ -228,7 +222,6 @@ final class ShowBase implements BaseModel
         string $name,
         string $publisher,
         int $totalEpisodes,
-        Type|string $type,
         string $uri,
     ): self {
         $obj = new self;
@@ -248,7 +241,6 @@ final class ShowBase implements BaseModel
         $obj->name = $name;
         $obj->publisher = $publisher;
         $obj->totalEpisodes = $totalEpisodes;
-        $obj['type'] = $type;
         $obj->uri = $uri;
 
         return $obj;
@@ -423,19 +415,6 @@ final class ShowBase implements BaseModel
     {
         $obj = clone $this;
         $obj->totalEpisodes = $totalEpisodes;
-
-        return $obj;
-    }
-
-    /**
-     * The object type.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $obj = clone $this;
-        $obj['type'] = $type;
 
         return $obj;
     }

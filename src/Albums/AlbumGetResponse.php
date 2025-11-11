@@ -8,7 +8,6 @@ use Spotted\AlbumRestrictionObject;
 use Spotted\Albums\AlbumGetResponse\AlbumType;
 use Spotted\Albums\AlbumGetResponse\ReleaseDatePrecision;
 use Spotted\Albums\AlbumGetResponse\Tracks;
-use Spotted\Albums\AlbumGetResponse\Type;
 use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
@@ -32,7 +31,7 @@ use Spotted\SimplifiedArtistObject;
  *   releaseDate: string,
  *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
  *   totalTracks: int,
- *   type: value-of<Type>,
+ *   type: string,
  *   uri: string,
  *   artists?: list<SimplifiedArtistObject>,
  *   copyrights?: list<CopyrightObject>,
@@ -50,6 +49,12 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     use SdkModel;
 
     use SdkResponse;
+
+    /**
+     * The object type.
+     */
+    #[Api]
+    public string $type = 'album';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the album.
@@ -118,14 +123,6 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
      */
     #[Api('total_tracks')]
     public int $totalTracks;
-
-    /**
-     * The object type.
-     *
-     * @var value-of<Type> $type
-     */
-    #[Api(enum: Type::class)]
-    public string $type;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the album.
@@ -205,7 +202,6 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
      *   releaseDate: ...,
      *   releaseDatePrecision: ...,
      *   totalTracks: ...,
-     *   type: ...,
      *   uri: ...,
      * )
      * ```
@@ -224,7 +220,6 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
      *   ->withReleaseDate(...)
      *   ->withReleaseDatePrecision(...)
      *   ->withTotalTracks(...)
-     *   ->withType(...)
      *   ->withUri(...)
      * ```
      */
@@ -242,7 +237,6 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
      * @param list<string> $availableMarkets
      * @param list<ImageObject> $images
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
-     * @param Type|value-of<Type> $type
      * @param list<SimplifiedArtistObject> $artists
      * @param list<CopyrightObject> $copyrights
      * @param list<string> $genres
@@ -258,7 +252,6 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
         string $releaseDate,
         ReleaseDatePrecision|string $releaseDatePrecision,
         int $totalTracks,
-        Type|string $type,
         string $uri,
         ?array $artists = null,
         ?array $copyrights = null,
@@ -281,7 +274,6 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
         $obj->releaseDate = $releaseDate;
         $obj['releaseDatePrecision'] = $releaseDatePrecision;
         $obj->totalTracks = $totalTracks;
-        $obj['type'] = $type;
         $obj->uri = $uri;
 
         null !== $artists && $obj->artists = $artists;
@@ -411,19 +403,6 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     {
         $obj = clone $this;
         $obj->totalTracks = $totalTracks;
-
-        return $obj;
-    }
-
-    /**
-     * The object type.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $obj = clone $this;
-        $obj['type'] = $type;
 
         return $obj;
     }

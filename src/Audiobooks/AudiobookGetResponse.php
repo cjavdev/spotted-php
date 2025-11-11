@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Spotted\Audiobooks;
 
-use Spotted\AudiobookBase\Type;
 use Spotted\Audiobooks\AudiobookGetResponse\Chapters;
 use Spotted\AuthorObject;
 use Spotted\CopyrightObject;
@@ -35,7 +34,7 @@ use Spotted\NarratorObject;
  *   narrators: list<NarratorObject>,
  *   publisher: string,
  *   totalChapters: int,
- *   type: value-of<Type>,
+ *   type: string,
  *   uri: string,
  *   edition?: string,
  *   chapters: Chapters,
@@ -47,6 +46,12 @@ final class AudiobookGetResponse implements BaseModel, ResponseConverter
     use SdkModel;
 
     use SdkResponse;
+
+    /**
+     * The object type.
+     */
+    #[Api]
+    public string $type = 'audiobook';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the audiobook.
@@ -154,14 +159,6 @@ final class AudiobookGetResponse implements BaseModel, ResponseConverter
     public int $totalChapters;
 
     /**
-     * The object type.
-     *
-     * @var value-of<Type> $type
-     */
-    #[Api(enum: Type::class)]
-    public string $type;
-
-    /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the audiobook.
      */
     #[Api]
@@ -201,7 +198,6 @@ final class AudiobookGetResponse implements BaseModel, ResponseConverter
      *   narrators: ...,
      *   publisher: ...,
      *   totalChapters: ...,
-     *   type: ...,
      *   uri: ...,
      *   chapters: ...,
      * )
@@ -227,7 +223,6 @@ final class AudiobookGetResponse implements BaseModel, ResponseConverter
      *   ->withNarrators(...)
      *   ->withPublisher(...)
      *   ->withTotalChapters(...)
-     *   ->withType(...)
      *   ->withUri(...)
      *   ->withChapters(...)
      * ```
@@ -248,7 +243,6 @@ final class AudiobookGetResponse implements BaseModel, ResponseConverter
      * @param list<ImageObject> $images
      * @param list<string> $languages
      * @param list<NarratorObject> $narrators
-     * @param Type|value-of<Type> $type
      */
     public static function with(
         string $id,
@@ -267,7 +261,6 @@ final class AudiobookGetResponse implements BaseModel, ResponseConverter
         array $narrators,
         string $publisher,
         int $totalChapters,
-        Type|string $type,
         string $uri,
         Chapters $chapters,
         ?string $edition = null,
@@ -290,7 +283,6 @@ final class AudiobookGetResponse implements BaseModel, ResponseConverter
         $obj->narrators = $narrators;
         $obj->publisher = $publisher;
         $obj->totalChapters = $totalChapters;
-        $obj['type'] = $type;
         $obj->uri = $uri;
         $obj->chapters = $chapters;
 
@@ -480,19 +472,6 @@ final class AudiobookGetResponse implements BaseModel, ResponseConverter
     {
         $obj = clone $this;
         $obj->totalChapters = $totalChapters;
-
-        return $obj;
-    }
-
-    /**
-     * The object type.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $obj = clone $this;
-        $obj['type'] = $type;
 
         return $obj;
     }

@@ -13,7 +13,6 @@ use Spotted\ImageObject;
 use Spotted\SimplifiedArtistObject;
 use Spotted\TrackObject\Album\AlbumType;
 use Spotted\TrackObject\Album\ReleaseDatePrecision;
-use Spotted\TrackObject\Album\Type;
 
 /**
  * The album on which the track appears. The album object includes a link in `href` to full information about the album.
@@ -30,7 +29,7 @@ use Spotted\TrackObject\Album\Type;
  *   releaseDate: string,
  *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
  *   totalTracks: int,
- *   type: value-of<Type>,
+ *   type: string,
  *   uri: string,
  *   restrictions?: AlbumRestrictionObject,
  * }
@@ -39,6 +38,12 @@ final class Album implements BaseModel
 {
     /** @use SdkModel<AlbumShape> */
     use SdkModel;
+
+    /**
+     * The object type.
+     */
+    #[Api]
+    public string $type = 'album';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the album.
@@ -117,14 +122,6 @@ final class Album implements BaseModel
     public int $totalTracks;
 
     /**
-     * The object type.
-     *
-     * @var value-of<Type> $type
-     */
-    #[Api(enum: Type::class)]
-    public string $type;
-
-    /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the album.
      */
     #[Api]
@@ -153,7 +150,6 @@ final class Album implements BaseModel
      *   releaseDate: ...,
      *   releaseDatePrecision: ...,
      *   totalTracks: ...,
-     *   type: ...,
      *   uri: ...,
      * )
      * ```
@@ -173,7 +169,6 @@ final class Album implements BaseModel
      *   ->withReleaseDate(...)
      *   ->withReleaseDatePrecision(...)
      *   ->withTotalTracks(...)
-     *   ->withType(...)
      *   ->withUri(...)
      * ```
      */
@@ -192,7 +187,6 @@ final class Album implements BaseModel
      * @param list<string> $availableMarkets
      * @param list<ImageObject> $images
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
-     * @param Type|value-of<Type> $type
      */
     public static function with(
         string $id,
@@ -206,7 +200,6 @@ final class Album implements BaseModel
         string $releaseDate,
         ReleaseDatePrecision|string $releaseDatePrecision,
         int $totalTracks,
-        Type|string $type,
         string $uri,
         ?AlbumRestrictionObject $restrictions = null,
     ): self {
@@ -223,7 +216,6 @@ final class Album implements BaseModel
         $obj->releaseDate = $releaseDate;
         $obj['releaseDatePrecision'] = $releaseDatePrecision;
         $obj->totalTracks = $totalTracks;
-        $obj['type'] = $type;
         $obj->uri = $uri;
 
         null !== $restrictions && $obj->restrictions = $restrictions;
@@ -359,19 +351,6 @@ final class Album implements BaseModel
     {
         $obj = clone $this;
         $obj->totalTracks = $totalTracks;
-
-        return $obj;
-    }
-
-    /**
-     * The object type.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $obj = clone $this;
-        $obj['type'] = $type;
 
         return $obj;
     }
