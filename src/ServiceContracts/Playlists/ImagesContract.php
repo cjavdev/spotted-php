@@ -13,27 +13,12 @@ interface ImagesContract
     /**
      * @api
      *
-     * @param string $body base64 encoded JPEG image data, maximum payload size is 256 KB
-     *
      * @throws APIException
      */
     public function update(
         string $playlistID,
-        $body,
+        string $body,
         ?RequestOptions $requestOptions = null
-    ): string;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $playlistID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
     ): string;
 
     /**
