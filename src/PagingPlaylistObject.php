@@ -11,12 +11,12 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * @phpstan-type PagingPlaylistObjectShape = array{
  *   href: string,
- *   items: list<SimplifiedPlaylistObject>,
  *   limit: int,
  *   next: string|null,
  *   offset: int,
  *   previous: string|null,
  *   total: int,
+ *   items?: list<SimplifiedPlaylistObject>,
  * }
  */
 final class PagingPlaylistObject implements BaseModel
@@ -29,10 +29,6 @@ final class PagingPlaylistObject implements BaseModel
      */
     #[Api]
     public string $href;
-
-    /** @var list<SimplifiedPlaylistObject> $items */
-    #[Api(list: SimplifiedPlaylistObject::class)]
-    public array $items;
 
     /**
      * The maximum number of items in the response (as set in the query or by default).
@@ -64,19 +60,17 @@ final class PagingPlaylistObject implements BaseModel
     #[Api]
     public int $total;
 
+    /** @var list<SimplifiedPlaylistObject>|null $items */
+    #[Api(list: SimplifiedPlaylistObject::class, optional: true)]
+    public ?array $items;
+
     /**
      * `new PagingPlaylistObject()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
      * PagingPlaylistObject::with(
-     *   href: ...,
-     *   items: ...,
-     *   limit: ...,
-     *   next: ...,
-     *   offset: ...,
-     *   previous: ...,
-     *   total: ...,
+     *   href: ..., limit: ..., next: ..., offset: ..., previous: ..., total: ...
      * )
      * ```
      *
@@ -85,7 +79,6 @@ final class PagingPlaylistObject implements BaseModel
      * ```
      * (new PagingPlaylistObject)
      *   ->withHref(...)
-     *   ->withItems(...)
      *   ->withLimit(...)
      *   ->withNext(...)
      *   ->withOffset(...)
@@ -107,22 +100,23 @@ final class PagingPlaylistObject implements BaseModel
      */
     public static function with(
         string $href,
-        array $items,
         int $limit,
         ?string $next,
         int $offset,
         ?string $previous,
         int $total,
+        ?array $items = null,
     ): self {
         $obj = new self;
 
         $obj->href = $href;
-        $obj->items = $items;
         $obj->limit = $limit;
         $obj->next = $next;
         $obj->offset = $offset;
         $obj->previous = $previous;
         $obj->total = $total;
+
+        null !== $items && $obj->items = $items;
 
         return $obj;
     }
@@ -134,17 +128,6 @@ final class PagingPlaylistObject implements BaseModel
     {
         $obj = clone $this;
         $obj->href = $href;
-
-        return $obj;
-    }
-
-    /**
-     * @param list<SimplifiedPlaylistObject> $items
-     */
-    public function withItems(array $items): self
-    {
-        $obj = clone $this;
-        $obj->items = $items;
 
         return $obj;
     }
@@ -200,6 +183,17 @@ final class PagingPlaylistObject implements BaseModel
     {
         $obj = clone $this;
         $obj->total = $total;
+
+        return $obj;
+    }
+
+    /**
+     * @param list<SimplifiedPlaylistObject> $items
+     */
+    public function withItems(array $items): self
+    {
+        $obj = clone $this;
+        $obj->items = $items;
 
         return $obj;
     }

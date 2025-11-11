@@ -12,12 +12,12 @@ use Spotted\SimplifiedEpisodeObject;
 /**
  * @phpstan-type EpisodesShape = array{
  *   href: string,
- *   items: list<SimplifiedEpisodeObject>,
  *   limit: int,
  *   next: string|null,
  *   offset: int,
  *   previous: string|null,
  *   total: int,
+ *   items?: list<SimplifiedEpisodeObject>,
  * }
  */
 final class Episodes implements BaseModel
@@ -30,10 +30,6 @@ final class Episodes implements BaseModel
      */
     #[Api]
     public string $href;
-
-    /** @var list<SimplifiedEpisodeObject> $items */
-    #[Api(list: SimplifiedEpisodeObject::class)]
-    public array $items;
 
     /**
      * The maximum number of items in the response (as set in the query or by default).
@@ -65,19 +61,17 @@ final class Episodes implements BaseModel
     #[Api]
     public int $total;
 
+    /** @var list<SimplifiedEpisodeObject>|null $items */
+    #[Api(list: SimplifiedEpisodeObject::class, optional: true)]
+    public ?array $items;
+
     /**
      * `new Episodes()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
      * Episodes::with(
-     *   href: ...,
-     *   items: ...,
-     *   limit: ...,
-     *   next: ...,
-     *   offset: ...,
-     *   previous: ...,
-     *   total: ...,
+     *   href: ..., limit: ..., next: ..., offset: ..., previous: ..., total: ...
      * )
      * ```
      *
@@ -86,7 +80,6 @@ final class Episodes implements BaseModel
      * ```
      * (new Episodes)
      *   ->withHref(...)
-     *   ->withItems(...)
      *   ->withLimit(...)
      *   ->withNext(...)
      *   ->withOffset(...)
@@ -108,22 +101,23 @@ final class Episodes implements BaseModel
      */
     public static function with(
         string $href,
-        array $items,
         int $limit,
         ?string $next,
         int $offset,
         ?string $previous,
         int $total,
+        ?array $items = null,
     ): self {
         $obj = new self;
 
         $obj->href = $href;
-        $obj->items = $items;
         $obj->limit = $limit;
         $obj->next = $next;
         $obj->offset = $offset;
         $obj->previous = $previous;
         $obj->total = $total;
+
+        null !== $items && $obj->items = $items;
 
         return $obj;
     }
@@ -135,17 +129,6 @@ final class Episodes implements BaseModel
     {
         $obj = clone $this;
         $obj->href = $href;
-
-        return $obj;
-    }
-
-    /**
-     * @param list<SimplifiedEpisodeObject> $items
-     */
-    public function withItems(array $items): self
-    {
-        $obj = clone $this;
-        $obj->items = $items;
 
         return $obj;
     }
@@ -201,6 +184,17 @@ final class Episodes implements BaseModel
     {
         $obj = clone $this;
         $obj->total = $total;
+
+        return $obj;
+    }
+
+    /**
+     * @param list<SimplifiedEpisodeObject> $items
+     */
+    public function withItems(array $items): self
+    {
+        $obj = clone $this;
+        $obj->items = $items;
 
         return $obj;
     }

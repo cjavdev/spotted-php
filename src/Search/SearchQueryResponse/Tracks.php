@@ -12,12 +12,12 @@ use Spotted\TrackObject;
 /**
  * @phpstan-type TracksShape = array{
  *   href: string,
- *   items: list<TrackObject>,
  *   limit: int,
  *   next: string|null,
  *   offset: int,
  *   previous: string|null,
  *   total: int,
+ *   items?: list<TrackObject>,
  * }
  */
 final class Tracks implements BaseModel
@@ -30,10 +30,6 @@ final class Tracks implements BaseModel
      */
     #[Api]
     public string $href;
-
-    /** @var list<TrackObject> $items */
-    #[Api(list: TrackObject::class)]
-    public array $items;
 
     /**
      * The maximum number of items in the response (as set in the query or by default).
@@ -65,19 +61,17 @@ final class Tracks implements BaseModel
     #[Api]
     public int $total;
 
+    /** @var list<TrackObject>|null $items */
+    #[Api(list: TrackObject::class, optional: true)]
+    public ?array $items;
+
     /**
      * `new Tracks()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
      * Tracks::with(
-     *   href: ...,
-     *   items: ...,
-     *   limit: ...,
-     *   next: ...,
-     *   offset: ...,
-     *   previous: ...,
-     *   total: ...,
+     *   href: ..., limit: ..., next: ..., offset: ..., previous: ..., total: ...
      * )
      * ```
      *
@@ -86,7 +80,6 @@ final class Tracks implements BaseModel
      * ```
      * (new Tracks)
      *   ->withHref(...)
-     *   ->withItems(...)
      *   ->withLimit(...)
      *   ->withNext(...)
      *   ->withOffset(...)
@@ -108,22 +101,23 @@ final class Tracks implements BaseModel
      */
     public static function with(
         string $href,
-        array $items,
         int $limit,
         ?string $next,
         int $offset,
         ?string $previous,
         int $total,
+        ?array $items = null,
     ): self {
         $obj = new self;
 
         $obj->href = $href;
-        $obj->items = $items;
         $obj->limit = $limit;
         $obj->next = $next;
         $obj->offset = $offset;
         $obj->previous = $previous;
         $obj->total = $total;
+
+        null !== $items && $obj->items = $items;
 
         return $obj;
     }
@@ -135,17 +129,6 @@ final class Tracks implements BaseModel
     {
         $obj = clone $this;
         $obj->href = $href;
-
-        return $obj;
-    }
-
-    /**
-     * @param list<TrackObject> $items
-     */
-    public function withItems(array $items): self
-    {
-        $obj = clone $this;
-        $obj->items = $items;
 
         return $obj;
     }
@@ -201,6 +184,17 @@ final class Tracks implements BaseModel
     {
         $obj = clone $this;
         $obj->total = $total;
+
+        return $obj;
+    }
+
+    /**
+     * @param list<TrackObject> $items
+     */
+    public function withItems(array $items): self
+    {
+        $obj = clone $this;
+        $obj->items = $items;
 
         return $obj;
     }
