@@ -8,7 +8,6 @@ use Spotted\Client;
 use Spotted\Core\Conversion\ListOf;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\ImageObject;
-use Spotted\Playlists\Images\ImageUpdateParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Playlists\ImagesContract;
 
@@ -24,37 +23,13 @@ final class ImagesService implements ImagesContract
      *
      * Replace the image used to represent a specific playlist.
      *
-     * @param string $body base64 encoded JPEG image data, maximum payload size is 256 KB
-     *
      * @throws APIException
      */
     public function update(
         string $playlistID,
-        $body,
+        string $body,
         ?RequestOptions $requestOptions = null
     ): string {
-        $params = ['body' => $body];
-
-        return $this->updateRaw($playlistID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $playlistID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): string {
-        [$parsed, $options] = ImageUpdateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
         // @phpstan-ignore-next-line;
         return $this->client->request(
             method: 'put',
@@ -62,8 +37,8 @@ final class ImagesService implements ImagesContract
             headers: [
                 'Content-Type' => 'image/jpeg', 'Accept' => 'application/binary',
             ],
-            body: $parsed['body'],
-            options: $options,
+            body: STAINLESS_FIXME_parsed['body'],
+            options: $requestOptions,
             convert: 'string',
         );
     }
