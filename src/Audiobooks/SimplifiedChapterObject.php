@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Spotted\Audiobooks;
 
 use Spotted\Audiobooks\SimplifiedChapterObject\ReleaseDatePrecision;
-use Spotted\Audiobooks\SimplifiedChapterObject\Type;
 use Spotted\ChapterRestrictionObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
@@ -33,7 +32,7 @@ use Spotted\ResumePointObject;
  *   name: string,
  *   releaseDate: string,
  *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
- *   type: value-of<Type>,
+ *   type: string,
  *   uri: string,
  *   availableMarkets?: list<string>,
  *   restrictions?: ChapterRestrictionObject,
@@ -46,6 +45,12 @@ final class SimplifiedChapterObject implements BaseModel, ResponseConverter
     use SdkModel;
 
     use SdkResponse;
+
+    /**
+     * The object type.
+     */
+    #[Api]
+    public string $type = 'episode';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the chapter.
@@ -146,14 +151,6 @@ final class SimplifiedChapterObject implements BaseModel, ResponseConverter
     public string $releaseDatePrecision;
 
     /**
-     * The object type.
-     *
-     * @var value-of<Type> $type
-     */
-    #[Api(enum: Type::class)]
-    public string $type;
-
-    /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the chapter.
      */
     #[Api]
@@ -200,7 +197,6 @@ final class SimplifiedChapterObject implements BaseModel, ResponseConverter
      *   name: ...,
      *   releaseDate: ...,
      *   releaseDatePrecision: ...,
-     *   type: ...,
      *   uri: ...,
      * )
      * ```
@@ -224,7 +220,6 @@ final class SimplifiedChapterObject implements BaseModel, ResponseConverter
      *   ->withName(...)
      *   ->withReleaseDate(...)
      *   ->withReleaseDatePrecision(...)
-     *   ->withType(...)
      *   ->withUri(...)
      * ```
      */
@@ -241,7 +236,6 @@ final class SimplifiedChapterObject implements BaseModel, ResponseConverter
      * @param list<ImageObject> $images
      * @param list<string> $languages
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
-     * @param Type|value-of<Type> $type
      * @param list<string> $availableMarkets
      */
     public static function with(
@@ -260,7 +254,6 @@ final class SimplifiedChapterObject implements BaseModel, ResponseConverter
         string $name,
         string $releaseDate,
         ReleaseDatePrecision|string $releaseDatePrecision,
-        Type|string $type,
         string $uri,
         ?array $availableMarkets = null,
         ?ChapterRestrictionObject $restrictions = null,
@@ -283,7 +276,6 @@ final class SimplifiedChapterObject implements BaseModel, ResponseConverter
         $obj->name = $name;
         $obj->releaseDate = $releaseDate;
         $obj['releaseDatePrecision'] = $releaseDatePrecision;
-        $obj['type'] = $type;
         $obj->uri = $uri;
 
         null !== $availableMarkets && $obj->availableMarkets = $availableMarkets;
@@ -461,19 +453,6 @@ final class SimplifiedChapterObject implements BaseModel, ResponseConverter
     ): self {
         $obj = clone $this;
         $obj['releaseDatePrecision'] = $releaseDatePrecision;
-
-        return $obj;
-    }
-
-    /**
-     * The object type.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $obj = clone $this;
-        $obj['type'] = $type;
 
         return $obj;
     }

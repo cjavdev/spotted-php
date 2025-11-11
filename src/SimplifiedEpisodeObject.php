@@ -8,7 +8,6 @@ use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\SimplifiedEpisodeObject\ReleaseDatePrecision;
-use Spotted\SimplifiedEpisodeObject\Type;
 
 /**
  * @phpstan-type SimplifiedEpisodeObjectShape = array{
@@ -27,7 +26,7 @@ use Spotted\SimplifiedEpisodeObject\Type;
  *   name: string,
  *   releaseDate: string,
  *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
- *   type: value-of<Type>,
+ *   type: string,
  *   uri: string,
  *   language?: string,
  *   restrictions?: EpisodeRestrictionObject,
@@ -38,6 +37,12 @@ final class SimplifiedEpisodeObject implements BaseModel
 {
     /** @use SdkModel<SimplifiedEpisodeObjectShape> */
     use SdkModel;
+
+    /**
+     * The object type.
+     */
+    #[Api]
+    public string $type = 'episode';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the episode.
@@ -138,14 +143,6 @@ final class SimplifiedEpisodeObject implements BaseModel
     public string $releaseDatePrecision;
 
     /**
-     * The object type.
-     *
-     * @var value-of<Type> $type
-     */
-    #[Api(enum: Type::class)]
-    public string $type;
-
-    /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the episode.
      */
     #[Api]
@@ -192,7 +189,6 @@ final class SimplifiedEpisodeObject implements BaseModel
      *   name: ...,
      *   releaseDate: ...,
      *   releaseDatePrecision: ...,
-     *   type: ...,
      *   uri: ...,
      * )
      * ```
@@ -216,7 +212,6 @@ final class SimplifiedEpisodeObject implements BaseModel
      *   ->withName(...)
      *   ->withReleaseDate(...)
      *   ->withReleaseDatePrecision(...)
-     *   ->withType(...)
      *   ->withUri(...)
      * ```
      */
@@ -233,7 +228,6 @@ final class SimplifiedEpisodeObject implements BaseModel
      * @param list<ImageObject> $images
      * @param list<string> $languages
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
-     * @param Type|value-of<Type> $type
      */
     public static function with(
         string $id,
@@ -251,7 +245,6 @@ final class SimplifiedEpisodeObject implements BaseModel
         string $name,
         string $releaseDate,
         ReleaseDatePrecision|string $releaseDatePrecision,
-        Type|string $type,
         string $uri,
         ?string $language = null,
         ?EpisodeRestrictionObject $restrictions = null,
@@ -274,7 +267,6 @@ final class SimplifiedEpisodeObject implements BaseModel
         $obj->name = $name;
         $obj->releaseDate = $releaseDate;
         $obj['releaseDatePrecision'] = $releaseDatePrecision;
-        $obj['type'] = $type;
         $obj->uri = $uri;
 
         null !== $language && $obj->language = $language;
@@ -452,19 +444,6 @@ final class SimplifiedEpisodeObject implements BaseModel
     ): self {
         $obj = clone $this;
         $obj['releaseDatePrecision'] = $releaseDatePrecision;
-
-        return $obj;
-    }
-
-    /**
-     * The object type.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $obj = clone $this;
-        $obj['type'] = $type;
 
         return $obj;
     }

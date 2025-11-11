@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\AudiobookBase\Type;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
@@ -27,7 +26,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   narrators: list<NarratorObject>,
  *   publisher: string,
  *   totalChapters: int,
- *   type: value-of<Type>,
+ *   type: string,
  *   uri: string,
  *   edition?: string,
  * }
@@ -36,6 +35,12 @@ final class AudiobookBase implements BaseModel
 {
     /** @use SdkModel<AudiobookBaseShape> */
     use SdkModel;
+
+    /**
+     * The object type.
+     */
+    #[Api]
+    public string $type = 'audiobook';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the audiobook.
@@ -146,14 +151,6 @@ final class AudiobookBase implements BaseModel
     public int $totalChapters;
 
     /**
-     * The object type.
-     *
-     * @var value-of<Type> $type
-     */
-    #[Api(enum: Type::class)]
-    public string $type;
-
-    /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the audiobook.
      */
     #[Api]
@@ -187,7 +184,6 @@ final class AudiobookBase implements BaseModel
      *   narrators: ...,
      *   publisher: ...,
      *   totalChapters: ...,
-     *   type: ...,
      *   uri: ...,
      * )
      * ```
@@ -212,7 +208,6 @@ final class AudiobookBase implements BaseModel
      *   ->withNarrators(...)
      *   ->withPublisher(...)
      *   ->withTotalChapters(...)
-     *   ->withType(...)
      *   ->withUri(...)
      * ```
      */
@@ -232,7 +227,6 @@ final class AudiobookBase implements BaseModel
      * @param list<ImageObject> $images
      * @param list<string> $languages
      * @param list<NarratorObject> $narrators
-     * @param Type|value-of<Type> $type
      */
     public static function with(
         string $id,
@@ -251,7 +245,6 @@ final class AudiobookBase implements BaseModel
         array $narrators,
         string $publisher,
         int $totalChapters,
-        Type|string $type,
         string $uri,
         ?string $edition = null,
     ): self {
@@ -273,7 +266,6 @@ final class AudiobookBase implements BaseModel
         $obj->narrators = $narrators;
         $obj->publisher = $publisher;
         $obj->totalChapters = $totalChapters;
-        $obj['type'] = $type;
         $obj->uri = $uri;
 
         null !== $edition && $obj->edition = $edition;
@@ -465,19 +457,6 @@ final class AudiobookBase implements BaseModel
     {
         $obj = clone $this;
         $obj->totalChapters = $totalChapters;
-
-        return $obj;
-    }
-
-    /**
-     * The object type.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $obj = clone $this;
-        $obj['type'] = $type;
 
         return $obj;
     }

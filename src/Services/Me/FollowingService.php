@@ -9,8 +9,8 @@ use Spotted\Core\Conversion\ListOf;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\Me\Following\FollowingBulkGetResponse;
 use Spotted\Me\Following\FollowingBulkRetrieveParams;
-use Spotted\Me\Following\FollowingBulkRetrieveParams\Type;
 use Spotted\Me\Following\FollowingCheckParams;
+use Spotted\Me\Following\FollowingCheckParams\Type;
 use Spotted\Me\Following\FollowingFollowParams;
 use Spotted\Me\Following\FollowingUnfollowParams;
 use Spotted\RequestOptions;
@@ -30,7 +30,7 @@ final class FollowingService implements FollowingContract
      *
      * Get the current user's followed artists.
      *
-     * @param Type|value-of<Type> $type the ID type: currently only `artist` is supported
+     * @param string $type the ID type: currently only `artist` is supported
      * @param string $after the last artist ID retrieved from the previous request
      * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      *
@@ -79,7 +79,7 @@ final class FollowingService implements FollowingContract
      * Check to see if the current user is following one or more artists or other Spotify users.
      *
      * @param string $ids A comma-separated list of the artist or the user [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) to check. For example: `ids=74ASZWbe4lXaubB36ztrGX,08td7MxkoHQkXnWAYD8d6Q`. A maximum of 50 IDs can be sent in one request.
-     * @param FollowingCheckParams\Type|value-of<FollowingCheckParams\Type> $type the ID type: either `artist` or `user`
+     * @param Type|value-of<Type> $type the ID type: either `artist` or `user`
      *
      * @return list<bool>
      *

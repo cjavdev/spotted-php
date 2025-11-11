@@ -7,7 +7,6 @@ namespace Spotted\Chapters\ChapterBulkGetResponse;
 use Spotted\AudiobookBase;
 use Spotted\ChapterRestrictionObject;
 use Spotted\Chapters\ChapterBulkGetResponse\Chapter\ReleaseDatePrecision;
-use Spotted\Chapters\ChapterBulkGetResponse\Chapter\Type;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
@@ -33,7 +32,7 @@ use Spotted\ResumePointObject;
  *   name: string,
  *   releaseDate: string,
  *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
- *   type: value-of<Type>,
+ *   type: string,
  *   uri: string,
  *   availableMarkets?: list<string>,
  *   restrictions?: ChapterRestrictionObject,
@@ -44,6 +43,12 @@ final class Chapter implements BaseModel
 {
     /** @use SdkModel<ChapterShape> */
     use SdkModel;
+
+    /**
+     * The object type.
+     */
+    #[Api]
+    public string $type = 'episode';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the chapter.
@@ -150,14 +155,6 @@ final class Chapter implements BaseModel
     public string $releaseDatePrecision;
 
     /**
-     * The object type.
-     *
-     * @var value-of<Type> $type
-     */
-    #[Api(enum: Type::class)]
-    public string $type;
-
-    /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the chapter.
      */
     #[Api]
@@ -205,7 +202,6 @@ final class Chapter implements BaseModel
      *   name: ...,
      *   releaseDate: ...,
      *   releaseDatePrecision: ...,
-     *   type: ...,
      *   uri: ...,
      * )
      * ```
@@ -230,7 +226,6 @@ final class Chapter implements BaseModel
      *   ->withName(...)
      *   ->withReleaseDate(...)
      *   ->withReleaseDatePrecision(...)
-     *   ->withType(...)
      *   ->withUri(...)
      * ```
      */
@@ -247,7 +242,6 @@ final class Chapter implements BaseModel
      * @param list<ImageObject> $images
      * @param list<string> $languages
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
-     * @param Type|value-of<Type> $type
      * @param list<string> $availableMarkets
      */
     public static function with(
@@ -267,7 +261,6 @@ final class Chapter implements BaseModel
         string $name,
         string $releaseDate,
         ReleaseDatePrecision|string $releaseDatePrecision,
-        Type|string $type,
         string $uri,
         ?array $availableMarkets = null,
         ?ChapterRestrictionObject $restrictions = null,
@@ -291,7 +284,6 @@ final class Chapter implements BaseModel
         $obj->name = $name;
         $obj->releaseDate = $releaseDate;
         $obj['releaseDatePrecision'] = $releaseDatePrecision;
-        $obj['type'] = $type;
         $obj->uri = $uri;
 
         null !== $availableMarkets && $obj->availableMarkets = $availableMarkets;
@@ -480,19 +472,6 @@ final class Chapter implements BaseModel
     ): self {
         $obj = clone $this;
         $obj['releaseDatePrecision'] = $releaseDatePrecision;
-
-        return $obj;
-    }
-
-    /**
-     * The object type.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $obj = clone $this;
-        $obj['type'] = $type;
 
         return $obj;
     }
