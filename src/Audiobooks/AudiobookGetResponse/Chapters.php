@@ -14,12 +14,12 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @phpstan-type ChaptersShape = array{
  *   href: string,
- *   items: list<SimplifiedChapterObject>,
  *   limit: int,
  *   next: string|null,
  *   offset: int,
  *   previous: string|null,
  *   total: int,
+ *   items?: list<SimplifiedChapterObject>,
  * }
  */
 final class Chapters implements BaseModel
@@ -32,10 +32,6 @@ final class Chapters implements BaseModel
      */
     #[Api]
     public string $href;
-
-    /** @var list<SimplifiedChapterObject> $items */
-    #[Api(list: SimplifiedChapterObject::class)]
-    public array $items;
 
     /**
      * The maximum number of items in the response (as set in the query or by default).
@@ -67,19 +63,17 @@ final class Chapters implements BaseModel
     #[Api]
     public int $total;
 
+    /** @var list<SimplifiedChapterObject>|null $items */
+    #[Api(list: SimplifiedChapterObject::class, optional: true)]
+    public ?array $items;
+
     /**
      * `new Chapters()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
      * Chapters::with(
-     *   href: ...,
-     *   items: ...,
-     *   limit: ...,
-     *   next: ...,
-     *   offset: ...,
-     *   previous: ...,
-     *   total: ...,
+     *   href: ..., limit: ..., next: ..., offset: ..., previous: ..., total: ...
      * )
      * ```
      *
@@ -88,7 +82,6 @@ final class Chapters implements BaseModel
      * ```
      * (new Chapters)
      *   ->withHref(...)
-     *   ->withItems(...)
      *   ->withLimit(...)
      *   ->withNext(...)
      *   ->withOffset(...)
@@ -110,22 +103,23 @@ final class Chapters implements BaseModel
      */
     public static function with(
         string $href,
-        array $items,
         int $limit,
         ?string $next,
         int $offset,
         ?string $previous,
         int $total,
+        ?array $items = null,
     ): self {
         $obj = new self;
 
         $obj->href = $href;
-        $obj->items = $items;
         $obj->limit = $limit;
         $obj->next = $next;
         $obj->offset = $offset;
         $obj->previous = $previous;
         $obj->total = $total;
+
+        null !== $items && $obj->items = $items;
 
         return $obj;
     }
@@ -137,17 +131,6 @@ final class Chapters implements BaseModel
     {
         $obj = clone $this;
         $obj->href = $href;
-
-        return $obj;
-    }
-
-    /**
-     * @param list<SimplifiedChapterObject> $items
-     */
-    public function withItems(array $items): self
-    {
-        $obj = clone $this;
-        $obj->items = $items;
 
         return $obj;
     }
@@ -203,6 +186,17 @@ final class Chapters implements BaseModel
     {
         $obj = clone $this;
         $obj->total = $total;
+
+        return $obj;
+    }
+
+    /**
+     * @param list<SimplifiedChapterObject> $items
+     */
+    public function withItems(array $items): self
+    {
+        $obj = clone $this;
+        $obj->items = $items;
 
         return $obj;
     }
