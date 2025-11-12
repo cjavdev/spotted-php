@@ -37,7 +37,7 @@ final class TopTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->top->listTopArtists();
+        $result = $this->client->me->top->listTopArtists([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,7 +49,7 @@ final class TopTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->top->listTopTracks();
+        $result = $this->client->me->top->listTopTracks([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

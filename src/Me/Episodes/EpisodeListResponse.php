@@ -13,7 +13,7 @@ use Spotted\EpisodeObject;
 
 /**
  * @phpstan-type EpisodeListResponseShape = array{
- *   addedAt?: \DateTimeInterface, episode?: EpisodeObject
+ *   added_at?: \DateTimeInterface|null, episode?: EpisodeObject|null
  * }
  */
 final class EpisodeListResponse implements BaseModel, ResponseConverter
@@ -27,8 +27,8 @@ final class EpisodeListResponse implements BaseModel, ResponseConverter
      * The date and time the episode was saved.
      * Timestamps are returned in ISO 8601 format as Coordinated Universal Time (UTC) with a zero offset: YYYY-MM-DDTHH:MM:SSZ.
      */
-    #[Api('added_at', optional: true)]
-    public ?\DateTimeInterface $addedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $added_at;
 
     /**
      * Information about the episode.
@@ -47,12 +47,12 @@ final class EpisodeListResponse implements BaseModel, ResponseConverter
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?\DateTimeInterface $addedAt = null,
+        ?\DateTimeInterface $added_at = null,
         ?EpisodeObject $episode = null
     ): self {
         $obj = new self;
 
-        null !== $addedAt && $obj->addedAt = $addedAt;
+        null !== $added_at && $obj->added_at = $added_at;
         null !== $episode && $obj->episode = $episode;
 
         return $obj;
@@ -65,7 +65,7 @@ final class EpisodeListResponse implements BaseModel, ResponseConverter
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
         $obj = clone $this;
-        $obj->addedAt = $addedAt;
+        $obj->added_at = $addedAt;
 
         return $obj;
     }

@@ -37,7 +37,7 @@ final class AudiobooksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->audiobooks->retrieve('7iHfbu1YPACw6oZPAFJtqe');
+        $result = $this->client->audiobooks->retrieve('7iHfbu1YPACw6oZPAFJtqe', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,9 +49,9 @@ final class AudiobooksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->audiobooks->bulkRetrieve(
-            ids: '18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ,7iHfbu1YPACw6oZPAFJtqe',
-        );
+        $result = $this->client->audiobooks->bulkRetrieve([
+            'ids' => '18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ,7iHfbu1YPACw6oZPAFJtqe',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -63,9 +63,9 @@ final class AudiobooksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->audiobooks->bulkRetrieve(
-            ids: '18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ,7iHfbu1YPACw6oZPAFJtqe',
-        );
+        $result = $this->client->audiobooks->bulkRetrieve([
+            'ids' => '18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ,7iHfbu1YPACw6oZPAFJtqe',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,7 +77,10 @@ final class AudiobooksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->audiobooks->listChapters('7iHfbu1YPACw6oZPAFJtqe');
+        $result = $this->client->audiobooks->listChapters(
+            '7iHfbu1YPACw6oZPAFJtqe',
+            []
+        );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

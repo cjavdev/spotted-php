@@ -14,12 +14,12 @@ use Spotted\PlaylistUserObject\Type;
  * The user who owns the playlist.
  *
  * @phpstan-type OwnerShape = array{
- *   id?: string,
- *   externalURLs?: ExternalURLObject,
- *   href?: string,
- *   type?: value-of<Type>,
- *   uri?: string,
- *   displayName?: string|null,
+ *   id?: string|null,
+ *   external_urls?: ExternalURLObject|null,
+ *   href?: string|null,
+ *   type?: value-of<Type>|null,
+ *   uri?: string|null,
+ *   display_name?: string|null,
  * }
  */
 final class Owner implements BaseModel
@@ -33,8 +33,8 @@ final class Owner implements BaseModel
     #[Api(optional: true)]
     public ?string $id;
 
-    #[Api('external_urls', optional: true)]
-    public ?ExternalURLObject $externalURLs;
+    #[Api(optional: true)]
+    public ?ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint for this user.
@@ -59,8 +59,8 @@ final class Owner implements BaseModel
     /**
      * The name displayed on the user's profile. `null` if not available.
      */
-    #[Api('display_name', nullable: true, optional: true)]
-    public ?string $displayName;
+    #[Api(nullable: true, optional: true)]
+    public ?string $display_name;
 
     public function __construct()
     {
@@ -76,20 +76,20 @@ final class Owner implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?ExternalURLObject $externalURLs = null,
+        ?ExternalURLObject $external_urls = null,
         ?string $href = null,
         Type|string|null $type = null,
         ?string $uri = null,
-        ?string $displayName = null,
+        ?string $display_name = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $externalURLs && $obj->externalURLs = $externalURLs;
+        null !== $external_urls && $obj->external_urls = $external_urls;
         null !== $href && $obj->href = $href;
         null !== $type && $obj['type'] = $type;
         null !== $uri && $obj->uri = $uri;
-        null !== $displayName && $obj->displayName = $displayName;
+        null !== $display_name && $obj->display_name = $display_name;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class Owner implements BaseModel
     public function withExternalURLs(ExternalURLObject $externalURLs): self
     {
         $obj = clone $this;
-        $obj->externalURLs = $externalURLs;
+        $obj->external_urls = $externalURLs;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class Owner implements BaseModel
     public function withDisplayName(?string $displayName): self
     {
         $obj = clone $this;
-        $obj->displayName = $displayName;
+        $obj->display_name = $displayName;
 
         return $obj;
     }

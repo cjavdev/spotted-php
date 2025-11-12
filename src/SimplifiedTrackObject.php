@@ -10,23 +10,23 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type SimplifiedTrackObjectShape = array{
- *   id?: string,
- *   artists?: list<SimplifiedArtistObject>,
- *   availableMarkets?: list<string>,
- *   discNumber?: int,
- *   durationMs?: int,
- *   explicit?: bool,
- *   externalURLs?: ExternalURLObject,
- *   href?: string,
- *   isLocal?: bool,
- *   isPlayable?: bool,
- *   linkedFrom?: LinkedTrackObject,
- *   name?: string,
- *   previewURL?: string|null,
- *   restrictions?: TrackRestrictionObject,
- *   trackNumber?: int,
- *   type?: string,
- *   uri?: string,
+ *   id?: string|null,
+ *   artists?: list<SimplifiedArtistObject>|null,
+ *   available_markets?: list<string>|null,
+ *   disc_number?: int|null,
+ *   duration_ms?: int|null,
+ *   explicit?: bool|null,
+ *   external_urls?: ExternalURLObject|null,
+ *   href?: string|null,
+ *   is_local?: bool|null,
+ *   is_playable?: bool|null,
+ *   linked_from?: LinkedTrackObject|null,
+ *   name?: string|null,
+ *   preview_url?: string|null,
+ *   restrictions?: TrackRestrictionObject|null,
+ *   track_number?: int|null,
+ *   type?: string|null,
+ *   uri?: string|null,
  * }
  */
 final class SimplifiedTrackObject implements BaseModel
@@ -51,22 +51,22 @@ final class SimplifiedTrackObject implements BaseModel
     /**
      * A list of the countries in which the track can be played, identified by their [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code.
      *
-     * @var list<string>|null $availableMarkets
+     * @var list<string>|null $available_markets
      */
-    #[Api('available_markets', list: 'string', optional: true)]
-    public ?array $availableMarkets;
+    #[Api(list: 'string', optional: true)]
+    public ?array $available_markets;
 
     /**
      * The disc number (usually `1` unless the album consists of more than one disc).
      */
-    #[Api('disc_number', optional: true)]
-    public ?int $discNumber;
+    #[Api(optional: true)]
+    public ?int $disc_number;
 
     /**
      * The track length in milliseconds.
      */
-    #[Api('duration_ms', optional: true)]
-    public ?int $durationMs;
+    #[Api(optional: true)]
+    public ?int $duration_ms;
 
     /**
      * Whether or not the track has explicit lyrics ( `true` = yes it does; `false` = no it does not OR unknown).
@@ -77,8 +77,8 @@ final class SimplifiedTrackObject implements BaseModel
     /**
      * External URLs for this track.
      */
-    #[Api('external_urls', optional: true)]
-    public ?ExternalURLObject $externalURLs;
+    #[Api(optional: true)]
+    public ?ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the track.
@@ -89,20 +89,20 @@ final class SimplifiedTrackObject implements BaseModel
     /**
      * Whether or not the track is from a local file.
      */
-    #[Api('is_local', optional: true)]
-    public ?bool $isLocal;
+    #[Api(optional: true)]
+    public ?bool $is_local;
 
     /**
      * Part of the response when [Track Relinking](/documentation/web-api/concepts/track-relinking/) is applied. If `true`, the track is playable in the given market. Otherwise `false`.
      */
-    #[Api('is_playable', optional: true)]
-    public ?bool $isPlayable;
+    #[Api(optional: true)]
+    public ?bool $is_playable;
 
     /**
      * Part of the response when [Track Relinking](/documentation/web-api/concepts/track-relinking/) is applied and is only part of the response if the track linking, in fact, exists. The requested track has been replaced with a different track. The track in the `linked_from` object contains information about the originally requested track.
      */
-    #[Api('linked_from', optional: true)]
-    public ?LinkedTrackObject $linkedFrom;
+    #[Api(optional: true)]
+    public ?LinkedTrackObject $linked_from;
 
     /**
      * The name of the track.
@@ -115,8 +115,8 @@ final class SimplifiedTrackObject implements BaseModel
      *
      * A URL to a 30 second preview (MP3 format) of the track
      */
-    #[Api('preview_url', nullable: true, optional: true)]
-    public ?string $previewURL;
+    #[Api(nullable: true, optional: true)]
+    public ?string $preview_url;
 
     /**
      * Included in the response when a content restriction is applied.
@@ -127,8 +127,8 @@ final class SimplifiedTrackObject implements BaseModel
     /**
      * The number of the track. If an album has several discs, the track number is the number on the specified disc.
      */
-    #[Api('track_number', optional: true)]
-    public ?int $trackNumber;
+    #[Api(optional: true)]
+    public ?int $track_number;
 
     /**
      * The object type: "track".
@@ -153,24 +153,24 @@ final class SimplifiedTrackObject implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<SimplifiedArtistObject> $artists
-     * @param list<string> $availableMarkets
+     * @param list<string> $available_markets
      */
     public static function with(
         ?string $id = null,
         ?array $artists = null,
-        ?array $availableMarkets = null,
-        ?int $discNumber = null,
-        ?int $durationMs = null,
+        ?array $available_markets = null,
+        ?int $disc_number = null,
+        ?int $duration_ms = null,
         ?bool $explicit = null,
-        ?ExternalURLObject $externalURLs = null,
+        ?ExternalURLObject $external_urls = null,
         ?string $href = null,
-        ?bool $isLocal = null,
-        ?bool $isPlayable = null,
-        ?LinkedTrackObject $linkedFrom = null,
+        ?bool $is_local = null,
+        ?bool $is_playable = null,
+        ?LinkedTrackObject $linked_from = null,
         ?string $name = null,
-        ?string $previewURL = null,
+        ?string $preview_url = null,
         ?TrackRestrictionObject $restrictions = null,
-        ?int $trackNumber = null,
+        ?int $track_number = null,
         ?string $type = null,
         ?string $uri = null,
     ): self {
@@ -178,19 +178,19 @@ final class SimplifiedTrackObject implements BaseModel
 
         null !== $id && $obj->id = $id;
         null !== $artists && $obj->artists = $artists;
-        null !== $availableMarkets && $obj->availableMarkets = $availableMarkets;
-        null !== $discNumber && $obj->discNumber = $discNumber;
-        null !== $durationMs && $obj->durationMs = $durationMs;
+        null !== $available_markets && $obj->available_markets = $available_markets;
+        null !== $disc_number && $obj->disc_number = $disc_number;
+        null !== $duration_ms && $obj->duration_ms = $duration_ms;
         null !== $explicit && $obj->explicit = $explicit;
-        null !== $externalURLs && $obj->externalURLs = $externalURLs;
+        null !== $external_urls && $obj->external_urls = $external_urls;
         null !== $href && $obj->href = $href;
-        null !== $isLocal && $obj->isLocal = $isLocal;
-        null !== $isPlayable && $obj->isPlayable = $isPlayable;
-        null !== $linkedFrom && $obj->linkedFrom = $linkedFrom;
+        null !== $is_local && $obj->is_local = $is_local;
+        null !== $is_playable && $obj->is_playable = $is_playable;
+        null !== $linked_from && $obj->linked_from = $linked_from;
         null !== $name && $obj->name = $name;
-        null !== $previewURL && $obj->previewURL = $previewURL;
+        null !== $preview_url && $obj->preview_url = $preview_url;
         null !== $restrictions && $obj->restrictions = $restrictions;
-        null !== $trackNumber && $obj->trackNumber = $trackNumber;
+        null !== $track_number && $obj->track_number = $track_number;
         null !== $type && $obj->type = $type;
         null !== $uri && $obj->uri = $uri;
 
@@ -229,7 +229,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withAvailableMarkets(array $availableMarkets): self
     {
         $obj = clone $this;
-        $obj->availableMarkets = $availableMarkets;
+        $obj->available_markets = $availableMarkets;
 
         return $obj;
     }
@@ -240,7 +240,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withDiscNumber(int $discNumber): self
     {
         $obj = clone $this;
-        $obj->discNumber = $discNumber;
+        $obj->disc_number = $discNumber;
 
         return $obj;
     }
@@ -251,7 +251,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withDurationMs(int $durationMs): self
     {
         $obj = clone $this;
-        $obj->durationMs = $durationMs;
+        $obj->duration_ms = $durationMs;
 
         return $obj;
     }
@@ -273,7 +273,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withExternalURLs(ExternalURLObject $externalURLs): self
     {
         $obj = clone $this;
-        $obj->externalURLs = $externalURLs;
+        $obj->external_urls = $externalURLs;
 
         return $obj;
     }
@@ -295,7 +295,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withIsLocal(bool $isLocal): self
     {
         $obj = clone $this;
-        $obj->isLocal = $isLocal;
+        $obj->is_local = $isLocal;
 
         return $obj;
     }
@@ -306,7 +306,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withIsPlayable(bool $isPlayable): self
     {
         $obj = clone $this;
-        $obj->isPlayable = $isPlayable;
+        $obj->is_playable = $isPlayable;
 
         return $obj;
     }
@@ -317,7 +317,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withLinkedFrom(LinkedTrackObject $linkedFrom): self
     {
         $obj = clone $this;
-        $obj->linkedFrom = $linkedFrom;
+        $obj->linked_from = $linkedFrom;
 
         return $obj;
     }
@@ -339,7 +339,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withPreviewURL(?string $previewURL): self
     {
         $obj = clone $this;
-        $obj->previewURL = $previewURL;
+        $obj->preview_url = $previewURL;
 
         return $obj;
     }
@@ -361,7 +361,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withTrackNumber(int $trackNumber): self
     {
         $obj = clone $this;
-        $obj->trackNumber = $trackNumber;
+        $obj->track_number = $trackNumber;
 
         return $obj;
     }

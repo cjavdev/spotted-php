@@ -9,7 +9,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type EpisodeRestrictionObjectShape = array{reason?: string}
+ * @phpstan-type EpisodeRestrictionObjectShape = array{reason?: string|null}
  */
 final class EpisodeRestrictionObject implements BaseModel
 {

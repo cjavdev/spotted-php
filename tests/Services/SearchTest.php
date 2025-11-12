@@ -37,10 +37,9 @@ final class SearchTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->search->query(
-            q: 'remaster%20track:Doxy%20artist:Miles%20Davis',
-            type: ['album']
-        );
+        $result = $this->client->search->query([
+            'q' => 'remaster%20track:Doxy%20artist:Miles%20Davis', 'type' => ['album'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -52,10 +51,9 @@ final class SearchTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->search->query(
-            q: 'remaster%20track:Doxy%20artist:Miles%20Davis',
-            type: ['album']
-        );
+        $result = $this->client->search->query([
+            'q' => 'remaster%20track:Doxy%20artist:Miles%20Davis', 'type' => ['album'],
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

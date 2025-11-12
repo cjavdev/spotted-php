@@ -19,7 +19,7 @@ use Spotted\SimplifiedEpisodeObject;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<SimplifiedEpisodeObject>,
+ *   items?: list<SimplifiedEpisodeObject>|null,
  * }
  */
 final class Episodes implements BaseModel

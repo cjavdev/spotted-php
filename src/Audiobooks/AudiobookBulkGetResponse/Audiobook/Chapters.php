@@ -19,7 +19,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<SimplifiedChapterObject>,
+ *   items?: list<SimplifiedChapterObject>|null,
  * }
  */
 final class Chapters implements BaseModel

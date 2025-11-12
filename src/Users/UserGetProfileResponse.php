@@ -16,14 +16,14 @@ use Spotted\Users\UserGetProfileResponse\Type;
 
 /**
  * @phpstan-type UserGetProfileResponseShape = array{
- *   id?: string,
- *   displayName?: string|null,
- *   externalURLs?: ExternalURLObject,
- *   followers?: FollowersObject,
- *   href?: string,
- *   images?: list<ImageObject>,
- *   type?: value-of<Type>,
- *   uri?: string,
+ *   id?: string|null,
+ *   display_name?: string|null,
+ *   external_urls?: ExternalURLObject|null,
+ *   followers?: FollowersObject|null,
+ *   href?: string|null,
+ *   images?: list<ImageObject>|null,
+ *   type?: value-of<Type>|null,
+ *   uri?: string|null,
  * }
  */
 final class UserGetProfileResponse implements BaseModel, ResponseConverter
@@ -42,14 +42,14 @@ final class UserGetProfileResponse implements BaseModel, ResponseConverter
     /**
      * The name displayed on the user's profile. `null` if not available.
      */
-    #[Api('display_name', nullable: true, optional: true)]
-    public ?string $displayName;
+    #[Api(nullable: true, optional: true)]
+    public ?string $display_name;
 
     /**
      * Known public external URLs for this user.
      */
-    #[Api('external_urls', optional: true)]
-    public ?ExternalURLObject $externalURLs;
+    #[Api(optional: true)]
+    public ?ExternalURLObject $external_urls;
 
     /**
      * Information about the followers of this user.
@@ -100,8 +100,8 @@ final class UserGetProfileResponse implements BaseModel, ResponseConverter
      */
     public static function with(
         ?string $id = null,
-        ?string $displayName = null,
-        ?ExternalURLObject $externalURLs = null,
+        ?string $display_name = null,
+        ?ExternalURLObject $external_urls = null,
         ?FollowersObject $followers = null,
         ?string $href = null,
         ?array $images = null,
@@ -111,8 +111,8 @@ final class UserGetProfileResponse implements BaseModel, ResponseConverter
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $displayName && $obj->displayName = $displayName;
-        null !== $externalURLs && $obj->externalURLs = $externalURLs;
+        null !== $display_name && $obj->display_name = $display_name;
+        null !== $external_urls && $obj->external_urls = $external_urls;
         null !== $followers && $obj->followers = $followers;
         null !== $href && $obj->href = $href;
         null !== $images && $obj->images = $images;
@@ -139,7 +139,7 @@ final class UserGetProfileResponse implements BaseModel, ResponseConverter
     public function withDisplayName(?string $displayName): self
     {
         $obj = clone $this;
-        $obj->displayName = $displayName;
+        $obj->display_name = $displayName;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class UserGetProfileResponse implements BaseModel, ResponseConverter
     public function withExternalURLs(ExternalURLObject $externalURLs): self
     {
         $obj = clone $this;
-        $obj->externalURLs = $externalURLs;
+        $obj->external_urls = $externalURLs;
 
         return $obj;
     }

@@ -9,7 +9,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ChapterRestrictionObjectShape = array{reason?: string}
+ * @phpstan-type ChapterRestrictionObjectShape = array{reason?: string|null}
  */
 final class ChapterRestrictionObject implements BaseModel
 {

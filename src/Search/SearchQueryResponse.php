@@ -19,13 +19,13 @@ use Spotted\Search\SearchQueryResponse\Tracks;
 
 /**
  * @phpstan-type SearchQueryResponseShape = array{
- *   albums?: Albums,
- *   artists?: Artists,
- *   audiobooks?: Audiobooks,
- *   episodes?: Episodes,
- *   playlists?: PagingPlaylistObject,
- *   shows?: Shows,
- *   tracks?: Tracks,
+ *   albums?: Albums|null,
+ *   artists?: Artists|null,
+ *   audiobooks?: Audiobooks|null,
+ *   episodes?: Episodes|null,
+ *   playlists?: PagingPlaylistObject|null,
+ *   shows?: Shows|null,
+ *   tracks?: Tracks|null,
  * }
  */
 final class SearchQueryResponse implements BaseModel, ResponseConverter

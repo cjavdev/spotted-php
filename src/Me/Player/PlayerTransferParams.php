@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Me\Player->transfer
  *
  * @phpstan-type PlayerTransferParamsShape = array{
- *   deviceIDs: list<string>, play?: bool
+ *   device_ids: list<string>, play?: bool
  * }
  */
 final class PlayerTransferParams implements BaseModel
@@ -27,10 +27,10 @@ final class PlayerTransferParams implements BaseModel
     /**
      * A JSON array containing the ID of the device on which playback should be started/transferred.<br/>For example:`{device_ids:["74ASZWbe4lXaubB36ztrGX"]}`<br/>_**Note**: Although an array is accepted, only a single device_id is currently supported. Supplying more than one will return `400 Bad Request`_.
      *
-     * @var list<string> $deviceIDs
+     * @var list<string> $device_ids
      */
-    #[Api('device_ids', list: 'string')]
-    public array $deviceIDs;
+    #[Api(list: 'string')]
+    public array $device_ids;
 
     /**
      * **true**: ensure playback happens on new device.<br/>**false** or not provided: keep the current playback state.
@@ -43,7 +43,7 @@ final class PlayerTransferParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * PlayerTransferParams::with(deviceIDs: ...)
+     * PlayerTransferParams::with(device_ids: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -62,13 +62,13 @@ final class PlayerTransferParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $deviceIDs
+     * @param list<string> $device_ids
      */
-    public static function with(array $deviceIDs, ?bool $play = null): self
+    public static function with(array $device_ids, ?bool $play = null): self
     {
         $obj = new self;
 
-        $obj->deviceIDs = $deviceIDs;
+        $obj->device_ids = $device_ids;
 
         null !== $play && $obj->play = $play;
 
@@ -83,7 +83,7 @@ final class PlayerTransferParams implements BaseModel
     public function withDeviceIDs(array $deviceIDs): self
     {
         $obj = clone $this;
-        $obj->deviceIDs = $deviceIDs;
+        $obj->device_ids = $deviceIDs;
 
         return $obj;
     }

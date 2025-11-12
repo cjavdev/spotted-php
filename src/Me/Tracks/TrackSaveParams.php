@@ -16,7 +16,7 @@ use Spotted\Me\Tracks\TrackSaveParams\TimestampedID;
  * @see Spotted\Me\Tracks->save
  *
  * @phpstan-type TrackSaveParamsShape = array{
- *   ids: list<string>, timestampedIDs?: list<TimestampedID>
+ *   ids: list<string>, timestamped_ids?: list<TimestampedID>
  * }
  */
 final class TrackSaveParams implements BaseModel
@@ -36,10 +36,10 @@ final class TrackSaveParams implements BaseModel
     /**
      * A JSON array of objects containing track IDs with their corresponding timestamps. Each object must include a track ID and an `added_at` timestamp. This allows you to specify when tracks were added to maintain a specific chronological order in the user's library.<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `timestamped_ids` is present in the body, any IDs listed in the query parameters (deprecated) or the `ids` field in the body will be ignored._.
      *
-     * @var list<TimestampedID>|null $timestampedIDs
+     * @var list<TimestampedID>|null $timestamped_ids
      */
-    #[Api('timestamped_ids', list: TimestampedID::class, optional: true)]
-    public ?array $timestampedIDs;
+    #[Api(list: TimestampedID::class, optional: true)]
+    public ?array $timestamped_ids;
 
     /**
      * `new TrackSaveParams()` is missing required properties by the API.
@@ -66,15 +66,15 @@ final class TrackSaveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $ids
-     * @param list<TimestampedID> $timestampedIDs
+     * @param list<TimestampedID> $timestamped_ids
      */
-    public static function with(array $ids, ?array $timestampedIDs = null): self
+    public static function with(array $ids, ?array $timestamped_ids = null): self
     {
         $obj = new self;
 
         $obj->ids = $ids;
 
-        null !== $timestampedIDs && $obj->timestampedIDs = $timestampedIDs;
+        null !== $timestamped_ids && $obj->timestamped_ids = $timestamped_ids;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class TrackSaveParams implements BaseModel
     public function withTimestampedIDs(array $timestampedIDs): self
     {
         $obj = clone $this;
-        $obj->timestampedIDs = $timestampedIDs;
+        $obj->timestamped_ids = $timestampedIDs;
 
         return $obj;
     }

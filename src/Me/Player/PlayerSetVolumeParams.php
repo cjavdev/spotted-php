@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Me\Player->setVolume
  *
  * @phpstan-type PlayerSetVolumeParamsShape = array{
- *   volumePercent: int, deviceID?: string
+ *   volume_percent: int, device_id?: string
  * }
  */
 final class PlayerSetVolumeParams implements BaseModel
@@ -28,20 +28,20 @@ final class PlayerSetVolumeParams implements BaseModel
      * The volume to set. Must be a value from 0 to 100 inclusive.
      */
     #[Api]
-    public int $volumePercent;
+    public int $volume_percent;
 
     /**
      * The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      */
     #[Api(optional: true)]
-    public ?string $deviceID;
+    public ?string $device_id;
 
     /**
      * `new PlayerSetVolumeParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * PlayerSetVolumeParams::with(volumePercent: ...)
+     * PlayerSetVolumeParams::with(volume_percent: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -61,14 +61,14 @@ final class PlayerSetVolumeParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        int $volumePercent,
-        ?string $deviceID = null
+        int $volume_percent,
+        ?string $device_id = null
     ): self {
         $obj = new self;
 
-        $obj->volumePercent = $volumePercent;
+        $obj->volume_percent = $volume_percent;
 
-        null !== $deviceID && $obj->deviceID = $deviceID;
+        null !== $device_id && $obj->device_id = $device_id;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class PlayerSetVolumeParams implements BaseModel
     public function withVolumePercent(int $volumePercent): self
     {
         $obj = clone $this;
-        $obj->volumePercent = $volumePercent;
+        $obj->volume_percent = $volumePercent;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class PlayerSetVolumeParams implements BaseModel
     public function withDeviceID(string $deviceID): self
     {
         $obj = clone $this;
-        $obj->deviceID = $deviceID;
+        $obj->device_id = $deviceID;
 
         return $obj;
     }

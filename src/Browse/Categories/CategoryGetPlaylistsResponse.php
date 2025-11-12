@@ -13,7 +13,7 @@ use Spotted\PagingPlaylistObject;
 
 /**
  * @phpstan-type CategoryGetPlaylistsResponseShape = array{
- *   message?: string, playlists?: PagingPlaylistObject
+ *   message?: string|null, playlists?: PagingPlaylistObject|null
  * }
  */
 final class CategoryGetPlaylistsResponse implements BaseModel, ResponseConverter

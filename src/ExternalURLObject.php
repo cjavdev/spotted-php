@@ -9,7 +9,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ExternalURLObjectShape = array{spotify?: string}
+ * @phpstan-type ExternalURLObjectShape = array{spotify?: string|null}
  */
 final class ExternalURLObject implements BaseModel
 {

@@ -10,7 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ExternalIDObjectShape = array{
- *   ean?: string, isrc?: string, upc?: string
+ *   ean?: string|null, isrc?: string|null, upc?: string|null
  * }
  */
 final class ExternalIDObject implements BaseModel

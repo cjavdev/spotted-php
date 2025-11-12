@@ -11,7 +11,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type MarketListResponseShape = array{markets?: list<string>}
+ * @phpstan-type MarketListResponseShape = array{markets?: list<string>|null}
  */
 final class MarketListResponse implements BaseModel, ResponseConverter
 {

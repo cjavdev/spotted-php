@@ -10,11 +10,11 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type LinkedTrackObjectShape = array{
- *   id?: string,
- *   externalURLs?: ExternalURLObject,
- *   href?: string,
- *   type?: string,
- *   uri?: string,
+ *   id?: string|null,
+ *   external_urls?: ExternalURLObject|null,
+ *   href?: string|null,
+ *   type?: string|null,
+ *   uri?: string|null,
  * }
  */
 final class LinkedTrackObject implements BaseModel
@@ -31,8 +31,8 @@ final class LinkedTrackObject implements BaseModel
     /**
      * Known external URLs for this track.
      */
-    #[Api('external_urls', optional: true)]
-    public ?ExternalURLObject $externalURLs;
+    #[Api(optional: true)]
+    public ?ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the track.
@@ -64,7 +64,7 @@ final class LinkedTrackObject implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?ExternalURLObject $externalURLs = null,
+        ?ExternalURLObject $external_urls = null,
         ?string $href = null,
         ?string $type = null,
         ?string $uri = null,
@@ -72,7 +72,7 @@ final class LinkedTrackObject implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $externalURLs && $obj->externalURLs = $externalURLs;
+        null !== $external_urls && $obj->external_urls = $external_urls;
         null !== $href && $obj->href = $href;
         null !== $type && $obj->type = $type;
         null !== $uri && $obj->uri = $uri;
@@ -97,7 +97,7 @@ final class LinkedTrackObject implements BaseModel
     public function withExternalURLs(ExternalURLObject $externalURLs): self
     {
         $obj = clone $this;
-        $obj->externalURLs = $externalURLs;
+        $obj->external_urls = $externalURLs;
 
         return $obj;
     }

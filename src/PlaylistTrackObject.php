@@ -11,10 +11,10 @@ use Spotted\PlaylistTrackObject\Track;
 
 /**
  * @phpstan-type PlaylistTrackObjectShape = array{
- *   addedAt?: \DateTimeInterface,
- *   addedBy?: PlaylistUserObject,
- *   isLocal?: bool,
- *   track?: TrackObject|EpisodeObject,
+ *   added_at?: \DateTimeInterface|null,
+ *   added_by?: PlaylistUserObject|null,
+ *   is_local?: bool|null,
+ *   track?: null|TrackObject|EpisodeObject,
  * }
  */
 final class PlaylistTrackObject implements BaseModel
@@ -25,20 +25,20 @@ final class PlaylistTrackObject implements BaseModel
     /**
      * The date and time the track or episode was added. _**Note**: some very old playlists may return `null` in this field._.
      */
-    #[Api('added_at', optional: true)]
-    public ?\DateTimeInterface $addedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $added_at;
 
     /**
      * The Spotify user who added the track or episode. _**Note**: some very old playlists may return `null` in this field._.
      */
-    #[Api('added_by', optional: true)]
-    public ?PlaylistUserObject $addedBy;
+    #[Api(optional: true)]
+    public ?PlaylistUserObject $added_by;
 
     /**
      * Whether this track or episode is a [local file](/documentation/web-api/concepts/playlists/#local-files) or not.
      */
-    #[Api('is_local', optional: true)]
-    public ?bool $isLocal;
+    #[Api(optional: true)]
+    public ?bool $is_local;
 
     /**
      * Information about the track or episode.
@@ -57,16 +57,16 @@ final class PlaylistTrackObject implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?\DateTimeInterface $addedAt = null,
-        ?PlaylistUserObject $addedBy = null,
-        ?bool $isLocal = null,
+        ?\DateTimeInterface $added_at = null,
+        ?PlaylistUserObject $added_by = null,
+        ?bool $is_local = null,
         TrackObject|EpisodeObject|null $track = null,
     ): self {
         $obj = new self;
 
-        null !== $addedAt && $obj->addedAt = $addedAt;
-        null !== $addedBy && $obj->addedBy = $addedBy;
-        null !== $isLocal && $obj->isLocal = $isLocal;
+        null !== $added_at && $obj->added_at = $added_at;
+        null !== $added_by && $obj->added_by = $added_by;
+        null !== $is_local && $obj->is_local = $is_local;
         null !== $track && $obj->track = $track;
 
         return $obj;
@@ -78,7 +78,7 @@ final class PlaylistTrackObject implements BaseModel
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
         $obj = clone $this;
-        $obj->addedAt = $addedAt;
+        $obj->added_at = $addedAt;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class PlaylistTrackObject implements BaseModel
     public function withAddedBy(PlaylistUserObject $addedBy): self
     {
         $obj = clone $this;
-        $obj->addedBy = $addedBy;
+        $obj->added_by = $addedBy;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class PlaylistTrackObject implements BaseModel
     public function withIsLocal(bool $isLocal): self
     {
         $obj = clone $this;
-        $obj->isLocal = $isLocal;
+        $obj->is_local = $isLocal;
 
         return $obj;
     }

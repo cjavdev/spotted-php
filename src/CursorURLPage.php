@@ -41,7 +41,7 @@ final class CursorURLPage implements BaseModel, BasePage
   /** @return list<TItem> */
   function getItems(): array {
     // @phpstan-ignore-next-line
-    return $this->offsetGet("items") ?? [];
+    return $this->offsetGet('items') ?? [];
   }
 
   /**
@@ -51,8 +51,8 @@ final class CursorURLPage implements BaseModel, BasePage
   *   array{
   *     method: string,
   *     path: string,
-  *     query: array<string, mixed>,
-  *     headers: array<string, string|null|list<string>>,
+  *     query: array<string,mixed>,
+  *     headers: array<string,string|null|list<string>>,
   *     body: mixed,
   *   },
   *   RequestOptions,
@@ -77,8 +77,8 @@ final class CursorURLPage implements BaseModel, BasePage
   * @param array{
   *   method: string,
   *   path: string,
-  *   query: array<string, mixed>,
-  *   headers: array<string, string|null|list<string>>,
+  *   query: array<string,mixed>,
+  *   headers: array<string,string|null|list<string>>,
   *   body: mixed,
   * } $request
   * @param RequestOptions $options
@@ -89,7 +89,7 @@ final class CursorURLPage implements BaseModel, BasePage
     private array $request,
     private RequestOptions $options,
     ResponseInterface $response,
-  ){
+  ) {
     $this->initialize();
 
     $data = Util::decodeContent($response);
@@ -102,12 +102,12 @@ final class CursorURLPage implements BaseModel, BasePage
     // @phpstan-ignore-next-line
     self::__unserialize($data);
 
-    if ($this->offsetExists("items")) {
+    if ($this->offsetExists('items')) {
       $acc = Conversion::coerce(
-        new ListOf($convert), value: $this->offsetGet("items")
+        new ListOf($convert), value: $this->offsetGet('items')
       );
       // @phpstan-ignore-next-line
-      $this->offsetSet("items", $acc);
+      $this->offsetSet('items', $acc);
 
     }
   }

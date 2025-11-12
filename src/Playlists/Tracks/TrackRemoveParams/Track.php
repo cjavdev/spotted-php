@@ -9,7 +9,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type TrackShape = array{uri?: string}
+ * @phpstan-type TrackShape = array{uri?: string|null}
  */
 final class Track implements BaseModel
 {

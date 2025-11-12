@@ -17,7 +17,7 @@ use Spotted\ShowBase;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<ShowBase>,
+ *   items?: list<ShowBase>|null,
  * }
  */
 final class Shows implements BaseModel

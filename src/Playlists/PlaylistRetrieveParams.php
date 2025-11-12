@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Playlists->retrieve
  *
  * @phpstan-type PlaylistRetrieveParamsShape = array{
- *   additionalTypes?: string, fields?: string, market?: string
+ *   additional_types?: string, fields?: string, market?: string
  * }
  */
 final class PlaylistRetrieveParams implements BaseModel
@@ -30,7 +30,7 @@ final class PlaylistRetrieveParams implements BaseModel
      * In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.
      */
     #[Api(optional: true)]
-    public ?string $additionalTypes;
+    public ?string $additional_types;
 
     /**
      * Filters for the query: a comma-separated list of the
@@ -68,13 +68,13 @@ final class PlaylistRetrieveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $additionalTypes = null,
+        ?string $additional_types = null,
         ?string $fields = null,
-        ?string $market = null
+        ?string $market = null,
     ): self {
         $obj = new self;
 
-        null !== $additionalTypes && $obj->additionalTypes = $additionalTypes;
+        null !== $additional_types && $obj->additional_types = $additional_types;
         null !== $fields && $obj->fields = $fields;
         null !== $market && $obj->market = $market;
 
@@ -89,7 +89,7 @@ final class PlaylistRetrieveParams implements BaseModel
     public function withAdditionalTypes(string $additionalTypes): self
     {
         $obj = clone $this;
-        $obj->additionalTypes = $additionalTypes;
+        $obj->additional_types = $additionalTypes;
 
         return $obj;
     }

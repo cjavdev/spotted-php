@@ -20,7 +20,7 @@ use Spotted\Search\SearchQueryParams\Type;
  * @phpstan-type SearchQueryParamsShape = array{
  *   q: string,
  *   type: list<Type|value-of<Type>>,
- *   includeExternal?: IncludeExternal|value-of<IncludeExternal>,
+ *   include_external?: IncludeExternal|value-of<IncludeExternal>,
  *   limit?: int,
  *   market?: string,
  *   offset?: int,
@@ -60,10 +60,10 @@ final class SearchQueryParams implements BaseModel
      * If `include_external=audio` is specified it signals that the client can play externally hosted audio content, and marks
      * the content as playable in the response. By default externally hosted audio content is marked as unplayable in the response.
      *
-     * @var value-of<IncludeExternal>|null $includeExternal
+     * @var value-of<IncludeExternal>|null $include_external
      */
     #[Api(enum: IncludeExternal::class, optional: true)]
-    public ?string $includeExternal;
+    public ?string $include_external;
 
     /**
      * The maximum number of results to return in each item type.
@@ -114,12 +114,12 @@ final class SearchQueryParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Type|value-of<Type>> $type
-     * @param IncludeExternal|value-of<IncludeExternal> $includeExternal
+     * @param IncludeExternal|value-of<IncludeExternal> $include_external
      */
     public static function with(
         string $q,
         array $type,
-        IncludeExternal|string|null $includeExternal = null,
+        IncludeExternal|string|null $include_external = null,
         ?int $limit = null,
         ?string $market = null,
         ?int $offset = null,
@@ -129,7 +129,7 @@ final class SearchQueryParams implements BaseModel
         $obj->q = $q;
         $obj['type'] = $type;
 
-        null !== $includeExternal && $obj['includeExternal'] = $includeExternal;
+        null !== $include_external && $obj['include_external'] = $include_external;
         null !== $limit && $obj->limit = $limit;
         null !== $market && $obj->market = $market;
         null !== $offset && $obj->offset = $offset;
@@ -181,7 +181,7 @@ final class SearchQueryParams implements BaseModel
         IncludeExternal|string $includeExternal
     ): self {
         $obj = clone $this;
-        $obj['includeExternal'] = $includeExternal;
+        $obj['include_external'] = $includeExternal;
 
         return $obj;
     }

@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player->pausePlayback
  *
- * @phpstan-type PlayerPausePlaybackParamsShape = array{deviceID?: string}
+ * @phpstan-type PlayerPausePlaybackParamsShape = array{device_id?: string}
  */
 final class PlayerPausePlaybackParams implements BaseModel
 {
@@ -26,7 +26,7 @@ final class PlayerPausePlaybackParams implements BaseModel
      * The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      */
     #[Api(optional: true)]
-    public ?string $deviceID;
+    public ?string $device_id;
 
     public function __construct()
     {
@@ -38,11 +38,11 @@ final class PlayerPausePlaybackParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $deviceID = null): self
+    public static function with(?string $device_id = null): self
     {
         $obj = new self;
 
-        null !== $deviceID && $obj->deviceID = $deviceID;
+        null !== $device_id && $obj->device_id = $device_id;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class PlayerPausePlaybackParams implements BaseModel
     public function withDeviceID(string $deviceID): self
     {
         $obj = clone $this;
-        $obj->deviceID = $deviceID;
+        $obj->device_id = $deviceID;
 
         return $obj;
     }

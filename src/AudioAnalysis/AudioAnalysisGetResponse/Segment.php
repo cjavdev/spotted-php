@@ -10,15 +10,15 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type SegmentShape = array{
- *   confidence?: float,
- *   duration?: float,
- *   loudnessEnd?: float,
- *   loudnessMax?: float,
- *   loudnessMaxTime?: float,
- *   loudnessStart?: float,
- *   pitches?: list<float>,
- *   start?: float,
- *   timbre?: list<float>,
+ *   confidence?: float|null,
+ *   duration?: float|null,
+ *   loudness_end?: float|null,
+ *   loudness_max?: float|null,
+ *   loudness_max_time?: float|null,
+ *   loudness_start?: float|null,
+ *   pitches?: list<float>|null,
+ *   start?: float|null,
+ *   timbre?: list<float>|null,
  * }
  */
 final class Segment implements BaseModel
@@ -41,26 +41,26 @@ final class Segment implements BaseModel
     /**
      * The offset loudness of the segment in decibels (dB). This value should be equivalent to the loudness_start of the following segment.
      */
-    #[Api('loudness_end', optional: true)]
-    public ?float $loudnessEnd;
+    #[Api(optional: true)]
+    public ?float $loudness_end;
 
     /**
      * The peak loudness of the segment in decibels (dB). Combined with `loudness_start` and `loudness_max_time`, these components can be used to describe the "attack" of the segment.
      */
-    #[Api('loudness_max', optional: true)]
-    public ?float $loudnessMax;
+    #[Api(optional: true)]
+    public ?float $loudness_max;
 
     /**
      * The segment-relative offset of the segment peak loudness in seconds. Combined with `loudness_start` and `loudness_max`, these components can be used to desctibe the "attack" of the segment.
      */
-    #[Api('loudness_max_time', optional: true)]
-    public ?float $loudnessMaxTime;
+    #[Api(optional: true)]
+    public ?float $loudness_max_time;
 
     /**
      * The onset loudness of the segment in decibels (dB). Combined with `loudness_max` and `loudness_max_time`, these components can be used to describe the "attack" of the segment.
      */
-    #[Api('loudness_start', optional: true)]
-    public ?float $loudnessStart;
+    #[Api(optional: true)]
+    public ?float $loudness_start;
 
     /**
      * Pitch content is given by a “chroma” vector, corresponding to the 12 pitch classes C, C#, D to B, with values ranging from 0 to 1 that describe the relative dominance of every pitch in the chromatic scale. For example a C Major chord would likely be represented by large values of C, E and G (i.e. classes 0, 4, and 7).
@@ -109,10 +109,10 @@ final class Segment implements BaseModel
     public static function with(
         ?float $confidence = null,
         ?float $duration = null,
-        ?float $loudnessEnd = null,
-        ?float $loudnessMax = null,
-        ?float $loudnessMaxTime = null,
-        ?float $loudnessStart = null,
+        ?float $loudness_end = null,
+        ?float $loudness_max = null,
+        ?float $loudness_max_time = null,
+        ?float $loudness_start = null,
         ?array $pitches = null,
         ?float $start = null,
         ?array $timbre = null,
@@ -121,10 +121,10 @@ final class Segment implements BaseModel
 
         null !== $confidence && $obj->confidence = $confidence;
         null !== $duration && $obj->duration = $duration;
-        null !== $loudnessEnd && $obj->loudnessEnd = $loudnessEnd;
-        null !== $loudnessMax && $obj->loudnessMax = $loudnessMax;
-        null !== $loudnessMaxTime && $obj->loudnessMaxTime = $loudnessMaxTime;
-        null !== $loudnessStart && $obj->loudnessStart = $loudnessStart;
+        null !== $loudness_end && $obj->loudness_end = $loudness_end;
+        null !== $loudness_max && $obj->loudness_max = $loudness_max;
+        null !== $loudness_max_time && $obj->loudness_max_time = $loudness_max_time;
+        null !== $loudness_start && $obj->loudness_start = $loudness_start;
         null !== $pitches && $obj->pitches = $pitches;
         null !== $start && $obj->start = $start;
         null !== $timbre && $obj->timbre = $timbre;
@@ -160,7 +160,7 @@ final class Segment implements BaseModel
     public function withLoudnessEnd(float $loudnessEnd): self
     {
         $obj = clone $this;
-        $obj->loudnessEnd = $loudnessEnd;
+        $obj->loudness_end = $loudnessEnd;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class Segment implements BaseModel
     public function withLoudnessMax(float $loudnessMax): self
     {
         $obj = clone $this;
-        $obj->loudnessMax = $loudnessMax;
+        $obj->loudness_max = $loudnessMax;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class Segment implements BaseModel
     public function withLoudnessMaxTime(float $loudnessMaxTime): self
     {
         $obj = clone $this;
-        $obj->loudnessMaxTime = $loudnessMaxTime;
+        $obj->loudness_max_time = $loudnessMaxTime;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class Segment implements BaseModel
     public function withLoudnessStart(float $loudnessStart): self
     {
         $obj = clone $this;
-        $obj->loudnessStart = $loudnessStart;
+        $obj->loudness_start = $loudnessStart;
 
         return $obj;
     }

@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<SimplifiedPlaylistObject>,
+ *   items?: list<SimplifiedPlaylistObject>|null,
  * }
  */
 final class PagingPlaylistObject implements BaseModel

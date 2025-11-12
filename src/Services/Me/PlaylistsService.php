@@ -12,8 +12,6 @@ use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\PlaylistsContract;
 use Spotted\SimplifiedPlaylistObject;
 
-use const Spotted\Core\OMIT as omit;
-
 final class PlaylistsService implements PlaylistsContract
 {
     /**
@@ -27,41 +25,19 @@ final class PlaylistsService implements PlaylistsContract
      * Get a list of the playlists owned or followed by the current Spotify
      * user.
      *
-     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
-     * @param int $offset 'The index of the first playlist to return. Default:
-     * 0 (the first object). Maximum offset: 100.000\. Use with `limit` to get the
-     * next set of playlists.'
+     * @param array{limit?: int, offset?: int}|PlaylistListParams $params
      *
      * @return CursorURLPage<SimplifiedPlaylistObject>
      *
      * @throws APIException
      */
     public function list(
-        $limit = omit,
-        $offset = omit,
-        ?RequestOptions $requestOptions = null
-    ): CursorURLPage {
-        $params = ['limit' => $limit, 'offset' => $offset];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @return CursorURLPage<SimplifiedPlaylistObject>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|PlaylistListParams $params,
         ?RequestOptions $requestOptions = null
     ): CursorURLPage {
         [$parsed, $options] = PlaylistListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

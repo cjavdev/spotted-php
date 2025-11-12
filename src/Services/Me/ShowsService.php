@@ -16,8 +16,6 @@ use Spotted\Me\Shows\ShowSaveParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\ShowsContract;
 
-use const Spotted\Core\OMIT as omit;
-
 final class ShowsService implements ShowsContract
 {
     /**
@@ -30,39 +28,19 @@ final class ShowsService implements ShowsContract
      *
      * Get a list of shows saved in the current Spotify user's library. Optional parameters can be used to limit the number of shows returned.
      *
-     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
-     * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param array{limit?: int, offset?: int}|ShowListParams $params
      *
      * @return CursorURLPage<ShowListResponse>
      *
      * @throws APIException
      */
     public function list(
-        $limit = omit,
-        $offset = omit,
-        ?RequestOptions $requestOptions = null
-    ): CursorURLPage {
-        $params = ['limit' => $limit, 'offset' => $offset];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @return CursorURLPage<ShowListResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|ShowListParams $params,
         ?RequestOptions $requestOptions = null
     ): CursorURLPage {
         [$parsed, $options] = ShowListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -81,35 +59,19 @@ final class ShowsService implements ShowsContract
      *
      * Check if one or more shows is already saved in the current Spotify user's library.
      *
-     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the shows. Maximum: 50 IDs.
+     * @param array{ids: string}|ShowCheckParams $params
      *
      * @return list<bool>
      *
      * @throws APIException
      */
-    public function check($ids, ?RequestOptions $requestOptions = null): array
-    {
-        $params = ['ids' => $ids];
-
-        return $this->checkRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @return list<bool>
-     *
-     * @throws APIException
-     */
-    public function checkRaw(
-        array $params,
+    public function check(
+        array|ShowCheckParams $params,
         ?RequestOptions $requestOptions = null
     ): array {
         [$parsed, $options] = ShowCheckParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -127,34 +89,17 @@ final class ShowsService implements ShowsContract
      *
      * Delete one or more shows from current Spotify user's library.
      *
-     * @param list<string> $ids A JSON array of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids).
-     * A maximum of 50 items can be specified in one request. *Note: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored.*
+     * @param array{ids?: list<string>}|ShowRemoveParams $params
      *
      * @throws APIException
      */
     public function remove(
-        $ids = omit,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = ['ids' => $ids];
-
-        return $this->removeRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function removeRaw(
-        array $params,
+        array|ShowRemoveParams $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         [$parsed, $options] = ShowRemoveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -172,34 +117,17 @@ final class ShowsService implements ShowsContract
      *
      * Save one or more shows to current Spotify user's library.
      *
-     * @param list<string> $ids A JSON array of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids).
-     * A maximum of 50 items can be specified in one request. *Note: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored.*
+     * @param array{ids?: list<string>}|ShowSaveParams $params
      *
      * @throws APIException
      */
     public function save(
-        $ids = omit,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = ['ids' => $ids];
-
-        return $this->saveRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function saveRaw(
-        array $params,
+        array|ShowSaveParams $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         [$parsed, $options] = ShowSaveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

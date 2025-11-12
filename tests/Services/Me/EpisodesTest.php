@@ -37,7 +37,7 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->episodes->list();
+        $result = $this->client->me->episodes->list([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,9 +49,9 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->episodes->check(
-            '77o6BIVlYM3msb4MMIL1jH,0Q86acNRm6V9GYx55SXKwf'
-        );
+        $result = $this->client->me->episodes->check([
+            'ids' => '77o6BIVlYM3msb4MMIL1jH,0Q86acNRm6V9GYx55SXKwf',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -63,9 +63,9 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->episodes->check(
-            '77o6BIVlYM3msb4MMIL1jH,0Q86acNRm6V9GYx55SXKwf'
-        );
+        $result = $this->client->me->episodes->check([
+            'ids' => '77o6BIVlYM3msb4MMIL1jH,0Q86acNRm6V9GYx55SXKwf',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,7 +77,7 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->episodes->remove();
+        $result = $this->client->me->episodes->remove([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -89,7 +89,7 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->episodes->save(['string']);
+        $result = $this->client->me->episodes->save(['ids' => ['string']]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -101,7 +101,7 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->episodes->save(['string']);
+        $result = $this->client->me->episodes->save(['ids' => ['string']]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

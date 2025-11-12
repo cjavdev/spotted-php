@@ -28,7 +28,8 @@ final class ImagesService implements ImagesContract
     public function update(
         string $playlistID,
         string $body,
-        ?RequestOptions $requestOptions = null
+        string $params,
+        ?RequestOptions $requestOptions = null,
     ): string {
         // @phpstan-ignore-next-line;
         return $this->client->request(

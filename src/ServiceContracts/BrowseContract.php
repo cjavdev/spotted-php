@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Spotted\ServiceContracts;
 
+use Spotted\Browse\BrowseGetFeaturedPlaylistsParams;
 use Spotted\Browse\BrowseGetFeaturedPlaylistsResponse;
+use Spotted\Browse\BrowseGetNewReleasesParams;
 use Spotted\Browse\BrowseGetNewReleasesResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
-
-use const Spotted\Core\OMIT as omit;
 
 interface BrowseContract
 {
@@ -18,56 +18,24 @@ interface BrowseContract
      *
      * @api
      *
-     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
-     * @param string $locale The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1) language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning &quot;Spanish (Mexico)&quot;. Provide this parameter if you want the category strings returned in a particular language.<br/> _**Note**: if `locale` is not supplied, or if the specified language is not available, the category strings returned will be in the Spotify default language (American English)._
-     * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param array<mixed>|BrowseGetFeaturedPlaylistsParams $params
      *
      * @throws APIException
      */
     public function getFeaturedPlaylists(
-        $limit = omit,
-        $locale = omit,
-        $offset = omit,
+        array|BrowseGetFeaturedPlaylistsParams $params,
         ?RequestOptions $requestOptions = null,
     ): BrowseGetFeaturedPlaylistsResponse;
 
     /**
-     * @deprecated
-     *
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function getFeaturedPlaylistsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): BrowseGetFeaturedPlaylistsResponse;
-
-    /**
-     * @api
-     *
-     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
-     * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param array<mixed>|BrowseGetNewReleasesParams $params
      *
      * @throws APIException
      */
     public function getNewReleases(
-        $limit = omit,
-        $offset = omit,
-        ?RequestOptions $requestOptions = null
-    ): BrowseGetNewReleasesResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function getNewReleasesRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|BrowseGetNewReleasesParams $params,
+        ?RequestOptions $requestOptions = null,
     ): BrowseGetNewReleasesResponse;
 }

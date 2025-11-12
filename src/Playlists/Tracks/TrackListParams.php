@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Playlists\Tracks->list
  *
  * @phpstan-type TrackListParamsShape = array{
- *   additionalTypes?: string,
+ *   additional_types?: string,
  *   fields?: string,
  *   limit?: int,
  *   market?: string,
@@ -34,7 +34,7 @@ final class TrackListParams implements BaseModel
      * In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.
      */
     #[Api(optional: true)]
-    public ?string $additionalTypes;
+    public ?string $additional_types;
 
     /**
      * Filters for the query: a comma-separated list of the
@@ -83,7 +83,7 @@ final class TrackListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $additionalTypes = null,
+        ?string $additional_types = null,
         ?string $fields = null,
         ?int $limit = null,
         ?string $market = null,
@@ -91,7 +91,7 @@ final class TrackListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $additionalTypes && $obj->additionalTypes = $additionalTypes;
+        null !== $additional_types && $obj->additional_types = $additional_types;
         null !== $fields && $obj->fields = $fields;
         null !== $limit && $obj->limit = $limit;
         null !== $market && $obj->market = $market;
@@ -108,7 +108,7 @@ final class TrackListParams implements BaseModel
     public function withAdditionalTypes(string $additionalTypes): self
     {
         $obj = clone $this;
-        $obj->additionalTypes = $additionalTypes;
+        $obj->additional_types = $additionalTypes;
 
         return $obj;
     }

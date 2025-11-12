@@ -16,7 +16,7 @@ use Spotted\Playlists\Tracks\TrackRemoveParams\Track;
  * @see Spotted\Playlists\Tracks->remove
  *
  * @phpstan-type TrackRemoveParamsShape = array{
- *   tracks: list<Track>, snapshotID?: string
+ *   tracks: list<Track>, snapshot_id?: string
  * }
  */
 final class TrackRemoveParams implements BaseModel
@@ -39,8 +39,8 @@ final class TrackRemoveParams implements BaseModel
      * The API will validate that the specified items exist and in the specified positions and make the changes,
      * even if more recent changes have been made to the playlist.
      */
-    #[Api('snapshot_id', optional: true)]
-    public ?string $snapshotID;
+    #[Api(optional: true)]
+    public ?string $snapshot_id;
 
     /**
      * `new TrackRemoveParams()` is missing required properties by the API.
@@ -68,13 +68,13 @@ final class TrackRemoveParams implements BaseModel
      *
      * @param list<Track> $tracks
      */
-    public static function with(array $tracks, ?string $snapshotID = null): self
+    public static function with(array $tracks, ?string $snapshot_id = null): self
     {
         $obj = new self;
 
         $obj->tracks = $tracks;
 
-        null !== $snapshotID && $obj->snapshotID = $snapshotID;
+        null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class TrackRemoveParams implements BaseModel
     public function withSnapshotID(string $snapshotID): self
     {
         $obj = clone $this;
-        $obj->snapshotID = $snapshotID;
+        $obj->snapshot_id = $snapshotID;
 
         return $obj;
     }

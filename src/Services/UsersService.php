@@ -14,7 +14,7 @@ use Spotted\Users\UserGetProfileResponse;
 final class UsersService implements UsersContract
 {
     /**
-     * @@api
+     * @api
      */
     public PlaylistsService $playlists;
 

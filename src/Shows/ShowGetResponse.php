@@ -17,21 +17,21 @@ use Spotted\Shows\ShowGetResponse\Episodes;
 /**
  * @phpstan-type ShowGetResponseShape = array{
  *   id: string,
- *   availableMarkets: list<string>,
+ *   available_markets: list<string>,
  *   copyrights: list<CopyrightObject>,
  *   description: string,
  *   explicit: bool,
- *   externalURLs: ExternalURLObject,
+ *   external_urls: ExternalURLObject,
  *   href: string,
- *   htmlDescription: string,
+ *   html_description: string,
  *   images: list<ImageObject>,
- *   isExternallyHosted: bool,
+ *   is_externally_hosted: bool,
  *   languages: list<string>,
- *   mediaType: string,
+ *   media_type: string,
  *   name: string,
  *   publisher: string,
- *   totalEpisodes: int,
- *   type: string,
+ *   total_episodes: int,
+ *   type: "show",
  *   uri: string,
  *   episodes: Episodes,
  * }
@@ -45,6 +45,8 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
 
     /**
      * The object type.
+     *
+     * @var "show" $type
      */
     #[Api]
     public string $type = 'show';
@@ -58,10 +60,10 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     /**
      * A list of the countries in which the show can be played, identified by their [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code.
      *
-     * @var list<string> $availableMarkets
+     * @var list<string> $available_markets
      */
-    #[Api('available_markets', list: 'string')]
-    public array $availableMarkets;
+    #[Api(list: 'string')]
+    public array $available_markets;
 
     /**
      * The copyright statements of the show.
@@ -83,8 +85,8 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     #[Api]
     public bool $explicit;
 
-    #[Api('external_urls')]
-    public ExternalURLObject $externalURLs;
+    #[Api]
+    public ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the show.
@@ -95,8 +97,8 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     /**
      * A description of the show. This field may contain HTML tags.
      */
-    #[Api('html_description')]
-    public string $htmlDescription;
+    #[Api]
+    public string $html_description;
 
     /**
      * The cover art for the show in various sizes, widest first.
@@ -109,8 +111,8 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     /**
      * True if all of the shows episodes are hosted outside of Spotify's CDN. This field might be `null` in some cases.
      */
-    #[Api('is_externally_hosted')]
-    public bool $isExternallyHosted;
+    #[Api]
+    public bool $is_externally_hosted;
 
     /**
      * A list of the languages used in the show, identified by their [ISO 639](https://en.wikipedia.org/wiki/ISO_639) code.
@@ -123,8 +125,8 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     /**
      * The media type of the show.
      */
-    #[Api('media_type')]
-    public string $mediaType;
+    #[Api]
+    public string $media_type;
 
     /**
      * The name of the episode.
@@ -141,8 +143,8 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     /**
      * The total number of episodes in the show.
      */
-    #[Api('total_episodes')]
-    public int $totalEpisodes;
+    #[Api]
+    public int $total_episodes;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the show.
@@ -163,20 +165,20 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
      * ```
      * ShowGetResponse::with(
      *   id: ...,
-     *   availableMarkets: ...,
+     *   available_markets: ...,
      *   copyrights: ...,
      *   description: ...,
      *   explicit: ...,
-     *   externalURLs: ...,
+     *   external_urls: ...,
      *   href: ...,
-     *   htmlDescription: ...,
+     *   html_description: ...,
      *   images: ...,
-     *   isExternallyHosted: ...,
+     *   is_externally_hosted: ...,
      *   languages: ...,
-     *   mediaType: ...,
+     *   media_type: ...,
      *   name: ...,
      *   publisher: ...,
-     *   totalEpisodes: ...,
+     *   total_episodes: ...,
      *   uri: ...,
      *   episodes: ...,
      * )
@@ -215,47 +217,47 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $availableMarkets
+     * @param list<string> $available_markets
      * @param list<CopyrightObject> $copyrights
      * @param list<ImageObject> $images
      * @param list<string> $languages
      */
     public static function with(
         string $id,
-        array $availableMarkets,
+        array $available_markets,
         array $copyrights,
         string $description,
         bool $explicit,
-        ExternalURLObject $externalURLs,
+        ExternalURLObject $external_urls,
         string $href,
-        string $htmlDescription,
+        string $html_description,
         array $images,
-        bool $isExternallyHosted,
+        bool $is_externally_hosted,
         array $languages,
-        string $mediaType,
+        string $media_type,
         string $name,
         string $publisher,
-        int $totalEpisodes,
+        int $total_episodes,
         string $uri,
         Episodes $episodes,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj->availableMarkets = $availableMarkets;
+        $obj->available_markets = $available_markets;
         $obj->copyrights = $copyrights;
         $obj->description = $description;
         $obj->explicit = $explicit;
-        $obj->externalURLs = $externalURLs;
+        $obj->external_urls = $external_urls;
         $obj->href = $href;
-        $obj->htmlDescription = $htmlDescription;
+        $obj->html_description = $html_description;
         $obj->images = $images;
-        $obj->isExternallyHosted = $isExternallyHosted;
+        $obj->is_externally_hosted = $is_externally_hosted;
         $obj->languages = $languages;
-        $obj->mediaType = $mediaType;
+        $obj->media_type = $media_type;
         $obj->name = $name;
         $obj->publisher = $publisher;
-        $obj->totalEpisodes = $totalEpisodes;
+        $obj->total_episodes = $total_episodes;
         $obj->uri = $uri;
         $obj->episodes = $episodes;
 
@@ -281,7 +283,7 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     public function withAvailableMarkets(array $availableMarkets): self
     {
         $obj = clone $this;
-        $obj->availableMarkets = $availableMarkets;
+        $obj->available_markets = $availableMarkets;
 
         return $obj;
     }
@@ -324,7 +326,7 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     public function withExternalURLs(ExternalURLObject $externalURLs): self
     {
         $obj = clone $this;
-        $obj->externalURLs = $externalURLs;
+        $obj->external_urls = $externalURLs;
 
         return $obj;
     }
@@ -346,7 +348,7 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     public function withHTMLDescription(string $htmlDescription): self
     {
         $obj = clone $this;
-        $obj->htmlDescription = $htmlDescription;
+        $obj->html_description = $htmlDescription;
 
         return $obj;
     }
@@ -370,7 +372,7 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     public function withIsExternallyHosted(bool $isExternallyHosted): self
     {
         $obj = clone $this;
-        $obj->isExternallyHosted = $isExternallyHosted;
+        $obj->is_externally_hosted = $isExternallyHosted;
 
         return $obj;
     }
@@ -394,7 +396,7 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     public function withMediaType(string $mediaType): self
     {
         $obj = clone $this;
-        $obj->mediaType = $mediaType;
+        $obj->media_type = $mediaType;
 
         return $obj;
     }
@@ -427,7 +429,7 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     public function withTotalEpisodes(int $totalEpisodes): self
     {
         $obj = clone $this;
-        $obj->totalEpisodes = $totalEpisodes;
+        $obj->total_episodes = $totalEpisodes;
 
         return $obj;
     }

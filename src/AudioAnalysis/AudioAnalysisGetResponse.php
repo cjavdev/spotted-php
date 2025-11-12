@@ -16,13 +16,13 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AudioAnalysisGetResponseShape = array{
- *   bars?: list<TimeIntervalObject>,
- *   beats?: list<TimeIntervalObject>,
- *   meta?: Meta,
- *   sections?: list<Section>,
- *   segments?: list<Segment>,
- *   tatums?: list<TimeIntervalObject>,
- *   track?: Track,
+ *   bars?: list<TimeIntervalObject>|null,
+ *   beats?: list<TimeIntervalObject>|null,
+ *   meta?: Meta|null,
+ *   sections?: list<Section>|null,
+ *   segments?: list<Segment>|null,
+ *   tatums?: list<TimeIntervalObject>|null,
+ *   track?: Track|null,
  * }
  */
 final class AudioAnalysisGetResponse implements BaseModel, ResponseConverter

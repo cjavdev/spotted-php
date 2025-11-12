@@ -13,7 +13,7 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AudioFeatureBulkGetResponseShape = array{
- *   audioFeatures: list<AudioFeature>
+ *   audio_features: list<AudioFeature>
  * }
  */
 final class AudioFeatureBulkGetResponse implements BaseModel, ResponseConverter
@@ -23,16 +23,16 @@ final class AudioFeatureBulkGetResponse implements BaseModel, ResponseConverter
 
     use SdkResponse;
 
-    /** @var list<AudioFeature> $audioFeatures */
-    #[Api('audio_features', list: AudioFeature::class)]
-    public array $audioFeatures;
+    /** @var list<AudioFeature> $audio_features */
+    #[Api(list: AudioFeature::class)]
+    public array $audio_features;
 
     /**
      * `new AudioFeatureBulkGetResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AudioFeatureBulkGetResponse::with(audioFeatures: ...)
+     * AudioFeatureBulkGetResponse::with(audio_features: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -51,13 +51,13 @@ final class AudioFeatureBulkGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AudioFeature> $audioFeatures
+     * @param list<AudioFeature> $audio_features
      */
-    public static function with(array $audioFeatures): self
+    public static function with(array $audio_features): self
     {
         $obj = new self;
 
-        $obj->audioFeatures = $audioFeatures;
+        $obj->audio_features = $audio_features;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class AudioFeatureBulkGetResponse implements BaseModel, ResponseConverter
     public function withAudioFeatures(array $audioFeatures): self
     {
         $obj = clone $this;
-        $obj->audioFeatures = $audioFeatures;
+        $obj->audio_features = $audioFeatures;
 
         return $obj;
     }

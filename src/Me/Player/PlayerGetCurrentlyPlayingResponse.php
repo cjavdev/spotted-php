@@ -16,13 +16,13 @@ use Spotted\TrackObject;
 
 /**
  * @phpstan-type PlayerGetCurrentlyPlayingResponseShape = array{
- *   actions?: Actions,
- *   context?: ContextObject,
- *   currentlyPlayingType?: string,
- *   isPlaying?: bool,
- *   item?: TrackObject|EpisodeObject,
- *   progressMs?: int,
- *   timestamp?: int,
+ *   actions?: Actions|null,
+ *   context?: ContextObject|null,
+ *   currently_playing_type?: string|null,
+ *   is_playing?: bool|null,
+ *   item?: null|TrackObject|EpisodeObject,
+ *   progress_ms?: int|null,
+ *   timestamp?: int|null,
  * }
  */
 final class PlayerGetCurrentlyPlayingResponse implements BaseModel, ResponseConverter
@@ -47,14 +47,14 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel, ResponseConv
     /**
      * The object type of the currently playing item. Can be one of `track`, `episode`, `ad` or `unknown`.
      */
-    #[Api('currently_playing_type', optional: true)]
-    public ?string $currentlyPlayingType;
+    #[Api(optional: true)]
+    public ?string $currently_playing_type;
 
     /**
      * If something is currently playing, return `true`.
      */
-    #[Api('is_playing', optional: true)]
-    public ?bool $isPlaying;
+    #[Api(optional: true)]
+    public ?bool $is_playing;
 
     /**
      * The currently playing track or episode. Can be `null`.
@@ -65,8 +65,8 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel, ResponseConv
     /**
      * Progress into the currently playing track or episode. Can be `null`.
      */
-    #[Api('progress_ms', optional: true)]
-    public ?int $progressMs;
+    #[Api(optional: true)]
+    public ?int $progress_ms;
 
     /**
      * Unix Millisecond Timestamp when data was fetched.
@@ -87,20 +87,20 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel, ResponseConv
     public static function with(
         ?Actions $actions = null,
         ?ContextObject $context = null,
-        ?string $currentlyPlayingType = null,
-        ?bool $isPlaying = null,
+        ?string $currently_playing_type = null,
+        ?bool $is_playing = null,
         TrackObject|EpisodeObject|null $item = null,
-        ?int $progressMs = null,
+        ?int $progress_ms = null,
         ?int $timestamp = null,
     ): self {
         $obj = new self;
 
         null !== $actions && $obj->actions = $actions;
         null !== $context && $obj->context = $context;
-        null !== $currentlyPlayingType && $obj->currentlyPlayingType = $currentlyPlayingType;
-        null !== $isPlaying && $obj->isPlaying = $isPlaying;
+        null !== $currently_playing_type && $obj->currently_playing_type = $currently_playing_type;
+        null !== $is_playing && $obj->is_playing = $is_playing;
         null !== $item && $obj->item = $item;
-        null !== $progressMs && $obj->progressMs = $progressMs;
+        null !== $progress_ms && $obj->progress_ms = $progress_ms;
         null !== $timestamp && $obj->timestamp = $timestamp;
 
         return $obj;
@@ -134,7 +134,7 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel, ResponseConv
     public function withCurrentlyPlayingType(string $currentlyPlayingType): self
     {
         $obj = clone $this;
-        $obj->currentlyPlayingType = $currentlyPlayingType;
+        $obj->currently_playing_type = $currentlyPlayingType;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel, ResponseConv
     public function withIsPlaying(bool $isPlaying): self
     {
         $obj = clone $this;
-        $obj->isPlaying = $isPlaying;
+        $obj->is_playing = $isPlaying;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel, ResponseConv
     public function withProgressMs(int $progressMs): self
     {
         $obj = clone $this;
-        $obj->progressMs = $progressMs;
+        $obj->progress_ms = $progressMs;
 
         return $obj;
     }
