@@ -17,7 +17,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<ArtistObject>,
+ *   items?: list<ArtistObject>|null,
  * }
  */
 final class Artists implements BaseModel

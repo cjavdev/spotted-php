@@ -11,19 +11,19 @@ use Spotted\SimplifiedPlaylistObject\Owner;
 
 /**
  * @phpstan-type SimplifiedPlaylistObjectShape = array{
- *   id?: string,
- *   collaborative?: bool,
- *   description?: string,
- *   externalURLs?: ExternalURLObject,
- *   href?: string,
- *   images?: list<ImageObject>,
- *   name?: string,
- *   owner?: Owner,
- *   public?: bool,
- *   snapshotID?: string,
- *   tracks?: PlaylistTracksRefObject,
- *   type?: string,
- *   uri?: string,
+ *   id?: string|null,
+ *   collaborative?: bool|null,
+ *   description?: string|null,
+ *   external_urls?: ExternalURLObject|null,
+ *   href?: string|null,
+ *   images?: list<ImageObject>|null,
+ *   name?: string|null,
+ *   owner?: Owner|null,
+ *   public?: bool|null,
+ *   snapshot_id?: string|null,
+ *   tracks?: PlaylistTracksRefObject|null,
+ *   type?: string|null,
+ *   uri?: string|null,
  * }
  */
 final class SimplifiedPlaylistObject implements BaseModel
@@ -52,8 +52,8 @@ final class SimplifiedPlaylistObject implements BaseModel
     /**
      * Known external URLs for this playlist.
      */
-    #[Api('external_urls', optional: true)]
-    public ?ExternalURLObject $externalURLs;
+    #[Api(optional: true)]
+    public ?ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the playlist.
@@ -90,8 +90,8 @@ final class SimplifiedPlaylistObject implements BaseModel
     /**
      * The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version.
      */
-    #[Api('snapshot_id', optional: true)]
-    public ?string $snapshotID;
+    #[Api(optional: true)]
+    public ?string $snapshot_id;
 
     /**
      * A collection containing a link ( `href` ) to the Web API endpoint where full details of the playlist's tracks can be retrieved, along with the `total` number of tracks in the playlist. Note, a track object may be `null`. This can happen if a track is no longer available.
@@ -127,13 +127,13 @@ final class SimplifiedPlaylistObject implements BaseModel
         ?string $id = null,
         ?bool $collaborative = null,
         ?string $description = null,
-        ?ExternalURLObject $externalURLs = null,
+        ?ExternalURLObject $external_urls = null,
         ?string $href = null,
         ?array $images = null,
         ?string $name = null,
         ?Owner $owner = null,
         ?bool $public = null,
-        ?string $snapshotID = null,
+        ?string $snapshot_id = null,
         ?PlaylistTracksRefObject $tracks = null,
         ?string $type = null,
         ?string $uri = null,
@@ -143,13 +143,13 @@ final class SimplifiedPlaylistObject implements BaseModel
         null !== $id && $obj->id = $id;
         null !== $collaborative && $obj->collaborative = $collaborative;
         null !== $description && $obj->description = $description;
-        null !== $externalURLs && $obj->externalURLs = $externalURLs;
+        null !== $external_urls && $obj->external_urls = $external_urls;
         null !== $href && $obj->href = $href;
         null !== $images && $obj->images = $images;
         null !== $name && $obj->name = $name;
         null !== $owner && $obj->owner = $owner;
         null !== $public && $obj->public = $public;
-        null !== $snapshotID && $obj->snapshotID = $snapshotID;
+        null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
         null !== $tracks && $obj->tracks = $tracks;
         null !== $type && $obj->type = $type;
         null !== $uri && $obj->uri = $uri;
@@ -196,7 +196,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     public function withExternalURLs(ExternalURLObject $externalURLs): self
     {
         $obj = clone $this;
-        $obj->externalURLs = $externalURLs;
+        $obj->external_urls = $externalURLs;
 
         return $obj;
     }
@@ -264,7 +264,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     public function withSnapshotID(string $snapshotID): self
     {
         $obj = clone $this;
-        $obj->snapshotID = $snapshotID;
+        $obj->snapshot_id = $snapshotID;
 
         return $obj;
     }

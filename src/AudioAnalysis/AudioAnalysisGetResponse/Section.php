@@ -10,18 +10,18 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type SectionShape = array{
- *   confidence?: float,
- *   duration?: float,
- *   key?: int,
- *   keyConfidence?: float,
- *   loudness?: float,
- *   mode?: float,
- *   modeConfidence?: float,
- *   start?: float,
- *   tempo?: float,
- *   tempoConfidence?: float,
- *   timeSignature?: int,
- *   timeSignatureConfidence?: float,
+ *   confidence?: float|null,
+ *   duration?: float|null,
+ *   key?: int|null,
+ *   key_confidence?: float|null,
+ *   loudness?: float|null,
+ *   mode?: float|null,
+ *   mode_confidence?: float|null,
+ *   start?: float|null,
+ *   tempo?: float|null,
+ *   tempo_confidence?: float|null,
+ *   time_signature?: int|null,
+ *   time_signature_confidence?: float|null,
  * }
  */
 final class Section implements BaseModel
@@ -50,8 +50,8 @@ final class Section implements BaseModel
     /**
      * The confidence, from 0.0 to 1.0, of the reliability of the key. Songs with many key changes may correspond to low values in this field.
      */
-    #[Api('key_confidence', optional: true)]
-    public ?float $keyConfidence;
+    #[Api(optional: true)]
+    public ?float $key_confidence;
 
     /**
      * The overall loudness of the section in decibels (dB). Loudness values are useful for comparing relative loudness of sections within tracks.
@@ -68,8 +68,8 @@ final class Section implements BaseModel
     /**
      * The confidence, from 0.0 to 1.0, of the reliability of the `mode`.
      */
-    #[Api('mode_confidence', optional: true)]
-    public ?float $modeConfidence;
+    #[Api(optional: true)]
+    public ?float $mode_confidence;
 
     /**
      * The starting point (in seconds) of the section.
@@ -86,20 +86,20 @@ final class Section implements BaseModel
     /**
      * The confidence, from 0.0 to 1.0, of the reliability of the tempo. Some tracks contain tempo changes or sounds which don't contain tempo (like pure speech) which would correspond to a low value in this field.
      */
-    #[Api('tempo_confidence', optional: true)]
-    public ?float $tempoConfidence;
+    #[Api(optional: true)]
+    public ?float $tempo_confidence;
 
     /**
      * An estimated time signature. The time signature (meter) is a notational convention to specify how many beats are in each bar (or measure). The time signature ranges from 3 to 7 indicating time signatures of "3/4", to "7/4".
      */
-    #[Api('time_signature', optional: true)]
-    public ?int $timeSignature;
+    #[Api(optional: true)]
+    public ?int $time_signature;
 
     /**
      * The confidence, from 0.0 to 1.0, of the reliability of the `time_signature`. Sections with time signature changes may correspond to low values in this field.
      */
-    #[Api('time_signature_confidence', optional: true)]
-    public ?float $timeSignatureConfidence;
+    #[Api(optional: true)]
+    public ?float $time_signature_confidence;
 
     public function __construct()
     {
@@ -115,30 +115,30 @@ final class Section implements BaseModel
         ?float $confidence = null,
         ?float $duration = null,
         ?int $key = null,
-        ?float $keyConfidence = null,
+        ?float $key_confidence = null,
         ?float $loudness = null,
         ?float $mode = null,
-        ?float $modeConfidence = null,
+        ?float $mode_confidence = null,
         ?float $start = null,
         ?float $tempo = null,
-        ?float $tempoConfidence = null,
-        ?int $timeSignature = null,
-        ?float $timeSignatureConfidence = null,
+        ?float $tempo_confidence = null,
+        ?int $time_signature = null,
+        ?float $time_signature_confidence = null,
     ): self {
         $obj = new self;
 
         null !== $confidence && $obj->confidence = $confidence;
         null !== $duration && $obj->duration = $duration;
         null !== $key && $obj->key = $key;
-        null !== $keyConfidence && $obj->keyConfidence = $keyConfidence;
+        null !== $key_confidence && $obj->key_confidence = $key_confidence;
         null !== $loudness && $obj->loudness = $loudness;
         null !== $mode && $obj->mode = $mode;
-        null !== $modeConfidence && $obj->modeConfidence = $modeConfidence;
+        null !== $mode_confidence && $obj->mode_confidence = $mode_confidence;
         null !== $start && $obj->start = $start;
         null !== $tempo && $obj->tempo = $tempo;
-        null !== $tempoConfidence && $obj->tempoConfidence = $tempoConfidence;
-        null !== $timeSignature && $obj->timeSignature = $timeSignature;
-        null !== $timeSignatureConfidence && $obj->timeSignatureConfidence = $timeSignatureConfidence;
+        null !== $tempo_confidence && $obj->tempo_confidence = $tempo_confidence;
+        null !== $time_signature && $obj->time_signature = $time_signature;
+        null !== $time_signature_confidence && $obj->time_signature_confidence = $time_signature_confidence;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class Section implements BaseModel
     public function withKeyConfidence(float $keyConfidence): self
     {
         $obj = clone $this;
-        $obj->keyConfidence = $keyConfidence;
+        $obj->key_confidence = $keyConfidence;
 
         return $obj;
     }
@@ -215,7 +215,7 @@ final class Section implements BaseModel
     public function withModeConfidence(float $modeConfidence): self
     {
         $obj = clone $this;
-        $obj->modeConfidence = $modeConfidence;
+        $obj->mode_confidence = $modeConfidence;
 
         return $obj;
     }
@@ -248,7 +248,7 @@ final class Section implements BaseModel
     public function withTempoConfidence(float $tempoConfidence): self
     {
         $obj = clone $this;
-        $obj->tempoConfidence = $tempoConfidence;
+        $obj->tempo_confidence = $tempoConfidence;
 
         return $obj;
     }
@@ -259,7 +259,7 @@ final class Section implements BaseModel
     public function withTimeSignature(int $timeSignature): self
     {
         $obj = clone $this;
-        $obj->timeSignature = $timeSignature;
+        $obj->time_signature = $timeSignature;
 
         return $obj;
     }
@@ -271,7 +271,7 @@ final class Section implements BaseModel
         float $timeSignatureConfidence
     ): self {
         $obj = clone $this;
-        $obj->timeSignatureConfidence = $timeSignatureConfidence;
+        $obj->time_signature_confidence = $timeSignatureConfidence;
 
         return $obj;
     }

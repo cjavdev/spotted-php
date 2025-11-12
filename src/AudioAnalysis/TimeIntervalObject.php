@@ -10,7 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TimeIntervalObjectShape = array{
- *   confidence?: float, duration?: float, start?: float
+ *   confidence?: float|null, duration?: float|null, start?: float|null
  * }
  */
 final class TimeIntervalObject implements BaseModel

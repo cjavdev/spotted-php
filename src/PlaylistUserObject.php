@@ -11,11 +11,11 @@ use Spotted\PlaylistUserObject\Type;
 
 /**
  * @phpstan-type PlaylistUserObjectShape = array{
- *   id?: string,
- *   externalURLs?: ExternalURLObject,
- *   href?: string,
- *   type?: value-of<Type>,
- *   uri?: string,
+ *   id?: string|null,
+ *   external_urls?: ExternalURLObject|null,
+ *   href?: string|null,
+ *   type?: value-of<Type>|null,
+ *   uri?: string|null,
  * }
  */
 final class PlaylistUserObject implements BaseModel
@@ -32,8 +32,8 @@ final class PlaylistUserObject implements BaseModel
     /**
      * Known public external URLs for this user.
      */
-    #[Api('external_urls', optional: true)]
-    public ?ExternalURLObject $externalURLs;
+    #[Api(optional: true)]
+    public ?ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint for this user.
@@ -69,7 +69,7 @@ final class PlaylistUserObject implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?ExternalURLObject $externalURLs = null,
+        ?ExternalURLObject $external_urls = null,
         ?string $href = null,
         Type|string|null $type = null,
         ?string $uri = null,
@@ -77,7 +77,7 @@ final class PlaylistUserObject implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $externalURLs && $obj->externalURLs = $externalURLs;
+        null !== $external_urls && $obj->external_urls = $external_urls;
         null !== $href && $obj->href = $href;
         null !== $type && $obj['type'] = $type;
         null !== $uri && $obj->uri = $uri;
@@ -102,7 +102,7 @@ final class PlaylistUserObject implements BaseModel
     public function withExternalURLs(ExternalURLObject $externalURLs): self
     {
         $obj = clone $this;
-        $obj->externalURLs = $externalURLs;
+        $obj->external_urls = $externalURLs;
 
         return $obj;
     }

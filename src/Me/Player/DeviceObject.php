@@ -11,13 +11,13 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * @phpstan-type DeviceObjectShape = array{
  *   id?: string|null,
- *   isActive?: bool,
- *   isPrivateSession?: bool,
- *   isRestricted?: bool,
- *   name?: string,
- *   supportsVolume?: bool,
- *   type?: string,
- *   volumePercent?: int|null,
+ *   is_active?: bool|null,
+ *   is_private_session?: bool|null,
+ *   is_restricted?: bool|null,
+ *   name?: string|null,
+ *   supports_volume?: bool|null,
+ *   type?: string|null,
+ *   volume_percent?: int|null,
  * }
  */
 final class DeviceObject implements BaseModel
@@ -34,20 +34,20 @@ final class DeviceObject implements BaseModel
     /**
      * If this device is the currently active device.
      */
-    #[Api('is_active', optional: true)]
-    public ?bool $isActive;
+    #[Api(optional: true)]
+    public ?bool $is_active;
 
     /**
      * If this device is currently in a private session.
      */
-    #[Api('is_private_session', optional: true)]
-    public ?bool $isPrivateSession;
+    #[Api(optional: true)]
+    public ?bool $is_private_session;
 
     /**
      * Whether controlling this device is restricted. At present if this is "true" then no Web API commands will be accepted by this device.
      */
-    #[Api('is_restricted', optional: true)]
-    public ?bool $isRestricted;
+    #[Api(optional: true)]
+    public ?bool $is_restricted;
 
     /**
      * A human-readable name for the device. Some devices have a name that the user can configure (e.g. \"Loudest speaker\") and some devices have a generic name associated with the manufacturer or device model.
@@ -58,8 +58,8 @@ final class DeviceObject implements BaseModel
     /**
      * If this device can be used to set the volume.
      */
-    #[Api('supports_volume', optional: true)]
-    public ?bool $supportsVolume;
+    #[Api(optional: true)]
+    public ?bool $supports_volume;
 
     /**
      * Device type, such as "computer", "smartphone" or "speaker".
@@ -70,8 +70,8 @@ final class DeviceObject implements BaseModel
     /**
      * The current volume in percent.
      */
-    #[Api('volume_percent', nullable: true, optional: true)]
-    public ?int $volumePercent;
+    #[Api(nullable: true, optional: true)]
+    public ?int $volume_percent;
 
     public function __construct()
     {
@@ -85,24 +85,24 @@ final class DeviceObject implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?bool $isActive = null,
-        ?bool $isPrivateSession = null,
-        ?bool $isRestricted = null,
+        ?bool $is_active = null,
+        ?bool $is_private_session = null,
+        ?bool $is_restricted = null,
         ?string $name = null,
-        ?bool $supportsVolume = null,
+        ?bool $supports_volume = null,
         ?string $type = null,
-        ?int $volumePercent = null,
+        ?int $volume_percent = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $isActive && $obj->isActive = $isActive;
-        null !== $isPrivateSession && $obj->isPrivateSession = $isPrivateSession;
-        null !== $isRestricted && $obj->isRestricted = $isRestricted;
+        null !== $is_active && $obj->is_active = $is_active;
+        null !== $is_private_session && $obj->is_private_session = $is_private_session;
+        null !== $is_restricted && $obj->is_restricted = $is_restricted;
         null !== $name && $obj->name = $name;
-        null !== $supportsVolume && $obj->supportsVolume = $supportsVolume;
+        null !== $supports_volume && $obj->supports_volume = $supports_volume;
         null !== $type && $obj->type = $type;
-        null !== $volumePercent && $obj->volumePercent = $volumePercent;
+        null !== $volume_percent && $obj->volume_percent = $volume_percent;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class DeviceObject implements BaseModel
     public function withIsActive(bool $isActive): self
     {
         $obj = clone $this;
-        $obj->isActive = $isActive;
+        $obj->is_active = $isActive;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class DeviceObject implements BaseModel
     public function withIsPrivateSession(bool $isPrivateSession): self
     {
         $obj = clone $this;
-        $obj->isPrivateSession = $isPrivateSession;
+        $obj->is_private_session = $isPrivateSession;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class DeviceObject implements BaseModel
     public function withIsRestricted(bool $isRestricted): self
     {
         $obj = clone $this;
-        $obj->isRestricted = $isRestricted;
+        $obj->is_restricted = $isRestricted;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class DeviceObject implements BaseModel
     public function withSupportsVolume(bool $supportsVolume): self
     {
         $obj = clone $this;
-        $obj->supportsVolume = $supportsVolume;
+        $obj->supports_volume = $supportsVolume;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class DeviceObject implements BaseModel
     public function withVolumePercent(?int $volumePercent): self
     {
         $obj = clone $this;
-        $obj->volumePercent = $volumePercent;
+        $obj->volume_percent = $volumePercent;
 
         return $obj;
     }

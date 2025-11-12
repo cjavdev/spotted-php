@@ -11,12 +11,12 @@ use Spotted\SimplifiedArtistObject\Type;
 
 /**
  * @phpstan-type SimplifiedArtistObjectShape = array{
- *   id?: string,
- *   externalURLs?: ExternalURLObject,
- *   href?: string,
- *   name?: string,
- *   type?: value-of<Type>,
- *   uri?: string,
+ *   id?: string|null,
+ *   external_urls?: ExternalURLObject|null,
+ *   href?: string|null,
+ *   name?: string|null,
+ *   type?: value-of<Type>|null,
+ *   uri?: string|null,
  * }
  */
 final class SimplifiedArtistObject implements BaseModel
@@ -33,8 +33,8 @@ final class SimplifiedArtistObject implements BaseModel
     /**
      * Known external URLs for this artist.
      */
-    #[Api('external_urls', optional: true)]
-    public ?ExternalURLObject $externalURLs;
+    #[Api(optional: true)]
+    public ?ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the artist.
@@ -76,7 +76,7 @@ final class SimplifiedArtistObject implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?ExternalURLObject $externalURLs = null,
+        ?ExternalURLObject $external_urls = null,
         ?string $href = null,
         ?string $name = null,
         Type|string|null $type = null,
@@ -85,7 +85,7 @@ final class SimplifiedArtistObject implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $externalURLs && $obj->externalURLs = $externalURLs;
+        null !== $external_urls && $obj->external_urls = $external_urls;
         null !== $href && $obj->href = $href;
         null !== $name && $obj->name = $name;
         null !== $type && $obj['type'] = $type;
@@ -111,7 +111,7 @@ final class SimplifiedArtistObject implements BaseModel
     public function withExternalURLs(ExternalURLObject $externalURLs): self
     {
         $obj = clone $this;
-        $obj->externalURLs = $externalURLs;
+        $obj->external_urls = $externalURLs;
 
         return $obj;
     }

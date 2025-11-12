@@ -17,20 +17,20 @@ use Spotted\Users\Playlists\PlaylistNewResponse\Tracks;
 
 /**
  * @phpstan-type PlaylistNewResponseShape = array{
- *   id?: string,
- *   collaborative?: bool,
+ *   id?: string|null,
+ *   collaborative?: bool|null,
  *   description?: string|null,
- *   externalURLs?: ExternalURLObject,
- *   followers?: FollowersObject,
- *   href?: string,
- *   images?: list<ImageObject>,
- *   name?: string,
- *   owner?: Owner,
- *   public?: bool,
- *   snapshotID?: string,
- *   tracks?: Tracks,
- *   type?: string,
- *   uri?: string,
+ *   external_urls?: ExternalURLObject|null,
+ *   followers?: FollowersObject|null,
+ *   href?: string|null,
+ *   images?: list<ImageObject>|null,
+ *   name?: string|null,
+ *   owner?: Owner|null,
+ *   public?: bool|null,
+ *   snapshot_id?: string|null,
+ *   tracks?: Tracks|null,
+ *   type?: string|null,
+ *   uri?: string|null,
  * }
  */
 final class PlaylistNewResponse implements BaseModel, ResponseConverter
@@ -61,8 +61,8 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
     /**
      * Known external URLs for this playlist.
      */
-    #[Api('external_urls', optional: true)]
-    public ?ExternalURLObject $externalURLs;
+    #[Api(optional: true)]
+    public ?ExternalURLObject $external_urls;
 
     /**
      * Information about the followers of the playlist.
@@ -105,8 +105,8 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
     /**
      * The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version.
      */
-    #[Api('snapshot_id', optional: true)]
-    public ?string $snapshotID;
+    #[Api(optional: true)]
+    public ?string $snapshot_id;
 
     /**
      * The tracks of the playlist.
@@ -142,14 +142,14 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
         ?string $id = null,
         ?bool $collaborative = null,
         ?string $description = null,
-        ?ExternalURLObject $externalURLs = null,
+        ?ExternalURLObject $external_urls = null,
         ?FollowersObject $followers = null,
         ?string $href = null,
         ?array $images = null,
         ?string $name = null,
         ?Owner $owner = null,
         ?bool $public = null,
-        ?string $snapshotID = null,
+        ?string $snapshot_id = null,
         ?Tracks $tracks = null,
         ?string $type = null,
         ?string $uri = null,
@@ -159,14 +159,14 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
         null !== $id && $obj->id = $id;
         null !== $collaborative && $obj->collaborative = $collaborative;
         null !== $description && $obj->description = $description;
-        null !== $externalURLs && $obj->externalURLs = $externalURLs;
+        null !== $external_urls && $obj->external_urls = $external_urls;
         null !== $followers && $obj->followers = $followers;
         null !== $href && $obj->href = $href;
         null !== $images && $obj->images = $images;
         null !== $name && $obj->name = $name;
         null !== $owner && $obj->owner = $owner;
         null !== $public && $obj->public = $public;
-        null !== $snapshotID && $obj->snapshotID = $snapshotID;
+        null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
         null !== $tracks && $obj->tracks = $tracks;
         null !== $type && $obj->type = $type;
         null !== $uri && $obj->uri = $uri;
@@ -213,7 +213,7 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
     public function withExternalURLs(ExternalURLObject $externalURLs): self
     {
         $obj = clone $this;
-        $obj->externalURLs = $externalURLs;
+        $obj->external_urls = $externalURLs;
 
         return $obj;
     }
@@ -292,7 +292,7 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
     public function withSnapshotID(string $snapshotID): self
     {
         $obj = clone $this;
-        $obj->snapshotID = $snapshotID;
+        $obj->snapshot_id = $snapshotID;
 
         return $obj;
     }

@@ -13,7 +13,7 @@ use Spotted\ShowBase;
 
 /**
  * @phpstan-type ShowListResponseShape = array{
- *   addedAt?: \DateTimeInterface, show?: ShowBase
+ *   added_at?: \DateTimeInterface|null, show?: ShowBase|null
  * }
  */
 final class ShowListResponse implements BaseModel, ResponseConverter
@@ -28,8 +28,8 @@ final class ShowListResponse implements BaseModel, ResponseConverter
      * Timestamps are returned in ISO 8601 format as Coordinated Universal Time (UTC) with a zero offset: YYYY-MM-DDTHH:MM:SSZ.
      * If the time is imprecise (for example, the date/time of an album release), an additional field indicates the precision; see for example, release_date in an album object.
      */
-    #[Api('added_at', optional: true)]
-    public ?\DateTimeInterface $addedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $added_at;
 
     /**
      * Information about the show.
@@ -48,12 +48,12 @@ final class ShowListResponse implements BaseModel, ResponseConverter
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?\DateTimeInterface $addedAt = null,
+        ?\DateTimeInterface $added_at = null,
         ?ShowBase $show = null
     ): self {
         $obj = new self;
 
-        null !== $addedAt && $obj->addedAt = $addedAt;
+        null !== $added_at && $obj->added_at = $added_at;
         null !== $show && $obj->show = $show;
 
         return $obj;
@@ -67,7 +67,7 @@ final class ShowListResponse implements BaseModel, ResponseConverter
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
         $obj = clone $this;
-        $obj->addedAt = $addedAt;
+        $obj->added_at = $addedAt;
 
         return $obj;
     }

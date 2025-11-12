@@ -19,7 +19,7 @@ use Spotted\PlaylistTrackObject;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<PlaylistTrackObject>,
+ *   items?: list<PlaylistTrackObject>|null,
  * }
  */
 final class Tracks implements BaseModel

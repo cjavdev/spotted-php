@@ -11,7 +11,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * The cursors used to find the next set of items.
  *
- * @phpstan-type CursorsShape = array{after?: string, before?: string}
+ * @phpstan-type CursorsShape = array{after?: string|null, before?: string|null}
  */
 final class Cursors implements BaseModel
 {

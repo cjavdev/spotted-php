@@ -12,8 +12,6 @@ use Spotted\Playlists\Followers\FollowerFollowParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Playlists\FollowersContract;
 
-use const Spotted\Core\OMIT as omit;
-
 final class FollowersService implements FollowersContract
 {
     /**
@@ -26,7 +24,7 @@ final class FollowersService implements FollowersContract
      *
      * Check to see if the current user is following a specified playlist.
      *
-     * @param string $ids **Deprecated** A single item list containing current user's [Spotify Username](/documentation/web-api/concepts/spotify-uris-ids). Maximum: 1 id.
+     * @param array{ids?: string}|FollowerCheckParams $params
      *
      * @return list<bool>
      *
@@ -34,31 +32,12 @@ final class FollowersService implements FollowersContract
      */
     public function check(
         string $playlistID,
-        $ids = omit,
-        ?RequestOptions $requestOptions = null
-    ): array {
-        $params = ['ids' => $ids];
-
-        return $this->checkRaw($playlistID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @return list<bool>
-     *
-     * @throws APIException
-     */
-    public function checkRaw(
-        string $playlistID,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|FollowerCheckParams $params,
+        ?RequestOptions $requestOptions = null,
     ): array {
         [$parsed, $options] = FollowerCheckParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -76,35 +55,18 @@ final class FollowersService implements FollowersContract
      *
      * Add the current user as a follower of a playlist.
      *
-     * @param bool $public Defaults to `true`. If `true` the playlist will be included in user's public playlists (added to profile), if `false` it will remain private. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
+     * @param array{public?: bool}|FollowerFollowParams $params
      *
      * @throws APIException
      */
     public function follow(
         string $playlistID,
-        $public = omit,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = ['public' => $public];
-
-        return $this->followRaw($playlistID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function followRaw(
-        string $playlistID,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|FollowerFollowParams $params,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
         [$parsed, $options] = FollowerFollowParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

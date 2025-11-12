@@ -11,7 +11,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type TrackUpdateResponseShape = array{snapshotID?: string}
+ * @phpstan-type TrackUpdateResponseShape = array{snapshot_id?: string|null}
  */
 final class TrackUpdateResponse implements BaseModel, ResponseConverter
 {
@@ -20,8 +20,8 @@ final class TrackUpdateResponse implements BaseModel, ResponseConverter
 
     use SdkResponse;
 
-    #[Api('snapshot_id', optional: true)]
-    public ?string $snapshotID;
+    #[Api(optional: true)]
+    public ?string $snapshot_id;
 
     public function __construct()
     {
@@ -33,11 +33,11 @@ final class TrackUpdateResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $snapshotID = null): self
+    public static function with(?string $snapshot_id = null): self
     {
         $obj = new self;
 
-        null !== $snapshotID && $obj->snapshotID = $snapshotID;
+        null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
 
         return $obj;
     }
@@ -45,7 +45,7 @@ final class TrackUpdateResponse implements BaseModel, ResponseConverter
     public function withSnapshotID(string $snapshotID): self
     {
         $obj = clone $this;
-        $obj->snapshotID = $snapshotID;
+        $obj->snapshot_id = $snapshotID;
 
         return $obj;
     }

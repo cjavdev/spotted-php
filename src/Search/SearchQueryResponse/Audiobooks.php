@@ -17,7 +17,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<AudiobookBase>,
+ *   items?: list<AudiobookBase>|null,
  * }
  */
 final class Audiobooks implements BaseModel

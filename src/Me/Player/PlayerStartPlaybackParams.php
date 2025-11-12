@@ -15,10 +15,10 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Me\Player->startPlayback
  *
  * @phpstan-type PlayerStartPlaybackParamsShape = array{
- *   deviceID?: string,
- *   contextUri?: string,
- *   offset?: array<string, mixed>,
- *   positionMs?: int,
+ *   device_id?: string,
+ *   context_uri?: string,
+ *   offset?: array<string,mixed>,
+ *   position_ms?: int,
  *   uris?: list<string>,
  * }
  */
@@ -32,22 +32,22 @@ final class PlayerStartPlaybackParams implements BaseModel
      * The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      */
     #[Api(optional: true)]
-    public ?string $deviceID;
+    public ?string $device_id;
 
     /**
      * Optional. Spotify URI of the context to play.
      * Valid contexts are albums, artists & playlists.
      * `{context_uri:"spotify:album:1Je1IMUlBXcx1Fz0WE7oPT"}`.
      */
-    #[Api('context_uri', optional: true)]
-    public ?string $contextUri;
+    #[Api(optional: true)]
+    public ?string $context_uri;
 
     /**
      * Optional. Indicates from where in the context playback should start. Only available when context_uri corresponds to an album or playlist object
      * "position" is zero based and can’t be negative. Example: `"offset": {"position": 5}`
      * "uri" is a string representing the uri of the item to start at. Example: `"offset": {"uri": "spotify:track:1301WleyT98MSxVHPZCA6M"}`.
      *
-     * @var array<string, mixed>|null $offset
+     * @var array<string,mixed>|null $offset
      */
     #[Api(map: 'mixed', optional: true)]
     public ?array $offset;
@@ -55,8 +55,8 @@ final class PlayerStartPlaybackParams implements BaseModel
     /**
      * Indicates from what position to start playback. Must be a positive number. Passing in a position that is greater than the length of the track will cause the player to start playing the next song.
      */
-    #[Api('position_ms', optional: true)]
-    public ?int $positionMs;
+    #[Api(optional: true)]
+    public ?int $position_ms;
 
     /**
      * Optional. A JSON array of the Spotify track URIs to play.
@@ -77,22 +77,22 @@ final class PlayerStartPlaybackParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $offset
+     * @param array<string,mixed> $offset
      * @param list<string> $uris
      */
     public static function with(
-        ?string $deviceID = null,
-        ?string $contextUri = null,
+        ?string $device_id = null,
+        ?string $context_uri = null,
         ?array $offset = null,
-        ?int $positionMs = null,
+        ?int $position_ms = null,
         ?array $uris = null,
     ): self {
         $obj = new self;
 
-        null !== $deviceID && $obj->deviceID = $deviceID;
-        null !== $contextUri && $obj->contextUri = $contextUri;
+        null !== $device_id && $obj->device_id = $device_id;
+        null !== $context_uri && $obj->context_uri = $context_uri;
         null !== $offset && $obj->offset = $offset;
-        null !== $positionMs && $obj->positionMs = $positionMs;
+        null !== $position_ms && $obj->position_ms = $position_ms;
         null !== $uris && $obj->uris = $uris;
 
         return $obj;
@@ -104,7 +104,7 @@ final class PlayerStartPlaybackParams implements BaseModel
     public function withDeviceID(string $deviceID): self
     {
         $obj = clone $this;
-        $obj->deviceID = $deviceID;
+        $obj->device_id = $deviceID;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class PlayerStartPlaybackParams implements BaseModel
     public function withContextUri(string $contextUri): self
     {
         $obj = clone $this;
-        $obj->contextUri = $contextUri;
+        $obj->context_uri = $contextUri;
 
         return $obj;
     }
@@ -127,7 +127,7 @@ final class PlayerStartPlaybackParams implements BaseModel
      * "position" is zero based and can’t be negative. Example: `"offset": {"position": 5}`
      * "uri" is a string representing the uri of the item to start at. Example: `"offset": {"uri": "spotify:track:1301WleyT98MSxVHPZCA6M"}`.
      *
-     * @param array<string, mixed> $offset
+     * @param array<string,mixed> $offset
      */
     public function withOffset(array $offset): self
     {
@@ -143,7 +143,7 @@ final class PlayerStartPlaybackParams implements BaseModel
     public function withPositionMs(int $positionMs): self
     {
         $obj = clone $this;
-        $obj->positionMs = $positionMs;
+        $obj->position_ms = $positionMs;
 
         return $obj;
     }

@@ -16,8 +16,6 @@ use Spotted\Me\Audiobooks\AudiobookSaveParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\AudiobooksContract;
 
-use const Spotted\Core\OMIT as omit;
-
 final class AudiobooksService implements AudiobooksContract
 {
     /**
@@ -30,39 +28,19 @@ final class AudiobooksService implements AudiobooksContract
      *
      * Get a list of the audiobooks saved in the current Spotify user's 'Your Music' library.
      *
-     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
-     * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param array{limit?: int, offset?: int}|AudiobookListParams $params
      *
      * @return CursorURLPage<AudiobookListResponse>
      *
      * @throws APIException
      */
     public function list(
-        $limit = omit,
-        $offset = omit,
-        ?RequestOptions $requestOptions = null
-    ): CursorURLPage {
-        $params = ['limit' => $limit, 'offset' => $offset];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @return CursorURLPage<AudiobookListResponse>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
+        array|AudiobookListParams $params,
         ?RequestOptions $requestOptions = null
     ): CursorURLPage {
         [$parsed, $options] = AudiobookListParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -81,35 +59,19 @@ final class AudiobooksService implements AudiobooksContract
      *
      * Check if one or more audiobooks are already saved in the current Spotify user's library.
      *
-     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
+     * @param array{ids: string}|AudiobookCheckParams $params
      *
      * @return list<bool>
      *
      * @throws APIException
      */
-    public function check($ids, ?RequestOptions $requestOptions = null): array
-    {
-        $params = ['ids' => $ids];
-
-        return $this->checkRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @return list<bool>
-     *
-     * @throws APIException
-     */
-    public function checkRaw(
-        array $params,
+    public function check(
+        array|AudiobookCheckParams $params,
         ?RequestOptions $requestOptions = null
     ): array {
         [$parsed, $options] = AudiobookCheckParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -127,31 +89,17 @@ final class AudiobooksService implements AudiobooksContract
      *
      * Remove one or more audiobooks from the Spotify user's library.
      *
-     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
+     * @param array{ids: string}|AudiobookRemoveParams $params
      *
      * @throws APIException
      */
-    public function remove($ids, ?RequestOptions $requestOptions = null): mixed
-    {
-        $params = ['ids' => $ids];
-
-        return $this->removeRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function removeRaw(
-        array $params,
+    public function remove(
+        array|AudiobookRemoveParams $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         [$parsed, $options] = AudiobookRemoveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -169,31 +117,17 @@ final class AudiobooksService implements AudiobooksContract
      *
      * Save one or more audiobooks to the current Spotify user's library.
      *
-     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
+     * @param array{ids: string}|AudiobookSaveParams $params
      *
      * @throws APIException
      */
-    public function save($ids, ?RequestOptions $requestOptions = null): mixed
-    {
-        $params = ['ids' => $ids];
-
-        return $this->saveRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function saveRaw(
-        array $params,
+    public function save(
+        array|AudiobookSaveParams $params,
         ?RequestOptions $requestOptions = null
     ): mixed {
         [$parsed, $options] = AudiobookSaveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

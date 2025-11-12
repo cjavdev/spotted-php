@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
-use Spotted\Playlists\Tracks\TrackRemoveParams\Track;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +38,8 @@ final class TracksTest extends TestCase
         }
 
         $result = $this->client->playlists->tracks->update(
-            '3cEYpjA9oz9GiPac4AsH4n'
+            '3cEYpjA9oz9GiPac4AsH4n',
+            []
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -52,7 +52,10 @@ final class TracksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->playlists->tracks->list('3cEYpjA9oz9GiPac4AsH4n');
+        $result = $this->client->playlists->tracks->list(
+            '3cEYpjA9oz9GiPac4AsH4n',
+            []
+        );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -64,7 +67,10 @@ final class TracksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->playlists->tracks->add('3cEYpjA9oz9GiPac4AsH4n');
+        $result = $this->client->playlists->tracks->add(
+            '3cEYpjA9oz9GiPac4AsH4n',
+            []
+        );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -78,7 +84,7 @@ final class TracksTest extends TestCase
 
         $result = $this->client->playlists->tracks->remove(
             '3cEYpjA9oz9GiPac4AsH4n',
-            tracks: [new Track]
+            ['tracks' => [[]]]
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -93,7 +99,7 @@ final class TracksTest extends TestCase
 
         $result = $this->client->playlists->tracks->remove(
             '3cEYpjA9oz9GiPac4AsH4n',
-            tracks: [(new Track)->withUri('uri')]
+            ['tracks' => [['uri' => 'uri']]]
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType

@@ -17,7 +17,7 @@ use Spotted\Search\SearchQueryResponse\Albums\Item;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<Item>,
+ *   items?: list<Item>|null,
  * }
  */
 final class Albums implements BaseModel

@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Me\Player->skipPrevious
  *
- * @phpstan-type PlayerSkipPreviousParamsShape = array{deviceID?: string}
+ * @phpstan-type PlayerSkipPreviousParamsShape = array{device_id?: string}
  */
 final class PlayerSkipPreviousParams implements BaseModel
 {
@@ -27,7 +27,7 @@ final class PlayerSkipPreviousParams implements BaseModel
      * not supplied, the user's currently active device is the target.
      */
     #[Api(optional: true)]
-    public ?string $deviceID;
+    public ?string $device_id;
 
     public function __construct()
     {
@@ -39,11 +39,11 @@ final class PlayerSkipPreviousParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $deviceID = null): self
+    public static function with(?string $device_id = null): self
     {
         $obj = new self;
 
-        null !== $deviceID && $obj->deviceID = $deviceID;
+        null !== $device_id && $obj->device_id = $device_id;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class PlayerSkipPreviousParams implements BaseModel
     public function withDeviceID(string $deviceID): self
     {
         $obj = clone $this;
-        $obj->deviceID = $deviceID;
+        $obj->device_id = $deviceID;
 
         return $obj;
     }

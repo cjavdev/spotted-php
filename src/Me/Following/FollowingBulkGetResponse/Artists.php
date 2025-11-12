@@ -12,12 +12,12 @@ use Spotted\Me\Following\FollowingBulkGetResponse\Artists\Cursors;
 
 /**
  * @phpstan-type ArtistsShape = array{
- *   cursors?: Cursors,
- *   href?: string,
- *   items?: list<ArtistObject>,
- *   limit?: int,
- *   next?: string,
- *   total?: int,
+ *   cursors?: Cursors|null,
+ *   href?: string|null,
+ *   items?: list<ArtistObject>|null,
+ *   limit?: int|null,
+ *   next?: string|null,
+ *   total?: int|null,
  * }
  */
 final class Artists implements BaseModel

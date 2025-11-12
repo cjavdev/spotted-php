@@ -16,18 +16,18 @@ use Spotted\Me\MeGetResponse\ExplicitContent;
 
 /**
  * @phpstan-type MeGetResponseShape = array{
- *   id?: string,
- *   country?: string,
- *   displayName?: string,
- *   email?: string,
- *   explicitContent?: ExplicitContent,
- *   externalURLs?: ExternalURLObject,
- *   followers?: FollowersObject,
- *   href?: string,
- *   images?: list<ImageObject>,
- *   product?: string,
- *   type?: string,
- *   uri?: string,
+ *   id?: string|null,
+ *   country?: string|null,
+ *   display_name?: string|null,
+ *   email?: string|null,
+ *   explicit_content?: ExplicitContent|null,
+ *   external_urls?: ExternalURLObject|null,
+ *   followers?: FollowersObject|null,
+ *   href?: string|null,
+ *   images?: list<ImageObject>|null,
+ *   product?: string|null,
+ *   type?: string|null,
+ *   uri?: string|null,
  * }
  */
 final class MeGetResponse implements BaseModel, ResponseConverter
@@ -52,8 +52,8 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     /**
      * The name displayed on the user's profile. `null` if not available.
      */
-    #[Api('display_name', optional: true)]
-    public ?string $displayName;
+    #[Api(optional: true)]
+    public ?string $display_name;
 
     /**
      * The user's email address, as entered by the user when creating their account. _**Important!** This email address is unverified; there is no proof that it actually belongs to the user._ _This field is only available when the current user has granted access to the [user-read-email](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
@@ -64,14 +64,14 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     /**
      * The user's explicit content settings. _This field is only available when the current user has granted access to the [user-read-private](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
      */
-    #[Api('explicit_content', optional: true)]
-    public ?ExplicitContent $explicitContent;
+    #[Api(optional: true)]
+    public ?ExplicitContent $explicit_content;
 
     /**
      * Known external URLs for this user.
      */
-    #[Api('external_urls', optional: true)]
-    public ?ExternalURLObject $externalURLs;
+    #[Api(optional: true)]
+    public ?ExternalURLObject $external_urls;
 
     /**
      * Information about the followers of the user.
@@ -126,10 +126,10 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     public static function with(
         ?string $id = null,
         ?string $country = null,
-        ?string $displayName = null,
+        ?string $display_name = null,
         ?string $email = null,
-        ?ExplicitContent $explicitContent = null,
-        ?ExternalURLObject $externalURLs = null,
+        ?ExplicitContent $explicit_content = null,
+        ?ExternalURLObject $external_urls = null,
         ?FollowersObject $followers = null,
         ?string $href = null,
         ?array $images = null,
@@ -141,10 +141,10 @@ final class MeGetResponse implements BaseModel, ResponseConverter
 
         null !== $id && $obj->id = $id;
         null !== $country && $obj->country = $country;
-        null !== $displayName && $obj->displayName = $displayName;
+        null !== $display_name && $obj->display_name = $display_name;
         null !== $email && $obj->email = $email;
-        null !== $explicitContent && $obj->explicitContent = $explicitContent;
-        null !== $externalURLs && $obj->externalURLs = $externalURLs;
+        null !== $explicit_content && $obj->explicit_content = $explicit_content;
+        null !== $external_urls && $obj->external_urls = $external_urls;
         null !== $followers && $obj->followers = $followers;
         null !== $href && $obj->href = $href;
         null !== $images && $obj->images = $images;
@@ -183,7 +183,7 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     public function withDisplayName(string $displayName): self
     {
         $obj = clone $this;
-        $obj->displayName = $displayName;
+        $obj->display_name = $displayName;
 
         return $obj;
     }
@@ -205,7 +205,7 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     public function withExplicitContent(ExplicitContent $explicitContent): self
     {
         $obj = clone $this;
-        $obj->explicitContent = $explicitContent;
+        $obj->explicit_content = $explicitContent;
 
         return $obj;
     }
@@ -216,7 +216,7 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     public function withExternalURLs(ExternalURLObject $externalURLs): self
     {
         $obj = clone $this;
-        $obj->externalURLs = $externalURLs;
+        $obj->external_urls = $externalURLs;
 
         return $obj;
     }

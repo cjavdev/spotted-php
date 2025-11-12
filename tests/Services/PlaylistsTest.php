@@ -37,7 +37,7 @@ final class PlaylistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->playlists->retrieve('3cEYpjA9oz9GiPac4AsH4n');
+        $result = $this->client->playlists->retrieve('3cEYpjA9oz9GiPac4AsH4n', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,7 +49,7 @@ final class PlaylistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->playlists->update('3cEYpjA9oz9GiPac4AsH4n');
+        $result = $this->client->playlists->update('3cEYpjA9oz9GiPac4AsH4n', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

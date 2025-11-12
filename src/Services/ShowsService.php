@@ -16,8 +16,6 @@ use Spotted\Shows\ShowListEpisodesParams;
 use Spotted\Shows\ShowRetrieveParams;
 use Spotted\SimplifiedEpisodeObject;
 
-use const Spotted\Core\OMIT as omit;
-
 final class ShowsService implements ShowsContract
 {
     /**
@@ -31,40 +29,18 @@ final class ShowsService implements ShowsContract
      * Get Spotify catalog information for a single show identified by its
      * unique Spotify ID.
      *
-     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-     *   If a country code is specified, only content that is available in that market will be returned.<br/>
-     *   If a valid user access token is specified in the request header, the country associated with
-     *   the user account will take priority over this parameter.<br/>
-     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
-     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param array{market?: string}|ShowRetrieveParams $params
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        $market = omit,
-        ?RequestOptions $requestOptions = null
-    ): ShowGetResponse {
-        $params = ['market' => $market];
-
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|ShowRetrieveParams $params,
+        ?RequestOptions $requestOptions = null,
     ): ShowGetResponse {
         [$parsed, $options] = ShowRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -82,40 +58,17 @@ final class ShowsService implements ShowsContract
      *
      * Get Spotify catalog information for several shows based on their Spotify IDs.
      *
-     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the shows. Maximum: 50 IDs.
-     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-     *   If a country code is specified, only content that is available in that market will be returned.<br/>
-     *   If a valid user access token is specified in the request header, the country associated with
-     *   the user account will take priority over this parameter.<br/>
-     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
-     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param array{ids: string, market?: string}|ShowBulkRetrieveParams $params
      *
      * @throws APIException
      */
     public function bulkRetrieve(
-        $ids,
-        $market = omit,
-        ?RequestOptions $requestOptions = null
-    ): ShowBulkGetResponse {
-        $params = ['ids' => $ids, 'market' => $market];
-
-        return $this->bulkRetrieveRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function bulkRetrieveRaw(
-        array $params,
+        array|ShowBulkRetrieveParams $params,
         ?RequestOptions $requestOptions = null
     ): ShowBulkGetResponse {
         [$parsed, $options] = ShowBulkRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;
@@ -133,14 +86,9 @@ final class ShowsService implements ShowsContract
      *
      * Get Spotify catalog information about an show’s episodes. Optional parameters can be used to limit the number of episodes returned.
      *
-     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
-     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-     *   If a country code is specified, only content that is available in that market will be returned.<br/>
-     *   If a valid user access token is specified in the request header, the country associated with
-     *   the user account will take priority over this parameter.<br/>
-     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
-     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
-     * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param array{
+     *   limit?: int, market?: string, offset?: int
+     * }|ShowListEpisodesParams $params
      *
      * @return CursorURLPage<SimplifiedEpisodeObject>
      *
@@ -148,33 +96,12 @@ final class ShowsService implements ShowsContract
      */
     public function listEpisodes(
         string $id,
-        $limit = omit,
-        $market = omit,
-        $offset = omit,
+        array|ShowListEpisodesParams $params,
         ?RequestOptions $requestOptions = null,
-    ): CursorURLPage {
-        $params = ['limit' => $limit, 'market' => $market, 'offset' => $offset];
-
-        return $this->listEpisodesRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @return CursorURLPage<SimplifiedEpisodeObject>
-     *
-     * @throws APIException
-     */
-    public function listEpisodesRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
     ): CursorURLPage {
         [$parsed, $options] = ShowListEpisodesParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

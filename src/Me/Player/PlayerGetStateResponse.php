@@ -16,16 +16,16 @@ use Spotted\TrackObject;
 
 /**
  * @phpstan-type PlayerGetStateResponseShape = array{
- *   actions?: Actions,
- *   context?: ContextObject,
- *   currentlyPlayingType?: string,
- *   device?: DeviceObject,
- *   isPlaying?: bool,
- *   item?: TrackObject|EpisodeObject,
- *   progressMs?: int,
- *   repeatState?: string,
- *   shuffleState?: bool,
- *   timestamp?: int,
+ *   actions?: Actions|null,
+ *   context?: ContextObject|null,
+ *   currently_playing_type?: string|null,
+ *   device?: DeviceObject|null,
+ *   is_playing?: bool|null,
+ *   item?: null|TrackObject|EpisodeObject,
+ *   progress_ms?: int|null,
+ *   repeat_state?: string|null,
+ *   shuffle_state?: bool|null,
+ *   timestamp?: int|null,
  * }
  */
 final class PlayerGetStateResponse implements BaseModel, ResponseConverter
@@ -50,8 +50,8 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
     /**
      * The object type of the currently playing item. Can be one of `track`, `episode`, `ad` or `unknown`.
      */
-    #[Api('currently_playing_type', optional: true)]
-    public ?string $currentlyPlayingType;
+    #[Api(optional: true)]
+    public ?string $currently_playing_type;
 
     /**
      * The device that is currently active.
@@ -62,8 +62,8 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
     /**
      * If something is currently playing, return `true`.
      */
-    #[Api('is_playing', optional: true)]
-    public ?bool $isPlaying;
+    #[Api(optional: true)]
+    public ?bool $is_playing;
 
     /**
      * The currently playing track or episode. Can be `null`.
@@ -74,20 +74,20 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
     /**
      * Progress into the currently playing track or episode. Can be `null`.
      */
-    #[Api('progress_ms', optional: true)]
-    public ?int $progressMs;
+    #[Api(optional: true)]
+    public ?int $progress_ms;
 
     /**
      * off, track, context.
      */
-    #[Api('repeat_state', optional: true)]
-    public ?string $repeatState;
+    #[Api(optional: true)]
+    public ?string $repeat_state;
 
     /**
      * If shuffle is on or off.
      */
-    #[Api('shuffle_state', optional: true)]
-    public ?bool $shuffleState;
+    #[Api(optional: true)]
+    public ?bool $shuffle_state;
 
     /**
      * Unix Millisecond Timestamp when playback state was last changed (play, pause, skip, scrub, new song, etc.).
@@ -108,26 +108,26 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
     public static function with(
         ?Actions $actions = null,
         ?ContextObject $context = null,
-        ?string $currentlyPlayingType = null,
+        ?string $currently_playing_type = null,
         ?DeviceObject $device = null,
-        ?bool $isPlaying = null,
+        ?bool $is_playing = null,
         TrackObject|EpisodeObject|null $item = null,
-        ?int $progressMs = null,
-        ?string $repeatState = null,
-        ?bool $shuffleState = null,
+        ?int $progress_ms = null,
+        ?string $repeat_state = null,
+        ?bool $shuffle_state = null,
         ?int $timestamp = null,
     ): self {
         $obj = new self;
 
         null !== $actions && $obj->actions = $actions;
         null !== $context && $obj->context = $context;
-        null !== $currentlyPlayingType && $obj->currentlyPlayingType = $currentlyPlayingType;
+        null !== $currently_playing_type && $obj->currently_playing_type = $currently_playing_type;
         null !== $device && $obj->device = $device;
-        null !== $isPlaying && $obj->isPlaying = $isPlaying;
+        null !== $is_playing && $obj->is_playing = $is_playing;
         null !== $item && $obj->item = $item;
-        null !== $progressMs && $obj->progressMs = $progressMs;
-        null !== $repeatState && $obj->repeatState = $repeatState;
-        null !== $shuffleState && $obj->shuffleState = $shuffleState;
+        null !== $progress_ms && $obj->progress_ms = $progress_ms;
+        null !== $repeat_state && $obj->repeat_state = $repeat_state;
+        null !== $shuffle_state && $obj->shuffle_state = $shuffle_state;
         null !== $timestamp && $obj->timestamp = $timestamp;
 
         return $obj;
@@ -161,7 +161,7 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
     public function withCurrentlyPlayingType(string $currentlyPlayingType): self
     {
         $obj = clone $this;
-        $obj->currentlyPlayingType = $currentlyPlayingType;
+        $obj->currently_playing_type = $currentlyPlayingType;
 
         return $obj;
     }
@@ -183,7 +183,7 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
     public function withIsPlaying(bool $isPlaying): self
     {
         $obj = clone $this;
-        $obj->isPlaying = $isPlaying;
+        $obj->is_playing = $isPlaying;
 
         return $obj;
     }
@@ -205,7 +205,7 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
     public function withProgressMs(int $progressMs): self
     {
         $obj = clone $this;
-        $obj->progressMs = $progressMs;
+        $obj->progress_ms = $progressMs;
 
         return $obj;
     }
@@ -216,7 +216,7 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
     public function withRepeatState(string $repeatState): self
     {
         $obj = clone $this;
-        $obj->repeatState = $repeatState;
+        $obj->repeat_state = $repeatState;
 
         return $obj;
     }
@@ -227,7 +227,7 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
     public function withShuffleState(bool $shuffleState): self
     {
         $obj = clone $this;
-        $obj->shuffleState = $shuffleState;
+        $obj->shuffle_state = $shuffleState;
 
         return $obj;
     }

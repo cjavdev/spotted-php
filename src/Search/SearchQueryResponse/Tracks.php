@@ -17,7 +17,7 @@ use Spotted\TrackObject;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<TrackObject>,
+ *   items?: list<TrackObject>|null,
  * }
  */
 final class Tracks implements BaseModel

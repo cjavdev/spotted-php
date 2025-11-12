@@ -39,7 +39,7 @@ final class PlaylistsTest extends TestCase
 
         $result = $this->client->users->playlists->create(
             'smedjan',
-            name: 'New Playlist'
+            ['name' => 'New Playlist']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -54,7 +54,7 @@ final class PlaylistsTest extends TestCase
 
         $result = $this->client->users->playlists->create(
             'smedjan',
-            name: 'New Playlist'
+            ['name' => 'New Playlist']
         );
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
@@ -67,7 +67,7 @@ final class PlaylistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->users->playlists->list('smedjan');
+        $result = $this->client->users->playlists->list('smedjan', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

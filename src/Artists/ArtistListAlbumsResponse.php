@@ -20,20 +20,20 @@ use Spotted\SimplifiedArtistObject;
 /**
  * @phpstan-type ArtistListAlbumsResponseShape = array{
  *   id: string,
- *   albumGroup: value-of<AlbumGroup>,
- *   albumType: value-of<AlbumType>,
+ *   album_group: value-of<AlbumGroup>,
+ *   album_type: value-of<AlbumType>,
  *   artists: list<SimplifiedArtistObject>,
- *   availableMarkets: list<string>,
- *   externalURLs: ExternalURLObject,
+ *   available_markets: list<string>,
+ *   external_urls: ExternalURLObject,
  *   href: string,
  *   images: list<ImageObject>,
  *   name: string,
- *   releaseDate: string,
- *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
- *   totalTracks: int,
- *   type: string,
+ *   release_date: string,
+ *   release_date_precision: value-of<ReleaseDatePrecision>,
+ *   total_tracks: int,
+ *   type: "album",
  *   uri: string,
- *   restrictions?: AlbumRestrictionObject,
+ *   restrictions?: AlbumRestrictionObject|null,
  * }
  */
 final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
@@ -45,6 +45,8 @@ final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
 
     /**
      * The object type.
+     *
+     * @var "album" $type
      */
     #[Api]
     public string $type = 'album';
@@ -58,18 +60,18 @@ final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
     /**
      * This field describes the relationship between the artist and the album.
      *
-     * @var value-of<AlbumGroup> $albumGroup
+     * @var value-of<AlbumGroup> $album_group
      */
-    #[Api('album_group', enum: AlbumGroup::class)]
-    public string $albumGroup;
+    #[Api(enum: AlbumGroup::class)]
+    public string $album_group;
 
     /**
      * The type of the album.
      *
-     * @var value-of<AlbumType> $albumType
+     * @var value-of<AlbumType> $album_type
      */
-    #[Api('album_type', enum: AlbumType::class)]
-    public string $albumType;
+    #[Api(enum: AlbumType::class)]
+    public string $album_type;
 
     /**
      * The artists of the album. Each artist object includes a link in `href` to more detailed information about the artist.
@@ -82,16 +84,16 @@ final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
     /**
      * The markets in which the album is available: [ISO 3166-1 alpha-2 country codes](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). _**NOTE**: an album is considered available in a market when at least 1 of its tracks is available in that market._.
      *
-     * @var list<string> $availableMarkets
+     * @var list<string> $available_markets
      */
-    #[Api('available_markets', list: 'string')]
-    public array $availableMarkets;
+    #[Api(list: 'string')]
+    public array $available_markets;
 
     /**
      * Known external URLs for this album.
      */
-    #[Api('external_urls')]
-    public ExternalURLObject $externalURLs;
+    #[Api]
+    public ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the album.
@@ -116,22 +118,22 @@ final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
     /**
      * The date the album was first released.
      */
-    #[Api('release_date')]
-    public string $releaseDate;
+    #[Api]
+    public string $release_date;
 
     /**
      * The precision with which `release_date` value is known.
      *
-     * @var value-of<ReleaseDatePrecision> $releaseDatePrecision
+     * @var value-of<ReleaseDatePrecision> $release_date_precision
      */
-    #[Api('release_date_precision', enum: ReleaseDatePrecision::class)]
-    public string $releaseDatePrecision;
+    #[Api(enum: ReleaseDatePrecision::class)]
+    public string $release_date_precision;
 
     /**
      * The number of tracks in the album.
      */
-    #[Api('total_tracks')]
-    public int $totalTracks;
+    #[Api]
+    public int $total_tracks;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the album.
@@ -152,17 +154,17 @@ final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
      * ```
      * ArtistListAlbumsResponse::with(
      *   id: ...,
-     *   albumGroup: ...,
-     *   albumType: ...,
+     *   album_group: ...,
+     *   album_type: ...,
      *   artists: ...,
-     *   availableMarkets: ...,
-     *   externalURLs: ...,
+     *   available_markets: ...,
+     *   external_urls: ...,
      *   href: ...,
      *   images: ...,
      *   name: ...,
-     *   releaseDate: ...,
-     *   releaseDatePrecision: ...,
-     *   totalTracks: ...,
+     *   release_date: ...,
+     *   release_date_precision: ...,
+     *   total_tracks: ...,
      *   uri: ...,
      * )
      * ```
@@ -196,43 +198,43 @@ final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AlbumGroup|value-of<AlbumGroup> $albumGroup
-     * @param AlbumType|value-of<AlbumType> $albumType
+     * @param AlbumGroup|value-of<AlbumGroup> $album_group
+     * @param AlbumType|value-of<AlbumType> $album_type
      * @param list<SimplifiedArtistObject> $artists
-     * @param list<string> $availableMarkets
+     * @param list<string> $available_markets
      * @param list<ImageObject> $images
-     * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
+     * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $release_date_precision
      */
     public static function with(
         string $id,
-        AlbumGroup|string $albumGroup,
-        AlbumType|string $albumType,
+        AlbumGroup|string $album_group,
+        AlbumType|string $album_type,
         array $artists,
-        array $availableMarkets,
-        ExternalURLObject $externalURLs,
+        array $available_markets,
+        ExternalURLObject $external_urls,
         string $href,
         array $images,
         string $name,
-        string $releaseDate,
-        ReleaseDatePrecision|string $releaseDatePrecision,
-        int $totalTracks,
+        string $release_date,
+        ReleaseDatePrecision|string $release_date_precision,
+        int $total_tracks,
         string $uri,
         ?AlbumRestrictionObject $restrictions = null,
     ): self {
         $obj = new self;
 
         $obj->id = $id;
-        $obj['albumGroup'] = $albumGroup;
-        $obj['albumType'] = $albumType;
+        $obj['album_group'] = $album_group;
+        $obj['album_type'] = $album_type;
         $obj->artists = $artists;
-        $obj->availableMarkets = $availableMarkets;
-        $obj->externalURLs = $externalURLs;
+        $obj->available_markets = $available_markets;
+        $obj->external_urls = $external_urls;
         $obj->href = $href;
         $obj->images = $images;
         $obj->name = $name;
-        $obj->releaseDate = $releaseDate;
-        $obj['releaseDatePrecision'] = $releaseDatePrecision;
-        $obj->totalTracks = $totalTracks;
+        $obj->release_date = $release_date;
+        $obj['release_date_precision'] = $release_date_precision;
+        $obj->total_tracks = $total_tracks;
         $obj->uri = $uri;
 
         null !== $restrictions && $obj->restrictions = $restrictions;
@@ -259,7 +261,7 @@ final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
     public function withAlbumGroup(AlbumGroup|string $albumGroup): self
     {
         $obj = clone $this;
-        $obj['albumGroup'] = $albumGroup;
+        $obj['album_group'] = $albumGroup;
 
         return $obj;
     }
@@ -272,7 +274,7 @@ final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
     public function withAlbumType(AlbumType|string $albumType): self
     {
         $obj = clone $this;
-        $obj['albumType'] = $albumType;
+        $obj['album_type'] = $albumType;
 
         return $obj;
     }
@@ -298,7 +300,7 @@ final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
     public function withAvailableMarkets(array $availableMarkets): self
     {
         $obj = clone $this;
-        $obj->availableMarkets = $availableMarkets;
+        $obj->available_markets = $availableMarkets;
 
         return $obj;
     }
@@ -309,7 +311,7 @@ final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
     public function withExternalURLs(ExternalURLObject $externalURLs): self
     {
         $obj = clone $this;
-        $obj->externalURLs = $externalURLs;
+        $obj->external_urls = $externalURLs;
 
         return $obj;
     }
@@ -355,7 +357,7 @@ final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
     public function withReleaseDate(string $releaseDate): self
     {
         $obj = clone $this;
-        $obj->releaseDate = $releaseDate;
+        $obj->release_date = $releaseDate;
 
         return $obj;
     }
@@ -369,7 +371,7 @@ final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
         ReleaseDatePrecision|string $releaseDatePrecision
     ): self {
         $obj = clone $this;
-        $obj['releaseDatePrecision'] = $releaseDatePrecision;
+        $obj['release_date_precision'] = $releaseDatePrecision;
 
         return $obj;
     }
@@ -380,7 +382,7 @@ final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
     public function withTotalTracks(int $totalTracks): self
     {
         $obj = clone $this;
-        $obj->totalTracks = $totalTracks;
+        $obj->total_tracks = $totalTracks;
 
         return $obj;
     }

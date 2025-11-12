@@ -10,12 +10,12 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type SeedShape = array{
- *   id?: string,
- *   afterFilteringSize?: int,
- *   afterRelinkingSize?: int,
- *   href?: string,
- *   initialPoolSize?: int,
- *   type?: string,
+ *   id?: string|null,
+ *   afterFilteringSize?: int|null,
+ *   afterRelinkingSize?: int|null,
+ *   href?: string|null,
+ *   initialPoolSize?: int|null,
+ *   type?: string|null,
  * }
  */
 final class Seed implements BaseModel

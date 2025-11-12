@@ -167,7 +167,7 @@ class Client extends BaseClient
         $this->markets = new MarketsService($this);
     }
 
-    /** @return array<string, string> */
+    /** @return array<string,string> */
     protected function bearerAuth(): array
     {
         return $this->accessToken ? [
@@ -175,7 +175,7 @@ class Client extends BaseClient
         ] : [];
     }
 
-    /** @return array<string, string> */
+    /** @return array<string,string> */
     protected function oauth2_0(): array
     {
         throw new \BadMethodCallException;

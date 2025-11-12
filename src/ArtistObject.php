@@ -11,16 +11,16 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ArtistObjectShape = array{
- *   id?: string,
- *   externalURLs?: ExternalURLObject,
- *   followers?: FollowersObject,
- *   genres?: list<string>,
- *   href?: string,
- *   images?: list<ImageObject>,
- *   name?: string,
- *   popularity?: int,
- *   type?: value-of<Type>,
- *   uri?: string,
+ *   id?: string|null,
+ *   external_urls?: ExternalURLObject|null,
+ *   followers?: FollowersObject|null,
+ *   genres?: list<string>|null,
+ *   href?: string|null,
+ *   images?: list<ImageObject>|null,
+ *   name?: string|null,
+ *   popularity?: int|null,
+ *   type?: value-of<Type>|null,
+ *   uri?: string|null,
  * }
  */
 final class ArtistObject implements BaseModel
@@ -37,8 +37,8 @@ final class ArtistObject implements BaseModel
     /**
      * Known external URLs for this artist.
      */
-    #[Api('external_urls', optional: true)]
-    public ?ExternalURLObject $externalURLs;
+    #[Api(optional: true)]
+    public ?ExternalURLObject $external_urls;
 
     /**
      * Information about the followers of the artist.
@@ -110,7 +110,7 @@ final class ArtistObject implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?ExternalURLObject $externalURLs = null,
+        ?ExternalURLObject $external_urls = null,
         ?FollowersObject $followers = null,
         ?array $genres = null,
         ?string $href = null,
@@ -123,7 +123,7 @@ final class ArtistObject implements BaseModel
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $externalURLs && $obj->externalURLs = $externalURLs;
+        null !== $external_urls && $obj->external_urls = $external_urls;
         null !== $followers && $obj->followers = $followers;
         null !== $genres && $obj->genres = $genres;
         null !== $href && $obj->href = $href;
@@ -153,7 +153,7 @@ final class ArtistObject implements BaseModel
     public function withExternalURLs(ExternalURLObject $externalURLs): self
     {
         $obj = clone $this;
-        $obj->externalURLs = $externalURLs;
+        $obj->external_urls = $externalURLs;
 
         return $obj;
     }

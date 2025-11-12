@@ -48,7 +48,7 @@ $client = new Client(
   clientSecret: getenv("SPOTIFY_CLIENT_SECRET") ?: "My Client Secret",
 );
 
-$album = $client->albums->retrieve("4aawyAB9vmqN3uQ7FjRGTy");
+$album = $client->albums->retrieve("4aawyAB9vmqN3uQ7FjRGTy", []);
 
 var_dump($album->id);
 ```
@@ -76,7 +76,7 @@ $client = new Client(
   clientSecret: getenv("SPOTIFY_CLIENT_SECRET") ?: "My Client Secret",
 );
 
-$page = $client->shows->listEpisodes("showid");
+$page = $client->shows->listEpisodes("showid", []);
 
 var_dump($page);
 
@@ -100,7 +100,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 use Spotted\Core\Exceptions\APIConnectionException;
 
 try {
-  $album = $client->albums->retrieve("4aawyAB9vmqN3uQ7FjRGTy");
+  $album = $client->albums->retrieve("4aawyAB9vmqN3uQ7FjRGTy", []);
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
@@ -147,7 +147,7 @@ $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
 $result = $client->albums->retrieve(
-  "4aawyAB9vmqN3uQ7FjRGTy", requestOptions: RequestOptions::with(maxRetries: 5)
+  "4aawyAB9vmqN3uQ7FjRGTy", [], RequestOptions::with(maxRetries: 5)
 );
 ```
 
@@ -168,14 +168,13 @@ use Spotted\RequestOptions;
 
 $album = $client->albums->retrieve(
   "4aawyAB9vmqN3uQ7FjRGTy",
-  requestOptions: RequestOptions::with(
+  [],
+  RequestOptions::with(
     extraQueryParams: ["my_query_parameter" => "value"],
     extraBodyParams: ["my_body_parameter" => "value"],
     extraHeaders: ["my-header" => "value"],
   ),
 );
-
-var_dump($album["my_undocumented_property"]);
 ```
 
 #### Undocumented request params

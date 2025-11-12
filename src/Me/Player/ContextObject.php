@@ -11,7 +11,10 @@ use Spotted\ExternalURLObject;
 
 /**
  * @phpstan-type ContextObjectShape = array{
- *   externalURLs?: ExternalURLObject, href?: string, type?: string, uri?: string
+ *   external_urls?: ExternalURLObject|null,
+ *   href?: string|null,
+ *   type?: string|null,
+ *   uri?: string|null,
  * }
  */
 final class ContextObject implements BaseModel
@@ -22,8 +25,8 @@ final class ContextObject implements BaseModel
     /**
      * External URLs for this context.
      */
-    #[Api('external_urls', optional: true)]
-    public ?ExternalURLObject $externalURLs;
+    #[Api(optional: true)]
+    public ?ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the track.
@@ -54,14 +57,14 @@ final class ContextObject implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?ExternalURLObject $externalURLs = null,
+        ?ExternalURLObject $external_urls = null,
         ?string $href = null,
         ?string $type = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $externalURLs && $obj->externalURLs = $externalURLs;
+        null !== $external_urls && $obj->external_urls = $external_urls;
         null !== $href && $obj->href = $href;
         null !== $type && $obj->type = $type;
         null !== $uri && $obj->uri = $uri;
@@ -75,7 +78,7 @@ final class ContextObject implements BaseModel
     public function withExternalURLs(ExternalURLObject $externalURLs): self
     {
         $obj = clone $this;
-        $obj->externalURLs = $externalURLs;
+        $obj->external_urls = $externalURLs;
 
         return $obj;
     }

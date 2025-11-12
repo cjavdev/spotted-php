@@ -37,7 +37,7 @@ final class AlbumsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->albums->retrieve('4aawyAB9vmqN3uQ7FjRGTy');
+        $result = $this->client->albums->retrieve('4aawyAB9vmqN3uQ7FjRGTy', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,9 +49,9 @@ final class AlbumsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->albums->bulkRetrieve(
-            ids: '382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc',
-        );
+        $result = $this->client->albums->bulkRetrieve([
+            'ids' => '382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -63,9 +63,9 @@ final class AlbumsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->albums->bulkRetrieve(
-            ids: '382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc',
-        );
+        $result = $this->client->albums->bulkRetrieve([
+            'ids' => '382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,7 +77,7 @@ final class AlbumsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->albums->listTracks('4aawyAB9vmqN3uQ7FjRGTy');
+        $result = $this->client->albums->listTracks('4aawyAB9vmqN3uQ7FjRGTy', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

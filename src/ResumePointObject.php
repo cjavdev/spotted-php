@@ -10,7 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ResumePointObjectShape = array{
- *   fullyPlayed?: bool, resumePositionMs?: int
+ *   fully_played?: bool|null, resume_position_ms?: int|null
  * }
  */
 final class ResumePointObject implements BaseModel
@@ -21,14 +21,14 @@ final class ResumePointObject implements BaseModel
     /**
      * Whether or not the episode has been fully played by the user.
      */
-    #[Api('fully_played', optional: true)]
-    public ?bool $fullyPlayed;
+    #[Api(optional: true)]
+    public ?bool $fully_played;
 
     /**
      * The user's most recent position in the episode in milliseconds.
      */
-    #[Api('resume_position_ms', optional: true)]
-    public ?int $resumePositionMs;
+    #[Api(optional: true)]
+    public ?int $resume_position_ms;
 
     public function __construct()
     {
@@ -41,13 +41,13 @@ final class ResumePointObject implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?bool $fullyPlayed = null,
-        ?int $resumePositionMs = null
+        ?bool $fully_played = null,
+        ?int $resume_position_ms = null
     ): self {
         $obj = new self;
 
-        null !== $fullyPlayed && $obj->fullyPlayed = $fullyPlayed;
-        null !== $resumePositionMs && $obj->resumePositionMs = $resumePositionMs;
+        null !== $fully_played && $obj->fully_played = $fully_played;
+        null !== $resume_position_ms && $obj->resume_position_ms = $resume_position_ms;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class ResumePointObject implements BaseModel
     public function withFullyPlayed(bool $fullyPlayed): self
     {
         $obj = clone $this;
-        $obj->fullyPlayed = $fullyPlayed;
+        $obj->fully_played = $fullyPlayed;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class ResumePointObject implements BaseModel
     public function withResumePositionMs(int $resumePositionMs): self
     {
         $obj = clone $this;
-        $obj->resumePositionMs = $resumePositionMs;
+        $obj->resume_position_ms = $resumePositionMs;
 
         return $obj;
     }

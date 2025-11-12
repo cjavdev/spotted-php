@@ -16,8 +16,8 @@ use Spotted\TrackObject;
 
 /**
  * @phpstan-type QueueGetResponseShape = array{
- *   currentlyPlaying?: TrackObject|EpisodeObject,
- *   queue?: list<TrackObject|EpisodeObject>,
+ *   currently_playing?: null|TrackObject|EpisodeObject,
+ *   queue?: list<TrackObject|EpisodeObject>|null,
  * }
  */
 final class QueueGetResponse implements BaseModel, ResponseConverter
@@ -30,8 +30,8 @@ final class QueueGetResponse implements BaseModel, ResponseConverter
     /**
      * The currently playing track or episode. Can be `null`.
      */
-    #[Api('currently_playing', union: CurrentlyPlaying::class, optional: true)]
-    public TrackObject|EpisodeObject|null $currentlyPlaying;
+    #[Api(union: CurrentlyPlaying::class, optional: true)]
+    public TrackObject|EpisodeObject|null $currently_playing;
 
     /**
      * The tracks or episodes in the queue. Can be empty.
@@ -54,12 +54,12 @@ final class QueueGetResponse implements BaseModel, ResponseConverter
      * @param list<TrackObject|EpisodeObject> $queue
      */
     public static function with(
-        TrackObject|EpisodeObject|null $currentlyPlaying = null,
+        TrackObject|EpisodeObject|null $currently_playing = null,
         ?array $queue = null
     ): self {
         $obj = new self;
 
-        null !== $currentlyPlaying && $obj->currentlyPlaying = $currentlyPlaying;
+        null !== $currently_playing && $obj->currently_playing = $currently_playing;
         null !== $queue && $obj->queue = $queue;
 
         return $obj;
@@ -72,7 +72,7 @@ final class QueueGetResponse implements BaseModel, ResponseConverter
         TrackObject|EpisodeObject $currentlyPlaying
     ): self {
         $obj = clone $this;
-        $obj->currentlyPlaying = $currentlyPlaying;
+        $obj->currently_playing = $currentlyPlaying;
 
         return $obj;
     }

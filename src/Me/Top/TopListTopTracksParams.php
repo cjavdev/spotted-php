@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Me\Top->listTopTracks
  *
  * @phpstan-type TopListTopTracksParamsShape = array{
- *   limit?: int, offset?: int, timeRange?: string
+ *   limit?: int, offset?: int, time_range?: string
  * }
  */
 final class TopListTopTracksParams implements BaseModel
@@ -40,7 +40,7 @@ final class TopListTopTracksParams implements BaseModel
      * Over what time frame the affinities are computed. Valid values: `long_term` (calculated from ~1 year of data and including all new data as it becomes available), `medium_term` (approximately last 6 months), `short_term` (approximately last 4 weeks). Default: `medium_term`.
      */
     #[Api(optional: true)]
-    public ?string $timeRange;
+    public ?string $time_range;
 
     public function __construct()
     {
@@ -55,13 +55,13 @@ final class TopListTopTracksParams implements BaseModel
     public static function with(
         ?int $limit = null,
         ?int $offset = null,
-        ?string $timeRange = null
+        ?string $time_range = null
     ): self {
         $obj = new self;
 
         null !== $limit && $obj->limit = $limit;
         null !== $offset && $obj->offset = $offset;
-        null !== $timeRange && $obj->timeRange = $timeRange;
+        null !== $time_range && $obj->time_range = $time_range;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class TopListTopTracksParams implements BaseModel
     public function withTimeRange(string $timeRange): self
     {
         $obj = clone $this;
-        $obj->timeRange = $timeRange;
+        $obj->time_range = $timeRange;
 
         return $obj;
     }

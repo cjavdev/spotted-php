@@ -49,36 +49,17 @@ final class AudioFeaturesService implements AudioFeaturesContract
      *
      * Get audio features for multiple tracks based on their Spotify IDs.
      *
-     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids)
-     * for the tracks. Maximum: 100 IDs.
+     * @param array{ids: string}|AudioFeatureBulkRetrieveParams $params
      *
      * @throws APIException
      */
     public function bulkRetrieve(
-        $ids,
-        ?RequestOptions $requestOptions = null
-    ): AudioFeatureBulkGetResponse {
-        $params = ['ids' => $ids];
-
-        return $this->bulkRetrieveRaw($params, $requestOptions);
-    }
-
-    /**
-     * @deprecated
-     *
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function bulkRetrieveRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        array|AudioFeatureBulkRetrieveParams $params,
+        ?RequestOptions $requestOptions = null,
     ): AudioFeatureBulkGetResponse {
         [$parsed, $options] = AudioFeatureBulkRetrieveParams::parseRequest(
             $params,
-            $requestOptions
+            $requestOptions,
         );
 
         // @phpstan-ignore-next-line;

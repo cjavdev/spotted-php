@@ -22,47 +22,47 @@ use Spotted\Services\Me\TracksService;
 final class MeService implements MeContract
 {
     /**
-     * @@api
+     * @api
      */
     public AudiobooksService $audiobooks;
 
     /**
-     * @@api
+     * @api
      */
     public PlaylistsService $playlists;
 
     /**
-     * @@api
+     * @api
      */
     public TopService $top;
 
     /**
-     * @@api
+     * @api
      */
     public AlbumsService $albums;
 
     /**
-     * @@api
+     * @api
      */
     public TracksService $tracks;
 
     /**
-     * @@api
+     * @api
      */
     public EpisodesService $episodes;
 
     /**
-     * @@api
+     * @api
      */
     public ShowsService $shows;
 
     /**
-     * @@api
+     * @api
      */
     public FollowingService $following;
 
     /**
-     * @@api
+     * @api
      */
     public PlayerService $player;
 

@@ -9,7 +9,7 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type AuthorObjectShape = array{name?: string}
+ * @phpstan-type AuthorObjectShape = array{name?: string|null}
  */
 final class AuthorObject implements BaseModel
 {

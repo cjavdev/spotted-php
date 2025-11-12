@@ -37,7 +37,7 @@ final class ShowsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->shows->retrieve('38bS44xjbVVZ3No3ByF1dJ');
+        $result = $this->client->shows->retrieve('38bS44xjbVVZ3No3ByF1dJ', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -49,9 +49,9 @@ final class ShowsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->shows->bulkRetrieve(
-            ids: '5CfCWKI5pZ28U0uOzXkDHe,5as3aKmN2k11yfDDDSrvaZ'
-        );
+        $result = $this->client->shows->bulkRetrieve([
+            'ids' => '5CfCWKI5pZ28U0uOzXkDHe,5as3aKmN2k11yfDDDSrvaZ',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -63,9 +63,9 @@ final class ShowsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->shows->bulkRetrieve(
-            ids: '5CfCWKI5pZ28U0uOzXkDHe,5as3aKmN2k11yfDDDSrvaZ'
-        );
+        $result = $this->client->shows->bulkRetrieve([
+            'ids' => '5CfCWKI5pZ28U0uOzXkDHe,5as3aKmN2k11yfDDDSrvaZ',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -77,7 +77,7 @@ final class ShowsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->shows->listEpisodes('38bS44xjbVVZ3No3ByF1dJ');
+        $result = $this->client->shows->listEpisodes('38bS44xjbVVZ3No3ByF1dJ', []);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

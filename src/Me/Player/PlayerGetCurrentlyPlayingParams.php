@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Me\Player->getCurrentlyPlaying
  *
  * @phpstan-type PlayerGetCurrentlyPlayingParamsShape = array{
- *   additionalTypes?: string, market?: string
+ *   additional_types?: string, market?: string
  * }
  */
 final class PlayerGetCurrentlyPlayingParams implements BaseModel
@@ -30,7 +30,7 @@ final class PlayerGetCurrentlyPlayingParams implements BaseModel
      * In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.
      */
     #[Api(optional: true)]
-    public ?string $additionalTypes;
+    public ?string $additional_types;
 
     /**
      * An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
@@ -54,12 +54,12 @@ final class PlayerGetCurrentlyPlayingParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $additionalTypes = null,
+        ?string $additional_types = null,
         ?string $market = null
     ): self {
         $obj = new self;
 
-        null !== $additionalTypes && $obj->additionalTypes = $additionalTypes;
+        null !== $additional_types && $obj->additional_types = $additional_types;
         null !== $market && $obj->market = $market;
 
         return $obj;
@@ -73,7 +73,7 @@ final class PlayerGetCurrentlyPlayingParams implements BaseModel
     public function withAdditionalTypes(string $additionalTypes): self
     {
         $obj = clone $this;
-        $obj->additionalTypes = $additionalTypes;
+        $obj->additional_types = $additionalTypes;
 
         return $obj;
     }

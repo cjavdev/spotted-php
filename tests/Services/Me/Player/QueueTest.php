@@ -37,9 +37,9 @@ final class QueueTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->queue->add(
-            uri: 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh'
-        );
+        $result = $this->client->me->player->queue->add([
+            'uri' => 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
@@ -51,9 +51,9 @@ final class QueueTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->queue->add(
-            uri: 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh'
-        );
+        $result = $this->client->me->player->queue->add([
+            'uri' => 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh',
+        ]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }

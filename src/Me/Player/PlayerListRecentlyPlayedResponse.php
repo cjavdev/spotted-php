@@ -13,7 +13,9 @@ use Spotted\TrackObject;
 
 /**
  * @phpstan-type PlayerListRecentlyPlayedResponseShape = array{
- *   context?: ContextObject, playedAt?: \DateTimeInterface, track?: TrackObject
+ *   context?: ContextObject|null,
+ *   played_at?: \DateTimeInterface|null,
+ *   track?: TrackObject|null,
  * }
  */
 final class PlayerListRecentlyPlayedResponse implements BaseModel, ResponseConverter
@@ -32,8 +34,8 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel, ResponseConve
     /**
      * The date and time the track was played.
      */
-    #[Api('played_at', optional: true)]
-    public ?\DateTimeInterface $playedAt;
+    #[Api(optional: true)]
+    public ?\DateTimeInterface $played_at;
 
     /**
      * The track the user listened to.
@@ -53,13 +55,13 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel, ResponseConve
      */
     public static function with(
         ?ContextObject $context = null,
-        ?\DateTimeInterface $playedAt = null,
+        ?\DateTimeInterface $played_at = null,
         ?TrackObject $track = null,
     ): self {
         $obj = new self;
 
         null !== $context && $obj->context = $context;
-        null !== $playedAt && $obj->playedAt = $playedAt;
+        null !== $played_at && $obj->played_at = $played_at;
         null !== $track && $obj->track = $track;
 
         return $obj;
@@ -82,7 +84,7 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel, ResponseConve
     public function withPlayedAt(\DateTimeInterface $playedAt): self
     {
         $obj = clone $this;
-        $obj->playedAt = $playedAt;
+        $obj->played_at = $playedAt;
 
         return $obj;
     }

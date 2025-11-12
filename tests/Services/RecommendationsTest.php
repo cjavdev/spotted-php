@@ -37,7 +37,7 @@ final class RecommendationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->recommendations->get();
+        $result = $this->client->recommendations->get([]);
 
         $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
