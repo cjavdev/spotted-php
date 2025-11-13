@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Check if one or more tracks is already saved in the current Spotify user's 'Your Music' library.
  *
- * @see Spotted\Me\Tracks->check
+ * @see Spotted\Services\Me\TracksService::check()
  *
  * @phpstan-type TrackCheckParamsShape = array{ids: string}
  */

@@ -18,7 +18,7 @@ use Spotted\Core\Contracts\BaseModel;
  * **Note**: Replace and reorder are mutually exclusive operations which share the same endpoint, but have different parameters.
  * These operations can't be applied together in a single request.
  *
- * @see Spotted\Playlists\Tracks->update
+ * @see Spotted\Services\Playlists\TracksService::update()
  *
  * @phpstan-type TrackUpdateParamsShape = array{
  *   insert_before?: int,

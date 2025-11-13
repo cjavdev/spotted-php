@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Remove one or more tracks from the current user's 'Your Music' library.
  *
- * @see Spotted\Me\Tracks->remove
+ * @see Spotted\Services\Me\TracksService::remove()
  *
  * @phpstan-type TrackRemoveParamsShape = array{ids?: list<string>}
  */

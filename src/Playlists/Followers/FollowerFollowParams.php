@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Add the current user as a follower of a playlist.
  *
- * @see Spotted\Playlists\Followers->follow
+ * @see Spotted\Services\Playlists\FollowersService::follow()
  *
  * @phpstan-type FollowerFollowParamsShape = array{public?: bool}
  */

@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Add an item to be played next in the user's current playback queue. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
  *
- * @see Spotted\Me\Player\Queue->add
+ * @see Spotted\Services\Me\Player\QueueService::add()
  *
  * @phpstan-type QueueAddParamsShape = array{uri: string, device_id?: string}
  */

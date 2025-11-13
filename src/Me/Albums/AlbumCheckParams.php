@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Check if one or more albums is already saved in the current Spotify user's 'Your Music' library.
  *
- * @see Spotted\Me\Albums->check
+ * @see Spotted\Services\Me\AlbumsService::check()
  *
  * @phpstan-type AlbumCheckParamsShape = array{ids: string}
  */

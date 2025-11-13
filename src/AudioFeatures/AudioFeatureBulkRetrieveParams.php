@@ -13,7 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
  * Get audio features for multiple tracks based on their Spotify IDs.
  *
  * @deprecated
- * @see Spotted\AudioFeatures->bulkRetrieve
+ * @see Spotted\Services\AudioFeaturesService::bulkRetrieve()
  *
  * @phpstan-type AudioFeatureBulkRetrieveParamsShape = array{ids: string}
  */

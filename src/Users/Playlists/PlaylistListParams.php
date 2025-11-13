@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get a list of the playlists owned or followed by a Spotify user.
  *
- * @see Spotted\Users\Playlists->list
+ * @see Spotted\Services\Users\PlaylistsService::list()
  *
  * @phpstan-type PlaylistListParamsShape = array{limit?: int, offset?: int}
  */

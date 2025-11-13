@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get a list of the audiobooks saved in the current Spotify user's 'Your Music' library.
  *
- * @see Spotted\Me\Audiobooks->list
+ * @see Spotted\Services\Me\AudiobooksService::list()
  *
  * @phpstan-type AudiobookListParamsShape = array{limit?: int, offset?: int}
  */

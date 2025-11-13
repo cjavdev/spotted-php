@@ -13,7 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
  * Get Spotify catalog information about an album’s tracks.
  * Optional parameters can be used to limit the number of tracks returned.
  *
- * @see Spotted\Albums->listTracks
+ * @see Spotted\Services\AlbumsService::listTracks()
  *
  * @phpstan-type AlbumListTracksParamsShape = array{
  *   limit?: int, market?: string, offset?: int

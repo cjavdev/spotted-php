@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get the current user's top artists based on calculated affinity.
  *
- * @see Spotted\Me\Top->listTopArtists
+ * @see Spotted\Services\Me\TopService::listTopArtists()
  *
  * @phpstan-type TopListTopArtistsParamsShape = array{
  *   limit?: int, offset?: int, time_range?: string

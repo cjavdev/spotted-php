@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get Spotify catalog information for several artists based on their Spotify IDs.
  *
- * @see Spotted\Artists->bulkRetrieve
+ * @see Spotted\Services\ArtistsService::bulkRetrieve()
  *
  * @phpstan-type ArtistBulkRetrieveParamsShape = array{ids: string}
  */

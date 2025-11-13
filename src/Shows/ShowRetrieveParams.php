@@ -13,7 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
  * Get Spotify catalog information for a single show identified by its
  * unique Spotify ID.
  *
- * @see Spotted\Shows->retrieve
+ * @see Spotted\Services\ShowsService::retrieve()
  *
  * @phpstan-type ShowRetrieveParamsShape = array{market?: string}
  */

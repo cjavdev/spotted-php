@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get Spotify catalog information for a single audiobook. Audiobooks are only available within the US, UK, Canada, Ireland, New Zealand and Australia markets.
  *
- * @see Spotted\Audiobooks->retrieve
+ * @see Spotted\Services\AudiobooksService::retrieve()
  *
  * @phpstan-type AudiobookRetrieveParamsShape = array{market?: string}
  */

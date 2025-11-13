@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get a list of new album releases featured in Spotify (shown, for example, on a Spotify player’s “Browse” tab).
  *
- * @see Spotted\Browse->getNewReleases
+ * @see Spotted\Services\BrowseService::getNewReleases()
  *
  * @phpstan-type BrowseGetNewReleasesParamsShape = array{limit?: int, offset?: int}
  */

@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get the current user's followed artists.
  *
- * @see Spotted\Me\Following->bulkRetrieve
+ * @see Spotted\Services\Me\FollowingService::bulkRetrieve()
  *
  * @phpstan-type FollowingBulkRetrieveParamsShape = array{
  *   type: "artist", after?: string, limit?: int

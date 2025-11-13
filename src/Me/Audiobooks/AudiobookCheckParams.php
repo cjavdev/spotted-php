@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Check if one or more audiobooks are already saved in the current Spotify user's library.
  *
- * @see Spotted\Me\Audiobooks->check
+ * @see Spotted\Services\Me\AudiobooksService::check()
  *
  * @phpstan-type AudiobookCheckParamsShape = array{ids: string}
  */

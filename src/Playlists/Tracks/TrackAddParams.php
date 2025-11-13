@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Add one or more items to a user's playlist.
  *
- * @see Spotted\Playlists\Tracks->add
+ * @see Spotted\Services\Playlists\TracksService::add()
  *
  * @phpstan-type TrackAddParamsShape = array{position?: int, uris?: list<string>}
  */

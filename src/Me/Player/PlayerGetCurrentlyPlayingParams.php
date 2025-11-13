@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get the object currently being played on the user's Spotify account.
  *
- * @see Spotted\Me\Player->getCurrentlyPlaying
+ * @see Spotted\Services\Me\PlayerService::getCurrentlyPlaying()
  *
  * @phpstan-type PlayerGetCurrentlyPlayingParamsShape = array{
  *   additional_types?: string, market?: string

@@ -13,7 +13,7 @@ use Spotted\Me\Following\FollowingCheckParams\Type;
 /**
  * Check to see if the current user is following one or more artists or other Spotify users.
  *
- * @see Spotted\Me\Following->check
+ * @see Spotted\Services\Me\FollowingService::check()
  *
  * @phpstan-type FollowingCheckParamsShape = array{
  *   ids: string, type: Type|value-of<Type>

@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Remove the current user as a follower of one or more artists or other Spotify users.
  *
- * @see Spotted\Me\Following->unfollow
+ * @see Spotted\Services\Me\FollowingService::unfollow()
  *
  * @phpstan-type FollowingUnfollowParamsShape = array{ids?: list<string>}
  */

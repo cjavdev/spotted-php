@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get the current user's top tracks based on calculated affinity.
  *
- * @see Spotted\Me\Top->listTopTracks
+ * @see Spotted\Services\Me\TopService::listTopTracks()
  *
  * @phpstan-type TopListTopTracksParamsShape = array{
  *   limit?: int, offset?: int, time_range?: string

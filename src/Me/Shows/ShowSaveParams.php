@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Save one or more shows to current Spotify user's library.
  *
- * @see Spotted\Me\Shows->save
+ * @see Spotted\Services\Me\ShowsService::save()
  *
  * @phpstan-type ShowSaveParamsShape = array{ids?: list<string>}
  */

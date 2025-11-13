@@ -13,7 +13,7 @@ use Spotted\Playlists\Tracks\TrackRemoveParams\Track;
 /**
  * Remove one or more items from a user's playlist.
  *
- * @see Spotted\Playlists\Tracks->remove
+ * @see Spotted\Services\Playlists\TracksService::remove()
  *
  * @phpstan-type TrackRemoveParamsShape = array{
  *   tracks: list<Track>, snapshot_id?: string

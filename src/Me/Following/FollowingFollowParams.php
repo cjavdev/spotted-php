@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Add the current user as a follower of one or more artists or other Spotify users.
  *
- * @see Spotted\Me\Following->follow
+ * @see Spotted\Services\Me\FollowingService::follow()
  *
  * @phpstan-type FollowingFollowParamsShape = array{ids: list<string>}
  */

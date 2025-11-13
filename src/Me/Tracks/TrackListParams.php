@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get a list of the songs saved in the current Spotify user's 'Your Music' library.
  *
- * @see Spotted\Me\Tracks->list
+ * @see Spotted\Services\Me\TracksService::list()
  *
  * @phpstan-type TrackListParamsShape = array{
  *   limit?: int, market?: string, offset?: int

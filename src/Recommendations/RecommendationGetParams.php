@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * For artists and tracks that are very new or obscure there might not be enough data to generate a list of tracks.
  *
  * @deprecated
- * @see Spotted\Recommendations->get
+ * @see Spotted\Services\RecommendationsService::get()
  *
  * @phpstan-type RecommendationGetParamsShape = array{
  *   limit?: int,

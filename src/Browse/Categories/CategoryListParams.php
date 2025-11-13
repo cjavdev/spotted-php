@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
  *
- * @see Spotted\Browse\Categories->list
+ * @see Spotted\Services\Browse\CategoriesService::list()
  *
  * @phpstan-type CategoryListParamsShape = array{
  *   limit?: int, locale?: string, offset?: int

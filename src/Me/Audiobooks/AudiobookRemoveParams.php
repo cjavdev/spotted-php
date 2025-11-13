@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Remove one or more audiobooks from the Spotify user's library.
  *
- * @see Spotted\Me\Audiobooks->remove
+ * @see Spotted\Services\Me\AudiobooksService::remove()
  *
  * @phpstan-type AudiobookRemoveParamsShape = array{ids: string}
  */

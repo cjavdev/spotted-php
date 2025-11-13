@@ -13,7 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
  * Get a list of Spotify playlists tagged with a particular category.
  *
  * @deprecated
- * @see Spotted\Browse\Categories->getPlaylists
+ * @see Spotted\Services\Browse\CategoriesService::getPlaylists()
  *
  * @phpstan-type CategoryGetPlaylistsParamsShape = array{limit?: int, offset?: int}
  */

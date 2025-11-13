@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get a list of shows saved in the current Spotify user's library. Optional parameters can be used to limit the number of shows returned.
  *
- * @see Spotted\Me\Shows->list
+ * @see Spotted\Services\Me\ShowsService::list()
  *
  * @phpstan-type ShowListParamsShape = array{limit?: int, offset?: int}
  */

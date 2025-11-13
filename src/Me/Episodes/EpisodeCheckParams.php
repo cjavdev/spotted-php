@@ -13,7 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
  * Check if one or more episodes is already saved in the current Spotify user's 'Your Episodes' library.<br/>
  * This API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer)..
  *
- * @see Spotted\Me\Episodes->check
+ * @see Spotted\Services\Me\EpisodesService::check()
  *
  * @phpstan-type EpisodeCheckParamsShape = array{ids: string}
  */
