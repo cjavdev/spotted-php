@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get full details of the items of a playlist owned by a Spotify user.
  *
- * @see Spotted\Playlists\Tracks->list
+ * @see Spotted\Services\Playlists\TracksService::list()
  *
  * @phpstan-type TrackListParamsShape = array{
  *   additional_types?: string,

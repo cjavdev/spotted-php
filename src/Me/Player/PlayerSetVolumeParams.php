@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Set the volume for the user’s current playback device. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
  *
- * @see Spotted\Me\Player->setVolume
+ * @see Spotted\Services\Me\PlayerService::setVolume()
  *
  * @phpstan-type PlayerSetVolumeParamsShape = array{
  *   volume_percent: int, device_id?: string

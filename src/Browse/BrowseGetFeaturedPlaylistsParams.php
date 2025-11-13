@@ -13,7 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
  * Get a list of Spotify featured playlists (shown, for example, on a Spotify player's 'Browse' tab).
  *
  * @deprecated
- * @see Spotted\Browse->getFeaturedPlaylists
+ * @see Spotted\Services\BrowseService::getFeaturedPlaylists()
  *
  * @phpstan-type BrowseGetFeaturedPlaylistsParamsShape = array{
  *   limit?: int, locale?: string, offset?: int

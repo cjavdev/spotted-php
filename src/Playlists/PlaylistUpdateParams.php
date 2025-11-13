@@ -13,7 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
  * Change a playlist's name and public/private state. (The user must, of
  * course, own the playlist.).
  *
- * @see Spotted\Playlists->update
+ * @see Spotted\Services\PlaylistsService::update()
  *
  * @phpstan-type PlaylistUpdateParamsShape = array{
  *   collaborative?: bool, description?: string, name?: string, public?: bool

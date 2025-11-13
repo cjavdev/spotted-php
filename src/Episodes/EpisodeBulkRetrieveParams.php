@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get Spotify catalog information for several episodes based on their Spotify IDs.
  *
- * @see Spotted\Episodes->bulkRetrieve
+ * @see Spotted\Services\EpisodesService::bulkRetrieve()
  *
  * @phpstan-type EpisodeBulkRetrieveParamsShape = array{
  *   ids: string, market?: string

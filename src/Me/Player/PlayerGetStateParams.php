@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get information about the user’s current playback state, including track or episode, progress, and active device.
  *
- * @see Spotted\Me\Player->getState
+ * @see Spotted\Services\Me\PlayerService::getState()
  *
  * @phpstan-type PlayerGetStateParamsShape = array{
  *   additional_types?: string, market?: string

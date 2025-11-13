@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Save one or more albums to the current user's 'Your Music' library.
  *
- * @see Spotted\Me\Albums->save
+ * @see Spotted\Services\Me\AlbumsService::save()
  *
  * @phpstan-type AlbumSaveParamsShape = array{ids?: list<string>}
  */

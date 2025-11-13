@@ -13,7 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
  * Get Spotify catalog information for a single track identified by its
  * unique Spotify ID.
  *
- * @see Spotted\Tracks->retrieve
+ * @see Spotted\Services\TracksService::retrieve()
  *
  * @phpstan-type TrackRetrieveParamsShape = array{market?: string}
  */

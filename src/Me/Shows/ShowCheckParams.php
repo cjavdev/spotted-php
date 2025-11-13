@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Check if one or more shows is already saved in the current Spotify user's library.
  *
- * @see Spotted\Me\Shows->check
+ * @see Spotted\Services\Me\ShowsService::check()
  *
  * @phpstan-type ShowCheckParamsShape = array{ids: string}
  */

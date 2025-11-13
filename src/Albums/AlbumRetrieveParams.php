@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get Spotify catalog information for a single album.
  *
- * @see Spotted\Albums->retrieve
+ * @see Spotted\Services\AlbumsService::retrieve()
  *
  * @phpstan-type AlbumRetrieveParamsShape = array{market?: string}
  */

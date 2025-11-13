@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Check to see if the current user is following a specified playlist.
  *
- * @see Spotted\Playlists\Followers->check
+ * @see Spotted\Services\Playlists\FollowersService::check()
  *
  * @phpstan-type FollowerCheckParamsShape = array{ids?: string}
  */

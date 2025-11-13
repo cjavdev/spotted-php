@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get Spotify catalog information about an show’s episodes. Optional parameters can be used to limit the number of episodes returned.
  *
- * @see Spotted\Shows->listEpisodes
+ * @see Spotted\Services\ShowsService::listEpisodes()
  *
  * @phpstan-type ShowListEpisodesParamsShape = array{
  *   limit?: int, market?: string, offset?: int

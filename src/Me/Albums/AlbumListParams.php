@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get a list of the albums saved in the current Spotify user's 'Your Music' library.
  *
- * @see Spotted\Me\Albums->list
+ * @see Spotted\Services\Me\AlbumsService::list()
  *
  * @phpstan-type AlbumListParamsShape = array{
  *   limit?: int, market?: string, offset?: int

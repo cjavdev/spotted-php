@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  * you [add tracks](/documentation/web-api/reference/add-tracks-to-playlist).)
  * Each user is generally limited to a maximum of 11000 playlists.
  *
- * @see Spotted\Users\Playlists->create
+ * @see Spotted\Services\Users\PlaylistsService::create()
  *
  * @phpstan-type PlaylistCreateParamsShape = array{
  *   name: string, collaborative?: bool, description?: string, public?: bool

@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Toggle shuffle on or off for user’s playback. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
  *
- * @see Spotted\Me\Player->toggleShuffle
+ * @see Spotted\Services\Me\PlayerService::toggleShuffle()
  *
  * @phpstan-type PlayerToggleShuffleParamsShape = array{
  *   state: bool, device_id?: string

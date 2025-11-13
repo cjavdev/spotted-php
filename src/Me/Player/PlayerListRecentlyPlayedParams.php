@@ -13,7 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
  * Get tracks from the current user's recently played tracks.
  * _**Note**: Currently doesn't support podcast episodes._.
  *
- * @see Spotted\Me\Player->listRecentlyPlayed
+ * @see Spotted\Services\Me\PlayerService::listRecentlyPlayed()
  *
  * @phpstan-type PlayerListRecentlyPlayedParamsShape = array{
  *   after?: int, before?: int, limit?: int

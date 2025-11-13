@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Seeks to the given position in the user’s currently playing track. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
  *
- * @see Spotted\Me\Player->seekToPosition
+ * @see Spotted\Services\Me\PlayerService::seekToPosition()
  *
  * @phpstan-type PlayerSeekToPositionParamsShape = array{
  *   position_ms: int, device_id?: string

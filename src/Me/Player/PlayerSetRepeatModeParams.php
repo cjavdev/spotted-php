@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Set the repeat mode for the user's playback. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
  *
- * @see Spotted\Me\Player->setRepeatMode
+ * @see Spotted\Services\Me\PlayerService::setRepeatMode()
  *
  * @phpstan-type PlayerSetRepeatModeParamsShape = array{
  *   state: string, device_id?: string

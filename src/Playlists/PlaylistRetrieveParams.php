@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get a playlist owned by a Spotify user.
  *
- * @see Spotted\Playlists->retrieve
+ * @see Spotted\Services\PlaylistsService::retrieve()
  *
  * @phpstan-type PlaylistRetrieveParamsShape = array{
  *   additional_types?: string, fields?: string, market?: string
