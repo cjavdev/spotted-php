@@ -13,18 +13,6 @@ interface ImagesContract
     /**
      * @api
      *
-     * @throws APIException
-     */
-    public function update(
-        string $playlistID,
-        string $body,
-        string $params,
-        ?RequestOptions $requestOptions = null,
-    ): string;
-
-    /**
-     * @api
-     *
      * @return list<ImageObject>
      *
      * @throws APIException
