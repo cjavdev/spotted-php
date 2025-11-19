@@ -59,7 +59,7 @@ final class CursorURLPage implements BaseModel, BasePage
   * }|null
  */
   function nextRequest(): ?array {
-    $urlString = $this->next ?? null
+    $urlString = $this->next ?? null;
     if (!$urlString) {
       return null;
     }
