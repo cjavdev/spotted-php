@@ -55,9 +55,7 @@ final class FollowersService implements FollowersContract
      *
      * Add the current user as a follower of a playlist.
      *
-     * @param array{
-     *   dollar_paths________requestBody_content__application_json___schema_properties_published?: bool,
-     * }|FollowerFollowParams $params
+     * @param array{public?: bool}|FollowerFollowParams $params
      *
      * @throws APIException
      */

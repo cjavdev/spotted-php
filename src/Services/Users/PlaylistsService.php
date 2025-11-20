@@ -29,10 +29,7 @@ final class PlaylistsService implements PlaylistsContract
      * Each user is generally limited to a maximum of 11000 playlists.
      *
      * @param array{
-     *   name: string,
-     *   dollar_paths________requestBody_content__application_json___schema_properties_published?: bool,
-     *   collaborative?: bool,
-     *   description?: string,
+     *   name: string, collaborative?: bool, description?: string, public?: bool
      * }|PlaylistCreateParams $params
      *
      * @throws APIException
