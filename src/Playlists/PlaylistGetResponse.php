@@ -18,7 +18,6 @@ use Spotted\Playlists\PlaylistGetResponse\Tracks;
 /**
  * @phpstan-type PlaylistGetResponseShape = array{
  *   id?: string|null,
- *   dollar_components_schemas___properties_published?: bool|null,
  *   collaborative?: bool|null,
  *   description?: string|null,
  *   external_urls?: ExternalURLObject|null,
@@ -27,6 +26,7 @@ use Spotted\Playlists\PlaylistGetResponse\Tracks;
  *   images?: list<ImageObject>|null,
  *   name?: string|null,
  *   owner?: Owner|null,
+ *   published?: bool|null,
  *   snapshot_id?: string|null,
  *   tracks?: Tracks|null,
  *   type?: string|null,
@@ -45,12 +45,6 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
      */
     #[Api(optional: true)]
     public ?string $id;
-
-    /**
-     * The playlist's public/private status (if it is added to the user's profile): `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
-     */
-    #[Api('$.components.schemas.*.properties.published', optional: true)]
-    public ?bool $dollar_components_schemas___properties_published;
 
     /**
      * `true` if the owner allows other users to modify the playlist.
@@ -103,6 +97,12 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
     public ?Owner $owner;
 
     /**
+     * The playlist's public/private status (if it is added to the user's profile): `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Api(optional: true)]
+    public ?bool $published;
+
+    /**
      * The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version.
      */
     #[Api(optional: true)]
@@ -140,7 +140,6 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
      */
     public static function with(
         ?string $id = null,
-        ?bool $dollar_components_schemas___properties_published = null,
         ?bool $collaborative = null,
         ?string $description = null,
         ?ExternalURLObject $external_urls = null,
@@ -149,6 +148,7 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
         ?array $images = null,
         ?string $name = null,
         ?Owner $owner = null,
+        ?bool $published = null,
         ?string $snapshot_id = null,
         ?Tracks $tracks = null,
         ?string $type = null,
@@ -157,7 +157,6 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
         $obj = new self;
 
         null !== $id && $obj->id = $id;
-        null !== $dollar_components_schemas___properties_published && $obj->dollar_components_schemas___properties_published = $dollar_components_schemas___properties_published;
         null !== $collaborative && $obj->collaborative = $collaborative;
         null !== $description && $obj->description = $description;
         null !== $external_urls && $obj->external_urls = $external_urls;
@@ -166,6 +165,7 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
         null !== $images && $obj->images = $images;
         null !== $name && $obj->name = $name;
         null !== $owner && $obj->owner = $owner;
+        null !== $published && $obj->published = $published;
         null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
         null !== $tracks && $obj->tracks = $tracks;
         null !== $type && $obj->type = $type;
@@ -181,18 +181,6 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
     {
         $obj = clone $this;
         $obj->id = $id;
-
-        return $obj;
-    }
-
-    /**
-     * The playlist's public/private status (if it is added to the user's profile): `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
-     */
-    public function withComponentsSchemasPropertiesPublished(
-        bool $componentsSchemasPropertiesPublished
-    ): self {
-        $obj = clone $this;
-        $obj->dollar_components_schemas___properties_published = $componentsSchemasPropertiesPublished;
 
         return $obj;
     }
@@ -283,6 +271,17 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
     {
         $obj = clone $this;
         $obj->owner = $owner;
+
+        return $obj;
+    }
+
+    /**
+     * The playlist's public/private status (if it is added to the user's profile): `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $obj = clone $this;
+        $obj->published = $published;
 
         return $obj;
     }
