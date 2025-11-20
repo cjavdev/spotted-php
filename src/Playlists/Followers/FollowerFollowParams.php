@@ -14,7 +14,9 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Playlists\FollowersService::follow()
  *
- * @phpstan-type FollowerFollowParamsShape = array{public?: bool}
+ * @phpstan-type FollowerFollowParamsShape = array{
+ *   dollar_components_schemas___properties_published?: bool
+ * }
  */
 final class FollowerFollowParams implements BaseModel
 {
@@ -25,8 +27,8 @@ final class FollowerFollowParams implements BaseModel
     /**
      * Defaults to `true`. If `true` the playlist will be included in user's public playlists (added to profile), if `false` it will remain private. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
-    #[Api(optional: true)]
-    public ?bool $public;
+    #[Api('$.components.schemas.*.properties.published', optional: true)]
+    public ?bool $dollar_components_schemas___properties_published;
 
     public function __construct()
     {
@@ -38,11 +40,12 @@ final class FollowerFollowParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?bool $public = null): self
-    {
+    public static function with(
+        ?bool $dollar_components_schemas___properties_published = null
+    ): self {
         $obj = new self;
 
-        null !== $public && $obj->public = $public;
+        null !== $dollar_components_schemas___properties_published && $obj->dollar_components_schemas___properties_published = $dollar_components_schemas___properties_published;
 
         return $obj;
     }
@@ -50,10 +53,11 @@ final class FollowerFollowParams implements BaseModel
     /**
      * Defaults to `true`. If `true` the playlist will be included in user's public playlists (added to profile), if `false` it will remain private. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
-    public function withPublic(bool $public): self
-    {
+    public function withComponentsSchemasPropertiesPublished(
+        bool $componentsSchemasPropertiesPublished
+    ): self {
         $obj = clone $this;
-        $obj->public = $public;
+        $obj->dollar_components_schemas___properties_published = $componentsSchemasPropertiesPublished;
 
         return $obj;
     }
