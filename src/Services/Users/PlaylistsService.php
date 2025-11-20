@@ -30,7 +30,7 @@ final class PlaylistsService implements PlaylistsContract
      *
      * @param array{
      *   name: string,
-     *   dollar_components_schemas___properties_published?: bool,
+     *   dollar_paths________requestBody_content__application_json___schema_properties_published?: bool,
      *   collaborative?: bool,
      *   description?: string,
      * }|PlaylistCreateParams $params
