@@ -17,22 +17,10 @@ The REST API documentation can be found on [spotted.stldocs.com](https://spotted
 
 ## Installation
 
-To use this package, install via Composer by adding the following to your application's `composer.json`:
-
 <!-- x-release-please-start-version -->
 
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:cjavdev/spotted-php.git"
-    }
-  ],
-  "require": {
-    "org-placeholder/spotted": "dev-main"
-  }
-}
+```
+composer require "cjavdev/spotted 0.2.0"
 ```
 
 <!-- x-release-please-end -->
