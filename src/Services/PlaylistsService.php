@@ -80,10 +80,7 @@ final class PlaylistsService implements PlaylistsContract
      * course, own the playlist.)
      *
      * @param array{
-     *   dollar_paths________requestBody_content__application_json___schema_properties_published?: bool,
-     *   collaborative?: bool,
-     *   description?: string,
-     *   name?: string,
+     *   collaborative?: bool, description?: string, name?: string, public?: bool
      * }|PlaylistUpdateParams $params
      *
      * @throws APIException
