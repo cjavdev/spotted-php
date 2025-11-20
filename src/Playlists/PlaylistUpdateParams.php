@@ -16,7 +16,10 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\PlaylistsService::update()
  *
  * @phpstan-type PlaylistUpdateParamsShape = array{
- *   collaborative?: bool, description?: string, name?: string, public?: bool
+ *   dollar_components_schemas___properties_published?: bool,
+ *   collaborative?: bool,
+ *   description?: string,
+ *   name?: string,
  * }
  */
 final class PlaylistUpdateParams implements BaseModel
@@ -24,6 +27,12 @@ final class PlaylistUpdateParams implements BaseModel
     /** @use SdkModel<PlaylistUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Api('$.components.schemas.*.properties.published', optional: true)]
+    public ?bool $dollar_components_schemas___properties_published;
 
     /**
      * If `true`, the playlist will become collaborative and other users will be able to modify the playlist in their Spotify client. <br/>
@@ -44,12 +53,6 @@ final class PlaylistUpdateParams implements BaseModel
     #[Api(optional: true)]
     public ?string $name;
 
-    /**
-     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
-     */
-    #[Api(optional: true)]
-    public ?bool $public;
-
     public function __construct()
     {
         $this->initialize();
@@ -61,17 +64,29 @@ final class PlaylistUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        ?bool $dollar_components_schemas___properties_published = null,
         ?bool $collaborative = null,
         ?string $description = null,
         ?string $name = null,
-        ?bool $public = null,
     ): self {
         $obj = new self;
 
+        null !== $dollar_components_schemas___properties_published && $obj->dollar_components_schemas___properties_published = $dollar_components_schemas___properties_published;
         null !== $collaborative && $obj->collaborative = $collaborative;
         null !== $description && $obj->description = $description;
         null !== $name && $obj->name = $name;
-        null !== $public && $obj->public = $public;
+
+        return $obj;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withComponentsSchemasPropertiesPublished(
+        bool $componentsSchemasPropertiesPublished
+    ): self {
+        $obj = clone $this;
+        $obj->dollar_components_schemas___properties_published = $componentsSchemasPropertiesPublished;
 
         return $obj;
     }
@@ -106,17 +121,6 @@ final class PlaylistUpdateParams implements BaseModel
     {
         $obj = clone $this;
         $obj->name = $name;
-
-        return $obj;
-    }
-
-    /**
-     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
-     */
-    public function withPublic(bool $public): self
-    {
-        $obj = clone $this;
-        $obj->public = $public;
 
         return $obj;
     }
