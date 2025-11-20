@@ -21,6 +21,32 @@ final class ImagesService implements ImagesContract
     /**
      * @api
      *
+     * Replace the image used to represent a specific playlist.
+     *
+     * @throws APIException
+     */
+    public function update(
+        string $playlistID,
+        string $body,
+        string $params,
+        ?RequestOptions $requestOptions = null,
+    ): string {
+        // @phpstan-ignore-next-line;
+        return $this->client->request(
+            method: 'put',
+            path: ['playlists/%1$s/images', $playlistID],
+            headers: [
+                'Content-Type' => 'image/jpeg', 'Accept' => 'application/binary',
+            ],
+            body: STAINLESS_FIXME_parsed['body'],
+            options: $requestOptions,
+            convert: 'string',
+        );
+    }
+
+    /**
+     * @api
+     *
      * Get the current image associated with a specific playlist.
      *
      * @return list<ImageObject>
