@@ -31,6 +31,22 @@ final class ImagesTest extends TestCase
     }
 
     #[Test]
+    public function testUpdate(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped("Prism doesn't support application/binary responses");
+        }
+
+        $result = $this->client->playlists->images->update(
+            '3cEYpjA9oz9GiPac4AsH4n',
+            'file',
+            []
+        );
+
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+    }
+
+    #[Test]
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
