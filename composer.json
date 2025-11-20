@@ -28,7 +28,7 @@
     "sort-packages": true
   },
   "description": "Spotted PHP SDK",
-  "name": "org-placeholder/spotted",
+  "name": "cjavdev/spotted",
   "require": {
     "php": "^8.1",
     "php-http/discovery": "^1",
