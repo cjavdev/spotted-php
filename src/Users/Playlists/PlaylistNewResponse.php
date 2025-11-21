@@ -26,7 +26,7 @@ use Spotted\Users\Playlists\PlaylistNewResponse\Tracks;
  *   images?: list<ImageObject>|null,
  *   name?: string|null,
  *   owner?: Owner|null,
- *   public?: bool|null,
+ *   published?: bool|null,
  *   snapshot_id?: string|null,
  *   tracks?: Tracks|null,
  *   type?: string|null,
@@ -100,7 +100,7 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
      * The playlist's public/private status (if it is added to the user's profile): `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
     #[Api(optional: true)]
-    public ?bool $public;
+    public ?bool $published;
 
     /**
      * The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version.
@@ -148,7 +148,7 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
         ?array $images = null,
         ?string $name = null,
         ?Owner $owner = null,
-        ?bool $public = null,
+        ?bool $published = null,
         ?string $snapshot_id = null,
         ?Tracks $tracks = null,
         ?string $type = null,
@@ -165,7 +165,7 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
         null !== $images && $obj->images = $images;
         null !== $name && $obj->name = $name;
         null !== $owner && $obj->owner = $owner;
-        null !== $public && $obj->public = $public;
+        null !== $published && $obj->published = $published;
         null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
         null !== $tracks && $obj->tracks = $tracks;
         null !== $type && $obj->type = $type;
@@ -278,10 +278,10 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
     /**
      * The playlist's public/private status (if it is added to the user's profile): `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
-    public function withPublic(bool $public): self
+    public function withPublished(bool $published): self
     {
         $obj = clone $this;
-        $obj->public = $public;
+        $obj->published = $published;
 
         return $obj;
     }
