@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.3.0 (2025-11-21)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/cjavdev/spotted-php/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** manual updates ([a551597](https://github.com/cjavdev/spotted-php/commit/a55159767f3ddbb7d8861b8fae3326a3ba38f064))
+* **api:** manual updates ([f46e12b](https://github.com/cjavdev/spotted-php/commit/f46e12b7737a9d37ec0bde0bf9a4904e09454188))
+* **api:** manual updates ([7aef3ab](https://github.com/cjavdev/spotted-php/commit/7aef3ab57e33d16f6af19c43187cb7e2aec38dbf))
+* **api:** manual updates ([11111fd](https://github.com/cjavdev/spotted-php/commit/11111fd18450213eb9c0aaa31ea2e409ed23e0d2))
+* **api:** manual updates ([fae3dd3](https://github.com/cjavdev/spotted-php/commit/fae3dd3f6a736a013bc1bd61dec11a3bbb3e8b20))
+* **api:** rename public to published for java ([60cf1fa](https://github.com/cjavdev/spotted-php/commit/60cf1fab8ecec56b41c5773388d1a1abc209ba33))
+
+
+### Chores
+
+* **client:** refactor error type constructors ([557ec0b](https://github.com/cjavdev/spotted-php/commit/557ec0b26f168bb113a682eb09d4720606caac13))
+
 ## 0.2.0 (2025-11-20)
 
 Full Changelog: [v0.1.1...v0.2.0](https://github.com/cjavdev/spotted-php/compare/v0.1.1...v0.2.0)
