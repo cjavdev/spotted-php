@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\PlaylistsService::update()
  *
  * @phpstan-type PlaylistUpdateParamsShape = array{
- *   collaborative?: bool, description?: string, name?: string, published?: bool
+ *   collaborative?: bool, description?: string, name?: string, public?: bool
  * }
  */
 final class PlaylistUpdateParams implements BaseModel
@@ -48,7 +48,7 @@ final class PlaylistUpdateParams implements BaseModel
      * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
     #[Api(optional: true)]
-    public ?bool $published;
+    public ?bool $public;
 
     public function __construct()
     {
@@ -64,14 +64,14 @@ final class PlaylistUpdateParams implements BaseModel
         ?bool $collaborative = null,
         ?string $description = null,
         ?string $name = null,
-        ?bool $published = null,
+        ?bool $public = null,
     ): self {
         $obj = new self;
 
         null !== $collaborative && $obj->collaborative = $collaborative;
         null !== $description && $obj->description = $description;
         null !== $name && $obj->name = $name;
-        null !== $published && $obj->published = $published;
+        null !== $public && $obj->public = $public;
 
         return $obj;
     }
@@ -113,10 +113,10 @@ final class PlaylistUpdateParams implements BaseModel
     /**
      * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
-    public function withPublished(bool $published): self
+    public function withPublic(bool $public): self
     {
         $obj = clone $this;
-        $obj->published = $published;
+        $obj->public = $public;
 
         return $obj;
     }
