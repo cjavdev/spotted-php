@@ -28,7 +28,7 @@ final class FollowingService implements FollowingContract
      * Get the current user's followed artists.
      *
      * @param array{
-     *   type: "artist", after?: string, limit?: int
+     *   type: 'artist', after?: string, limit?: int
      * }|FollowingBulkRetrieveParams $params
      *
      * @throws APIException
@@ -57,7 +57,7 @@ final class FollowingService implements FollowingContract
      *
      * Check to see if the current user is following one or more artists or other Spotify users.
      *
-     * @param array{ids: string, type: "artist"|"user"}|FollowingCheckParams $params
+     * @param array{ids: string, type: 'artist'|'user'}|FollowingCheckParams $params
      *
      * @return list<bool>
      *

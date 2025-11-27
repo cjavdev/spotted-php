@@ -29,7 +29,7 @@ use Spotted\TrackObject\Album\ReleaseDatePrecision;
  *   release_date: string,
  *   release_date_precision: value-of<ReleaseDatePrecision>,
  *   total_tracks: int,
- *   type: "album",
+ *   type: 'album',
  *   uri: string,
  *   restrictions?: AlbumRestrictionObject|null,
  * }
@@ -42,7 +42,7 @@ final class Album implements BaseModel
     /**
      * The object type.
      *
-     * @var "album" $type
+     * @var 'album' $type
      */
     #[Api]
     public string $type = 'album';

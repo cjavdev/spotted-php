@@ -26,7 +26,7 @@ use Spotted\SimplifiedEpisodeObject\ReleaseDatePrecision;
  *   name: string,
  *   release_date: string,
  *   release_date_precision: value-of<ReleaseDatePrecision>,
- *   type: "episode",
+ *   type: 'episode',
  *   uri: string,
  *   language?: string|null,
  *   restrictions?: EpisodeRestrictionObject|null,
@@ -41,7 +41,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * The object type.
      *
-     * @var "episode" $type
+     * @var 'episode' $type
      */
     #[Api]
     public string $type = 'episode';

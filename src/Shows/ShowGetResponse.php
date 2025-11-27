@@ -31,7 +31,7 @@ use Spotted\Shows\ShowGetResponse\Episodes;
  *   name: string,
  *   publisher: string,
  *   total_episodes: int,
- *   type: "show",
+ *   type: 'show',
  *   uri: string,
  *   episodes: Episodes,
  * }
@@ -46,7 +46,7 @@ final class ShowGetResponse implements BaseModel, ResponseConverter
     /**
      * The object type.
      *
-     * @var "show" $type
+     * @var 'show' $type
      */
     #[Api]
     public string $type = 'show';

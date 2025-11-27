@@ -26,8 +26,8 @@ final class SearchService implements SearchContract
      *
      * @param array{
      *   q: string,
-     *   type: list<"album"|"artist"|"playlist"|"track"|"show"|"episode"|"audiobook">,
-     *   include_external?: "audio",
+     *   type: list<'album'|'artist'|'playlist'|'track'|'show'|'episode'|'audiobook'>,
+     *   include_external?: 'audio',
      *   limit?: int,
      *   market?: string,
      *   offset?: int,
