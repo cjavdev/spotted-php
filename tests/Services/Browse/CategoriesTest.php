@@ -5,6 +5,9 @@ namespace Tests\Services\Browse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Spotted\Browse\Categories\CategoryGetPlaylistsResponse;
+use Spotted\Browse\Categories\CategoryGetResponse;
+use Spotted\Browse\Categories\CategoryListResponse;
 use Spotted\Client;
 use Tests\UnsupportedMockTests;
 
@@ -39,7 +42,8 @@ final class CategoriesTest extends TestCase
 
         $result = $this->client->browse->categories->retrieve('dinner', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CategoryGetResponse::class, $result);
     }
 
     #[Test]
@@ -51,7 +55,8 @@ final class CategoriesTest extends TestCase
 
         $result = $this->client->browse->categories->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CategoryListResponse::class, $result);
     }
 
     #[Test]
@@ -63,6 +68,7 @@ final class CategoriesTest extends TestCase
 
         $result = $this->client->browse->categories->getPlaylists('dinner', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CategoryGetPlaylistsResponse::class, $result);
     }
 }

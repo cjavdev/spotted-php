@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.1 (2025-11-27)
+
+Full Changelog: [v0.3.0...v0.3.1](https://github.com/cjavdev/spotted-php/compare/v0.3.0...v0.3.1)
+
+### Chores
+
+* use non-trivial test assertions ([fabf4f1](https://github.com/cjavdev/spotted-php/commit/fabf4f1bc523fedd113bdd81caab56e7295109bf))
+
 ## 0.3.0 (2025-11-27)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/cjavdev/spotted-php/compare/v0.2.0...v0.3.0)

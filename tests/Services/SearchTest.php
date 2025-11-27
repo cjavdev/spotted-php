@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\Search\SearchQueryResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -41,7 +42,8 @@ final class SearchTest extends TestCase
             'q' => 'remaster%20track:Doxy%20artist:Miles%20Davis', 'type' => ['album'],
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SearchQueryResponse::class, $result);
     }
 
     #[Test]
@@ -52,9 +54,15 @@ final class SearchTest extends TestCase
         }
 
         $result = $this->client->search->query([
-            'q' => 'remaster%20track:Doxy%20artist:Miles%20Davis', 'type' => ['album'],
+            'q' => 'remaster%20track:Doxy%20artist:Miles%20Davis',
+            'type' => ['album'],
+            'include_external' => 'audio',
+            'limit' => 10,
+            'market' => 'ES',
+            'offset' => 5,
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SearchQueryResponse::class, $result);
     }
 }

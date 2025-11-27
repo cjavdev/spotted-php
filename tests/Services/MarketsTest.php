@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\Markets\MarketListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,6 +40,7 @@ final class MarketsTest extends TestCase
 
         $result = $this->client->markets->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MarketListResponse::class, $result);
     }
 }

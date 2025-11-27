@@ -5,6 +5,8 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Spotted\Browse\BrowseGetFeaturedPlaylistsResponse;
+use Spotted\Browse\BrowseGetNewReleasesResponse;
 use Spotted\Client;
 use Tests\UnsupportedMockTests;
 
@@ -39,7 +41,8 @@ final class BrowseTest extends TestCase
 
         $result = $this->client->browse->getFeaturedPlaylists([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BrowseGetFeaturedPlaylistsResponse::class, $result);
     }
 
     #[Test]
@@ -51,6 +54,7 @@ final class BrowseTest extends TestCase
 
         $result = $this->client->browse->getNewReleases([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BrowseGetNewReleasesResponse::class, $result);
     }
 }

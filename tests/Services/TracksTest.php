@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\TrackObject;
+use Spotted\Tracks\TrackBulkGetResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +41,8 @@ final class TracksTest extends TestCase
 
         $result = $this->client->tracks->retrieve('11dFghVXANMlKmJXsNCbNl', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TrackObject::class, $result);
     }
 
     #[Test]
@@ -53,7 +56,8 @@ final class TracksTest extends TestCase
             'ids' => '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TrackBulkGetResponse::class, $result);
     }
 
     #[Test]
@@ -65,8 +69,10 @@ final class TracksTest extends TestCase
 
         $result = $this->client->tracks->bulkRetrieve([
             'ids' => '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
+            'market' => 'ES',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TrackBulkGetResponse::class, $result);
     }
 }

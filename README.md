@@ -20,7 +20,7 @@ The REST API documentation can be found on [spotted.stldocs.com](https://spotted
 <!-- x-release-please-start-version -->
 
 ```
-composer require "cjavdev/spotted 0.3.0"
+composer require "cjavdev/spotted 0.3.1"
 ```
 
 <!-- x-release-please-end -->
@@ -68,7 +68,7 @@ $client = new Client(
   clientSecret: getenv('SPOTIFY_CLIENT_SECRET') ?: 'My Client Secret',
 );
 
-$page = $client->shows->listEpisodes('showid', []);
+$page = $client->shows->listEpisodes('showid', ['limit' => 5, 'offset' => 10]);
 
 var_dump($page);
 

@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\CursorURLPage;
+use Spotted\Users\Playlists\PlaylistNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -42,7 +44,8 @@ final class PlaylistsTest extends TestCase
             ['name' => 'New Playlist']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PlaylistNewResponse::class, $result);
     }
 
     #[Test]
@@ -54,10 +57,16 @@ final class PlaylistsTest extends TestCase
 
         $result = $this->client->users->playlists->create(
             'smedjan',
-            ['name' => 'New Playlist']
+            [
+                'name' => 'New Playlist',
+                'collaborative' => true,
+                'description' => 'New playlist description',
+                'public' => false,
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PlaylistNewResponse::class, $result);
     }
 
     #[Test]
@@ -69,6 +78,7 @@ final class PlaylistsTest extends TestCase
 
         $result = $this->client->users->playlists->list('smedjan', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CursorURLPage::class, $result);
     }
 }
