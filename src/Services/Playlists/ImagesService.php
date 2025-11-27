@@ -28,8 +28,7 @@ final class ImagesService implements ImagesContract
     public function update(
         string $playlistID,
         string $body,
-        string $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): string {
         // @phpstan-ignore-next-line;
         return $this->client->request(
@@ -38,7 +37,7 @@ final class ImagesService implements ImagesContract
             headers: [
                 'Content-Type' => 'image/jpeg', 'Accept' => 'application/binary',
             ],
-            body: STAINLESS_FIXME_parsed['body'],
+            body: $body,
             options: $requestOptions,
             convert: 'string',
         );
