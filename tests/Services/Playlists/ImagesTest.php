@@ -34,7 +34,7 @@ final class ImagesTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't support application/binary responses");
+            $this->markTestSkipped('Prism doesn\'t support application/binary responses');
         }
 
         $result = $this->client->playlists->images->update(

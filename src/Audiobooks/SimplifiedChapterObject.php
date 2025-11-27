@@ -32,7 +32,7 @@ use Spotted\ResumePointObject;
  *   name: string,
  *   release_date: string,
  *   release_date_precision: value-of<ReleaseDatePrecision>,
- *   type: "episode",
+ *   type: 'episode',
  *   uri: string,
  *   available_markets?: list<string>|null,
  *   restrictions?: ChapterRestrictionObject|null,
@@ -49,7 +49,7 @@ final class SimplifiedChapterObject implements BaseModel, ResponseConverter
     /**
      * The object type.
      *
-     * @var "episode" $type
+     * @var 'episode' $type
      */
     #[Api]
     public string $type = 'episode';

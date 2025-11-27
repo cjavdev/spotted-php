@@ -32,7 +32,7 @@ use Spotted\NarratorObject;
  *   narrators: list<NarratorObject>,
  *   publisher: string,
  *   total_chapters: int,
- *   type: "audiobook",
+ *   type: 'audiobook',
  *   uri: string,
  *   edition?: string|null,
  *   chapters: Chapters,
@@ -46,7 +46,7 @@ final class Audiobook implements BaseModel
     /**
      * The object type.
      *
-     * @var "audiobook" $type
+     * @var 'audiobook' $type
      */
     #[Api]
     public string $type = 'audiobook';

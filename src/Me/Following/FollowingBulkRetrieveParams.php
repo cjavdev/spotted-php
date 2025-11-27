@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\FollowingService::bulkRetrieve()
  *
  * @phpstan-type FollowingBulkRetrieveParamsShape = array{
- *   type: "artist", after?: string, limit?: int
+ *   type: 'artist', after?: string, limit?: int
  * }
  */
 final class FollowingBulkRetrieveParams implements BaseModel
@@ -27,7 +27,7 @@ final class FollowingBulkRetrieveParams implements BaseModel
     /**
      * The ID type: currently only `artist` is supported.
      *
-     * @var "artist" $type
+     * @var 'artist' $type
      */
     #[Api]
     public string $type = 'artist';
