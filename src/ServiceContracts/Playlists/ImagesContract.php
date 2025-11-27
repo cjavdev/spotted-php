@@ -18,8 +18,7 @@ interface ImagesContract
     public function update(
         string $playlistID,
         string $body,
-        string $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): string;
 
     /**
