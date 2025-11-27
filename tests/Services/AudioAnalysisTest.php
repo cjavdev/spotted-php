@@ -5,6 +5,7 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Spotted\AudioAnalysis\AudioAnalysisGetResponse;
 use Spotted\Client;
 use Tests\UnsupportedMockTests;
 
@@ -39,6 +40,7 @@ final class AudioAnalysisTest extends TestCase
 
         $result = $this->client->audioAnalysis->retrieve('11dFghVXANMlKmJXsNCbNl');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AudioAnalysisGetResponse::class, $result);
     }
 }

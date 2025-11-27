@@ -5,6 +5,8 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Spotted\AudioFeatures\AudioFeatureBulkGetResponse;
+use Spotted\AudioFeatures\AudioFeatureGetResponse;
 use Spotted\Client;
 use Tests\UnsupportedMockTests;
 
@@ -39,7 +41,8 @@ final class AudioFeaturesTest extends TestCase
 
         $result = $this->client->audioFeatures->retrieve('11dFghVXANMlKmJXsNCbNl');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AudioFeatureGetResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +56,8 @@ final class AudioFeaturesTest extends TestCase
             'ids' => '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AudioFeatureBulkGetResponse::class, $result);
     }
 
     #[Test]
@@ -67,6 +71,7 @@ final class AudioFeaturesTest extends TestCase
             'ids' => '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AudioFeatureBulkGetResponse::class, $result);
     }
 }
