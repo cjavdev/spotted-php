@@ -36,11 +36,11 @@ Parameters with a default value must be set by name.
 use Spotted\Client;
 
 $client = new Client(
-  clientID: getenv("SPOTIFY_CLIENT_ID") ?: "My Client ID",
-  clientSecret: getenv("SPOTIFY_CLIENT_SECRET") ?: "My Client Secret",
+  clientID: getenv('SPOTIFY_CLIENT_ID') ?: 'My Client ID',
+  clientSecret: getenv('SPOTIFY_CLIENT_SECRET') ?: 'My Client Secret',
 );
 
-$album = $client->albums->retrieve("4aawyAB9vmqN3uQ7FjRGTy", []);
+$album = $client->albums->retrieve('4aawyAB9vmqN3uQ7FjRGTy', []);
 
 var_dump($album->id);
 ```
@@ -64,11 +64,11 @@ This library provides auto-paginating iterators with each list response, so you 
 use Spotted\Client;
 
 $client = new Client(
-  clientID: getenv("SPOTIFY_CLIENT_ID") ?: "My Client ID",
-  clientSecret: getenv("SPOTIFY_CLIENT_SECRET") ?: "My Client Secret",
+  clientID: getenv('SPOTIFY_CLIENT_ID') ?: 'My Client ID',
+  clientSecret: getenv('SPOTIFY_CLIENT_SECRET') ?: 'My Client Secret',
 );
 
-$page = $client->shows->listEpisodes("showid", []);
+$page = $client->shows->listEpisodes('showid', []);
 
 var_dump($page);
 
@@ -92,7 +92,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 use Spotted\Core\Exceptions\APIConnectionException;
 
 try {
-  $album = $client->albums->retrieve("4aawyAB9vmqN3uQ7FjRGTy", []);
+  $album = $client->albums->retrieve('4aawyAB9vmqN3uQ7FjRGTy', []);
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
@@ -139,7 +139,7 @@ $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
 $result = $client->albums->retrieve(
-  "4aawyAB9vmqN3uQ7FjRGTy", [], RequestOptions::with(maxRetries: 5)
+  '4aawyAB9vmqN3uQ7FjRGTy', [], RequestOptions::with(maxRetries: 5)
 );
 ```
 
@@ -159,12 +159,12 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 use Spotted\RequestOptions;
 
 $album = $client->albums->retrieve(
-  "4aawyAB9vmqN3uQ7FjRGTy",
+  '4aawyAB9vmqN3uQ7FjRGTy',
   [],
   RequestOptions::with(
-    extraQueryParams: ["my_query_parameter" => "value"],
-    extraBodyParams: ["my_body_parameter" => "value"],
-    extraHeaders: ["my-header" => "value"],
+    extraQueryParams: ['my_query_parameter' => 'value'],
+    extraBodyParams: ['my_body_parameter' => 'value'],
+    extraHeaders: ['my-header' => 'value'],
   ),
 );
 ```

@@ -29,7 +29,7 @@ use Spotted\SimplifiedArtistObject;
  *   release_date: string,
  *   release_date_precision: value-of<ReleaseDatePrecision>,
  *   total_tracks: int,
- *   type: "album",
+ *   type: 'album',
  *   uri: string,
  *   artists?: list<SimplifiedArtistObject>|null,
  *   copyrights?: list<CopyrightObject>|null,
@@ -49,7 +49,7 @@ final class Album implements BaseModel
     /**
      * The object type.
      *
-     * @var "album" $type
+     * @var 'album' $type
      */
     #[Api]
     public string $type = 'album';

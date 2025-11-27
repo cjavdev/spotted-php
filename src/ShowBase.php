@@ -25,7 +25,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   name: string,
  *   publisher: string,
  *   total_episodes: int,
- *   type: "show",
+ *   type: 'show',
  *   uri: string,
  * }
  */
@@ -37,7 +37,7 @@ final class ShowBase implements BaseModel
     /**
      * The object type.
      *
-     * @var "show" $type
+     * @var 'show' $type
      */
     #[Api]
     public string $type = 'show';

@@ -35,7 +35,7 @@ final class CursorURLPage implements BaseModel, BasePage
   public ?string $next;
 
   /** @var list<TItem>|null $items */
-  #[Api(list: "mixed", optional: true)]
+  #[Api(list: 'mixed', optional: true)]
   public ?array $items;
 
   /** @return list<TItem> */
