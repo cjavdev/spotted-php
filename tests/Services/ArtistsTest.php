@@ -5,7 +5,12 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Spotted\ArtistObject;
+use Spotted\Artists\ArtistBulkGetResponse;
+use Spotted\Artists\ArtistListRelatedArtistsResponse;
+use Spotted\Artists\ArtistTopTracksResponse;
 use Spotted\Client;
+use Spotted\CursorURLPage;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +44,8 @@ final class ArtistsTest extends TestCase
 
         $result = $this->client->artists->retrieve('0TnOYISbd1XYRBk9myaseg');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ArtistObject::class, $result);
     }
 
     #[Test]
@@ -53,7 +59,8 @@ final class ArtistsTest extends TestCase
             'ids' => '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ArtistBulkGetResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +74,8 @@ final class ArtistsTest extends TestCase
             'ids' => '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ArtistBulkGetResponse::class, $result);
     }
 
     #[Test]
@@ -79,7 +87,8 @@ final class ArtistsTest extends TestCase
 
         $result = $this->client->artists->listAlbums('0TnOYISbd1XYRBk9myaseg', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CursorURLPage::class, $result);
     }
 
     #[Test]
@@ -93,7 +102,8 @@ final class ArtistsTest extends TestCase
             '0TnOYISbd1XYRBk9myaseg'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ArtistListRelatedArtistsResponse::class, $result);
     }
 
     #[Test]
@@ -105,6 +115,7 @@ final class ArtistsTest extends TestCase
 
         $result = $this->client->artists->topTracks('0TnOYISbd1XYRBk9myaseg', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ArtistTopTracksResponse::class, $result);
     }
 }

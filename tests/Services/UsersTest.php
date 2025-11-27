@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\Users\UserGetProfileResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,6 +40,7 @@ final class UsersTest extends TestCase
 
         $result = $this->client->users->retrieveProfile('smedjan');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserGetProfileResponse::class, $result);
     }
 }

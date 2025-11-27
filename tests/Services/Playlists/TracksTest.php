@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\CursorURLPage;
+use Spotted\Playlists\Tracks\TrackAddResponse;
+use Spotted\Playlists\Tracks\TrackRemoveResponse;
+use Spotted\Playlists\Tracks\TrackUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -42,7 +46,8 @@ final class TracksTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TrackUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -57,7 +62,8 @@ final class TracksTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CursorURLPage::class, $result);
     }
 
     #[Test]
@@ -72,7 +78,8 @@ final class TracksTest extends TestCase
             []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TrackAddResponse::class, $result);
     }
 
     #[Test]
@@ -87,7 +94,8 @@ final class TracksTest extends TestCase
             ['tracks' => [[]]]
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TrackRemoveResponse::class, $result);
     }
 
     #[Test]
@@ -99,9 +107,10 @@ final class TracksTest extends TestCase
 
         $result = $this->client->playlists->tracks->remove(
             '3cEYpjA9oz9GiPac4AsH4n',
-            ['tracks' => [['uri' => 'uri']]]
+            ['tracks' => [['uri' => 'uri']], 'snapshot_id' => 'snapshot_id'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TrackRemoveResponse::class, $result);
     }
 }

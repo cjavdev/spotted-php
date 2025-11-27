@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\CursorURLPage;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +40,8 @@ final class TopTest extends TestCase
 
         $result = $this->client->me->top->listTopArtists([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CursorURLPage::class, $result);
     }
 
     #[Test]
@@ -51,6 +53,7 @@ final class TopTest extends TestCase
 
         $result = $this->client->me->top->listTopTracks([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CursorURLPage::class, $result);
     }
 }

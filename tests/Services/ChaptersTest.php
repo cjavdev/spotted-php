@@ -5,6 +5,8 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Spotted\Chapters\ChapterBulkGetResponse;
+use Spotted\Chapters\ChapterGetResponse;
 use Spotted\Client;
 use Tests\UnsupportedMockTests;
 
@@ -39,7 +41,8 @@ final class ChaptersTest extends TestCase
 
         $result = $this->client->chapters->retrieve('0D5wENdkdwbqlrHoaJ9g29', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ChapterGetResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +56,8 @@ final class ChaptersTest extends TestCase
             'ids' => '0IsXVP0JmcB2adSE338GkK,3ZXb8FKZGU0EHALYX6uCzU,0D5wENdkdwbqlrHoaJ9g29',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ChapterBulkGetResponse::class, $result);
     }
 
     #[Test]
@@ -65,8 +69,10 @@ final class ChaptersTest extends TestCase
 
         $result = $this->client->chapters->bulkRetrieve([
             'ids' => '0IsXVP0JmcB2adSE338GkK,3ZXb8FKZGU0EHALYX6uCzU,0D5wENdkdwbqlrHoaJ9g29',
+            'market' => 'ES',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ChapterBulkGetResponse::class, $result);
     }
 }

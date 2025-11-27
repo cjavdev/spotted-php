@@ -5,7 +5,10 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Spotted\Albums\AlbumBulkGetResponse;
+use Spotted\Albums\AlbumGetResponse;
 use Spotted\Client;
+use Spotted\CursorURLPage;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +42,8 @@ final class AlbumsTest extends TestCase
 
         $result = $this->client->albums->retrieve('4aawyAB9vmqN3uQ7FjRGTy', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AlbumGetResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +57,8 @@ final class AlbumsTest extends TestCase
             'ids' => '382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AlbumBulkGetResponse::class, $result);
     }
 
     #[Test]
@@ -65,9 +70,11 @@ final class AlbumsTest extends TestCase
 
         $result = $this->client->albums->bulkRetrieve([
             'ids' => '382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc',
+            'market' => 'ES',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AlbumBulkGetResponse::class, $result);
     }
 
     #[Test]
@@ -79,6 +86,7 @@ final class AlbumsTest extends TestCase
 
         $result = $this->client->albums->listTracks('4aawyAB9vmqN3uQ7FjRGTy', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CursorURLPage::class, $result);
     }
 }
