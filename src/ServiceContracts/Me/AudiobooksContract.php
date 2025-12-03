@@ -26,7 +26,7 @@ interface AudiobooksContract
      */
     public function list(
         array|AudiobookListParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): CursorURLPage;
 
     /**
@@ -40,7 +40,7 @@ interface AudiobooksContract
      */
     public function check(
         array|AudiobookCheckParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): array;
 
     /**
@@ -64,6 +64,6 @@ interface AudiobooksContract
      */
     public function save(
         array|AudiobookSaveParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): mixed;
 }

@@ -52,7 +52,7 @@ interface EpisodesContract
      */
     public function remove(
         array|EpisodeRemoveParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): mixed;
 
     /**
