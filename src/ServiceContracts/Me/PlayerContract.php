@@ -56,7 +56,7 @@ interface PlayerContract
      */
     public function getState(
         array|PlayerGetStateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): PlayerGetStateResponse;
 
     /**
@@ -130,7 +130,7 @@ interface PlayerContract
      */
     public function skipNext(
         array|PlayerSkipNextParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): mixed;
 
     /**
@@ -178,6 +178,6 @@ interface PlayerContract
      */
     public function transfer(
         array|PlayerTransferParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): mixed;
 }

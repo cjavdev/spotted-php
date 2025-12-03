@@ -37,7 +37,7 @@ interface FollowingContract
      */
     public function check(
         array|FollowingCheckParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): array;
 
     /**
