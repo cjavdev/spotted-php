@@ -46,7 +46,7 @@ final class EpisodesService implements EpisodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'me/episodes',
@@ -78,7 +78,7 @@ final class EpisodesService implements EpisodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'me/episodes/contains',
@@ -107,7 +107,7 @@ final class EpisodesService implements EpisodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: 'me/episodes',
@@ -136,7 +136,7 @@ final class EpisodesService implements EpisodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: 'me/episodes',

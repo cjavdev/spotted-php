@@ -89,7 +89,7 @@ final class RecommendationsService implements RecommendationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'recommendations',
@@ -111,7 +111,7 @@ final class RecommendationsService implements RecommendationsContract
     public function listAvailableGenreSeeds(
         ?RequestOptions $requestOptions = null
     ): RecommendationListAvailableGenreSeedsResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'recommendations/available-genre-seeds',

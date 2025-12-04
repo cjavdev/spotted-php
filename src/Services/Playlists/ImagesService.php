@@ -30,7 +30,7 @@ final class ImagesService implements ImagesContract
         string $body,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['playlists/%1$s/images', $playlistID],
@@ -56,7 +56,7 @@ final class ImagesService implements ImagesContract
         string $playlistID,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['playlists/%1$s/images', $playlistID],

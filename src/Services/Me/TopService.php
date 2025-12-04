@@ -43,7 +43,7 @@ final class TopService implements TopContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'me/top/artists',
@@ -76,7 +76,7 @@ final class TopService implements TopContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'me/top/tracks',

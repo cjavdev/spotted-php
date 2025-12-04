@@ -51,7 +51,7 @@ final class BrowseService implements BrowseContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'browse/featured-playlists',
@@ -79,7 +79,7 @@ final class BrowseService implements BrowseContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'browse/new-releases',

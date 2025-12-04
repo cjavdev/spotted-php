@@ -36,7 +36,7 @@ final class QueueService implements QueueContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'me/player/queue',
@@ -56,7 +56,7 @@ final class QueueService implements QueueContract
     public function get(
         ?RequestOptions $requestOptions = null
     ): QueueGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'me/player/queue',

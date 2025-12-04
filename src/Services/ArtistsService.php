@@ -36,7 +36,7 @@ final class ArtistsService implements ArtistsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ArtistObject {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['artists/%1$s', $id],
@@ -63,7 +63,7 @@ final class ArtistsService implements ArtistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'artists',
@@ -96,7 +96,7 @@ final class ArtistsService implements ArtistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['artists/%1$s/albums', $id],
@@ -120,7 +120,7 @@ final class ArtistsService implements ArtistsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ArtistListRelatedArtistsResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['artists/%1$s/related-artists', $id],
@@ -148,7 +148,7 @@ final class ArtistsService implements ArtistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['artists/%1$s/top-tracks', $id],

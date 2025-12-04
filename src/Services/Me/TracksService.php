@@ -43,7 +43,7 @@ final class TracksService implements TracksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'me/tracks',
@@ -74,7 +74,7 @@ final class TracksService implements TracksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'me/tracks/contains',
@@ -102,7 +102,7 @@ final class TracksService implements TracksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: 'me/tracks',
@@ -135,7 +135,7 @@ final class TracksService implements TracksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: 'me/tracks',

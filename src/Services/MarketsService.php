@@ -27,7 +27,7 @@ final class MarketsService implements MarketsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): MarketListResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'markets',

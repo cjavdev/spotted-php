@@ -42,7 +42,7 @@ final class AlbumsService implements AlbumsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['albums/%1$s', $id],
@@ -70,7 +70,7 @@ final class AlbumsService implements AlbumsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'albums',
@@ -104,7 +104,7 @@ final class AlbumsService implements AlbumsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['albums/%1$s/tracks', $id],
