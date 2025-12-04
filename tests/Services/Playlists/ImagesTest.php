@@ -39,7 +39,6 @@ final class ImagesTest extends TestCase
 
         $result = $this->client->playlists->images->update(
             '3cEYpjA9oz9GiPac4AsH4n',
-            'file',
             'file'
         );
 
