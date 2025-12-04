@@ -40,7 +40,7 @@ final class EpisodesService implements EpisodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['episodes/%1$s', $id],
@@ -68,7 +68,7 @@ final class EpisodesService implements EpisodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'episodes',

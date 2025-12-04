@@ -41,7 +41,7 @@ final class CategoriesService implements CategoriesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['browse/categories/%1$s', $categoryID],
@@ -71,7 +71,7 @@ final class CategoriesService implements CategoriesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'browse/categories',
@@ -102,7 +102,7 @@ final class CategoriesService implements CategoriesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['browse/categories/%1$s/playlists', $categoryID],

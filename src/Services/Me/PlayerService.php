@@ -62,7 +62,7 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'me/player/currently-playing',
@@ -82,7 +82,7 @@ final class PlayerService implements PlayerContract
     public function getDevices(
         ?RequestOptions $requestOptions = null
     ): PlayerGetDevicesResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'me/player/devices',
@@ -111,7 +111,7 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'me/player',
@@ -144,7 +144,7 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'me/player/recently-played',
@@ -173,7 +173,7 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: 'me/player/pause',
@@ -203,7 +203,7 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: 'me/player/seek',
@@ -233,7 +233,7 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: 'me/player/repeat',
@@ -263,7 +263,7 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: 'me/player/volume',
@@ -291,7 +291,7 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'me/player/next',
@@ -319,7 +319,7 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'me/player/previous',
@@ -354,7 +354,7 @@ final class PlayerService implements PlayerContract
         );
         $query_params = ['device_id'];
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: 'me/player/play',
@@ -383,7 +383,7 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: 'me/player/shuffle',
@@ -411,7 +411,7 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: 'me/player',

@@ -43,7 +43,7 @@ final class ShowsService implements ShowsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['shows/%1$s', $id],
@@ -71,7 +71,7 @@ final class ShowsService implements ShowsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'shows',
@@ -104,7 +104,7 @@ final class ShowsService implements ShowsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['shows/%1$s/episodes', $id],

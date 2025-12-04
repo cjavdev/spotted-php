@@ -40,7 +40,7 @@ final class TracksService implements TracksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['tracks/%1$s', $id],
@@ -68,7 +68,7 @@ final class TracksService implements TracksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'tracks',

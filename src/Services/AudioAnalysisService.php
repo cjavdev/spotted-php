@@ -30,7 +30,7 @@ final class AudioAnalysisService implements AudioAnalysisContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): AudioAnalysisGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['audio-analysis/%1$s', $id],

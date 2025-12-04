@@ -37,7 +37,7 @@ final class UsersService implements UsersContract
         string $userID,
         ?RequestOptions $requestOptions = null
     ): UserGetProfileResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['users/%1$s', $userID],

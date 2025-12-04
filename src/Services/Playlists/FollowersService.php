@@ -40,7 +40,7 @@ final class FollowersService implements FollowersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['playlists/%1$s/followers/contains', $playlistID],
@@ -69,7 +69,7 @@ final class FollowersService implements FollowersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['playlists/%1$s/followers', $playlistID],
@@ -90,7 +90,7 @@ final class FollowersService implements FollowersContract
         string $playlistID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['playlists/%1$s/followers', $playlistID],

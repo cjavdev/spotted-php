@@ -33,7 +33,7 @@ final class AudioFeaturesService implements AudioFeaturesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): AudioFeatureGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['audio-features/%1$s', $id],
@@ -62,7 +62,7 @@ final class AudioFeaturesService implements AudioFeaturesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'audio-features',

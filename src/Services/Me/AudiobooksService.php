@@ -43,7 +43,7 @@ final class AudiobooksService implements AudiobooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'me/audiobooks',
@@ -74,7 +74,7 @@ final class AudiobooksService implements AudiobooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'me/audiobooks/contains',
@@ -102,7 +102,7 @@ final class AudiobooksService implements AudiobooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: 'me/audiobooks',
@@ -130,7 +130,7 @@ final class AudiobooksService implements AudiobooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: 'me/audiobooks',

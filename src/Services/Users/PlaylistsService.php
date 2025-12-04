@@ -44,7 +44,7 @@ final class PlaylistsService implements PlaylistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['users/%1$s/playlists', $userID],
@@ -75,7 +75,7 @@ final class PlaylistsService implements PlaylistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['users/%1$s/playlists', $userID],
