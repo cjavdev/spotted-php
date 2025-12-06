@@ -36,7 +36,7 @@ final class ExternalURLObject implements BaseModel
     {
         $obj = new self;
 
-        null !== $spotify && $obj->spotify = $spotify;
+        null !== $spotify && $obj['spotify'] = $spotify;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class ExternalURLObject implements BaseModel
     public function withSpotify(string $spotify): self
     {
         $obj = clone $this;
-        $obj->spotify = $spotify;
+        $obj['spotify'] = $spotify;
 
         return $obj;
     }

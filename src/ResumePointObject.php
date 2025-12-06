@@ -46,8 +46,8 @@ final class ResumePointObject implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $fully_played && $obj->fully_played = $fully_played;
-        null !== $resume_position_ms && $obj->resume_position_ms = $resume_position_ms;
+        null !== $fully_played && $obj['fully_played'] = $fully_played;
+        null !== $resume_position_ms && $obj['resume_position_ms'] = $resume_position_ms;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class ResumePointObject implements BaseModel
     public function withFullyPlayed(bool $fullyPlayed): self
     {
         $obj = clone $this;
-        $obj->fully_played = $fullyPlayed;
+        $obj['fully_played'] = $fullyPlayed;
 
         return $obj;
     }
@@ -69,7 +69,7 @@ final class ResumePointObject implements BaseModel
     public function withResumePositionMs(int $resumePositionMs): self
     {
         $obj = clone $this;
-        $obj->resume_position_ms = $resumePositionMs;
+        $obj['resume_position_ms'] = $resumePositionMs;
 
         return $obj;
     }

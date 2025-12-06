@@ -119,15 +119,15 @@ final class Segment implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $confidence && $obj->confidence = $confidence;
-        null !== $duration && $obj->duration = $duration;
-        null !== $loudness_end && $obj->loudness_end = $loudness_end;
-        null !== $loudness_max && $obj->loudness_max = $loudness_max;
-        null !== $loudness_max_time && $obj->loudness_max_time = $loudness_max_time;
-        null !== $loudness_start && $obj->loudness_start = $loudness_start;
-        null !== $pitches && $obj->pitches = $pitches;
-        null !== $start && $obj->start = $start;
-        null !== $timbre && $obj->timbre = $timbre;
+        null !== $confidence && $obj['confidence'] = $confidence;
+        null !== $duration && $obj['duration'] = $duration;
+        null !== $loudness_end && $obj['loudness_end'] = $loudness_end;
+        null !== $loudness_max && $obj['loudness_max'] = $loudness_max;
+        null !== $loudness_max_time && $obj['loudness_max_time'] = $loudness_max_time;
+        null !== $loudness_start && $obj['loudness_start'] = $loudness_start;
+        null !== $pitches && $obj['pitches'] = $pitches;
+        null !== $start && $obj['start'] = $start;
+        null !== $timbre && $obj['timbre'] = $timbre;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class Segment implements BaseModel
     public function withConfidence(float $confidence): self
     {
         $obj = clone $this;
-        $obj->confidence = $confidence;
+        $obj['confidence'] = $confidence;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Segment implements BaseModel
     public function withDuration(float $duration): self
     {
         $obj = clone $this;
-        $obj->duration = $duration;
+        $obj['duration'] = $duration;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class Segment implements BaseModel
     public function withLoudnessEnd(float $loudnessEnd): self
     {
         $obj = clone $this;
-        $obj->loudness_end = $loudnessEnd;
+        $obj['loudness_end'] = $loudnessEnd;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class Segment implements BaseModel
     public function withLoudnessMax(float $loudnessMax): self
     {
         $obj = clone $this;
-        $obj->loudness_max = $loudnessMax;
+        $obj['loudness_max'] = $loudnessMax;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class Segment implements BaseModel
     public function withLoudnessMaxTime(float $loudnessMaxTime): self
     {
         $obj = clone $this;
-        $obj->loudness_max_time = $loudnessMaxTime;
+        $obj['loudness_max_time'] = $loudnessMaxTime;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class Segment implements BaseModel
     public function withLoudnessStart(float $loudnessStart): self
     {
         $obj = clone $this;
-        $obj->loudness_start = $loudnessStart;
+        $obj['loudness_start'] = $loudnessStart;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class Segment implements BaseModel
     public function withPitches(array $pitches): self
     {
         $obj = clone $this;
-        $obj->pitches = $pitches;
+        $obj['pitches'] = $pitches;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class Segment implements BaseModel
     public function withStart(float $start): self
     {
         $obj = clone $this;
-        $obj->start = $start;
+        $obj['start'] = $start;
 
         return $obj;
     }
@@ -239,7 +239,7 @@ final class Segment implements BaseModel
     public function withTimbre(array $timbre): self
     {
         $obj = clone $this;
-        $obj->timbre = $timbre;
+        $obj['timbre'] = $timbre;
 
         return $obj;
     }

@@ -72,10 +72,10 @@ final class ArtistListAlbumsParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $include_groups && $obj->include_groups = $include_groups;
-        null !== $limit && $obj->limit = $limit;
-        null !== $market && $obj->market = $market;
-        null !== $offset && $obj->offset = $offset;
+        null !== $include_groups && $obj['include_groups'] = $include_groups;
+        null !== $limit && $obj['limit'] = $limit;
+        null !== $market && $obj['market'] = $market;
+        null !== $offset && $obj['offset'] = $offset;
 
         return $obj;
     }
@@ -87,7 +87,7 @@ final class ArtistListAlbumsParams implements BaseModel
     public function withIncludeGroups(string $includeGroups): self
     {
         $obj = clone $this;
-        $obj->include_groups = $includeGroups;
+        $obj['include_groups'] = $includeGroups;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class ArtistListAlbumsParams implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class ArtistListAlbumsParams implements BaseModel
     public function withMarket(string $market): self
     {
         $obj = clone $this;
-        $obj->market = $market;
+        $obj['market'] = $market;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class ArtistListAlbumsParams implements BaseModel
     public function withOffset(int $offset): self
     {
         $obj = clone $this;
-        $obj->offset = $offset;
+        $obj['offset'] = $offset;
 
         return $obj;
     }

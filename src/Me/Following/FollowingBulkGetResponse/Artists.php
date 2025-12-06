@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace Spotted\Me\Following\FollowingBulkGetResponse;
 
 use Spotted\ArtistObject;
+use Spotted\ArtistObject\Type;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
+use Spotted\ExternalURLObject;
+use Spotted\FollowersObject;
+use Spotted\ImageObject;
 use Spotted\Me\Following\FollowingBulkGetResponse\Artists\Cursors;
 
 /**
@@ -69,10 +73,22 @@ final class Artists implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ArtistObject> $items
+     * @param Cursors|array{after?: string|null, before?: string|null} $cursors
+     * @param list<ArtistObject|array{
+     *   id?: string|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   followers?: FollowersObject|null,
+     *   genres?: list<string>|null,
+     *   href?: string|null,
+     *   images?: list<ImageObject>|null,
+     *   name?: string|null,
+     *   popularity?: int|null,
+     *   type?: value-of<Type>|null,
+     *   uri?: string|null,
+     * }> $items
      */
     public static function with(
-        ?Cursors $cursors = null,
+        Cursors|array|null $cursors = null,
         ?string $href = null,
         ?array $items = null,
         ?int $limit = null,
@@ -81,23 +97,25 @@ final class Artists implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $cursors && $obj->cursors = $cursors;
-        null !== $href && $obj->href = $href;
-        null !== $items && $obj->items = $items;
-        null !== $limit && $obj->limit = $limit;
-        null !== $next && $obj->next = $next;
-        null !== $total && $obj->total = $total;
+        null !== $cursors && $obj['cursors'] = $cursors;
+        null !== $href && $obj['href'] = $href;
+        null !== $items && $obj['items'] = $items;
+        null !== $limit && $obj['limit'] = $limit;
+        null !== $next && $obj['next'] = $next;
+        null !== $total && $obj['total'] = $total;
 
         return $obj;
     }
 
     /**
      * The cursors used to find the next set of items.
+     *
+     * @param Cursors|array{after?: string|null, before?: string|null} $cursors
      */
-    public function withCursors(Cursors $cursors): self
+    public function withCursors(Cursors|array $cursors): self
     {
         $obj = clone $this;
-        $obj->cursors = $cursors;
+        $obj['cursors'] = $cursors;
 
         return $obj;
     }
@@ -108,18 +126,29 @@ final class Artists implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
 
     /**
-     * @param list<ArtistObject> $items
+     * @param list<ArtistObject|array{
+     *   id?: string|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   followers?: FollowersObject|null,
+     *   genres?: list<string>|null,
+     *   href?: string|null,
+     *   images?: list<ImageObject>|null,
+     *   name?: string|null,
+     *   popularity?: int|null,
+     *   type?: value-of<Type>|null,
+     *   uri?: string|null,
+     * }> $items
      */
     public function withItems(array $items): self
     {
         $obj = clone $this;
-        $obj->items = $items;
+        $obj['items'] = $items;
 
         return $obj;
     }
@@ -130,7 +159,7 @@ final class Artists implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -141,7 +170,7 @@ final class Artists implements BaseModel
     public function withNext(string $next): self
     {
         $obj = clone $this;
-        $obj->next = $next;
+        $obj['next'] = $next;
 
         return $obj;
     }
@@ -152,7 +181,7 @@ final class Artists implements BaseModel
     public function withTotal(int $total): self
     {
         $obj = clone $this;
-        $obj->total = $total;
+        $obj['total'] = $total;
 
         return $obj;
     }

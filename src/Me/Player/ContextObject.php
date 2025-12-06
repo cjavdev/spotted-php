@@ -55,30 +55,35 @@ final class ContextObject implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
      */
     public static function with(
-        ?ExternalURLObject $external_urls = null,
+        ExternalURLObject|array|null $external_urls = null,
         ?string $href = null,
         ?string $type = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $href && $obj->href = $href;
-        null !== $type && $obj->type = $type;
-        null !== $uri && $obj->uri = $uri;
+        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $href && $obj['href'] = $href;
+        null !== $type && $obj['type'] = $type;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
 
     /**
      * External URLs for this context.
+     *
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
         $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+        $obj['external_urls'] = $externalURLs;
 
         return $obj;
     }
@@ -89,7 +94,7 @@ final class ContextObject implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -100,7 +105,7 @@ final class ContextObject implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -111,7 +116,7 @@ final class ContextObject implements BaseModel
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

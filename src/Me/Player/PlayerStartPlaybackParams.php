@@ -89,11 +89,11 @@ final class PlayerStartPlaybackParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $device_id && $obj->device_id = $device_id;
-        null !== $context_uri && $obj->context_uri = $context_uri;
-        null !== $offset && $obj->offset = $offset;
-        null !== $position_ms && $obj->position_ms = $position_ms;
-        null !== $uris && $obj->uris = $uris;
+        null !== $device_id && $obj['device_id'] = $device_id;
+        null !== $context_uri && $obj['context_uri'] = $context_uri;
+        null !== $offset && $obj['offset'] = $offset;
+        null !== $position_ms && $obj['position_ms'] = $position_ms;
+        null !== $uris && $obj['uris'] = $uris;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class PlayerStartPlaybackParams implements BaseModel
     public function withDeviceID(string $deviceID): self
     {
         $obj = clone $this;
-        $obj->device_id = $deviceID;
+        $obj['device_id'] = $deviceID;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class PlayerStartPlaybackParams implements BaseModel
     public function withContextUri(string $contextUri): self
     {
         $obj = clone $this;
-        $obj->context_uri = $contextUri;
+        $obj['context_uri'] = $contextUri;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class PlayerStartPlaybackParams implements BaseModel
     public function withOffset(array $offset): self
     {
         $obj = clone $this;
-        $obj->offset = $offset;
+        $obj['offset'] = $offset;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class PlayerStartPlaybackParams implements BaseModel
     public function withPositionMs(int $positionMs): self
     {
         $obj = clone $this;
-        $obj->position_ms = $positionMs;
+        $obj['position_ms'] = $positionMs;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class PlayerStartPlaybackParams implements BaseModel
     public function withUris(array $uris): self
     {
         $obj = clone $this;
-        $obj->uris = $uris;
+        $obj['uris'] = $uris;
 
         return $obj;
     }

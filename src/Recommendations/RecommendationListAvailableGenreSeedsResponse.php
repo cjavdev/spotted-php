@@ -56,7 +56,7 @@ final class RecommendationListAvailableGenreSeedsResponse implements BaseModel, 
     {
         $obj = new self;
 
-        $obj->genres = $genres;
+        $obj['genres'] = $genres;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class RecommendationListAvailableGenreSeedsResponse implements BaseModel, 
     public function withGenres(array $genres): self
     {
         $obj = clone $this;
-        $obj->genres = $genres;
+        $obj['genres'] = $genres;
 
         return $obj;
     }

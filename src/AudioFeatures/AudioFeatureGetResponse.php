@@ -184,24 +184,24 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $acousticness && $obj->acousticness = $acousticness;
-        null !== $analysis_url && $obj->analysis_url = $analysis_url;
-        null !== $danceability && $obj->danceability = $danceability;
-        null !== $duration_ms && $obj->duration_ms = $duration_ms;
-        null !== $energy && $obj->energy = $energy;
-        null !== $instrumentalness && $obj->instrumentalness = $instrumentalness;
-        null !== $key && $obj->key = $key;
-        null !== $liveness && $obj->liveness = $liveness;
-        null !== $loudness && $obj->loudness = $loudness;
-        null !== $mode && $obj->mode = $mode;
-        null !== $speechiness && $obj->speechiness = $speechiness;
-        null !== $tempo && $obj->tempo = $tempo;
-        null !== $time_signature && $obj->time_signature = $time_signature;
-        null !== $track_href && $obj->track_href = $track_href;
+        null !== $id && $obj['id'] = $id;
+        null !== $acousticness && $obj['acousticness'] = $acousticness;
+        null !== $analysis_url && $obj['analysis_url'] = $analysis_url;
+        null !== $danceability && $obj['danceability'] = $danceability;
+        null !== $duration_ms && $obj['duration_ms'] = $duration_ms;
+        null !== $energy && $obj['energy'] = $energy;
+        null !== $instrumentalness && $obj['instrumentalness'] = $instrumentalness;
+        null !== $key && $obj['key'] = $key;
+        null !== $liveness && $obj['liveness'] = $liveness;
+        null !== $loudness && $obj['loudness'] = $loudness;
+        null !== $mode && $obj['mode'] = $mode;
+        null !== $speechiness && $obj['speechiness'] = $speechiness;
+        null !== $tempo && $obj['tempo'] = $tempo;
+        null !== $time_signature && $obj['time_signature'] = $time_signature;
+        null !== $track_href && $obj['track_href'] = $track_href;
         null !== $type && $obj['type'] = $type;
-        null !== $uri && $obj->uri = $uri;
-        null !== $valence && $obj->valence = $valence;
+        null !== $uri && $obj['uri'] = $uri;
+        null !== $valence && $obj['valence'] = $valence;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withAcousticness(float $acousticness): self
     {
         $obj = clone $this;
-        $obj->acousticness = $acousticness;
+        $obj['acousticness'] = $acousticness;
 
         return $obj;
     }
@@ -234,7 +234,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withAnalysisURL(string $analysisURL): self
     {
         $obj = clone $this;
-        $obj->analysis_url = $analysisURL;
+        $obj['analysis_url'] = $analysisURL;
 
         return $obj;
     }
@@ -245,7 +245,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withDanceability(float $danceability): self
     {
         $obj = clone $this;
-        $obj->danceability = $danceability;
+        $obj['danceability'] = $danceability;
 
         return $obj;
     }
@@ -256,7 +256,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withDurationMs(int $durationMs): self
     {
         $obj = clone $this;
-        $obj->duration_ms = $durationMs;
+        $obj['duration_ms'] = $durationMs;
 
         return $obj;
     }
@@ -267,7 +267,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withEnergy(float $energy): self
     {
         $obj = clone $this;
-        $obj->energy = $energy;
+        $obj['energy'] = $energy;
 
         return $obj;
     }
@@ -278,7 +278,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withInstrumentalness(float $instrumentalness): self
     {
         $obj = clone $this;
-        $obj->instrumentalness = $instrumentalness;
+        $obj['instrumentalness'] = $instrumentalness;
 
         return $obj;
     }
@@ -289,7 +289,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withKey(int $key): self
     {
         $obj = clone $this;
-        $obj->key = $key;
+        $obj['key'] = $key;
 
         return $obj;
     }
@@ -300,7 +300,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withLiveness(float $liveness): self
     {
         $obj = clone $this;
-        $obj->liveness = $liveness;
+        $obj['liveness'] = $liveness;
 
         return $obj;
     }
@@ -311,7 +311,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withLoudness(float $loudness): self
     {
         $obj = clone $this;
-        $obj->loudness = $loudness;
+        $obj['loudness'] = $loudness;
 
         return $obj;
     }
@@ -322,7 +322,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withMode(int $mode): self
     {
         $obj = clone $this;
-        $obj->mode = $mode;
+        $obj['mode'] = $mode;
 
         return $obj;
     }
@@ -333,7 +333,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withSpeechiness(float $speechiness): self
     {
         $obj = clone $this;
-        $obj->speechiness = $speechiness;
+        $obj['speechiness'] = $speechiness;
 
         return $obj;
     }
@@ -344,7 +344,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withTempo(float $tempo): self
     {
         $obj = clone $this;
-        $obj->tempo = $tempo;
+        $obj['tempo'] = $tempo;
 
         return $obj;
     }
@@ -355,7 +355,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withTimeSignature(int $timeSignature): self
     {
         $obj = clone $this;
-        $obj->time_signature = $timeSignature;
+        $obj['time_signature'] = $timeSignature;
 
         return $obj;
     }
@@ -366,7 +366,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withTrackHref(string $trackHref): self
     {
         $obj = clone $this;
-        $obj->track_href = $trackHref;
+        $obj['track_href'] = $trackHref;
 
         return $obj;
     }
@@ -390,7 +390,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -401,7 +401,7 @@ final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
     public function withValence(float $valence): self
     {
         $obj = clone $this;
-        $obj->valence = $valence;
+        $obj['valence'] = $valence;
 
         return $obj;
     }

@@ -4,10 +4,16 @@ declare(strict_types=1);
 
 namespace Spotted\Browse\BrowseGetNewReleasesResponse;
 
+use Spotted\AlbumRestrictionObject;
 use Spotted\Browse\BrowseGetNewReleasesResponse\Albums\Item;
+use Spotted\Browse\BrowseGetNewReleasesResponse\Albums\Item\AlbumType;
+use Spotted\Browse\BrowseGetNewReleasesResponse\Albums\Item\ReleaseDatePrecision;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
+use Spotted\ExternalURLObject;
+use Spotted\ImageObject;
+use Spotted\SimplifiedArtistObject;
 
 /**
  * @phpstan-type AlbumsShape = array{
@@ -97,7 +103,22 @@ final class Albums implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Item> $items
+     * @param list<Item|array{
+     *   id: string,
+     *   album_type: value-of<AlbumType>,
+     *   artists: list<SimplifiedArtistObject>,
+     *   available_markets: list<string>,
+     *   external_urls: ExternalURLObject,
+     *   href: string,
+     *   images: list<ImageObject>,
+     *   name: string,
+     *   release_date: string,
+     *   release_date_precision: value-of<ReleaseDatePrecision>,
+     *   total_tracks: int,
+     *   type: 'album',
+     *   uri: string,
+     *   restrictions?: AlbumRestrictionObject|null,
+     * }> $items
      */
     public static function with(
         string $href,
@@ -110,14 +131,14 @@ final class Albums implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->href = $href;
-        $obj->limit = $limit;
-        $obj->next = $next;
-        $obj->offset = $offset;
-        $obj->previous = $previous;
-        $obj->total = $total;
+        $obj['href'] = $href;
+        $obj['limit'] = $limit;
+        $obj['next'] = $next;
+        $obj['offset'] = $offset;
+        $obj['previous'] = $previous;
+        $obj['total'] = $total;
 
-        null !== $items && $obj->items = $items;
+        null !== $items && $obj['items'] = $items;
 
         return $obj;
     }
@@ -128,7 +149,7 @@ final class Albums implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -139,7 +160,7 @@ final class Albums implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -150,7 +171,7 @@ final class Albums implements BaseModel
     public function withNext(?string $next): self
     {
         $obj = clone $this;
-        $obj->next = $next;
+        $obj['next'] = $next;
 
         return $obj;
     }
@@ -161,7 +182,7 @@ final class Albums implements BaseModel
     public function withOffset(int $offset): self
     {
         $obj = clone $this;
-        $obj->offset = $offset;
+        $obj['offset'] = $offset;
 
         return $obj;
     }
@@ -172,7 +193,7 @@ final class Albums implements BaseModel
     public function withPrevious(?string $previous): self
     {
         $obj = clone $this;
-        $obj->previous = $previous;
+        $obj['previous'] = $previous;
 
         return $obj;
     }
@@ -183,18 +204,33 @@ final class Albums implements BaseModel
     public function withTotal(int $total): self
     {
         $obj = clone $this;
-        $obj->total = $total;
+        $obj['total'] = $total;
 
         return $obj;
     }
 
     /**
-     * @param list<Item> $items
+     * @param list<Item|array{
+     *   id: string,
+     *   album_type: value-of<AlbumType>,
+     *   artists: list<SimplifiedArtistObject>,
+     *   available_markets: list<string>,
+     *   external_urls: ExternalURLObject,
+     *   href: string,
+     *   images: list<ImageObject>,
+     *   name: string,
+     *   release_date: string,
+     *   release_date_precision: value-of<ReleaseDatePrecision>,
+     *   total_tracks: int,
+     *   type: 'album',
+     *   uri: string,
+     *   restrictions?: AlbumRestrictionObject|null,
+     * }> $items
      */
     public function withItems(array $items): self
     {
         $obj = clone $this;
-        $obj->items = $items;
+        $obj['items'] = $items;
 
         return $obj;
     }

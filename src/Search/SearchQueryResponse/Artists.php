@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace Spotted\Search\SearchQueryResponse;
 
 use Spotted\ArtistObject;
+use Spotted\ArtistObject\Type;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
+use Spotted\ExternalURLObject;
+use Spotted\FollowersObject;
+use Spotted\ImageObject;
 
 /**
  * @phpstan-type ArtistsShape = array{
@@ -97,7 +101,18 @@ final class Artists implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ArtistObject> $items
+     * @param list<ArtistObject|array{
+     *   id?: string|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   followers?: FollowersObject|null,
+     *   genres?: list<string>|null,
+     *   href?: string|null,
+     *   images?: list<ImageObject>|null,
+     *   name?: string|null,
+     *   popularity?: int|null,
+     *   type?: value-of<Type>|null,
+     *   uri?: string|null,
+     * }> $items
      */
     public static function with(
         string $href,
@@ -110,14 +125,14 @@ final class Artists implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->href = $href;
-        $obj->limit = $limit;
-        $obj->next = $next;
-        $obj->offset = $offset;
-        $obj->previous = $previous;
-        $obj->total = $total;
+        $obj['href'] = $href;
+        $obj['limit'] = $limit;
+        $obj['next'] = $next;
+        $obj['offset'] = $offset;
+        $obj['previous'] = $previous;
+        $obj['total'] = $total;
 
-        null !== $items && $obj->items = $items;
+        null !== $items && $obj['items'] = $items;
 
         return $obj;
     }
@@ -128,7 +143,7 @@ final class Artists implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -139,7 +154,7 @@ final class Artists implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -150,7 +165,7 @@ final class Artists implements BaseModel
     public function withNext(?string $next): self
     {
         $obj = clone $this;
-        $obj->next = $next;
+        $obj['next'] = $next;
 
         return $obj;
     }
@@ -161,7 +176,7 @@ final class Artists implements BaseModel
     public function withOffset(int $offset): self
     {
         $obj = clone $this;
-        $obj->offset = $offset;
+        $obj['offset'] = $offset;
 
         return $obj;
     }
@@ -172,7 +187,7 @@ final class Artists implements BaseModel
     public function withPrevious(?string $previous): self
     {
         $obj = clone $this;
-        $obj->previous = $previous;
+        $obj['previous'] = $previous;
 
         return $obj;
     }
@@ -183,18 +198,29 @@ final class Artists implements BaseModel
     public function withTotal(int $total): self
     {
         $obj = clone $this;
-        $obj->total = $total;
+        $obj['total'] = $total;
 
         return $obj;
     }
 
     /**
-     * @param list<ArtistObject> $items
+     * @param list<ArtistObject|array{
+     *   id?: string|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   followers?: FollowersObject|null,
+     *   genres?: list<string>|null,
+     *   href?: string|null,
+     *   images?: list<ImageObject>|null,
+     *   name?: string|null,
+     *   popularity?: int|null,
+     *   type?: value-of<Type>|null,
+     *   uri?: string|null,
+     * }> $items
      */
     public function withItems(array $items): self
     {
         $obj = clone $this;
-        $obj->items = $items;
+        $obj['items'] = $items;
 
         return $obj;
     }

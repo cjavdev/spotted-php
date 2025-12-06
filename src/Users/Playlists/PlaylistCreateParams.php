@@ -82,11 +82,11 @@ final class PlaylistCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->name = $name;
+        $obj['name'] = $name;
 
-        null !== $collaborative && $obj->collaborative = $collaborative;
-        null !== $description && $obj->description = $description;
-        null !== $public && $obj->public = $public;
+        null !== $collaborative && $obj['collaborative'] = $collaborative;
+        null !== $description && $obj['description'] = $description;
+        null !== $public && $obj['public'] = $public;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class PlaylistCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class PlaylistCreateParams implements BaseModel
     public function withCollaborative(bool $collaborative): self
     {
         $obj = clone $this;
-        $obj->collaborative = $collaborative;
+        $obj['collaborative'] = $collaborative;
 
         return $obj;
     }
@@ -119,7 +119,7 @@ final class PlaylistCreateParams implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class PlaylistCreateParams implements BaseModel
     public function withPublic(bool $public): self
     {
         $obj = clone $this;
-        $obj->public = $public;
+        $obj['public'] = $public;
 
         return $obj;
     }

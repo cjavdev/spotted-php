@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Albums;
 
 use Spotted\AlbumRestrictionObject;
+use Spotted\AlbumRestrictionObject\Reason;
 use Spotted\Albums\AlbumGetResponse\AlbumType;
 use Spotted\Albums\AlbumGetResponse\ReleaseDatePrecision;
 use Spotted\Albums\AlbumGetResponse\Tracks;
@@ -18,6 +19,8 @@ use Spotted\ExternalIDObject;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
 use Spotted\SimplifiedArtistObject;
+use Spotted\SimplifiedArtistObject\Type;
+use Spotted\SimplifiedTrackObject;
 
 /**
  * @phpstan-type AlbumGetResponseShape = array{
@@ -237,17 +240,44 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
      *
      * @param AlbumType|value-of<AlbumType> $album_type
      * @param list<string> $available_markets
-     * @param list<ImageObject> $images
+     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $release_date_precision
-     * @param list<SimplifiedArtistObject> $artists
-     * @param list<CopyrightObject> $copyrights
+     * @param list<SimplifiedArtistObject|array{
+     *   id?: string|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   href?: string|null,
+     *   name?: string|null,
+     *   type?: value-of<Type>|null,
+     *   uri?: string|null,
+     * }> $artists
+     * @param list<CopyrightObject|array{
+     *   text?: string|null, type?: string|null
+     * }> $copyrights
+     * @param ExternalIDObject|array{
+     *   ean?: string|null, isrc?: string|null, upc?: string|null
+     * } $external_ids
      * @param list<string> $genres
+     * @param AlbumRestrictionObject|array{
+     *   reason?: value-of<Reason>|null
+     * } $restrictions
+     * @param Tracks|array{
+     *   href: string,
+     *   limit: int,
+     *   next: string|null,
+     *   offset: int,
+     *   previous: string|null,
+     *   total: int,
+     *   items?: list<SimplifiedTrackObject>|null,
+     * } $tracks
      */
     public static function with(
         string $id,
         AlbumType|string $album_type,
         array $available_markets,
-        ExternalURLObject $external_urls,
+        ExternalURLObject|array $external_urls,
         string $href,
         array $images,
         string $name,
@@ -257,35 +287,35 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
         string $uri,
         ?array $artists = null,
         ?array $copyrights = null,
-        ?ExternalIDObject $external_ids = null,
+        ExternalIDObject|array|null $external_ids = null,
         ?array $genres = null,
         ?string $label = null,
         ?int $popularity = null,
-        ?AlbumRestrictionObject $restrictions = null,
-        ?Tracks $tracks = null,
+        AlbumRestrictionObject|array|null $restrictions = null,
+        Tracks|array|null $tracks = null,
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
+        $obj['id'] = $id;
         $obj['album_type'] = $album_type;
-        $obj->available_markets = $available_markets;
-        $obj->external_urls = $external_urls;
-        $obj->href = $href;
-        $obj->images = $images;
-        $obj->name = $name;
-        $obj->release_date = $release_date;
+        $obj['available_markets'] = $available_markets;
+        $obj['external_urls'] = $external_urls;
+        $obj['href'] = $href;
+        $obj['images'] = $images;
+        $obj['name'] = $name;
+        $obj['release_date'] = $release_date;
         $obj['release_date_precision'] = $release_date_precision;
-        $obj->total_tracks = $total_tracks;
-        $obj->uri = $uri;
+        $obj['total_tracks'] = $total_tracks;
+        $obj['uri'] = $uri;
 
-        null !== $artists && $obj->artists = $artists;
-        null !== $copyrights && $obj->copyrights = $copyrights;
-        null !== $external_ids && $obj->external_ids = $external_ids;
-        null !== $genres && $obj->genres = $genres;
-        null !== $label && $obj->label = $label;
-        null !== $popularity && $obj->popularity = $popularity;
-        null !== $restrictions && $obj->restrictions = $restrictions;
-        null !== $tracks && $obj->tracks = $tracks;
+        null !== $artists && $obj['artists'] = $artists;
+        null !== $copyrights && $obj['copyrights'] = $copyrights;
+        null !== $external_ids && $obj['external_ids'] = $external_ids;
+        null !== $genres && $obj['genres'] = $genres;
+        null !== $label && $obj['label'] = $label;
+        null !== $popularity && $obj['popularity'] = $popularity;
+        null !== $restrictions && $obj['restrictions'] = $restrictions;
+        null !== $tracks && $obj['tracks'] = $tracks;
 
         return $obj;
     }
@@ -296,7 +326,7 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -322,18 +352,21 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     public function withAvailableMarkets(array $availableMarkets): self
     {
         $obj = clone $this;
-        $obj->available_markets = $availableMarkets;
+        $obj['available_markets'] = $availableMarkets;
 
         return $obj;
     }
 
     /**
      * Known external URLs for this album.
+     *
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
         $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+        $obj['external_urls'] = $externalURLs;
 
         return $obj;
     }
@@ -344,7 +377,7 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -352,12 +385,14 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     /**
      * The cover art for the album in various sizes, widest first.
      *
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      */
     public function withImages(array $images): self
     {
         $obj = clone $this;
-        $obj->images = $images;
+        $obj['images'] = $images;
 
         return $obj;
     }
@@ -368,7 +403,7 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -379,7 +414,7 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     public function withReleaseDate(string $releaseDate): self
     {
         $obj = clone $this;
-        $obj->release_date = $releaseDate;
+        $obj['release_date'] = $releaseDate;
 
         return $obj;
     }
@@ -404,7 +439,7 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     public function withTotalTracks(int $totalTracks): self
     {
         $obj = clone $this;
-        $obj->total_tracks = $totalTracks;
+        $obj['total_tracks'] = $totalTracks;
 
         return $obj;
     }
@@ -415,7 +450,7 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -423,12 +458,19 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     /**
      * The artists of the album. Each artist object includes a link in `href` to more detailed information about the artist.
      *
-     * @param list<SimplifiedArtistObject> $artists
+     * @param list<SimplifiedArtistObject|array{
+     *   id?: string|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   href?: string|null,
+     *   name?: string|null,
+     *   type?: value-of<Type>|null,
+     *   uri?: string|null,
+     * }> $artists
      */
     public function withArtists(array $artists): self
     {
         $obj = clone $this;
-        $obj->artists = $artists;
+        $obj['artists'] = $artists;
 
         return $obj;
     }
@@ -436,23 +478,29 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     /**
      * The copyright statements of the album.
      *
-     * @param list<CopyrightObject> $copyrights
+     * @param list<CopyrightObject|array{
+     *   text?: string|null, type?: string|null
+     * }> $copyrights
      */
     public function withCopyrights(array $copyrights): self
     {
         $obj = clone $this;
-        $obj->copyrights = $copyrights;
+        $obj['copyrights'] = $copyrights;
 
         return $obj;
     }
 
     /**
      * Known external IDs for the album.
+     *
+     * @param ExternalIDObject|array{
+     *   ean?: string|null, isrc?: string|null, upc?: string|null
+     * } $externalIDs
      */
-    public function withExternalIDs(ExternalIDObject $externalIDs): self
+    public function withExternalIDs(ExternalIDObject|array $externalIDs): self
     {
         $obj = clone $this;
-        $obj->external_ids = $externalIDs;
+        $obj['external_ids'] = $externalIDs;
 
         return $obj;
     }
@@ -465,7 +513,7 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     public function withGenres(array $genres): self
     {
         $obj = clone $this;
-        $obj->genres = $genres;
+        $obj['genres'] = $genres;
 
         return $obj;
     }
@@ -476,7 +524,7 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     public function withLabel(string $label): self
     {
         $obj = clone $this;
-        $obj->label = $label;
+        $obj['label'] = $label;
 
         return $obj;
     }
@@ -487,29 +535,44 @@ final class AlbumGetResponse implements BaseModel, ResponseConverter
     public function withPopularity(int $popularity): self
     {
         $obj = clone $this;
-        $obj->popularity = $popularity;
+        $obj['popularity'] = $popularity;
 
         return $obj;
     }
 
     /**
      * Included in the response when a content restriction is applied.
+     *
+     * @param AlbumRestrictionObject|array{
+     *   reason?: value-of<Reason>|null
+     * } $restrictions
      */
-    public function withRestrictions(AlbumRestrictionObject $restrictions): self
-    {
+    public function withRestrictions(
+        AlbumRestrictionObject|array $restrictions
+    ): self {
         $obj = clone $this;
-        $obj->restrictions = $restrictions;
+        $obj['restrictions'] = $restrictions;
 
         return $obj;
     }
 
     /**
      * The tracks of the album.
+     *
+     * @param Tracks|array{
+     *   href: string,
+     *   limit: int,
+     *   next: string|null,
+     *   offset: int,
+     *   previous: string|null,
+     *   total: int,
+     *   items?: list<SimplifiedTrackObject>|null,
+     * } $tracks
      */
-    public function withTracks(Tracks $tracks): self
+    public function withTracks(Tracks|array $tracks): self
     {
         $obj = clone $this;
-        $obj->tracks = $tracks;
+        $obj['tracks'] = $tracks;
 
         return $obj;
     }

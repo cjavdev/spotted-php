@@ -69,9 +69,9 @@ final class EpisodeBulkRetrieveParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->ids = $ids;
+        $obj['ids'] = $ids;
 
-        null !== $market && $obj->market = $market;
+        null !== $market && $obj['market'] = $market;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class EpisodeBulkRetrieveParams implements BaseModel
     public function withIDs(string $ids): self
     {
         $obj = clone $this;
-        $obj->ids = $ids;
+        $obj['ids'] = $ids;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class EpisodeBulkRetrieveParams implements BaseModel
     public function withMarket(string $market): self
     {
         $obj = clone $this;
-        $obj->market = $market;
+        $obj['market'] = $market;
 
         return $obj;
     }

@@ -59,8 +59,8 @@ final class PlayerGetStateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $additional_types && $obj->additional_types = $additional_types;
-        null !== $market && $obj->market = $market;
+        null !== $additional_types && $obj['additional_types'] = $additional_types;
+        null !== $market && $obj['market'] = $market;
 
         return $obj;
     }
@@ -73,7 +73,7 @@ final class PlayerGetStateParams implements BaseModel
     public function withAdditionalTypes(string $additionalTypes): self
     {
         $obj = clone $this;
-        $obj->additional_types = $additionalTypes;
+        $obj['additional_types'] = $additionalTypes;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class PlayerGetStateParams implements BaseModel
     public function withMarket(string $market): self
     {
         $obj = clone $this;
-        $obj->market = $market;
+        $obj['market'] = $market;
 
         return $obj;
     }

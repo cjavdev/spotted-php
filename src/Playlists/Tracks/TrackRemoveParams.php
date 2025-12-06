@@ -16,7 +16,7 @@ use Spotted\Playlists\Tracks\TrackRemoveParams\Track;
  * @see Spotted\Services\Playlists\TracksService::remove()
  *
  * @phpstan-type TrackRemoveParamsShape = array{
- *   tracks: list<Track>, snapshot_id?: string
+ *   tracks: list<Track|array{uri?: string|null}>, snapshot_id?: string
  * }
  */
 final class TrackRemoveParams implements BaseModel
@@ -66,15 +66,15 @@ final class TrackRemoveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Track> $tracks
+     * @param list<Track|array{uri?: string|null}> $tracks
      */
     public static function with(array $tracks, ?string $snapshot_id = null): self
     {
         $obj = new self;
 
-        $obj->tracks = $tracks;
+        $obj['tracks'] = $tracks;
 
-        null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
+        null !== $snapshot_id && $obj['snapshot_id'] = $snapshot_id;
 
         return $obj;
     }
@@ -83,12 +83,12 @@ final class TrackRemoveParams implements BaseModel
      * An array of objects containing [Spotify URIs](/documentation/web-api/concepts/spotify-uris-ids) of the tracks or episodes to remove.
      * For example: `{ "tracks": [{ "uri": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh" },{ "uri": "spotify:track:1301WleyT98MSxVHPZCA6M" }] }`. A maximum of 100 objects can be sent at once.
      *
-     * @param list<Track> $tracks
+     * @param list<Track|array{uri?: string|null}> $tracks
      */
     public function withTracks(array $tracks): self
     {
         $obj = clone $this;
-        $obj->tracks = $tracks;
+        $obj['tracks'] = $tracks;
 
         return $obj;
     }
@@ -101,7 +101,7 @@ final class TrackRemoveParams implements BaseModel
     public function withSnapshotID(string $snapshotID): self
     {
         $obj = clone $this;
-        $obj->snapshot_id = $snapshotID;
+        $obj['snapshot_id'] = $snapshotID;
 
         return $obj;
     }

@@ -64,9 +64,9 @@ final class ImageObject implements BaseModel
     {
         $obj = new self;
 
-        $obj->height = $height;
-        $obj->url = $url;
-        $obj->width = $width;
+        $obj['height'] = $height;
+        $obj['url'] = $url;
+        $obj['width'] = $width;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class ImageObject implements BaseModel
     public function withHeight(?int $height): self
     {
         $obj = clone $this;
-        $obj->height = $height;
+        $obj['height'] = $height;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class ImageObject implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }
@@ -99,7 +99,7 @@ final class ImageObject implements BaseModel
     public function withWidth(?int $width): self
     {
         $obj = clone $this;
-        $obj->width = $width;
+        $obj['width'] = $width;
 
         return $obj;
     }

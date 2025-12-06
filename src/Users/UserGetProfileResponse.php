@@ -95,14 +95,18 @@ final class UserGetProfileResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ImageObject> $images
+     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      * @param Type|value-of<Type> $type
      */
     public static function with(
         ?string $id = null,
         ?string $display_name = null,
-        ?ExternalURLObject $external_urls = null,
-        ?FollowersObject $followers = null,
+        ExternalURLObject|array|null $external_urls = null,
+        FollowersObject|array|null $followers = null,
         ?string $href = null,
         ?array $images = null,
         Type|string|null $type = null,
@@ -110,14 +114,14 @@ final class UserGetProfileResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $display_name && $obj->display_name = $display_name;
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $followers && $obj->followers = $followers;
-        null !== $href && $obj->href = $href;
-        null !== $images && $obj->images = $images;
+        null !== $id && $obj['id'] = $id;
+        null !== $display_name && $obj['display_name'] = $display_name;
+        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $followers && $obj['followers'] = $followers;
+        null !== $href && $obj['href'] = $href;
+        null !== $images && $obj['images'] = $images;
         null !== $type && $obj['type'] = $type;
-        null !== $uri && $obj->uri = $uri;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -128,7 +132,7 @@ final class UserGetProfileResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -139,29 +143,34 @@ final class UserGetProfileResponse implements BaseModel, ResponseConverter
     public function withDisplayName(?string $displayName): self
     {
         $obj = clone $this;
-        $obj->display_name = $displayName;
+        $obj['display_name'] = $displayName;
 
         return $obj;
     }
 
     /**
      * Known public external URLs for this user.
+     *
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
         $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+        $obj['external_urls'] = $externalURLs;
 
         return $obj;
     }
 
     /**
      * Information about the followers of this user.
+     *
+     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
      */
-    public function withFollowers(FollowersObject $followers): self
+    public function withFollowers(FollowersObject|array $followers): self
     {
         $obj = clone $this;
-        $obj->followers = $followers;
+        $obj['followers'] = $followers;
 
         return $obj;
     }
@@ -172,7 +181,7 @@ final class UserGetProfileResponse implements BaseModel, ResponseConverter
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -180,12 +189,14 @@ final class UserGetProfileResponse implements BaseModel, ResponseConverter
     /**
      * The user's profile image.
      *
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      */
     public function withImages(array $images): self
     {
         $obj = clone $this;
-        $obj->images = $images;
+        $obj['images'] = $images;
 
         return $obj;
     }
@@ -209,7 +220,7 @@ final class UserGetProfileResponse implements BaseModel, ResponseConverter
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

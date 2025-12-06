@@ -48,8 +48,8 @@ final class ShowListParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $limit && $obj->limit = $limit;
-        null !== $offset && $obj->offset = $offset;
+        null !== $limit && $obj['limit'] = $limit;
+        null !== $offset && $obj['offset'] = $offset;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class ShowListParams implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class ShowListParams implements BaseModel
     public function withOffset(int $offset): self
     {
         $obj = clone $this;
-        $obj->offset = $offset;
+        $obj['offset'] = $offset;
 
         return $obj;
     }

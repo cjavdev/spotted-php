@@ -66,9 +66,9 @@ final class PlayerToggleShuffleParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->state = $state;
+        $obj['state'] = $state;
 
-        null !== $device_id && $obj->device_id = $device_id;
+        null !== $device_id && $obj['device_id'] = $device_id;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class PlayerToggleShuffleParams implements BaseModel
     public function withState(bool $state): self
     {
         $obj = clone $this;
-        $obj->state = $state;
+        $obj['state'] = $state;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class PlayerToggleShuffleParams implements BaseModel
     public function withDeviceID(string $deviceID): self
     {
         $obj = clone $this;
-        $obj->device_id = $deviceID;
+        $obj['device_id'] = $deviceID;
 
         return $obj;
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Browse;
 
 use Spotted\Browse\BrowseGetNewReleasesResponse\Albums;
+use Spotted\Browse\BrowseGetNewReleasesResponse\Albums\Item;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkResponse;
@@ -47,20 +48,41 @@ final class BrowseGetNewReleasesResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Albums|array{
+     *   href: string,
+     *   limit: int,
+     *   next: string|null,
+     *   offset: int,
+     *   previous: string|null,
+     *   total: int,
+     *   items?: list<Item>|null,
+     * } $albums
      */
-    public static function with(Albums $albums): self
+    public static function with(Albums|array $albums): self
     {
         $obj = new self;
 
-        $obj->albums = $albums;
+        $obj['albums'] = $albums;
 
         return $obj;
     }
 
-    public function withAlbums(Albums $albums): self
+    /**
+     * @param Albums|array{
+     *   href: string,
+     *   limit: int,
+     *   next: string|null,
+     *   offset: int,
+     *   previous: string|null,
+     *   total: int,
+     *   items?: list<Item>|null,
+     * } $albums
+     */
+    public function withAlbums(Albums|array $albums): self
     {
         $obj = clone $this;
-        $obj->albums = $albums;
+        $obj['albums'] = $albums;
 
         return $obj;
     }

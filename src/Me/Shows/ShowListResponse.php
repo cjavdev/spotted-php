@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Shows;
 
+use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
+use Spotted\ExternalURLObject;
+use Spotted\ImageObject;
 use Spotted\ShowBase;
 
 /**
@@ -46,15 +49,35 @@ final class ShowListResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ShowBase|array{
+     *   id: string,
+     *   available_markets: list<string>,
+     *   copyrights: list<CopyrightObject>,
+     *   description: string,
+     *   explicit: bool,
+     *   external_urls: ExternalURLObject,
+     *   href: string,
+     *   html_description: string,
+     *   images: list<ImageObject>,
+     *   is_externally_hosted: bool,
+     *   languages: list<string>,
+     *   media_type: string,
+     *   name: string,
+     *   publisher: string,
+     *   total_episodes: int,
+     *   type: 'show',
+     *   uri: string,
+     * } $show
      */
     public static function with(
         ?\DateTimeInterface $added_at = null,
-        ?ShowBase $show = null
+        ShowBase|array|null $show = null
     ): self {
         $obj = new self;
 
-        null !== $added_at && $obj->added_at = $added_at;
-        null !== $show && $obj->show = $show;
+        null !== $added_at && $obj['added_at'] = $added_at;
+        null !== $show && $obj['show'] = $show;
 
         return $obj;
     }
@@ -67,18 +90,38 @@ final class ShowListResponse implements BaseModel, ResponseConverter
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
         $obj = clone $this;
-        $obj->added_at = $addedAt;
+        $obj['added_at'] = $addedAt;
 
         return $obj;
     }
 
     /**
      * Information about the show.
+     *
+     * @param ShowBase|array{
+     *   id: string,
+     *   available_markets: list<string>,
+     *   copyrights: list<CopyrightObject>,
+     *   description: string,
+     *   explicit: bool,
+     *   external_urls: ExternalURLObject,
+     *   href: string,
+     *   html_description: string,
+     *   images: list<ImageObject>,
+     *   is_externally_hosted: bool,
+     *   languages: list<string>,
+     *   media_type: string,
+     *   name: string,
+     *   publisher: string,
+     *   total_episodes: int,
+     *   type: 'show',
+     *   uri: string,
+     * } $show
      */
-    public function withShow(ShowBase $show): self
+    public function withShow(ShowBase|array $show): self
     {
         $obj = clone $this;
-        $obj->show = $show;
+        $obj['show'] = $show;
 
         return $obj;
     }

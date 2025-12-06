@@ -223,12 +223,17 @@ final class AudiobookBase implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AuthorObject> $authors
+     * @param list<AuthorObject|array{name?: string|null}> $authors
      * @param list<string> $available_markets
-     * @param list<CopyrightObject> $copyrights
-     * @param list<ImageObject> $images
+     * @param list<CopyrightObject|array{
+     *   text?: string|null, type?: string|null
+     * }> $copyrights
+     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      * @param list<string> $languages
-     * @param list<NarratorObject> $narrators
+     * @param list<NarratorObject|array{name?: string|null}> $narrators
      */
     public static function with(
         string $id,
@@ -237,7 +242,7 @@ final class AudiobookBase implements BaseModel
         array $copyrights,
         string $description,
         bool $explicit,
-        ExternalURLObject $external_urls,
+        ExternalURLObject|array $external_urls,
         string $href,
         string $html_description,
         array $images,
@@ -252,25 +257,25 @@ final class AudiobookBase implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->authors = $authors;
-        $obj->available_markets = $available_markets;
-        $obj->copyrights = $copyrights;
-        $obj->description = $description;
-        $obj->explicit = $explicit;
-        $obj->external_urls = $external_urls;
-        $obj->href = $href;
-        $obj->html_description = $html_description;
-        $obj->images = $images;
-        $obj->languages = $languages;
-        $obj->media_type = $media_type;
-        $obj->name = $name;
-        $obj->narrators = $narrators;
-        $obj->publisher = $publisher;
-        $obj->total_chapters = $total_chapters;
-        $obj->uri = $uri;
+        $obj['id'] = $id;
+        $obj['authors'] = $authors;
+        $obj['available_markets'] = $available_markets;
+        $obj['copyrights'] = $copyrights;
+        $obj['description'] = $description;
+        $obj['explicit'] = $explicit;
+        $obj['external_urls'] = $external_urls;
+        $obj['href'] = $href;
+        $obj['html_description'] = $html_description;
+        $obj['images'] = $images;
+        $obj['languages'] = $languages;
+        $obj['media_type'] = $media_type;
+        $obj['name'] = $name;
+        $obj['narrators'] = $narrators;
+        $obj['publisher'] = $publisher;
+        $obj['total_chapters'] = $total_chapters;
+        $obj['uri'] = $uri;
 
-        null !== $edition && $obj->edition = $edition;
+        null !== $edition && $obj['edition'] = $edition;
 
         return $obj;
     }
@@ -281,7 +286,7 @@ final class AudiobookBase implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -289,12 +294,12 @@ final class AudiobookBase implements BaseModel
     /**
      * The author(s) for the audiobook.
      *
-     * @param list<AuthorObject> $authors
+     * @param list<AuthorObject|array{name?: string|null}> $authors
      */
     public function withAuthors(array $authors): self
     {
         $obj = clone $this;
-        $obj->authors = $authors;
+        $obj['authors'] = $authors;
 
         return $obj;
     }
@@ -307,7 +312,7 @@ final class AudiobookBase implements BaseModel
     public function withAvailableMarkets(array $availableMarkets): self
     {
         $obj = clone $this;
-        $obj->available_markets = $availableMarkets;
+        $obj['available_markets'] = $availableMarkets;
 
         return $obj;
     }
@@ -315,12 +320,14 @@ final class AudiobookBase implements BaseModel
     /**
      * The copyright statements of the audiobook.
      *
-     * @param list<CopyrightObject> $copyrights
+     * @param list<CopyrightObject|array{
+     *   text?: string|null, type?: string|null
+     * }> $copyrights
      */
     public function withCopyrights(array $copyrights): self
     {
         $obj = clone $this;
-        $obj->copyrights = $copyrights;
+        $obj['copyrights'] = $copyrights;
 
         return $obj;
     }
@@ -331,7 +338,7 @@ final class AudiobookBase implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -342,18 +349,21 @@ final class AudiobookBase implements BaseModel
     public function withExplicit(bool $explicit): self
     {
         $obj = clone $this;
-        $obj->explicit = $explicit;
+        $obj['explicit'] = $explicit;
 
         return $obj;
     }
 
     /**
      * External URLs for this audiobook.
+     *
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
         $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+        $obj['external_urls'] = $externalURLs;
 
         return $obj;
     }
@@ -364,7 +374,7 @@ final class AudiobookBase implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -375,7 +385,7 @@ final class AudiobookBase implements BaseModel
     public function withHTMLDescription(string $htmlDescription): self
     {
         $obj = clone $this;
-        $obj->html_description = $htmlDescription;
+        $obj['html_description'] = $htmlDescription;
 
         return $obj;
     }
@@ -383,12 +393,14 @@ final class AudiobookBase implements BaseModel
     /**
      * The cover art for the audiobook in various sizes, widest first.
      *
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      */
     public function withImages(array $images): self
     {
         $obj = clone $this;
-        $obj->images = $images;
+        $obj['images'] = $images;
 
         return $obj;
     }
@@ -401,7 +413,7 @@ final class AudiobookBase implements BaseModel
     public function withLanguages(array $languages): self
     {
         $obj = clone $this;
-        $obj->languages = $languages;
+        $obj['languages'] = $languages;
 
         return $obj;
     }
@@ -412,7 +424,7 @@ final class AudiobookBase implements BaseModel
     public function withMediaType(string $mediaType): self
     {
         $obj = clone $this;
-        $obj->media_type = $mediaType;
+        $obj['media_type'] = $mediaType;
 
         return $obj;
     }
@@ -423,7 +435,7 @@ final class AudiobookBase implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -431,12 +443,12 @@ final class AudiobookBase implements BaseModel
     /**
      * The narrator(s) for the audiobook.
      *
-     * @param list<NarratorObject> $narrators
+     * @param list<NarratorObject|array{name?: string|null}> $narrators
      */
     public function withNarrators(array $narrators): self
     {
         $obj = clone $this;
-        $obj->narrators = $narrators;
+        $obj['narrators'] = $narrators;
 
         return $obj;
     }
@@ -447,7 +459,7 @@ final class AudiobookBase implements BaseModel
     public function withPublisher(string $publisher): self
     {
         $obj = clone $this;
-        $obj->publisher = $publisher;
+        $obj['publisher'] = $publisher;
 
         return $obj;
     }
@@ -458,7 +470,7 @@ final class AudiobookBase implements BaseModel
     public function withTotalChapters(int $totalChapters): self
     {
         $obj = clone $this;
-        $obj->total_chapters = $totalChapters;
+        $obj['total_chapters'] = $totalChapters;
 
         return $obj;
     }
@@ -469,7 +481,7 @@ final class AudiobookBase implements BaseModel
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -480,7 +492,7 @@ final class AudiobookBase implements BaseModel
     public function withEdition(string $edition): self
     {
         $obj = clone $this;
-        $obj->edition = $edition;
+        $obj['edition'] = $edition;
 
         return $obj;
     }

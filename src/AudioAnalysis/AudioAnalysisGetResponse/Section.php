@@ -127,18 +127,18 @@ final class Section implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $confidence && $obj->confidence = $confidence;
-        null !== $duration && $obj->duration = $duration;
-        null !== $key && $obj->key = $key;
-        null !== $key_confidence && $obj->key_confidence = $key_confidence;
-        null !== $loudness && $obj->loudness = $loudness;
-        null !== $mode && $obj->mode = $mode;
-        null !== $mode_confidence && $obj->mode_confidence = $mode_confidence;
-        null !== $start && $obj->start = $start;
-        null !== $tempo && $obj->tempo = $tempo;
-        null !== $tempo_confidence && $obj->tempo_confidence = $tempo_confidence;
-        null !== $time_signature && $obj->time_signature = $time_signature;
-        null !== $time_signature_confidence && $obj->time_signature_confidence = $time_signature_confidence;
+        null !== $confidence && $obj['confidence'] = $confidence;
+        null !== $duration && $obj['duration'] = $duration;
+        null !== $key && $obj['key'] = $key;
+        null !== $key_confidence && $obj['key_confidence'] = $key_confidence;
+        null !== $loudness && $obj['loudness'] = $loudness;
+        null !== $mode && $obj['mode'] = $mode;
+        null !== $mode_confidence && $obj['mode_confidence'] = $mode_confidence;
+        null !== $start && $obj['start'] = $start;
+        null !== $tempo && $obj['tempo'] = $tempo;
+        null !== $tempo_confidence && $obj['tempo_confidence'] = $tempo_confidence;
+        null !== $time_signature && $obj['time_signature'] = $time_signature;
+        null !== $time_signature_confidence && $obj['time_signature_confidence'] = $time_signature_confidence;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class Section implements BaseModel
     public function withConfidence(float $confidence): self
     {
         $obj = clone $this;
-        $obj->confidence = $confidence;
+        $obj['confidence'] = $confidence;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class Section implements BaseModel
     public function withDuration(float $duration): self
     {
         $obj = clone $this;
-        $obj->duration = $duration;
+        $obj['duration'] = $duration;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class Section implements BaseModel
     public function withKey(int $key): self
     {
         $obj = clone $this;
-        $obj->key = $key;
+        $obj['key'] = $key;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class Section implements BaseModel
     public function withKeyConfidence(float $keyConfidence): self
     {
         $obj = clone $this;
-        $obj->key_confidence = $keyConfidence;
+        $obj['key_confidence'] = $keyConfidence;
 
         return $obj;
     }
@@ -193,7 +193,7 @@ final class Section implements BaseModel
     public function withLoudness(float $loudness): self
     {
         $obj = clone $this;
-        $obj->loudness = $loudness;
+        $obj['loudness'] = $loudness;
 
         return $obj;
     }
@@ -204,7 +204,7 @@ final class Section implements BaseModel
     public function withMode(float $mode): self
     {
         $obj = clone $this;
-        $obj->mode = $mode;
+        $obj['mode'] = $mode;
 
         return $obj;
     }
@@ -215,7 +215,7 @@ final class Section implements BaseModel
     public function withModeConfidence(float $modeConfidence): self
     {
         $obj = clone $this;
-        $obj->mode_confidence = $modeConfidence;
+        $obj['mode_confidence'] = $modeConfidence;
 
         return $obj;
     }
@@ -226,7 +226,7 @@ final class Section implements BaseModel
     public function withStart(float $start): self
     {
         $obj = clone $this;
-        $obj->start = $start;
+        $obj['start'] = $start;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class Section implements BaseModel
     public function withTempo(float $tempo): self
     {
         $obj = clone $this;
-        $obj->tempo = $tempo;
+        $obj['tempo'] = $tempo;
 
         return $obj;
     }
@@ -248,7 +248,7 @@ final class Section implements BaseModel
     public function withTempoConfidence(float $tempoConfidence): self
     {
         $obj = clone $this;
-        $obj->tempo_confidence = $tempoConfidence;
+        $obj['tempo_confidence'] = $tempoConfidence;
 
         return $obj;
     }
@@ -259,7 +259,7 @@ final class Section implements BaseModel
     public function withTimeSignature(int $timeSignature): self
     {
         $obj = clone $this;
-        $obj->time_signature = $timeSignature;
+        $obj['time_signature'] = $timeSignature;
 
         return $obj;
     }
@@ -271,7 +271,7 @@ final class Section implements BaseModel
         float $timeSignatureConfidence
     ): self {
         $obj = clone $this;
-        $obj->time_signature_confidence = $timeSignatureConfidence;
+        $obj['time_signature_confidence'] = $timeSignatureConfidence;
 
         return $obj;
     }

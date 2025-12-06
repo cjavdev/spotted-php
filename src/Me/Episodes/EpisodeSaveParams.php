@@ -61,7 +61,7 @@ final class EpisodeSaveParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->ids = $ids;
+        $obj['ids'] = $ids;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class EpisodeSaveParams implements BaseModel
     public function withIDs(array $ids): self
     {
         $obj = clone $this;
-        $obj->ids = $ids;
+        $obj['ids'] = $ids;
 
         return $obj;
     }

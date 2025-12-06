@@ -59,9 +59,9 @@ final class TopListTopTracksParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $limit && $obj->limit = $limit;
-        null !== $offset && $obj->offset = $offset;
-        null !== $time_range && $obj->time_range = $time_range;
+        null !== $limit && $obj['limit'] = $limit;
+        null !== $offset && $obj['offset'] = $offset;
+        null !== $time_range && $obj['time_range'] = $time_range;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class TopListTopTracksParams implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class TopListTopTracksParams implements BaseModel
     public function withOffset(int $offset): self
     {
         $obj = clone $this;
-        $obj->offset = $offset;
+        $obj['offset'] = $offset;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class TopListTopTracksParams implements BaseModel
     public function withTimeRange(string $timeRange): self
     {
         $obj = clone $this;
-        $obj->time_range = $timeRange;
+        $obj['time_range'] = $timeRange;
 
         return $obj;
     }

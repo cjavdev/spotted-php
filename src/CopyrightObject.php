@@ -44,8 +44,8 @@ final class CopyrightObject implements BaseModel
     {
         $obj = new self;
 
-        null !== $text && $obj->text = $text;
-        null !== $type && $obj->type = $type;
+        null !== $text && $obj['text'] = $text;
+        null !== $type && $obj['type'] = $type;
 
         return $obj;
     }
@@ -56,7 +56,7 @@ final class CopyrightObject implements BaseModel
     public function withText(string $text): self
     {
         $obj = clone $this;
-        $obj->text = $text;
+        $obj['text'] = $text;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class CopyrightObject implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

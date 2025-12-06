@@ -14,6 +14,8 @@ use Spotted\FollowersObject;
 use Spotted\ImageObject;
 use Spotted\Playlists\PlaylistGetResponse\Owner;
 use Spotted\Playlists\PlaylistGetResponse\Tracks;
+use Spotted\PlaylistTrackObject;
+use Spotted\PlaylistUserObject\Type;
 
 /**
  * @phpstan-type PlaylistGetResponseShape = array{
@@ -136,40 +138,61 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ImageObject> $images
+     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
+     * @param Owner|array{
+     *   id?: string|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   href?: string|null,
+     *   type?: value-of<Type>|null,
+     *   uri?: string|null,
+     *   display_name?: string|null,
+     * } $owner
+     * @param Tracks|array{
+     *   href: string,
+     *   limit: int,
+     *   next: string|null,
+     *   offset: int,
+     *   previous: string|null,
+     *   total: int,
+     *   items?: list<PlaylistTrackObject>|null,
+     * } $tracks
      */
     public static function with(
         ?string $id = null,
         ?bool $collaborative = null,
         ?string $description = null,
-        ?ExternalURLObject $external_urls = null,
-        ?FollowersObject $followers = null,
+        ExternalURLObject|array|null $external_urls = null,
+        FollowersObject|array|null $followers = null,
         ?string $href = null,
         ?array $images = null,
         ?string $name = null,
-        ?Owner $owner = null,
+        Owner|array|null $owner = null,
         ?bool $published = null,
         ?string $snapshot_id = null,
-        ?Tracks $tracks = null,
+        Tracks|array|null $tracks = null,
         ?string $type = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $collaborative && $obj->collaborative = $collaborative;
-        null !== $description && $obj->description = $description;
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $followers && $obj->followers = $followers;
-        null !== $href && $obj->href = $href;
-        null !== $images && $obj->images = $images;
-        null !== $name && $obj->name = $name;
-        null !== $owner && $obj->owner = $owner;
-        null !== $published && $obj->published = $published;
-        null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
-        null !== $tracks && $obj->tracks = $tracks;
-        null !== $type && $obj->type = $type;
-        null !== $uri && $obj->uri = $uri;
+        null !== $id && $obj['id'] = $id;
+        null !== $collaborative && $obj['collaborative'] = $collaborative;
+        null !== $description && $obj['description'] = $description;
+        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $followers && $obj['followers'] = $followers;
+        null !== $href && $obj['href'] = $href;
+        null !== $images && $obj['images'] = $images;
+        null !== $name && $obj['name'] = $name;
+        null !== $owner && $obj['owner'] = $owner;
+        null !== $published && $obj['published'] = $published;
+        null !== $snapshot_id && $obj['snapshot_id'] = $snapshot_id;
+        null !== $tracks && $obj['tracks'] = $tracks;
+        null !== $type && $obj['type'] = $type;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -180,7 +203,7 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -191,7 +214,7 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
     public function withCollaborative(bool $collaborative): self
     {
         $obj = clone $this;
-        $obj->collaborative = $collaborative;
+        $obj['collaborative'] = $collaborative;
 
         return $obj;
     }
@@ -202,29 +225,34 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
     public function withDescription(?string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
 
     /**
      * Known external URLs for this playlist.
+     *
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
         $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+        $obj['external_urls'] = $externalURLs;
 
         return $obj;
     }
 
     /**
      * Information about the followers of the playlist.
+     *
+     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
      */
-    public function withFollowers(FollowersObject $followers): self
+    public function withFollowers(FollowersObject|array $followers): self
     {
         $obj = clone $this;
-        $obj->followers = $followers;
+        $obj['followers'] = $followers;
 
         return $obj;
     }
@@ -235,7 +263,7 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -243,12 +271,14 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
     /**
      * Images for the playlist. The array may be empty or contain up to three images. The images are returned by size in descending order. See [Working with Playlists](/documentation/web-api/concepts/playlists). _**Note**: If returned, the source URL for the image (`url`) is temporary and will expire in less than a day._.
      *
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      */
     public function withImages(array $images): self
     {
         $obj = clone $this;
-        $obj->images = $images;
+        $obj['images'] = $images;
 
         return $obj;
     }
@@ -259,18 +289,27 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
 
     /**
      * The user who owns the playlist.
+     *
+     * @param Owner|array{
+     *   id?: string|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   href?: string|null,
+     *   type?: value-of<Type>|null,
+     *   uri?: string|null,
+     *   display_name?: string|null,
+     * } $owner
      */
-    public function withOwner(Owner $owner): self
+    public function withOwner(Owner|array $owner): self
     {
         $obj = clone $this;
-        $obj->owner = $owner;
+        $obj['owner'] = $owner;
 
         return $obj;
     }
@@ -281,7 +320,7 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
     public function withPublished(bool $published): self
     {
         $obj = clone $this;
-        $obj->published = $published;
+        $obj['published'] = $published;
 
         return $obj;
     }
@@ -292,18 +331,28 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
     public function withSnapshotID(string $snapshotID): self
     {
         $obj = clone $this;
-        $obj->snapshot_id = $snapshotID;
+        $obj['snapshot_id'] = $snapshotID;
 
         return $obj;
     }
 
     /**
      * The tracks of the playlist.
+     *
+     * @param Tracks|array{
+     *   href: string,
+     *   limit: int,
+     *   next: string|null,
+     *   offset: int,
+     *   previous: string|null,
+     *   total: int,
+     *   items?: list<PlaylistTrackObject>|null,
+     * } $tracks
      */
-    public function withTracks(Tracks $tracks): self
+    public function withTracks(Tracks|array $tracks): self
     {
         $obj = clone $this;
-        $obj->tracks = $tracks;
+        $obj['tracks'] = $tracks;
 
         return $obj;
     }
@@ -314,7 +363,7 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -325,7 +374,7 @@ final class PlaylistGetResponse implements BaseModel, ResponseConverter
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

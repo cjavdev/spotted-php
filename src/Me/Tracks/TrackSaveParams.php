@@ -16,7 +16,10 @@ use Spotted\Me\Tracks\TrackSaveParams\TimestampedID;
  * @see Spotted\Services\Me\TracksService::save()
  *
  * @phpstan-type TrackSaveParamsShape = array{
- *   ids: list<string>, timestamped_ids?: list<TimestampedID>
+ *   ids: list<string>,
+ *   timestamped_ids?: list<TimestampedID|array{
+ *     id: string, added_at: \DateTimeInterface
+ *   }>,
  * }
  */
 final class TrackSaveParams implements BaseModel
@@ -66,15 +69,17 @@ final class TrackSaveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $ids
-     * @param list<TimestampedID> $timestamped_ids
+     * @param list<TimestampedID|array{
+     *   id: string, added_at: \DateTimeInterface
+     * }> $timestamped_ids
      */
     public static function with(array $ids, ?array $timestamped_ids = null): self
     {
         $obj = new self;
 
-        $obj->ids = $ids;
+        $obj['ids'] = $ids;
 
-        null !== $timestamped_ids && $obj->timestamped_ids = $timestamped_ids;
+        null !== $timestamped_ids && $obj['timestamped_ids'] = $timestamped_ids;
 
         return $obj;
     }
@@ -87,7 +92,7 @@ final class TrackSaveParams implements BaseModel
     public function withIDs(array $ids): self
     {
         $obj = clone $this;
-        $obj->ids = $ids;
+        $obj['ids'] = $ids;
 
         return $obj;
     }
@@ -95,12 +100,14 @@ final class TrackSaveParams implements BaseModel
     /**
      * A JSON array of objects containing track IDs with their corresponding timestamps. Each object must include a track ID and an `added_at` timestamp. This allows you to specify when tracks were added to maintain a specific chronological order in the user's library.<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `timestamped_ids` is present in the body, any IDs listed in the query parameters (deprecated) or the `ids` field in the body will be ignored._.
      *
-     * @param list<TimestampedID> $timestampedIDs
+     * @param list<TimestampedID|array{
+     *   id: string, added_at: \DateTimeInterface
+     * }> $timestampedIDs
      */
     public function withTimestampedIDs(array $timestampedIDs): self
     {
         $obj = clone $this;
-        $obj->timestamped_ids = $timestampedIDs;
+        $obj['timestamped_ids'] = $timestampedIDs;
 
         return $obj;
     }

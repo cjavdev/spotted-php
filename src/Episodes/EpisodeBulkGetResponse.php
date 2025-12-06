@@ -10,6 +10,12 @@ use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\EpisodeObject;
+use Spotted\EpisodeObject\ReleaseDatePrecision;
+use Spotted\EpisodeRestrictionObject;
+use Spotted\ExternalURLObject;
+use Spotted\ImageObject;
+use Spotted\ResumePointObject;
+use Spotted\ShowBase;
 
 /**
  * @phpstan-type EpisodeBulkGetResponseShape = array{episodes: list<EpisodeObject>}
@@ -49,24 +55,68 @@ final class EpisodeBulkGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<EpisodeObject> $episodes
+     * @param list<EpisodeObject|array{
+     *   id: string,
+     *   audio_preview_url: string|null,
+     *   description: string,
+     *   duration_ms: int,
+     *   explicit: bool,
+     *   external_urls: ExternalURLObject,
+     *   href: string,
+     *   html_description: string,
+     *   images: list<ImageObject>,
+     *   is_externally_hosted: bool,
+     *   is_playable: bool,
+     *   languages: list<string>,
+     *   name: string,
+     *   release_date: string,
+     *   release_date_precision: value-of<ReleaseDatePrecision>,
+     *   show: ShowBase,
+     *   type: 'episode',
+     *   uri: string,
+     *   language?: string|null,
+     *   restrictions?: EpisodeRestrictionObject|null,
+     *   resume_point?: ResumePointObject|null,
+     * }> $episodes
      */
     public static function with(array $episodes): self
     {
         $obj = new self;
 
-        $obj->episodes = $episodes;
+        $obj['episodes'] = $episodes;
 
         return $obj;
     }
 
     /**
-     * @param list<EpisodeObject> $episodes
+     * @param list<EpisodeObject|array{
+     *   id: string,
+     *   audio_preview_url: string|null,
+     *   description: string,
+     *   duration_ms: int,
+     *   explicit: bool,
+     *   external_urls: ExternalURLObject,
+     *   href: string,
+     *   html_description: string,
+     *   images: list<ImageObject>,
+     *   is_externally_hosted: bool,
+     *   is_playable: bool,
+     *   languages: list<string>,
+     *   name: string,
+     *   release_date: string,
+     *   release_date_precision: value-of<ReleaseDatePrecision>,
+     *   show: ShowBase,
+     *   type: 'episode',
+     *   uri: string,
+     *   language?: string|null,
+     *   restrictions?: EpisodeRestrictionObject|null,
+     *   resume_point?: ResumePointObject|null,
+     * }> $episodes
      */
     public function withEpisodes(array $episodes): self
     {
         $obj = clone $this;
-        $obj->episodes = $episodes;
+        $obj['episodes'] = $episodes;
 
         return $obj;
     }

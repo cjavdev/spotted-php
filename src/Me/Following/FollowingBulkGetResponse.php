@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Following;
 
+use Spotted\ArtistObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\Me\Following\FollowingBulkGetResponse\Artists;
+use Spotted\Me\Following\FollowingBulkGetResponse\Artists\Cursors;
 
 /**
  * @phpstan-type FollowingBulkGetResponseShape = array{artists: Artists}
@@ -47,20 +49,39 @@ final class FollowingBulkGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Artists|array{
+     *   cursors?: Cursors|null,
+     *   href?: string|null,
+     *   items?: list<ArtistObject>|null,
+     *   limit?: int|null,
+     *   next?: string|null,
+     *   total?: int|null,
+     * } $artists
      */
-    public static function with(Artists $artists): self
+    public static function with(Artists|array $artists): self
     {
         $obj = new self;
 
-        $obj->artists = $artists;
+        $obj['artists'] = $artists;
 
         return $obj;
     }
 
-    public function withArtists(Artists $artists): self
+    /**
+     * @param Artists|array{
+     *   cursors?: Cursors|null,
+     *   href?: string|null,
+     *   items?: list<ArtistObject>|null,
+     *   limit?: int|null,
+     *   next?: string|null,
+     *   total?: int|null,
+     * } $artists
+     */
+    public function withArtists(Artists|array $artists): self
     {
         $obj = clone $this;
-        $obj->artists = $artists;
+        $obj['artists'] = $artists;
 
         return $obj;
     }

@@ -87,13 +87,13 @@ final class Meta implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $analysis_time && $obj->analysis_time = $analysis_time;
-        null !== $analyzer_version && $obj->analyzer_version = $analyzer_version;
-        null !== $detailed_status && $obj->detailed_status = $detailed_status;
-        null !== $input_process && $obj->input_process = $input_process;
-        null !== $platform && $obj->platform = $platform;
-        null !== $status_code && $obj->status_code = $status_code;
-        null !== $timestamp && $obj->timestamp = $timestamp;
+        null !== $analysis_time && $obj['analysis_time'] = $analysis_time;
+        null !== $analyzer_version && $obj['analyzer_version'] = $analyzer_version;
+        null !== $detailed_status && $obj['detailed_status'] = $detailed_status;
+        null !== $input_process && $obj['input_process'] = $input_process;
+        null !== $platform && $obj['platform'] = $platform;
+        null !== $status_code && $obj['status_code'] = $status_code;
+        null !== $timestamp && $obj['timestamp'] = $timestamp;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class Meta implements BaseModel
     public function withAnalysisTime(float $analysisTime): self
     {
         $obj = clone $this;
-        $obj->analysis_time = $analysisTime;
+        $obj['analysis_time'] = $analysisTime;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class Meta implements BaseModel
     public function withAnalyzerVersion(string $analyzerVersion): self
     {
         $obj = clone $this;
-        $obj->analyzer_version = $analyzerVersion;
+        $obj['analyzer_version'] = $analyzerVersion;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class Meta implements BaseModel
     public function withDetailedStatus(string $detailedStatus): self
     {
         $obj = clone $this;
-        $obj->detailed_status = $detailedStatus;
+        $obj['detailed_status'] = $detailedStatus;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class Meta implements BaseModel
     public function withInputProcess(string $inputProcess): self
     {
         $obj = clone $this;
-        $obj->input_process = $inputProcess;
+        $obj['input_process'] = $inputProcess;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class Meta implements BaseModel
     public function withPlatform(string $platform): self
     {
         $obj = clone $this;
-        $obj->platform = $platform;
+        $obj['platform'] = $platform;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class Meta implements BaseModel
     public function withStatusCode(int $statusCode): self
     {
         $obj = clone $this;
-        $obj->status_code = $statusCode;
+        $obj['status_code'] = $statusCode;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class Meta implements BaseModel
     public function withTimestamp(int $timestamp): self
     {
         $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $obj['timestamp'] = $timestamp;
 
         return $obj;
     }

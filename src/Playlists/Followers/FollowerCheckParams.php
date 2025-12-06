@@ -42,7 +42,7 @@ final class FollowerCheckParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $ids && $obj->ids = $ids;
+        null !== $ids && $obj['ids'] = $ids;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class FollowerCheckParams implements BaseModel
     public function withIDs(string $ids): self
     {
         $obj = clone $this;
-        $obj->ids = $ids;
+        $obj['ids'] = $ids;
 
         return $obj;
     }

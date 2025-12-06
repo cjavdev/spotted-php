@@ -7,7 +7,10 @@ namespace Spotted\Users\Playlists\PlaylistNewResponse;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
+use Spotted\EpisodeObject;
 use Spotted\PlaylistTrackObject;
+use Spotted\PlaylistUserObject;
+use Spotted\TrackObject;
 
 /**
  * The tracks of the playlist.
@@ -99,7 +102,12 @@ final class Tracks implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PlaylistTrackObject> $items
+     * @param list<PlaylistTrackObject|array{
+     *   added_at?: \DateTimeInterface|null,
+     *   added_by?: PlaylistUserObject|null,
+     *   is_local?: bool|null,
+     *   track?: TrackObject|EpisodeObject|null,
+     * }> $items
      */
     public static function with(
         string $href,
@@ -112,14 +120,14 @@ final class Tracks implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->href = $href;
-        $obj->limit = $limit;
-        $obj->next = $next;
-        $obj->offset = $offset;
-        $obj->previous = $previous;
-        $obj->total = $total;
+        $obj['href'] = $href;
+        $obj['limit'] = $limit;
+        $obj['next'] = $next;
+        $obj['offset'] = $offset;
+        $obj['previous'] = $previous;
+        $obj['total'] = $total;
 
-        null !== $items && $obj->items = $items;
+        null !== $items && $obj['items'] = $items;
 
         return $obj;
     }
@@ -130,7 +138,7 @@ final class Tracks implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -141,7 +149,7 @@ final class Tracks implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -152,7 +160,7 @@ final class Tracks implements BaseModel
     public function withNext(?string $next): self
     {
         $obj = clone $this;
-        $obj->next = $next;
+        $obj['next'] = $next;
 
         return $obj;
     }
@@ -163,7 +171,7 @@ final class Tracks implements BaseModel
     public function withOffset(int $offset): self
     {
         $obj = clone $this;
-        $obj->offset = $offset;
+        $obj['offset'] = $offset;
 
         return $obj;
     }
@@ -174,7 +182,7 @@ final class Tracks implements BaseModel
     public function withPrevious(?string $previous): self
     {
         $obj = clone $this;
-        $obj->previous = $previous;
+        $obj['previous'] = $previous;
 
         return $obj;
     }
@@ -185,18 +193,23 @@ final class Tracks implements BaseModel
     public function withTotal(int $total): self
     {
         $obj = clone $this;
-        $obj->total = $total;
+        $obj['total'] = $total;
 
         return $obj;
     }
 
     /**
-     * @param list<PlaylistTrackObject> $items
+     * @param list<PlaylistTrackObject|array{
+     *   added_at?: \DateTimeInterface|null,
+     *   added_by?: PlaylistUserObject|null,
+     *   is_local?: bool|null,
+     *   track?: TrackObject|EpisodeObject|null,
+     * }> $items
      */
     public function withItems(array $items): self
     {
         $obj = clone $this;
-        $obj->items = $items;
+        $obj['items'] = $items;
 
         return $obj;
     }

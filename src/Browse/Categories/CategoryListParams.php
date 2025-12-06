@@ -59,9 +59,9 @@ final class CategoryListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $limit && $obj->limit = $limit;
-        null !== $locale && $obj->locale = $locale;
-        null !== $offset && $obj->offset = $offset;
+        null !== $limit && $obj['limit'] = $limit;
+        null !== $locale && $obj['locale'] = $locale;
+        null !== $offset && $obj['offset'] = $offset;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class CategoryListParams implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class CategoryListParams implements BaseModel
     public function withLocale(string $locale): self
     {
         $obj = clone $this;
-        $obj->locale = $locale;
+        $obj['locale'] = $locale;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class CategoryListParams implements BaseModel
     public function withOffset(int $offset): self
     {
         $obj = clone $this;
-        $obj->offset = $offset;
+        $obj['offset'] = $offset;
 
         return $obj;
     }

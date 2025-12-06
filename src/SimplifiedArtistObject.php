@@ -72,11 +72,12 @@ final class SimplifiedArtistObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
      * @param Type|value-of<Type> $type
      */
     public static function with(
         ?string $id = null,
-        ?ExternalURLObject $external_urls = null,
+        ExternalURLObject|array|null $external_urls = null,
         ?string $href = null,
         ?string $name = null,
         Type|string|null $type = null,
@@ -84,12 +85,12 @@ final class SimplifiedArtistObject implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $href && $obj->href = $href;
-        null !== $name && $obj->name = $name;
+        null !== $id && $obj['id'] = $id;
+        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $href && $obj['href'] = $href;
+        null !== $name && $obj['name'] = $name;
         null !== $type && $obj['type'] = $type;
-        null !== $uri && $obj->uri = $uri;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -100,18 +101,21 @@ final class SimplifiedArtistObject implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
     /**
      * Known external URLs for this artist.
+     *
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
         $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+        $obj['external_urls'] = $externalURLs;
 
         return $obj;
     }
@@ -122,7 +126,7 @@ final class SimplifiedArtistObject implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -133,7 +137,7 @@ final class SimplifiedArtistObject implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -157,7 +161,7 @@ final class SimplifiedArtistObject implements BaseModel
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }
