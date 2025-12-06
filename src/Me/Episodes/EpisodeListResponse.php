@@ -10,6 +10,12 @@ use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\EpisodeObject;
+use Spotted\EpisodeObject\ReleaseDatePrecision;
+use Spotted\EpisodeRestrictionObject;
+use Spotted\ExternalURLObject;
+use Spotted\ImageObject;
+use Spotted\ResumePointObject;
+use Spotted\ShowBase;
 
 /**
  * @phpstan-type EpisodeListResponseShape = array{
@@ -45,15 +51,39 @@ final class EpisodeListResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param EpisodeObject|array{
+     *   id: string,
+     *   audio_preview_url: string|null,
+     *   description: string,
+     *   duration_ms: int,
+     *   explicit: bool,
+     *   external_urls: ExternalURLObject,
+     *   href: string,
+     *   html_description: string,
+     *   images: list<ImageObject>,
+     *   is_externally_hosted: bool,
+     *   is_playable: bool,
+     *   languages: list<string>,
+     *   name: string,
+     *   release_date: string,
+     *   release_date_precision: value-of<ReleaseDatePrecision>,
+     *   show: ShowBase,
+     *   type: 'episode',
+     *   uri: string,
+     *   language?: string|null,
+     *   restrictions?: EpisodeRestrictionObject|null,
+     *   resume_point?: ResumePointObject|null,
+     * } $episode
      */
     public static function with(
         ?\DateTimeInterface $added_at = null,
-        ?EpisodeObject $episode = null
+        EpisodeObject|array|null $episode = null
     ): self {
         $obj = new self;
 
-        null !== $added_at && $obj->added_at = $added_at;
-        null !== $episode && $obj->episode = $episode;
+        null !== $added_at && $obj['added_at'] = $added_at;
+        null !== $episode && $obj['episode'] = $episode;
 
         return $obj;
     }
@@ -65,18 +95,42 @@ final class EpisodeListResponse implements BaseModel, ResponseConverter
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
         $obj = clone $this;
-        $obj->added_at = $addedAt;
+        $obj['added_at'] = $addedAt;
 
         return $obj;
     }
 
     /**
      * Information about the episode.
+     *
+     * @param EpisodeObject|array{
+     *   id: string,
+     *   audio_preview_url: string|null,
+     *   description: string,
+     *   duration_ms: int,
+     *   explicit: bool,
+     *   external_urls: ExternalURLObject,
+     *   href: string,
+     *   html_description: string,
+     *   images: list<ImageObject>,
+     *   is_externally_hosted: bool,
+     *   is_playable: bool,
+     *   languages: list<string>,
+     *   name: string,
+     *   release_date: string,
+     *   release_date_precision: value-of<ReleaseDatePrecision>,
+     *   show: ShowBase,
+     *   type: 'episode',
+     *   uri: string,
+     *   language?: string|null,
+     *   restrictions?: EpisodeRestrictionObject|null,
+     *   resume_point?: ResumePointObject|null,
+     * } $episode
      */
-    public function withEpisode(EpisodeObject $episode): self
+    public function withEpisode(EpisodeObject|array $episode): self
     {
         $obj = clone $this;
-        $obj->episode = $episode;
+        $obj['episode'] = $episode;
 
         return $obj;
     }

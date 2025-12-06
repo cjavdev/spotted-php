@@ -121,16 +121,23 @@ final class MeGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ImageObject> $images
+     * @param ExplicitContent|array{
+     *   filter_enabled?: bool|null, filter_locked?: bool|null
+     * } $explicit_content
+     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      */
     public static function with(
         ?string $id = null,
         ?string $country = null,
         ?string $display_name = null,
         ?string $email = null,
-        ?ExplicitContent $explicit_content = null,
-        ?ExternalURLObject $external_urls = null,
-        ?FollowersObject $followers = null,
+        ExplicitContent|array|null $explicit_content = null,
+        ExternalURLObject|array|null $external_urls = null,
+        FollowersObject|array|null $followers = null,
         ?string $href = null,
         ?array $images = null,
         ?string $product = null,
@@ -139,18 +146,18 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $country && $obj->country = $country;
-        null !== $display_name && $obj->display_name = $display_name;
-        null !== $email && $obj->email = $email;
-        null !== $explicit_content && $obj->explicit_content = $explicit_content;
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $followers && $obj->followers = $followers;
-        null !== $href && $obj->href = $href;
-        null !== $images && $obj->images = $images;
-        null !== $product && $obj->product = $product;
-        null !== $type && $obj->type = $type;
-        null !== $uri && $obj->uri = $uri;
+        null !== $id && $obj['id'] = $id;
+        null !== $country && $obj['country'] = $country;
+        null !== $display_name && $obj['display_name'] = $display_name;
+        null !== $email && $obj['email'] = $email;
+        null !== $explicit_content && $obj['explicit_content'] = $explicit_content;
+        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $followers && $obj['followers'] = $followers;
+        null !== $href && $obj['href'] = $href;
+        null !== $images && $obj['images'] = $images;
+        null !== $product && $obj['product'] = $product;
+        null !== $type && $obj['type'] = $type;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -161,7 +168,7 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -172,7 +179,7 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     public function withCountry(string $country): self
     {
         $obj = clone $this;
-        $obj->country = $country;
+        $obj['country'] = $country;
 
         return $obj;
     }
@@ -183,7 +190,7 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     public function withDisplayName(string $displayName): self
     {
         $obj = clone $this;
-        $obj->display_name = $displayName;
+        $obj['display_name'] = $displayName;
 
         return $obj;
     }
@@ -194,40 +201,50 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     public function withEmail(string $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }
 
     /**
      * The user's explicit content settings. _This field is only available when the current user has granted access to the [user-read-private](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
+     *
+     * @param ExplicitContent|array{
+     *   filter_enabled?: bool|null, filter_locked?: bool|null
+     * } $explicitContent
      */
-    public function withExplicitContent(ExplicitContent $explicitContent): self
-    {
+    public function withExplicitContent(
+        ExplicitContent|array $explicitContent
+    ): self {
         $obj = clone $this;
-        $obj->explicit_content = $explicitContent;
+        $obj['explicit_content'] = $explicitContent;
 
         return $obj;
     }
 
     /**
      * Known external URLs for this user.
+     *
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
         $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+        $obj['external_urls'] = $externalURLs;
 
         return $obj;
     }
 
     /**
      * Information about the followers of the user.
+     *
+     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
      */
-    public function withFollowers(FollowersObject $followers): self
+    public function withFollowers(FollowersObject|array $followers): self
     {
         $obj = clone $this;
-        $obj->followers = $followers;
+        $obj['followers'] = $followers;
 
         return $obj;
     }
@@ -238,7 +255,7 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -246,12 +263,14 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     /**
      * The user's profile image.
      *
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      */
     public function withImages(array $images): self
     {
         $obj = clone $this;
-        $obj->images = $images;
+        $obj['images'] = $images;
 
         return $obj;
     }
@@ -262,7 +281,7 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     public function withProduct(string $product): self
     {
         $obj = clone $this;
-        $obj->product = $product;
+        $obj['product'] = $product;
 
         return $obj;
     }
@@ -273,7 +292,7 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -284,7 +303,7 @@ final class MeGetResponse implements BaseModel, ResponseConverter
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

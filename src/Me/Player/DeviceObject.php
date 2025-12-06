@@ -95,14 +95,14 @@ final class DeviceObject implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $is_active && $obj->is_active = $is_active;
-        null !== $is_private_session && $obj->is_private_session = $is_private_session;
-        null !== $is_restricted && $obj->is_restricted = $is_restricted;
-        null !== $name && $obj->name = $name;
-        null !== $supports_volume && $obj->supports_volume = $supports_volume;
-        null !== $type && $obj->type = $type;
-        null !== $volume_percent && $obj->volume_percent = $volume_percent;
+        null !== $id && $obj['id'] = $id;
+        null !== $is_active && $obj['is_active'] = $is_active;
+        null !== $is_private_session && $obj['is_private_session'] = $is_private_session;
+        null !== $is_restricted && $obj['is_restricted'] = $is_restricted;
+        null !== $name && $obj['name'] = $name;
+        null !== $supports_volume && $obj['supports_volume'] = $supports_volume;
+        null !== $type && $obj['type'] = $type;
+        null !== $volume_percent && $obj['volume_percent'] = $volume_percent;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class DeviceObject implements BaseModel
     public function withID(?string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class DeviceObject implements BaseModel
     public function withIsActive(bool $isActive): self
     {
         $obj = clone $this;
-        $obj->is_active = $isActive;
+        $obj['is_active'] = $isActive;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class DeviceObject implements BaseModel
     public function withIsPrivateSession(bool $isPrivateSession): self
     {
         $obj = clone $this;
-        $obj->is_private_session = $isPrivateSession;
+        $obj['is_private_session'] = $isPrivateSession;
 
         return $obj;
     }
@@ -146,7 +146,7 @@ final class DeviceObject implements BaseModel
     public function withIsRestricted(bool $isRestricted): self
     {
         $obj = clone $this;
-        $obj->is_restricted = $isRestricted;
+        $obj['is_restricted'] = $isRestricted;
 
         return $obj;
     }
@@ -157,7 +157,7 @@ final class DeviceObject implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class DeviceObject implements BaseModel
     public function withSupportsVolume(bool $supportsVolume): self
     {
         $obj = clone $this;
-        $obj->supports_volume = $supportsVolume;
+        $obj['supports_volume'] = $supportsVolume;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class DeviceObject implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class DeviceObject implements BaseModel
     public function withVolumePercent(?int $volumePercent): self
     {
         $obj = clone $this;
-        $obj->volume_percent = $volumePercent;
+        $obj['volume_percent'] = $volumePercent;
 
         return $obj;
     }

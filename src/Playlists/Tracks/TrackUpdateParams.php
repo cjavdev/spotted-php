@@ -83,11 +83,11 @@ final class TrackUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $insert_before && $obj->insert_before = $insert_before;
-        null !== $range_length && $obj->range_length = $range_length;
-        null !== $range_start && $obj->range_start = $range_start;
-        null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
-        null !== $uris && $obj->uris = $uris;
+        null !== $insert_before && $obj['insert_before'] = $insert_before;
+        null !== $range_length && $obj['range_length'] = $range_length;
+        null !== $range_start && $obj['range_start'] = $range_start;
+        null !== $snapshot_id && $obj['snapshot_id'] = $snapshot_id;
+        null !== $uris && $obj['uris'] = $uris;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class TrackUpdateParams implements BaseModel
     public function withInsertBefore(int $insertBefore): self
     {
         $obj = clone $this;
-        $obj->insert_before = $insertBefore;
+        $obj['insert_before'] = $insertBefore;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class TrackUpdateParams implements BaseModel
     public function withRangeLength(int $rangeLength): self
     {
         $obj = clone $this;
-        $obj->range_length = $rangeLength;
+        $obj['range_length'] = $rangeLength;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class TrackUpdateParams implements BaseModel
     public function withRangeStart(int $rangeStart): self
     {
         $obj = clone $this;
-        $obj->range_start = $rangeStart;
+        $obj['range_start'] = $rangeStart;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class TrackUpdateParams implements BaseModel
     public function withSnapshotID(string $snapshotID): self
     {
         $obj = clone $this;
-        $obj->snapshot_id = $snapshotID;
+        $obj['snapshot_id'] = $snapshotID;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class TrackUpdateParams implements BaseModel
     public function withUris(array $uris): self
     {
         $obj = clone $this;
-        $obj->uris = $uris;
+        $obj['uris'] = $uris;
 
         return $obj;
     }

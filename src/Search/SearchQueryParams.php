@@ -126,13 +126,13 @@ final class SearchQueryParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->q = $q;
+        $obj['q'] = $q;
         $obj['type'] = $type;
 
         null !== $include_external && $obj['include_external'] = $include_external;
-        null !== $limit && $obj->limit = $limit;
-        null !== $market && $obj->market = $market;
-        null !== $offset && $obj->offset = $offset;
+        null !== $limit && $obj['limit'] = $limit;
+        null !== $market && $obj['market'] = $market;
+        null !== $offset && $obj['offset'] = $offset;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class SearchQueryParams implements BaseModel
     public function withQ(string $q): self
     {
         $obj = clone $this;
-        $obj->q = $q;
+        $obj['q'] = $q;
 
         return $obj;
     }
@@ -192,7 +192,7 @@ final class SearchQueryParams implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class SearchQueryParams implements BaseModel
     public function withMarket(string $market): self
     {
         $obj = clone $this;
-        $obj->market = $market;
+        $obj['market'] = $market;
 
         return $obj;
     }
@@ -220,7 +220,7 @@ final class SearchQueryParams implements BaseModel
     public function withOffset(int $offset): self
     {
         $obj = clone $this;
-        $obj->offset = $offset;
+        $obj['offset'] = $offset;
 
         return $obj;
     }

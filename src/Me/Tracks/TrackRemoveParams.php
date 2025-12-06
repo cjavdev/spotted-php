@@ -46,7 +46,7 @@ final class TrackRemoveParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $ids && $obj->ids = $ids;
+        null !== $ids && $obj['ids'] = $ids;
 
         return $obj;
     }
@@ -59,7 +59,7 @@ final class TrackRemoveParams implements BaseModel
     public function withIDs(array $ids): self
     {
         $obj = clone $this;
-        $obj->ids = $ids;
+        $obj['ids'] = $ids;
 
         return $obj;
     }

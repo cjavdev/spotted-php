@@ -42,7 +42,7 @@ final class CategoryRetrieveParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $locale && $obj->locale = $locale;
+        null !== $locale && $obj['locale'] = $locale;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class CategoryRetrieveParams implements BaseModel
     public function withLocale(string $locale): self
     {
         $obj = clone $this;
-        $obj->locale = $locale;
+        $obj['locale'] = $locale;
 
         return $obj;
     }

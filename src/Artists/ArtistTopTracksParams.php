@@ -47,7 +47,7 @@ final class ArtistTopTracksParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $market && $obj->market = $market;
+        null !== $market && $obj['market'] = $market;
 
         return $obj;
     }
@@ -63,7 +63,7 @@ final class ArtistTopTracksParams implements BaseModel
     public function withMarket(string $market): self
     {
         $obj = clone $this;
-        $obj->market = $market;
+        $obj['market'] = $market;
 
         return $obj;
     }

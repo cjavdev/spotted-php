@@ -5,9 +5,14 @@ declare(strict_types=1);
 namespace Spotted\Search\SearchQueryResponse;
 
 use Spotted\AudiobookBase;
+use Spotted\AuthorObject;
+use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
+use Spotted\ExternalURLObject;
+use Spotted\ImageObject;
+use Spotted\NarratorObject;
 
 /**
  * @phpstan-type AudiobooksShape = array{
@@ -97,7 +102,27 @@ final class Audiobooks implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AudiobookBase> $items
+     * @param list<AudiobookBase|array{
+     *   id: string,
+     *   authors: list<AuthorObject>,
+     *   available_markets: list<string>,
+     *   copyrights: list<CopyrightObject>,
+     *   description: string,
+     *   explicit: bool,
+     *   external_urls: ExternalURLObject,
+     *   href: string,
+     *   html_description: string,
+     *   images: list<ImageObject>,
+     *   languages: list<string>,
+     *   media_type: string,
+     *   name: string,
+     *   narrators: list<NarratorObject>,
+     *   publisher: string,
+     *   total_chapters: int,
+     *   type: 'audiobook',
+     *   uri: string,
+     *   edition?: string|null,
+     * }> $items
      */
     public static function with(
         string $href,
@@ -110,14 +135,14 @@ final class Audiobooks implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->href = $href;
-        $obj->limit = $limit;
-        $obj->next = $next;
-        $obj->offset = $offset;
-        $obj->previous = $previous;
-        $obj->total = $total;
+        $obj['href'] = $href;
+        $obj['limit'] = $limit;
+        $obj['next'] = $next;
+        $obj['offset'] = $offset;
+        $obj['previous'] = $previous;
+        $obj['total'] = $total;
 
-        null !== $items && $obj->items = $items;
+        null !== $items && $obj['items'] = $items;
 
         return $obj;
     }
@@ -128,7 +153,7 @@ final class Audiobooks implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -139,7 +164,7 @@ final class Audiobooks implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -150,7 +175,7 @@ final class Audiobooks implements BaseModel
     public function withNext(?string $next): self
     {
         $obj = clone $this;
-        $obj->next = $next;
+        $obj['next'] = $next;
 
         return $obj;
     }
@@ -161,7 +186,7 @@ final class Audiobooks implements BaseModel
     public function withOffset(int $offset): self
     {
         $obj = clone $this;
-        $obj->offset = $offset;
+        $obj['offset'] = $offset;
 
         return $obj;
     }
@@ -172,7 +197,7 @@ final class Audiobooks implements BaseModel
     public function withPrevious(?string $previous): self
     {
         $obj = clone $this;
-        $obj->previous = $previous;
+        $obj['previous'] = $previous;
 
         return $obj;
     }
@@ -183,18 +208,38 @@ final class Audiobooks implements BaseModel
     public function withTotal(int $total): self
     {
         $obj = clone $this;
-        $obj->total = $total;
+        $obj['total'] = $total;
 
         return $obj;
     }
 
     /**
-     * @param list<AudiobookBase> $items
+     * @param list<AudiobookBase|array{
+     *   id: string,
+     *   authors: list<AuthorObject>,
+     *   available_markets: list<string>,
+     *   copyrights: list<CopyrightObject>,
+     *   description: string,
+     *   explicit: bool,
+     *   external_urls: ExternalURLObject,
+     *   href: string,
+     *   html_description: string,
+     *   images: list<ImageObject>,
+     *   languages: list<string>,
+     *   media_type: string,
+     *   name: string,
+     *   narrators: list<NarratorObject>,
+     *   publisher: string,
+     *   total_chapters: int,
+     *   type: 'audiobook',
+     *   uri: string,
+     *   edition?: string|null,
+     * }> $items
      */
     public function withItems(array $items): self
     {
         $obj = clone $this;
-        $obj->items = $items;
+        $obj['items'] = $items;
 
         return $obj;
     }

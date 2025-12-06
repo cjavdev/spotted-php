@@ -58,8 +58,8 @@ final class FollowingBulkRetrieveParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $after && $obj->after = $after;
-        null !== $limit && $obj->limit = $limit;
+        null !== $after && $obj['after'] = $after;
+        null !== $limit && $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class FollowingBulkRetrieveParams implements BaseModel
     public function withAfter(string $after): self
     {
         $obj = clone $this;
-        $obj->after = $after;
+        $obj['after'] = $after;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class FollowingBulkRetrieveParams implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }

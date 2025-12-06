@@ -7,6 +7,7 @@ namespace Spotted;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
+use Spotted\PlaylistUserObject\Type;
 use Spotted\SimplifiedPlaylistObject\Owner;
 
 /**
@@ -121,38 +122,52 @@ final class SimplifiedPlaylistObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ImageObject> $images
+     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
+     * @param Owner|array{
+     *   id?: string|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   href?: string|null,
+     *   type?: value-of<Type>|null,
+     *   uri?: string|null,
+     *   display_name?: string|null,
+     * } $owner
+     * @param PlaylistTracksRefObject|array{
+     *   href?: string|null, total?: int|null
+     * } $tracks
      */
     public static function with(
         ?string $id = null,
         ?bool $collaborative = null,
         ?string $description = null,
-        ?ExternalURLObject $external_urls = null,
+        ExternalURLObject|array|null $external_urls = null,
         ?string $href = null,
         ?array $images = null,
         ?string $name = null,
-        ?Owner $owner = null,
+        Owner|array|null $owner = null,
         ?bool $published = null,
         ?string $snapshot_id = null,
-        ?PlaylistTracksRefObject $tracks = null,
+        PlaylistTracksRefObject|array|null $tracks = null,
         ?string $type = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $collaborative && $obj->collaborative = $collaborative;
-        null !== $description && $obj->description = $description;
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $href && $obj->href = $href;
-        null !== $images && $obj->images = $images;
-        null !== $name && $obj->name = $name;
-        null !== $owner && $obj->owner = $owner;
-        null !== $published && $obj->published = $published;
-        null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
-        null !== $tracks && $obj->tracks = $tracks;
-        null !== $type && $obj->type = $type;
-        null !== $uri && $obj->uri = $uri;
+        null !== $id && $obj['id'] = $id;
+        null !== $collaborative && $obj['collaborative'] = $collaborative;
+        null !== $description && $obj['description'] = $description;
+        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $href && $obj['href'] = $href;
+        null !== $images && $obj['images'] = $images;
+        null !== $name && $obj['name'] = $name;
+        null !== $owner && $obj['owner'] = $owner;
+        null !== $published && $obj['published'] = $published;
+        null !== $snapshot_id && $obj['snapshot_id'] = $snapshot_id;
+        null !== $tracks && $obj['tracks'] = $tracks;
+        null !== $type && $obj['type'] = $type;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -163,7 +178,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -174,7 +189,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     public function withCollaborative(bool $collaborative): self
     {
         $obj = clone $this;
-        $obj->collaborative = $collaborative;
+        $obj['collaborative'] = $collaborative;
 
         return $obj;
     }
@@ -185,18 +200,21 @@ final class SimplifiedPlaylistObject implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
 
     /**
      * Known external URLs for this playlist.
+     *
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
         $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+        $obj['external_urls'] = $externalURLs;
 
         return $obj;
     }
@@ -207,7 +225,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -215,12 +233,14 @@ final class SimplifiedPlaylistObject implements BaseModel
     /**
      * Images for the playlist. The array may be empty or contain up to three images. The images are returned by size in descending order. See [Working with Playlists](/documentation/web-api/concepts/playlists). _**Note**: If returned, the source URL for the image (`url`) is temporary and will expire in less than a day._.
      *
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      */
     public function withImages(array $images): self
     {
         $obj = clone $this;
-        $obj->images = $images;
+        $obj['images'] = $images;
 
         return $obj;
     }
@@ -231,18 +251,27 @@ final class SimplifiedPlaylistObject implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
 
     /**
      * The user who owns the playlist.
+     *
+     * @param Owner|array{
+     *   id?: string|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   href?: string|null,
+     *   type?: value-of<Type>|null,
+     *   uri?: string|null,
+     *   display_name?: string|null,
+     * } $owner
      */
-    public function withOwner(Owner $owner): self
+    public function withOwner(Owner|array $owner): self
     {
         $obj = clone $this;
-        $obj->owner = $owner;
+        $obj['owner'] = $owner;
 
         return $obj;
     }
@@ -253,7 +282,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     public function withPublished(bool $published): self
     {
         $obj = clone $this;
-        $obj->published = $published;
+        $obj['published'] = $published;
 
         return $obj;
     }
@@ -264,18 +293,22 @@ final class SimplifiedPlaylistObject implements BaseModel
     public function withSnapshotID(string $snapshotID): self
     {
         $obj = clone $this;
-        $obj->snapshot_id = $snapshotID;
+        $obj['snapshot_id'] = $snapshotID;
 
         return $obj;
     }
 
     /**
      * A collection containing a link ( `href` ) to the Web API endpoint where full details of the playlist's tracks can be retrieved, along with the `total` number of tracks in the playlist. Note, a track object may be `null`. This can happen if a track is no longer available.
+     *
+     * @param PlaylistTracksRefObject|array{
+     *   href?: string|null, total?: int|null
+     * } $tracks
      */
-    public function withTracks(PlaylistTracksRefObject $tracks): self
+    public function withTracks(PlaylistTracksRefObject|array $tracks): self
     {
         $obj = clone $this;
-        $obj->tracks = $tracks;
+        $obj['tracks'] = $tracks;
 
         return $obj;
     }
@@ -286,7 +319,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -297,7 +330,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

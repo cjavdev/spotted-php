@@ -7,6 +7,7 @@ namespace Spotted;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
+use Spotted\SimplifiedArtistObject\Type;
 
 /**
  * @phpstan-type SimplifiedTrackObjectShape = array{
@@ -152,8 +153,24 @@ final class SimplifiedTrackObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedArtistObject> $artists
+     * @param list<SimplifiedArtistObject|array{
+     *   id?: string|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   href?: string|null,
+     *   name?: string|null,
+     *   type?: value-of<Type>|null,
+     *   uri?: string|null,
+     * }> $artists
      * @param list<string> $available_markets
+     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param LinkedTrackObject|array{
+     *   id?: string|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   href?: string|null,
+     *   type?: string|null,
+     *   uri?: string|null,
+     * } $linked_from
+     * @param TrackRestrictionObject|array{reason?: string|null} $restrictions
      */
     public static function with(
         ?string $id = null,
@@ -162,37 +179,37 @@ final class SimplifiedTrackObject implements BaseModel
         ?int $disc_number = null,
         ?int $duration_ms = null,
         ?bool $explicit = null,
-        ?ExternalURLObject $external_urls = null,
+        ExternalURLObject|array|null $external_urls = null,
         ?string $href = null,
         ?bool $is_local = null,
         ?bool $is_playable = null,
-        ?LinkedTrackObject $linked_from = null,
+        LinkedTrackObject|array|null $linked_from = null,
         ?string $name = null,
         ?string $preview_url = null,
-        ?TrackRestrictionObject $restrictions = null,
+        TrackRestrictionObject|array|null $restrictions = null,
         ?int $track_number = null,
         ?string $type = null,
         ?string $uri = null,
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $artists && $obj->artists = $artists;
-        null !== $available_markets && $obj->available_markets = $available_markets;
-        null !== $disc_number && $obj->disc_number = $disc_number;
-        null !== $duration_ms && $obj->duration_ms = $duration_ms;
-        null !== $explicit && $obj->explicit = $explicit;
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $href && $obj->href = $href;
-        null !== $is_local && $obj->is_local = $is_local;
-        null !== $is_playable && $obj->is_playable = $is_playable;
-        null !== $linked_from && $obj->linked_from = $linked_from;
-        null !== $name && $obj->name = $name;
-        null !== $preview_url && $obj->preview_url = $preview_url;
-        null !== $restrictions && $obj->restrictions = $restrictions;
-        null !== $track_number && $obj->track_number = $track_number;
-        null !== $type && $obj->type = $type;
-        null !== $uri && $obj->uri = $uri;
+        null !== $id && $obj['id'] = $id;
+        null !== $artists && $obj['artists'] = $artists;
+        null !== $available_markets && $obj['available_markets'] = $available_markets;
+        null !== $disc_number && $obj['disc_number'] = $disc_number;
+        null !== $duration_ms && $obj['duration_ms'] = $duration_ms;
+        null !== $explicit && $obj['explicit'] = $explicit;
+        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $href && $obj['href'] = $href;
+        null !== $is_local && $obj['is_local'] = $is_local;
+        null !== $is_playable && $obj['is_playable'] = $is_playable;
+        null !== $linked_from && $obj['linked_from'] = $linked_from;
+        null !== $name && $obj['name'] = $name;
+        null !== $preview_url && $obj['preview_url'] = $preview_url;
+        null !== $restrictions && $obj['restrictions'] = $restrictions;
+        null !== $track_number && $obj['track_number'] = $track_number;
+        null !== $type && $obj['type'] = $type;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -203,7 +220,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -211,12 +228,19 @@ final class SimplifiedTrackObject implements BaseModel
     /**
      * The artists who performed the track. Each artist object includes a link in `href` to more detailed information about the artist.
      *
-     * @param list<SimplifiedArtistObject> $artists
+     * @param list<SimplifiedArtistObject|array{
+     *   id?: string|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   href?: string|null,
+     *   name?: string|null,
+     *   type?: value-of<Type>|null,
+     *   uri?: string|null,
+     * }> $artists
      */
     public function withArtists(array $artists): self
     {
         $obj = clone $this;
-        $obj->artists = $artists;
+        $obj['artists'] = $artists;
 
         return $obj;
     }
@@ -229,7 +253,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withAvailableMarkets(array $availableMarkets): self
     {
         $obj = clone $this;
-        $obj->available_markets = $availableMarkets;
+        $obj['available_markets'] = $availableMarkets;
 
         return $obj;
     }
@@ -240,7 +264,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withDiscNumber(int $discNumber): self
     {
         $obj = clone $this;
-        $obj->disc_number = $discNumber;
+        $obj['disc_number'] = $discNumber;
 
         return $obj;
     }
@@ -251,7 +275,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withDurationMs(int $durationMs): self
     {
         $obj = clone $this;
-        $obj->duration_ms = $durationMs;
+        $obj['duration_ms'] = $durationMs;
 
         return $obj;
     }
@@ -262,18 +286,21 @@ final class SimplifiedTrackObject implements BaseModel
     public function withExplicit(bool $explicit): self
     {
         $obj = clone $this;
-        $obj->explicit = $explicit;
+        $obj['explicit'] = $explicit;
 
         return $obj;
     }
 
     /**
      * External URLs for this track.
+     *
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
         $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+        $obj['external_urls'] = $externalURLs;
 
         return $obj;
     }
@@ -284,7 +311,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -295,7 +322,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withIsLocal(bool $isLocal): self
     {
         $obj = clone $this;
-        $obj->is_local = $isLocal;
+        $obj['is_local'] = $isLocal;
 
         return $obj;
     }
@@ -306,18 +333,26 @@ final class SimplifiedTrackObject implements BaseModel
     public function withIsPlayable(bool $isPlayable): self
     {
         $obj = clone $this;
-        $obj->is_playable = $isPlayable;
+        $obj['is_playable'] = $isPlayable;
 
         return $obj;
     }
 
     /**
      * Part of the response when [Track Relinking](/documentation/web-api/concepts/track-relinking/) is applied and is only part of the response if the track linking, in fact, exists. The requested track has been replaced with a different track. The track in the `linked_from` object contains information about the originally requested track.
+     *
+     * @param LinkedTrackObject|array{
+     *   id?: string|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   href?: string|null,
+     *   type?: string|null,
+     *   uri?: string|null,
+     * } $linkedFrom
      */
-    public function withLinkedFrom(LinkedTrackObject $linkedFrom): self
+    public function withLinkedFrom(LinkedTrackObject|array $linkedFrom): self
     {
         $obj = clone $this;
-        $obj->linked_from = $linkedFrom;
+        $obj['linked_from'] = $linkedFrom;
 
         return $obj;
     }
@@ -328,7 +363,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -339,18 +374,21 @@ final class SimplifiedTrackObject implements BaseModel
     public function withPreviewURL(?string $previewURL): self
     {
         $obj = clone $this;
-        $obj->preview_url = $previewURL;
+        $obj['preview_url'] = $previewURL;
 
         return $obj;
     }
 
     /**
      * Included in the response when a content restriction is applied.
+     *
+     * @param TrackRestrictionObject|array{reason?: string|null} $restrictions
      */
-    public function withRestrictions(TrackRestrictionObject $restrictions): self
-    {
+    public function withRestrictions(
+        TrackRestrictionObject|array $restrictions
+    ): self {
         $obj = clone $this;
-        $obj->restrictions = $restrictions;
+        $obj['restrictions'] = $restrictions;
 
         return $obj;
     }
@@ -361,7 +399,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withTrackNumber(int $trackNumber): self
     {
         $obj = clone $this;
-        $obj->track_number = $trackNumber;
+        $obj['track_number'] = $trackNumber;
 
         return $obj;
     }
@@ -372,7 +410,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -383,7 +421,7 @@ final class SimplifiedTrackObject implements BaseModel
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

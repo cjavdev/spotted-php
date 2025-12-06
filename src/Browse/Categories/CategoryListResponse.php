@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Browse\Categories;
 
 use Spotted\Browse\Categories\CategoryListResponse\Categories;
+use Spotted\Browse\Categories\CategoryListResponse\Categories\Item;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkResponse;
@@ -47,20 +48,41 @@ final class CategoryListResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Categories|array{
+     *   href: string,
+     *   limit: int,
+     *   next: string|null,
+     *   offset: int,
+     *   previous: string|null,
+     *   total: int,
+     *   items?: list<Item>|null,
+     * } $categories
      */
-    public static function with(Categories $categories): self
+    public static function with(Categories|array $categories): self
     {
         $obj = new self;
 
-        $obj->categories = $categories;
+        $obj['categories'] = $categories;
 
         return $obj;
     }
 
-    public function withCategories(Categories $categories): self
+    /**
+     * @param Categories|array{
+     *   href: string,
+     *   limit: int,
+     *   next: string|null,
+     *   offset: int,
+     *   previous: string|null,
+     *   total: int,
+     *   items?: list<Item>|null,
+     * } $categories
+     */
+    public function withCategories(Categories|array $categories): self
     {
         $obj = clone $this;
-        $obj->categories = $categories;
+        $obj['categories'] = $categories;
 
         return $obj;
     }

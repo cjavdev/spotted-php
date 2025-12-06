@@ -72,11 +72,12 @@ final class Owner implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
      * @param Type|value-of<Type> $type
      */
     public static function with(
         ?string $id = null,
-        ?ExternalURLObject $external_urls = null,
+        ExternalURLObject|array|null $external_urls = null,
         ?string $href = null,
         Type|string|null $type = null,
         ?string $uri = null,
@@ -84,12 +85,12 @@ final class Owner implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $href && $obj->href = $href;
+        null !== $id && $obj['id'] = $id;
+        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $href && $obj['href'] = $href;
         null !== $type && $obj['type'] = $type;
-        null !== $uri && $obj->uri = $uri;
-        null !== $display_name && $obj->display_name = $display_name;
+        null !== $uri && $obj['uri'] = $uri;
+        null !== $display_name && $obj['display_name'] = $display_name;
 
         return $obj;
     }
@@ -100,15 +101,19 @@ final class Owner implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
+    /**
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     */
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
         $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+        $obj['external_urls'] = $externalURLs;
 
         return $obj;
     }
@@ -119,7 +124,7 @@ final class Owner implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -143,7 +148,7 @@ final class Owner implements BaseModel
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -154,7 +159,7 @@ final class Owner implements BaseModel
     public function withDisplayName(?string $displayName): self
     {
         $obj = clone $this;
-        $obj->display_name = $displayName;
+        $obj['display_name'] = $displayName;
 
         return $obj;
     }

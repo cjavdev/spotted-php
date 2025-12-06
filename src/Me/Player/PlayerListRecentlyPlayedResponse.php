@@ -9,7 +9,14 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
+use Spotted\ExternalIDObject;
+use Spotted\ExternalURLObject;
+use Spotted\LinkedTrackObject;
+use Spotted\SimplifiedArtistObject;
 use Spotted\TrackObject;
+use Spotted\TrackObject\Album;
+use Spotted\TrackObject\Type;
+use Spotted\TrackRestrictionObject;
 
 /**
  * @phpstan-type PlayerListRecentlyPlayedResponseShape = array{
@@ -52,28 +59,64 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel, ResponseConve
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ContextObject|array{
+     *   external_urls?: ExternalURLObject|null,
+     *   href?: string|null,
+     *   type?: string|null,
+     *   uri?: string|null,
+     * } $context
+     * @param TrackObject|array{
+     *   id?: string|null,
+     *   album?: Album|null,
+     *   artists?: list<SimplifiedArtistObject>|null,
+     *   available_markets?: list<string>|null,
+     *   disc_number?: int|null,
+     *   duration_ms?: int|null,
+     *   explicit?: bool|null,
+     *   external_ids?: ExternalIDObject|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   href?: string|null,
+     *   is_local?: bool|null,
+     *   is_playable?: bool|null,
+     *   linked_from?: LinkedTrackObject|null,
+     *   name?: string|null,
+     *   popularity?: int|null,
+     *   preview_url?: string|null,
+     *   restrictions?: TrackRestrictionObject|null,
+     *   track_number?: int|null,
+     *   type?: value-of<Type>|null,
+     *   uri?: string|null,
+     * } $track
      */
     public static function with(
-        ?ContextObject $context = null,
+        ContextObject|array|null $context = null,
         ?\DateTimeInterface $played_at = null,
-        ?TrackObject $track = null,
+        TrackObject|array|null $track = null,
     ): self {
         $obj = new self;
 
-        null !== $context && $obj->context = $context;
-        null !== $played_at && $obj->played_at = $played_at;
-        null !== $track && $obj->track = $track;
+        null !== $context && $obj['context'] = $context;
+        null !== $played_at && $obj['played_at'] = $played_at;
+        null !== $track && $obj['track'] = $track;
 
         return $obj;
     }
 
     /**
      * The context the track was played from.
+     *
+     * @param ContextObject|array{
+     *   external_urls?: ExternalURLObject|null,
+     *   href?: string|null,
+     *   type?: string|null,
+     *   uri?: string|null,
+     * } $context
      */
-    public function withContext(ContextObject $context): self
+    public function withContext(ContextObject|array $context): self
     {
         $obj = clone $this;
-        $obj->context = $context;
+        $obj['context'] = $context;
 
         return $obj;
     }
@@ -84,18 +127,41 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel, ResponseConve
     public function withPlayedAt(\DateTimeInterface $playedAt): self
     {
         $obj = clone $this;
-        $obj->played_at = $playedAt;
+        $obj['played_at'] = $playedAt;
 
         return $obj;
     }
 
     /**
      * The track the user listened to.
+     *
+     * @param TrackObject|array{
+     *   id?: string|null,
+     *   album?: Album|null,
+     *   artists?: list<SimplifiedArtistObject>|null,
+     *   available_markets?: list<string>|null,
+     *   disc_number?: int|null,
+     *   duration_ms?: int|null,
+     *   explicit?: bool|null,
+     *   external_ids?: ExternalIDObject|null,
+     *   external_urls?: ExternalURLObject|null,
+     *   href?: string|null,
+     *   is_local?: bool|null,
+     *   is_playable?: bool|null,
+     *   linked_from?: LinkedTrackObject|null,
+     *   name?: string|null,
+     *   popularity?: int|null,
+     *   preview_url?: string|null,
+     *   restrictions?: TrackRestrictionObject|null,
+     *   track_number?: int|null,
+     *   type?: value-of<Type>|null,
+     *   uri?: string|null,
+     * } $track
      */
-    public function withTrack(TrackObject $track): self
+    public function withTrack(TrackObject|array $track): self
     {
         $obj = clone $this;
-        $obj->track = $track;
+        $obj['track'] = $track;
 
         return $obj;
     }

@@ -79,12 +79,12 @@ final class Seed implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $afterFilteringSize && $obj->afterFilteringSize = $afterFilteringSize;
-        null !== $afterRelinkingSize && $obj->afterRelinkingSize = $afterRelinkingSize;
-        null !== $href && $obj->href = $href;
-        null !== $initialPoolSize && $obj->initialPoolSize = $initialPoolSize;
-        null !== $type && $obj->type = $type;
+        null !== $id && $obj['id'] = $id;
+        null !== $afterFilteringSize && $obj['afterFilteringSize'] = $afterFilteringSize;
+        null !== $afterRelinkingSize && $obj['afterRelinkingSize'] = $afterRelinkingSize;
+        null !== $href && $obj['href'] = $href;
+        null !== $initialPoolSize && $obj['initialPoolSize'] = $initialPoolSize;
+        null !== $type && $obj['type'] = $type;
 
         return $obj;
     }
@@ -95,7 +95,7 @@ final class Seed implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Seed implements BaseModel
     public function withAfterFilteringSize(int $afterFilteringSize): self
     {
         $obj = clone $this;
-        $obj->afterFilteringSize = $afterFilteringSize;
+        $obj['afterFilteringSize'] = $afterFilteringSize;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class Seed implements BaseModel
     public function withAfterRelinkingSize(int $afterRelinkingSize): self
     {
         $obj = clone $this;
-        $obj->afterRelinkingSize = $afterRelinkingSize;
+        $obj['afterRelinkingSize'] = $afterRelinkingSize;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class Seed implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Seed implements BaseModel
     public function withInitialPoolSize(int $initialPoolSize): self
     {
         $obj = clone $this;
-        $obj->initialPoolSize = $initialPoolSize;
+        $obj['initialPoolSize'] = $initialPoolSize;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class Seed implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }

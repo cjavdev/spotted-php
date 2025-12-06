@@ -77,7 +77,9 @@ final class CategoryGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ImageObject> $icons
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $icons
      */
     public static function with(
         string $id,
@@ -87,10 +89,10 @@ final class CategoryGetResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->href = $href;
-        $obj->icons = $icons;
-        $obj->name = $name;
+        $obj['id'] = $id;
+        $obj['href'] = $href;
+        $obj['icons'] = $icons;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -101,7 +103,7 @@ final class CategoryGetResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -112,7 +114,7 @@ final class CategoryGetResponse implements BaseModel, ResponseConverter
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -120,12 +122,14 @@ final class CategoryGetResponse implements BaseModel, ResponseConverter
     /**
      * The category icon, in various sizes.
      *
-     * @param list<ImageObject> $icons
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $icons
      */
     public function withIcons(array $icons): self
     {
         $obj = clone $this;
-        $obj->icons = $icons;
+        $obj['icons'] = $icons;
 
         return $obj;
     }
@@ -136,7 +140,7 @@ final class CategoryGetResponse implements BaseModel, ResponseConverter
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

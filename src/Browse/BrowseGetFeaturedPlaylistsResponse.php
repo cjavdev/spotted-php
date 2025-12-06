@@ -10,6 +10,7 @@ use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\PagingPlaylistObject;
+use Spotted\SimplifiedPlaylistObject;
 
 /**
  * @phpstan-type BrowseGetFeaturedPlaylistsResponseShape = array{
@@ -41,15 +42,25 @@ final class BrowseGetFeaturedPlaylistsResponse implements BaseModel, ResponseCon
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PagingPlaylistObject|array{
+     *   href: string,
+     *   limit: int,
+     *   next: string|null,
+     *   offset: int,
+     *   previous: string|null,
+     *   total: int,
+     *   items?: list<SimplifiedPlaylistObject>|null,
+     * } $playlists
      */
     public static function with(
         ?string $message = null,
-        ?PagingPlaylistObject $playlists = null
+        PagingPlaylistObject|array|null $playlists = null
     ): self {
         $obj = new self;
 
-        null !== $message && $obj->message = $message;
-        null !== $playlists && $obj->playlists = $playlists;
+        null !== $message && $obj['message'] = $message;
+        null !== $playlists && $obj['playlists'] = $playlists;
 
         return $obj;
     }
@@ -60,15 +71,26 @@ final class BrowseGetFeaturedPlaylistsResponse implements BaseModel, ResponseCon
     public function withMessage(string $message): self
     {
         $obj = clone $this;
-        $obj->message = $message;
+        $obj['message'] = $message;
 
         return $obj;
     }
 
-    public function withPlaylists(PagingPlaylistObject $playlists): self
+    /**
+     * @param PagingPlaylistObject|array{
+     *   href: string,
+     *   limit: int,
+     *   next: string|null,
+     *   offset: int,
+     *   previous: string|null,
+     *   total: int,
+     *   items?: list<SimplifiedPlaylistObject>|null,
+     * } $playlists
+     */
+    public function withPlaylists(PagingPlaylistObject|array $playlists): self
     {
         $obj = clone $this;
-        $obj->playlists = $playlists;
+        $obj['playlists'] = $playlists;
 
         return $obj;
     }

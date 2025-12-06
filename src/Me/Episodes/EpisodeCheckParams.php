@@ -57,7 +57,7 @@ final class EpisodeCheckParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->ids = $ids;
+        $obj['ids'] = $ids;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class EpisodeCheckParams implements BaseModel
     public function withIDs(string $ids): self
     {
         $obj = clone $this;
-        $obj->ids = $ids;
+        $obj['ids'] = $ids;
 
         return $obj;
     }

@@ -68,9 +68,9 @@ final class PlayerSetRepeatModeParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->state = $state;
+        $obj['state'] = $state;
 
-        null !== $device_id && $obj->device_id = $device_id;
+        null !== $device_id && $obj['device_id'] = $device_id;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class PlayerSetRepeatModeParams implements BaseModel
     public function withState(string $state): self
     {
         $obj = clone $this;
-        $obj->state = $state;
+        $obj['state'] = $state;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class PlayerSetRepeatModeParams implements BaseModel
     public function withDeviceID(string $deviceID): self
     {
         $obj = clone $this;
-        $obj->device_id = $deviceID;
+        $obj['device_id'] = $deviceID;
 
         return $obj;
     }

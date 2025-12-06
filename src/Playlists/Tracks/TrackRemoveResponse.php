@@ -37,7 +37,7 @@ final class TrackRemoveResponse implements BaseModel, ResponseConverter
     {
         $obj = new self;
 
-        null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
+        null !== $snapshot_id && $obj['snapshot_id'] = $snapshot_id;
 
         return $obj;
     }
@@ -45,7 +45,7 @@ final class TrackRemoveResponse implements BaseModel, ResponseConverter
     public function withSnapshotID(string $snapshotID): self
     {
         $obj = clone $this;
-        $obj->snapshot_id = $snapshotID;
+        $obj['snapshot_id'] = $snapshotID;
 
         return $obj;
     }

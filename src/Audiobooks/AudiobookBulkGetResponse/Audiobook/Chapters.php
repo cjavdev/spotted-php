@@ -5,9 +5,14 @@ declare(strict_types=1);
 namespace Spotted\Audiobooks\AudiobookBulkGetResponse\Audiobook;
 
 use Spotted\Audiobooks\SimplifiedChapterObject;
+use Spotted\Audiobooks\SimplifiedChapterObject\ReleaseDatePrecision;
+use Spotted\ChapterRestrictionObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
+use Spotted\ExternalURLObject;
+use Spotted\ImageObject;
+use Spotted\ResumePointObject;
 
 /**
  * The chapters of the audiobook.
@@ -99,7 +104,28 @@ final class Chapters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedChapterObject> $items
+     * @param list<SimplifiedChapterObject|array{
+     *   id: string,
+     *   audio_preview_url: string|null,
+     *   chapter_number: int,
+     *   description: string,
+     *   duration_ms: int,
+     *   explicit: bool,
+     *   external_urls: ExternalURLObject,
+     *   href: string,
+     *   html_description: string,
+     *   images: list<ImageObject>,
+     *   is_playable: bool,
+     *   languages: list<string>,
+     *   name: string,
+     *   release_date: string,
+     *   release_date_precision: value-of<ReleaseDatePrecision>,
+     *   type: 'episode',
+     *   uri: string,
+     *   available_markets?: list<string>|null,
+     *   restrictions?: ChapterRestrictionObject|null,
+     *   resume_point?: ResumePointObject|null,
+     * }> $items
      */
     public static function with(
         string $href,
@@ -112,14 +138,14 @@ final class Chapters implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->href = $href;
-        $obj->limit = $limit;
-        $obj->next = $next;
-        $obj->offset = $offset;
-        $obj->previous = $previous;
-        $obj->total = $total;
+        $obj['href'] = $href;
+        $obj['limit'] = $limit;
+        $obj['next'] = $next;
+        $obj['offset'] = $offset;
+        $obj['previous'] = $previous;
+        $obj['total'] = $total;
 
-        null !== $items && $obj->items = $items;
+        null !== $items && $obj['items'] = $items;
 
         return $obj;
     }
@@ -130,7 +156,7 @@ final class Chapters implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -141,7 +167,7 @@ final class Chapters implements BaseModel
     public function withLimit(int $limit): self
     {
         $obj = clone $this;
-        $obj->limit = $limit;
+        $obj['limit'] = $limit;
 
         return $obj;
     }
@@ -152,7 +178,7 @@ final class Chapters implements BaseModel
     public function withNext(?string $next): self
     {
         $obj = clone $this;
-        $obj->next = $next;
+        $obj['next'] = $next;
 
         return $obj;
     }
@@ -163,7 +189,7 @@ final class Chapters implements BaseModel
     public function withOffset(int $offset): self
     {
         $obj = clone $this;
-        $obj->offset = $offset;
+        $obj['offset'] = $offset;
 
         return $obj;
     }
@@ -174,7 +200,7 @@ final class Chapters implements BaseModel
     public function withPrevious(?string $previous): self
     {
         $obj = clone $this;
-        $obj->previous = $previous;
+        $obj['previous'] = $previous;
 
         return $obj;
     }
@@ -185,18 +211,39 @@ final class Chapters implements BaseModel
     public function withTotal(int $total): self
     {
         $obj = clone $this;
-        $obj->total = $total;
+        $obj['total'] = $total;
 
         return $obj;
     }
 
     /**
-     * @param list<SimplifiedChapterObject> $items
+     * @param list<SimplifiedChapterObject|array{
+     *   id: string,
+     *   audio_preview_url: string|null,
+     *   chapter_number: int,
+     *   description: string,
+     *   duration_ms: int,
+     *   explicit: bool,
+     *   external_urls: ExternalURLObject,
+     *   href: string,
+     *   html_description: string,
+     *   images: list<ImageObject>,
+     *   is_playable: bool,
+     *   languages: list<string>,
+     *   name: string,
+     *   release_date: string,
+     *   release_date_precision: value-of<ReleaseDatePrecision>,
+     *   type: 'episode',
+     *   uri: string,
+     *   available_markets?: list<string>|null,
+     *   restrictions?: ChapterRestrictionObject|null,
+     *   resume_point?: ResumePointObject|null,
+     * }> $items
      */
     public function withItems(array $items): self
     {
         $obj = clone $this;
-        $obj->items = $items;
+        $obj['items'] = $items;
 
         return $obj;
     }

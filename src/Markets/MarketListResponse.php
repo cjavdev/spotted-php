@@ -40,7 +40,7 @@ final class MarketListResponse implements BaseModel, ResponseConverter
     {
         $obj = new self;
 
-        null !== $markets && $obj->markets = $markets;
+        null !== $markets && $obj['markets'] = $markets;
 
         return $obj;
     }
@@ -51,7 +51,7 @@ final class MarketListResponse implements BaseModel, ResponseConverter
     public function withMarkets(array $markets): self
     {
         $obj = clone $this;
-        $obj->markets = $markets;
+        $obj['markets'] = $markets;
 
         return $obj;
     }

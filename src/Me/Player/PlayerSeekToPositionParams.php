@@ -69,9 +69,9 @@ final class PlayerSeekToPositionParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->position_ms = $position_ms;
+        $obj['position_ms'] = $position_ms;
 
-        null !== $device_id && $obj->device_id = $device_id;
+        null !== $device_id && $obj['device_id'] = $device_id;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class PlayerSeekToPositionParams implements BaseModel
     public function withPositionMs(int $positionMs): self
     {
         $obj = clone $this;
-        $obj->position_ms = $positionMs;
+        $obj['position_ms'] = $positionMs;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class PlayerSeekToPositionParams implements BaseModel
     public function withDeviceID(string $deviceID): self
     {
         $obj = clone $this;
-        $obj->device_id = $deviceID;
+        $obj['device_id'] = $deviceID;
 
         return $obj;
     }

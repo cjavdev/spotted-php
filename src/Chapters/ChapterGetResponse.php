@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Spotted\Chapters;
 
 use Spotted\AudiobookBase;
+use Spotted\AuthorObject;
 use Spotted\ChapterRestrictionObject;
 use Spotted\Chapters\ChapterGetResponse\ReleaseDatePrecision;
+use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkResponse;
@@ -14,6 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
+use Spotted\NarratorObject;
 use Spotted\ResumePointObject;
 
 /**
@@ -245,20 +248,48 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ImageObject> $images
+     * @param AudiobookBase|array{
+     *   id: string,
+     *   authors: list<AuthorObject>,
+     *   available_markets: list<string>,
+     *   copyrights: list<CopyrightObject>,
+     *   description: string,
+     *   explicit: bool,
+     *   external_urls: ExternalURLObject,
+     *   href: string,
+     *   html_description: string,
+     *   images: list<ImageObject>,
+     *   languages: list<string>,
+     *   media_type: string,
+     *   name: string,
+     *   narrators: list<NarratorObject>,
+     *   publisher: string,
+     *   total_chapters: int,
+     *   type: 'audiobook',
+     *   uri: string,
+     *   edition?: string|null,
+     * } $audiobook
+     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      * @param list<string> $languages
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $release_date_precision
      * @param list<string> $available_markets
+     * @param ChapterRestrictionObject|array{reason?: string|null} $restrictions
+     * @param ResumePointObject|array{
+     *   fully_played?: bool|null, resume_position_ms?: int|null
+     * } $resume_point
      */
     public static function with(
         string $id,
         ?string $audio_preview_url,
-        AudiobookBase $audiobook,
+        AudiobookBase|array $audiobook,
         int $chapter_number,
         string $description,
         int $duration_ms,
         bool $explicit,
-        ExternalURLObject $external_urls,
+        ExternalURLObject|array $external_urls,
         string $href,
         string $html_description,
         array $images,
@@ -269,32 +300,32 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
         ReleaseDatePrecision|string $release_date_precision,
         string $uri,
         ?array $available_markets = null,
-        ?ChapterRestrictionObject $restrictions = null,
-        ?ResumePointObject $resume_point = null,
+        ChapterRestrictionObject|array|null $restrictions = null,
+        ResumePointObject|array|null $resume_point = null,
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->audio_preview_url = $audio_preview_url;
-        $obj->audiobook = $audiobook;
-        $obj->chapter_number = $chapter_number;
-        $obj->description = $description;
-        $obj->duration_ms = $duration_ms;
-        $obj->explicit = $explicit;
-        $obj->external_urls = $external_urls;
-        $obj->href = $href;
-        $obj->html_description = $html_description;
-        $obj->images = $images;
-        $obj->is_playable = $is_playable;
-        $obj->languages = $languages;
-        $obj->name = $name;
-        $obj->release_date = $release_date;
+        $obj['id'] = $id;
+        $obj['audio_preview_url'] = $audio_preview_url;
+        $obj['audiobook'] = $audiobook;
+        $obj['chapter_number'] = $chapter_number;
+        $obj['description'] = $description;
+        $obj['duration_ms'] = $duration_ms;
+        $obj['explicit'] = $explicit;
+        $obj['external_urls'] = $external_urls;
+        $obj['href'] = $href;
+        $obj['html_description'] = $html_description;
+        $obj['images'] = $images;
+        $obj['is_playable'] = $is_playable;
+        $obj['languages'] = $languages;
+        $obj['name'] = $name;
+        $obj['release_date'] = $release_date;
         $obj['release_date_precision'] = $release_date_precision;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
-        null !== $available_markets && $obj->available_markets = $available_markets;
-        null !== $restrictions && $obj->restrictions = $restrictions;
-        null !== $resume_point && $obj->resume_point = $resume_point;
+        null !== $available_markets && $obj['available_markets'] = $available_markets;
+        null !== $restrictions && $obj['restrictions'] = $restrictions;
+        null !== $resume_point && $obj['resume_point'] = $resume_point;
 
         return $obj;
     }
@@ -305,7 +336,7 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -316,18 +347,40 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     public function withAudioPreviewURL(?string $audioPreviewURL): self
     {
         $obj = clone $this;
-        $obj->audio_preview_url = $audioPreviewURL;
+        $obj['audio_preview_url'] = $audioPreviewURL;
 
         return $obj;
     }
 
     /**
      * The audiobook for which the chapter belongs.
+     *
+     * @param AudiobookBase|array{
+     *   id: string,
+     *   authors: list<AuthorObject>,
+     *   available_markets: list<string>,
+     *   copyrights: list<CopyrightObject>,
+     *   description: string,
+     *   explicit: bool,
+     *   external_urls: ExternalURLObject,
+     *   href: string,
+     *   html_description: string,
+     *   images: list<ImageObject>,
+     *   languages: list<string>,
+     *   media_type: string,
+     *   name: string,
+     *   narrators: list<NarratorObject>,
+     *   publisher: string,
+     *   total_chapters: int,
+     *   type: 'audiobook',
+     *   uri: string,
+     *   edition?: string|null,
+     * } $audiobook
      */
-    public function withAudiobook(AudiobookBase $audiobook): self
+    public function withAudiobook(AudiobookBase|array $audiobook): self
     {
         $obj = clone $this;
-        $obj->audiobook = $audiobook;
+        $obj['audiobook'] = $audiobook;
 
         return $obj;
     }
@@ -338,7 +391,7 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     public function withChapterNumber(int $chapterNumber): self
     {
         $obj = clone $this;
-        $obj->chapter_number = $chapterNumber;
+        $obj['chapter_number'] = $chapterNumber;
 
         return $obj;
     }
@@ -349,7 +402,7 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -360,7 +413,7 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     public function withDurationMs(int $durationMs): self
     {
         $obj = clone $this;
-        $obj->duration_ms = $durationMs;
+        $obj['duration_ms'] = $durationMs;
 
         return $obj;
     }
@@ -371,18 +424,21 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     public function withExplicit(bool $explicit): self
     {
         $obj = clone $this;
-        $obj->explicit = $explicit;
+        $obj['explicit'] = $explicit;
 
         return $obj;
     }
 
     /**
      * External URLs for this chapter.
+     *
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
         $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+        $obj['external_urls'] = $externalURLs;
 
         return $obj;
     }
@@ -393,7 +449,7 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -404,7 +460,7 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     public function withHTMLDescription(string $htmlDescription): self
     {
         $obj = clone $this;
-        $obj->html_description = $htmlDescription;
+        $obj['html_description'] = $htmlDescription;
 
         return $obj;
     }
@@ -412,12 +468,14 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     /**
      * The cover art for the chapter in various sizes, widest first.
      *
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      */
     public function withImages(array $images): self
     {
         $obj = clone $this;
-        $obj->images = $images;
+        $obj['images'] = $images;
 
         return $obj;
     }
@@ -428,7 +486,7 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     public function withIsPlayable(bool $isPlayable): self
     {
         $obj = clone $this;
-        $obj->is_playable = $isPlayable;
+        $obj['is_playable'] = $isPlayable;
 
         return $obj;
     }
@@ -441,7 +499,7 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     public function withLanguages(array $languages): self
     {
         $obj = clone $this;
-        $obj->languages = $languages;
+        $obj['languages'] = $languages;
 
         return $obj;
     }
@@ -452,7 +510,7 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -463,7 +521,7 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     public function withReleaseDate(string $releaseDate): self
     {
         $obj = clone $this;
-        $obj->release_date = $releaseDate;
+        $obj['release_date'] = $releaseDate;
 
         return $obj;
     }
@@ -488,7 +546,7 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -501,30 +559,36 @@ final class ChapterGetResponse implements BaseModel, ResponseConverter
     public function withAvailableMarkets(array $availableMarkets): self
     {
         $obj = clone $this;
-        $obj->available_markets = $availableMarkets;
+        $obj['available_markets'] = $availableMarkets;
 
         return $obj;
     }
 
     /**
      * Included in the response when a content restriction is applied.
+     *
+     * @param ChapterRestrictionObject|array{reason?: string|null} $restrictions
      */
     public function withRestrictions(
-        ChapterRestrictionObject $restrictions
+        ChapterRestrictionObject|array $restrictions
     ): self {
         $obj = clone $this;
-        $obj->restrictions = $restrictions;
+        $obj['restrictions'] = $restrictions;
 
         return $obj;
     }
 
     /**
      * The user's most recent position in the chapter. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
+     *
+     * @param ResumePointObject|array{
+     *   fully_played?: bool|null, resume_position_ms?: int|null
+     * } $resumePoint
      */
-    public function withResumePoint(ResumePointObject $resumePoint): self
+    public function withResumePoint(ResumePointObject|array $resumePoint): self
     {
         $obj = clone $this;
-        $obj->resume_point = $resumePoint;
+        $obj['resume_point'] = $resumePoint;
 
         return $obj;
     }

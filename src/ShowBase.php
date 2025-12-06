@@ -204,8 +204,13 @@ final class ShowBase implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $available_markets
-     * @param list<CopyrightObject> $copyrights
-     * @param list<ImageObject> $images
+     * @param list<CopyrightObject|array{
+     *   text?: string|null, type?: string|null
+     * }> $copyrights
+     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      * @param list<string> $languages
      */
     public static function with(
@@ -214,7 +219,7 @@ final class ShowBase implements BaseModel
         array $copyrights,
         string $description,
         bool $explicit,
-        ExternalURLObject $external_urls,
+        ExternalURLObject|array $external_urls,
         string $href,
         string $html_description,
         array $images,
@@ -228,22 +233,22 @@ final class ShowBase implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->available_markets = $available_markets;
-        $obj->copyrights = $copyrights;
-        $obj->description = $description;
-        $obj->explicit = $explicit;
-        $obj->external_urls = $external_urls;
-        $obj->href = $href;
-        $obj->html_description = $html_description;
-        $obj->images = $images;
-        $obj->is_externally_hosted = $is_externally_hosted;
-        $obj->languages = $languages;
-        $obj->media_type = $media_type;
-        $obj->name = $name;
-        $obj->publisher = $publisher;
-        $obj->total_episodes = $total_episodes;
-        $obj->uri = $uri;
+        $obj['id'] = $id;
+        $obj['available_markets'] = $available_markets;
+        $obj['copyrights'] = $copyrights;
+        $obj['description'] = $description;
+        $obj['explicit'] = $explicit;
+        $obj['external_urls'] = $external_urls;
+        $obj['href'] = $href;
+        $obj['html_description'] = $html_description;
+        $obj['images'] = $images;
+        $obj['is_externally_hosted'] = $is_externally_hosted;
+        $obj['languages'] = $languages;
+        $obj['media_type'] = $media_type;
+        $obj['name'] = $name;
+        $obj['publisher'] = $publisher;
+        $obj['total_episodes'] = $total_episodes;
+        $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -254,7 +259,7 @@ final class ShowBase implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -267,7 +272,7 @@ final class ShowBase implements BaseModel
     public function withAvailableMarkets(array $availableMarkets): self
     {
         $obj = clone $this;
-        $obj->available_markets = $availableMarkets;
+        $obj['available_markets'] = $availableMarkets;
 
         return $obj;
     }
@@ -275,12 +280,14 @@ final class ShowBase implements BaseModel
     /**
      * The copyright statements of the show.
      *
-     * @param list<CopyrightObject> $copyrights
+     * @param list<CopyrightObject|array{
+     *   text?: string|null, type?: string|null
+     * }> $copyrights
      */
     public function withCopyrights(array $copyrights): self
     {
         $obj = clone $this;
-        $obj->copyrights = $copyrights;
+        $obj['copyrights'] = $copyrights;
 
         return $obj;
     }
@@ -291,7 +298,7 @@ final class ShowBase implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -302,18 +309,21 @@ final class ShowBase implements BaseModel
     public function withExplicit(bool $explicit): self
     {
         $obj = clone $this;
-        $obj->explicit = $explicit;
+        $obj['explicit'] = $explicit;
 
         return $obj;
     }
 
     /**
      * External URLs for this show.
+     *
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
         $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+        $obj['external_urls'] = $externalURLs;
 
         return $obj;
     }
@@ -324,7 +334,7 @@ final class ShowBase implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -335,7 +345,7 @@ final class ShowBase implements BaseModel
     public function withHTMLDescription(string $htmlDescription): self
     {
         $obj = clone $this;
-        $obj->html_description = $htmlDescription;
+        $obj['html_description'] = $htmlDescription;
 
         return $obj;
     }
@@ -343,12 +353,14 @@ final class ShowBase implements BaseModel
     /**
      * The cover art for the show in various sizes, widest first.
      *
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      */
     public function withImages(array $images): self
     {
         $obj = clone $this;
-        $obj->images = $images;
+        $obj['images'] = $images;
 
         return $obj;
     }
@@ -359,7 +371,7 @@ final class ShowBase implements BaseModel
     public function withIsExternallyHosted(bool $isExternallyHosted): self
     {
         $obj = clone $this;
-        $obj->is_externally_hosted = $isExternallyHosted;
+        $obj['is_externally_hosted'] = $isExternallyHosted;
 
         return $obj;
     }
@@ -372,7 +384,7 @@ final class ShowBase implements BaseModel
     public function withLanguages(array $languages): self
     {
         $obj = clone $this;
-        $obj->languages = $languages;
+        $obj['languages'] = $languages;
 
         return $obj;
     }
@@ -383,7 +395,7 @@ final class ShowBase implements BaseModel
     public function withMediaType(string $mediaType): self
     {
         $obj = clone $this;
-        $obj->media_type = $mediaType;
+        $obj['media_type'] = $mediaType;
 
         return $obj;
     }
@@ -394,7 +406,7 @@ final class ShowBase implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -405,7 +417,7 @@ final class ShowBase implements BaseModel
     public function withPublisher(string $publisher): self
     {
         $obj = clone $this;
-        $obj->publisher = $publisher;
+        $obj['publisher'] = $publisher;
 
         return $obj;
     }
@@ -416,7 +428,7 @@ final class ShowBase implements BaseModel
     public function withTotalEpisodes(int $totalEpisodes): self
     {
         $obj = clone $this;
-        $obj->total_episodes = $totalEpisodes;
+        $obj['total_episodes'] = $totalEpisodes;
 
         return $obj;
     }
@@ -427,7 +439,7 @@ final class ShowBase implements BaseModel
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

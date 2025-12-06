@@ -113,16 +113,16 @@ final class Actions implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $interrupting_playback && $obj->interrupting_playback = $interrupting_playback;
-        null !== $pausing && $obj->pausing = $pausing;
-        null !== $resuming && $obj->resuming = $resuming;
-        null !== $seeking && $obj->seeking = $seeking;
-        null !== $skipping_next && $obj->skipping_next = $skipping_next;
-        null !== $skipping_prev && $obj->skipping_prev = $skipping_prev;
-        null !== $toggling_repeat_context && $obj->toggling_repeat_context = $toggling_repeat_context;
-        null !== $toggling_repeat_track && $obj->toggling_repeat_track = $toggling_repeat_track;
-        null !== $toggling_shuffle && $obj->toggling_shuffle = $toggling_shuffle;
-        null !== $transferring_playback && $obj->transferring_playback = $transferring_playback;
+        null !== $interrupting_playback && $obj['interrupting_playback'] = $interrupting_playback;
+        null !== $pausing && $obj['pausing'] = $pausing;
+        null !== $resuming && $obj['resuming'] = $resuming;
+        null !== $seeking && $obj['seeking'] = $seeking;
+        null !== $skipping_next && $obj['skipping_next'] = $skipping_next;
+        null !== $skipping_prev && $obj['skipping_prev'] = $skipping_prev;
+        null !== $toggling_repeat_context && $obj['toggling_repeat_context'] = $toggling_repeat_context;
+        null !== $toggling_repeat_track && $obj['toggling_repeat_track'] = $toggling_repeat_track;
+        null !== $toggling_shuffle && $obj['toggling_shuffle'] = $toggling_shuffle;
+        null !== $transferring_playback && $obj['transferring_playback'] = $transferring_playback;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class Actions implements BaseModel
     public function withInterruptingPlayback(bool $interruptingPlayback): self
     {
         $obj = clone $this;
-        $obj->interrupting_playback = $interruptingPlayback;
+        $obj['interrupting_playback'] = $interruptingPlayback;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class Actions implements BaseModel
     public function withPausing(bool $pausing): self
     {
         $obj = clone $this;
-        $obj->pausing = $pausing;
+        $obj['pausing'] = $pausing;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class Actions implements BaseModel
     public function withResuming(bool $resuming): self
     {
         $obj = clone $this;
-        $obj->resuming = $resuming;
+        $obj['resuming'] = $resuming;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class Actions implements BaseModel
     public function withSeeking(bool $seeking): self
     {
         $obj = clone $this;
-        $obj->seeking = $seeking;
+        $obj['seeking'] = $seeking;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class Actions implements BaseModel
     public function withSkippingNext(bool $skippingNext): self
     {
         $obj = clone $this;
-        $obj->skipping_next = $skippingNext;
+        $obj['skipping_next'] = $skippingNext;
 
         return $obj;
     }
@@ -188,7 +188,7 @@ final class Actions implements BaseModel
     public function withSkippingPrev(bool $skippingPrev): self
     {
         $obj = clone $this;
-        $obj->skipping_prev = $skippingPrev;
+        $obj['skipping_prev'] = $skippingPrev;
 
         return $obj;
     }
@@ -199,7 +199,7 @@ final class Actions implements BaseModel
     public function withTogglingRepeatContext(bool $togglingRepeatContext): self
     {
         $obj = clone $this;
-        $obj->toggling_repeat_context = $togglingRepeatContext;
+        $obj['toggling_repeat_context'] = $togglingRepeatContext;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class Actions implements BaseModel
     public function withTogglingRepeatTrack(bool $togglingRepeatTrack): self
     {
         $obj = clone $this;
-        $obj->toggling_repeat_track = $togglingRepeatTrack;
+        $obj['toggling_repeat_track'] = $togglingRepeatTrack;
 
         return $obj;
     }
@@ -221,7 +221,7 @@ final class Actions implements BaseModel
     public function withTogglingShuffle(bool $togglingShuffle): self
     {
         $obj = clone $this;
-        $obj->toggling_shuffle = $togglingShuffle;
+        $obj['toggling_shuffle'] = $togglingShuffle;
 
         return $obj;
     }
@@ -232,7 +232,7 @@ final class Actions implements BaseModel
     public function withTransferringPlayback(bool $transferringPlayback): self
     {
         $obj = clone $this;
-        $obj->transferring_playback = $transferringPlayback;
+        $obj['transferring_playback'] = $transferringPlayback;
 
         return $obj;
     }

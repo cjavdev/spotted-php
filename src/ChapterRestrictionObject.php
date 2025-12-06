@@ -43,7 +43,7 @@ final class ChapterRestrictionObject implements BaseModel
     {
         $obj = new self;
 
-        null !== $reason && $obj->reason = $reason;
+        null !== $reason && $obj['reason'] = $reason;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class ChapterRestrictionObject implements BaseModel
     public function withReason(string $reason): self
     {
         $obj = clone $this;
-        $obj->reason = $reason;
+        $obj['reason'] = $reason;
 
         return $obj;
     }

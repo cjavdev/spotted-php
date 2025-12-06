@@ -104,14 +104,18 @@ final class ArtistObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
      * @param list<string> $genres
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      * @param Type|value-of<Type> $type
      */
     public static function with(
         ?string $id = null,
-        ?ExternalURLObject $external_urls = null,
-        ?FollowersObject $followers = null,
+        ExternalURLObject|array|null $external_urls = null,
+        FollowersObject|array|null $followers = null,
         ?array $genres = null,
         ?string $href = null,
         ?array $images = null,
@@ -122,16 +126,16 @@ final class ArtistObject implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $followers && $obj->followers = $followers;
-        null !== $genres && $obj->genres = $genres;
-        null !== $href && $obj->href = $href;
-        null !== $images && $obj->images = $images;
-        null !== $name && $obj->name = $name;
-        null !== $popularity && $obj->popularity = $popularity;
+        null !== $id && $obj['id'] = $id;
+        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $followers && $obj['followers'] = $followers;
+        null !== $genres && $obj['genres'] = $genres;
+        null !== $href && $obj['href'] = $href;
+        null !== $images && $obj['images'] = $images;
+        null !== $name && $obj['name'] = $name;
+        null !== $popularity && $obj['popularity'] = $popularity;
         null !== $type && $obj['type'] = $type;
-        null !== $uri && $obj->uri = $uri;
+        null !== $uri && $obj['uri'] = $uri;
 
         return $obj;
     }
@@ -142,29 +146,34 @@ final class ArtistObject implements BaseModel
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
 
     /**
      * Known external URLs for this artist.
+     *
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
         $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+        $obj['external_urls'] = $externalURLs;
 
         return $obj;
     }
 
     /**
      * Information about the followers of the artist.
+     *
+     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
      */
-    public function withFollowers(FollowersObject $followers): self
+    public function withFollowers(FollowersObject|array $followers): self
     {
         $obj = clone $this;
-        $obj->followers = $followers;
+        $obj['followers'] = $followers;
 
         return $obj;
     }
@@ -177,7 +186,7 @@ final class ArtistObject implements BaseModel
     public function withGenres(array $genres): self
     {
         $obj = clone $this;
-        $obj->genres = $genres;
+        $obj['genres'] = $genres;
 
         return $obj;
     }
@@ -188,7 +197,7 @@ final class ArtistObject implements BaseModel
     public function withHref(string $href): self
     {
         $obj = clone $this;
-        $obj->href = $href;
+        $obj['href'] = $href;
 
         return $obj;
     }
@@ -196,12 +205,14 @@ final class ArtistObject implements BaseModel
     /**
      * Images of the artist in various sizes, widest first.
      *
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|array{
+     *   height: int|null, url: string, width: int|null
+     * }> $images
      */
     public function withImages(array $images): self
     {
         $obj = clone $this;
-        $obj->images = $images;
+        $obj['images'] = $images;
 
         return $obj;
     }
@@ -212,7 +223,7 @@ final class ArtistObject implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -223,7 +234,7 @@ final class ArtistObject implements BaseModel
     public function withPopularity(int $popularity): self
     {
         $obj = clone $this;
-        $obj->popularity = $popularity;
+        $obj['popularity'] = $popularity;
 
         return $obj;
     }
@@ -247,7 +258,7 @@ final class ArtistObject implements BaseModel
     public function withUri(string $uri): self
     {
         $obj = clone $this;
-        $obj->uri = $uri;
+        $obj['uri'] = $uri;
 
         return $obj;
     }

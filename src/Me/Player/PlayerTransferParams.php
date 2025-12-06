@@ -68,9 +68,9 @@ final class PlayerTransferParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->device_ids = $device_ids;
+        $obj['device_ids'] = $device_ids;
 
-        null !== $play && $obj->play = $play;
+        null !== $play && $obj['play'] = $play;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class PlayerTransferParams implements BaseModel
     public function withDeviceIDs(array $deviceIDs): self
     {
         $obj = clone $this;
-        $obj->device_ids = $deviceIDs;
+        $obj['device_ids'] = $deviceIDs;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class PlayerTransferParams implements BaseModel
     public function withPlay(bool $play): self
     {
         $obj = clone $this;
-        $obj->play = $play;
+        $obj['play'] = $play;
 
         return $obj;
     }
