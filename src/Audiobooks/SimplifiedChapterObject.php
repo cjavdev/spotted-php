@@ -31,7 +31,7 @@ use Spotted\ResumePointObject;
  *   name: string,
  *   release_date: string,
  *   release_date_precision: value-of<ReleaseDatePrecision>,
- *   type: 'episode',
+ *   type?: 'episode',
  *   uri: string,
  *   available_markets?: list<string>|null,
  *   restrictions?: ChapterRestrictionObject|null,

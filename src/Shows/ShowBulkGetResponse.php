@@ -64,7 +64,7 @@ final class ShowBulkGetResponse implements BaseModel
      *   name: string,
      *   publisher: string,
      *   total_episodes: int,
-     *   type: 'show',
+     *   type?: 'show',
      *   uri: string,
      * }> $shows
      */
@@ -94,7 +94,7 @@ final class ShowBulkGetResponse implements BaseModel
      *   name: string,
      *   publisher: string,
      *   total_episodes: int,
-     *   type: 'show',
+     *   type?: 'show',
      *   uri: string,
      * }> $shows
      */

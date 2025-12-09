@@ -30,7 +30,7 @@ use Spotted\SimplifiedEpisodeObject;
  *   name: string,
  *   publisher: string,
  *   total_episodes: int,
- *   type: 'show',
+ *   type?: 'show',
  *   uri: string,
  *   episodes: Episodes,
  * }

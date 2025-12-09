@@ -34,7 +34,7 @@ use Spotted\NarratorObject;
  *   narrators: list<NarratorObject>,
  *   publisher: string,
  *   total_chapters: int,
- *   type: 'audiobook',
+ *   type?: 'audiobook',
  *   uri: string,
  *   edition?: string|null,
  *   chapters: Chapters,

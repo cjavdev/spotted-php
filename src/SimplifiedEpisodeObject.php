@@ -27,7 +27,7 @@ use Spotted\SimplifiedEpisodeObject\ReleaseDatePrecision;
  *   name: string,
  *   release_date: string,
  *   release_date_precision: value-of<ReleaseDatePrecision>,
- *   type: 'episode',
+ *   type?: 'episode',
  *   uri: string,
  *   language?: string|null,
  *   restrictions?: EpisodeRestrictionObject|null,

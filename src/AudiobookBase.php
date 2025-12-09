@@ -27,7 +27,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   narrators: list<NarratorObject>,
  *   publisher: string,
  *   total_chapters: int,
- *   type: 'audiobook',
+ *   type?: 'audiobook',
  *   uri: string,
  *   edition?: string|null,
  * }

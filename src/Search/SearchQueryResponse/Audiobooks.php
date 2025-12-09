@@ -120,7 +120,7 @@ final class Audiobooks implements BaseModel
      *   narrators: list<NarratorObject>,
      *   publisher: string,
      *   total_chapters: int,
-     *   type: 'audiobook',
+     *   type?: 'audiobook',
      *   uri: string,
      *   edition?: string|null,
      * }> $items
@@ -232,7 +232,7 @@ final class Audiobooks implements BaseModel
      *   narrators: list<NarratorObject>,
      *   publisher: string,
      *   total_chapters: int,
-     *   type: 'audiobook',
+     *   type?: 'audiobook',
      *   uri: string,
      *   edition?: string|null,
      * }> $items

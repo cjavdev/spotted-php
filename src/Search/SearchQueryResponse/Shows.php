@@ -117,7 +117,7 @@ final class Shows implements BaseModel
      *   name: string,
      *   publisher: string,
      *   total_episodes: int,
-     *   type: 'show',
+     *   type?: 'show',
      *   uri: string,
      * }> $items
      */
@@ -227,7 +227,7 @@ final class Shows implements BaseModel
      *   name: string,
      *   publisher: string,
      *   total_episodes: int,
-     *   type: 'show',
+     *   type?: 'show',
      *   uri: string,
      * }> $items
      */

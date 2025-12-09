@@ -33,7 +33,7 @@ use Spotted\SimplifiedTrackObject;
  *   release_date: string,
  *   release_date_precision: value-of<ReleaseDatePrecision>,
  *   total_tracks: int,
- *   type: 'album',
+ *   type?: 'album',
  *   uri: string,
  *   artists?: list<SimplifiedArtistObject>|null,
  *   copyrights?: list<CopyrightObject>|null,
