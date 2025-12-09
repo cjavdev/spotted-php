@@ -11,6 +11,7 @@ use Spotted\Audiobooks\AudiobookListChaptersParams;
 use Spotted\Audiobooks\AudiobookRetrieveParams;
 use Spotted\Audiobooks\SimplifiedChapterObject;
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
@@ -42,14 +43,16 @@ final class AudiobooksService implements AudiobooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AudiobookGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['audiobooks/%1$s', $id],
             query: $parsed,
             options: $options,
             convert: AudiobookGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -70,14 +73,16 @@ final class AudiobooksService implements AudiobooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AudiobookBulkGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'audiobooks',
             query: $parsed,
             options: $options,
             convert: AudiobookBulkGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -103,8 +108,8 @@ final class AudiobooksService implements AudiobooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CursorURLPage<SimplifiedChapterObject>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['audiobooks/%1$s/chapters', $id],
             query: $parsed,
@@ -112,5 +117,7 @@ final class AudiobooksService implements AudiobooksContract
             convert: SimplifiedChapterObject::class,
             page: CursorURLPage::class,
         );
+
+        return $response->parse();
     }
 }

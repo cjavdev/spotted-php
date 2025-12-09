@@ -6,9 +6,7 @@ namespace Spotted\Browse\Categories;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ImageObject;
 
 /**
@@ -16,12 +14,10 @@ use Spotted\ImageObject;
  *   id: string, href: string, icons: list<ImageObject>, name: string
  * }
  */
-final class CategoryGetResponse implements BaseModel, ResponseConverter
+final class CategoryGetResponse implements BaseModel
 {
     /** @use SdkModel<CategoryGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The [Spotify category ID](/documentation/web-api/concepts/spotify-uris-ids) of the category.

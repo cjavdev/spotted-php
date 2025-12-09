@@ -8,9 +8,7 @@ use Spotted\AlbumRestrictionObject;
 use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalIDObject;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
@@ -25,12 +23,10 @@ use Spotted\SimplifiedArtistObject;
  *   added_at?: \DateTimeInterface|null, album?: Album|null
  * }
  */
-final class AlbumListResponse implements BaseModel, ResponseConverter
+final class AlbumListResponse implements BaseModel
 {
     /** @use SdkModel<AlbumListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The date and time the album was saved

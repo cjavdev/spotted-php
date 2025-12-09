@@ -9,6 +9,7 @@ use Spotted\Browse\BrowseGetFeaturedPlaylistsResponse;
 use Spotted\Browse\BrowseGetNewReleasesParams;
 use Spotted\Browse\BrowseGetNewReleasesResponse;
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\BrowseContract;
@@ -51,14 +52,16 @@ final class BrowseService implements BrowseContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BrowseGetFeaturedPlaylistsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'browse/featured-playlists',
             query: $parsed,
             options: $options,
             convert: BrowseGetFeaturedPlaylistsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -79,13 +82,15 @@ final class BrowseService implements BrowseContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BrowseGetNewReleasesResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'browse/new-releases',
             query: $parsed,
             options: $options,
             convert: BrowseGetNewReleasesResponse::class,
         );
+
+        return $response->parse();
     }
 }

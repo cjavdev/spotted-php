@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services\Me;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Conversion\ListOf;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\Me\Following\FollowingBulkGetResponse;
@@ -42,14 +43,16 @@ final class FollowingService implements FollowingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<FollowingBulkGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'me/following',
             query: $parsed,
             options: $options,
             convert: FollowingBulkGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -72,14 +75,16 @@ final class FollowingService implements FollowingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<bool>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'me/following/contains',
             query: $parsed,
             options: $options,
             convert: new ListOf('bool'),
         );
+
+        return $response->parse();
     }
 
     /**
@@ -100,14 +105,16 @@ final class FollowingService implements FollowingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: 'me/following',
             body: (object) $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -128,13 +135,15 @@ final class FollowingService implements FollowingContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: 'me/following',
             body: (object) $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

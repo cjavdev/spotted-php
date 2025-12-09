@@ -9,9 +9,7 @@ use Spotted\AuthorObject;
 use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
 use Spotted\NarratorObject;
@@ -40,12 +38,10 @@ use Spotted\NarratorObject;
  *   chapters: Chapters,
  * }
  */
-final class AudiobookGetResponse implements BaseModel, ResponseConverter
+final class AudiobookGetResponse implements BaseModel
 {
     /** @use SdkModel<AudiobookGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The object type.

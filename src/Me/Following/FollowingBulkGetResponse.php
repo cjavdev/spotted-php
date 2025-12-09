@@ -7,21 +7,17 @@ namespace Spotted\Me\Following;
 use Spotted\ArtistObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\Me\Following\FollowingBulkGetResponse\Artists;
 use Spotted\Me\Following\FollowingBulkGetResponse\Artists\Cursors;
 
 /**
  * @phpstan-type FollowingBulkGetResponseShape = array{artists: Artists}
  */
-final class FollowingBulkGetResponse implements BaseModel, ResponseConverter
+final class FollowingBulkGetResponse implements BaseModel
 {
     /** @use SdkModel<FollowingBulkGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Artists $artists;

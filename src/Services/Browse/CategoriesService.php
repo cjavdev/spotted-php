@@ -11,6 +11,7 @@ use Spotted\Browse\Categories\CategoryListParams;
 use Spotted\Browse\Categories\CategoryListResponse;
 use Spotted\Browse\Categories\CategoryRetrieveParams;
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Browse\CategoriesContract;
@@ -41,14 +42,16 @@ final class CategoriesService implements CategoriesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CategoryGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['browse/categories/%1$s', $categoryID],
             query: $parsed,
             options: $options,
             convert: CategoryGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -71,14 +74,16 @@ final class CategoriesService implements CategoriesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CategoryListResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'browse/categories',
             query: $parsed,
             options: $options,
             convert: CategoryListResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -102,13 +107,15 @@ final class CategoriesService implements CategoriesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CategoryGetPlaylistsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['browse/categories/%1$s/playlists', $categoryID],
             query: $parsed,
             options: $options,
             convert: CategoryGetPlaylistsResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -6,9 +6,7 @@ namespace Spotted\Me\Player;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\EpisodeObject;
 use Spotted\EpisodeObject\ReleaseDatePrecision;
 use Spotted\EpisodeRestrictionObject;
@@ -37,12 +35,10 @@ use Spotted\TrackRestrictionObject;
  *   timestamp?: int|null,
  * }
  */
-final class PlayerGetCurrentlyPlayingResponse implements BaseModel, ResponseConverter
+final class PlayerGetCurrentlyPlayingResponse implements BaseModel
 {
     /** @use SdkModel<PlayerGetCurrentlyPlayingResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Allows to update the user interface based on which playback actions are available within the current context.

@@ -6,21 +6,17 @@ namespace Spotted\Recommendations;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type RecommendationListAvailableGenreSeedsResponseShape = array{
  *   genres: list<string>
  * }
  */
-final class RecommendationListAvailableGenreSeedsResponse implements BaseModel, ResponseConverter
+final class RecommendationListAvailableGenreSeedsResponse implements BaseModel
 {
     /** @use SdkModel<RecommendationListAvailableGenreSeedsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<string> $genres */
     #[Api(list: 'string')]

@@ -6,19 +6,15 @@ namespace Spotted\Playlists\Tracks;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type TrackRemoveResponseShape = array{snapshot_id?: string|null}
  */
-final class TrackRemoveResponse implements BaseModel, ResponseConverter
+final class TrackRemoveResponse implements BaseModel
 {
     /** @use SdkModel<TrackRemoveResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $snapshot_id;

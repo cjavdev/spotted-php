@@ -6,9 +6,7 @@ namespace Spotted\Tracks;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalIDObject;
 use Spotted\ExternalURLObject;
 use Spotted\LinkedTrackObject;
@@ -21,12 +19,10 @@ use Spotted\TrackRestrictionObject;
 /**
  * @phpstan-type TrackBulkGetResponseShape = array{tracks: list<TrackObject>}
  */
-final class TrackBulkGetResponse implements BaseModel, ResponseConverter
+final class TrackBulkGetResponse implements BaseModel
 {
     /** @use SdkModel<TrackBulkGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<TrackObject> $tracks */
     #[Api(list: TrackObject::class)]

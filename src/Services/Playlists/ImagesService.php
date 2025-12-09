@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services\Playlists;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Conversion\ListOf;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\ImageObject;
@@ -30,8 +31,8 @@ final class ImagesService implements ImagesContract
         string $body,
         ?RequestOptions $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<string> */
+        $response = $this->client->request(
             method: 'put',
             path: ['playlists/%1$s/images', $playlistID],
             headers: [
@@ -41,6 +42,8 @@ final class ImagesService implements ImagesContract
             options: $requestOptions,
             convert: 'string',
         );
+
+        return $response->parse();
     }
 
     /**
@@ -56,12 +59,14 @@ final class ImagesService implements ImagesContract
         string $playlistID,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<ImageObject>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['playlists/%1$s/images', $playlistID],
             options: $requestOptions,
             convert: new ListOf(ImageObject::class),
         );
+
+        return $response->parse();
     }
 }

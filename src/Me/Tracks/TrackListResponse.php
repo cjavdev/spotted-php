@@ -6,9 +6,7 @@ namespace Spotted\Me\Tracks;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalIDObject;
 use Spotted\ExternalURLObject;
 use Spotted\LinkedTrackObject;
@@ -23,12 +21,10 @@ use Spotted\TrackRestrictionObject;
  *   added_at?: \DateTimeInterface|null, track?: TrackObject|null
  * }
  */
-final class TrackListResponse implements BaseModel, ResponseConverter
+final class TrackListResponse implements BaseModel
 {
     /** @use SdkModel<TrackListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The date and time the track was saved.

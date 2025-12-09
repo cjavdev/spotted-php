@@ -8,19 +8,15 @@ use Spotted\Browse\Categories\CategoryListResponse\Categories;
 use Spotted\Browse\Categories\CategoryListResponse\Categories\Item;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type CategoryListResponseShape = array{categories: Categories}
  */
-final class CategoryListResponse implements BaseModel, ResponseConverter
+final class CategoryListResponse implements BaseModel
 {
     /** @use SdkModel<CategoryListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Categories $categories;

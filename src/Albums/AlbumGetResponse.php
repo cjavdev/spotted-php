@@ -12,9 +12,7 @@ use Spotted\Albums\AlbumGetResponse\Tracks;
 use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalIDObject;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
@@ -46,12 +44,10 @@ use Spotted\SimplifiedTrackObject;
  *   tracks?: Tracks|null,
  * }
  */
-final class AlbumGetResponse implements BaseModel, ResponseConverter
+final class AlbumGetResponse implements BaseModel
 {
     /** @use SdkModel<AlbumGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The object type.

@@ -12,9 +12,7 @@ use Spotted\Albums\AlbumBulkGetResponse\Album\Tracks;
 use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalIDObject;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
@@ -23,12 +21,10 @@ use Spotted\SimplifiedArtistObject;
 /**
  * @phpstan-type AlbumBulkGetResponseShape = array{albums: list<Album>}
  */
-final class AlbumBulkGetResponse implements BaseModel, ResponseConverter
+final class AlbumBulkGetResponse implements BaseModel
 {
     /** @use SdkModel<AlbumBulkGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Album> $albums */
     #[Api(list: Album::class)]

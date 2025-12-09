@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\Playlists\PlaylistGetResponse;
 use Spotted\Playlists\PlaylistRetrieveParams;
@@ -63,14 +64,16 @@ final class PlaylistsService implements PlaylistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PlaylistGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['playlists/%1$s', $playlistID],
             query: $parsed,
             options: $options,
             convert: PlaylistGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -95,13 +98,15 @@ final class PlaylistsService implements PlaylistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: ['playlists/%1$s', $playlistID],
             body: (object) $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

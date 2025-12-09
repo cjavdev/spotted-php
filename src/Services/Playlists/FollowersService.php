@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services\Playlists;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Conversion\ListOf;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\Playlists\Followers\FollowerCheckParams;
@@ -40,14 +41,16 @@ final class FollowersService implements FollowersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<bool>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['playlists/%1$s/followers/contains', $playlistID],
             query: $parsed,
             options: $options,
             convert: new ListOf('bool'),
         );
+
+        return $response->parse();
     }
 
     /**
@@ -69,14 +72,16 @@ final class FollowersService implements FollowersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: ['playlists/%1$s/followers', $playlistID],
             body: (object) $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -90,12 +95,14 @@ final class FollowersService implements FollowersContract
         string $playlistID,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['playlists/%1$s/followers', $playlistID],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

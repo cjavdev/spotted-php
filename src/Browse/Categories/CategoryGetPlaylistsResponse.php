@@ -6,9 +6,7 @@ namespace Spotted\Browse\Categories;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\PagingPlaylistObject;
 use Spotted\SimplifiedPlaylistObject;
 
@@ -17,12 +15,10 @@ use Spotted\SimplifiedPlaylistObject;
  *   message?: string|null, playlists?: PagingPlaylistObject|null
  * }
  */
-final class CategoryGetPlaylistsResponse implements BaseModel, ResponseConverter
+final class CategoryGetPlaylistsResponse implements BaseModel
 {
     /** @use SdkModel<CategoryGetPlaylistsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The localized message of a playlist.

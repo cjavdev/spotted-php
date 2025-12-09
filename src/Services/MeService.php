@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\Me\MeGetResponse;
 use Spotted\RequestOptions;
@@ -93,12 +94,14 @@ final class MeService implements MeContract
     public function retrieve(
         ?RequestOptions $requestOptions = null
     ): MeGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<MeGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'me',
             options: $requestOptions,
             convert: MeGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\EpisodeObject;
 use Spotted\Episodes\EpisodeBulkGetResponse;
@@ -40,14 +41,16 @@ final class EpisodesService implements EpisodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<EpisodeObject> */
+        $response = $this->client->request(
             method: 'get',
             path: ['episodes/%1$s', $id],
             query: $parsed,
             options: $options,
             convert: EpisodeObject::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -68,13 +71,15 @@ final class EpisodesService implements EpisodesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<EpisodeBulkGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'episodes',
             query: $parsed,
             options: $options,
             convert: EpisodeBulkGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

@@ -8,6 +8,7 @@ use Spotted\AudioFeatures\AudioFeatureBulkGetResponse;
 use Spotted\AudioFeatures\AudioFeatureBulkRetrieveParams;
 use Spotted\AudioFeatures\AudioFeatureGetResponse;
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\AudioFeaturesContract;
@@ -33,13 +34,15 @@ final class AudioFeaturesService implements AudioFeaturesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): AudioFeatureGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AudioFeatureGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['audio-features/%1$s', $id],
             options: $requestOptions,
             convert: AudioFeatureGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -62,13 +65,15 @@ final class AudioFeaturesService implements AudioFeaturesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AudioFeatureBulkGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'audio-features',
             query: $parsed,
             options: $options,
             convert: AudioFeatureBulkGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

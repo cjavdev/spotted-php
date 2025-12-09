@@ -6,9 +6,7 @@ namespace Spotted\Users\Playlists;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\FollowersObject;
 use Spotted\ImageObject;
@@ -35,12 +33,10 @@ use Spotted\Users\Playlists\PlaylistNewResponse\Tracks;
  *   uri?: string|null,
  * }
  */
-final class PlaylistNewResponse implements BaseModel, ResponseConverter
+final class PlaylistNewResponse implements BaseModel
 {
     /** @use SdkModel<PlaylistNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the playlist.

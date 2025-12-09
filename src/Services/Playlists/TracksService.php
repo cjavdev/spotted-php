@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services\Playlists;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\Playlists\Tracks\TrackAddParams;
@@ -56,14 +57,16 @@ final class TracksService implements TracksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TrackUpdateResponse> */
+        $response = $this->client->request(
             method: 'put',
             path: ['playlists/%1$s/tracks', $playlistID],
             body: (object) $parsed,
             options: $options,
             convert: TrackUpdateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -93,8 +96,8 @@ final class TracksService implements TracksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CursorURLPage<PlaylistTrackObject>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['playlists/%1$s/tracks', $playlistID],
             query: $parsed,
@@ -102,6 +105,8 @@ final class TracksService implements TracksContract
             convert: PlaylistTrackObject::class,
             page: CursorURLPage::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -123,14 +128,16 @@ final class TracksService implements TracksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TrackAddResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['playlists/%1$s/tracks', $playlistID],
             body: (object) $parsed,
             options: $options,
             convert: TrackAddResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -154,13 +161,15 @@ final class TracksService implements TracksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TrackRemoveResponse> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['playlists/%1$s/tracks', $playlistID],
             body: (object) $parsed,
             options: $options,
             convert: TrackRemoveResponse::class,
         );
+
+        return $response->parse();
     }
 }

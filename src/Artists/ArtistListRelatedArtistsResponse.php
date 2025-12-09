@@ -8,9 +8,7 @@ use Spotted\ArtistObject;
 use Spotted\ArtistObject\Type;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\FollowersObject;
 use Spotted\ImageObject;
@@ -20,12 +18,10 @@ use Spotted\ImageObject;
  *   artists: list<ArtistObject>
  * }
  */
-final class ArtistListRelatedArtistsResponse implements BaseModel, ResponseConverter
+final class ArtistListRelatedArtistsResponse implements BaseModel
 {
     /** @use SdkModel<ArtistListRelatedArtistsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<ArtistObject> $artists */
     #[Api(list: ArtistObject::class)]

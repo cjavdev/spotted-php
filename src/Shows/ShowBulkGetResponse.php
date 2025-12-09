@@ -7,9 +7,7 @@ namespace Spotted\Shows;
 use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
 use Spotted\ShowBase;
@@ -17,12 +15,10 @@ use Spotted\ShowBase;
 /**
  * @phpstan-type ShowBulkGetResponseShape = array{shows: list<ShowBase>}
  */
-final class ShowBulkGetResponse implements BaseModel, ResponseConverter
+final class ShowBulkGetResponse implements BaseModel
 {
     /** @use SdkModel<ShowBulkGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<ShowBase> $shows */
     #[Api(list: ShowBase::class)]

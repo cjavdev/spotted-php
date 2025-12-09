@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services\Me\Player;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\Me\Player\Queue\QueueAddParams;
 use Spotted\Me\Player\Queue\QueueGetResponse;
@@ -36,14 +37,16 @@ final class QueueService implements QueueContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'post',
             path: 'me/player/queue',
             query: $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -56,12 +59,14 @@ final class QueueService implements QueueContract
     public function get(
         ?RequestOptions $requestOptions = null
     ): QueueGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<QueueGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'me/player/queue',
             options: $requestOptions,
             convert: QueueGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

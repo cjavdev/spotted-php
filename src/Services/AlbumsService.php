@@ -10,6 +10,7 @@ use Spotted\Albums\AlbumGetResponse;
 use Spotted\Albums\AlbumListTracksParams;
 use Spotted\Albums\AlbumRetrieveParams;
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
@@ -42,14 +43,16 @@ final class AlbumsService implements AlbumsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AlbumGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['albums/%1$s', $id],
             query: $parsed,
             options: $options,
             convert: AlbumGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -70,14 +73,16 @@ final class AlbumsService implements AlbumsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AlbumBulkGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'albums',
             query: $parsed,
             options: $options,
             convert: AlbumBulkGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -104,8 +109,8 @@ final class AlbumsService implements AlbumsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CursorURLPage<SimplifiedTrackObject>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['albums/%1$s/tracks', $id],
             query: $parsed,
@@ -113,5 +118,7 @@ final class AlbumsService implements AlbumsContract
             convert: SimplifiedTrackObject::class,
             page: CursorURLPage::class,
         );
+
+        return $response->parse();
     }
 }

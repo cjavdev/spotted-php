@@ -6,9 +6,7 @@ namespace Spotted\Episodes;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\EpisodeObject;
 use Spotted\EpisodeObject\ReleaseDatePrecision;
 use Spotted\EpisodeRestrictionObject;
@@ -20,12 +18,10 @@ use Spotted\ShowBase;
 /**
  * @phpstan-type EpisodeBulkGetResponseShape = array{episodes: list<EpisodeObject>}
  */
-final class EpisodeBulkGetResponse implements BaseModel, ResponseConverter
+final class EpisodeBulkGetResponse implements BaseModel
 {
     /** @use SdkModel<EpisodeBulkGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<EpisodeObject> $episodes */
     #[Api(list: EpisodeObject::class)]

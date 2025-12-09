@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
@@ -43,14 +44,16 @@ final class ShowsService implements ShowsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ShowGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['shows/%1$s', $id],
             query: $parsed,
             options: $options,
             convert: ShowGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -71,14 +74,16 @@ final class ShowsService implements ShowsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ShowBulkGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'shows',
             query: $parsed,
             options: $options,
             convert: ShowBulkGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -104,8 +109,8 @@ final class ShowsService implements ShowsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CursorURLPage<SimplifiedEpisodeObject>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['shows/%1$s/episodes', $id],
             query: $parsed,
@@ -113,5 +118,7 @@ final class ShowsService implements ShowsContract
             convert: SimplifiedEpisodeObject::class,
             page: CursorURLPage::class,
         );
+
+        return $response->parse();
     }
 }

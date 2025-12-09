@@ -13,6 +13,7 @@ use Spotted\Artists\ArtistListRelatedArtistsResponse;
 use Spotted\Artists\ArtistTopTracksParams;
 use Spotted\Artists\ArtistTopTracksResponse;
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
@@ -36,13 +37,15 @@ final class ArtistsService implements ArtistsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ArtistObject {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ArtistObject> */
+        $response = $this->client->request(
             method: 'get',
             path: ['artists/%1$s', $id],
             options: $requestOptions,
             convert: ArtistObject::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -63,14 +66,16 @@ final class ArtistsService implements ArtistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ArtistBulkGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'artists',
             query: $parsed,
             options: $options,
             convert: ArtistBulkGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -96,8 +101,8 @@ final class ArtistsService implements ArtistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CursorURLPage<ArtistListAlbumsResponse>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['artists/%1$s/albums', $id],
             query: $parsed,
@@ -105,6 +110,8 @@ final class ArtistsService implements ArtistsContract
             convert: ArtistListAlbumsResponse::class,
             page: CursorURLPage::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -120,13 +127,15 @@ final class ArtistsService implements ArtistsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ArtistListRelatedArtistsResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ArtistListRelatedArtistsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['artists/%1$s/related-artists', $id],
             options: $requestOptions,
             convert: ArtistListRelatedArtistsResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -148,13 +157,15 @@ final class ArtistsService implements ArtistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ArtistTopTracksResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['artists/%1$s/top-tracks', $id],
             query: $parsed,
             options: $options,
             convert: ArtistTopTracksResponse::class,
         );
+
+        return $response->parse();
     }
 }

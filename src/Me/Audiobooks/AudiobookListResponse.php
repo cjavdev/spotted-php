@@ -8,9 +8,7 @@ use Spotted\AuthorObject;
 use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
 use Spotted\Me\Audiobooks\AudiobookListResponse\Audiobook;
@@ -22,12 +20,10 @@ use Spotted\NarratorObject;
  *   added_at?: \DateTimeInterface|null, audiobook?: Audiobook|null
  * }
  */
-final class AudiobookListResponse implements BaseModel, ResponseConverter
+final class AudiobookListResponse implements BaseModel
 {
     /** @use SdkModel<AudiobookListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The date and time the audiobook was saved
