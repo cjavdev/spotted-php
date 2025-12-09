@@ -6,9 +6,7 @@ namespace Spotted\Me;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\FollowersObject;
 use Spotted\ImageObject;
@@ -30,12 +28,10 @@ use Spotted\Me\MeGetResponse\ExplicitContent;
  *   uri?: string|null,
  * }
  */
-final class MeGetResponse implements BaseModel, ResponseConverter
+final class MeGetResponse implements BaseModel
 {
     /** @use SdkModel<MeGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids) for the user.

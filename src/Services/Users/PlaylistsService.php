@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services\Users;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
@@ -44,14 +45,16 @@ final class PlaylistsService implements PlaylistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PlaylistNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['users/%1$s/playlists', $userID],
             body: (object) $parsed,
             options: $options,
             convert: PlaylistNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -75,8 +78,8 @@ final class PlaylistsService implements PlaylistsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CursorURLPage<SimplifiedPlaylistObject>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['users/%1$s/playlists', $userID],
             query: $parsed,
@@ -84,5 +87,7 @@ final class PlaylistsService implements PlaylistsContract
             convert: SimplifiedPlaylistObject::class,
             page: CursorURLPage::class,
         );
+
+        return $response->parse();
     }
 }

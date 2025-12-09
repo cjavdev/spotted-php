@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services\Me;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Conversion\ListOf;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
@@ -43,8 +44,8 @@ final class AudiobooksService implements AudiobooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CursorURLPage<AudiobookListResponse>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'me/audiobooks',
             query: $parsed,
@@ -52,6 +53,8 @@ final class AudiobooksService implements AudiobooksContract
             convert: AudiobookListResponse::class,
             page: CursorURLPage::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -74,14 +77,16 @@ final class AudiobooksService implements AudiobooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<bool>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'me/audiobooks/contains',
             query: $parsed,
             options: $options,
             convert: new ListOf('bool'),
         );
+
+        return $response->parse();
     }
 
     /**
@@ -102,14 +107,16 @@ final class AudiobooksService implements AudiobooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: 'me/audiobooks',
             query: $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -130,13 +137,15 @@ final class AudiobooksService implements AudiobooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: 'me/audiobooks',
             query: $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

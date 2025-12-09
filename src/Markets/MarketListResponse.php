@@ -6,19 +6,15 @@ namespace Spotted\Markets;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MarketListResponseShape = array{markets?: list<string>|null}
  */
-final class MarketListResponse implements BaseModel, ResponseConverter
+final class MarketListResponse implements BaseModel
 {
     /** @use SdkModel<MarketListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<string>|null $markets */
     #[Api(list: 'string', optional: true)]

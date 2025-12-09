@@ -7,9 +7,7 @@ namespace Spotted\Shows;
 use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
 use Spotted\Shows\ShowGetResponse\Episodes;
@@ -37,12 +35,10 @@ use Spotted\SimplifiedEpisodeObject;
  *   episodes: Episodes,
  * }
  */
-final class ShowGetResponse implements BaseModel, ResponseConverter
+final class ShowGetResponse implements BaseModel
 {
     /** @use SdkModel<ShowGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The object type.

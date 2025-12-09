@@ -6,9 +6,7 @@ namespace Spotted\Artists;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalIDObject;
 use Spotted\ExternalURLObject;
 use Spotted\LinkedTrackObject;
@@ -21,12 +19,10 @@ use Spotted\TrackRestrictionObject;
 /**
  * @phpstan-type ArtistTopTracksResponseShape = array{tracks: list<TrackObject>}
  */
-final class ArtistTopTracksResponse implements BaseModel, ResponseConverter
+final class ArtistTopTracksResponse implements BaseModel
 {
     /** @use SdkModel<ArtistTopTracksResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<TrackObject> $tracks */
     #[Api(list: TrackObject::class)]

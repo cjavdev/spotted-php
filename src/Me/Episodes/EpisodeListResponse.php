@@ -6,9 +6,7 @@ namespace Spotted\Me\Episodes;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\EpisodeObject;
 use Spotted\EpisodeObject\ReleaseDatePrecision;
 use Spotted\EpisodeRestrictionObject;
@@ -22,12 +20,10 @@ use Spotted\ShowBase;
  *   added_at?: \DateTimeInterface|null, episode?: EpisodeObject|null
  * }
  */
-final class EpisodeListResponse implements BaseModel, ResponseConverter
+final class EpisodeListResponse implements BaseModel
 {
     /** @use SdkModel<EpisodeListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The date and time the episode was saved.

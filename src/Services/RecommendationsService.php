@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\Recommendations\RecommendationGetParams;
 use Spotted\Recommendations\RecommendationGetResponse;
@@ -89,14 +90,16 @@ final class RecommendationsService implements RecommendationsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RecommendationGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'recommendations',
             query: $parsed,
             options: $options,
             convert: RecommendationGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -111,12 +114,14 @@ final class RecommendationsService implements RecommendationsContract
     public function listAvailableGenreSeeds(
         ?RequestOptions $requestOptions = null
     ): RecommendationListAvailableGenreSeedsResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<RecommendationListAvailableGenreSeedsResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'recommendations/available-genre-seeds',
             options: $requestOptions,
             convert: RecommendationListAvailableGenreSeedsResponse::class,
         );
+
+        return $response->parse();
     }
 }

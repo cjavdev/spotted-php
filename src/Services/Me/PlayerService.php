@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services\Me;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\Me\Player\PlayerGetCurrentlyPlayingParams;
@@ -62,14 +63,16 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PlayerGetCurrentlyPlayingResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'me/player/currently-playing',
             query: $parsed,
             options: $options,
             convert: PlayerGetCurrentlyPlayingResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -82,13 +85,15 @@ final class PlayerService implements PlayerContract
     public function getDevices(
         ?RequestOptions $requestOptions = null
     ): PlayerGetDevicesResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PlayerGetDevicesResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'me/player/devices',
             options: $requestOptions,
             convert: PlayerGetDevicesResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -111,14 +116,16 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PlayerGetStateResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'me/player',
             query: $parsed,
             options: $options,
             convert: PlayerGetStateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -144,8 +151,8 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CursorURLPage<PlayerListRecentlyPlayedResponse>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'me/player/recently-played',
             query: $parsed,
@@ -153,6 +160,8 @@ final class PlayerService implements PlayerContract
             convert: PlayerListRecentlyPlayedResponse::class,
             page: CursorURLPage::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -173,14 +182,16 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: 'me/player/pause',
             query: $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -203,14 +214,16 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: 'me/player/seek',
             query: $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -233,14 +246,16 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: 'me/player/repeat',
             query: $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -263,14 +278,16 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: 'me/player/volume',
             query: $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -291,14 +308,16 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'post',
             path: 'me/player/next',
             query: $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -319,14 +338,16 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'post',
             path: 'me/player/previous',
             query: $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -354,8 +375,8 @@ final class PlayerService implements PlayerContract
         );
         $query_params = ['device_id'];
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: 'me/player/play',
             query: array_diff_key($parsed, $query_params),
@@ -363,6 +384,8 @@ final class PlayerService implements PlayerContract
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -383,14 +406,16 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: 'me/player/shuffle',
             query: $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -411,13 +436,15 @@ final class PlayerService implements PlayerContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: 'me/player',
             body: (object) $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

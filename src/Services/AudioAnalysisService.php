@@ -6,6 +6,7 @@ namespace Spotted\Services;
 
 use Spotted\AudioAnalysis\AudioAnalysisGetResponse;
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\AudioAnalysisContract;
@@ -30,12 +31,14 @@ final class AudioAnalysisService implements AudioAnalysisContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): AudioAnalysisGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AudioAnalysisGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['audio-analysis/%1$s', $id],
             options: $requestOptions,
             convert: AudioAnalysisGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

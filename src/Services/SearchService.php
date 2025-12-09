@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\Search\SearchQueryParams;
@@ -44,13 +45,15 @@ final class SearchService implements SearchContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<SearchQueryResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'search',
             query: $parsed,
             options: $options,
             convert: SearchQueryResponse::class,
         );
+
+        return $response->parse();
     }
 }

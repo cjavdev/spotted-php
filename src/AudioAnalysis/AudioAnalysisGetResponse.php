@@ -10,9 +10,7 @@ use Spotted\AudioAnalysis\AudioAnalysisGetResponse\Segment;
 use Spotted\AudioAnalysis\AudioAnalysisGetResponse\Track;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AudioAnalysisGetResponseShape = array{
@@ -25,12 +23,10 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
  *   track?: Track|null,
  * }
  */
-final class AudioAnalysisGetResponse implements BaseModel, ResponseConverter
+final class AudioAnalysisGetResponse implements BaseModel
 {
     /** @use SdkModel<AudioAnalysisGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The time intervals of the bars throughout the track. A bar (or measure) is a segment of time defined as a given number of beats.

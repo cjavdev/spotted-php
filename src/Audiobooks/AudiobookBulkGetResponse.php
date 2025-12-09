@@ -10,9 +10,7 @@ use Spotted\AuthorObject;
 use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
 use Spotted\NarratorObject;
@@ -20,12 +18,10 @@ use Spotted\NarratorObject;
 /**
  * @phpstan-type AudiobookBulkGetResponseShape = array{audiobooks: list<Audiobook>}
  */
-final class AudiobookBulkGetResponse implements BaseModel, ResponseConverter
+final class AudiobookBulkGetResponse implements BaseModel
 {
     /** @use SdkModel<AudiobookBulkGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Audiobook> $audiobooks */
     #[Api(list: Audiobook::class)]

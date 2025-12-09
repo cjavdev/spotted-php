@@ -8,19 +8,15 @@ use Spotted\Browse\BrowseGetNewReleasesResponse\Albums;
 use Spotted\Browse\BrowseGetNewReleasesResponse\Albums\Item;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type BrowseGetNewReleasesResponseShape = array{albums: Albums}
  */
-final class BrowseGetNewReleasesResponse implements BaseModel, ResponseConverter
+final class BrowseGetNewReleasesResponse implements BaseModel
 {
     /** @use SdkModel<BrowseGetNewReleasesResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Albums $albums;

@@ -11,9 +11,7 @@ use Spotted\Chapters\ChapterGetResponse\ReleaseDatePrecision;
 use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
 use Spotted\NarratorObject;
@@ -44,12 +42,10 @@ use Spotted\ResumePointObject;
  *   resume_point?: ResumePointObject|null,
  * }
  */
-final class ChapterGetResponse implements BaseModel, ResponseConverter
+final class ChapterGetResponse implements BaseModel
 {
     /** @use SdkModel<ChapterGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The object type.

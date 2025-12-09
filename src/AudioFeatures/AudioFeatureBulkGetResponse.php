@@ -8,21 +8,17 @@ use Spotted\AudioFeatures\AudioFeatureBulkGetResponse\AudioFeature;
 use Spotted\AudioFeatures\AudioFeatureBulkGetResponse\AudioFeature\Type;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AudioFeatureBulkGetResponseShape = array{
  *   audio_features: list<AudioFeature>
  * }
  */
-final class AudioFeatureBulkGetResponse implements BaseModel, ResponseConverter
+final class AudioFeatureBulkGetResponse implements BaseModel
 {
     /** @use SdkModel<AudioFeatureBulkGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<AudioFeature> $audio_features */
     #[Api(list: AudioFeature::class)]

@@ -6,9 +6,7 @@ namespace Spotted\Recommendations;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalIDObject;
 use Spotted\ExternalURLObject;
 use Spotted\LinkedTrackObject;
@@ -24,12 +22,10 @@ use Spotted\TrackRestrictionObject;
  *   seeds: list<Seed>, tracks: list<TrackObject>
  * }
  */
-final class RecommendationGetResponse implements BaseModel, ResponseConverter
+final class RecommendationGetResponse implements BaseModel
 {
     /** @use SdkModel<RecommendationGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * An array of recommendation seed objects.

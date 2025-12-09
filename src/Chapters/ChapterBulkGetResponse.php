@@ -10,9 +10,7 @@ use Spotted\Chapters\ChapterBulkGetResponse\Chapter;
 use Spotted\Chapters\ChapterBulkGetResponse\Chapter\ReleaseDatePrecision;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
 use Spotted\ResumePointObject;
@@ -20,12 +18,10 @@ use Spotted\ResumePointObject;
 /**
  * @phpstan-type ChapterBulkGetResponseShape = array{chapters: list<Chapter>}
  */
-final class ChapterBulkGetResponse implements BaseModel, ResponseConverter
+final class ChapterBulkGetResponse implements BaseModel
 {
     /** @use SdkModel<ChapterBulkGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<Chapter> $chapters */
     #[Api(list: Chapter::class)]

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\UsersContract;
@@ -37,12 +38,14 @@ final class UsersService implements UsersContract
         string $userID,
         ?RequestOptions $requestOptions = null
     ): UserGetProfileResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<UserGetProfileResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['users/%1$s', $userID],
             options: $requestOptions,
             convert: UserGetProfileResponse::class,
         );
+
+        return $response->parse();
     }
 }

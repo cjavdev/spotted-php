@@ -8,9 +8,7 @@ use Spotted\Audiobooks\SimplifiedChapterObject\ReleaseDatePrecision;
 use Spotted\ChapterRestrictionObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
 use Spotted\ResumePointObject;
@@ -39,12 +37,10 @@ use Spotted\ResumePointObject;
  *   resume_point?: ResumePointObject|null,
  * }
  */
-final class SimplifiedChapterObject implements BaseModel, ResponseConverter
+final class SimplifiedChapterObject implements BaseModel
 {
     /** @use SdkModel<SimplifiedChapterObjectShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The object type.

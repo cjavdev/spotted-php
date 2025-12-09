@@ -7,9 +7,7 @@ namespace Spotted\Me\Shows;
 use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
 use Spotted\ShowBase;
@@ -19,12 +17,10 @@ use Spotted\ShowBase;
  *   added_at?: \DateTimeInterface|null, show?: ShowBase|null
  * }
  */
-final class ShowListResponse implements BaseModel, ResponseConverter
+final class ShowListResponse implements BaseModel
 {
     /** @use SdkModel<ShowListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The date and time the show was saved.

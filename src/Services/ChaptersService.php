@@ -9,6 +9,7 @@ use Spotted\Chapters\ChapterBulkRetrieveParams;
 use Spotted\Chapters\ChapterGetResponse;
 use Spotted\Chapters\ChapterRetrieveParams;
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\ChaptersContract;
@@ -39,14 +40,16 @@ final class ChaptersService implements ChaptersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ChapterGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['chapters/%1$s', $id],
             query: $parsed,
             options: $options,
             convert: ChapterGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -67,13 +70,15 @@ final class ChaptersService implements ChaptersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ChapterBulkGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'chapters',
             query: $parsed,
             options: $options,
             convert: ChapterBulkGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

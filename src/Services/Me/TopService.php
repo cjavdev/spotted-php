@@ -6,6 +6,7 @@ namespace Spotted\Services\Me;
 
 use Spotted\ArtistObject;
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\Me\Top\TopListTopArtistsParams;
@@ -43,8 +44,8 @@ final class TopService implements TopContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CursorURLPage<ArtistObject>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'me/top/artists',
             query: $parsed,
@@ -52,6 +53,8 @@ final class TopService implements TopContract
             convert: ArtistObject::class,
             page: CursorURLPage::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -76,8 +79,8 @@ final class TopService implements TopContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CursorURLPage<TrackObject>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'me/top/tracks',
             query: $parsed,
@@ -85,5 +88,7 @@ final class TopService implements TopContract
             convert: TrackObject::class,
             page: CursorURLPage::class,
         );
+
+        return $response->parse();
     }
 }

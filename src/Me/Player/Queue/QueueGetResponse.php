@@ -6,9 +6,7 @@ namespace Spotted\Me\Player\Queue;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\EpisodeObject;
 use Spotted\EpisodeObject\ReleaseDatePrecision;
 use Spotted\EpisodeRestrictionObject;
@@ -32,12 +30,10 @@ use Spotted\TrackRestrictionObject;
  *   queue?: list<TrackObject|EpisodeObject>|null,
  * }
  */
-final class QueueGetResponse implements BaseModel, ResponseConverter
+final class QueueGetResponse implements BaseModel
 {
     /** @use SdkModel<QueueGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The currently playing track or episode. Can be `null`.

@@ -8,9 +8,7 @@ use Spotted\ArtistObject;
 use Spotted\AudiobookBase;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\PagingPlaylistObject;
 use Spotted\Search\SearchQueryResponse\Albums;
 use Spotted\Search\SearchQueryResponse\Albums\Item;
@@ -35,12 +33,10 @@ use Spotted\TrackObject;
  *   tracks?: Tracks|null,
  * }
  */
-final class SearchQueryResponse implements BaseModel, ResponseConverter
+final class SearchQueryResponse implements BaseModel
 {
     /** @use SdkModel<SearchQueryResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Albums $albums;

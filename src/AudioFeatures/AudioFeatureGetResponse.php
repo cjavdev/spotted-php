@@ -7,9 +7,7 @@ namespace Spotted\AudioFeatures;
 use Spotted\AudioFeatures\AudioFeatureGetResponse\Type;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AudioFeatureGetResponseShape = array{
@@ -33,12 +31,10 @@ use Spotted\Core\Conversion\Contracts\ResponseConverter;
  *   valence?: float|null,
  * }
  */
-final class AudioFeatureGetResponse implements BaseModel, ResponseConverter
+final class AudioFeatureGetResponse implements BaseModel
 {
     /** @use SdkModel<AudioFeatureGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The Spotify ID for the track.

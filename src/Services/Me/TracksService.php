@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services\Me;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Conversion\ListOf;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
@@ -43,8 +44,8 @@ final class TracksService implements TracksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<CursorURLPage<TrackListResponse>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'me/tracks',
             query: $parsed,
@@ -52,6 +53,8 @@ final class TracksService implements TracksContract
             convert: TrackListResponse::class,
             page: CursorURLPage::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -74,14 +77,16 @@ final class TracksService implements TracksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<bool>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'me/tracks/contains',
             query: $parsed,
             options: $options,
             convert: new ListOf('bool'),
         );
+
+        return $response->parse();
     }
 
     /**
@@ -102,14 +107,16 @@ final class TracksService implements TracksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: 'me/tracks',
             body: (object) $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -135,13 +142,15 @@ final class TracksService implements TracksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: 'me/tracks',
             body: (object) $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

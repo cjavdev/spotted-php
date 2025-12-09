@@ -6,19 +6,15 @@ namespace Spotted\Me\Player;
 
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type PlayerGetDevicesResponseShape = array{devices: list<DeviceObject>}
  */
-final class PlayerGetDevicesResponse implements BaseModel, ResponseConverter
+final class PlayerGetDevicesResponse implements BaseModel
 {
     /** @use SdkModel<PlayerGetDevicesResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /** @var list<DeviceObject> $devices */
     #[Api(list: DeviceObject::class)]

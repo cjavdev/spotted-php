@@ -11,9 +11,7 @@ use Spotted\Artists\ArtistListAlbumsResponse\AlbumType;
 use Spotted\Artists\ArtistListAlbumsResponse\ReleaseDatePrecision;
 use Spotted\Core\Attributes\Api;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
 use Spotted\SimplifiedArtistObject;
@@ -38,12 +36,10 @@ use Spotted\SimplifiedArtistObject\Type;
  *   restrictions?: AlbumRestrictionObject|null,
  * }
  */
-final class ArtistListAlbumsResponse implements BaseModel, ResponseConverter
+final class ArtistListAlbumsResponse implements BaseModel
 {
     /** @use SdkModel<ArtistListAlbumsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The object type.
