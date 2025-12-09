@@ -13,9 +13,9 @@ use Spotted\Core\Contracts\BaseModel;
  * @phpstan-type AudioFeatureShape = array{
  *   id?: string|null,
  *   acousticness?: float|null,
- *   analysis_url?: string|null,
+ *   analysisURL?: string|null,
  *   danceability?: float|null,
- *   duration_ms?: int|null,
+ *   durationMs?: int|null,
  *   energy?: float|null,
  *   instrumentalness?: float|null,
  *   key?: int|null,
@@ -24,8 +24,8 @@ use Spotted\Core\Contracts\BaseModel;
  *   mode?: int|null,
  *   speechiness?: float|null,
  *   tempo?: float|null,
- *   time_signature?: int|null,
- *   track_href?: string|null,
+ *   timeSignature?: int|null,
+ *   trackHref?: string|null,
  *   type?: value-of<Type>|null,
  *   uri?: string|null,
  *   valence?: float|null,
@@ -51,8 +51,8 @@ final class AudioFeature implements BaseModel
     /**
      * A URL to access the full audio analysis of this track. An access token is required to access this data.
      */
-    #[Optional]
-    public ?string $analysis_url;
+    #[Optional('analysis_url')]
+    public ?string $analysisURL;
 
     /**
      * Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.
@@ -63,8 +63,8 @@ final class AudioFeature implements BaseModel
     /**
      * The duration of the track in milliseconds.
      */
-    #[Optional]
-    public ?int $duration_ms;
+    #[Optional('duration_ms')]
+    public ?int $durationMs;
 
     /**
      * Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.
@@ -117,14 +117,14 @@ final class AudioFeature implements BaseModel
     /**
      * An estimated time signature. The time signature (meter) is a notational convention to specify how many beats are in each bar (or measure). The time signature ranges from 3 to 7 indicating time signatures of "3/4", to "7/4".
      */
-    #[Optional]
-    public ?int $time_signature;
+    #[Optional('time_signature')]
+    public ?int $timeSignature;
 
     /**
      * A link to the Web API endpoint providing full details of the track.
      */
-    #[Optional]
-    public ?string $track_href;
+    #[Optional('track_href')]
+    public ?string $trackHref;
 
     /**
      * The object type.
@@ -161,9 +161,9 @@ final class AudioFeature implements BaseModel
     public static function with(
         ?string $id = null,
         ?float $acousticness = null,
-        ?string $analysis_url = null,
+        ?string $analysisURL = null,
         ?float $danceability = null,
-        ?int $duration_ms = null,
+        ?int $durationMs = null,
         ?float $energy = null,
         ?float $instrumentalness = null,
         ?int $key = null,
@@ -172,8 +172,8 @@ final class AudioFeature implements BaseModel
         ?int $mode = null,
         ?float $speechiness = null,
         ?float $tempo = null,
-        ?int $time_signature = null,
-        ?string $track_href = null,
+        ?int $timeSignature = null,
+        ?string $trackHref = null,
         Type|string|null $type = null,
         ?string $uri = null,
         ?float $valence = null,
@@ -182,9 +182,9 @@ final class AudioFeature implements BaseModel
 
         null !== $id && $obj['id'] = $id;
         null !== $acousticness && $obj['acousticness'] = $acousticness;
-        null !== $analysis_url && $obj['analysis_url'] = $analysis_url;
+        null !== $analysisURL && $obj['analysisURL'] = $analysisURL;
         null !== $danceability && $obj['danceability'] = $danceability;
-        null !== $duration_ms && $obj['duration_ms'] = $duration_ms;
+        null !== $durationMs && $obj['durationMs'] = $durationMs;
         null !== $energy && $obj['energy'] = $energy;
         null !== $instrumentalness && $obj['instrumentalness'] = $instrumentalness;
         null !== $key && $obj['key'] = $key;
@@ -193,8 +193,8 @@ final class AudioFeature implements BaseModel
         null !== $mode && $obj['mode'] = $mode;
         null !== $speechiness && $obj['speechiness'] = $speechiness;
         null !== $tempo && $obj['tempo'] = $tempo;
-        null !== $time_signature && $obj['time_signature'] = $time_signature;
-        null !== $track_href && $obj['track_href'] = $track_href;
+        null !== $timeSignature && $obj['timeSignature'] = $timeSignature;
+        null !== $trackHref && $obj['trackHref'] = $trackHref;
         null !== $type && $obj['type'] = $type;
         null !== $uri && $obj['uri'] = $uri;
         null !== $valence && $obj['valence'] = $valence;
@@ -230,7 +230,7 @@ final class AudioFeature implements BaseModel
     public function withAnalysisURL(string $analysisURL): self
     {
         $obj = clone $this;
-        $obj['analysis_url'] = $analysisURL;
+        $obj['analysisURL'] = $analysisURL;
 
         return $obj;
     }
@@ -252,7 +252,7 @@ final class AudioFeature implements BaseModel
     public function withDurationMs(int $durationMs): self
     {
         $obj = clone $this;
-        $obj['duration_ms'] = $durationMs;
+        $obj['durationMs'] = $durationMs;
 
         return $obj;
     }
@@ -351,7 +351,7 @@ final class AudioFeature implements BaseModel
     public function withTimeSignature(int $timeSignature): self
     {
         $obj = clone $this;
-        $obj['time_signature'] = $timeSignature;
+        $obj['timeSignature'] = $timeSignature;
 
         return $obj;
     }
@@ -362,7 +362,7 @@ final class AudioFeature implements BaseModel
     public function withTrackHref(string $trackHref): self
     {
         $obj = clone $this;
-        $obj['track_href'] = $trackHref;
+        $obj['trackHref'] = $trackHref;
 
         return $obj;
     }

@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * @phpstan-type ArtistObjectShape = array{
  *   id?: string|null,
- *   external_urls?: ExternalURLObject|null,
+ *   externalURLs?: ExternalURLObject|null,
  *   followers?: FollowersObject|null,
  *   genres?: list<string>|null,
  *   href?: string|null,
@@ -37,8 +37,8 @@ final class ArtistObject implements BaseModel
     /**
      * Known external URLs for this artist.
      */
-    #[Optional]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * Information about the followers of the artist.
@@ -104,7 +104,7 @@ final class ArtistObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
      * @param list<string> $genres
      * @param list<ImageObject|array{
@@ -114,7 +114,7 @@ final class ArtistObject implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ExternalURLObject|array|null $external_urls = null,
+        ExternalURLObject|array|null $externalURLs = null,
         FollowersObject|array|null $followers = null,
         ?array $genres = null,
         ?string $href = null,
@@ -127,7 +127,7 @@ final class ArtistObject implements BaseModel
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $externalURLs && $obj['externalURLs'] = $externalURLs;
         null !== $followers && $obj['followers'] = $followers;
         null !== $genres && $obj['genres'] = $genres;
         null !== $href && $obj['href'] = $href;
@@ -160,7 +160,7 @@ final class ArtistObject implements BaseModel
         ExternalURLObject|array $externalURLs
     ): self {
         $obj = clone $this;
-        $obj['external_urls'] = $externalURLs;
+        $obj['externalURLs'] = $externalURLs;
 
         return $obj;
     }

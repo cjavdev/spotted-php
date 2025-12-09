@@ -126,9 +126,7 @@ final class TracksService implements TracksContract
      *
      * @param array{
      *   ids: list<string>,
-     *   timestamped_ids?: list<array{
-     *     id: string, added_at: string|\DateTimeInterface
-     *   }>,
+     *   timestampedIDs?: list<array{id: string, addedAt: string|\DateTimeInterface}>,
      * }|TrackSaveParams $params
      *
      * @throws APIException

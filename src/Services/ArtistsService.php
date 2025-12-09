@@ -15,6 +15,7 @@ use Spotted\Artists\ArtistTopTracksResponse;
 use Spotted\Client;
 use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\ArtistsContract;
@@ -84,7 +85,7 @@ final class ArtistsService implements ArtistsContract
      * Get Spotify catalog information about an artist's albums.
      *
      * @param array{
-     *   include_groups?: string, limit?: int, market?: string, offset?: int
+     *   includeGroups?: string, limit?: int, market?: string, offset?: int
      * }|ArtistListAlbumsParams $params
      *
      * @return CursorURLPage<ArtistListAlbumsResponse>
@@ -105,7 +106,10 @@ final class ArtistsService implements ArtistsContract
         $response = $this->client->request(
             method: 'get',
             path: ['artists/%1$s/albums', $id],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['includeGroups' => 'include_groups']
+            ),
             options: $options,
             convert: ArtistListAlbumsResponse::class,
             page: CursorURLPage::class,

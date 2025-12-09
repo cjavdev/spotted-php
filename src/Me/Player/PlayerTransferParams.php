@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::transfer()
  *
  * @phpstan-type PlayerTransferParamsShape = array{
- *   device_ids: list<string>, play?: bool
+ *   deviceIDs: list<string>, play?: bool
  * }
  */
 final class PlayerTransferParams implements BaseModel
@@ -28,10 +28,10 @@ final class PlayerTransferParams implements BaseModel
     /**
      * A JSON array containing the ID of the device on which playback should be started/transferred.<br/>For example:`{device_ids:["74ASZWbe4lXaubB36ztrGX"]}`<br/>_**Note**: Although an array is accepted, only a single device_id is currently supported. Supplying more than one will return `400 Bad Request`_.
      *
-     * @var list<string> $device_ids
+     * @var list<string> $deviceIDs
      */
-    #[Required(list: 'string')]
-    public array $device_ids;
+    #[Required('device_ids', list: 'string')]
+    public array $deviceIDs;
 
     /**
      * **true**: ensure playback happens on new device.<br/>**false** or not provided: keep the current playback state.
@@ -44,7 +44,7 @@ final class PlayerTransferParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * PlayerTransferParams::with(device_ids: ...)
+     * PlayerTransferParams::with(deviceIDs: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -63,13 +63,13 @@ final class PlayerTransferParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $device_ids
+     * @param list<string> $deviceIDs
      */
-    public static function with(array $device_ids, ?bool $play = null): self
+    public static function with(array $deviceIDs, ?bool $play = null): self
     {
         $obj = new self;
 
-        $obj['device_ids'] = $device_ids;
+        $obj['deviceIDs'] = $deviceIDs;
 
         null !== $play && $obj['play'] = $play;
 
@@ -84,7 +84,7 @@ final class PlayerTransferParams implements BaseModel
     public function withDeviceIDs(array $deviceIDs): self
     {
         $obj = clone $this;
-        $obj['device_ids'] = $deviceIDs;
+        $obj['deviceIDs'] = $deviceIDs;
 
         return $obj;
     }

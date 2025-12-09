@@ -11,7 +11,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * @phpstan-type LinkedTrackObjectShape = array{
  *   id?: string|null,
- *   external_urls?: ExternalURLObject|null,
+ *   externalURLs?: ExternalURLObject|null,
  *   href?: string|null,
  *   type?: string|null,
  *   uri?: string|null,
@@ -31,8 +31,8 @@ final class LinkedTrackObject implements BaseModel
     /**
      * Known external URLs for this track.
      */
-    #[Optional]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * A link to the Web API endpoint providing full details of the track.
@@ -62,11 +62,11 @@ final class LinkedTrackObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      */
     public static function with(
         ?string $id = null,
-        ExternalURLObject|array|null $external_urls = null,
+        ExternalURLObject|array|null $externalURLs = null,
         ?string $href = null,
         ?string $type = null,
         ?string $uri = null,
@@ -74,7 +74,7 @@ final class LinkedTrackObject implements BaseModel
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $externalURLs && $obj['externalURLs'] = $externalURLs;
         null !== $href && $obj['href'] = $href;
         null !== $type && $obj['type'] = $type;
         null !== $uri && $obj['uri'] = $uri;
@@ -102,7 +102,7 @@ final class LinkedTrackObject implements BaseModel
         ExternalURLObject|array $externalURLs
     ): self {
         $obj = clone $this;
-        $obj['external_urls'] = $externalURLs;
+        $obj['externalURLs'] = $externalURLs;
 
         return $obj;
     }

@@ -21,10 +21,10 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Playlists\TracksService::update()
  *
  * @phpstan-type TrackUpdateParamsShape = array{
- *   insert_before?: int,
- *   range_length?: int,
- *   range_start?: int,
- *   snapshot_id?: string,
+ *   insertBefore?: int,
+ *   rangeLength?: int,
+ *   rangeStart?: int,
+ *   snapshotID?: string,
  *   uris?: list<string>,
  * }
  */
@@ -37,26 +37,26 @@ final class TrackUpdateParams implements BaseModel
     /**
      * The position where the items should be inserted.<br/>To reorder the items to the end of the playlist, simply set _insert_before_ to the position after the last item.<br/>Examples:<br/>To reorder the first item to the last position in a playlist with 10 items, set _range_start_ to 0, and _insert_before_ to 10.<br/>To reorder the last item in a playlist with 10 items to the start of the playlist, set _range_start_ to 9, and _insert_before_ to 0.
      */
-    #[Optional]
-    public ?int $insert_before;
+    #[Optional('insert_before')]
+    public ?int $insertBefore;
 
     /**
      * The amount of items to be reordered. Defaults to 1 if not set.<br/>The range of items to be reordered begins from the _range_start_ position, and includes the _range_length_ subsequent items.<br/>Example:<br/>To move the items at index 9-10 to the start of the playlist, _range_start_ is set to 9, and _range_length_ is set to 2.
      */
-    #[Optional]
-    public ?int $range_length;
+    #[Optional('range_length')]
+    public ?int $rangeLength;
 
     /**
      * The position of the first item to be reordered.
      */
-    #[Optional]
-    public ?int $range_start;
+    #[Optional('range_start')]
+    public ?int $rangeStart;
 
     /**
      * The playlist's snapshot ID against which you want to make the changes.
      */
-    #[Optional]
-    public ?string $snapshot_id;
+    #[Optional('snapshot_id')]
+    public ?string $snapshotID;
 
     /** @var list<string>|null $uris */
     #[Optional(list: 'string')]
@@ -75,18 +75,18 @@ final class TrackUpdateParams implements BaseModel
      * @param list<string> $uris
      */
     public static function with(
-        ?int $insert_before = null,
-        ?int $range_length = null,
-        ?int $range_start = null,
-        ?string $snapshot_id = null,
+        ?int $insertBefore = null,
+        ?int $rangeLength = null,
+        ?int $rangeStart = null,
+        ?string $snapshotID = null,
         ?array $uris = null,
     ): self {
         $obj = new self;
 
-        null !== $insert_before && $obj['insert_before'] = $insert_before;
-        null !== $range_length && $obj['range_length'] = $range_length;
-        null !== $range_start && $obj['range_start'] = $range_start;
-        null !== $snapshot_id && $obj['snapshot_id'] = $snapshot_id;
+        null !== $insertBefore && $obj['insertBefore'] = $insertBefore;
+        null !== $rangeLength && $obj['rangeLength'] = $rangeLength;
+        null !== $rangeStart && $obj['rangeStart'] = $rangeStart;
+        null !== $snapshotID && $obj['snapshotID'] = $snapshotID;
         null !== $uris && $obj['uris'] = $uris;
 
         return $obj;
@@ -98,7 +98,7 @@ final class TrackUpdateParams implements BaseModel
     public function withInsertBefore(int $insertBefore): self
     {
         $obj = clone $this;
-        $obj['insert_before'] = $insertBefore;
+        $obj['insertBefore'] = $insertBefore;
 
         return $obj;
     }
@@ -109,7 +109,7 @@ final class TrackUpdateParams implements BaseModel
     public function withRangeLength(int $rangeLength): self
     {
         $obj = clone $this;
-        $obj['range_length'] = $rangeLength;
+        $obj['rangeLength'] = $rangeLength;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class TrackUpdateParams implements BaseModel
     public function withRangeStart(int $rangeStart): self
     {
         $obj = clone $this;
-        $obj['range_start'] = $rangeStart;
+        $obj['rangeStart'] = $rangeStart;
 
         return $obj;
     }
@@ -131,7 +131,7 @@ final class TrackUpdateParams implements BaseModel
     public function withSnapshotID(string $snapshotID): self
     {
         $obj = clone $this;
-        $obj['snapshot_id'] = $snapshotID;
+        $obj['snapshotID'] = $snapshotID;
 
         return $obj;
     }

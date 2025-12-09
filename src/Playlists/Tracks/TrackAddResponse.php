@@ -9,15 +9,15 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type TrackAddResponseShape = array{snapshot_id?: string|null}
+ * @phpstan-type TrackAddResponseShape = array{snapshotID?: string|null}
  */
 final class TrackAddResponse implements BaseModel
 {
     /** @use SdkModel<TrackAddResponseShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $snapshot_id;
+    #[Optional('snapshot_id')]
+    public ?string $snapshotID;
 
     public function __construct()
     {
@@ -29,11 +29,11 @@ final class TrackAddResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $snapshot_id = null): self
+    public static function with(?string $snapshotID = null): self
     {
         $obj = new self;
 
-        null !== $snapshot_id && $obj['snapshot_id'] = $snapshot_id;
+        null !== $snapshotID && $obj['snapshotID'] = $snapshotID;
 
         return $obj;
     }
@@ -41,7 +41,7 @@ final class TrackAddResponse implements BaseModel
     public function withSnapshotID(string $snapshotID): self
     {
         $obj = clone $this;
-        $obj['snapshot_id'] = $snapshotID;
+        $obj['snapshotID'] = $snapshotID;
 
         return $obj;
     }

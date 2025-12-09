@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
  * The user's explicit content settings. _This field is only available when the current user has granted access to the [user-read-private](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
  *
  * @phpstan-type ExplicitContentShape = array{
- *   filter_enabled?: bool|null, filter_locked?: bool|null
+ *   filterEnabled?: bool|null, filterLocked?: bool|null
  * }
  */
 final class ExplicitContent implements BaseModel
@@ -23,14 +23,14 @@ final class ExplicitContent implements BaseModel
     /**
      * When `true`, indicates that explicit content should not be played.
      */
-    #[Optional]
-    public ?bool $filter_enabled;
+    #[Optional('filter_enabled')]
+    public ?bool $filterEnabled;
 
     /**
      * When `true`, indicates that the explicit content setting is locked and can't be changed by the user.
      */
-    #[Optional]
-    public ?bool $filter_locked;
+    #[Optional('filter_locked')]
+    public ?bool $filterLocked;
 
     public function __construct()
     {
@@ -43,13 +43,13 @@ final class ExplicitContent implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?bool $filter_enabled = null,
-        ?bool $filter_locked = null
+        ?bool $filterEnabled = null,
+        ?bool $filterLocked = null
     ): self {
         $obj = new self;
 
-        null !== $filter_enabled && $obj['filter_enabled'] = $filter_enabled;
-        null !== $filter_locked && $obj['filter_locked'] = $filter_locked;
+        null !== $filterEnabled && $obj['filterEnabled'] = $filterEnabled;
+        null !== $filterLocked && $obj['filterLocked'] = $filterLocked;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class ExplicitContent implements BaseModel
     public function withFilterEnabled(bool $filterEnabled): self
     {
         $obj = clone $this;
-        $obj['filter_enabled'] = $filterEnabled;
+        $obj['filterEnabled'] = $filterEnabled;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class ExplicitContent implements BaseModel
     public function withFilterLocked(bool $filterLocked): self
     {
         $obj = clone $this;
-        $obj['filter_locked'] = $filterLocked;
+        $obj['filterLocked'] = $filterLocked;
 
         return $obj;
     }

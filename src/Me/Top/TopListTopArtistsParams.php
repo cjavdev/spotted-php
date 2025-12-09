@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\TopService::listTopArtists()
  *
  * @phpstan-type TopListTopArtistsParamsShape = array{
- *   limit?: int, offset?: int, time_range?: string
+ *   limit?: int, offset?: int, timeRange?: string
  * }
  */
 final class TopListTopArtistsParams implements BaseModel
@@ -40,7 +40,7 @@ final class TopListTopArtistsParams implements BaseModel
      * Over what time frame the affinities are computed. Valid values: `long_term` (calculated from ~1 year of data and including all new data as it becomes available), `medium_term` (approximately last 6 months), `short_term` (approximately last 4 weeks). Default: `medium_term`.
      */
     #[Optional]
-    public ?string $time_range;
+    public ?string $timeRange;
 
     public function __construct()
     {
@@ -55,13 +55,13 @@ final class TopListTopArtistsParams implements BaseModel
     public static function with(
         ?int $limit = null,
         ?int $offset = null,
-        ?string $time_range = null
+        ?string $timeRange = null
     ): self {
         $obj = new self;
 
         null !== $limit && $obj['limit'] = $limit;
         null !== $offset && $obj['offset'] = $offset;
-        null !== $time_range && $obj['time_range'] = $time_range;
+        null !== $timeRange && $obj['timeRange'] = $timeRange;
 
         return $obj;
     }
@@ -94,7 +94,7 @@ final class TopListTopArtistsParams implements BaseModel
     public function withTimeRange(string $timeRange): self
     {
         $obj = clone $this;
-        $obj['time_range'] = $timeRange;
+        $obj['timeRange'] = $timeRange;
 
         return $obj;
     }

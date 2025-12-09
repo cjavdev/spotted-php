@@ -20,7 +20,7 @@ use Spotted\SimplifiedArtistObject;
 
 /**
  * @phpstan-type AlbumListResponseShape = array{
- *   added_at?: \DateTimeInterface|null, album?: Album|null
+ *   addedAt?: \DateTimeInterface|null, album?: Album|null
  * }
  */
 final class AlbumListResponse implements BaseModel
@@ -33,8 +33,8 @@ final class AlbumListResponse implements BaseModel
      * Timestamps are returned in ISO 8601 format as Coordinated Universal Time (UTC) with a zero offset: YYYY-MM-DDTHH:MM:SSZ.
      * If the time is imprecise (for example, the date/time of an album release), an additional field indicates the precision; see for example, release_date in an album object.
      */
-    #[Optional]
-    public ?\DateTimeInterface $added_at;
+    #[Optional('added_at')]
+    public ?\DateTimeInterface $addedAt;
 
     /**
      * Information about the album.
@@ -54,20 +54,20 @@ final class AlbumListResponse implements BaseModel
      *
      * @param Album|array{
      *   id: string,
-     *   album_type: value-of<AlbumType>,
-     *   available_markets: list<string>,
-     *   external_urls: ExternalURLObject,
+     *   albumType: value-of<AlbumType>,
+     *   availableMarkets: list<string>,
+     *   externalURLs: ExternalURLObject,
      *   href: string,
      *   images: list<ImageObject>,
      *   name: string,
-     *   release_date: string,
-     *   release_date_precision: value-of<ReleaseDatePrecision>,
-     *   total_tracks: int,
+     *   releaseDate: string,
+     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
+     *   totalTracks: int,
      *   type?: 'album',
      *   uri: string,
      *   artists?: list<SimplifiedArtistObject>|null,
      *   copyrights?: list<CopyrightObject>|null,
-     *   external_ids?: ExternalIDObject|null,
+     *   externalIDs?: ExternalIDObject|null,
      *   genres?: list<string>|null,
      *   label?: string|null,
      *   popularity?: int|null,
@@ -76,12 +76,12 @@ final class AlbumListResponse implements BaseModel
      * } $album
      */
     public static function with(
-        ?\DateTimeInterface $added_at = null,
+        ?\DateTimeInterface $addedAt = null,
         Album|array|null $album = null
     ): self {
         $obj = new self;
 
-        null !== $added_at && $obj['added_at'] = $added_at;
+        null !== $addedAt && $obj['addedAt'] = $addedAt;
         null !== $album && $obj['album'] = $album;
 
         return $obj;
@@ -95,7 +95,7 @@ final class AlbumListResponse implements BaseModel
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
         $obj = clone $this;
-        $obj['added_at'] = $addedAt;
+        $obj['addedAt'] = $addedAt;
 
         return $obj;
     }
@@ -105,20 +105,20 @@ final class AlbumListResponse implements BaseModel
      *
      * @param Album|array{
      *   id: string,
-     *   album_type: value-of<AlbumType>,
-     *   available_markets: list<string>,
-     *   external_urls: ExternalURLObject,
+     *   albumType: value-of<AlbumType>,
+     *   availableMarkets: list<string>,
+     *   externalURLs: ExternalURLObject,
      *   href: string,
      *   images: list<ImageObject>,
      *   name: string,
-     *   release_date: string,
-     *   release_date_precision: value-of<ReleaseDatePrecision>,
-     *   total_tracks: int,
+     *   releaseDate: string,
+     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
+     *   totalTracks: int,
      *   type?: 'album',
      *   uri: string,
      *   artists?: list<SimplifiedArtistObject>|null,
      *   copyrights?: list<CopyrightObject>|null,
-     *   external_ids?: ExternalIDObject|null,
+     *   externalIDs?: ExternalIDObject|null,
      *   genres?: list<string>|null,
      *   label?: string|null,
      *   popularity?: int|null,

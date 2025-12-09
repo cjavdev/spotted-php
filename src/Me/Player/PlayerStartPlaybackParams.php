@@ -15,10 +15,10 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::startPlayback()
  *
  * @phpstan-type PlayerStartPlaybackParamsShape = array{
- *   device_id?: string,
- *   context_uri?: string,
+ *   deviceID?: string,
+ *   contextUri?: string,
  *   offset?: array<string,mixed>,
- *   position_ms?: int,
+ *   positionMs?: int,
  *   uris?: list<string>,
  * }
  */
@@ -32,15 +32,15 @@ final class PlayerStartPlaybackParams implements BaseModel
      * The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      */
     #[Optional]
-    public ?string $device_id;
+    public ?string $deviceID;
 
     /**
      * Optional. Spotify URI of the context to play.
      * Valid contexts are albums, artists & playlists.
      * `{context_uri:"spotify:album:1Je1IMUlBXcx1Fz0WE7oPT"}`.
      */
-    #[Optional]
-    public ?string $context_uri;
+    #[Optional('context_uri')]
+    public ?string $contextUri;
 
     /**
      * Optional. Indicates from where in the context playback should start. Only available when context_uri corresponds to an album or playlist object
@@ -55,8 +55,8 @@ final class PlayerStartPlaybackParams implements BaseModel
     /**
      * Indicates from what position to start playback. Must be a positive number. Passing in a position that is greater than the length of the track will cause the player to start playing the next song.
      */
-    #[Optional]
-    public ?int $position_ms;
+    #[Optional('position_ms')]
+    public ?int $positionMs;
 
     /**
      * Optional. A JSON array of the Spotify track URIs to play.
@@ -81,18 +81,18 @@ final class PlayerStartPlaybackParams implements BaseModel
      * @param list<string> $uris
      */
     public static function with(
-        ?string $device_id = null,
-        ?string $context_uri = null,
+        ?string $deviceID = null,
+        ?string $contextUri = null,
         ?array $offset = null,
-        ?int $position_ms = null,
+        ?int $positionMs = null,
         ?array $uris = null,
     ): self {
         $obj = new self;
 
-        null !== $device_id && $obj['device_id'] = $device_id;
-        null !== $context_uri && $obj['context_uri'] = $context_uri;
+        null !== $deviceID && $obj['deviceID'] = $deviceID;
+        null !== $contextUri && $obj['contextUri'] = $contextUri;
         null !== $offset && $obj['offset'] = $offset;
-        null !== $position_ms && $obj['position_ms'] = $position_ms;
+        null !== $positionMs && $obj['positionMs'] = $positionMs;
         null !== $uris && $obj['uris'] = $uris;
 
         return $obj;
@@ -104,7 +104,7 @@ final class PlayerStartPlaybackParams implements BaseModel
     public function withDeviceID(string $deviceID): self
     {
         $obj = clone $this;
-        $obj['device_id'] = $deviceID;
+        $obj['deviceID'] = $deviceID;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class PlayerStartPlaybackParams implements BaseModel
     public function withContextUri(string $contextUri): self
     {
         $obj = clone $this;
-        $obj['context_uri'] = $contextUri;
+        $obj['contextUri'] = $contextUri;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class PlayerStartPlaybackParams implements BaseModel
     public function withPositionMs(int $positionMs): self
     {
         $obj = clone $this;
-        $obj['position_ms'] = $positionMs;
+        $obj['positionMs'] = $positionMs;
 
         return $obj;
     }

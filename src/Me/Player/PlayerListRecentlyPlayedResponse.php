@@ -19,7 +19,7 @@ use Spotted\TrackRestrictionObject;
 /**
  * @phpstan-type PlayerListRecentlyPlayedResponseShape = array{
  *   context?: ContextObject|null,
- *   played_at?: \DateTimeInterface|null,
+ *   playedAt?: \DateTimeInterface|null,
  *   track?: TrackObject|null,
  * }
  */
@@ -37,8 +37,8 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
     /**
      * The date and time the track was played.
      */
-    #[Optional]
-    public ?\DateTimeInterface $played_at;
+    #[Optional('played_at')]
+    public ?\DateTimeInterface $playedAt;
 
     /**
      * The track the user listened to.
@@ -57,7 +57,7 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ContextObject|array{
-     *   external_urls?: ExternalURLObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   type?: string|null,
      *   uri?: string|null,
@@ -66,34 +66,34 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
      *   id?: string|null,
      *   album?: Album|null,
      *   artists?: list<SimplifiedArtistObject>|null,
-     *   available_markets?: list<string>|null,
-     *   disc_number?: int|null,
-     *   duration_ms?: int|null,
+     *   availableMarkets?: list<string>|null,
+     *   discNumber?: int|null,
+     *   durationMs?: int|null,
      *   explicit?: bool|null,
-     *   external_ids?: ExternalIDObject|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalIDs?: ExternalIDObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
-     *   is_local?: bool|null,
-     *   is_playable?: bool|null,
-     *   linked_from?: LinkedTrackObject|null,
+     *   isLocal?: bool|null,
+     *   isPlayable?: bool|null,
+     *   linkedFrom?: LinkedTrackObject|null,
      *   name?: string|null,
      *   popularity?: int|null,
-     *   preview_url?: string|null,
+     *   previewURL?: string|null,
      *   restrictions?: TrackRestrictionObject|null,
-     *   track_number?: int|null,
+     *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * } $track
      */
     public static function with(
         ContextObject|array|null $context = null,
-        ?\DateTimeInterface $played_at = null,
+        ?\DateTimeInterface $playedAt = null,
         TrackObject|array|null $track = null,
     ): self {
         $obj = new self;
 
         null !== $context && $obj['context'] = $context;
-        null !== $played_at && $obj['played_at'] = $played_at;
+        null !== $playedAt && $obj['playedAt'] = $playedAt;
         null !== $track && $obj['track'] = $track;
 
         return $obj;
@@ -103,7 +103,7 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
      * The context the track was played from.
      *
      * @param ContextObject|array{
-     *   external_urls?: ExternalURLObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   type?: string|null,
      *   uri?: string|null,
@@ -123,7 +123,7 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
     public function withPlayedAt(\DateTimeInterface $playedAt): self
     {
         $obj = clone $this;
-        $obj['played_at'] = $playedAt;
+        $obj['playedAt'] = $playedAt;
 
         return $obj;
     }
@@ -135,21 +135,21 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
      *   id?: string|null,
      *   album?: Album|null,
      *   artists?: list<SimplifiedArtistObject>|null,
-     *   available_markets?: list<string>|null,
-     *   disc_number?: int|null,
-     *   duration_ms?: int|null,
+     *   availableMarkets?: list<string>|null,
+     *   discNumber?: int|null,
+     *   durationMs?: int|null,
      *   explicit?: bool|null,
-     *   external_ids?: ExternalIDObject|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalIDs?: ExternalIDObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
-     *   is_local?: bool|null,
-     *   is_playable?: bool|null,
-     *   linked_from?: LinkedTrackObject|null,
+     *   isLocal?: bool|null,
+     *   isPlayable?: bool|null,
+     *   linkedFrom?: LinkedTrackObject|null,
      *   name?: string|null,
      *   popularity?: int|null,
-     *   preview_url?: string|null,
+     *   previewURL?: string|null,
      *   restrictions?: TrackRestrictionObject|null,
-     *   track_number?: int|null,
+     *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * } $track

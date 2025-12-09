@@ -20,51 +20,51 @@ use Spotted\Core\Contracts\BaseModel;
  * @phpstan-type RecommendationGetParamsShape = array{
  *   limit?: int,
  *   market?: string,
- *   max_acousticness?: float,
- *   max_danceability?: float,
- *   max_duration_ms?: int,
- *   max_energy?: float,
- *   max_instrumentalness?: float,
- *   max_key?: int,
- *   max_liveness?: float,
- *   max_loudness?: float,
- *   max_mode?: int,
- *   max_popularity?: int,
- *   max_speechiness?: float,
- *   max_tempo?: float,
- *   max_time_signature?: int,
- *   max_valence?: float,
- *   min_acousticness?: float,
- *   min_danceability?: float,
- *   min_duration_ms?: int,
- *   min_energy?: float,
- *   min_instrumentalness?: float,
- *   min_key?: int,
- *   min_liveness?: float,
- *   min_loudness?: float,
- *   min_mode?: int,
- *   min_popularity?: int,
- *   min_speechiness?: float,
- *   min_tempo?: float,
- *   min_time_signature?: int,
- *   min_valence?: float,
- *   seed_artists?: string,
- *   seed_genres?: string,
- *   seed_tracks?: string,
- *   target_acousticness?: float,
- *   target_danceability?: float,
- *   target_duration_ms?: int,
- *   target_energy?: float,
- *   target_instrumentalness?: float,
- *   target_key?: int,
- *   target_liveness?: float,
- *   target_loudness?: float,
- *   target_mode?: int,
- *   target_popularity?: int,
- *   target_speechiness?: float,
- *   target_tempo?: float,
- *   target_time_signature?: int,
- *   target_valence?: float,
+ *   maxAcousticness?: float,
+ *   maxDanceability?: float,
+ *   maxDurationMs?: int,
+ *   maxEnergy?: float,
+ *   maxInstrumentalness?: float,
+ *   maxKey?: int,
+ *   maxLiveness?: float,
+ *   maxLoudness?: float,
+ *   maxMode?: int,
+ *   maxPopularity?: int,
+ *   maxSpeechiness?: float,
+ *   maxTempo?: float,
+ *   maxTimeSignature?: int,
+ *   maxValence?: float,
+ *   minAcousticness?: float,
+ *   minDanceability?: float,
+ *   minDurationMs?: int,
+ *   minEnergy?: float,
+ *   minInstrumentalness?: float,
+ *   minKey?: int,
+ *   minLiveness?: float,
+ *   minLoudness?: float,
+ *   minMode?: int,
+ *   minPopularity?: int,
+ *   minSpeechiness?: float,
+ *   minTempo?: float,
+ *   minTimeSignature?: int,
+ *   minValence?: float,
+ *   seedArtists?: string,
+ *   seedGenres?: string,
+ *   seedTracks?: string,
+ *   targetAcousticness?: float,
+ *   targetDanceability?: float,
+ *   targetDurationMs?: int,
+ *   targetEnergy?: float,
+ *   targetInstrumentalness?: float,
+ *   targetKey?: int,
+ *   targetLiveness?: float,
+ *   targetLoudness?: float,
+ *   targetMode?: int,
+ *   targetPopularity?: int,
+ *   targetSpeechiness?: float,
+ *   targetTempo?: float,
+ *   targetTimeSignature?: int,
+ *   targetValence?: float,
  * }
  */
 final class RecommendationGetParams implements BaseModel
@@ -94,271 +94,271 @@ final class RecommendationGetParams implements BaseModel
      * For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
      */
     #[Optional]
-    public ?float $max_acousticness;
+    public ?float $maxAcousticness;
 
     /**
      * For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
      */
     #[Optional]
-    public ?float $max_danceability;
+    public ?float $maxDanceability;
 
     /**
      * For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
      */
     #[Optional]
-    public ?int $max_duration_ms;
+    public ?int $maxDurationMs;
 
     /**
      * For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
      */
     #[Optional]
-    public ?float $max_energy;
+    public ?float $maxEnergy;
 
     /**
      * For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
      */
     #[Optional]
-    public ?float $max_instrumentalness;
+    public ?float $maxInstrumentalness;
 
     /**
      * For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
      */
     #[Optional]
-    public ?int $max_key;
+    public ?int $maxKey;
 
     /**
      * For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
      */
     #[Optional]
-    public ?float $max_liveness;
+    public ?float $maxLiveness;
 
     /**
      * For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
      */
     #[Optional]
-    public ?float $max_loudness;
+    public ?float $maxLoudness;
 
     /**
      * For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
      */
     #[Optional]
-    public ?int $max_mode;
+    public ?int $maxMode;
 
     /**
      * For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
      */
     #[Optional]
-    public ?int $max_popularity;
+    public ?int $maxPopularity;
 
     /**
      * For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
      */
     #[Optional]
-    public ?float $max_speechiness;
+    public ?float $maxSpeechiness;
 
     /**
      * For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
      */
     #[Optional]
-    public ?float $max_tempo;
+    public ?float $maxTempo;
 
     /**
      * For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
      */
     #[Optional]
-    public ?int $max_time_signature;
+    public ?int $maxTimeSignature;
 
     /**
      * For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
      */
     #[Optional]
-    public ?float $max_valence;
+    public ?float $maxValence;
 
     /**
      * For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      */
     #[Optional]
-    public ?float $min_acousticness;
+    public ?float $minAcousticness;
 
     /**
      * For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      */
     #[Optional]
-    public ?float $min_danceability;
+    public ?float $minDanceability;
 
     /**
      * For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      */
     #[Optional]
-    public ?int $min_duration_ms;
+    public ?int $minDurationMs;
 
     /**
      * For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      */
     #[Optional]
-    public ?float $min_energy;
+    public ?float $minEnergy;
 
     /**
      * For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      */
     #[Optional]
-    public ?float $min_instrumentalness;
+    public ?float $minInstrumentalness;
 
     /**
      * For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      */
     #[Optional]
-    public ?int $min_key;
+    public ?int $minKey;
 
     /**
      * For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      */
     #[Optional]
-    public ?float $min_liveness;
+    public ?float $minLiveness;
 
     /**
      * For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      */
     #[Optional]
-    public ?float $min_loudness;
+    public ?float $minLoudness;
 
     /**
      * For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      */
     #[Optional]
-    public ?int $min_mode;
+    public ?int $minMode;
 
     /**
      * For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      */
     #[Optional]
-    public ?int $min_popularity;
+    public ?int $minPopularity;
 
     /**
      * For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      */
     #[Optional]
-    public ?float $min_speechiness;
+    public ?float $minSpeechiness;
 
     /**
      * For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      */
     #[Optional]
-    public ?float $min_tempo;
+    public ?float $minTempo;
 
     /**
      * For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      */
     #[Optional]
-    public ?int $min_time_signature;
+    public ?int $minTimeSignature;
 
     /**
      * For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      */
     #[Optional]
-    public ?float $min_valence;
+    public ?float $minValence;
 
     /**
      * A comma separated list of [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for seed artists.  Up to 5 seed values may be provided in any combination of `seed_artists`, `seed_tracks` and `seed_genres`.<br/> _**Note**: only required if `seed_genres` and `seed_tracks` are not set_.
      */
     #[Optional]
-    public ?string $seed_artists;
+    public ?string $seedArtists;
 
     /**
      * A comma separated list of any genres in the set of [available genre seeds](/documentation/web-api/reference/get-recommendation-genres). Up to 5 seed values may be provided in any combination of `seed_artists`, `seed_tracks` and `seed_genres`.<br/> _**Note**: only required if `seed_artists` and `seed_tracks` are not set_.
      */
     #[Optional]
-    public ?string $seed_genres;
+    public ?string $seedGenres;
 
     /**
      * A comma separated list of [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for a seed track.  Up to 5 seed values may be provided in any combination of `seed_artists`, `seed_tracks` and `seed_genres`.<br/> _**Note**: only required if `seed_artists` and `seed_genres` are not set_.
      */
     #[Optional]
-    public ?string $seed_tracks;
+    public ?string $seedTracks;
 
     /**
      * For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      */
     #[Optional]
-    public ?float $target_acousticness;
+    public ?float $targetAcousticness;
 
     /**
      * For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      */
     #[Optional]
-    public ?float $target_danceability;
+    public ?float $targetDanceability;
 
     /**
      * Target duration of the track (ms).
      */
     #[Optional]
-    public ?int $target_duration_ms;
+    public ?int $targetDurationMs;
 
     /**
      * For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      */
     #[Optional]
-    public ?float $target_energy;
+    public ?float $targetEnergy;
 
     /**
      * For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      */
     #[Optional]
-    public ?float $target_instrumentalness;
+    public ?float $targetInstrumentalness;
 
     /**
      * For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      */
     #[Optional]
-    public ?int $target_key;
+    public ?int $targetKey;
 
     /**
      * For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      */
     #[Optional]
-    public ?float $target_liveness;
+    public ?float $targetLiveness;
 
     /**
      * For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      */
     #[Optional]
-    public ?float $target_loudness;
+    public ?float $targetLoudness;
 
     /**
      * For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      */
     #[Optional]
-    public ?int $target_mode;
+    public ?int $targetMode;
 
     /**
      * For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      */
     #[Optional]
-    public ?int $target_popularity;
+    public ?int $targetPopularity;
 
     /**
      * For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      */
     #[Optional]
-    public ?float $target_speechiness;
+    public ?float $targetSpeechiness;
 
     /**
      * Target tempo (BPM).
      */
     #[Optional]
-    public ?float $target_tempo;
+    public ?float $targetTempo;
 
     /**
      * For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      */
     #[Optional]
-    public ?int $target_time_signature;
+    public ?int $targetTimeSignature;
 
     /**
      * For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      */
     #[Optional]
-    public ?float $target_valence;
+    public ?float $targetValence;
 
     public function __construct()
     {
@@ -373,101 +373,101 @@ final class RecommendationGetParams implements BaseModel
     public static function with(
         ?int $limit = null,
         ?string $market = null,
-        ?float $max_acousticness = null,
-        ?float $max_danceability = null,
-        ?int $max_duration_ms = null,
-        ?float $max_energy = null,
-        ?float $max_instrumentalness = null,
-        ?int $max_key = null,
-        ?float $max_liveness = null,
-        ?float $max_loudness = null,
-        ?int $max_mode = null,
-        ?int $max_popularity = null,
-        ?float $max_speechiness = null,
-        ?float $max_tempo = null,
-        ?int $max_time_signature = null,
-        ?float $max_valence = null,
-        ?float $min_acousticness = null,
-        ?float $min_danceability = null,
-        ?int $min_duration_ms = null,
-        ?float $min_energy = null,
-        ?float $min_instrumentalness = null,
-        ?int $min_key = null,
-        ?float $min_liveness = null,
-        ?float $min_loudness = null,
-        ?int $min_mode = null,
-        ?int $min_popularity = null,
-        ?float $min_speechiness = null,
-        ?float $min_tempo = null,
-        ?int $min_time_signature = null,
-        ?float $min_valence = null,
-        ?string $seed_artists = null,
-        ?string $seed_genres = null,
-        ?string $seed_tracks = null,
-        ?float $target_acousticness = null,
-        ?float $target_danceability = null,
-        ?int $target_duration_ms = null,
-        ?float $target_energy = null,
-        ?float $target_instrumentalness = null,
-        ?int $target_key = null,
-        ?float $target_liveness = null,
-        ?float $target_loudness = null,
-        ?int $target_mode = null,
-        ?int $target_popularity = null,
-        ?float $target_speechiness = null,
-        ?float $target_tempo = null,
-        ?int $target_time_signature = null,
-        ?float $target_valence = null,
+        ?float $maxAcousticness = null,
+        ?float $maxDanceability = null,
+        ?int $maxDurationMs = null,
+        ?float $maxEnergy = null,
+        ?float $maxInstrumentalness = null,
+        ?int $maxKey = null,
+        ?float $maxLiveness = null,
+        ?float $maxLoudness = null,
+        ?int $maxMode = null,
+        ?int $maxPopularity = null,
+        ?float $maxSpeechiness = null,
+        ?float $maxTempo = null,
+        ?int $maxTimeSignature = null,
+        ?float $maxValence = null,
+        ?float $minAcousticness = null,
+        ?float $minDanceability = null,
+        ?int $minDurationMs = null,
+        ?float $minEnergy = null,
+        ?float $minInstrumentalness = null,
+        ?int $minKey = null,
+        ?float $minLiveness = null,
+        ?float $minLoudness = null,
+        ?int $minMode = null,
+        ?int $minPopularity = null,
+        ?float $minSpeechiness = null,
+        ?float $minTempo = null,
+        ?int $minTimeSignature = null,
+        ?float $minValence = null,
+        ?string $seedArtists = null,
+        ?string $seedGenres = null,
+        ?string $seedTracks = null,
+        ?float $targetAcousticness = null,
+        ?float $targetDanceability = null,
+        ?int $targetDurationMs = null,
+        ?float $targetEnergy = null,
+        ?float $targetInstrumentalness = null,
+        ?int $targetKey = null,
+        ?float $targetLiveness = null,
+        ?float $targetLoudness = null,
+        ?int $targetMode = null,
+        ?int $targetPopularity = null,
+        ?float $targetSpeechiness = null,
+        ?float $targetTempo = null,
+        ?int $targetTimeSignature = null,
+        ?float $targetValence = null,
     ): self {
         $obj = new self;
 
         null !== $limit && $obj['limit'] = $limit;
         null !== $market && $obj['market'] = $market;
-        null !== $max_acousticness && $obj['max_acousticness'] = $max_acousticness;
-        null !== $max_danceability && $obj['max_danceability'] = $max_danceability;
-        null !== $max_duration_ms && $obj['max_duration_ms'] = $max_duration_ms;
-        null !== $max_energy && $obj['max_energy'] = $max_energy;
-        null !== $max_instrumentalness && $obj['max_instrumentalness'] = $max_instrumentalness;
-        null !== $max_key && $obj['max_key'] = $max_key;
-        null !== $max_liveness && $obj['max_liveness'] = $max_liveness;
-        null !== $max_loudness && $obj['max_loudness'] = $max_loudness;
-        null !== $max_mode && $obj['max_mode'] = $max_mode;
-        null !== $max_popularity && $obj['max_popularity'] = $max_popularity;
-        null !== $max_speechiness && $obj['max_speechiness'] = $max_speechiness;
-        null !== $max_tempo && $obj['max_tempo'] = $max_tempo;
-        null !== $max_time_signature && $obj['max_time_signature'] = $max_time_signature;
-        null !== $max_valence && $obj['max_valence'] = $max_valence;
-        null !== $min_acousticness && $obj['min_acousticness'] = $min_acousticness;
-        null !== $min_danceability && $obj['min_danceability'] = $min_danceability;
-        null !== $min_duration_ms && $obj['min_duration_ms'] = $min_duration_ms;
-        null !== $min_energy && $obj['min_energy'] = $min_energy;
-        null !== $min_instrumentalness && $obj['min_instrumentalness'] = $min_instrumentalness;
-        null !== $min_key && $obj['min_key'] = $min_key;
-        null !== $min_liveness && $obj['min_liveness'] = $min_liveness;
-        null !== $min_loudness && $obj['min_loudness'] = $min_loudness;
-        null !== $min_mode && $obj['min_mode'] = $min_mode;
-        null !== $min_popularity && $obj['min_popularity'] = $min_popularity;
-        null !== $min_speechiness && $obj['min_speechiness'] = $min_speechiness;
-        null !== $min_tempo && $obj['min_tempo'] = $min_tempo;
-        null !== $min_time_signature && $obj['min_time_signature'] = $min_time_signature;
-        null !== $min_valence && $obj['min_valence'] = $min_valence;
-        null !== $seed_artists && $obj['seed_artists'] = $seed_artists;
-        null !== $seed_genres && $obj['seed_genres'] = $seed_genres;
-        null !== $seed_tracks && $obj['seed_tracks'] = $seed_tracks;
-        null !== $target_acousticness && $obj['target_acousticness'] = $target_acousticness;
-        null !== $target_danceability && $obj['target_danceability'] = $target_danceability;
-        null !== $target_duration_ms && $obj['target_duration_ms'] = $target_duration_ms;
-        null !== $target_energy && $obj['target_energy'] = $target_energy;
-        null !== $target_instrumentalness && $obj['target_instrumentalness'] = $target_instrumentalness;
-        null !== $target_key && $obj['target_key'] = $target_key;
-        null !== $target_liveness && $obj['target_liveness'] = $target_liveness;
-        null !== $target_loudness && $obj['target_loudness'] = $target_loudness;
-        null !== $target_mode && $obj['target_mode'] = $target_mode;
-        null !== $target_popularity && $obj['target_popularity'] = $target_popularity;
-        null !== $target_speechiness && $obj['target_speechiness'] = $target_speechiness;
-        null !== $target_tempo && $obj['target_tempo'] = $target_tempo;
-        null !== $target_time_signature && $obj['target_time_signature'] = $target_time_signature;
-        null !== $target_valence && $obj['target_valence'] = $target_valence;
+        null !== $maxAcousticness && $obj['maxAcousticness'] = $maxAcousticness;
+        null !== $maxDanceability && $obj['maxDanceability'] = $maxDanceability;
+        null !== $maxDurationMs && $obj['maxDurationMs'] = $maxDurationMs;
+        null !== $maxEnergy && $obj['maxEnergy'] = $maxEnergy;
+        null !== $maxInstrumentalness && $obj['maxInstrumentalness'] = $maxInstrumentalness;
+        null !== $maxKey && $obj['maxKey'] = $maxKey;
+        null !== $maxLiveness && $obj['maxLiveness'] = $maxLiveness;
+        null !== $maxLoudness && $obj['maxLoudness'] = $maxLoudness;
+        null !== $maxMode && $obj['maxMode'] = $maxMode;
+        null !== $maxPopularity && $obj['maxPopularity'] = $maxPopularity;
+        null !== $maxSpeechiness && $obj['maxSpeechiness'] = $maxSpeechiness;
+        null !== $maxTempo && $obj['maxTempo'] = $maxTempo;
+        null !== $maxTimeSignature && $obj['maxTimeSignature'] = $maxTimeSignature;
+        null !== $maxValence && $obj['maxValence'] = $maxValence;
+        null !== $minAcousticness && $obj['minAcousticness'] = $minAcousticness;
+        null !== $minDanceability && $obj['minDanceability'] = $minDanceability;
+        null !== $minDurationMs && $obj['minDurationMs'] = $minDurationMs;
+        null !== $minEnergy && $obj['minEnergy'] = $minEnergy;
+        null !== $minInstrumentalness && $obj['minInstrumentalness'] = $minInstrumentalness;
+        null !== $minKey && $obj['minKey'] = $minKey;
+        null !== $minLiveness && $obj['minLiveness'] = $minLiveness;
+        null !== $minLoudness && $obj['minLoudness'] = $minLoudness;
+        null !== $minMode && $obj['minMode'] = $minMode;
+        null !== $minPopularity && $obj['minPopularity'] = $minPopularity;
+        null !== $minSpeechiness && $obj['minSpeechiness'] = $minSpeechiness;
+        null !== $minTempo && $obj['minTempo'] = $minTempo;
+        null !== $minTimeSignature && $obj['minTimeSignature'] = $minTimeSignature;
+        null !== $minValence && $obj['minValence'] = $minValence;
+        null !== $seedArtists && $obj['seedArtists'] = $seedArtists;
+        null !== $seedGenres && $obj['seedGenres'] = $seedGenres;
+        null !== $seedTracks && $obj['seedTracks'] = $seedTracks;
+        null !== $targetAcousticness && $obj['targetAcousticness'] = $targetAcousticness;
+        null !== $targetDanceability && $obj['targetDanceability'] = $targetDanceability;
+        null !== $targetDurationMs && $obj['targetDurationMs'] = $targetDurationMs;
+        null !== $targetEnergy && $obj['targetEnergy'] = $targetEnergy;
+        null !== $targetInstrumentalness && $obj['targetInstrumentalness'] = $targetInstrumentalness;
+        null !== $targetKey && $obj['targetKey'] = $targetKey;
+        null !== $targetLiveness && $obj['targetLiveness'] = $targetLiveness;
+        null !== $targetLoudness && $obj['targetLoudness'] = $targetLoudness;
+        null !== $targetMode && $obj['targetMode'] = $targetMode;
+        null !== $targetPopularity && $obj['targetPopularity'] = $targetPopularity;
+        null !== $targetSpeechiness && $obj['targetSpeechiness'] = $targetSpeechiness;
+        null !== $targetTempo && $obj['targetTempo'] = $targetTempo;
+        null !== $targetTimeSignature && $obj['targetTimeSignature'] = $targetTimeSignature;
+        null !== $targetValence && $obj['targetValence'] = $targetValence;
 
         return $obj;
     }
@@ -505,7 +505,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMaxAcousticness(float $maxAcousticness): self
     {
         $obj = clone $this;
-        $obj['max_acousticness'] = $maxAcousticness;
+        $obj['maxAcousticness'] = $maxAcousticness;
 
         return $obj;
     }
@@ -516,7 +516,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMaxDanceability(float $maxDanceability): self
     {
         $obj = clone $this;
-        $obj['max_danceability'] = $maxDanceability;
+        $obj['maxDanceability'] = $maxDanceability;
 
         return $obj;
     }
@@ -527,7 +527,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMaxDurationMs(int $maxDurationMs): self
     {
         $obj = clone $this;
-        $obj['max_duration_ms'] = $maxDurationMs;
+        $obj['maxDurationMs'] = $maxDurationMs;
 
         return $obj;
     }
@@ -538,7 +538,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMaxEnergy(float $maxEnergy): self
     {
         $obj = clone $this;
-        $obj['max_energy'] = $maxEnergy;
+        $obj['maxEnergy'] = $maxEnergy;
 
         return $obj;
     }
@@ -549,7 +549,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMaxInstrumentalness(float $maxInstrumentalness): self
     {
         $obj = clone $this;
-        $obj['max_instrumentalness'] = $maxInstrumentalness;
+        $obj['maxInstrumentalness'] = $maxInstrumentalness;
 
         return $obj;
     }
@@ -560,7 +560,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMaxKey(int $maxKey): self
     {
         $obj = clone $this;
-        $obj['max_key'] = $maxKey;
+        $obj['maxKey'] = $maxKey;
 
         return $obj;
     }
@@ -571,7 +571,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMaxLiveness(float $maxLiveness): self
     {
         $obj = clone $this;
-        $obj['max_liveness'] = $maxLiveness;
+        $obj['maxLiveness'] = $maxLiveness;
 
         return $obj;
     }
@@ -582,7 +582,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMaxLoudness(float $maxLoudness): self
     {
         $obj = clone $this;
-        $obj['max_loudness'] = $maxLoudness;
+        $obj['maxLoudness'] = $maxLoudness;
 
         return $obj;
     }
@@ -593,7 +593,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMaxMode(int $maxMode): self
     {
         $obj = clone $this;
-        $obj['max_mode'] = $maxMode;
+        $obj['maxMode'] = $maxMode;
 
         return $obj;
     }
@@ -604,7 +604,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMaxPopularity(int $maxPopularity): self
     {
         $obj = clone $this;
-        $obj['max_popularity'] = $maxPopularity;
+        $obj['maxPopularity'] = $maxPopularity;
 
         return $obj;
     }
@@ -615,7 +615,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMaxSpeechiness(float $maxSpeechiness): self
     {
         $obj = clone $this;
-        $obj['max_speechiness'] = $maxSpeechiness;
+        $obj['maxSpeechiness'] = $maxSpeechiness;
 
         return $obj;
     }
@@ -626,7 +626,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMaxTempo(float $maxTempo): self
     {
         $obj = clone $this;
-        $obj['max_tempo'] = $maxTempo;
+        $obj['maxTempo'] = $maxTempo;
 
         return $obj;
     }
@@ -637,7 +637,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMaxTimeSignature(int $maxTimeSignature): self
     {
         $obj = clone $this;
-        $obj['max_time_signature'] = $maxTimeSignature;
+        $obj['maxTimeSignature'] = $maxTimeSignature;
 
         return $obj;
     }
@@ -648,7 +648,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMaxValence(float $maxValence): self
     {
         $obj = clone $this;
-        $obj['max_valence'] = $maxValence;
+        $obj['maxValence'] = $maxValence;
 
         return $obj;
     }
@@ -659,7 +659,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMinAcousticness(float $minAcousticness): self
     {
         $obj = clone $this;
-        $obj['min_acousticness'] = $minAcousticness;
+        $obj['minAcousticness'] = $minAcousticness;
 
         return $obj;
     }
@@ -670,7 +670,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMinDanceability(float $minDanceability): self
     {
         $obj = clone $this;
-        $obj['min_danceability'] = $minDanceability;
+        $obj['minDanceability'] = $minDanceability;
 
         return $obj;
     }
@@ -681,7 +681,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMinDurationMs(int $minDurationMs): self
     {
         $obj = clone $this;
-        $obj['min_duration_ms'] = $minDurationMs;
+        $obj['minDurationMs'] = $minDurationMs;
 
         return $obj;
     }
@@ -692,7 +692,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMinEnergy(float $minEnergy): self
     {
         $obj = clone $this;
-        $obj['min_energy'] = $minEnergy;
+        $obj['minEnergy'] = $minEnergy;
 
         return $obj;
     }
@@ -703,7 +703,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMinInstrumentalness(float $minInstrumentalness): self
     {
         $obj = clone $this;
-        $obj['min_instrumentalness'] = $minInstrumentalness;
+        $obj['minInstrumentalness'] = $minInstrumentalness;
 
         return $obj;
     }
@@ -714,7 +714,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMinKey(int $minKey): self
     {
         $obj = clone $this;
-        $obj['min_key'] = $minKey;
+        $obj['minKey'] = $minKey;
 
         return $obj;
     }
@@ -725,7 +725,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMinLiveness(float $minLiveness): self
     {
         $obj = clone $this;
-        $obj['min_liveness'] = $minLiveness;
+        $obj['minLiveness'] = $minLiveness;
 
         return $obj;
     }
@@ -736,7 +736,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMinLoudness(float $minLoudness): self
     {
         $obj = clone $this;
-        $obj['min_loudness'] = $minLoudness;
+        $obj['minLoudness'] = $minLoudness;
 
         return $obj;
     }
@@ -747,7 +747,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMinMode(int $minMode): self
     {
         $obj = clone $this;
-        $obj['min_mode'] = $minMode;
+        $obj['minMode'] = $minMode;
 
         return $obj;
     }
@@ -758,7 +758,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMinPopularity(int $minPopularity): self
     {
         $obj = clone $this;
-        $obj['min_popularity'] = $minPopularity;
+        $obj['minPopularity'] = $minPopularity;
 
         return $obj;
     }
@@ -769,7 +769,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMinSpeechiness(float $minSpeechiness): self
     {
         $obj = clone $this;
-        $obj['min_speechiness'] = $minSpeechiness;
+        $obj['minSpeechiness'] = $minSpeechiness;
 
         return $obj;
     }
@@ -780,7 +780,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMinTempo(float $minTempo): self
     {
         $obj = clone $this;
-        $obj['min_tempo'] = $minTempo;
+        $obj['minTempo'] = $minTempo;
 
         return $obj;
     }
@@ -791,7 +791,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMinTimeSignature(int $minTimeSignature): self
     {
         $obj = clone $this;
-        $obj['min_time_signature'] = $minTimeSignature;
+        $obj['minTimeSignature'] = $minTimeSignature;
 
         return $obj;
     }
@@ -802,7 +802,7 @@ final class RecommendationGetParams implements BaseModel
     public function withMinValence(float $minValence): self
     {
         $obj = clone $this;
-        $obj['min_valence'] = $minValence;
+        $obj['minValence'] = $minValence;
 
         return $obj;
     }
@@ -813,7 +813,7 @@ final class RecommendationGetParams implements BaseModel
     public function withSeedArtists(string $seedArtists): self
     {
         $obj = clone $this;
-        $obj['seed_artists'] = $seedArtists;
+        $obj['seedArtists'] = $seedArtists;
 
         return $obj;
     }
@@ -824,7 +824,7 @@ final class RecommendationGetParams implements BaseModel
     public function withSeedGenres(string $seedGenres): self
     {
         $obj = clone $this;
-        $obj['seed_genres'] = $seedGenres;
+        $obj['seedGenres'] = $seedGenres;
 
         return $obj;
     }
@@ -835,7 +835,7 @@ final class RecommendationGetParams implements BaseModel
     public function withSeedTracks(string $seedTracks): self
     {
         $obj = clone $this;
-        $obj['seed_tracks'] = $seedTracks;
+        $obj['seedTracks'] = $seedTracks;
 
         return $obj;
     }
@@ -846,7 +846,7 @@ final class RecommendationGetParams implements BaseModel
     public function withTargetAcousticness(float $targetAcousticness): self
     {
         $obj = clone $this;
-        $obj['target_acousticness'] = $targetAcousticness;
+        $obj['targetAcousticness'] = $targetAcousticness;
 
         return $obj;
     }
@@ -857,7 +857,7 @@ final class RecommendationGetParams implements BaseModel
     public function withTargetDanceability(float $targetDanceability): self
     {
         $obj = clone $this;
-        $obj['target_danceability'] = $targetDanceability;
+        $obj['targetDanceability'] = $targetDanceability;
 
         return $obj;
     }
@@ -868,7 +868,7 @@ final class RecommendationGetParams implements BaseModel
     public function withTargetDurationMs(int $targetDurationMs): self
     {
         $obj = clone $this;
-        $obj['target_duration_ms'] = $targetDurationMs;
+        $obj['targetDurationMs'] = $targetDurationMs;
 
         return $obj;
     }
@@ -879,7 +879,7 @@ final class RecommendationGetParams implements BaseModel
     public function withTargetEnergy(float $targetEnergy): self
     {
         $obj = clone $this;
-        $obj['target_energy'] = $targetEnergy;
+        $obj['targetEnergy'] = $targetEnergy;
 
         return $obj;
     }
@@ -891,7 +891,7 @@ final class RecommendationGetParams implements BaseModel
         float $targetInstrumentalness
     ): self {
         $obj = clone $this;
-        $obj['target_instrumentalness'] = $targetInstrumentalness;
+        $obj['targetInstrumentalness'] = $targetInstrumentalness;
 
         return $obj;
     }
@@ -902,7 +902,7 @@ final class RecommendationGetParams implements BaseModel
     public function withTargetKey(int $targetKey): self
     {
         $obj = clone $this;
-        $obj['target_key'] = $targetKey;
+        $obj['targetKey'] = $targetKey;
 
         return $obj;
     }
@@ -913,7 +913,7 @@ final class RecommendationGetParams implements BaseModel
     public function withTargetLiveness(float $targetLiveness): self
     {
         $obj = clone $this;
-        $obj['target_liveness'] = $targetLiveness;
+        $obj['targetLiveness'] = $targetLiveness;
 
         return $obj;
     }
@@ -924,7 +924,7 @@ final class RecommendationGetParams implements BaseModel
     public function withTargetLoudness(float $targetLoudness): self
     {
         $obj = clone $this;
-        $obj['target_loudness'] = $targetLoudness;
+        $obj['targetLoudness'] = $targetLoudness;
 
         return $obj;
     }
@@ -935,7 +935,7 @@ final class RecommendationGetParams implements BaseModel
     public function withTargetMode(int $targetMode): self
     {
         $obj = clone $this;
-        $obj['target_mode'] = $targetMode;
+        $obj['targetMode'] = $targetMode;
 
         return $obj;
     }
@@ -946,7 +946,7 @@ final class RecommendationGetParams implements BaseModel
     public function withTargetPopularity(int $targetPopularity): self
     {
         $obj = clone $this;
-        $obj['target_popularity'] = $targetPopularity;
+        $obj['targetPopularity'] = $targetPopularity;
 
         return $obj;
     }
@@ -957,7 +957,7 @@ final class RecommendationGetParams implements BaseModel
     public function withTargetSpeechiness(float $targetSpeechiness): self
     {
         $obj = clone $this;
-        $obj['target_speechiness'] = $targetSpeechiness;
+        $obj['targetSpeechiness'] = $targetSpeechiness;
 
         return $obj;
     }
@@ -968,7 +968,7 @@ final class RecommendationGetParams implements BaseModel
     public function withTargetTempo(float $targetTempo): self
     {
         $obj = clone $this;
-        $obj['target_tempo'] = $targetTempo;
+        $obj['targetTempo'] = $targetTempo;
 
         return $obj;
     }
@@ -979,7 +979,7 @@ final class RecommendationGetParams implements BaseModel
     public function withTargetTimeSignature(int $targetTimeSignature): self
     {
         $obj = clone $this;
-        $obj['target_time_signature'] = $targetTimeSignature;
+        $obj['targetTimeSignature'] = $targetTimeSignature;
 
         return $obj;
     }
@@ -990,7 +990,7 @@ final class RecommendationGetParams implements BaseModel
     public function withTargetValence(float $targetValence): self
     {
         $obj = clone $this;
-        $obj['target_valence'] = $targetValence;
+        $obj['targetValence'] = $targetValence;
 
         return $obj;
     }

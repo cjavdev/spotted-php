@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::getState()
  *
  * @phpstan-type PlayerGetStateParamsShape = array{
- *   additional_types?: string, market?: string
+ *   additionalTypes?: string, market?: string
  * }
  */
 final class PlayerGetStateParams implements BaseModel
@@ -30,7 +30,7 @@ final class PlayerGetStateParams implements BaseModel
      * In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.
      */
     #[Optional]
-    public ?string $additional_types;
+    public ?string $additionalTypes;
 
     /**
      * An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
@@ -54,12 +54,12 @@ final class PlayerGetStateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $additional_types = null,
+        ?string $additionalTypes = null,
         ?string $market = null
     ): self {
         $obj = new self;
 
-        null !== $additional_types && $obj['additional_types'] = $additional_types;
+        null !== $additionalTypes && $obj['additionalTypes'] = $additionalTypes;
         null !== $market && $obj['market'] = $market;
 
         return $obj;
@@ -73,7 +73,7 @@ final class PlayerGetStateParams implements BaseModel
     public function withAdditionalTypes(string $additionalTypes): self
     {
         $obj = clone $this;
-        $obj['additional_types'] = $additionalTypes;
+        $obj['additionalTypes'] = $additionalTypes;
 
         return $obj;
     }

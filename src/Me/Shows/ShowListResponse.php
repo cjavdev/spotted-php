@@ -14,7 +14,7 @@ use Spotted\ShowBase;
 
 /**
  * @phpstan-type ShowListResponseShape = array{
- *   added_at?: \DateTimeInterface|null, show?: ShowBase|null
+ *   addedAt?: \DateTimeInterface|null, show?: ShowBase|null
  * }
  */
 final class ShowListResponse implements BaseModel
@@ -27,8 +27,8 @@ final class ShowListResponse implements BaseModel
      * Timestamps are returned in ISO 8601 format as Coordinated Universal Time (UTC) with a zero offset: YYYY-MM-DDTHH:MM:SSZ.
      * If the time is imprecise (for example, the date/time of an album release), an additional field indicates the precision; see for example, release_date in an album object.
      */
-    #[Optional]
-    public ?\DateTimeInterface $added_at;
+    #[Optional('added_at')]
+    public ?\DateTimeInterface $addedAt;
 
     /**
      * Information about the show.
@@ -48,31 +48,31 @@ final class ShowListResponse implements BaseModel
      *
      * @param ShowBase|array{
      *   id: string,
-     *   available_markets: list<string>,
+     *   availableMarkets: list<string>,
      *   copyrights: list<CopyrightObject>,
      *   description: string,
      *   explicit: bool,
-     *   external_urls: ExternalURLObject,
+     *   externalURLs: ExternalURLObject,
      *   href: string,
-     *   html_description: string,
+     *   htmlDescription: string,
      *   images: list<ImageObject>,
-     *   is_externally_hosted: bool,
+     *   isExternallyHosted: bool,
      *   languages: list<string>,
-     *   media_type: string,
+     *   mediaType: string,
      *   name: string,
      *   publisher: string,
-     *   total_episodes: int,
+     *   totalEpisodes: int,
      *   type?: 'show',
      *   uri: string,
      * } $show
      */
     public static function with(
-        ?\DateTimeInterface $added_at = null,
+        ?\DateTimeInterface $addedAt = null,
         ShowBase|array|null $show = null
     ): self {
         $obj = new self;
 
-        null !== $added_at && $obj['added_at'] = $added_at;
+        null !== $addedAt && $obj['addedAt'] = $addedAt;
         null !== $show && $obj['show'] = $show;
 
         return $obj;
@@ -86,7 +86,7 @@ final class ShowListResponse implements BaseModel
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
         $obj = clone $this;
-        $obj['added_at'] = $addedAt;
+        $obj['addedAt'] = $addedAt;
 
         return $obj;
     }
@@ -96,20 +96,20 @@ final class ShowListResponse implements BaseModel
      *
      * @param ShowBase|array{
      *   id: string,
-     *   available_markets: list<string>,
+     *   availableMarkets: list<string>,
      *   copyrights: list<CopyrightObject>,
      *   description: string,
      *   explicit: bool,
-     *   external_urls: ExternalURLObject,
+     *   externalURLs: ExternalURLObject,
      *   href: string,
-     *   html_description: string,
+     *   htmlDescription: string,
      *   images: list<ImageObject>,
-     *   is_externally_hosted: bool,
+     *   isExternallyHosted: bool,
      *   languages: list<string>,
-     *   media_type: string,
+     *   mediaType: string,
      *   name: string,
      *   publisher: string,
-     *   total_episodes: int,
+     *   totalEpisodes: int,
      *   type?: 'show',
      *   uri: string,
      * } $show

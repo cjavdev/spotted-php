@@ -7,6 +7,7 @@ namespace Spotted\Services\Playlists;
 use Spotted\Client;
 use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
 use Spotted\Playlists\Tracks\TrackAddParams;
 use Spotted\Playlists\Tracks\TrackAddResponse;
@@ -38,10 +39,10 @@ final class TracksService implements TracksContract
      * These operations can't be applied together in a single request.
      *
      * @param array{
-     *   insert_before?: int,
-     *   range_length?: int,
-     *   range_start?: int,
-     *   snapshot_id?: string,
+     *   insertBefore?: int,
+     *   rangeLength?: int,
+     *   rangeStart?: int,
+     *   snapshotID?: string,
      *   uris?: list<string>,
      * }|TrackUpdateParams $params
      *
@@ -75,7 +76,7 @@ final class TracksService implements TracksContract
      * Get full details of the items of a playlist owned by a Spotify user.
      *
      * @param array{
-     *   additional_types?: string,
+     *   additionalTypes?: string,
      *   fields?: string,
      *   limit?: int,
      *   market?: string,
@@ -100,7 +101,10 @@ final class TracksService implements TracksContract
         $response = $this->client->request(
             method: 'get',
             path: ['playlists/%1$s/tracks', $playlistID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['additionalTypes' => 'additional_types']
+            ),
             options: $options,
             convert: PlaylistTrackObject::class,
             page: CursorURLPage::class,
@@ -146,7 +150,7 @@ final class TracksService implements TracksContract
      * Remove one or more items from a user's playlist.
      *
      * @param array{
-     *   tracks: list<array{uri?: string}>, snapshot_id?: string
+     *   tracks: list<array{uri?: string}>, snapshotID?: string
      * }|TrackRemoveParams $params
      *
      * @throws APIException

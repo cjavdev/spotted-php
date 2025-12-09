@@ -46,13 +46,13 @@ final class PlayerGetDevicesResponse implements BaseModel
      *
      * @param list<DeviceObject|array{
      *   id?: string|null,
-     *   is_active?: bool|null,
-     *   is_private_session?: bool|null,
-     *   is_restricted?: bool|null,
+     *   isActive?: bool|null,
+     *   isPrivateSession?: bool|null,
+     *   isRestricted?: bool|null,
      *   name?: string|null,
-     *   supports_volume?: bool|null,
+     *   supportsVolume?: bool|null,
      *   type?: string|null,
-     *   volume_percent?: int|null,
+     *   volumePercent?: int|null,
      * }> $devices
      */
     public static function with(array $devices): self
@@ -67,13 +67,13 @@ final class PlayerGetDevicesResponse implements BaseModel
     /**
      * @param list<DeviceObject|array{
      *   id?: string|null,
-     *   is_active?: bool|null,
-     *   is_private_session?: bool|null,
-     *   is_restricted?: bool|null,
+     *   isActive?: bool|null,
+     *   isPrivateSession?: bool|null,
+     *   isRestricted?: bool|null,
      *   name?: string|null,
-     *   supports_volume?: bool|null,
+     *   supportsVolume?: bool|null,
      *   type?: string|null,
-     *   volume_percent?: int|null,
+     *   volumePercent?: int|null,
      * }> $devices
      */
     public function withDevices(array $devices): self

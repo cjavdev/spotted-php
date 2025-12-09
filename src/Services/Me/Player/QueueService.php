@@ -7,6 +7,7 @@ namespace Spotted\Services\Me\Player;
 use Spotted\Client;
 use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\Me\Player\Queue\QueueAddParams;
 use Spotted\Me\Player\Queue\QueueGetResponse;
 use Spotted\RequestOptions;
@@ -24,7 +25,7 @@ final class QueueService implements QueueContract
      *
      * Add an item to be played next in the user's current playback queue. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{uri: string, device_id?: string}|QueueAddParams $params
+     * @param array{uri: string, deviceID?: string}|QueueAddParams $params
      *
      * @throws APIException
      */
@@ -41,7 +42,7 @@ final class QueueService implements QueueContract
         $response = $this->client->request(
             method: 'post',
             path: 'me/player/queue',
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['deviceID' => 'device_id']),
             options: $options,
             convert: null,
         );

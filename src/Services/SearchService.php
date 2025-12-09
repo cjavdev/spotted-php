@@ -7,6 +7,7 @@ namespace Spotted\Services;
 use Spotted\Client;
 use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\RequestOptions;
 use Spotted\Search\SearchQueryParams;
 use Spotted\Search\SearchQueryParams\IncludeExternal;
@@ -30,7 +31,7 @@ final class SearchService implements SearchContract
      * @param array{
      *   q: string,
      *   type: list<'album'|'artist'|'playlist'|'track'|'show'|'episode'|'audiobook'|Type>,
-     *   include_external?: 'audio'|IncludeExternal,
+     *   includeExternal?: 'audio'|IncludeExternal,
      *   limit?: int,
      *   market?: string,
      *   offset?: int,
@@ -51,7 +52,10 @@ final class SearchService implements SearchContract
         $response = $this->client->request(
             method: 'get',
             path: 'search',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['includeExternal' => 'include_external']
+            ),
             options: $options,
             convert: SearchQueryResponse::class,
         );

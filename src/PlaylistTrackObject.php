@@ -14,9 +14,9 @@ use Spotted\TrackObject\Album;
 
 /**
  * @phpstan-type PlaylistTrackObjectShape = array{
- *   added_at?: \DateTimeInterface|null,
- *   added_by?: PlaylistUserObject|null,
- *   is_local?: bool|null,
+ *   addedAt?: \DateTimeInterface|null,
+ *   addedBy?: PlaylistUserObject|null,
+ *   isLocal?: bool|null,
  *   track?: null|TrackObject|EpisodeObject,
  * }
  */
@@ -28,20 +28,20 @@ final class PlaylistTrackObject implements BaseModel
     /**
      * The date and time the track or episode was added. _**Note**: some very old playlists may return `null` in this field._.
      */
-    #[Optional]
-    public ?\DateTimeInterface $added_at;
+    #[Optional('added_at')]
+    public ?\DateTimeInterface $addedAt;
 
     /**
      * The Spotify user who added the track or episode. _**Note**: some very old playlists may return `null` in this field._.
      */
-    #[Optional]
-    public ?PlaylistUserObject $added_by;
+    #[Optional('added_by')]
+    public ?PlaylistUserObject $addedBy;
 
     /**
      * Whether this track or episode is a [local file](/documentation/web-api/concepts/playlists/#local-files) or not.
      */
-    #[Optional]
-    public ?bool $is_local;
+    #[Optional('is_local')]
+    public ?bool $isLocal;
 
     /**
      * Information about the track or episode.
@@ -61,67 +61,67 @@ final class PlaylistTrackObject implements BaseModel
      *
      * @param PlaylistUserObject|array{
      *   id?: string|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
-     * } $added_by
+     * } $addedBy
      * @param TrackObject|array{
      *   id?: string|null,
      *   album?: Album|null,
      *   artists?: list<SimplifiedArtistObject>|null,
-     *   available_markets?: list<string>|null,
-     *   disc_number?: int|null,
-     *   duration_ms?: int|null,
+     *   availableMarkets?: list<string>|null,
+     *   discNumber?: int|null,
+     *   durationMs?: int|null,
      *   explicit?: bool|null,
-     *   external_ids?: ExternalIDObject|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalIDs?: ExternalIDObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
-     *   is_local?: bool|null,
-     *   is_playable?: bool|null,
-     *   linked_from?: LinkedTrackObject|null,
+     *   isLocal?: bool|null,
+     *   isPlayable?: bool|null,
+     *   linkedFrom?: LinkedTrackObject|null,
      *   name?: string|null,
      *   popularity?: int|null,
-     *   preview_url?: string|null,
+     *   previewURL?: string|null,
      *   restrictions?: TrackRestrictionObject|null,
-     *   track_number?: int|null,
+     *   trackNumber?: int|null,
      *   type?: value-of<TrackObject\Type>|null,
      *   uri?: string|null,
      * }|EpisodeObject|array{
      *   id: string,
-     *   audio_preview_url: string|null,
+     *   audioPreviewURL: string|null,
      *   description: string,
-     *   duration_ms: int,
+     *   durationMs: int,
      *   explicit: bool,
-     *   external_urls: ExternalURLObject,
+     *   externalURLs: ExternalURLObject,
      *   href: string,
-     *   html_description: string,
+     *   htmlDescription: string,
      *   images: list<ImageObject>,
-     *   is_externally_hosted: bool,
-     *   is_playable: bool,
+     *   isExternallyHosted: bool,
+     *   isPlayable: bool,
      *   languages: list<string>,
      *   name: string,
-     *   release_date: string,
-     *   release_date_precision: value-of<ReleaseDatePrecision>,
+     *   releaseDate: string,
+     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
      *   show: ShowBase,
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
      *   restrictions?: EpisodeRestrictionObject|null,
-     *   resume_point?: ResumePointObject|null,
+     *   resumePoint?: ResumePointObject|null,
      * } $track
      */
     public static function with(
-        ?\DateTimeInterface $added_at = null,
-        PlaylistUserObject|array|null $added_by = null,
-        ?bool $is_local = null,
+        ?\DateTimeInterface $addedAt = null,
+        PlaylistUserObject|array|null $addedBy = null,
+        ?bool $isLocal = null,
         TrackObject|array|EpisodeObject|null $track = null,
     ): self {
         $obj = new self;
 
-        null !== $added_at && $obj['added_at'] = $added_at;
-        null !== $added_by && $obj['added_by'] = $added_by;
-        null !== $is_local && $obj['is_local'] = $is_local;
+        null !== $addedAt && $obj['addedAt'] = $addedAt;
+        null !== $addedBy && $obj['addedBy'] = $addedBy;
+        null !== $isLocal && $obj['isLocal'] = $isLocal;
         null !== $track && $obj['track'] = $track;
 
         return $obj;
@@ -133,7 +133,7 @@ final class PlaylistTrackObject implements BaseModel
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
         $obj = clone $this;
-        $obj['added_at'] = $addedAt;
+        $obj['addedAt'] = $addedAt;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class PlaylistTrackObject implements BaseModel
      *
      * @param PlaylistUserObject|array{
      *   id?: string|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
@@ -152,7 +152,7 @@ final class PlaylistTrackObject implements BaseModel
     public function withAddedBy(PlaylistUserObject|array $addedBy): self
     {
         $obj = clone $this;
-        $obj['added_by'] = $addedBy;
+        $obj['addedBy'] = $addedBy;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class PlaylistTrackObject implements BaseModel
     public function withIsLocal(bool $isLocal): self
     {
         $obj = clone $this;
-        $obj['is_local'] = $isLocal;
+        $obj['isLocal'] = $isLocal;
 
         return $obj;
     }
@@ -175,45 +175,45 @@ final class PlaylistTrackObject implements BaseModel
      *   id?: string|null,
      *   album?: Album|null,
      *   artists?: list<SimplifiedArtistObject>|null,
-     *   available_markets?: list<string>|null,
-     *   disc_number?: int|null,
-     *   duration_ms?: int|null,
+     *   availableMarkets?: list<string>|null,
+     *   discNumber?: int|null,
+     *   durationMs?: int|null,
      *   explicit?: bool|null,
-     *   external_ids?: ExternalIDObject|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalIDs?: ExternalIDObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
-     *   is_local?: bool|null,
-     *   is_playable?: bool|null,
-     *   linked_from?: LinkedTrackObject|null,
+     *   isLocal?: bool|null,
+     *   isPlayable?: bool|null,
+     *   linkedFrom?: LinkedTrackObject|null,
      *   name?: string|null,
      *   popularity?: int|null,
-     *   preview_url?: string|null,
+     *   previewURL?: string|null,
      *   restrictions?: TrackRestrictionObject|null,
-     *   track_number?: int|null,
+     *   trackNumber?: int|null,
      *   type?: value-of<TrackObject\Type>|null,
      *   uri?: string|null,
      * }|EpisodeObject|array{
      *   id: string,
-     *   audio_preview_url: string|null,
+     *   audioPreviewURL: string|null,
      *   description: string,
-     *   duration_ms: int,
+     *   durationMs: int,
      *   explicit: bool,
-     *   external_urls: ExternalURLObject,
+     *   externalURLs: ExternalURLObject,
      *   href: string,
-     *   html_description: string,
+     *   htmlDescription: string,
      *   images: list<ImageObject>,
-     *   is_externally_hosted: bool,
-     *   is_playable: bool,
+     *   isExternallyHosted: bool,
+     *   isPlayable: bool,
      *   languages: list<string>,
      *   name: string,
-     *   release_date: string,
-     *   release_date_precision: value-of<ReleaseDatePrecision>,
+     *   releaseDate: string,
+     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
      *   show: ShowBase,
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
      *   restrictions?: EpisodeRestrictionObject|null,
-     *   resume_point?: ResumePointObject|null,
+     *   resumePoint?: ResumePointObject|null,
      * } $track
      */
     public function withTrack(TrackObject|array|EpisodeObject $track): self

@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AudioFeatureBulkGetResponseShape = array{
- *   audio_features: list<AudioFeature>
+ *   audioFeatures: list<AudioFeature>
  * }
  */
 final class AudioFeatureBulkGetResponse implements BaseModel
@@ -20,16 +20,16 @@ final class AudioFeatureBulkGetResponse implements BaseModel
     /** @use SdkModel<AudioFeatureBulkGetResponseShape> */
     use SdkModel;
 
-    /** @var list<AudioFeature> $audio_features */
-    #[Required(list: AudioFeature::class)]
-    public array $audio_features;
+    /** @var list<AudioFeature> $audioFeatures */
+    #[Required('audio_features', list: AudioFeature::class)]
+    public array $audioFeatures;
 
     /**
      * `new AudioFeatureBulkGetResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AudioFeatureBulkGetResponse::with(audio_features: ...)
+     * AudioFeatureBulkGetResponse::with(audioFeatures: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -51,9 +51,9 @@ final class AudioFeatureBulkGetResponse implements BaseModel
      * @param list<AudioFeature|array{
      *   id?: string|null,
      *   acousticness?: float|null,
-     *   analysis_url?: string|null,
+     *   analysisURL?: string|null,
      *   danceability?: float|null,
-     *   duration_ms?: int|null,
+     *   durationMs?: int|null,
      *   energy?: float|null,
      *   instrumentalness?: float|null,
      *   key?: int|null,
@@ -62,18 +62,18 @@ final class AudioFeatureBulkGetResponse implements BaseModel
      *   mode?: int|null,
      *   speechiness?: float|null,
      *   tempo?: float|null,
-     *   time_signature?: int|null,
-     *   track_href?: string|null,
+     *   timeSignature?: int|null,
+     *   trackHref?: string|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      *   valence?: float|null,
-     * }> $audio_features
+     * }> $audioFeatures
      */
-    public static function with(array $audio_features): self
+    public static function with(array $audioFeatures): self
     {
         $obj = new self;
 
-        $obj['audio_features'] = $audio_features;
+        $obj['audioFeatures'] = $audioFeatures;
 
         return $obj;
     }
@@ -82,9 +82,9 @@ final class AudioFeatureBulkGetResponse implements BaseModel
      * @param list<AudioFeature|array{
      *   id?: string|null,
      *   acousticness?: float|null,
-     *   analysis_url?: string|null,
+     *   analysisURL?: string|null,
      *   danceability?: float|null,
-     *   duration_ms?: int|null,
+     *   durationMs?: int|null,
      *   energy?: float|null,
      *   instrumentalness?: float|null,
      *   key?: int|null,
@@ -93,8 +93,8 @@ final class AudioFeatureBulkGetResponse implements BaseModel
      *   mode?: int|null,
      *   speechiness?: float|null,
      *   tempo?: float|null,
-     *   time_signature?: int|null,
-     *   track_href?: string|null,
+     *   timeSignature?: int|null,
+     *   trackHref?: string|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      *   valence?: float|null,
@@ -103,7 +103,7 @@ final class AudioFeatureBulkGetResponse implements BaseModel
     public function withAudioFeatures(array $audioFeatures): self
     {
         $obj = clone $this;
-        $obj['audio_features'] = $audioFeatures;
+        $obj['audioFeatures'] = $audioFeatures;
 
         return $obj;
     }

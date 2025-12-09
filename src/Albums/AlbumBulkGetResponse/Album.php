@@ -24,20 +24,20 @@ use Spotted\SimplifiedTrackObject;
 /**
  * @phpstan-type AlbumShape = array{
  *   id: string,
- *   album_type: value-of<AlbumType>,
- *   available_markets: list<string>,
- *   external_urls: ExternalURLObject,
+ *   albumType: value-of<AlbumType>,
+ *   availableMarkets: list<string>,
+ *   externalURLs: ExternalURLObject,
  *   href: string,
  *   images: list<ImageObject>,
  *   name: string,
- *   release_date: string,
- *   release_date_precision: value-of<ReleaseDatePrecision>,
- *   total_tracks: int,
+ *   releaseDate: string,
+ *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
+ *   totalTracks: int,
  *   type?: 'album',
  *   uri: string,
  *   artists?: list<SimplifiedArtistObject>|null,
  *   copyrights?: list<CopyrightObject>|null,
- *   external_ids?: ExternalIDObject|null,
+ *   externalIDs?: ExternalIDObject|null,
  *   genres?: list<string>|null,
  *   label?: string|null,
  *   popularity?: int|null,
@@ -67,24 +67,24 @@ final class Album implements BaseModel
     /**
      * The type of the album.
      *
-     * @var value-of<AlbumType> $album_type
+     * @var value-of<AlbumType> $albumType
      */
-    #[Required(enum: AlbumType::class)]
-    public string $album_type;
+    #[Required('album_type', enum: AlbumType::class)]
+    public string $albumType;
 
     /**
      * The markets in which the album is available: [ISO 3166-1 alpha-2 country codes](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). _**NOTE**: an album is considered available in a market when at least 1 of its tracks is available in that market._.
      *
-     * @var list<string> $available_markets
+     * @var list<string> $availableMarkets
      */
-    #[Required(list: 'string')]
-    public array $available_markets;
+    #[Required('available_markets', list: 'string')]
+    public array $availableMarkets;
 
     /**
      * Known external URLs for this album.
      */
-    #[Required]
-    public ExternalURLObject $external_urls;
+    #[Required('external_urls')]
+    public ExternalURLObject $externalURLs;
 
     /**
      * A link to the Web API endpoint providing full details of the album.
@@ -109,22 +109,22 @@ final class Album implements BaseModel
     /**
      * The date the album was first released.
      */
-    #[Required]
-    public string $release_date;
+    #[Required('release_date')]
+    public string $releaseDate;
 
     /**
      * The precision with which `release_date` value is known.
      *
-     * @var value-of<ReleaseDatePrecision> $release_date_precision
+     * @var value-of<ReleaseDatePrecision> $releaseDatePrecision
      */
-    #[Required(enum: ReleaseDatePrecision::class)]
-    public string $release_date_precision;
+    #[Required('release_date_precision', enum: ReleaseDatePrecision::class)]
+    public string $releaseDatePrecision;
 
     /**
      * The number of tracks in the album.
      */
-    #[Required]
-    public int $total_tracks;
+    #[Required('total_tracks')]
+    public int $totalTracks;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the album.
@@ -151,8 +151,8 @@ final class Album implements BaseModel
     /**
      * Known external IDs for the album.
      */
-    #[Optional]
-    public ?ExternalIDObject $external_ids;
+    #[Optional('external_ids')]
+    public ?ExternalIDObject $externalIDs;
 
     /**
      * @deprecated
@@ -195,15 +195,15 @@ final class Album implements BaseModel
      * ```
      * Album::with(
      *   id: ...,
-     *   album_type: ...,
-     *   available_markets: ...,
-     *   external_urls: ...,
+     *   albumType: ...,
+     *   availableMarkets: ...,
+     *   externalURLs: ...,
      *   href: ...,
      *   images: ...,
      *   name: ...,
-     *   release_date: ...,
-     *   release_date_precision: ...,
-     *   total_tracks: ...,
+     *   releaseDate: ...,
+     *   releaseDatePrecision: ...,
+     *   totalTracks: ...,
      *   uri: ...,
      * )
      * ```
@@ -235,16 +235,16 @@ final class Album implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AlbumType|value-of<AlbumType> $album_type
-     * @param list<string> $available_markets
-     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param AlbumType|value-of<AlbumType> $albumType
+     * @param list<string> $availableMarkets
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      * @param list<ImageObject|array{
      *   height: int|null, url: string, width: int|null
      * }> $images
-     * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $release_date_precision
+     * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
      * @param list<SimplifiedArtistObject|array{
      *   id?: string|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   name?: string|null,
      *   type?: value-of<Type>|null,
@@ -255,7 +255,7 @@ final class Album implements BaseModel
      * }> $copyrights
      * @param ExternalIDObject|array{
      *   ean?: string|null, isrc?: string|null, upc?: string|null
-     * } $external_ids
+     * } $externalIDs
      * @param list<string> $genres
      * @param AlbumRestrictionObject|array{
      *   reason?: value-of<Reason>|null
@@ -272,19 +272,19 @@ final class Album implements BaseModel
      */
     public static function with(
         string $id,
-        AlbumType|string $album_type,
-        array $available_markets,
-        ExternalURLObject|array $external_urls,
+        AlbumType|string $albumType,
+        array $availableMarkets,
+        ExternalURLObject|array $externalURLs,
         string $href,
         array $images,
         string $name,
-        string $release_date,
-        ReleaseDatePrecision|string $release_date_precision,
-        int $total_tracks,
+        string $releaseDate,
+        ReleaseDatePrecision|string $releaseDatePrecision,
+        int $totalTracks,
         string $uri,
         ?array $artists = null,
         ?array $copyrights = null,
-        ExternalIDObject|array|null $external_ids = null,
+        ExternalIDObject|array|null $externalIDs = null,
         ?array $genres = null,
         ?string $label = null,
         ?int $popularity = null,
@@ -294,20 +294,20 @@ final class Album implements BaseModel
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['album_type'] = $album_type;
-        $obj['available_markets'] = $available_markets;
-        $obj['external_urls'] = $external_urls;
+        $obj['albumType'] = $albumType;
+        $obj['availableMarkets'] = $availableMarkets;
+        $obj['externalURLs'] = $externalURLs;
         $obj['href'] = $href;
         $obj['images'] = $images;
         $obj['name'] = $name;
-        $obj['release_date'] = $release_date;
-        $obj['release_date_precision'] = $release_date_precision;
-        $obj['total_tracks'] = $total_tracks;
+        $obj['releaseDate'] = $releaseDate;
+        $obj['releaseDatePrecision'] = $releaseDatePrecision;
+        $obj['totalTracks'] = $totalTracks;
         $obj['uri'] = $uri;
 
         null !== $artists && $obj['artists'] = $artists;
         null !== $copyrights && $obj['copyrights'] = $copyrights;
-        null !== $external_ids && $obj['external_ids'] = $external_ids;
+        null !== $externalIDs && $obj['externalIDs'] = $externalIDs;
         null !== $genres && $obj['genres'] = $genres;
         null !== $label && $obj['label'] = $label;
         null !== $popularity && $obj['popularity'] = $popularity;
@@ -336,7 +336,7 @@ final class Album implements BaseModel
     public function withAlbumType(AlbumType|string $albumType): self
     {
         $obj = clone $this;
-        $obj['album_type'] = $albumType;
+        $obj['albumType'] = $albumType;
 
         return $obj;
     }
@@ -349,7 +349,7 @@ final class Album implements BaseModel
     public function withAvailableMarkets(array $availableMarkets): self
     {
         $obj = clone $this;
-        $obj['available_markets'] = $availableMarkets;
+        $obj['availableMarkets'] = $availableMarkets;
 
         return $obj;
     }
@@ -363,7 +363,7 @@ final class Album implements BaseModel
         ExternalURLObject|array $externalURLs
     ): self {
         $obj = clone $this;
-        $obj['external_urls'] = $externalURLs;
+        $obj['externalURLs'] = $externalURLs;
 
         return $obj;
     }
@@ -411,7 +411,7 @@ final class Album implements BaseModel
     public function withReleaseDate(string $releaseDate): self
     {
         $obj = clone $this;
-        $obj['release_date'] = $releaseDate;
+        $obj['releaseDate'] = $releaseDate;
 
         return $obj;
     }
@@ -425,7 +425,7 @@ final class Album implements BaseModel
         ReleaseDatePrecision|string $releaseDatePrecision
     ): self {
         $obj = clone $this;
-        $obj['release_date_precision'] = $releaseDatePrecision;
+        $obj['releaseDatePrecision'] = $releaseDatePrecision;
 
         return $obj;
     }
@@ -436,7 +436,7 @@ final class Album implements BaseModel
     public function withTotalTracks(int $totalTracks): self
     {
         $obj = clone $this;
-        $obj['total_tracks'] = $totalTracks;
+        $obj['totalTracks'] = $totalTracks;
 
         return $obj;
     }
@@ -457,7 +457,7 @@ final class Album implements BaseModel
      *
      * @param list<SimplifiedArtistObject|array{
      *   id?: string|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   name?: string|null,
      *   type?: value-of<Type>|null,
@@ -497,7 +497,7 @@ final class Album implements BaseModel
     public function withExternalIDs(ExternalIDObject|array $externalIDs): self
     {
         $obj = clone $this;
-        $obj['external_ids'] = $externalIDs;
+        $obj['externalIDs'] = $externalIDs;
 
         return $obj;
     }

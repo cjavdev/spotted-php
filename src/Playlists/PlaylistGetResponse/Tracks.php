@@ -104,9 +104,9 @@ final class Tracks implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<PlaylistTrackObject|array{
-     *   added_at?: \DateTimeInterface|null,
-     *   added_by?: PlaylistUserObject|null,
-     *   is_local?: bool|null,
+     *   addedAt?: \DateTimeInterface|null,
+     *   addedBy?: PlaylistUserObject|null,
+     *   isLocal?: bool|null,
      *   track?: TrackObject|EpisodeObject|null,
      * }> $items
      */
@@ -201,9 +201,9 @@ final class Tracks implements BaseModel
 
     /**
      * @param list<PlaylistTrackObject|array{
-     *   added_at?: \DateTimeInterface|null,
-     *   added_by?: PlaylistUserObject|null,
-     *   is_local?: bool|null,
+     *   addedAt?: \DateTimeInterface|null,
+     *   addedBy?: PlaylistUserObject|null,
+     *   isLocal?: bool|null,
      *   track?: TrackObject|EpisodeObject|null,
      * }> $items
      */

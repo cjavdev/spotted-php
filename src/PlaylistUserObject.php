@@ -12,7 +12,7 @@ use Spotted\PlaylistUserObject\Type;
 /**
  * @phpstan-type PlaylistUserObjectShape = array{
  *   id?: string|null,
- *   external_urls?: ExternalURLObject|null,
+ *   externalURLs?: ExternalURLObject|null,
  *   href?: string|null,
  *   type?: value-of<Type>|null,
  *   uri?: string|null,
@@ -32,8 +32,8 @@ final class PlaylistUserObject implements BaseModel
     /**
      * Known public external URLs for this user.
      */
-    #[Optional]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * A link to the Web API endpoint for this user.
@@ -65,12 +65,12 @@ final class PlaylistUserObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      * @param Type|value-of<Type> $type
      */
     public static function with(
         ?string $id = null,
-        ExternalURLObject|array|null $external_urls = null,
+        ExternalURLObject|array|null $externalURLs = null,
         ?string $href = null,
         Type|string|null $type = null,
         ?string $uri = null,
@@ -78,7 +78,7 @@ final class PlaylistUserObject implements BaseModel
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $externalURLs && $obj['externalURLs'] = $externalURLs;
         null !== $href && $obj['href'] = $href;
         null !== $type && $obj['type'] = $type;
         null !== $uri && $obj['uri'] = $uri;
@@ -106,7 +106,7 @@ final class PlaylistUserObject implements BaseModel
         ExternalURLObject|array $externalURLs
     ): self {
         $obj = clone $this;
-        $obj['external_urls'] = $externalURLs;
+        $obj['externalURLs'] = $externalURLs;
 
         return $obj;
     }

@@ -15,13 +15,13 @@ use Spotted\SimplifiedPlaylistObject\Owner;
  *   id?: string|null,
  *   collaborative?: bool|null,
  *   description?: string|null,
- *   external_urls?: ExternalURLObject|null,
+ *   externalURLs?: ExternalURLObject|null,
  *   href?: string|null,
  *   images?: list<ImageObject>|null,
  *   name?: string|null,
  *   owner?: Owner|null,
  *   published?: bool|null,
- *   snapshot_id?: string|null,
+ *   snapshotID?: string|null,
  *   tracks?: PlaylistTracksRefObject|null,
  *   type?: string|null,
  *   uri?: string|null,
@@ -53,8 +53,8 @@ final class SimplifiedPlaylistObject implements BaseModel
     /**
      * Known external URLs for this playlist.
      */
-    #[Optional]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * A link to the Web API endpoint providing full details of the playlist.
@@ -91,8 +91,8 @@ final class SimplifiedPlaylistObject implements BaseModel
     /**
      * The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version.
      */
-    #[Optional]
-    public ?string $snapshot_id;
+    #[Optional('snapshot_id')]
+    public ?string $snapshotID;
 
     /**
      * A collection containing a link ( `href` ) to the Web API endpoint where full details of the playlist's tracks can be retrieved, along with the `total` number of tracks in the playlist. Note, a track object may be `null`. This can happen if a track is no longer available.
@@ -122,17 +122,17 @@ final class SimplifiedPlaylistObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      * @param list<ImageObject|array{
      *   height: int|null, url: string, width: int|null
      * }> $images
      * @param Owner|array{
      *   id?: string|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
-     *   display_name?: string|null,
+     *   displayName?: string|null,
      * } $owner
      * @param PlaylistTracksRefObject|array{
      *   href?: string|null, total?: int|null
@@ -142,13 +142,13 @@ final class SimplifiedPlaylistObject implements BaseModel
         ?string $id = null,
         ?bool $collaborative = null,
         ?string $description = null,
-        ExternalURLObject|array|null $external_urls = null,
+        ExternalURLObject|array|null $externalURLs = null,
         ?string $href = null,
         ?array $images = null,
         ?string $name = null,
         Owner|array|null $owner = null,
         ?bool $published = null,
-        ?string $snapshot_id = null,
+        ?string $snapshotID = null,
         PlaylistTracksRefObject|array|null $tracks = null,
         ?string $type = null,
         ?string $uri = null,
@@ -158,13 +158,13 @@ final class SimplifiedPlaylistObject implements BaseModel
         null !== $id && $obj['id'] = $id;
         null !== $collaborative && $obj['collaborative'] = $collaborative;
         null !== $description && $obj['description'] = $description;
-        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $externalURLs && $obj['externalURLs'] = $externalURLs;
         null !== $href && $obj['href'] = $href;
         null !== $images && $obj['images'] = $images;
         null !== $name && $obj['name'] = $name;
         null !== $owner && $obj['owner'] = $owner;
         null !== $published && $obj['published'] = $published;
-        null !== $snapshot_id && $obj['snapshot_id'] = $snapshot_id;
+        null !== $snapshotID && $obj['snapshotID'] = $snapshotID;
         null !== $tracks && $obj['tracks'] = $tracks;
         null !== $type && $obj['type'] = $type;
         null !== $uri && $obj['uri'] = $uri;
@@ -214,7 +214,7 @@ final class SimplifiedPlaylistObject implements BaseModel
         ExternalURLObject|array $externalURLs
     ): self {
         $obj = clone $this;
-        $obj['external_urls'] = $externalURLs;
+        $obj['externalURLs'] = $externalURLs;
 
         return $obj;
     }
@@ -261,11 +261,11 @@ final class SimplifiedPlaylistObject implements BaseModel
      *
      * @param Owner|array{
      *   id?: string|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
-     *   display_name?: string|null,
+     *   displayName?: string|null,
      * } $owner
      */
     public function withOwner(Owner|array $owner): self
@@ -293,7 +293,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     public function withSnapshotID(string $snapshotID): self
     {
         $obj = clone $this;
-        $obj['snapshot_id'] = $snapshotID;
+        $obj['snapshotID'] = $snapshotID;
 
         return $obj;
     }

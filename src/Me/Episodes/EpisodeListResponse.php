@@ -17,7 +17,7 @@ use Spotted\ShowBase;
 
 /**
  * @phpstan-type EpisodeListResponseShape = array{
- *   added_at?: \DateTimeInterface|null, episode?: EpisodeObject|null
+ *   addedAt?: \DateTimeInterface|null, episode?: EpisodeObject|null
  * }
  */
 final class EpisodeListResponse implements BaseModel
@@ -29,8 +29,8 @@ final class EpisodeListResponse implements BaseModel
      * The date and time the episode was saved.
      * Timestamps are returned in ISO 8601 format as Coordinated Universal Time (UTC) with a zero offset: YYYY-MM-DDTHH:MM:SSZ.
      */
-    #[Optional]
-    public ?\DateTimeInterface $added_at;
+    #[Optional('added_at')]
+    public ?\DateTimeInterface $addedAt;
 
     /**
      * Information about the episode.
@@ -50,35 +50,35 @@ final class EpisodeListResponse implements BaseModel
      *
      * @param EpisodeObject|array{
      *   id: string,
-     *   audio_preview_url: string|null,
+     *   audioPreviewURL: string|null,
      *   description: string,
-     *   duration_ms: int,
+     *   durationMs: int,
      *   explicit: bool,
-     *   external_urls: ExternalURLObject,
+     *   externalURLs: ExternalURLObject,
      *   href: string,
-     *   html_description: string,
+     *   htmlDescription: string,
      *   images: list<ImageObject>,
-     *   is_externally_hosted: bool,
-     *   is_playable: bool,
+     *   isExternallyHosted: bool,
+     *   isPlayable: bool,
      *   languages: list<string>,
      *   name: string,
-     *   release_date: string,
-     *   release_date_precision: value-of<ReleaseDatePrecision>,
+     *   releaseDate: string,
+     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
      *   show: ShowBase,
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
      *   restrictions?: EpisodeRestrictionObject|null,
-     *   resume_point?: ResumePointObject|null,
+     *   resumePoint?: ResumePointObject|null,
      * } $episode
      */
     public static function with(
-        ?\DateTimeInterface $added_at = null,
+        ?\DateTimeInterface $addedAt = null,
         EpisodeObject|array|null $episode = null
     ): self {
         $obj = new self;
 
-        null !== $added_at && $obj['added_at'] = $added_at;
+        null !== $addedAt && $obj['addedAt'] = $addedAt;
         null !== $episode && $obj['episode'] = $episode;
 
         return $obj;
@@ -91,7 +91,7 @@ final class EpisodeListResponse implements BaseModel
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
         $obj = clone $this;
-        $obj['added_at'] = $addedAt;
+        $obj['addedAt'] = $addedAt;
 
         return $obj;
     }
@@ -101,26 +101,26 @@ final class EpisodeListResponse implements BaseModel
      *
      * @param EpisodeObject|array{
      *   id: string,
-     *   audio_preview_url: string|null,
+     *   audioPreviewURL: string|null,
      *   description: string,
-     *   duration_ms: int,
+     *   durationMs: int,
      *   explicit: bool,
-     *   external_urls: ExternalURLObject,
+     *   externalURLs: ExternalURLObject,
      *   href: string,
-     *   html_description: string,
+     *   htmlDescription: string,
      *   images: list<ImageObject>,
-     *   is_externally_hosted: bool,
-     *   is_playable: bool,
+     *   isExternallyHosted: bool,
+     *   isPlayable: bool,
      *   languages: list<string>,
      *   name: string,
-     *   release_date: string,
-     *   release_date_precision: value-of<ReleaseDatePrecision>,
+     *   releaseDate: string,
+     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
      *   show: ShowBase,
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
      *   restrictions?: EpisodeRestrictionObject|null,
-     *   resume_point?: ResumePointObject|null,
+     *   resumePoint?: ResumePointObject|null,
      * } $episode
      */
     public function withEpisode(EpisodeObject|array $episode): self

@@ -11,20 +11,20 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * @phpstan-type ShowBaseShape = array{
  *   id: string,
- *   available_markets: list<string>,
+ *   availableMarkets: list<string>,
  *   copyrights: list<CopyrightObject>,
  *   description: string,
  *   explicit: bool,
- *   external_urls: ExternalURLObject,
+ *   externalURLs: ExternalURLObject,
  *   href: string,
- *   html_description: string,
+ *   htmlDescription: string,
  *   images: list<ImageObject>,
- *   is_externally_hosted: bool,
+ *   isExternallyHosted: bool,
  *   languages: list<string>,
- *   media_type: string,
+ *   mediaType: string,
  *   name: string,
  *   publisher: string,
- *   total_episodes: int,
+ *   totalEpisodes: int,
  *   type?: 'show',
  *   uri: string,
  * }
@@ -51,10 +51,10 @@ final class ShowBase implements BaseModel
     /**
      * A list of the countries in which the show can be played, identified by their [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code.
      *
-     * @var list<string> $available_markets
+     * @var list<string> $availableMarkets
      */
-    #[Required(list: 'string')]
-    public array $available_markets;
+    #[Required('available_markets', list: 'string')]
+    public array $availableMarkets;
 
     /**
      * The copyright statements of the show.
@@ -79,8 +79,8 @@ final class ShowBase implements BaseModel
     /**
      * External URLs for this show.
      */
-    #[Required]
-    public ExternalURLObject $external_urls;
+    #[Required('external_urls')]
+    public ExternalURLObject $externalURLs;
 
     /**
      * A link to the Web API endpoint providing full details of the show.
@@ -91,8 +91,8 @@ final class ShowBase implements BaseModel
     /**
      * A description of the show. This field may contain HTML tags.
      */
-    #[Required]
-    public string $html_description;
+    #[Required('html_description')]
+    public string $htmlDescription;
 
     /**
      * The cover art for the show in various sizes, widest first.
@@ -105,8 +105,8 @@ final class ShowBase implements BaseModel
     /**
      * True if all of the shows episodes are hosted outside of Spotify's CDN. This field might be `null` in some cases.
      */
-    #[Required]
-    public bool $is_externally_hosted;
+    #[Required('is_externally_hosted')]
+    public bool $isExternallyHosted;
 
     /**
      * A list of the languages used in the show, identified by their [ISO 639](https://en.wikipedia.org/wiki/ISO_639) code.
@@ -119,8 +119,8 @@ final class ShowBase implements BaseModel
     /**
      * The media type of the show.
      */
-    #[Required]
-    public string $media_type;
+    #[Required('media_type')]
+    public string $mediaType;
 
     /**
      * The name of the episode.
@@ -137,8 +137,8 @@ final class ShowBase implements BaseModel
     /**
      * The total number of episodes in the show.
      */
-    #[Required]
-    public int $total_episodes;
+    #[Required('total_episodes')]
+    public int $totalEpisodes;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the show.
@@ -153,20 +153,20 @@ final class ShowBase implements BaseModel
      * ```
      * ShowBase::with(
      *   id: ...,
-     *   available_markets: ...,
+     *   availableMarkets: ...,
      *   copyrights: ...,
      *   description: ...,
      *   explicit: ...,
-     *   external_urls: ...,
+     *   externalURLs: ...,
      *   href: ...,
-     *   html_description: ...,
+     *   htmlDescription: ...,
      *   images: ...,
-     *   is_externally_hosted: ...,
+     *   isExternallyHosted: ...,
      *   languages: ...,
-     *   media_type: ...,
+     *   mediaType: ...,
      *   name: ...,
      *   publisher: ...,
-     *   total_episodes: ...,
+     *   totalEpisodes: ...,
      *   uri: ...,
      * )
      * ```
@@ -203,11 +203,11 @@ final class ShowBase implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $available_markets
+     * @param list<string> $availableMarkets
      * @param list<CopyrightObject|array{
      *   text?: string|null, type?: string|null
      * }> $copyrights
-     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      * @param list<ImageObject|array{
      *   height: int|null, url: string, width: int|null
      * }> $images
@@ -215,39 +215,39 @@ final class ShowBase implements BaseModel
      */
     public static function with(
         string $id,
-        array $available_markets,
+        array $availableMarkets,
         array $copyrights,
         string $description,
         bool $explicit,
-        ExternalURLObject|array $external_urls,
+        ExternalURLObject|array $externalURLs,
         string $href,
-        string $html_description,
+        string $htmlDescription,
         array $images,
-        bool $is_externally_hosted,
+        bool $isExternallyHosted,
         array $languages,
-        string $media_type,
+        string $mediaType,
         string $name,
         string $publisher,
-        int $total_episodes,
+        int $totalEpisodes,
         string $uri,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['available_markets'] = $available_markets;
+        $obj['availableMarkets'] = $availableMarkets;
         $obj['copyrights'] = $copyrights;
         $obj['description'] = $description;
         $obj['explicit'] = $explicit;
-        $obj['external_urls'] = $external_urls;
+        $obj['externalURLs'] = $externalURLs;
         $obj['href'] = $href;
-        $obj['html_description'] = $html_description;
+        $obj['htmlDescription'] = $htmlDescription;
         $obj['images'] = $images;
-        $obj['is_externally_hosted'] = $is_externally_hosted;
+        $obj['isExternallyHosted'] = $isExternallyHosted;
         $obj['languages'] = $languages;
-        $obj['media_type'] = $media_type;
+        $obj['mediaType'] = $mediaType;
         $obj['name'] = $name;
         $obj['publisher'] = $publisher;
-        $obj['total_episodes'] = $total_episodes;
+        $obj['totalEpisodes'] = $totalEpisodes;
         $obj['uri'] = $uri;
 
         return $obj;
@@ -272,7 +272,7 @@ final class ShowBase implements BaseModel
     public function withAvailableMarkets(array $availableMarkets): self
     {
         $obj = clone $this;
-        $obj['available_markets'] = $availableMarkets;
+        $obj['availableMarkets'] = $availableMarkets;
 
         return $obj;
     }
@@ -323,7 +323,7 @@ final class ShowBase implements BaseModel
         ExternalURLObject|array $externalURLs
     ): self {
         $obj = clone $this;
-        $obj['external_urls'] = $externalURLs;
+        $obj['externalURLs'] = $externalURLs;
 
         return $obj;
     }
@@ -345,7 +345,7 @@ final class ShowBase implements BaseModel
     public function withHTMLDescription(string $htmlDescription): self
     {
         $obj = clone $this;
-        $obj['html_description'] = $htmlDescription;
+        $obj['htmlDescription'] = $htmlDescription;
 
         return $obj;
     }
@@ -371,7 +371,7 @@ final class ShowBase implements BaseModel
     public function withIsExternallyHosted(bool $isExternallyHosted): self
     {
         $obj = clone $this;
-        $obj['is_externally_hosted'] = $isExternallyHosted;
+        $obj['isExternallyHosted'] = $isExternallyHosted;
 
         return $obj;
     }
@@ -395,7 +395,7 @@ final class ShowBase implements BaseModel
     public function withMediaType(string $mediaType): self
     {
         $obj = clone $this;
-        $obj['media_type'] = $mediaType;
+        $obj['mediaType'] = $mediaType;
 
         return $obj;
     }
@@ -428,7 +428,7 @@ final class ShowBase implements BaseModel
     public function withTotalEpisodes(int $totalEpisodes): self
     {
         $obj = clone $this;
-        $obj['total_episodes'] = $totalEpisodes;
+        $obj['totalEpisodes'] = $totalEpisodes;
 
         return $obj;
     }

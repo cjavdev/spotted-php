@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Me\Player\QueueService::add()
  *
- * @phpstan-type QueueAddParamsShape = array{uri: string, device_id?: string}
+ * @phpstan-type QueueAddParamsShape = array{uri: string, deviceID?: string}
  */
 final class QueueAddParams implements BaseModel
 {
@@ -34,7 +34,7 @@ final class QueueAddParams implements BaseModel
      * not supplied, the user's currently active device is the target.
      */
     #[Optional]
-    public ?string $device_id;
+    public ?string $deviceID;
 
     /**
      * `new QueueAddParams()` is missing required properties by the API.
@@ -60,13 +60,13 @@ final class QueueAddParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $uri, ?string $device_id = null): self
+    public static function with(string $uri, ?string $deviceID = null): self
     {
         $obj = new self;
 
         $obj['uri'] = $uri;
 
-        null !== $device_id && $obj['device_id'] = $device_id;
+        null !== $deviceID && $obj['deviceID'] = $deviceID;
 
         return $obj;
     }
@@ -89,7 +89,7 @@ final class QueueAddParams implements BaseModel
     public function withDeviceID(string $deviceID): self
     {
         $obj = clone $this;
-        $obj['device_id'] = $deviceID;
+        $obj['deviceID'] = $deviceID;
 
         return $obj;
     }

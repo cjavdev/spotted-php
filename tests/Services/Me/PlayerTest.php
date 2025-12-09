@@ -107,7 +107,7 @@ final class PlayerTest extends TestCase
         }
 
         $result = $this->client->me->player->seekToPosition([
-            'position_ms' => 25000,
+            'positionMs' => 25000,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -122,8 +122,8 @@ final class PlayerTest extends TestCase
         }
 
         $result = $this->client->me->player->seekToPosition([
-            'position_ms' => 25000,
-            'device_id' => '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
+            'positionMs' => 25000,
+            'deviceID' => '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -152,7 +152,7 @@ final class PlayerTest extends TestCase
 
         $result = $this->client->me->player->setRepeatMode([
             'state' => 'context',
-            'device_id' => '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
+            'deviceID' => '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -166,7 +166,7 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->setVolume(['volume_percent' => 50]);
+        $result = $this->client->me->player->setVolume(['volumePercent' => 50]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -180,8 +180,8 @@ final class PlayerTest extends TestCase
         }
 
         $result = $this->client->me->player->setVolume([
-            'volume_percent' => 50,
-            'device_id' => '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
+            'volumePercent' => 50,
+            'deviceID' => '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -248,7 +248,7 @@ final class PlayerTest extends TestCase
         }
 
         $result = $this->client->me->player->toggleShuffle([
-            'state' => true, 'device_id' => '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
+            'state' => true, 'deviceID' => '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -263,7 +263,7 @@ final class PlayerTest extends TestCase
         }
 
         $result = $this->client->me->player->transfer([
-            'device_ids' => ['74ASZWbe4lXaubB36ztrGX'],
+            'deviceIDs' => ['74ASZWbe4lXaubB36ztrGX'],
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -278,7 +278,7 @@ final class PlayerTest extends TestCase
         }
 
         $result = $this->client->me->player->transfer([
-            'device_ids' => ['74ASZWbe4lXaubB36ztrGX'], 'play' => true,
+            'deviceIDs' => ['74ASZWbe4lXaubB36ztrGX'], 'play' => true,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

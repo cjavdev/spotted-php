@@ -10,7 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TimestampedIDShape = array{
- *   id: string, added_at: \DateTimeInterface
+ *   id: string, addedAt: \DateTimeInterface
  * }
  */
 final class TimestampedID implements BaseModel
@@ -27,15 +27,15 @@ final class TimestampedID implements BaseModel
     /**
      * The timestamp when the track was added to the library. Use ISO 8601 format with UTC timezone (e.g., `2023-01-15T14:30:00Z`). You can specify past timestamps to insert tracks at specific positions in the library's chronological order. The API uses minute-level granularity for ordering, though the timestamp supports millisecond precision.
      */
-    #[Required]
-    public \DateTimeInterface $added_at;
+    #[Required('added_at')]
+    public \DateTimeInterface $addedAt;
 
     /**
      * `new TimestampedID()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * TimestampedID::with(id: ..., added_at: ...)
+     * TimestampedID::with(id: ..., addedAt: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -54,12 +54,12 @@ final class TimestampedID implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $id, \DateTimeInterface $added_at): self
+    public static function with(string $id, \DateTimeInterface $addedAt): self
     {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['added_at'] = $added_at;
+        $obj['addedAt'] = $addedAt;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class TimestampedID implements BaseModel
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
         $obj = clone $this;
-        $obj['added_at'] = $addedAt;
+        $obj['addedAt'] = $addedAt;
 
         return $obj;
     }
