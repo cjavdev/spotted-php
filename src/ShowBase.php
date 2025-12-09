@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -39,13 +39,13 @@ final class ShowBase implements BaseModel
      *
      * @var 'show' $type
      */
-    #[Api]
+    #[Required]
     public string $type = 'show';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the show.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -53,7 +53,7 @@ final class ShowBase implements BaseModel
      *
      * @var list<string> $available_markets
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $available_markets;
 
     /**
@@ -61,37 +61,37 @@ final class ShowBase implements BaseModel
      *
      * @var list<CopyrightObject> $copyrights
      */
-    #[Api(list: CopyrightObject::class)]
+    #[Required(list: CopyrightObject::class)]
     public array $copyrights;
 
     /**
      * A description of the show. HTML tags are stripped away from this field, use `html_description` field in case HTML tags are needed.
      */
-    #[Api]
+    #[Required]
     public string $description;
 
     /**
      * Whether or not the show has explicit content (true = yes it does; false = no it does not OR unknown).
      */
-    #[Api]
+    #[Required]
     public bool $explicit;
 
     /**
      * External URLs for this show.
      */
-    #[Api]
+    #[Required]
     public ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the show.
      */
-    #[Api]
+    #[Required]
     public string $href;
 
     /**
      * A description of the show. This field may contain HTML tags.
      */
-    #[Api]
+    #[Required]
     public string $html_description;
 
     /**
@@ -99,13 +99,13 @@ final class ShowBase implements BaseModel
      *
      * @var list<ImageObject> $images
      */
-    #[Api(list: ImageObject::class)]
+    #[Required(list: ImageObject::class)]
     public array $images;
 
     /**
      * True if all of the shows episodes are hosted outside of Spotify's CDN. This field might be `null` in some cases.
      */
-    #[Api]
+    #[Required]
     public bool $is_externally_hosted;
 
     /**
@@ -113,37 +113,37 @@ final class ShowBase implements BaseModel
      *
      * @var list<string> $languages
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $languages;
 
     /**
      * The media type of the show.
      */
-    #[Api]
+    #[Required]
     public string $media_type;
 
     /**
      * The name of the episode.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The publisher of the show.
      */
-    #[Api]
+    #[Required]
     public string $publisher;
 
     /**
      * The total number of episodes in the show.
      */
-    #[Api]
+    #[Required]
     public int $total_episodes;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the show.
      */
-    #[Api]
+    #[Required]
     public string $uri;
 
     /**

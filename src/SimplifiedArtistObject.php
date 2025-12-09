@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\SimplifiedArtistObject\Type;
@@ -27,25 +27,25 @@ final class SimplifiedArtistObject implements BaseModel
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Known external URLs for this artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
 
     /**
      * The name of the artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -53,13 +53,13 @@ final class SimplifiedArtistObject implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

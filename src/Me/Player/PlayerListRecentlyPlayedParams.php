@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -30,7 +30,7 @@ final class PlayerListRecentlyPlayedParams implements BaseModel
      * after (but not including) this cursor position. If `after` is specified, `before`
      * must not be specified.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $after;
 
     /**
@@ -38,13 +38,13 @@ final class PlayerListRecentlyPlayedParams implements BaseModel
      * before (but not including) this cursor position. If `before` is specified,
      * `after` must not be specified.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $before;
 
     /**
      * The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     public function __construct()

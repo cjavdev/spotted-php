@@ -6,7 +6,7 @@ namespace Spotted\Browse;
 
 use Spotted\Browse\BrowseGetNewReleasesResponse\Albums;
 use Spotted\Browse\BrowseGetNewReleasesResponse\Albums\Item;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -18,7 +18,7 @@ final class BrowseGetNewReleasesResponse implements BaseModel
     /** @use SdkModel<BrowseGetNewReleasesResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Albums $albums;
 
     /**

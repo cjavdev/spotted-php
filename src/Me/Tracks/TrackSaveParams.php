@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Tracks;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -33,7 +34,7 @@ final class TrackSaveParams implements BaseModel
      *
      * @var list<string> $ids
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $ids;
 
     /**
@@ -41,7 +42,7 @@ final class TrackSaveParams implements BaseModel
      *
      * @var list<TimestampedID>|null $timestamped_ids
      */
-    #[Api(list: TimestampedID::class, optional: true)]
+    #[Optional(list: TimestampedID::class)]
     public ?array $timestamped_ids;
 
     /**

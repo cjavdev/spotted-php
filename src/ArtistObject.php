@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Spotted;
 
 use Spotted\ArtistObject\Type;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -31,19 +31,19 @@ final class ArtistObject implements BaseModel
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Known external URLs for this artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExternalURLObject $external_urls;
 
     /**
      * Information about the followers of the artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?FollowersObject $followers;
 
     /**
@@ -51,13 +51,13 @@ final class ArtistObject implements BaseModel
      *
      * @var list<string>|null $genres
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $genres;
 
     /**
      * A link to the Web API endpoint providing full details of the artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
 
     /**
@@ -65,19 +65,19 @@ final class ArtistObject implements BaseModel
      *
      * @var list<ImageObject>|null $images
      */
-    #[Api(list: ImageObject::class, optional: true)]
+    #[Optional(list: ImageObject::class)]
     public ?array $images;
 
     /**
      * The name of the artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The popularity of the artist. The value will be between 0 and 100, with 100 being the most popular. The artist's popularity is calculated from the popularity of all the artist's tracks.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $popularity;
 
     /**
@@ -85,13 +85,13 @@ final class ArtistObject implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

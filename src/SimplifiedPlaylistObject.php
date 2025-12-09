@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\PlaylistUserObject\Type;
@@ -35,31 +35,31 @@ final class SimplifiedPlaylistObject implements BaseModel
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * `true` if the owner allows other users to modify the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $collaborative;
 
     /**
      * The playlist description. _Only returned for modified, verified playlists, otherwise_ `null`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Known external URLs for this playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
 
     /**
@@ -67,49 +67,49 @@ final class SimplifiedPlaylistObject implements BaseModel
      *
      * @var list<ImageObject>|null $images
      */
-    #[Api(list: ImageObject::class, optional: true)]
+    #[Optional(list: ImageObject::class)]
     public ?array $images;
 
     /**
      * The name of the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The user who owns the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Owner $owner;
 
     /**
      * The playlist's public/private status (if it is added to the user's profile): `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $published;
 
     /**
      * The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $snapshot_id;
 
     /**
      * A collection containing a link ( `href` ) to the Web API endpoint where full details of the playlist's tracks can be retrieved, along with the `total` number of tracks in the playlist. Note, a track object may be `null`. This can happen if a track is no longer available.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PlaylistTracksRefObject $tracks;
 
     /**
      * The object type: "playlist".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

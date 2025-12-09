@@ -8,7 +8,7 @@ use Spotted\AudiobookBase;
 use Spotted\ChapterRestrictionObject;
 use Spotted\Chapters\ChapterBulkGetResponse\Chapter;
 use Spotted\Chapters\ChapterBulkGetResponse\Chapter\ReleaseDatePrecision;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
@@ -24,7 +24,7 @@ final class ChapterBulkGetResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Chapter> $chapters */
-    #[Api(list: Chapter::class)]
+    #[Required(list: Chapter::class)]
     public array $chapters;
 
     /**

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Search;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -43,7 +44,7 @@ final class SearchQueryParams implements BaseModel
      * The `isrc` and `track` filters can be used while searching tracks.<br />
      * The `upc`, `tag:new` and `tag:hipster` filters can only be used while searching albums. The `tag:new` filter will return albums released in the past two weeks and `tag:hipster` can be used to return only albums with the lowest 10% popularity.<br />
      */
-    #[Api]
+    #[Required]
     public string $q;
 
     /**
@@ -53,7 +54,7 @@ final class SearchQueryParams implements BaseModel
      *
      * @var list<value-of<Type>> $type
      */
-    #[Api(list: Type::class)]
+    #[Required(list: Type::class)]
     public array $type;
 
     /**
@@ -62,13 +63,13 @@ final class SearchQueryParams implements BaseModel
      *
      * @var value-of<IncludeExternal>|null $include_external
      */
-    #[Api(enum: IncludeExternal::class, optional: true)]
+    #[Optional(enum: IncludeExternal::class)]
     public ?string $include_external;
 
     /**
      * The maximum number of results to return in each item type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     /**
@@ -79,14 +80,14 @@ final class SearchQueryParams implements BaseModel
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $market;
 
     /**
      * The index of the first result to return. Use
      * with limit to get the next page of search results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $offset;
 
     /**

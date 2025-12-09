@@ -8,7 +8,7 @@ use Spotted\Audiobooks\AudiobookBulkGetResponse\Audiobook;
 use Spotted\Audiobooks\AudiobookBulkGetResponse\Audiobook\Chapters;
 use Spotted\AuthorObject;
 use Spotted\CopyrightObject;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
@@ -24,7 +24,7 @@ final class AudiobookBulkGetResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Audiobook> $audiobooks */
-    #[Api(list: Audiobook::class)]
+    #[Required(list: Audiobook::class)]
     public array $audiobooks;
 
     /**

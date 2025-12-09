@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Following;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -29,19 +30,19 @@ final class FollowingBulkRetrieveParams implements BaseModel
      *
      * @var 'artist' $type
      */
-    #[Api]
+    #[Required]
     public string $type = 'artist';
 
     /**
      * The last artist ID retrieved from the previous request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $after;
 
     /**
      * The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class FollowersObject implements BaseModel
     /**
      * This will always be set to null, as the Web API does not support it at the moment.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $href;
 
     /**
      * The total number of followers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $total;
 
     public function __construct()

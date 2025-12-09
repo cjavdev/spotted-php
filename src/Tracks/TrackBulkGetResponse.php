@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Tracks;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalIDObject;
@@ -25,7 +25,7 @@ final class TrackBulkGetResponse implements BaseModel
     use SdkModel;
 
     /** @var list<TrackObject> $tracks */
-    #[Api(list: TrackObject::class)]
+    #[Required(list: TrackObject::class)]
     public array $tracks;
 
     /**

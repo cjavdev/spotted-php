@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -21,19 +21,19 @@ final class ExternalIDObject implements BaseModel
     /**
      * [International Article Number](http://en.wikipedia.org/wiki/International_Article_Number_%28EAN%29).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ean;
 
     /**
      * [International Standard Recording Code](http://en.wikipedia.org/wiki/International_Standard_Recording_Code).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $isrc;
 
     /**
      * [Universal Product Code](http://en.wikipedia.org/wiki/Universal_Product_Code).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $upc;
 
     public function __construct()

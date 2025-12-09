@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Playlists;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -26,7 +26,7 @@ final class PlaylistListParams implements BaseModel
     /**
      * The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     /**
@@ -34,7 +34,7 @@ final class PlaylistListParams implements BaseModel
      * 0 (the first object). Maximum offset: 100.000\. Use with `limit` to get the
      * next set of playlists.'
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $offset;
 
     public function __construct()

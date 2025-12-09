@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -28,14 +29,14 @@ final class PlayerToggleShuffleParams implements BaseModel
      * **true** : Shuffle user's playback.<br/>
      * **false** : Do not shuffle user's playback.
      */
-    #[Api]
+    #[Required]
     public bool $state;
 
     /**
      * The id of the device this command is targeting. If
      * not supplied, the user's currently active device is the target.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $device_id;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\EpisodeObject\ReleaseDatePrecision;
@@ -28,25 +28,25 @@ final class PlaylistTrackObject implements BaseModel
     /**
      * The date and time the track or episode was added. _**Note**: some very old playlists may return `null` in this field._.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $added_at;
 
     /**
      * The Spotify user who added the track or episode. _**Note**: some very old playlists may return `null` in this field._.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PlaylistUserObject $added_by;
 
     /**
      * Whether this track or episode is a [local file](/documentation/web-api/concepts/playlists/#local-files) or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $is_local;
 
     /**
      * Information about the track or episode.
      */
-    #[Api(union: Track::class, optional: true)]
+    #[Optional(union: Track::class)]
     public TrackObject|EpisodeObject|null $track;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Albums;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -27,7 +27,7 @@ final class AlbumSaveParams implements BaseModel
      *
      * @var list<string>|null $ids
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $ids;
 
     public function __construct()

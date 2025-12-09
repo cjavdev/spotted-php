@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\AudioAnalysis;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -21,19 +21,19 @@ final class TimeIntervalObject implements BaseModel
     /**
      * The confidence, from 0.0 to 1.0, of the reliability of the interval.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $confidence;
 
     /**
      * The duration (in seconds) of the time interval.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $duration;
 
     /**
      * The starting point (in seconds) of the time interval.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $start;
 
     public function __construct()

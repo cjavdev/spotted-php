@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\AudioAnalysis\AudioAnalysisGetResponse;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -29,37 +29,37 @@ final class Segment implements BaseModel
     /**
      * The confidence, from 0.0 to 1.0, of the reliability of the segmentation. Segments of the song which are difficult to logically segment (e.g: noise) may correspond to low values in this field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $confidence;
 
     /**
      * The duration (in seconds) of the segment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $duration;
 
     /**
      * The offset loudness of the segment in decibels (dB). This value should be equivalent to the loudness_start of the following segment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $loudness_end;
 
     /**
      * The peak loudness of the segment in decibels (dB). Combined with `loudness_start` and `loudness_max_time`, these components can be used to describe the "attack" of the segment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $loudness_max;
 
     /**
      * The segment-relative offset of the segment peak loudness in seconds. Combined with `loudness_start` and `loudness_max`, these components can be used to desctibe the "attack" of the segment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $loudness_max_time;
 
     /**
      * The onset loudness of the segment in decibels (dB). Combined with `loudness_max` and `loudness_max_time`, these components can be used to describe the "attack" of the segment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $loudness_start;
 
     /**
@@ -71,13 +71,13 @@ final class Segment implements BaseModel
      *
      * @var list<float>|null $pitches
      */
-    #[Api(list: 'float', optional: true)]
+    #[Optional(list: 'float')]
     public ?array $pitches;
 
     /**
      * The starting point (in seconds) of the segment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $start;
 
     /**
@@ -90,7 +90,7 @@ final class Segment implements BaseModel
      *
      * @var list<float>|null $timbre
      */
-    #[Api(list: 'float', optional: true)]
+    #[Optional(list: 'float')]
     public ?array $timbre;
 
     public function __construct()

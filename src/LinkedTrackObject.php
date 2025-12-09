@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -25,31 +25,31 @@ final class LinkedTrackObject implements BaseModel
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Known external URLs for this track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
 
     /**
      * The object type: "track".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

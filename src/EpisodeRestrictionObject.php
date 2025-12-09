@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -25,7 +25,7 @@ final class EpisodeRestrictionObject implements BaseModel
      * Additional reasons may be added in the future.
      * **Note**: If you use this field, make sure that your application safely handles unknown values.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $reason;
 
     public function __construct()

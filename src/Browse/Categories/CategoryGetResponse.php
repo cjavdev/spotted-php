@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Browse\Categories;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ImageObject;
@@ -22,13 +22,13 @@ final class CategoryGetResponse implements BaseModel
     /**
      * The [Spotify category ID](/documentation/web-api/concepts/spotify-uris-ids) of the category.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * A link to the Web API endpoint returning full details of the category.
      */
-    #[Api]
+    #[Required]
     public string $href;
 
     /**
@@ -36,13 +36,13 @@ final class CategoryGetResponse implements BaseModel
      *
      * @var list<ImageObject> $icons
      */
-    #[Api(list: ImageObject::class)]
+    #[Required(list: ImageObject::class)]
     public array $icons;
 
     /**
      * The name of the category.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class ExternalURLObject implements BaseModel
     /**
      * The [Spotify URL](/documentation/web-api/concepts/spotify-uris-ids) for the object.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $spotify;
 
     public function __construct()

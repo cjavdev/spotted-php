@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
@@ -25,25 +25,25 @@ final class ContextObject implements BaseModel
     /**
      * External URLs for this context.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
 
     /**
      * The object type, e.g. "artist", "playlist", "album", "show".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the context.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Browse;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\PagingPlaylistObject;
@@ -23,10 +23,10 @@ final class BrowseGetFeaturedPlaylistsResponse implements BaseModel
     /**
      * The localized message of a playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $message;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PagingPlaylistObject $playlists;
 
     public function __construct()

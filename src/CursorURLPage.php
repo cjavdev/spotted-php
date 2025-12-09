@@ -3,7 +3,7 @@
 namespace Spotted;
 
 use Psr\Http\Message\ResponseInterface;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkPage;
 use Spotted\Core\Contracts\BaseModel;
@@ -30,11 +30,11 @@ final class CursorURLPage implements BaseModel, BasePage
     /** @use SdkPage<TItem> */
     use SdkPage;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $next;
 
     /** @var list<TItem>|null $items */
-    #[Api(list: 'mixed', optional: true)]
+    #[Optional(list: 'mixed')]
     public ?array $items;
 
     /**

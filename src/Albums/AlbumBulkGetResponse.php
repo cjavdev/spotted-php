@@ -10,7 +10,7 @@ use Spotted\Albums\AlbumBulkGetResponse\Album\AlbumType;
 use Spotted\Albums\AlbumBulkGetResponse\Album\ReleaseDatePrecision;
 use Spotted\Albums\AlbumBulkGetResponse\Album\Tracks;
 use Spotted\CopyrightObject;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalIDObject;
@@ -27,7 +27,7 @@ final class AlbumBulkGetResponse implements BaseModel
     use SdkModel;
 
     /** @var list<Album> $albums */
-    #[Api(list: Album::class)]
+    #[Required(list: Album::class)]
     public array $albums;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalIDObject;
@@ -31,19 +31,19 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
     /**
      * The context the track was played from.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ContextObject $context;
 
     /**
      * The date and time the track was played.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $played_at;
 
     /**
      * The track the user listened to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?TrackObject $track;
 
     public function __construct()

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Spotted;
 
 use Spotted\AlbumRestrictionObject\Reason;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -25,7 +25,7 @@ final class AlbumRestrictionObject implements BaseModel
      *
      * @var value-of<Reason>|null $reason
      */
-    #[Api(enum: Reason::class, optional: true)]
+    #[Optional(enum: Reason::class)]
     public ?string $reason;
 
     public function __construct()

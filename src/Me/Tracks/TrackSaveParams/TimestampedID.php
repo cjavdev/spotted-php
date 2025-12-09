@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Tracks\TrackSaveParams;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class TimestampedID implements BaseModel
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the track.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The timestamp when the track was added to the library. Use ISO 8601 format with UTC timezone (e.g., `2023-01-15T14:30:00Z`). You can specify past timestamps to insert tracks at specific positions in the library's chronological order. The API uses minute-level granularity for ordering, though the timestamp supports millisecond precision.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $added_at;
 
     /**

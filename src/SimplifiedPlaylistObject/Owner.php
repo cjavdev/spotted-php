@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\SimplifiedPlaylistObject;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
@@ -30,16 +30,16 @@ final class Owner implements BaseModel
     /**
      * The [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids) for this user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint for this user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
 
     /**
@@ -47,19 +47,19 @@ final class Owner implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for this user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     /**
      * The name displayed on the user's profile. `null` if not available.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $display_name;
 
     public function __construct()

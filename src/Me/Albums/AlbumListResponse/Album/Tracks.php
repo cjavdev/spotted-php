@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Albums\AlbumListResponse\Album;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
@@ -34,41 +35,41 @@ final class Tracks implements BaseModel
     /**
      * A link to the Web API endpoint returning the full result of the request.
      */
-    #[Api]
+    #[Required]
     public string $href;
 
     /**
      * The maximum number of items in the response (as set in the query or by default).
      */
-    #[Api]
+    #[Required]
     public int $limit;
 
     /**
      * URL to the next page of items. ( `null` if none).
      */
-    #[Api]
+    #[Required]
     public ?string $next;
 
     /**
      * The offset of the items returned (as set in the query or by default).
      */
-    #[Api]
+    #[Required]
     public int $offset;
 
     /**
      * URL to the previous page of items. ( `null` if none).
      */
-    #[Api]
+    #[Required]
     public ?string $previous;
 
     /**
      * The total number of items available to return.
      */
-    #[Api]
+    #[Required]
     public int $total;
 
     /** @var list<SimplifiedTrackObject>|null $items */
-    #[Api(list: SimplifiedTrackObject::class, optional: true)]
+    #[Optional(list: SimplifiedTrackObject::class)]
     public ?array $items;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class ResumePointObject implements BaseModel
     /**
      * Whether or not the episode has been fully played by the user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $fully_played;
 
     /**
      * The user's most recent position in the episode in milliseconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $resume_position_ms;
 
     public function __construct()

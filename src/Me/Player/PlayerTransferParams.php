@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -29,13 +30,13 @@ final class PlayerTransferParams implements BaseModel
      *
      * @var list<string> $device_ids
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $device_ids;
 
     /**
      * **true**: ensure playback happens on new device.<br/>**false** or not provided: keep the current playback state.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $play;
 
     /**

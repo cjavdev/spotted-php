@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -41,13 +42,13 @@ final class AudiobookBase implements BaseModel
      *
      * @var 'audiobook' $type
      */
-    #[Api]
+    #[Required]
     public string $type = 'audiobook';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the audiobook.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -55,7 +56,7 @@ final class AudiobookBase implements BaseModel
      *
      * @var list<AuthorObject> $authors
      */
-    #[Api(list: AuthorObject::class)]
+    #[Required(list: AuthorObject::class)]
     public array $authors;
 
     /**
@@ -63,7 +64,7 @@ final class AudiobookBase implements BaseModel
      *
      * @var list<string> $available_markets
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $available_markets;
 
     /**
@@ -71,37 +72,37 @@ final class AudiobookBase implements BaseModel
      *
      * @var list<CopyrightObject> $copyrights
      */
-    #[Api(list: CopyrightObject::class)]
+    #[Required(list: CopyrightObject::class)]
     public array $copyrights;
 
     /**
      * A description of the audiobook. HTML tags are stripped away from this field, use `html_description` field in case HTML tags are needed.
      */
-    #[Api]
+    #[Required]
     public string $description;
 
     /**
      * Whether or not the audiobook has explicit content (true = yes it does; false = no it does not OR unknown).
      */
-    #[Api]
+    #[Required]
     public bool $explicit;
 
     /**
      * External URLs for this audiobook.
      */
-    #[Api]
+    #[Required]
     public ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the audiobook.
      */
-    #[Api]
+    #[Required]
     public string $href;
 
     /**
      * A description of the audiobook. This field may contain HTML tags.
      */
-    #[Api]
+    #[Required]
     public string $html_description;
 
     /**
@@ -109,7 +110,7 @@ final class AudiobookBase implements BaseModel
      *
      * @var list<ImageObject> $images
      */
-    #[Api(list: ImageObject::class)]
+    #[Required(list: ImageObject::class)]
     public array $images;
 
     /**
@@ -117,19 +118,19 @@ final class AudiobookBase implements BaseModel
      *
      * @var list<string> $languages
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $languages;
 
     /**
      * The media type of the audiobook.
      */
-    #[Api]
+    #[Required]
     public string $media_type;
 
     /**
      * The name of the audiobook.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -137,31 +138,31 @@ final class AudiobookBase implements BaseModel
      *
      * @var list<NarratorObject> $narrators
      */
-    #[Api(list: NarratorObject::class)]
+    #[Required(list: NarratorObject::class)]
     public array $narrators;
 
     /**
      * The publisher of the audiobook.
      */
-    #[Api]
+    #[Required]
     public string $publisher;
 
     /**
      * The number of chapters in this audiobook.
      */
-    #[Api]
+    #[Required]
     public int $total_chapters;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the audiobook.
      */
-    #[Api]
+    #[Required]
     public string $uri;
 
     /**
      * The edition of the audiobook.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $edition;
 
     /**

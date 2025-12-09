@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Me\Following;
 
 use Spotted\ArtistObject;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\Me\Following\FollowingBulkGetResponse\Artists;
@@ -19,7 +19,7 @@ final class FollowingBulkGetResponse implements BaseModel
     /** @use SdkModel<FollowingBulkGetResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Artists $artists;
 
     /**

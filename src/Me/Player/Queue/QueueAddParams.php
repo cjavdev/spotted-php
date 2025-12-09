@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player\Queue;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -25,14 +26,14 @@ final class QueueAddParams implements BaseModel
     /**
      * The uri of the item to add to the queue. Must be a track or an episode uri.
      */
-    #[Api]
+    #[Required]
     public string $uri;
 
     /**
      * The id of the device this command is targeting. If
      * not supplied, the user's currently active device is the target.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $device_id;
 
     /**

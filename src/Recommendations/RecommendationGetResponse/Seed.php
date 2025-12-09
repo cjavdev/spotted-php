@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Recommendations\RecommendationGetResponse;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -26,37 +26,37 @@ final class Seed implements BaseModel
     /**
      * The id used to select this seed. This will be the same as the string used in the `seed_artists`, `seed_tracks` or `seed_genres` parameter.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The number of tracks available after min\_\* and max\_\* filters have been applied.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $afterFilteringSize;
 
     /**
      * The number of tracks available after relinking for regional availability.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $afterRelinkingSize;
 
     /**
      * A link to the full track or artist data for this seed. For tracks this will be a link to a Track Object. For artists a link to an Artist Object. For genre seeds, this value will be `null`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
 
     /**
      * The number of recommended tracks available for this seed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $initialPoolSize;
 
     /**
      * The entity type of this seed. One of `artist`, `track` or `genre`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     public function __construct()

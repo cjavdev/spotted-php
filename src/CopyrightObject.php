@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class CopyrightObject implements BaseModel
     /**
      * The copyright text for this content.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $text;
 
     /**
      * The type of copyright: `C` = the copyright, `P` = the sound recording (performance) copyright.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     public function __construct()
