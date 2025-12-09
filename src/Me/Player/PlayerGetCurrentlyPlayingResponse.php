@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\EpisodeObject;
@@ -43,43 +43,43 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel
     /**
      * Allows to update the user interface based on which playback actions are available within the current context.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Actions $actions;
 
     /**
      * A Context Object. Can be `null`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ContextObject $context;
 
     /**
      * The object type of the currently playing item. Can be one of `track`, `episode`, `ad` or `unknown`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currently_playing_type;
 
     /**
      * If something is currently playing, return `true`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $is_playing;
 
     /**
      * The currently playing track or episode. Can be `null`.
      */
-    #[Api(union: Item::class, optional: true)]
+    #[Optional(union: Item::class)]
     public TrackObject|EpisodeObject|null $item;
 
     /**
      * Progress into the currently playing track or episode. Can be `null`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $progress_ms;
 
     /**
      * Unix Millisecond Timestamp when data was fetched.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timestamp;
 
     public function __construct()

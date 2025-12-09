@@ -8,7 +8,7 @@ use Spotted\AudioAnalysis\AudioAnalysisGetResponse\Meta;
 use Spotted\AudioAnalysis\AudioAnalysisGetResponse\Section;
 use Spotted\AudioAnalysis\AudioAnalysisGetResponse\Segment;
 use Spotted\AudioAnalysis\AudioAnalysisGetResponse\Track;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -33,7 +33,7 @@ final class AudioAnalysisGetResponse implements BaseModel
      *
      * @var list<TimeIntervalObject>|null $bars
      */
-    #[Api(list: TimeIntervalObject::class, optional: true)]
+    #[Optional(list: TimeIntervalObject::class)]
     public ?array $bars;
 
     /**
@@ -41,10 +41,10 @@ final class AudioAnalysisGetResponse implements BaseModel
      *
      * @var list<TimeIntervalObject>|null $beats
      */
-    #[Api(list: TimeIntervalObject::class, optional: true)]
+    #[Optional(list: TimeIntervalObject::class)]
     public ?array $beats;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
 
     /**
@@ -52,7 +52,7 @@ final class AudioAnalysisGetResponse implements BaseModel
      *
      * @var list<Section>|null $sections
      */
-    #[Api(list: Section::class, optional: true)]
+    #[Optional(list: Section::class)]
     public ?array $sections;
 
     /**
@@ -60,7 +60,7 @@ final class AudioAnalysisGetResponse implements BaseModel
      *
      * @var list<Segment>|null $segments
      */
-    #[Api(list: Segment::class, optional: true)]
+    #[Optional(list: Segment::class)]
     public ?array $segments;
 
     /**
@@ -68,10 +68,10 @@ final class AudioAnalysisGetResponse implements BaseModel
      *
      * @var list<TimeIntervalObject>|null $tatums
      */
-    #[Api(list: TimeIntervalObject::class, optional: true)]
+    #[Optional(list: TimeIntervalObject::class)]
     public ?array $tatums;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Track $track;
 
     public function __construct()

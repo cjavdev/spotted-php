@@ -6,7 +6,7 @@ namespace Spotted\Search;
 
 use Spotted\ArtistObject;
 use Spotted\AudiobookBase;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\PagingPlaylistObject;
@@ -38,25 +38,25 @@ final class SearchQueryResponse implements BaseModel
     /** @use SdkModel<SearchQueryResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Albums $albums;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Artists $artists;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Audiobooks $audiobooks;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Episodes $episodes;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PagingPlaylistObject $playlists;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Shows $shows;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Tracks $tracks;
 
     public function __construct()

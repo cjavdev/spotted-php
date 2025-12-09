@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -21,19 +21,19 @@ final class ImageObject implements BaseModel
     /**
      * The image height in pixels.
      */
-    #[Api]
+    #[Required]
     public ?int $height;
 
     /**
      * The source URL of the image.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**
      * The image width in pixels.
      */
-    #[Api]
+    #[Required]
     public ?int $width;
 
     /**

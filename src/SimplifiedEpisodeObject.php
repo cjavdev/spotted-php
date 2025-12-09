@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\SimplifiedEpisodeObject\ReleaseDatePrecision;
@@ -43,13 +44,13 @@ final class SimplifiedEpisodeObject implements BaseModel
      *
      * @var 'episode' $type
      */
-    #[Api]
+    #[Required]
     public string $type = 'episode';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the episode.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -57,43 +58,43 @@ final class SimplifiedEpisodeObject implements BaseModel
      *
      * A URL to a 30 second preview (MP3 format) of the episode. `null` if not available.
      */
-    #[Api]
+    #[Required]
     public ?string $audio_preview_url;
 
     /**
      * A description of the episode. HTML tags are stripped away from this field, use `html_description` field in case HTML tags are needed.
      */
-    #[Api]
+    #[Required]
     public string $description;
 
     /**
      * The episode length in milliseconds.
      */
-    #[Api]
+    #[Required]
     public int $duration_ms;
 
     /**
      * Whether or not the episode has explicit content (true = yes it does; false = no it does not OR unknown).
      */
-    #[Api]
+    #[Required]
     public bool $explicit;
 
     /**
      * External URLs for this episode.
      */
-    #[Api]
+    #[Required]
     public ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the episode.
      */
-    #[Api]
+    #[Required]
     public string $href;
 
     /**
      * A description of the episode. This field may contain HTML tags.
      */
-    #[Api]
+    #[Required]
     public string $html_description;
 
     /**
@@ -101,19 +102,19 @@ final class SimplifiedEpisodeObject implements BaseModel
      *
      * @var list<ImageObject> $images
      */
-    #[Api(list: ImageObject::class)]
+    #[Required(list: ImageObject::class)]
     public array $images;
 
     /**
      * True if the episode is hosted outside of Spotify's CDN.
      */
-    #[Api]
+    #[Required]
     public bool $is_externally_hosted;
 
     /**
      * True if the episode is playable in the given market. Otherwise false.
      */
-    #[Api]
+    #[Required]
     public bool $is_playable;
 
     /**
@@ -121,19 +122,19 @@ final class SimplifiedEpisodeObject implements BaseModel
      *
      * @var list<string> $languages
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $languages;
 
     /**
      * The name of the episode.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The date the episode was first released, for example `"1981-12-15"`. Depending on the precision, it might be shown as `"1981"` or `"1981-12"`.
      */
-    #[Api]
+    #[Required]
     public string $release_date;
 
     /**
@@ -141,13 +142,13 @@ final class SimplifiedEpisodeObject implements BaseModel
      *
      * @var value-of<ReleaseDatePrecision> $release_date_precision
      */
-    #[Api(enum: ReleaseDatePrecision::class)]
+    #[Required(enum: ReleaseDatePrecision::class)]
     public string $release_date_precision;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the episode.
      */
-    #[Api]
+    #[Required]
     public string $uri;
 
     /**
@@ -155,19 +156,19 @@ final class SimplifiedEpisodeObject implements BaseModel
      *
      * The language used in the episode, identified by a [ISO 639](https://en.wikipedia.org/wiki/ISO_639) code. This field is deprecated and might be removed in the future. Please use the `languages` field instead.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $language;
 
     /**
      * Included in the response when a content restriction is applied.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?EpisodeRestrictionObject $restrictions;
 
     /**
      * The user's most recent position in the episode. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ResumePointObject $resume_point;
 
     /**

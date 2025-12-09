@@ -6,7 +6,7 @@ namespace Spotted\Me\Audiobooks;
 
 use Spotted\AuthorObject;
 use Spotted\CopyrightObject;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
@@ -30,13 +30,13 @@ final class AudiobookListResponse implements BaseModel
      * Timestamps are returned in ISO 8601 format as Coordinated Universal Time (UTC) with a zero offset: YYYY-MM-DDTHH:MM:SSZ.
      * If the time is imprecise (for example, the date/time of an album release), an additional field indicates the precision; see for example, release_date in an album object.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $added_at;
 
     /**
      * Information about the audiobook.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Audiobook $audiobook;
 
     public function __construct()

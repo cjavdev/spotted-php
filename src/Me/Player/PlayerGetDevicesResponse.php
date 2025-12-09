@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -17,7 +17,7 @@ final class PlayerGetDevicesResponse implements BaseModel
     use SdkModel;
 
     /** @var list<DeviceObject> $devices */
-    #[Api(list: DeviceObject::class)]
+    #[Required(list: DeviceObject::class)]
     public array $devices;
 
     /**

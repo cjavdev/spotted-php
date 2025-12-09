@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Markets;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -17,7 +17,7 @@ final class MarketListResponse implements BaseModel
     use SdkModel;
 
     /** @var list<string>|null $markets */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $markets;
 
     public function __construct()

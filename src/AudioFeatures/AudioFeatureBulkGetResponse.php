@@ -6,7 +6,7 @@ namespace Spotted\AudioFeatures;
 
 use Spotted\AudioFeatures\AudioFeatureBulkGetResponse\AudioFeature;
 use Spotted\AudioFeatures\AudioFeatureBulkGetResponse\AudioFeature\Type;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -21,7 +21,7 @@ final class AudioFeatureBulkGetResponse implements BaseModel
     use SdkModel;
 
     /** @var list<AudioFeature> $audio_features */
-    #[Api(list: AudioFeature::class)]
+    #[Required(list: AudioFeature::class)]
     public array $audio_features;
 
     /**

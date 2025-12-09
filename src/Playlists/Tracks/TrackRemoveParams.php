@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Playlists\Tracks;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -31,7 +32,7 @@ final class TrackRemoveParams implements BaseModel
      *
      * @var list<Track> $tracks
      */
-    #[Api(list: Track::class)]
+    #[Required(list: Track::class)]
     public array $tracks;
 
     /**
@@ -39,7 +40,7 @@ final class TrackRemoveParams implements BaseModel
      * The API will validate that the specified items exist and in the specified positions and make the changes,
      * even if more recent changes have been made to the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $snapshot_id;
 
     /**

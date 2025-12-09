@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\AudioAnalysis\AudioAnalysisGetResponse;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -27,43 +27,43 @@ final class Meta implements BaseModel
     /**
      * The amount of time taken to analyze this track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $analysis_time;
 
     /**
      * The version of the Analyzer used to analyze this track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $analyzer_version;
 
     /**
      * A detailed status code for this track. If analysis data is missing, this code may explain why.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $detailed_status;
 
     /**
      * The method used to read the track's audio data.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $input_process;
 
     /**
      * The platform used to read the track's audio data.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $platform;
 
     /**
      * The return code of the analyzer process. 0 if successful, 1 if any errors occurred.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $status_code;
 
     /**
      * The Unix timestamp (in seconds) at which this track was analyzed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timestamp;
 
     public function __construct()

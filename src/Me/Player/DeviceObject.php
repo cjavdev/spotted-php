@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -28,49 +28,49 @@ final class DeviceObject implements BaseModel
     /**
      * The device ID. This ID is unique and persistent to some extent. However, this is not guaranteed and any cached `device_id` should periodically be cleared out and refetched as necessary.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $id;
 
     /**
      * If this device is the currently active device.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $is_active;
 
     /**
      * If this device is currently in a private session.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $is_private_session;
 
     /**
      * Whether controlling this device is restricted. At present if this is "true" then no Web API commands will be accepted by this device.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $is_restricted;
 
     /**
      * A human-readable name for the device. Some devices have a name that the user can configure (e.g. \"Loudest speaker\") and some devices have a generic name associated with the manufacturer or device model.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * If this device can be used to set the volume.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $supports_volume;
 
     /**
      * Device type, such as "computer", "smartphone" or "speaker".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     /**
      * The current volume in percent.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $volume_percent;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Recommendations;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class RecommendationListAvailableGenreSeedsResponse implements BaseModel
     use SdkModel;
 
     /** @var list<string> $genres */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $genres;
 
     /**

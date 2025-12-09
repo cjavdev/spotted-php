@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player\PlayerGetCurrentlyPlayingResponse;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -32,61 +32,61 @@ final class Actions implements BaseModel
     /**
      * Interrupting playback. Optional field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $interrupting_playback;
 
     /**
      * Pausing. Optional field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $pausing;
 
     /**
      * Resuming. Optional field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $resuming;
 
     /**
      * Seeking playback location. Optional field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $seeking;
 
     /**
      * Skipping to the next context. Optional field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $skipping_next;
 
     /**
      * Skipping to the previous context. Optional field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $skipping_prev;
 
     /**
      * Toggling repeat context flag. Optional field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $toggling_repeat_context;
 
     /**
      * Toggling repeat track flag. Optional field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $toggling_repeat_track;
 
     /**
      * Toggling shuffle flag. Optional field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $toggling_shuffle;
 
     /**
      * Transfering playback between devices. Optional field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $transferring_playback;
 
     public function __construct()

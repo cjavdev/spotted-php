@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Episodes;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\EpisodeObject;
@@ -24,7 +24,7 @@ final class EpisodeBulkGetResponse implements BaseModel
     use SdkModel;
 
     /** @var list<EpisodeObject> $episodes */
-    #[Api(list: EpisodeObject::class)]
+    #[Required(list: EpisodeObject::class)]
     public array $episodes;
 
     /**

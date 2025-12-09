@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Shows;
 
 use Spotted\CopyrightObject;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
@@ -21,7 +21,7 @@ final class ShowBulkGetResponse implements BaseModel
     use SdkModel;
 
     /** @var list<ShowBase> $shows */
-    #[Api(list: ShowBase::class)]
+    #[Required(list: ShowBase::class)]
     public array $shows;
 
     /**

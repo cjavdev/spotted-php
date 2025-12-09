@@ -10,7 +10,8 @@ use Spotted\Albums\AlbumBulkGetResponse\Album\AlbumType;
 use Spotted\Albums\AlbumBulkGetResponse\Album\ReleaseDatePrecision;
 use Spotted\Albums\AlbumBulkGetResponse\Album\Tracks;
 use Spotted\CopyrightObject;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalIDObject;
@@ -54,13 +55,13 @@ final class Album implements BaseModel
      *
      * @var 'album' $type
      */
-    #[Api]
+    #[Required]
     public string $type = 'album';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the album.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -68,7 +69,7 @@ final class Album implements BaseModel
      *
      * @var value-of<AlbumType> $album_type
      */
-    #[Api(enum: AlbumType::class)]
+    #[Required(enum: AlbumType::class)]
     public string $album_type;
 
     /**
@@ -76,19 +77,19 @@ final class Album implements BaseModel
      *
      * @var list<string> $available_markets
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $available_markets;
 
     /**
      * Known external URLs for this album.
      */
-    #[Api]
+    #[Required]
     public ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the album.
      */
-    #[Api]
+    #[Required]
     public string $href;
 
     /**
@@ -96,19 +97,19 @@ final class Album implements BaseModel
      *
      * @var list<ImageObject> $images
      */
-    #[Api(list: ImageObject::class)]
+    #[Required(list: ImageObject::class)]
     public array $images;
 
     /**
      * The name of the album. In case of an album takedown, the value may be an empty string.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The date the album was first released.
      */
-    #[Api]
+    #[Required]
     public string $release_date;
 
     /**
@@ -116,19 +117,19 @@ final class Album implements BaseModel
      *
      * @var value-of<ReleaseDatePrecision> $release_date_precision
      */
-    #[Api(enum: ReleaseDatePrecision::class)]
+    #[Required(enum: ReleaseDatePrecision::class)]
     public string $release_date_precision;
 
     /**
      * The number of tracks in the album.
      */
-    #[Api]
+    #[Required]
     public int $total_tracks;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the album.
      */
-    #[Api]
+    #[Required]
     public string $uri;
 
     /**
@@ -136,7 +137,7 @@ final class Album implements BaseModel
      *
      * @var list<SimplifiedArtistObject>|null $artists
      */
-    #[Api(list: SimplifiedArtistObject::class, optional: true)]
+    #[Optional(list: SimplifiedArtistObject::class)]
     public ?array $artists;
 
     /**
@@ -144,13 +145,13 @@ final class Album implements BaseModel
      *
      * @var list<CopyrightObject>|null $copyrights
      */
-    #[Api(list: CopyrightObject::class, optional: true)]
+    #[Optional(list: CopyrightObject::class)]
     public ?array $copyrights;
 
     /**
      * Known external IDs for the album.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExternalIDObject $external_ids;
 
     /**
@@ -160,31 +161,31 @@ final class Album implements BaseModel
      *
      * @var list<string>|null $genres
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $genres;
 
     /**
      * The label associated with the album.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $label;
 
     /**
      * The popularity of the album. The value will be between 0 and 100, with 100 being the most popular.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $popularity;
 
     /**
      * Included in the response when a content restriction is applied.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?AlbumRestrictionObject $restrictions;
 
     /**
      * The tracks of the album.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Tracks $tracks;
 
     /**

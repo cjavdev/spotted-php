@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -31,7 +31,7 @@ final class PlayerStartPlaybackParams implements BaseModel
     /**
      * The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $device_id;
 
     /**
@@ -39,7 +39,7 @@ final class PlayerStartPlaybackParams implements BaseModel
      * Valid contexts are albums, artists & playlists.
      * `{context_uri:"spotify:album:1Je1IMUlBXcx1Fz0WE7oPT"}`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $context_uri;
 
     /**
@@ -49,13 +49,13 @@ final class PlayerStartPlaybackParams implements BaseModel
      *
      * @var array<string,mixed>|null $offset
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $offset;
 
     /**
      * Indicates from what position to start playback. Must be a positive number. Passing in a position that is greater than the length of the track will cause the player to start playing the next song.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $position_ms;
 
     /**
@@ -64,7 +64,7 @@ final class PlayerStartPlaybackParams implements BaseModel
      *
      * @var list<string>|null $uris
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $uris;
 
     public function __construct()

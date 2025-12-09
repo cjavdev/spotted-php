@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player\Queue;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\EpisodeObject;
@@ -38,7 +38,7 @@ final class QueueGetResponse implements BaseModel
     /**
      * The currently playing track or episode. Can be `null`.
      */
-    #[Api(union: CurrentlyPlaying::class, optional: true)]
+    #[Optional(union: CurrentlyPlaying::class)]
     public TrackObject|EpisodeObject|null $currently_playing;
 
     /**
@@ -46,7 +46,7 @@ final class QueueGetResponse implements BaseModel
      *
      * @var list<TrackObject|EpisodeObject>|null $queue
      */
-    #[Api(list: Queue::class, optional: true)]
+    #[Optional(list: Queue::class)]
     public ?array $queue;
 
     public function __construct()

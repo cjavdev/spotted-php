@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -29,14 +30,14 @@ final class PlayerSeekToPositionParams implements BaseModel
      * positive number. Passing in a position that is greater than the length of
      * the track will cause the player to start playing the next song.
      */
-    #[Api]
+    #[Required]
     public int $position_ms;
 
     /**
      * The id of the device this command is targeting. If
      * not supplied, the user's currently active device is the target.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $device_id;
 
     /**

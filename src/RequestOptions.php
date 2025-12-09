@@ -8,7 +8,8 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
-use Spotted\Core\Attributes\Api as Property;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required as Property;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\Core\Implementation\Omit;
@@ -49,26 +50,26 @@ final class RequestOptions implements BaseModel
     public float $maxRetryDelay = 8.0;
 
     /** @var array<string,string|int|list<string|int>|null>|null $extraHeaders */
-    #[Property(optional: true)]
+    #[Optional]
     public ?array $extraHeaders;
 
     /** @var array<string,mixed>|null $extraQueryParams */
-    #[Property(optional: true)]
+    #[Optional]
     public ?array $extraQueryParams;
 
-    #[Property(optional: true)]
+    #[Optional]
     public mixed $extraBodyParams;
 
-    #[Property(optional: true)]
+    #[Optional]
     public ?ClientInterface $transporter;
 
-    #[Property(optional: true)]
+    #[Optional]
     public ?UriFactoryInterface $uriFactory;
 
-    #[Property(optional: true)]
+    #[Optional]
     public ?StreamFactoryInterface $streamFactory;
 
-    #[Property(optional: true)]
+    #[Optional]
     public ?RequestFactoryInterface $requestFactory;
 
     public function __construct()

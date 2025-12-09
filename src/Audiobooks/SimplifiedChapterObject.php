@@ -6,7 +6,8 @@ namespace Spotted\Audiobooks;
 
 use Spotted\Audiobooks\SimplifiedChapterObject\ReleaseDatePrecision;
 use Spotted\ChapterRestrictionObject;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
@@ -47,13 +48,13 @@ final class SimplifiedChapterObject implements BaseModel
      *
      * @var 'episode' $type
      */
-    #[Api]
+    #[Required]
     public string $type = 'episode';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the chapter.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -61,49 +62,49 @@ final class SimplifiedChapterObject implements BaseModel
      *
      * A URL to a 30 second preview (MP3 format) of the chapter. `null` if not available.
      */
-    #[Api]
+    #[Required]
     public ?string $audio_preview_url;
 
     /**
      * The number of the chapter.
      */
-    #[Api]
+    #[Required]
     public int $chapter_number;
 
     /**
      * A description of the chapter. HTML tags are stripped away from this field, use `html_description` field in case HTML tags are needed.
      */
-    #[Api]
+    #[Required]
     public string $description;
 
     /**
      * The chapter length in milliseconds.
      */
-    #[Api]
+    #[Required]
     public int $duration_ms;
 
     /**
      * Whether or not the chapter has explicit content (true = yes it does; false = no it does not OR unknown).
      */
-    #[Api]
+    #[Required]
     public bool $explicit;
 
     /**
      * External URLs for this chapter.
      */
-    #[Api]
+    #[Required]
     public ExternalURLObject $external_urls;
 
     /**
      * A link to the Web API endpoint providing full details of the chapter.
      */
-    #[Api]
+    #[Required]
     public string $href;
 
     /**
      * A description of the chapter. This field may contain HTML tags.
      */
-    #[Api]
+    #[Required]
     public string $html_description;
 
     /**
@@ -111,13 +112,13 @@ final class SimplifiedChapterObject implements BaseModel
      *
      * @var list<ImageObject> $images
      */
-    #[Api(list: ImageObject::class)]
+    #[Required(list: ImageObject::class)]
     public array $images;
 
     /**
      * True if the chapter is playable in the given market. Otherwise false.
      */
-    #[Api]
+    #[Required]
     public bool $is_playable;
 
     /**
@@ -125,19 +126,19 @@ final class SimplifiedChapterObject implements BaseModel
      *
      * @var list<string> $languages
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $languages;
 
     /**
      * The name of the chapter.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The date the chapter was first released, for example `"1981-12-15"`. Depending on the precision, it might be shown as `"1981"` or `"1981-12"`.
      */
-    #[Api]
+    #[Required]
     public string $release_date;
 
     /**
@@ -145,13 +146,13 @@ final class SimplifiedChapterObject implements BaseModel
      *
      * @var value-of<ReleaseDatePrecision> $release_date_precision
      */
-    #[Api(enum: ReleaseDatePrecision::class)]
+    #[Required(enum: ReleaseDatePrecision::class)]
     public string $release_date_precision;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the chapter.
      */
-    #[Api]
+    #[Required]
     public string $uri;
 
     /**
@@ -159,19 +160,19 @@ final class SimplifiedChapterObject implements BaseModel
      *
      * @var list<string>|null $available_markets
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $available_markets;
 
     /**
      * Included in the response when a content restriction is applied.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ChapterRestrictionObject $restrictions;
 
     /**
      * The user's most recent position in the chapter. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ResumePointObject $resume_point;
 
     /**

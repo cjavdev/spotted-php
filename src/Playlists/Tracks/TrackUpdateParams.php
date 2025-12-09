@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Playlists\Tracks;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -37,29 +37,29 @@ final class TrackUpdateParams implements BaseModel
     /**
      * The position where the items should be inserted.<br/>To reorder the items to the end of the playlist, simply set _insert_before_ to the position after the last item.<br/>Examples:<br/>To reorder the first item to the last position in a playlist with 10 items, set _range_start_ to 0, and _insert_before_ to 10.<br/>To reorder the last item in a playlist with 10 items to the start of the playlist, set _range_start_ to 9, and _insert_before_ to 0.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $insert_before;
 
     /**
      * The amount of items to be reordered. Defaults to 1 if not set.<br/>The range of items to be reordered begins from the _range_start_ position, and includes the _range_length_ subsequent items.<br/>Example:<br/>To move the items at index 9-10 to the start of the playlist, _range_start_ is set to 9, and _range_length_ is set to 2.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $range_length;
 
     /**
      * The position of the first item to be reordered.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $range_start;
 
     /**
      * The playlist's snapshot ID against which you want to make the changes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $snapshot_id;
 
     /** @var list<string>|null $uris */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $uris;
 
     public function __construct()

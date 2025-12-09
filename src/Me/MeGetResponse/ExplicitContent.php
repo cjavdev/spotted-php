@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\MeGetResponse;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -23,13 +23,13 @@ final class ExplicitContent implements BaseModel
     /**
      * When `true`, indicates that explicit content should not be played.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $filter_enabled;
 
     /**
      * When `true`, indicates that the explicit content setting is locked and can't be changed by the user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $filter_locked;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Playlists;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -29,7 +29,7 @@ final class PlaylistRetrieveParams implements BaseModel
      * _**Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future._<br/>
      * In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $additional_types;
 
     /**
@@ -43,7 +43,7 @@ final class PlaylistRetrieveParams implements BaseModel
      * Fields can be excluded by prefixing them with an exclamation mark, for example:
      * `fields=tracks.items(track(name,href,album(!name,href)))`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fields;
 
     /**
@@ -54,7 +54,7 @@ final class PlaylistRetrieveParams implements BaseModel
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $market;
 
     public function __construct()

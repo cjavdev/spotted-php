@@ -6,7 +6,7 @@ namespace Spotted\Me\Following\FollowingBulkGetResponse;
 
 use Spotted\ArtistObject;
 use Spotted\ArtistObject\Type;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
@@ -32,35 +32,35 @@ final class Artists implements BaseModel
     /**
      * The cursors used to find the next set of items.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Cursors $cursors;
 
     /**
      * A link to the Web API endpoint returning the full result of the request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
 
     /** @var list<ArtistObject>|null $items */
-    #[Api(list: ArtistObject::class, optional: true)]
+    #[Optional(list: ArtistObject::class)]
     public ?array $items;
 
     /**
      * The maximum number of items in the response (as set in the query or by default).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     /**
      * URL to the next page of items. ( `null` if none).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $next;
 
     /**
      * The total number of items available to return.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $total;
 
     public function __construct()

@@ -6,7 +6,7 @@ namespace Spotted\Artists;
 
 use Spotted\ArtistObject;
 use Spotted\ArtistObject\Type;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
@@ -22,7 +22,7 @@ final class ArtistBulkGetResponse implements BaseModel
     use SdkModel;
 
     /** @var list<ArtistObject> $artists */
-    #[Api(list: ArtistObject::class)]
+    #[Required(list: ArtistObject::class)]
     public array $artists;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Following\FollowingBulkGetResponse\Artists;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Cursors implements BaseModel
     /**
      * The cursor to use as key to find the next page of items.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $after;
 
     /**
      * The cursor to use as key to find the previous page of items.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $before;
 
     public function __construct()

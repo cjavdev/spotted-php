@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Episodes;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\EpisodeObject;
@@ -29,13 +29,13 @@ final class EpisodeListResponse implements BaseModel
      * The date and time the episode was saved.
      * Timestamps are returned in ISO 8601 format as Coordinated Universal Time (UTC) with a zero offset: YYYY-MM-DDTHH:MM:SSZ.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $added_at;
 
     /**
      * Information about the episode.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?EpisodeObject $episode;
 
     public function __construct()
