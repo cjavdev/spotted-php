@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::setRepeatMode()
  *
  * @phpstan-type PlayerSetRepeatModeParamsShape = array{
- *   state: string, device_id?: string
+ *   state: string, deviceID?: string
  * }
  */
 final class PlayerSetRepeatModeParams implements BaseModel
@@ -39,7 +39,7 @@ final class PlayerSetRepeatModeParams implements BaseModel
      * not supplied, the user's currently active device is the target.
      */
     #[Optional]
-    public ?string $device_id;
+    public ?string $deviceID;
 
     /**
      * `new PlayerSetRepeatModeParams()` is missing required properties by the API.
@@ -65,13 +65,13 @@ final class PlayerSetRepeatModeParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $state, ?string $device_id = null): self
+    public static function with(string $state, ?string $deviceID = null): self
     {
         $obj = new self;
 
         $obj['state'] = $state;
 
-        null !== $device_id && $obj['device_id'] = $device_id;
+        null !== $deviceID && $obj['deviceID'] = $deviceID;
 
         return $obj;
     }
@@ -97,7 +97,7 @@ final class PlayerSetRepeatModeParams implements BaseModel
     public function withDeviceID(string $deviceID): self
     {
         $obj = clone $this;
-        $obj['device_id'] = $deviceID;
+        $obj['deviceID'] = $deviceID;
 
         return $obj;
     }

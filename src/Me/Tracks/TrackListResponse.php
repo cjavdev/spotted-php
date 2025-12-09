@@ -18,7 +18,7 @@ use Spotted\TrackRestrictionObject;
 
 /**
  * @phpstan-type TrackListResponseShape = array{
- *   added_at?: \DateTimeInterface|null, track?: TrackObject|null
+ *   addedAt?: \DateTimeInterface|null, track?: TrackObject|null
  * }
  */
 final class TrackListResponse implements BaseModel
@@ -31,8 +31,8 @@ final class TrackListResponse implements BaseModel
      * Timestamps are returned in ISO 8601 format as Coordinated Universal Time (UTC) with a zero offset: YYYY-MM-DDTHH:MM:SSZ.
      * If the time is imprecise (for example, the date/time of an album release), an additional field indicates the precision; see for example, release_date in an album object.
      */
-    #[Optional]
-    public ?\DateTimeInterface $added_at;
+    #[Optional('added_at')]
+    public ?\DateTimeInterface $addedAt;
 
     /**
      * Information about the track.
@@ -54,32 +54,32 @@ final class TrackListResponse implements BaseModel
      *   id?: string|null,
      *   album?: Album|null,
      *   artists?: list<SimplifiedArtistObject>|null,
-     *   available_markets?: list<string>|null,
-     *   disc_number?: int|null,
-     *   duration_ms?: int|null,
+     *   availableMarkets?: list<string>|null,
+     *   discNumber?: int|null,
+     *   durationMs?: int|null,
      *   explicit?: bool|null,
-     *   external_ids?: ExternalIDObject|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalIDs?: ExternalIDObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
-     *   is_local?: bool|null,
-     *   is_playable?: bool|null,
-     *   linked_from?: LinkedTrackObject|null,
+     *   isLocal?: bool|null,
+     *   isPlayable?: bool|null,
+     *   linkedFrom?: LinkedTrackObject|null,
      *   name?: string|null,
      *   popularity?: int|null,
-     *   preview_url?: string|null,
+     *   previewURL?: string|null,
      *   restrictions?: TrackRestrictionObject|null,
-     *   track_number?: int|null,
+     *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * } $track
      */
     public static function with(
-        ?\DateTimeInterface $added_at = null,
+        ?\DateTimeInterface $addedAt = null,
         TrackObject|array|null $track = null
     ): self {
         $obj = new self;
 
-        null !== $added_at && $obj['added_at'] = $added_at;
+        null !== $addedAt && $obj['addedAt'] = $addedAt;
         null !== $track && $obj['track'] = $track;
 
         return $obj;
@@ -93,7 +93,7 @@ final class TrackListResponse implements BaseModel
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
         $obj = clone $this;
-        $obj['added_at'] = $addedAt;
+        $obj['addedAt'] = $addedAt;
 
         return $obj;
     }
@@ -105,21 +105,21 @@ final class TrackListResponse implements BaseModel
      *   id?: string|null,
      *   album?: Album|null,
      *   artists?: list<SimplifiedArtistObject>|null,
-     *   available_markets?: list<string>|null,
-     *   disc_number?: int|null,
-     *   duration_ms?: int|null,
+     *   availableMarkets?: list<string>|null,
+     *   discNumber?: int|null,
+     *   durationMs?: int|null,
      *   explicit?: bool|null,
-     *   external_ids?: ExternalIDObject|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalIDs?: ExternalIDObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
-     *   is_local?: bool|null,
-     *   is_playable?: bool|null,
-     *   linked_from?: LinkedTrackObject|null,
+     *   isLocal?: bool|null,
+     *   isPlayable?: bool|null,
+     *   linkedFrom?: LinkedTrackObject|null,
      *   name?: string|null,
      *   popularity?: int|null,
-     *   preview_url?: string|null,
+     *   previewURL?: string|null,
      *   restrictions?: TrackRestrictionObject|null,
-     *   track_number?: int|null,
+     *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * } $track

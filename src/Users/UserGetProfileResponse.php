@@ -15,8 +15,8 @@ use Spotted\Users\UserGetProfileResponse\Type;
 /**
  * @phpstan-type UserGetProfileResponseShape = array{
  *   id?: string|null,
- *   display_name?: string|null,
- *   external_urls?: ExternalURLObject|null,
+ *   displayName?: string|null,
+ *   externalURLs?: ExternalURLObject|null,
  *   followers?: FollowersObject|null,
  *   href?: string|null,
  *   images?: list<ImageObject>|null,
@@ -38,14 +38,14 @@ final class UserGetProfileResponse implements BaseModel
     /**
      * The name displayed on the user's profile. `null` if not available.
      */
-    #[Optional(nullable: true)]
-    public ?string $display_name;
+    #[Optional('display_name', nullable: true)]
+    public ?string $displayName;
 
     /**
      * Known public external URLs for this user.
      */
-    #[Optional]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * Information about the followers of this user.
@@ -91,7 +91,7 @@ final class UserGetProfileResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
      * @param list<ImageObject|array{
      *   height: int|null, url: string, width: int|null
@@ -100,8 +100,8 @@ final class UserGetProfileResponse implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $display_name = null,
-        ExternalURLObject|array|null $external_urls = null,
+        ?string $displayName = null,
+        ExternalURLObject|array|null $externalURLs = null,
         FollowersObject|array|null $followers = null,
         ?string $href = null,
         ?array $images = null,
@@ -111,8 +111,8 @@ final class UserGetProfileResponse implements BaseModel
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $display_name && $obj['display_name'] = $display_name;
-        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $displayName && $obj['displayName'] = $displayName;
+        null !== $externalURLs && $obj['externalURLs'] = $externalURLs;
         null !== $followers && $obj['followers'] = $followers;
         null !== $href && $obj['href'] = $href;
         null !== $images && $obj['images'] = $images;
@@ -139,7 +139,7 @@ final class UserGetProfileResponse implements BaseModel
     public function withDisplayName(?string $displayName): self
     {
         $obj = clone $this;
-        $obj['display_name'] = $displayName;
+        $obj['displayName'] = $displayName;
 
         return $obj;
     }
@@ -153,7 +153,7 @@ final class UserGetProfileResponse implements BaseModel
         ExternalURLObject|array $externalURLs
     ): self {
         $obj = clone $this;
-        $obj['external_urls'] = $externalURLs;
+        $obj['externalURLs'] = $externalURLs;
 
         return $obj;
     }

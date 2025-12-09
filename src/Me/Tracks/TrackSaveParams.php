@@ -18,8 +18,8 @@ use Spotted\Me\Tracks\TrackSaveParams\TimestampedID;
  *
  * @phpstan-type TrackSaveParamsShape = array{
  *   ids: list<string>,
- *   timestamped_ids?: list<TimestampedID|array{
- *     id: string, added_at: \DateTimeInterface
+ *   timestampedIDs?: list<TimestampedID|array{
+ *     id: string, addedAt: \DateTimeInterface
  *   }>,
  * }
  */
@@ -40,10 +40,10 @@ final class TrackSaveParams implements BaseModel
     /**
      * A JSON array of objects containing track IDs with their corresponding timestamps. Each object must include a track ID and an `added_at` timestamp. This allows you to specify when tracks were added to maintain a specific chronological order in the user's library.<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `timestamped_ids` is present in the body, any IDs listed in the query parameters (deprecated) or the `ids` field in the body will be ignored._.
      *
-     * @var list<TimestampedID>|null $timestamped_ids
+     * @var list<TimestampedID>|null $timestampedIDs
      */
-    #[Optional(list: TimestampedID::class)]
-    public ?array $timestamped_ids;
+    #[Optional('timestamped_ids', list: TimestampedID::class)]
+    public ?array $timestampedIDs;
 
     /**
      * `new TrackSaveParams()` is missing required properties by the API.
@@ -71,16 +71,16 @@ final class TrackSaveParams implements BaseModel
      *
      * @param list<string> $ids
      * @param list<TimestampedID|array{
-     *   id: string, added_at: \DateTimeInterface
-     * }> $timestamped_ids
+     *   id: string, addedAt: \DateTimeInterface
+     * }> $timestampedIDs
      */
-    public static function with(array $ids, ?array $timestamped_ids = null): self
+    public static function with(array $ids, ?array $timestampedIDs = null): self
     {
         $obj = new self;
 
         $obj['ids'] = $ids;
 
-        null !== $timestamped_ids && $obj['timestamped_ids'] = $timestamped_ids;
+        null !== $timestampedIDs && $obj['timestampedIDs'] = $timestampedIDs;
 
         return $obj;
     }
@@ -102,13 +102,13 @@ final class TrackSaveParams implements BaseModel
      * A JSON array of objects containing track IDs with their corresponding timestamps. Each object must include a track ID and an `added_at` timestamp. This allows you to specify when tracks were added to maintain a specific chronological order in the user's library.<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `timestamped_ids` is present in the body, any IDs listed in the query parameters (deprecated) or the `ids` field in the body will be ignored._.
      *
      * @param list<TimestampedID|array{
-     *   id: string, added_at: \DateTimeInterface
+     *   id: string, addedAt: \DateTimeInterface
      * }> $timestampedIDs
      */
     public function withTimestampedIDs(array $timestampedIDs): self
     {
         $obj = clone $this;
-        $obj['timestamped_ids'] = $timestampedIDs;
+        $obj['timestampedIDs'] = $timestampedIDs;
 
         return $obj;
     }

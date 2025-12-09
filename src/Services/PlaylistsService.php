@@ -7,6 +7,7 @@ namespace Spotted\Services;
 use Spotted\Client;
 use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\Playlists\PlaylistGetResponse;
 use Spotted\Playlists\PlaylistRetrieveParams;
 use Spotted\Playlists\PlaylistUpdateParams;
@@ -49,7 +50,7 @@ final class PlaylistsService implements PlaylistsContract
      * Get a playlist owned by a Spotify user.
      *
      * @param array{
-     *   additional_types?: string, fields?: string, market?: string
+     *   additionalTypes?: string, fields?: string, market?: string
      * }|PlaylistRetrieveParams $params
      *
      * @throws APIException
@@ -68,7 +69,10 @@ final class PlaylistsService implements PlaylistsContract
         $response = $this->client->request(
             method: 'get',
             path: ['playlists/%1$s', $playlistID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['additionalTypes' => 'additional_types']
+            ),
             options: $options,
             convert: PlaylistGetResponse::class,
         );

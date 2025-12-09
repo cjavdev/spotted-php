@@ -107,7 +107,7 @@ final class TracksTest extends TestCase
 
         $result = $this->client->playlists->tracks->remove(
             '3cEYpjA9oz9GiPac4AsH4n',
-            ['tracks' => [['uri' => 'uri']], 'snapshot_id' => 'snapshot_id'],
+            ['tracks' => [['uri' => 'uri']], 'snapshotID' => 'snapshot_id'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

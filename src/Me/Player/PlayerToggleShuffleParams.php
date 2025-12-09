@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::toggleShuffle()
  *
  * @phpstan-type PlayerToggleShuffleParamsShape = array{
- *   state: bool, device_id?: string
+ *   state: bool, deviceID?: string
  * }
  */
 final class PlayerToggleShuffleParams implements BaseModel
@@ -37,7 +37,7 @@ final class PlayerToggleShuffleParams implements BaseModel
      * not supplied, the user's currently active device is the target.
      */
     #[Optional]
-    public ?string $device_id;
+    public ?string $deviceID;
 
     /**
      * `new PlayerToggleShuffleParams()` is missing required properties by the API.
@@ -63,13 +63,13 @@ final class PlayerToggleShuffleParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(bool $state, ?string $device_id = null): self
+    public static function with(bool $state, ?string $deviceID = null): self
     {
         $obj = new self;
 
         $obj['state'] = $state;
 
-        null !== $device_id && $obj['device_id'] = $device_id;
+        null !== $deviceID && $obj['deviceID'] = $deviceID;
 
         return $obj;
     }
@@ -93,7 +93,7 @@ final class PlayerToggleShuffleParams implements BaseModel
     public function withDeviceID(string $deviceID): self
     {
         $obj = clone $this;
-        $obj['device_id'] = $deviceID;
+        $obj['deviceID'] = $deviceID;
 
         return $obj;
     }

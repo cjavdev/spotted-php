@@ -16,10 +16,10 @@ use Spotted\Me\MeGetResponse\ExplicitContent;
  * @phpstan-type MeGetResponseShape = array{
  *   id?: string|null,
  *   country?: string|null,
- *   display_name?: string|null,
+ *   displayName?: string|null,
  *   email?: string|null,
- *   explicit_content?: ExplicitContent|null,
- *   external_urls?: ExternalURLObject|null,
+ *   explicitContent?: ExplicitContent|null,
+ *   externalURLs?: ExternalURLObject|null,
  *   followers?: FollowersObject|null,
  *   href?: string|null,
  *   images?: list<ImageObject>|null,
@@ -48,8 +48,8 @@ final class MeGetResponse implements BaseModel
     /**
      * The name displayed on the user's profile. `null` if not available.
      */
-    #[Optional]
-    public ?string $display_name;
+    #[Optional('display_name')]
+    public ?string $displayName;
 
     /**
      * The user's email address, as entered by the user when creating their account. _**Important!** This email address is unverified; there is no proof that it actually belongs to the user._ _This field is only available when the current user has granted access to the [user-read-email](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
@@ -60,14 +60,14 @@ final class MeGetResponse implements BaseModel
     /**
      * The user's explicit content settings. _This field is only available when the current user has granted access to the [user-read-private](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
      */
-    #[Optional]
-    public ?ExplicitContent $explicit_content;
+    #[Optional('explicit_content')]
+    public ?ExplicitContent $explicitContent;
 
     /**
      * Known external URLs for this user.
      */
-    #[Optional]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * Information about the followers of the user.
@@ -118,9 +118,9 @@ final class MeGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ExplicitContent|array{
-     *   filter_enabled?: bool|null, filter_locked?: bool|null
-     * } $explicit_content
-     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     *   filterEnabled?: bool|null, filterLocked?: bool|null
+     * } $explicitContent
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
      * @param list<ImageObject|array{
      *   height: int|null, url: string, width: int|null
@@ -129,10 +129,10 @@ final class MeGetResponse implements BaseModel
     public static function with(
         ?string $id = null,
         ?string $country = null,
-        ?string $display_name = null,
+        ?string $displayName = null,
         ?string $email = null,
-        ExplicitContent|array|null $explicit_content = null,
-        ExternalURLObject|array|null $external_urls = null,
+        ExplicitContent|array|null $explicitContent = null,
+        ExternalURLObject|array|null $externalURLs = null,
         FollowersObject|array|null $followers = null,
         ?string $href = null,
         ?array $images = null,
@@ -144,10 +144,10 @@ final class MeGetResponse implements BaseModel
 
         null !== $id && $obj['id'] = $id;
         null !== $country && $obj['country'] = $country;
-        null !== $display_name && $obj['display_name'] = $display_name;
+        null !== $displayName && $obj['displayName'] = $displayName;
         null !== $email && $obj['email'] = $email;
-        null !== $explicit_content && $obj['explicit_content'] = $explicit_content;
-        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $explicitContent && $obj['explicitContent'] = $explicitContent;
+        null !== $externalURLs && $obj['externalURLs'] = $externalURLs;
         null !== $followers && $obj['followers'] = $followers;
         null !== $href && $obj['href'] = $href;
         null !== $images && $obj['images'] = $images;
@@ -186,7 +186,7 @@ final class MeGetResponse implements BaseModel
     public function withDisplayName(string $displayName): self
     {
         $obj = clone $this;
-        $obj['display_name'] = $displayName;
+        $obj['displayName'] = $displayName;
 
         return $obj;
     }
@@ -206,14 +206,14 @@ final class MeGetResponse implements BaseModel
      * The user's explicit content settings. _This field is only available when the current user has granted access to the [user-read-private](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
      *
      * @param ExplicitContent|array{
-     *   filter_enabled?: bool|null, filter_locked?: bool|null
+     *   filterEnabled?: bool|null, filterLocked?: bool|null
      * } $explicitContent
      */
     public function withExplicitContent(
         ExplicitContent|array $explicitContent
     ): self {
         $obj = clone $this;
-        $obj['explicit_content'] = $explicitContent;
+        $obj['explicitContent'] = $explicitContent;
 
         return $obj;
     }
@@ -227,7 +227,7 @@ final class MeGetResponse implements BaseModel
         ExternalURLObject|array $externalURLs
     ): self {
         $obj = clone $this;
-        $obj['external_urls'] = $externalURLs;
+        $obj['externalURLs'] = $externalURLs;
 
         return $obj;
     }

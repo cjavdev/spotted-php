@@ -7,6 +7,7 @@ namespace Spotted\Services\Me;
 use Spotted\Client;
 use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
 use Spotted\Me\Player\PlayerGetCurrentlyPlayingParams;
 use Spotted\Me\Player\PlayerGetCurrentlyPlayingResponse;
@@ -49,7 +50,7 @@ final class PlayerService implements PlayerContract
      * Get the object currently being played on the user's Spotify account.
      *
      * @param array{
-     *   additional_types?: string, market?: string
+     *   additionalTypes?: string, market?: string
      * }|PlayerGetCurrentlyPlayingParams $params
      *
      * @throws APIException
@@ -67,7 +68,10 @@ final class PlayerService implements PlayerContract
         $response = $this->client->request(
             method: 'get',
             path: 'me/player/currently-playing',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['additionalTypes' => 'additional_types']
+            ),
             options: $options,
             convert: PlayerGetCurrentlyPlayingResponse::class,
         );
@@ -102,7 +106,7 @@ final class PlayerService implements PlayerContract
      * Get information about the user’s current playback state, including track or episode, progress, and active device.
      *
      * @param array{
-     *   additional_types?: string, market?: string
+     *   additionalTypes?: string, market?: string
      * }|PlayerGetStateParams $params
      *
      * @throws APIException
@@ -120,7 +124,10 @@ final class PlayerService implements PlayerContract
         $response = $this->client->request(
             method: 'get',
             path: 'me/player',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['additionalTypes' => 'additional_types']
+            ),
             options: $options,
             convert: PlayerGetStateResponse::class,
         );
@@ -169,7 +176,7 @@ final class PlayerService implements PlayerContract
      *
      * Pause playback on the user's account. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{device_id?: string}|PlayerPausePlaybackParams $params
+     * @param array{deviceID?: string}|PlayerPausePlaybackParams $params
      *
      * @throws APIException
      */
@@ -186,7 +193,7 @@ final class PlayerService implements PlayerContract
         $response = $this->client->request(
             method: 'put',
             path: 'me/player/pause',
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['deviceID' => 'device_id']),
             options: $options,
             convert: null,
         );
@@ -200,7 +207,7 @@ final class PlayerService implements PlayerContract
      * Seeks to the given position in the user’s currently playing track. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
      * @param array{
-     *   position_ms: int, device_id?: string
+     *   positionMs: int, deviceID?: string
      * }|PlayerSeekToPositionParams $params
      *
      * @throws APIException
@@ -218,7 +225,10 @@ final class PlayerService implements PlayerContract
         $response = $this->client->request(
             method: 'put',
             path: 'me/player/seek',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['positionMs' => 'position_ms', 'deviceID' => 'device_id']
+            ),
             options: $options,
             convert: null,
         );
@@ -231,9 +241,7 @@ final class PlayerService implements PlayerContract
      *
      * Set the repeat mode for the user's playback. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{
-     *   state: string, device_id?: string
-     * }|PlayerSetRepeatModeParams $params
+     * @param array{state: string, deviceID?: string}|PlayerSetRepeatModeParams $params
      *
      * @throws APIException
      */
@@ -250,7 +258,7 @@ final class PlayerService implements PlayerContract
         $response = $this->client->request(
             method: 'put',
             path: 'me/player/repeat',
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['deviceID' => 'device_id']),
             options: $options,
             convert: null,
         );
@@ -264,7 +272,7 @@ final class PlayerService implements PlayerContract
      * Set the volume for the user’s current playback device. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
      * @param array{
-     *   volume_percent: int, device_id?: string
+     *   volumePercent: int, deviceID?: string
      * }|PlayerSetVolumeParams $params
      *
      * @throws APIException
@@ -282,7 +290,10 @@ final class PlayerService implements PlayerContract
         $response = $this->client->request(
             method: 'put',
             path: 'me/player/volume',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['volumePercent' => 'volume_percent', 'deviceID' => 'device_id'],
+            ),
             options: $options,
             convert: null,
         );
@@ -295,7 +306,7 @@ final class PlayerService implements PlayerContract
      *
      * Skips to next track in the user’s queue. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{device_id?: string}|PlayerSkipNextParams $params
+     * @param array{deviceID?: string}|PlayerSkipNextParams $params
      *
      * @throws APIException
      */
@@ -312,7 +323,7 @@ final class PlayerService implements PlayerContract
         $response = $this->client->request(
             method: 'post',
             path: 'me/player/next',
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['deviceID' => 'device_id']),
             options: $options,
             convert: null,
         );
@@ -325,7 +336,7 @@ final class PlayerService implements PlayerContract
      *
      * Skips to previous track in the user’s queue. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{device_id?: string}|PlayerSkipPreviousParams $params
+     * @param array{deviceID?: string}|PlayerSkipPreviousParams $params
      *
      * @throws APIException
      */
@@ -342,7 +353,7 @@ final class PlayerService implements PlayerContract
         $response = $this->client->request(
             method: 'post',
             path: 'me/player/previous',
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['deviceID' => 'device_id']),
             options: $options,
             convert: null,
         );
@@ -356,10 +367,10 @@ final class PlayerService implements PlayerContract
      * Start a new context or resume current playback on the user's active device. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
      * @param array{
-     *   device_id?: string,
-     *   context_uri?: string,
+     *   deviceID?: string,
+     *   contextUri?: string,
      *   offset?: array<string,mixed>,
-     *   position_ms?: int,
+     *   positionMs?: int,
      *   uris?: list<string>,
      * }|PlayerStartPlaybackParams $params
      *
@@ -379,7 +390,10 @@ final class PlayerService implements PlayerContract
         $response = $this->client->request(
             method: 'put',
             path: 'me/player/play',
-            query: array_diff_key($parsed, $query_params),
+            query: Util::array_transform_keys(
+                array_diff_key($parsed, $query_params),
+                ['deviceID' => 'device_id']
+            ),
             body: (object) array_diff_key($parsed, $query_params),
             options: $options,
             convert: null,
@@ -393,7 +407,7 @@ final class PlayerService implements PlayerContract
      *
      * Toggle shuffle on or off for user’s playback. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{state: bool, device_id?: string}|PlayerToggleShuffleParams $params
+     * @param array{state: bool, deviceID?: string}|PlayerToggleShuffleParams $params
      *
      * @throws APIException
      */
@@ -410,7 +424,7 @@ final class PlayerService implements PlayerContract
         $response = $this->client->request(
             method: 'put',
             path: 'me/player/shuffle',
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['deviceID' => 'device_id']),
             options: $options,
             convert: null,
         );
@@ -423,7 +437,7 @@ final class PlayerService implements PlayerContract
      *
      * Transfer playback to a new device and optionally begin playback. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{device_ids: list<string>, play?: bool}|PlayerTransferParams $params
+     * @param array{deviceIDs: list<string>, play?: bool}|PlayerTransferParams $params
      *
      * @throws APIException
      */

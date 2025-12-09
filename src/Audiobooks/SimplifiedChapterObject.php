@@ -17,25 +17,25 @@ use Spotted\ResumePointObject;
 /**
  * @phpstan-type SimplifiedChapterObjectShape = array{
  *   id: string,
- *   audio_preview_url: string|null,
- *   chapter_number: int,
+ *   audioPreviewURL: string|null,
+ *   chapterNumber: int,
  *   description: string,
- *   duration_ms: int,
+ *   durationMs: int,
  *   explicit: bool,
- *   external_urls: ExternalURLObject,
+ *   externalURLs: ExternalURLObject,
  *   href: string,
- *   html_description: string,
+ *   htmlDescription: string,
  *   images: list<ImageObject>,
- *   is_playable: bool,
+ *   isPlayable: bool,
  *   languages: list<string>,
  *   name: string,
- *   release_date: string,
- *   release_date_precision: value-of<ReleaseDatePrecision>,
+ *   releaseDate: string,
+ *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
  *   type?: 'episode',
  *   uri: string,
- *   available_markets?: list<string>|null,
+ *   availableMarkets?: list<string>|null,
  *   restrictions?: ChapterRestrictionObject|null,
- *   resume_point?: ResumePointObject|null,
+ *   resumePoint?: ResumePointObject|null,
  * }
  */
 final class SimplifiedChapterObject implements BaseModel
@@ -62,14 +62,14 @@ final class SimplifiedChapterObject implements BaseModel
      *
      * A URL to a 30 second preview (MP3 format) of the chapter. `null` if not available.
      */
-    #[Required]
-    public ?string $audio_preview_url;
+    #[Required('audio_preview_url')]
+    public ?string $audioPreviewURL;
 
     /**
      * The number of the chapter.
      */
-    #[Required]
-    public int $chapter_number;
+    #[Required('chapter_number')]
+    public int $chapterNumber;
 
     /**
      * A description of the chapter. HTML tags are stripped away from this field, use `html_description` field in case HTML tags are needed.
@@ -80,8 +80,8 @@ final class SimplifiedChapterObject implements BaseModel
     /**
      * The chapter length in milliseconds.
      */
-    #[Required]
-    public int $duration_ms;
+    #[Required('duration_ms')]
+    public int $durationMs;
 
     /**
      * Whether or not the chapter has explicit content (true = yes it does; false = no it does not OR unknown).
@@ -92,8 +92,8 @@ final class SimplifiedChapterObject implements BaseModel
     /**
      * External URLs for this chapter.
      */
-    #[Required]
-    public ExternalURLObject $external_urls;
+    #[Required('external_urls')]
+    public ExternalURLObject $externalURLs;
 
     /**
      * A link to the Web API endpoint providing full details of the chapter.
@@ -104,8 +104,8 @@ final class SimplifiedChapterObject implements BaseModel
     /**
      * A description of the chapter. This field may contain HTML tags.
      */
-    #[Required]
-    public string $html_description;
+    #[Required('html_description')]
+    public string $htmlDescription;
 
     /**
      * The cover art for the chapter in various sizes, widest first.
@@ -118,8 +118,8 @@ final class SimplifiedChapterObject implements BaseModel
     /**
      * True if the chapter is playable in the given market. Otherwise false.
      */
-    #[Required]
-    public bool $is_playable;
+    #[Required('is_playable')]
+    public bool $isPlayable;
 
     /**
      * A list of the languages used in the chapter, identified by their [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639) code.
@@ -138,16 +138,16 @@ final class SimplifiedChapterObject implements BaseModel
     /**
      * The date the chapter was first released, for example `"1981-12-15"`. Depending on the precision, it might be shown as `"1981"` or `"1981-12"`.
      */
-    #[Required]
-    public string $release_date;
+    #[Required('release_date')]
+    public string $releaseDate;
 
     /**
      * The precision with which `release_date` value is known.
      *
-     * @var value-of<ReleaseDatePrecision> $release_date_precision
+     * @var value-of<ReleaseDatePrecision> $releaseDatePrecision
      */
-    #[Required(enum: ReleaseDatePrecision::class)]
-    public string $release_date_precision;
+    #[Required('release_date_precision', enum: ReleaseDatePrecision::class)]
+    public string $releaseDatePrecision;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the chapter.
@@ -158,10 +158,10 @@ final class SimplifiedChapterObject implements BaseModel
     /**
      * A list of the countries in which the chapter can be played, identified by their [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code.
      *
-     * @var list<string>|null $available_markets
+     * @var list<string>|null $availableMarkets
      */
-    #[Optional(list: 'string')]
-    public ?array $available_markets;
+    #[Optional('available_markets', list: 'string')]
+    public ?array $availableMarkets;
 
     /**
      * Included in the response when a content restriction is applied.
@@ -172,8 +172,8 @@ final class SimplifiedChapterObject implements BaseModel
     /**
      * The user's most recent position in the chapter. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
      */
-    #[Optional]
-    public ?ResumePointObject $resume_point;
+    #[Optional('resume_point')]
+    public ?ResumePointObject $resumePoint;
 
     /**
      * `new SimplifiedChapterObject()` is missing required properties by the API.
@@ -182,20 +182,20 @@ final class SimplifiedChapterObject implements BaseModel
      * ```
      * SimplifiedChapterObject::with(
      *   id: ...,
-     *   audio_preview_url: ...,
-     *   chapter_number: ...,
+     *   audioPreviewURL: ...,
+     *   chapterNumber: ...,
      *   description: ...,
-     *   duration_ms: ...,
+     *   durationMs: ...,
      *   explicit: ...,
-     *   external_urls: ...,
+     *   externalURLs: ...,
      *   href: ...,
-     *   html_description: ...,
+     *   htmlDescription: ...,
      *   images: ...,
-     *   is_playable: ...,
+     *   isPlayable: ...,
      *   languages: ...,
      *   name: ...,
-     *   release_date: ...,
-     *   release_date_precision: ...,
+     *   releaseDate: ...,
+     *   releaseDatePrecision: ...,
      *   uri: ...,
      * )
      * ```
@@ -232,61 +232,61 @@ final class SimplifiedChapterObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      * @param list<ImageObject|array{
      *   height: int|null, url: string, width: int|null
      * }> $images
      * @param list<string> $languages
-     * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $release_date_precision
-     * @param list<string> $available_markets
+     * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
+     * @param list<string> $availableMarkets
      * @param ChapterRestrictionObject|array{reason?: string|null} $restrictions
      * @param ResumePointObject|array{
-     *   fully_played?: bool|null, resume_position_ms?: int|null
-     * } $resume_point
+     *   fullyPlayed?: bool|null, resumePositionMs?: int|null
+     * } $resumePoint
      */
     public static function with(
         string $id,
-        ?string $audio_preview_url,
-        int $chapter_number,
+        ?string $audioPreviewURL,
+        int $chapterNumber,
         string $description,
-        int $duration_ms,
+        int $durationMs,
         bool $explicit,
-        ExternalURLObject|array $external_urls,
+        ExternalURLObject|array $externalURLs,
         string $href,
-        string $html_description,
+        string $htmlDescription,
         array $images,
-        bool $is_playable,
+        bool $isPlayable,
         array $languages,
         string $name,
-        string $release_date,
-        ReleaseDatePrecision|string $release_date_precision,
+        string $releaseDate,
+        ReleaseDatePrecision|string $releaseDatePrecision,
         string $uri,
-        ?array $available_markets = null,
+        ?array $availableMarkets = null,
         ChapterRestrictionObject|array|null $restrictions = null,
-        ResumePointObject|array|null $resume_point = null,
+        ResumePointObject|array|null $resumePoint = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['audio_preview_url'] = $audio_preview_url;
-        $obj['chapter_number'] = $chapter_number;
+        $obj['audioPreviewURL'] = $audioPreviewURL;
+        $obj['chapterNumber'] = $chapterNumber;
         $obj['description'] = $description;
-        $obj['duration_ms'] = $duration_ms;
+        $obj['durationMs'] = $durationMs;
         $obj['explicit'] = $explicit;
-        $obj['external_urls'] = $external_urls;
+        $obj['externalURLs'] = $externalURLs;
         $obj['href'] = $href;
-        $obj['html_description'] = $html_description;
+        $obj['htmlDescription'] = $htmlDescription;
         $obj['images'] = $images;
-        $obj['is_playable'] = $is_playable;
+        $obj['isPlayable'] = $isPlayable;
         $obj['languages'] = $languages;
         $obj['name'] = $name;
-        $obj['release_date'] = $release_date;
-        $obj['release_date_precision'] = $release_date_precision;
+        $obj['releaseDate'] = $releaseDate;
+        $obj['releaseDatePrecision'] = $releaseDatePrecision;
         $obj['uri'] = $uri;
 
-        null !== $available_markets && $obj['available_markets'] = $available_markets;
+        null !== $availableMarkets && $obj['availableMarkets'] = $availableMarkets;
         null !== $restrictions && $obj['restrictions'] = $restrictions;
-        null !== $resume_point && $obj['resume_point'] = $resume_point;
+        null !== $resumePoint && $obj['resumePoint'] = $resumePoint;
 
         return $obj;
     }
@@ -308,7 +308,7 @@ final class SimplifiedChapterObject implements BaseModel
     public function withAudioPreviewURL(?string $audioPreviewURL): self
     {
         $obj = clone $this;
-        $obj['audio_preview_url'] = $audioPreviewURL;
+        $obj['audioPreviewURL'] = $audioPreviewURL;
 
         return $obj;
     }
@@ -319,7 +319,7 @@ final class SimplifiedChapterObject implements BaseModel
     public function withChapterNumber(int $chapterNumber): self
     {
         $obj = clone $this;
-        $obj['chapter_number'] = $chapterNumber;
+        $obj['chapterNumber'] = $chapterNumber;
 
         return $obj;
     }
@@ -341,7 +341,7 @@ final class SimplifiedChapterObject implements BaseModel
     public function withDurationMs(int $durationMs): self
     {
         $obj = clone $this;
-        $obj['duration_ms'] = $durationMs;
+        $obj['durationMs'] = $durationMs;
 
         return $obj;
     }
@@ -366,7 +366,7 @@ final class SimplifiedChapterObject implements BaseModel
         ExternalURLObject|array $externalURLs
     ): self {
         $obj = clone $this;
-        $obj['external_urls'] = $externalURLs;
+        $obj['externalURLs'] = $externalURLs;
 
         return $obj;
     }
@@ -388,7 +388,7 @@ final class SimplifiedChapterObject implements BaseModel
     public function withHTMLDescription(string $htmlDescription): self
     {
         $obj = clone $this;
-        $obj['html_description'] = $htmlDescription;
+        $obj['htmlDescription'] = $htmlDescription;
 
         return $obj;
     }
@@ -414,7 +414,7 @@ final class SimplifiedChapterObject implements BaseModel
     public function withIsPlayable(bool $isPlayable): self
     {
         $obj = clone $this;
-        $obj['is_playable'] = $isPlayable;
+        $obj['isPlayable'] = $isPlayable;
 
         return $obj;
     }
@@ -449,7 +449,7 @@ final class SimplifiedChapterObject implements BaseModel
     public function withReleaseDate(string $releaseDate): self
     {
         $obj = clone $this;
-        $obj['release_date'] = $releaseDate;
+        $obj['releaseDate'] = $releaseDate;
 
         return $obj;
     }
@@ -463,7 +463,7 @@ final class SimplifiedChapterObject implements BaseModel
         ReleaseDatePrecision|string $releaseDatePrecision
     ): self {
         $obj = clone $this;
-        $obj['release_date_precision'] = $releaseDatePrecision;
+        $obj['releaseDatePrecision'] = $releaseDatePrecision;
 
         return $obj;
     }
@@ -487,7 +487,7 @@ final class SimplifiedChapterObject implements BaseModel
     public function withAvailableMarkets(array $availableMarkets): self
     {
         $obj = clone $this;
-        $obj['available_markets'] = $availableMarkets;
+        $obj['availableMarkets'] = $availableMarkets;
 
         return $obj;
     }
@@ -510,13 +510,13 @@ final class SimplifiedChapterObject implements BaseModel
      * The user's most recent position in the chapter. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
      *
      * @param ResumePointObject|array{
-     *   fully_played?: bool|null, resume_position_ms?: int|null
+     *   fullyPlayed?: bool|null, resumePositionMs?: int|null
      * } $resumePoint
      */
     public function withResumePoint(ResumePointObject|array $resumePoint): self
     {
         $obj = clone $this;
-        $obj['resume_point'] = $resumePoint;
+        $obj['resumePoint'] = $resumePoint;
 
         return $obj;
     }

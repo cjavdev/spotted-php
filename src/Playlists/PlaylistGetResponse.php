@@ -20,14 +20,14 @@ use Spotted\PlaylistUserObject\Type;
  *   id?: string|null,
  *   collaborative?: bool|null,
  *   description?: string|null,
- *   external_urls?: ExternalURLObject|null,
+ *   externalURLs?: ExternalURLObject|null,
  *   followers?: FollowersObject|null,
  *   href?: string|null,
  *   images?: list<ImageObject>|null,
  *   name?: string|null,
  *   owner?: Owner|null,
  *   published?: bool|null,
- *   snapshot_id?: string|null,
+ *   snapshotID?: string|null,
  *   tracks?: Tracks|null,
  *   type?: string|null,
  *   uri?: string|null,
@@ -59,8 +59,8 @@ final class PlaylistGetResponse implements BaseModel
     /**
      * Known external URLs for this playlist.
      */
-    #[Optional]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * Information about the followers of the playlist.
@@ -103,8 +103,8 @@ final class PlaylistGetResponse implements BaseModel
     /**
      * The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version.
      */
-    #[Optional]
-    public ?string $snapshot_id;
+    #[Optional('snapshot_id')]
+    public ?string $snapshotID;
 
     /**
      * The tracks of the playlist.
@@ -134,18 +134,18 @@ final class PlaylistGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
      * @param list<ImageObject|array{
      *   height: int|null, url: string, width: int|null
      * }> $images
      * @param Owner|array{
      *   id?: string|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
-     *   display_name?: string|null,
+     *   displayName?: string|null,
      * } $owner
      * @param Tracks|array{
      *   href: string,
@@ -161,14 +161,14 @@ final class PlaylistGetResponse implements BaseModel
         ?string $id = null,
         ?bool $collaborative = null,
         ?string $description = null,
-        ExternalURLObject|array|null $external_urls = null,
+        ExternalURLObject|array|null $externalURLs = null,
         FollowersObject|array|null $followers = null,
         ?string $href = null,
         ?array $images = null,
         ?string $name = null,
         Owner|array|null $owner = null,
         ?bool $published = null,
-        ?string $snapshot_id = null,
+        ?string $snapshotID = null,
         Tracks|array|null $tracks = null,
         ?string $type = null,
         ?string $uri = null,
@@ -178,14 +178,14 @@ final class PlaylistGetResponse implements BaseModel
         null !== $id && $obj['id'] = $id;
         null !== $collaborative && $obj['collaborative'] = $collaborative;
         null !== $description && $obj['description'] = $description;
-        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $externalURLs && $obj['externalURLs'] = $externalURLs;
         null !== $followers && $obj['followers'] = $followers;
         null !== $href && $obj['href'] = $href;
         null !== $images && $obj['images'] = $images;
         null !== $name && $obj['name'] = $name;
         null !== $owner && $obj['owner'] = $owner;
         null !== $published && $obj['published'] = $published;
-        null !== $snapshot_id && $obj['snapshot_id'] = $snapshot_id;
+        null !== $snapshotID && $obj['snapshotID'] = $snapshotID;
         null !== $tracks && $obj['tracks'] = $tracks;
         null !== $type && $obj['type'] = $type;
         null !== $uri && $obj['uri'] = $uri;
@@ -235,7 +235,7 @@ final class PlaylistGetResponse implements BaseModel
         ExternalURLObject|array $externalURLs
     ): self {
         $obj = clone $this;
-        $obj['external_urls'] = $externalURLs;
+        $obj['externalURLs'] = $externalURLs;
 
         return $obj;
     }
@@ -295,11 +295,11 @@ final class PlaylistGetResponse implements BaseModel
      *
      * @param Owner|array{
      *   id?: string|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
-     *   display_name?: string|null,
+     *   displayName?: string|null,
      * } $owner
      */
     public function withOwner(Owner|array $owner): self
@@ -327,7 +327,7 @@ final class PlaylistGetResponse implements BaseModel
     public function withSnapshotID(string $snapshotID): self
     {
         $obj = clone $this;
-        $obj['snapshot_id'] = $snapshotID;
+        $obj['snapshotID'] = $snapshotID;
 
         return $obj;
     }

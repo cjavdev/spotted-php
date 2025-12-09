@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::seekToPosition()
  *
  * @phpstan-type PlayerSeekToPositionParamsShape = array{
- *   position_ms: int, device_id?: string
+ *   positionMs: int, deviceID?: string
  * }
  */
 final class PlayerSeekToPositionParams implements BaseModel
@@ -31,21 +31,21 @@ final class PlayerSeekToPositionParams implements BaseModel
      * the track will cause the player to start playing the next song.
      */
     #[Required]
-    public int $position_ms;
+    public int $positionMs;
 
     /**
      * The id of the device this command is targeting. If
      * not supplied, the user's currently active device is the target.
      */
     #[Optional]
-    public ?string $device_id;
+    public ?string $deviceID;
 
     /**
      * `new PlayerSeekToPositionParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * PlayerSeekToPositionParams::with(position_ms: ...)
+     * PlayerSeekToPositionParams::with(positionMs: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -64,15 +64,13 @@ final class PlayerSeekToPositionParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(
-        int $position_ms,
-        ?string $device_id = null
-    ): self {
+    public static function with(int $positionMs, ?string $deviceID = null): self
+    {
         $obj = new self;
 
-        $obj['position_ms'] = $position_ms;
+        $obj['positionMs'] = $positionMs;
 
-        null !== $device_id && $obj['device_id'] = $device_id;
+        null !== $deviceID && $obj['deviceID'] = $deviceID;
 
         return $obj;
     }
@@ -85,7 +83,7 @@ final class PlayerSeekToPositionParams implements BaseModel
     public function withPositionMs(int $positionMs): self
     {
         $obj = clone $this;
-        $obj['position_ms'] = $positionMs;
+        $obj['positionMs'] = $positionMs;
 
         return $obj;
     }
@@ -97,7 +95,7 @@ final class PlayerSeekToPositionParams implements BaseModel
     public function withDeviceID(string $deviceID): self
     {
         $obj = clone $this;
-        $obj['device_id'] = $deviceID;
+        $obj['deviceID'] = $deviceID;
 
         return $obj;
     }

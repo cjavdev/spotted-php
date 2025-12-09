@@ -15,11 +15,11 @@ use Spotted\PlaylistUserObject\Type;
  *
  * @phpstan-type OwnerShape = array{
  *   id?: string|null,
- *   external_urls?: ExternalURLObject|null,
+ *   externalURLs?: ExternalURLObject|null,
  *   href?: string|null,
  *   type?: value-of<Type>|null,
  *   uri?: string|null,
- *   display_name?: string|null,
+ *   displayName?: string|null,
  * }
  */
 final class Owner implements BaseModel
@@ -33,8 +33,8 @@ final class Owner implements BaseModel
     #[Optional]
     public ?string $id;
 
-    #[Optional]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * A link to the Web API endpoint for this user.
@@ -59,8 +59,8 @@ final class Owner implements BaseModel
     /**
      * The name displayed on the user's profile. `null` if not available.
      */
-    #[Optional(nullable: true)]
-    public ?string $display_name;
+    #[Optional('display_name', nullable: true)]
+    public ?string $displayName;
 
     public function __construct()
     {
@@ -72,25 +72,25 @@ final class Owner implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      * @param Type|value-of<Type> $type
      */
     public static function with(
         ?string $id = null,
-        ExternalURLObject|array|null $external_urls = null,
+        ExternalURLObject|array|null $externalURLs = null,
         ?string $href = null,
         Type|string|null $type = null,
         ?string $uri = null,
-        ?string $display_name = null,
+        ?string $displayName = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $externalURLs && $obj['externalURLs'] = $externalURLs;
         null !== $href && $obj['href'] = $href;
         null !== $type && $obj['type'] = $type;
         null !== $uri && $obj['uri'] = $uri;
-        null !== $display_name && $obj['display_name'] = $display_name;
+        null !== $displayName && $obj['displayName'] = $displayName;
 
         return $obj;
     }
@@ -113,7 +113,7 @@ final class Owner implements BaseModel
         ExternalURLObject|array $externalURLs
     ): self {
         $obj = clone $this;
-        $obj['external_urls'] = $externalURLs;
+        $obj['externalURLs'] = $externalURLs;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class Owner implements BaseModel
     public function withDisplayName(?string $displayName): self
     {
         $obj = clone $this;
-        $obj['display_name'] = $displayName;
+        $obj['displayName'] = $displayName;
 
         return $obj;
     }

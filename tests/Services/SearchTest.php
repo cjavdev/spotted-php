@@ -56,7 +56,7 @@ final class SearchTest extends TestCase
         $result = $this->client->search->query([
             'q' => 'remaster%20track:Doxy%20artist:Miles%20Davis',
             'type' => ['album'],
-            'include_external' => 'audio',
+            'includeExternal' => 'audio',
             'limit' => 10,
             'market' => 'ES',
             'offset' => 5,

@@ -28,13 +28,13 @@ use Spotted\TrackRestrictionObject;
  * @phpstan-type PlayerGetStateResponseShape = array{
  *   actions?: Actions|null,
  *   context?: ContextObject|null,
- *   currently_playing_type?: string|null,
+ *   currentlyPlayingType?: string|null,
  *   device?: DeviceObject|null,
- *   is_playing?: bool|null,
+ *   isPlaying?: bool|null,
  *   item?: null|TrackObject|EpisodeObject,
- *   progress_ms?: int|null,
- *   repeat_state?: string|null,
- *   shuffle_state?: bool|null,
+ *   progressMs?: int|null,
+ *   repeatState?: string|null,
+ *   shuffleState?: bool|null,
  *   timestamp?: int|null,
  * }
  */
@@ -58,8 +58,8 @@ final class PlayerGetStateResponse implements BaseModel
     /**
      * The object type of the currently playing item. Can be one of `track`, `episode`, `ad` or `unknown`.
      */
-    #[Optional]
-    public ?string $currently_playing_type;
+    #[Optional('currently_playing_type')]
+    public ?string $currentlyPlayingType;
 
     /**
      * The device that is currently active.
@@ -70,8 +70,8 @@ final class PlayerGetStateResponse implements BaseModel
     /**
      * If something is currently playing, return `true`.
      */
-    #[Optional]
-    public ?bool $is_playing;
+    #[Optional('is_playing')]
+    public ?bool $isPlaying;
 
     /**
      * The currently playing track or episode. Can be `null`.
@@ -82,20 +82,20 @@ final class PlayerGetStateResponse implements BaseModel
     /**
      * Progress into the currently playing track or episode. Can be `null`.
      */
-    #[Optional]
-    public ?int $progress_ms;
+    #[Optional('progress_ms')]
+    public ?int $progressMs;
 
     /**
      * off, track, context.
      */
-    #[Optional]
-    public ?string $repeat_state;
+    #[Optional('repeat_state')]
+    public ?string $repeatState;
 
     /**
      * If shuffle is on or off.
      */
-    #[Optional]
-    public ?bool $shuffle_state;
+    #[Optional('shuffle_state')]
+    public ?bool $shuffleState;
 
     /**
      * Unix Millisecond Timestamp when playback state was last changed (play, pause, skip, scrub, new song, etc.).
@@ -114,101 +114,101 @@ final class PlayerGetStateResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Actions|array{
-     *   interrupting_playback?: bool|null,
+     *   interruptingPlayback?: bool|null,
      *   pausing?: bool|null,
      *   resuming?: bool|null,
      *   seeking?: bool|null,
-     *   skipping_next?: bool|null,
-     *   skipping_prev?: bool|null,
-     *   toggling_repeat_context?: bool|null,
-     *   toggling_repeat_track?: bool|null,
-     *   toggling_shuffle?: bool|null,
-     *   transferring_playback?: bool|null,
+     *   skippingNext?: bool|null,
+     *   skippingPrev?: bool|null,
+     *   togglingRepeatContext?: bool|null,
+     *   togglingRepeatTrack?: bool|null,
+     *   togglingShuffle?: bool|null,
+     *   transferringPlayback?: bool|null,
      * } $actions
      * @param ContextObject|array{
-     *   external_urls?: ExternalURLObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   type?: string|null,
      *   uri?: string|null,
      * } $context
      * @param DeviceObject|array{
      *   id?: string|null,
-     *   is_active?: bool|null,
-     *   is_private_session?: bool|null,
-     *   is_restricted?: bool|null,
+     *   isActive?: bool|null,
+     *   isPrivateSession?: bool|null,
+     *   isRestricted?: bool|null,
      *   name?: string|null,
-     *   supports_volume?: bool|null,
+     *   supportsVolume?: bool|null,
      *   type?: string|null,
-     *   volume_percent?: int|null,
+     *   volumePercent?: int|null,
      * } $device
      * @param TrackObject|array{
      *   id?: string|null,
      *   album?: Album|null,
      *   artists?: list<SimplifiedArtistObject>|null,
-     *   available_markets?: list<string>|null,
-     *   disc_number?: int|null,
-     *   duration_ms?: int|null,
+     *   availableMarkets?: list<string>|null,
+     *   discNumber?: int|null,
+     *   durationMs?: int|null,
      *   explicit?: bool|null,
-     *   external_ids?: ExternalIDObject|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalIDs?: ExternalIDObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
-     *   is_local?: bool|null,
-     *   is_playable?: bool|null,
-     *   linked_from?: LinkedTrackObject|null,
+     *   isLocal?: bool|null,
+     *   isPlayable?: bool|null,
+     *   linkedFrom?: LinkedTrackObject|null,
      *   name?: string|null,
      *   popularity?: int|null,
-     *   preview_url?: string|null,
+     *   previewURL?: string|null,
      *   restrictions?: TrackRestrictionObject|null,
-     *   track_number?: int|null,
+     *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * }|EpisodeObject|array{
      *   id: string,
-     *   audio_preview_url: string|null,
+     *   audioPreviewURL: string|null,
      *   description: string,
-     *   duration_ms: int,
+     *   durationMs: int,
      *   explicit: bool,
-     *   external_urls: ExternalURLObject,
+     *   externalURLs: ExternalURLObject,
      *   href: string,
-     *   html_description: string,
+     *   htmlDescription: string,
      *   images: list<ImageObject>,
-     *   is_externally_hosted: bool,
-     *   is_playable: bool,
+     *   isExternallyHosted: bool,
+     *   isPlayable: bool,
      *   languages: list<string>,
      *   name: string,
-     *   release_date: string,
-     *   release_date_precision: value-of<ReleaseDatePrecision>,
+     *   releaseDate: string,
+     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
      *   show: ShowBase,
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
      *   restrictions?: EpisodeRestrictionObject|null,
-     *   resume_point?: ResumePointObject|null,
+     *   resumePoint?: ResumePointObject|null,
      * } $item
      */
     public static function with(
         Actions|array|null $actions = null,
         ContextObject|array|null $context = null,
-        ?string $currently_playing_type = null,
+        ?string $currentlyPlayingType = null,
         DeviceObject|array|null $device = null,
-        ?bool $is_playing = null,
+        ?bool $isPlaying = null,
         TrackObject|array|EpisodeObject|null $item = null,
-        ?int $progress_ms = null,
-        ?string $repeat_state = null,
-        ?bool $shuffle_state = null,
+        ?int $progressMs = null,
+        ?string $repeatState = null,
+        ?bool $shuffleState = null,
         ?int $timestamp = null,
     ): self {
         $obj = new self;
 
         null !== $actions && $obj['actions'] = $actions;
         null !== $context && $obj['context'] = $context;
-        null !== $currently_playing_type && $obj['currently_playing_type'] = $currently_playing_type;
+        null !== $currentlyPlayingType && $obj['currentlyPlayingType'] = $currentlyPlayingType;
         null !== $device && $obj['device'] = $device;
-        null !== $is_playing && $obj['is_playing'] = $is_playing;
+        null !== $isPlaying && $obj['isPlaying'] = $isPlaying;
         null !== $item && $obj['item'] = $item;
-        null !== $progress_ms && $obj['progress_ms'] = $progress_ms;
-        null !== $repeat_state && $obj['repeat_state'] = $repeat_state;
-        null !== $shuffle_state && $obj['shuffle_state'] = $shuffle_state;
+        null !== $progressMs && $obj['progressMs'] = $progressMs;
+        null !== $repeatState && $obj['repeatState'] = $repeatState;
+        null !== $shuffleState && $obj['shuffleState'] = $shuffleState;
         null !== $timestamp && $obj['timestamp'] = $timestamp;
 
         return $obj;
@@ -218,16 +218,16 @@ final class PlayerGetStateResponse implements BaseModel
      * Allows to update the user interface based on which playback actions are available within the current context.
      *
      * @param Actions|array{
-     *   interrupting_playback?: bool|null,
+     *   interruptingPlayback?: bool|null,
      *   pausing?: bool|null,
      *   resuming?: bool|null,
      *   seeking?: bool|null,
-     *   skipping_next?: bool|null,
-     *   skipping_prev?: bool|null,
-     *   toggling_repeat_context?: bool|null,
-     *   toggling_repeat_track?: bool|null,
-     *   toggling_shuffle?: bool|null,
-     *   transferring_playback?: bool|null,
+     *   skippingNext?: bool|null,
+     *   skippingPrev?: bool|null,
+     *   togglingRepeatContext?: bool|null,
+     *   togglingRepeatTrack?: bool|null,
+     *   togglingShuffle?: bool|null,
+     *   transferringPlayback?: bool|null,
      * } $actions
      */
     public function withActions(Actions|array $actions): self
@@ -242,7 +242,7 @@ final class PlayerGetStateResponse implements BaseModel
      * A Context Object. Can be `null`.
      *
      * @param ContextObject|array{
-     *   external_urls?: ExternalURLObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   type?: string|null,
      *   uri?: string|null,
@@ -262,7 +262,7 @@ final class PlayerGetStateResponse implements BaseModel
     public function withCurrentlyPlayingType(string $currentlyPlayingType): self
     {
         $obj = clone $this;
-        $obj['currently_playing_type'] = $currentlyPlayingType;
+        $obj['currentlyPlayingType'] = $currentlyPlayingType;
 
         return $obj;
     }
@@ -272,13 +272,13 @@ final class PlayerGetStateResponse implements BaseModel
      *
      * @param DeviceObject|array{
      *   id?: string|null,
-     *   is_active?: bool|null,
-     *   is_private_session?: bool|null,
-     *   is_restricted?: bool|null,
+     *   isActive?: bool|null,
+     *   isPrivateSession?: bool|null,
+     *   isRestricted?: bool|null,
      *   name?: string|null,
-     *   supports_volume?: bool|null,
+     *   supportsVolume?: bool|null,
      *   type?: string|null,
-     *   volume_percent?: int|null,
+     *   volumePercent?: int|null,
      * } $device
      */
     public function withDevice(DeviceObject|array $device): self
@@ -295,7 +295,7 @@ final class PlayerGetStateResponse implements BaseModel
     public function withIsPlaying(bool $isPlaying): self
     {
         $obj = clone $this;
-        $obj['is_playing'] = $isPlaying;
+        $obj['isPlaying'] = $isPlaying;
 
         return $obj;
     }
@@ -307,45 +307,45 @@ final class PlayerGetStateResponse implements BaseModel
      *   id?: string|null,
      *   album?: Album|null,
      *   artists?: list<SimplifiedArtistObject>|null,
-     *   available_markets?: list<string>|null,
-     *   disc_number?: int|null,
-     *   duration_ms?: int|null,
+     *   availableMarkets?: list<string>|null,
+     *   discNumber?: int|null,
+     *   durationMs?: int|null,
      *   explicit?: bool|null,
-     *   external_ids?: ExternalIDObject|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalIDs?: ExternalIDObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
-     *   is_local?: bool|null,
-     *   is_playable?: bool|null,
-     *   linked_from?: LinkedTrackObject|null,
+     *   isLocal?: bool|null,
+     *   isPlayable?: bool|null,
+     *   linkedFrom?: LinkedTrackObject|null,
      *   name?: string|null,
      *   popularity?: int|null,
-     *   preview_url?: string|null,
+     *   previewURL?: string|null,
      *   restrictions?: TrackRestrictionObject|null,
-     *   track_number?: int|null,
+     *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * }|EpisodeObject|array{
      *   id: string,
-     *   audio_preview_url: string|null,
+     *   audioPreviewURL: string|null,
      *   description: string,
-     *   duration_ms: int,
+     *   durationMs: int,
      *   explicit: bool,
-     *   external_urls: ExternalURLObject,
+     *   externalURLs: ExternalURLObject,
      *   href: string,
-     *   html_description: string,
+     *   htmlDescription: string,
      *   images: list<ImageObject>,
-     *   is_externally_hosted: bool,
-     *   is_playable: bool,
+     *   isExternallyHosted: bool,
+     *   isPlayable: bool,
      *   languages: list<string>,
      *   name: string,
-     *   release_date: string,
-     *   release_date_precision: value-of<ReleaseDatePrecision>,
+     *   releaseDate: string,
+     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
      *   show: ShowBase,
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
      *   restrictions?: EpisodeRestrictionObject|null,
-     *   resume_point?: ResumePointObject|null,
+     *   resumePoint?: ResumePointObject|null,
      * } $item
      */
     public function withItem(TrackObject|array|EpisodeObject $item): self
@@ -362,7 +362,7 @@ final class PlayerGetStateResponse implements BaseModel
     public function withProgressMs(int $progressMs): self
     {
         $obj = clone $this;
-        $obj['progress_ms'] = $progressMs;
+        $obj['progressMs'] = $progressMs;
 
         return $obj;
     }
@@ -373,7 +373,7 @@ final class PlayerGetStateResponse implements BaseModel
     public function withRepeatState(string $repeatState): self
     {
         $obj = clone $this;
-        $obj['repeat_state'] = $repeatState;
+        $obj['repeatState'] = $repeatState;
 
         return $obj;
     }
@@ -384,7 +384,7 @@ final class PlayerGetStateResponse implements BaseModel
     public function withShuffleState(bool $shuffleState): self
     {
         $obj = clone $this;
-        $obj['shuffle_state'] = $shuffleState;
+        $obj['shuffleState'] = $shuffleState;
 
         return $obj;
     }

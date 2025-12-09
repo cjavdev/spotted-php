@@ -104,7 +104,7 @@ final class Artists implements BaseModel
      *
      * @param list<ArtistObject|array{
      *   id?: string|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   followers?: FollowersObject|null,
      *   genres?: list<string>|null,
      *   href?: string|null,
@@ -207,7 +207,7 @@ final class Artists implements BaseModel
     /**
      * @param list<ArtistObject|array{
      *   id?: string|null,
-     *   external_urls?: ExternalURLObject|null,
+     *   externalURLs?: ExternalURLObject|null,
      *   followers?: FollowersObject|null,
      *   genres?: list<string>|null,
      *   href?: string|null,

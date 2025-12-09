@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\ArtistsService::listAlbums()
  *
  * @phpstan-type ArtistListAlbumsParamsShape = array{
- *   include_groups?: string, limit?: int, market?: string, offset?: int
+ *   includeGroups?: string, limit?: int, market?: string, offset?: int
  * }
  */
 final class ArtistListAlbumsParams implements BaseModel
@@ -29,7 +29,7 @@ final class ArtistListAlbumsParams implements BaseModel
      * Valid values are:<br/>- `album`<br/>- `single`<br/>- `appears_on`<br/>- `compilation`<br/>For example: `include_groups=album,single`.
      */
     #[Optional]
-    public ?string $include_groups;
+    public ?string $includeGroups;
 
     /**
      * The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
@@ -65,14 +65,14 @@ final class ArtistListAlbumsParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $include_groups = null,
+        ?string $includeGroups = null,
         ?int $limit = null,
         ?string $market = null,
         ?int $offset = null,
     ): self {
         $obj = new self;
 
-        null !== $include_groups && $obj['include_groups'] = $include_groups;
+        null !== $includeGroups && $obj['includeGroups'] = $includeGroups;
         null !== $limit && $obj['limit'] = $limit;
         null !== $market && $obj['market'] = $market;
         null !== $offset && $obj['offset'] = $offset;
@@ -87,7 +87,7 @@ final class ArtistListAlbumsParams implements BaseModel
     public function withIncludeGroups(string $includeGroups): self
     {
         $obj = clone $this;
-        $obj['include_groups'] = $includeGroups;
+        $obj['includeGroups'] = $includeGroups;
 
         return $obj;
     }

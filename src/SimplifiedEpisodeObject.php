@@ -13,25 +13,25 @@ use Spotted\SimplifiedEpisodeObject\ReleaseDatePrecision;
 /**
  * @phpstan-type SimplifiedEpisodeObjectShape = array{
  *   id: string,
- *   audio_preview_url: string|null,
+ *   audioPreviewURL: string|null,
  *   description: string,
- *   duration_ms: int,
+ *   durationMs: int,
  *   explicit: bool,
- *   external_urls: ExternalURLObject,
+ *   externalURLs: ExternalURLObject,
  *   href: string,
- *   html_description: string,
+ *   htmlDescription: string,
  *   images: list<ImageObject>,
- *   is_externally_hosted: bool,
- *   is_playable: bool,
+ *   isExternallyHosted: bool,
+ *   isPlayable: bool,
  *   languages: list<string>,
  *   name: string,
- *   release_date: string,
- *   release_date_precision: value-of<ReleaseDatePrecision>,
+ *   releaseDate: string,
+ *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
  *   type?: 'episode',
  *   uri: string,
  *   language?: string|null,
  *   restrictions?: EpisodeRestrictionObject|null,
- *   resume_point?: ResumePointObject|null,
+ *   resumePoint?: ResumePointObject|null,
  * }
  */
 final class SimplifiedEpisodeObject implements BaseModel
@@ -58,8 +58,8 @@ final class SimplifiedEpisodeObject implements BaseModel
      *
      * A URL to a 30 second preview (MP3 format) of the episode. `null` if not available.
      */
-    #[Required]
-    public ?string $audio_preview_url;
+    #[Required('audio_preview_url')]
+    public ?string $audioPreviewURL;
 
     /**
      * A description of the episode. HTML tags are stripped away from this field, use `html_description` field in case HTML tags are needed.
@@ -70,8 +70,8 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * The episode length in milliseconds.
      */
-    #[Required]
-    public int $duration_ms;
+    #[Required('duration_ms')]
+    public int $durationMs;
 
     /**
      * Whether or not the episode has explicit content (true = yes it does; false = no it does not OR unknown).
@@ -82,8 +82,8 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * External URLs for this episode.
      */
-    #[Required]
-    public ExternalURLObject $external_urls;
+    #[Required('external_urls')]
+    public ExternalURLObject $externalURLs;
 
     /**
      * A link to the Web API endpoint providing full details of the episode.
@@ -94,8 +94,8 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * A description of the episode. This field may contain HTML tags.
      */
-    #[Required]
-    public string $html_description;
+    #[Required('html_description')]
+    public string $htmlDescription;
 
     /**
      * The cover art for the episode in various sizes, widest first.
@@ -108,14 +108,14 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * True if the episode is hosted outside of Spotify's CDN.
      */
-    #[Required]
-    public bool $is_externally_hosted;
+    #[Required('is_externally_hosted')]
+    public bool $isExternallyHosted;
 
     /**
      * True if the episode is playable in the given market. Otherwise false.
      */
-    #[Required]
-    public bool $is_playable;
+    #[Required('is_playable')]
+    public bool $isPlayable;
 
     /**
      * A list of the languages used in the episode, identified by their [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639) code.
@@ -134,16 +134,16 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * The date the episode was first released, for example `"1981-12-15"`. Depending on the precision, it might be shown as `"1981"` or `"1981-12"`.
      */
-    #[Required]
-    public string $release_date;
+    #[Required('release_date')]
+    public string $releaseDate;
 
     /**
      * The precision with which `release_date` value is known.
      *
-     * @var value-of<ReleaseDatePrecision> $release_date_precision
+     * @var value-of<ReleaseDatePrecision> $releaseDatePrecision
      */
-    #[Required(enum: ReleaseDatePrecision::class)]
-    public string $release_date_precision;
+    #[Required('release_date_precision', enum: ReleaseDatePrecision::class)]
+    public string $releaseDatePrecision;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the episode.
@@ -168,8 +168,8 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * The user's most recent position in the episode. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
      */
-    #[Optional]
-    public ?ResumePointObject $resume_point;
+    #[Optional('resume_point')]
+    public ?ResumePointObject $resumePoint;
 
     /**
      * `new SimplifiedEpisodeObject()` is missing required properties by the API.
@@ -178,20 +178,20 @@ final class SimplifiedEpisodeObject implements BaseModel
      * ```
      * SimplifiedEpisodeObject::with(
      *   id: ...,
-     *   audio_preview_url: ...,
+     *   audioPreviewURL: ...,
      *   description: ...,
-     *   duration_ms: ...,
+     *   durationMs: ...,
      *   explicit: ...,
-     *   external_urls: ...,
+     *   externalURLs: ...,
      *   href: ...,
-     *   html_description: ...,
+     *   htmlDescription: ...,
      *   images: ...,
-     *   is_externally_hosted: ...,
-     *   is_playable: ...,
+     *   isExternallyHosted: ...,
+     *   isPlayable: ...,
      *   languages: ...,
      *   name: ...,
-     *   release_date: ...,
-     *   release_date_precision: ...,
+     *   releaseDate: ...,
+     *   releaseDatePrecision: ...,
      *   uri: ...,
      * )
      * ```
@@ -228,60 +228,60 @@ final class SimplifiedEpisodeObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      * @param list<ImageObject|array{
      *   height: int|null, url: string, width: int|null
      * }> $images
      * @param list<string> $languages
-     * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $release_date_precision
+     * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
      * @param EpisodeRestrictionObject|array{reason?: string|null} $restrictions
      * @param ResumePointObject|array{
-     *   fully_played?: bool|null, resume_position_ms?: int|null
-     * } $resume_point
+     *   fullyPlayed?: bool|null, resumePositionMs?: int|null
+     * } $resumePoint
      */
     public static function with(
         string $id,
-        ?string $audio_preview_url,
+        ?string $audioPreviewURL,
         string $description,
-        int $duration_ms,
+        int $durationMs,
         bool $explicit,
-        ExternalURLObject|array $external_urls,
+        ExternalURLObject|array $externalURLs,
         string $href,
-        string $html_description,
+        string $htmlDescription,
         array $images,
-        bool $is_externally_hosted,
-        bool $is_playable,
+        bool $isExternallyHosted,
+        bool $isPlayable,
         array $languages,
         string $name,
-        string $release_date,
-        ReleaseDatePrecision|string $release_date_precision,
+        string $releaseDate,
+        ReleaseDatePrecision|string $releaseDatePrecision,
         string $uri,
         ?string $language = null,
         EpisodeRestrictionObject|array|null $restrictions = null,
-        ResumePointObject|array|null $resume_point = null,
+        ResumePointObject|array|null $resumePoint = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['audio_preview_url'] = $audio_preview_url;
+        $obj['audioPreviewURL'] = $audioPreviewURL;
         $obj['description'] = $description;
-        $obj['duration_ms'] = $duration_ms;
+        $obj['durationMs'] = $durationMs;
         $obj['explicit'] = $explicit;
-        $obj['external_urls'] = $external_urls;
+        $obj['externalURLs'] = $externalURLs;
         $obj['href'] = $href;
-        $obj['html_description'] = $html_description;
+        $obj['htmlDescription'] = $htmlDescription;
         $obj['images'] = $images;
-        $obj['is_externally_hosted'] = $is_externally_hosted;
-        $obj['is_playable'] = $is_playable;
+        $obj['isExternallyHosted'] = $isExternallyHosted;
+        $obj['isPlayable'] = $isPlayable;
         $obj['languages'] = $languages;
         $obj['name'] = $name;
-        $obj['release_date'] = $release_date;
-        $obj['release_date_precision'] = $release_date_precision;
+        $obj['releaseDate'] = $releaseDate;
+        $obj['releaseDatePrecision'] = $releaseDatePrecision;
         $obj['uri'] = $uri;
 
         null !== $language && $obj['language'] = $language;
         null !== $restrictions && $obj['restrictions'] = $restrictions;
-        null !== $resume_point && $obj['resume_point'] = $resume_point;
+        null !== $resumePoint && $obj['resumePoint'] = $resumePoint;
 
         return $obj;
     }
@@ -303,7 +303,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     public function withAudioPreviewURL(?string $audioPreviewURL): self
     {
         $obj = clone $this;
-        $obj['audio_preview_url'] = $audioPreviewURL;
+        $obj['audioPreviewURL'] = $audioPreviewURL;
 
         return $obj;
     }
@@ -325,7 +325,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     public function withDurationMs(int $durationMs): self
     {
         $obj = clone $this;
-        $obj['duration_ms'] = $durationMs;
+        $obj['durationMs'] = $durationMs;
 
         return $obj;
     }
@@ -350,7 +350,7 @@ final class SimplifiedEpisodeObject implements BaseModel
         ExternalURLObject|array $externalURLs
     ): self {
         $obj = clone $this;
-        $obj['external_urls'] = $externalURLs;
+        $obj['externalURLs'] = $externalURLs;
 
         return $obj;
     }
@@ -372,7 +372,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     public function withHTMLDescription(string $htmlDescription): self
     {
         $obj = clone $this;
-        $obj['html_description'] = $htmlDescription;
+        $obj['htmlDescription'] = $htmlDescription;
 
         return $obj;
     }
@@ -398,7 +398,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     public function withIsExternallyHosted(bool $isExternallyHosted): self
     {
         $obj = clone $this;
-        $obj['is_externally_hosted'] = $isExternallyHosted;
+        $obj['isExternallyHosted'] = $isExternallyHosted;
 
         return $obj;
     }
@@ -409,7 +409,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     public function withIsPlayable(bool $isPlayable): self
     {
         $obj = clone $this;
-        $obj['is_playable'] = $isPlayable;
+        $obj['isPlayable'] = $isPlayable;
 
         return $obj;
     }
@@ -444,7 +444,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     public function withReleaseDate(string $releaseDate): self
     {
         $obj = clone $this;
-        $obj['release_date'] = $releaseDate;
+        $obj['releaseDate'] = $releaseDate;
 
         return $obj;
     }
@@ -458,7 +458,7 @@ final class SimplifiedEpisodeObject implements BaseModel
         ReleaseDatePrecision|string $releaseDatePrecision
     ): self {
         $obj = clone $this;
-        $obj['release_date_precision'] = $releaseDatePrecision;
+        $obj['releaseDatePrecision'] = $releaseDatePrecision;
 
         return $obj;
     }
@@ -503,13 +503,13 @@ final class SimplifiedEpisodeObject implements BaseModel
      * The user's most recent position in the episode. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
      *
      * @param ResumePointObject|array{
-     *   fully_played?: bool|null, resume_position_ms?: int|null
+     *   fullyPlayed?: bool|null, resumePositionMs?: int|null
      * } $resumePoint
      */
     public function withResumePoint(ResumePointObject|array $resumePoint): self
     {
         $obj = clone $this;
-        $obj['resume_point'] = $resumePoint;
+        $obj['resumePoint'] = $resumePoint;
 
         return $obj;
     }

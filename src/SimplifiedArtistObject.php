@@ -12,7 +12,7 @@ use Spotted\SimplifiedArtistObject\Type;
 /**
  * @phpstan-type SimplifiedArtistObjectShape = array{
  *   id?: string|null,
- *   external_urls?: ExternalURLObject|null,
+ *   externalURLs?: ExternalURLObject|null,
  *   href?: string|null,
  *   name?: string|null,
  *   type?: value-of<Type>|null,
@@ -33,8 +33,8 @@ final class SimplifiedArtistObject implements BaseModel
     /**
      * Known external URLs for this artist.
      */
-    #[Optional]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * A link to the Web API endpoint providing full details of the artist.
@@ -72,12 +72,12 @@ final class SimplifiedArtistObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $external_urls
+     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
      * @param Type|value-of<Type> $type
      */
     public static function with(
         ?string $id = null,
-        ExternalURLObject|array|null $external_urls = null,
+        ExternalURLObject|array|null $externalURLs = null,
         ?string $href = null,
         ?string $name = null,
         Type|string|null $type = null,
@@ -86,7 +86,7 @@ final class SimplifiedArtistObject implements BaseModel
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
-        null !== $external_urls && $obj['external_urls'] = $external_urls;
+        null !== $externalURLs && $obj['externalURLs'] = $externalURLs;
         null !== $href && $obj['href'] = $href;
         null !== $name && $obj['name'] = $name;
         null !== $type && $obj['type'] = $type;
@@ -115,7 +115,7 @@ final class SimplifiedArtistObject implements BaseModel
         ExternalURLObject|array $externalURLs
     ): self {
         $obj = clone $this;
-        $obj['external_urls'] = $externalURLs;
+        $obj['externalURLs'] = $externalURLs;
 
         return $obj;
     }

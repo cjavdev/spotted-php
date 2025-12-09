@@ -8,6 +8,7 @@ use Spotted\ArtistObject;
 use Spotted\Client;
 use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
 use Spotted\Me\Top\TopListTopArtistsParams;
 use Spotted\Me\Top\TopListTopTracksParams;
@@ -28,7 +29,7 @@ final class TopService implements TopContract
      * Get the current user's top artists based on calculated affinity.
      *
      * @param array{
-     *   limit?: int, offset?: int, time_range?: string
+     *   limit?: int, offset?: int, timeRange?: string
      * }|TopListTopArtistsParams $params
      *
      * @return CursorURLPage<ArtistObject>
@@ -48,7 +49,7 @@ final class TopService implements TopContract
         $response = $this->client->request(
             method: 'get',
             path: 'me/top/artists',
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['timeRange' => 'time_range']),
             options: $options,
             convert: ArtistObject::class,
             page: CursorURLPage::class,
@@ -63,7 +64,7 @@ final class TopService implements TopContract
      * Get the current user's top tracks based on calculated affinity.
      *
      * @param array{
-     *   limit?: int, offset?: int, time_range?: string
+     *   limit?: int, offset?: int, timeRange?: string
      * }|TopListTopTracksParams $params
      *
      * @return CursorURLPage<TrackObject>
@@ -83,7 +84,7 @@ final class TopService implements TopContract
         $response = $this->client->request(
             method: 'get',
             path: 'me/top/tracks',
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['timeRange' => 'time_range']),
             options: $options,
             convert: TrackObject::class,
             page: CursorURLPage::class,
