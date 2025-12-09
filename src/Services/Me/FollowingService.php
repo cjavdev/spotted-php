@@ -11,6 +11,7 @@ use Spotted\Core\Exceptions\APIException;
 use Spotted\Me\Following\FollowingBulkGetResponse;
 use Spotted\Me\Following\FollowingBulkRetrieveParams;
 use Spotted\Me\Following\FollowingCheckParams;
+use Spotted\Me\Following\FollowingCheckParams\Type;
 use Spotted\Me\Following\FollowingFollowParams;
 use Spotted\Me\Following\FollowingUnfollowParams;
 use Spotted\RequestOptions;
@@ -29,7 +30,7 @@ final class FollowingService implements FollowingContract
      * Get the current user's followed artists.
      *
      * @param array{
-     *   type: 'artist', after?: string, limit?: int
+     *   type?: 'artist', after?: string, limit?: int
      * }|FollowingBulkRetrieveParams $params
      *
      * @throws APIException
@@ -60,7 +61,9 @@ final class FollowingService implements FollowingContract
      *
      * Check to see if the current user is following one or more artists or other Spotify users.
      *
-     * @param array{ids: string, type: 'artist'|'user'}|FollowingCheckParams $params
+     * @param array{
+     *   ids: string, type: 'artist'|'user'|Type
+     * }|FollowingCheckParams $params
      *
      * @return list<bool>
      *

@@ -9,6 +9,8 @@ use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\Search\SearchQueryParams;
+use Spotted\Search\SearchQueryParams\IncludeExternal;
+use Spotted\Search\SearchQueryParams\Type;
 use Spotted\Search\SearchQueryResponse;
 use Spotted\ServiceContracts\SearchContract;
 
@@ -27,8 +29,8 @@ final class SearchService implements SearchContract
      *
      * @param array{
      *   q: string,
-     *   type: list<'album'|'artist'|'playlist'|'track'|'show'|'episode'|'audiobook'>,
-     *   include_external?: 'audio',
+     *   type: list<'album'|'artist'|'playlist'|'track'|'show'|'episode'|'audiobook'|Type>,
+     *   include_external?: 'audio'|IncludeExternal,
      *   limit?: int,
      *   market?: string,
      *   offset?: int,

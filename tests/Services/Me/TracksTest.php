@@ -110,7 +110,10 @@ final class TracksTest extends TestCase
         $result = $this->client->me->tracks->save([
             'ids' => ['string'],
             'timestamped_ids' => [
-                ['id' => 'id', 'added_at' => '2019-12-27T18:11:19.117Z'],
+                [
+                    'id' => 'id',
+                    'added_at' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+                ],
             ],
         ]);
 

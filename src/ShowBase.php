@@ -25,7 +25,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   name: string,
  *   publisher: string,
  *   total_episodes: int,
- *   type: 'show',
+ *   type?: 'show',
  *   uri: string,
  * }
  */

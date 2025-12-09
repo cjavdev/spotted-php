@@ -116,7 +116,7 @@ final class Albums implements BaseModel
      *   release_date: string,
      *   release_date_precision: value-of<ReleaseDatePrecision>,
      *   total_tracks: int,
-     *   type: 'album',
+     *   type?: 'album',
      *   uri: string,
      *   restrictions?: AlbumRestrictionObject|null,
      * }> $items
@@ -223,7 +223,7 @@ final class Albums implements BaseModel
      *   release_date: string,
      *   release_date_precision: value-of<ReleaseDatePrecision>,
      *   total_tracks: int,
-     *   type: 'album',
+     *   type?: 'album',
      *   uri: string,
      *   restrictions?: AlbumRestrictionObject|null,
      * }> $items

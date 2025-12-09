@@ -38,7 +38,7 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->bulkRetrieve(['type' => 'artist']);
+        $result = $this->client->me->following->bulkRetrieve([]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FollowingBulkGetResponse::class, $result);

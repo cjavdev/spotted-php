@@ -28,7 +28,7 @@ use Spotted\EpisodeObject\ReleaseDatePrecision;
  *   release_date: string,
  *   release_date_precision: value-of<ReleaseDatePrecision>,
  *   show: ShowBase,
- *   type: 'episode',
+ *   type?: 'episode',
  *   uri: string,
  *   language?: string|null,
  *   restrictions?: EpisodeRestrictionObject|null,
@@ -259,7 +259,7 @@ final class EpisodeObject implements BaseModel
      *   name: string,
      *   publisher: string,
      *   total_episodes: int,
-     *   type: 'show',
+     *   type?: 'show',
      *   uri: string,
      * } $show
      * @param EpisodeRestrictionObject|array{reason?: string|null} $restrictions
@@ -512,7 +512,7 @@ final class EpisodeObject implements BaseModel
      *   name: string,
      *   publisher: string,
      *   total_episodes: int,
-     *   type: 'show',
+     *   type?: 'show',
      *   uri: string,
      * } $show
      */

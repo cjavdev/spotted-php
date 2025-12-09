@@ -191,7 +191,7 @@ final class TrackObject implements BaseModel
      *   release_date: string,
      *   release_date_precision: value-of<ReleaseDatePrecision>,
      *   total_tracks: int,
-     *   type: 'album',
+     *   type?: 'album',
      *   uri: string,
      *   restrictions?: AlbumRestrictionObject|null,
      * } $album
@@ -292,7 +292,7 @@ final class TrackObject implements BaseModel
      *   release_date: string,
      *   release_date_precision: value-of<ReleaseDatePrecision>,
      *   total_tracks: int,
-     *   type: 'album',
+     *   type?: 'album',
      *   uri: string,
      *   restrictions?: AlbumRestrictionObject|null,
      * } $album
