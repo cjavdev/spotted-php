@@ -57,11 +57,11 @@ final class PlayerGetDevicesResponse implements BaseModel
      */
     public static function with(array $devices): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['devices'] = $devices;
+        $self['devices'] = $devices;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class PlayerGetDevicesResponse implements BaseModel
      */
     public function withDevices(array $devices): self
     {
-        $obj = clone $this;
-        $obj['devices'] = $devices;
+        $self = clone $this;
+        $self['devices'] = $devices;
 
-        return $obj;
+        return $self;
     }
 }

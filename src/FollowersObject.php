@@ -40,12 +40,12 @@ final class FollowersObject implements BaseModel
      */
     public static function with(?string $href = null, ?int $total = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $href && $obj['href'] = $href;
-        null !== $total && $obj['total'] = $total;
+        null !== $href && $self['href'] = $href;
+        null !== $total && $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -53,10 +53,10 @@ final class FollowersObject implements BaseModel
      */
     public function withHref(?string $href): self
     {
-        $obj = clone $this;
-        $obj['href'] = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,9 +64,9 @@ final class FollowersObject implements BaseModel
      */
     public function withTotal(int $total): self
     {
-        $obj = clone $this;
-        $obj['total'] = $total;
+        $self = clone $this;
+        $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 }

@@ -56,12 +56,12 @@ final class TimestampedID implements BaseModel
      */
     public static function with(string $id, \DateTimeInterface $addedAt): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['addedAt'] = $addedAt;
+        $self['id'] = $id;
+        $self['addedAt'] = $addedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class TimestampedID implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class TimestampedID implements BaseModel
      */
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
-        $obj = clone $this;
-        $obj['addedAt'] = $addedAt;
+        $self = clone $this;
+        $self['addedAt'] = $addedAt;
 
-        return $obj;
+        return $self;
     }
 }

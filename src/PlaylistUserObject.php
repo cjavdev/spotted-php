@@ -75,15 +75,15 @@ final class PlaylistUserObject implements BaseModel
         Type|string|null $type = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $externalURLs && $obj['externalURLs'] = $externalURLs;
-        null !== $href && $obj['href'] = $href;
-        null !== $type && $obj['type'] = $type;
-        null !== $uri && $obj['uri'] = $uri;
+        null !== $id && $self['id'] = $id;
+        null !== $externalURLs && $self['externalURLs'] = $externalURLs;
+        null !== $href && $self['href'] = $href;
+        null !== $type && $self['type'] = $type;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +91,10 @@ final class PlaylistUserObject implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class PlaylistUserObject implements BaseModel
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
     ): self {
-        $obj = clone $this;
-        $obj['externalURLs'] = $externalURLs;
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class PlaylistUserObject implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj['href'] = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,10 +129,10 @@ final class PlaylistUserObject implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,9 +140,9 @@ final class PlaylistUserObject implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

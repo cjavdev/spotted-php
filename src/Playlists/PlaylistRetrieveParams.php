@@ -72,13 +72,13 @@ final class PlaylistRetrieveParams implements BaseModel
         ?string $fields = null,
         ?string $market = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additionalTypes && $obj['additionalTypes'] = $additionalTypes;
-        null !== $fields && $obj['fields'] = $fields;
-        null !== $market && $obj['market'] = $market;
+        null !== $additionalTypes && $self['additionalTypes'] = $additionalTypes;
+        null !== $fields && $self['fields'] = $fields;
+        null !== $market && $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,10 +88,10 @@ final class PlaylistRetrieveParams implements BaseModel
      */
     public function withAdditionalTypes(string $additionalTypes): self
     {
-        $obj = clone $this;
-        $obj['additionalTypes'] = $additionalTypes;
+        $self = clone $this;
+        $self['additionalTypes'] = $additionalTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class PlaylistRetrieveParams implements BaseModel
      */
     public function withFields(string $fields): self
     {
-        $obj = clone $this;
-        $obj['fields'] = $fields;
+        $self = clone $this;
+        $self['fields'] = $fields;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,9 +123,9 @@ final class PlaylistRetrieveParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj['market'] = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 }

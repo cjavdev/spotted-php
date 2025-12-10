@@ -67,12 +67,12 @@ final class FollowingCheckParams implements BaseModel
      */
     public static function with(string $ids, Type|string $type): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['ids'] = $ids;
-        $obj['type'] = $type;
+        $self['ids'] = $ids;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +80,10 @@ final class FollowingCheckParams implements BaseModel
      */
     public function withIDs(string $ids): self
     {
-        $obj = clone $this;
-        $obj['ids'] = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,9 +93,9 @@ final class FollowingCheckParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

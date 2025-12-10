@@ -77,16 +77,16 @@ final class Seed implements BaseModel
         ?int $initialPoolSize = null,
         ?string $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $afterFilteringSize && $obj['afterFilteringSize'] = $afterFilteringSize;
-        null !== $afterRelinkingSize && $obj['afterRelinkingSize'] = $afterRelinkingSize;
-        null !== $href && $obj['href'] = $href;
-        null !== $initialPoolSize && $obj['initialPoolSize'] = $initialPoolSize;
-        null !== $type && $obj['type'] = $type;
+        null !== $id && $self['id'] = $id;
+        null !== $afterFilteringSize && $self['afterFilteringSize'] = $afterFilteringSize;
+        null !== $afterRelinkingSize && $self['afterRelinkingSize'] = $afterRelinkingSize;
+        null !== $href && $self['href'] = $href;
+        null !== $initialPoolSize && $self['initialPoolSize'] = $initialPoolSize;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +94,10 @@ final class Seed implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class Seed implements BaseModel
      */
     public function withAfterFilteringSize(int $afterFilteringSize): self
     {
-        $obj = clone $this;
-        $obj['afterFilteringSize'] = $afterFilteringSize;
+        $self = clone $this;
+        $self['afterFilteringSize'] = $afterFilteringSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class Seed implements BaseModel
      */
     public function withAfterRelinkingSize(int $afterRelinkingSize): self
     {
-        $obj = clone $this;
-        $obj['afterRelinkingSize'] = $afterRelinkingSize;
+        $self = clone $this;
+        $self['afterRelinkingSize'] = $afterRelinkingSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class Seed implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj['href'] = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class Seed implements BaseModel
      */
     public function withInitialPoolSize(int $initialPoolSize): self
     {
-        $obj = clone $this;
-        $obj['initialPoolSize'] = $initialPoolSize;
+        $self = clone $this;
+        $self['initialPoolSize'] = $initialPoolSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,9 +149,9 @@ final class Seed implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

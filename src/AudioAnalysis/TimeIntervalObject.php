@@ -51,13 +51,13 @@ final class TimeIntervalObject implements BaseModel
         ?float $duration = null,
         ?float $start = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $confidence && $obj['confidence'] = $confidence;
-        null !== $duration && $obj['duration'] = $duration;
-        null !== $start && $obj['start'] = $start;
+        null !== $confidence && $self['confidence'] = $confidence;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $start && $self['start'] = $start;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,10 +65,10 @@ final class TimeIntervalObject implements BaseModel
      */
     public function withConfidence(float $confidence): self
     {
-        $obj = clone $this;
-        $obj['confidence'] = $confidence;
+        $self = clone $this;
+        $self['confidence'] = $confidence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class TimeIntervalObject implements BaseModel
      */
     public function withDuration(float $duration): self
     {
-        $obj = clone $this;
-        $obj['duration'] = $duration;
+        $self = clone $this;
+        $self['duration'] = $duration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,9 +87,9 @@ final class TimeIntervalObject implements BaseModel
      */
     public function withStart(float $start): self
     {
-        $obj = clone $this;
-        $obj['start'] = $start;
+        $self = clone $this;
+        $self['start'] = $start;
 
-        return $obj;
+        return $self;
     }
 }

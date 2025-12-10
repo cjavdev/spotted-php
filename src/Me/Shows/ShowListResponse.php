@@ -70,12 +70,12 @@ final class ShowListResponse implements BaseModel
         ?\DateTimeInterface $addedAt = null,
         ShowBase|array|null $show = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $addedAt && $obj['addedAt'] = $addedAt;
-        null !== $show && $obj['show'] = $show;
+        null !== $addedAt && $self['addedAt'] = $addedAt;
+        null !== $show && $self['show'] = $show;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class ShowListResponse implements BaseModel
      */
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
-        $obj = clone $this;
-        $obj['addedAt'] = $addedAt;
+        $self = clone $this;
+        $self['addedAt'] = $addedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,9 +116,9 @@ final class ShowListResponse implements BaseModel
      */
     public function withShow(ShowBase|array $show): self
     {
-        $obj = clone $this;
-        $obj['show'] = $show;
+        $self = clone $this;
+        $self['show'] = $show;
 
-        return $obj;
+        return $self;
     }
 }

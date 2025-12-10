@@ -48,12 +48,12 @@ final class PlaylistListParams implements BaseModel
      */
     public static function with(?int $limit = null, ?int $offset = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $limit && $obj['limit'] = $limit;
-        null !== $offset && $obj['offset'] = $offset;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $offset && $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -61,10 +61,10 @@ final class PlaylistListParams implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj['limit'] = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class PlaylistListParams implements BaseModel
      */
     public function withOffset(int $offset): self
     {
-        $obj = clone $this;
-        $obj['offset'] = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 }

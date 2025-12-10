@@ -63,13 +63,13 @@ final class AlbumListTracksParams implements BaseModel
         ?string $market = null,
         ?int $offset = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $limit && $obj['limit'] = $limit;
-        null !== $market && $obj['market'] = $market;
-        null !== $offset && $obj['offset'] = $offset;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $market && $self['market'] = $market;
+        null !== $offset && $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,10 +77,10 @@ final class AlbumListTracksParams implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj['limit'] = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class AlbumListTracksParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj['market'] = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,9 +104,9 @@ final class AlbumListTracksParams implements BaseModel
      */
     public function withOffset(int $offset): self
     {
-        $obj = clone $this;
-        $obj['offset'] = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 }

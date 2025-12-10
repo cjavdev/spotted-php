@@ -81,15 +81,15 @@ final class PlaylistCreateParams implements BaseModel
         ?string $description = null,
         ?bool $public = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['name'] = $name;
+        $self['name'] = $name;
 
-        null !== $collaborative && $obj['collaborative'] = $collaborative;
-        null !== $description && $obj['description'] = $description;
-        null !== $public && $obj['public'] = $public;
+        null !== $collaborative && $self['collaborative'] = $collaborative;
+        null !== $description && $self['description'] = $description;
+        null !== $public && $self['public'] = $public;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class PlaylistCreateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,10 +108,10 @@ final class PlaylistCreateParams implements BaseModel
      */
     public function withCollaborative(bool $collaborative): self
     {
-        $obj = clone $this;
-        $obj['collaborative'] = $collaborative;
+        $self = clone $this;
+        $self['collaborative'] = $collaborative;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,10 +119,10 @@ final class PlaylistCreateParams implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,9 +130,9 @@ final class PlaylistCreateParams implements BaseModel
      */
     public function withPublic(bool $public): self
     {
-        $obj = clone $this;
-        $obj['public'] = $public;
+        $self = clone $this;
+        $self['public'] = $public;
 
-        return $obj;
+        return $self;
     }
 }

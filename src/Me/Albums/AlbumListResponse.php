@@ -79,12 +79,12 @@ final class AlbumListResponse implements BaseModel
         ?\DateTimeInterface $addedAt = null,
         Album|array|null $album = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $addedAt && $obj['addedAt'] = $addedAt;
-        null !== $album && $obj['album'] = $album;
+        null !== $addedAt && $self['addedAt'] = $addedAt;
+        null !== $album && $self['album'] = $album;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +94,10 @@ final class AlbumListResponse implements BaseModel
      */
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
-        $obj = clone $this;
-        $obj['addedAt'] = $addedAt;
+        $self = clone $this;
+        $self['addedAt'] = $addedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,9 +128,9 @@ final class AlbumListResponse implements BaseModel
      */
     public function withAlbum(Album|array $album): self
     {
-        $obj = clone $this;
-        $obj['album'] = $album;
+        $self = clone $this;
+        $self['album'] = $album;
 
-        return $obj;
+        return $self;
     }
 }

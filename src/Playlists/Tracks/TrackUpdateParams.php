@@ -81,15 +81,15 @@ final class TrackUpdateParams implements BaseModel
         ?string $snapshotID = null,
         ?array $uris = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $insertBefore && $obj['insertBefore'] = $insertBefore;
-        null !== $rangeLength && $obj['rangeLength'] = $rangeLength;
-        null !== $rangeStart && $obj['rangeStart'] = $rangeStart;
-        null !== $snapshotID && $obj['snapshotID'] = $snapshotID;
-        null !== $uris && $obj['uris'] = $uris;
+        null !== $insertBefore && $self['insertBefore'] = $insertBefore;
+        null !== $rangeLength && $self['rangeLength'] = $rangeLength;
+        null !== $rangeStart && $self['rangeStart'] = $rangeStart;
+        null !== $snapshotID && $self['snapshotID'] = $snapshotID;
+        null !== $uris && $self['uris'] = $uris;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class TrackUpdateParams implements BaseModel
      */
     public function withInsertBefore(int $insertBefore): self
     {
-        $obj = clone $this;
-        $obj['insertBefore'] = $insertBefore;
+        $self = clone $this;
+        $self['insertBefore'] = $insertBefore;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,10 +108,10 @@ final class TrackUpdateParams implements BaseModel
      */
     public function withRangeLength(int $rangeLength): self
     {
-        $obj = clone $this;
-        $obj['rangeLength'] = $rangeLength;
+        $self = clone $this;
+        $self['rangeLength'] = $rangeLength;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,10 +119,10 @@ final class TrackUpdateParams implements BaseModel
      */
     public function withRangeStart(int $rangeStart): self
     {
-        $obj = clone $this;
-        $obj['rangeStart'] = $rangeStart;
+        $self = clone $this;
+        $self['rangeStart'] = $rangeStart;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,10 +130,10 @@ final class TrackUpdateParams implements BaseModel
      */
     public function withSnapshotID(string $snapshotID): self
     {
-        $obj = clone $this;
-        $obj['snapshotID'] = $snapshotID;
+        $self = clone $this;
+        $self['snapshotID'] = $snapshotID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,9 +141,9 @@ final class TrackUpdateParams implements BaseModel
      */
     public function withUris(array $uris): self
     {
-        $obj = clone $this;
-        $obj['uris'] = $uris;
+        $self = clone $this;
+        $self['uris'] = $uris;
 
-        return $obj;
+        return $self;
     }
 }

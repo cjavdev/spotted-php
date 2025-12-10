@@ -71,11 +71,11 @@ final class AudioFeatureBulkGetResponse implements BaseModel
      */
     public static function with(array $audioFeatures): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['audioFeatures'] = $audioFeatures;
+        $self['audioFeatures'] = $audioFeatures;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,9 +102,9 @@ final class AudioFeatureBulkGetResponse implements BaseModel
      */
     public function withAudioFeatures(array $audioFeatures): self
     {
-        $obj = clone $this;
-        $obj['audioFeatures'] = $audioFeatures;
+        $self = clone $this;
+        $self['audioFeatures'] = $audioFeatures;
 
-        return $obj;
+        return $self;
     }
 }

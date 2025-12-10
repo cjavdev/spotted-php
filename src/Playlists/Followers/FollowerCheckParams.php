@@ -40,11 +40,11 @@ final class FollowerCheckParams implements BaseModel
      */
     public static function with(?string $ids = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $ids && $obj['ids'] = $ids;
+        null !== $ids && $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class FollowerCheckParams implements BaseModel
      */
     public function withIDs(string $ids): self
     {
-        $obj = clone $this;
-        $obj['ids'] = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 }

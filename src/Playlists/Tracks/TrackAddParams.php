@@ -50,12 +50,12 @@ final class TrackAddParams implements BaseModel
      */
     public static function with(?int $position = null, ?array $uris = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $position && $obj['position'] = $position;
-        null !== $uris && $obj['uris'] = $uris;
+        null !== $position && $self['position'] = $position;
+        null !== $uris && $self['uris'] = $uris;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class TrackAddParams implements BaseModel
      */
     public function withPosition(int $position): self
     {
-        $obj = clone $this;
-        $obj['position'] = $position;
+        $self = clone $this;
+        $self['position'] = $position;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,9 +76,9 @@ final class TrackAddParams implements BaseModel
      */
     public function withUris(array $uris): self
     {
-        $obj = clone $this;
-        $obj['uris'] = $uris;
+        $self = clone $this;
+        $self['uris'] = $uris;
 
-        return $obj;
+        return $self;
     }
 }

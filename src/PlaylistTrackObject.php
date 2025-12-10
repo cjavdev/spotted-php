@@ -117,14 +117,14 @@ final class PlaylistTrackObject implements BaseModel
         ?bool $isLocal = null,
         TrackObject|array|EpisodeObject|null $track = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $addedAt && $obj['addedAt'] = $addedAt;
-        null !== $addedBy && $obj['addedBy'] = $addedBy;
-        null !== $isLocal && $obj['isLocal'] = $isLocal;
-        null !== $track && $obj['track'] = $track;
+        null !== $addedAt && $self['addedAt'] = $addedAt;
+        null !== $addedBy && $self['addedBy'] = $addedBy;
+        null !== $isLocal && $self['isLocal'] = $isLocal;
+        null !== $track && $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +132,10 @@ final class PlaylistTrackObject implements BaseModel
      */
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
-        $obj = clone $this;
-        $obj['addedAt'] = $addedAt;
+        $self = clone $this;
+        $self['addedAt'] = $addedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +151,10 @@ final class PlaylistTrackObject implements BaseModel
      */
     public function withAddedBy(PlaylistUserObject|array $addedBy): self
     {
-        $obj = clone $this;
-        $obj['addedBy'] = $addedBy;
+        $self = clone $this;
+        $self['addedBy'] = $addedBy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,10 +162,10 @@ final class PlaylistTrackObject implements BaseModel
      */
     public function withIsLocal(bool $isLocal): self
     {
-        $obj = clone $this;
-        $obj['isLocal'] = $isLocal;
+        $self = clone $this;
+        $self['isLocal'] = $isLocal;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,9 +218,9 @@ final class PlaylistTrackObject implements BaseModel
      */
     public function withTrack(TrackObject|array|EpisodeObject $track): self
     {
-        $obj = clone $this;
-        $obj['track'] = $track;
+        $self = clone $this;
+        $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 }

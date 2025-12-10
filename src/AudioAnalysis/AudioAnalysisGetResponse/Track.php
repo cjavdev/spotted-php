@@ -237,36 +237,36 @@ final class Track implements BaseModel
         ?float $timeSignatureConfidence = null,
         ?int $windowSeconds = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $analysisChannels && $obj['analysisChannels'] = $analysisChannels;
-        null !== $analysisSampleRate && $obj['analysisSampleRate'] = $analysisSampleRate;
-        null !== $codeVersion && $obj['codeVersion'] = $codeVersion;
-        null !== $codestring && $obj['codestring'] = $codestring;
-        null !== $duration && $obj['duration'] = $duration;
-        null !== $echoprintVersion && $obj['echoprintVersion'] = $echoprintVersion;
-        null !== $echoprintstring && $obj['echoprintstring'] = $echoprintstring;
-        null !== $endOfFadeIn && $obj['endOfFadeIn'] = $endOfFadeIn;
-        null !== $key && $obj['key'] = $key;
-        null !== $keyConfidence && $obj['keyConfidence'] = $keyConfidence;
-        null !== $loudness && $obj['loudness'] = $loudness;
-        null !== $mode && $obj['mode'] = $mode;
-        null !== $modeConfidence && $obj['modeConfidence'] = $modeConfidence;
-        null !== $numSamples && $obj['numSamples'] = $numSamples;
-        null !== $offsetSeconds && $obj['offsetSeconds'] = $offsetSeconds;
-        null !== $rhythmVersion && $obj['rhythmVersion'] = $rhythmVersion;
-        null !== $rhythmstring && $obj['rhythmstring'] = $rhythmstring;
-        null !== $sampleMd5 && $obj['sampleMd5'] = $sampleMd5;
-        null !== $startOfFadeOut && $obj['startOfFadeOut'] = $startOfFadeOut;
-        null !== $synchVersion && $obj['synchVersion'] = $synchVersion;
-        null !== $synchstring && $obj['synchstring'] = $synchstring;
-        null !== $tempo && $obj['tempo'] = $tempo;
-        null !== $tempoConfidence && $obj['tempoConfidence'] = $tempoConfidence;
-        null !== $timeSignature && $obj['timeSignature'] = $timeSignature;
-        null !== $timeSignatureConfidence && $obj['timeSignatureConfidence'] = $timeSignatureConfidence;
-        null !== $windowSeconds && $obj['windowSeconds'] = $windowSeconds;
+        null !== $analysisChannels && $self['analysisChannels'] = $analysisChannels;
+        null !== $analysisSampleRate && $self['analysisSampleRate'] = $analysisSampleRate;
+        null !== $codeVersion && $self['codeVersion'] = $codeVersion;
+        null !== $codestring && $self['codestring'] = $codestring;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $echoprintVersion && $self['echoprintVersion'] = $echoprintVersion;
+        null !== $echoprintstring && $self['echoprintstring'] = $echoprintstring;
+        null !== $endOfFadeIn && $self['endOfFadeIn'] = $endOfFadeIn;
+        null !== $key && $self['key'] = $key;
+        null !== $keyConfidence && $self['keyConfidence'] = $keyConfidence;
+        null !== $loudness && $self['loudness'] = $loudness;
+        null !== $mode && $self['mode'] = $mode;
+        null !== $modeConfidence && $self['modeConfidence'] = $modeConfidence;
+        null !== $numSamples && $self['numSamples'] = $numSamples;
+        null !== $offsetSeconds && $self['offsetSeconds'] = $offsetSeconds;
+        null !== $rhythmVersion && $self['rhythmVersion'] = $rhythmVersion;
+        null !== $rhythmstring && $self['rhythmstring'] = $rhythmstring;
+        null !== $sampleMd5 && $self['sampleMd5'] = $sampleMd5;
+        null !== $startOfFadeOut && $self['startOfFadeOut'] = $startOfFadeOut;
+        null !== $synchVersion && $self['synchVersion'] = $synchVersion;
+        null !== $synchstring && $self['synchstring'] = $synchstring;
+        null !== $tempo && $self['tempo'] = $tempo;
+        null !== $tempoConfidence && $self['tempoConfidence'] = $tempoConfidence;
+        null !== $timeSignature && $self['timeSignature'] = $timeSignature;
+        null !== $timeSignatureConfidence && $self['timeSignatureConfidence'] = $timeSignatureConfidence;
+        null !== $windowSeconds && $self['windowSeconds'] = $windowSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -274,10 +274,10 @@ final class Track implements BaseModel
      */
     public function withAnalysisChannels(int $analysisChannels): self
     {
-        $obj = clone $this;
-        $obj['analysisChannels'] = $analysisChannels;
+        $self = clone $this;
+        $self['analysisChannels'] = $analysisChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -285,10 +285,10 @@ final class Track implements BaseModel
      */
     public function withAnalysisSampleRate(int $analysisSampleRate): self
     {
-        $obj = clone $this;
-        $obj['analysisSampleRate'] = $analysisSampleRate;
+        $self = clone $this;
+        $self['analysisSampleRate'] = $analysisSampleRate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -296,10 +296,10 @@ final class Track implements BaseModel
      */
     public function withCodeVersion(float $codeVersion): self
     {
-        $obj = clone $this;
-        $obj['codeVersion'] = $codeVersion;
+        $self = clone $this;
+        $self['codeVersion'] = $codeVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -307,10 +307,10 @@ final class Track implements BaseModel
      */
     public function withCodestring(string $codestring): self
     {
-        $obj = clone $this;
-        $obj['codestring'] = $codestring;
+        $self = clone $this;
+        $self['codestring'] = $codestring;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -318,10 +318,10 @@ final class Track implements BaseModel
      */
     public function withDuration(float $duration): self
     {
-        $obj = clone $this;
-        $obj['duration'] = $duration;
+        $self = clone $this;
+        $self['duration'] = $duration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -329,10 +329,10 @@ final class Track implements BaseModel
      */
     public function withEchoprintVersion(float $echoprintVersion): self
     {
-        $obj = clone $this;
-        $obj['echoprintVersion'] = $echoprintVersion;
+        $self = clone $this;
+        $self['echoprintVersion'] = $echoprintVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -340,10 +340,10 @@ final class Track implements BaseModel
      */
     public function withEchoprintstring(string $echoprintstring): self
     {
-        $obj = clone $this;
-        $obj['echoprintstring'] = $echoprintstring;
+        $self = clone $this;
+        $self['echoprintstring'] = $echoprintstring;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -351,10 +351,10 @@ final class Track implements BaseModel
      */
     public function withEndOfFadeIn(float $endOfFadeIn): self
     {
-        $obj = clone $this;
-        $obj['endOfFadeIn'] = $endOfFadeIn;
+        $self = clone $this;
+        $self['endOfFadeIn'] = $endOfFadeIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -362,10 +362,10 @@ final class Track implements BaseModel
      */
     public function withKey(int $key): self
     {
-        $obj = clone $this;
-        $obj['key'] = $key;
+        $self = clone $this;
+        $self['key'] = $key;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -373,10 +373,10 @@ final class Track implements BaseModel
      */
     public function withKeyConfidence(float $keyConfidence): self
     {
-        $obj = clone $this;
-        $obj['keyConfidence'] = $keyConfidence;
+        $self = clone $this;
+        $self['keyConfidence'] = $keyConfidence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -384,10 +384,10 @@ final class Track implements BaseModel
      */
     public function withLoudness(float $loudness): self
     {
-        $obj = clone $this;
-        $obj['loudness'] = $loudness;
+        $self = clone $this;
+        $self['loudness'] = $loudness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -395,10 +395,10 @@ final class Track implements BaseModel
      */
     public function withMode(int $mode): self
     {
-        $obj = clone $this;
-        $obj['mode'] = $mode;
+        $self = clone $this;
+        $self['mode'] = $mode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -406,10 +406,10 @@ final class Track implements BaseModel
      */
     public function withModeConfidence(float $modeConfidence): self
     {
-        $obj = clone $this;
-        $obj['modeConfidence'] = $modeConfidence;
+        $self = clone $this;
+        $self['modeConfidence'] = $modeConfidence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -417,10 +417,10 @@ final class Track implements BaseModel
      */
     public function withNumSamples(int $numSamples): self
     {
-        $obj = clone $this;
-        $obj['numSamples'] = $numSamples;
+        $self = clone $this;
+        $self['numSamples'] = $numSamples;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -428,10 +428,10 @@ final class Track implements BaseModel
      */
     public function withOffsetSeconds(int $offsetSeconds): self
     {
-        $obj = clone $this;
-        $obj['offsetSeconds'] = $offsetSeconds;
+        $self = clone $this;
+        $self['offsetSeconds'] = $offsetSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -439,10 +439,10 @@ final class Track implements BaseModel
      */
     public function withRhythmVersion(float $rhythmVersion): self
     {
-        $obj = clone $this;
-        $obj['rhythmVersion'] = $rhythmVersion;
+        $self = clone $this;
+        $self['rhythmVersion'] = $rhythmVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -450,10 +450,10 @@ final class Track implements BaseModel
      */
     public function withRhythmstring(string $rhythmstring): self
     {
-        $obj = clone $this;
-        $obj['rhythmstring'] = $rhythmstring;
+        $self = clone $this;
+        $self['rhythmstring'] = $rhythmstring;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -461,10 +461,10 @@ final class Track implements BaseModel
      */
     public function withSampleMd5(string $sampleMd5): self
     {
-        $obj = clone $this;
-        $obj['sampleMd5'] = $sampleMd5;
+        $self = clone $this;
+        $self['sampleMd5'] = $sampleMd5;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -472,10 +472,10 @@ final class Track implements BaseModel
      */
     public function withStartOfFadeOut(float $startOfFadeOut): self
     {
-        $obj = clone $this;
-        $obj['startOfFadeOut'] = $startOfFadeOut;
+        $self = clone $this;
+        $self['startOfFadeOut'] = $startOfFadeOut;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -483,10 +483,10 @@ final class Track implements BaseModel
      */
     public function withSynchVersion(float $synchVersion): self
     {
-        $obj = clone $this;
-        $obj['synchVersion'] = $synchVersion;
+        $self = clone $this;
+        $self['synchVersion'] = $synchVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -494,10 +494,10 @@ final class Track implements BaseModel
      */
     public function withSynchstring(string $synchstring): self
     {
-        $obj = clone $this;
-        $obj['synchstring'] = $synchstring;
+        $self = clone $this;
+        $self['synchstring'] = $synchstring;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -505,10 +505,10 @@ final class Track implements BaseModel
      */
     public function withTempo(float $tempo): self
     {
-        $obj = clone $this;
-        $obj['tempo'] = $tempo;
+        $self = clone $this;
+        $self['tempo'] = $tempo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -516,10 +516,10 @@ final class Track implements BaseModel
      */
     public function withTempoConfidence(float $tempoConfidence): self
     {
-        $obj = clone $this;
-        $obj['tempoConfidence'] = $tempoConfidence;
+        $self = clone $this;
+        $self['tempoConfidence'] = $tempoConfidence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -527,10 +527,10 @@ final class Track implements BaseModel
      */
     public function withTimeSignature(int $timeSignature): self
     {
-        $obj = clone $this;
-        $obj['timeSignature'] = $timeSignature;
+        $self = clone $this;
+        $self['timeSignature'] = $timeSignature;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -539,10 +539,10 @@ final class Track implements BaseModel
     public function withTimeSignatureConfidence(
         float $timeSignatureConfidence
     ): self {
-        $obj = clone $this;
-        $obj['timeSignatureConfidence'] = $timeSignatureConfidence;
+        $self = clone $this;
+        $self['timeSignatureConfidence'] = $timeSignatureConfidence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -550,9 +550,9 @@ final class Track implements BaseModel
      */
     public function withWindowSeconds(int $windowSeconds): self
     {
-        $obj = clone $this;
-        $obj['windowSeconds'] = $windowSeconds;
+        $self = clone $this;
+        $self['windowSeconds'] = $windowSeconds;
 
-        return $obj;
+        return $self;
     }
 }

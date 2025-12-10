@@ -31,18 +31,18 @@ final class TrackAddResponse implements BaseModel
      */
     public static function with(?string $snapshotID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $snapshotID && $obj['snapshotID'] = $snapshotID;
+        null !== $snapshotID && $self['snapshotID'] = $snapshotID;
 
-        return $obj;
+        return $self;
     }
 
     public function withSnapshotID(string $snapshotID): self
     {
-        $obj = clone $this;
-        $obj['snapshotID'] = $snapshotID;
+        $self = clone $this;
+        $self['snapshotID'] = $snapshotID;
 
-        return $obj;
+        return $self;
     }
 }

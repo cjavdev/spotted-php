@@ -57,11 +57,11 @@ final class BrowseGetNewReleasesResponse implements BaseModel
      */
     public static function with(Albums|array $albums): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['albums'] = $albums;
+        $self['albums'] = $albums;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,9 +77,9 @@ final class BrowseGetNewReleasesResponse implements BaseModel
      */
     public function withAlbums(Albums|array $albums): self
     {
-        $obj = clone $this;
-        $obj['albums'] = $albums;
+        $self = clone $this;
+        $self['albums'] = $albums;
 
-        return $obj;
+        return $self;
     }
 }

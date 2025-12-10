@@ -62,13 +62,13 @@ final class QueueAddParams implements BaseModel
      */
     public static function with(string $uri, ?string $deviceID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['uri'] = $uri;
+        $self['uri'] = $uri;
 
-        null !== $deviceID && $obj['deviceID'] = $deviceID;
+        null !== $deviceID && $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class QueueAddParams implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,9 +88,9 @@ final class QueueAddParams implements BaseModel
      */
     public function withDeviceID(string $deviceID): self
     {
-        $obj = clone $this;
-        $obj['deviceID'] = $deviceID;
+        $self = clone $this;
+        $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 }

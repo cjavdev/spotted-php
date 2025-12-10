@@ -130,18 +130,18 @@ final class Shows implements BaseModel
         int $total,
         ?array $items = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['href'] = $href;
-        $obj['limit'] = $limit;
-        $obj['next'] = $next;
-        $obj['offset'] = $offset;
-        $obj['previous'] = $previous;
-        $obj['total'] = $total;
+        $self['href'] = $href;
+        $self['limit'] = $limit;
+        $self['next'] = $next;
+        $self['offset'] = $offset;
+        $self['previous'] = $previous;
+        $self['total'] = $total;
 
-        null !== $items && $obj['items'] = $items;
+        null !== $items && $self['items'] = $items;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,10 +149,10 @@ final class Shows implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj['href'] = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,10 +160,10 @@ final class Shows implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj['limit'] = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -171,10 +171,10 @@ final class Shows implements BaseModel
      */
     public function withNext(?string $next): self
     {
-        $obj = clone $this;
-        $obj['next'] = $next;
+        $self = clone $this;
+        $self['next'] = $next;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,10 +182,10 @@ final class Shows implements BaseModel
      */
     public function withOffset(int $offset): self
     {
-        $obj = clone $this;
-        $obj['offset'] = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -193,10 +193,10 @@ final class Shows implements BaseModel
      */
     public function withPrevious(?string $previous): self
     {
-        $obj = clone $this;
-        $obj['previous'] = $previous;
+        $self = clone $this;
+        $self['previous'] = $previous;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -204,10 +204,10 @@ final class Shows implements BaseModel
      */
     public function withTotal(int $total): self
     {
-        $obj = clone $this;
-        $obj['total'] = $total;
+        $self = clone $this;
+        $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,9 +233,9 @@ final class Shows implements BaseModel
      */
     public function withItems(array $items): self
     {
-        $obj = clone $this;
-        $obj['items'] = $items;
+        $self = clone $this;
+        $self['items'] = $items;
 
-        return $obj;
+        return $self;
     }
 }

@@ -57,11 +57,11 @@ final class CategoryListResponse implements BaseModel
      */
     public static function with(Categories|array $categories): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['categories'] = $categories;
+        $self['categories'] = $categories;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,9 +77,9 @@ final class CategoryListResponse implements BaseModel
      */
     public function withCategories(Categories|array $categories): self
     {
-        $obj = clone $this;
-        $obj['categories'] = $categories;
+        $self = clone $this;
+        $self['categories'] = $categories;
 
-        return $obj;
+        return $self;
     }
 }

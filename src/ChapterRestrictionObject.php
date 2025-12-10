@@ -41,11 +41,11 @@ final class ChapterRestrictionObject implements BaseModel
      */
     public static function with(?string $reason = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $reason && $obj['reason'] = $reason;
+        null !== $reason && $self['reason'] = $reason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,9 +60,9 @@ final class ChapterRestrictionObject implements BaseModel
      */
     public function withReason(string $reason): self
     {
-        $obj = clone $this;
-        $obj['reason'] = $reason;
+        $self = clone $this;
+        $self['reason'] = $reason;
 
-        return $obj;
+        return $self;
     }
 }

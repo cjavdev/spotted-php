@@ -142,17 +142,17 @@ final class SearchQueryResponse implements BaseModel
         Shows|array|null $shows = null,
         Tracks|array|null $tracks = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $albums && $obj['albums'] = $albums;
-        null !== $artists && $obj['artists'] = $artists;
-        null !== $audiobooks && $obj['audiobooks'] = $audiobooks;
-        null !== $episodes && $obj['episodes'] = $episodes;
-        null !== $playlists && $obj['playlists'] = $playlists;
-        null !== $shows && $obj['shows'] = $shows;
-        null !== $tracks && $obj['tracks'] = $tracks;
+        null !== $albums && $self['albums'] = $albums;
+        null !== $artists && $self['artists'] = $artists;
+        null !== $audiobooks && $self['audiobooks'] = $audiobooks;
+        null !== $episodes && $self['episodes'] = $episodes;
+        null !== $playlists && $self['playlists'] = $playlists;
+        null !== $shows && $self['shows'] = $shows;
+        null !== $tracks && $self['tracks'] = $tracks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -168,10 +168,10 @@ final class SearchQueryResponse implements BaseModel
      */
     public function withAlbums(Albums|array $albums): self
     {
-        $obj = clone $this;
-        $obj['albums'] = $albums;
+        $self = clone $this;
+        $self['albums'] = $albums;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class SearchQueryResponse implements BaseModel
      */
     public function withArtists(Artists|array $artists): self
     {
-        $obj = clone $this;
-        $obj['artists'] = $artists;
+        $self = clone $this;
+        $self['artists'] = $artists;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -206,10 +206,10 @@ final class SearchQueryResponse implements BaseModel
      */
     public function withAudiobooks(Audiobooks|array $audiobooks): self
     {
-        $obj = clone $this;
-        $obj['audiobooks'] = $audiobooks;
+        $self = clone $this;
+        $self['audiobooks'] = $audiobooks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -225,10 +225,10 @@ final class SearchQueryResponse implements BaseModel
      */
     public function withEpisodes(Episodes|array $episodes): self
     {
-        $obj = clone $this;
-        $obj['episodes'] = $episodes;
+        $self = clone $this;
+        $self['episodes'] = $episodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,10 +244,10 @@ final class SearchQueryResponse implements BaseModel
      */
     public function withPlaylists(PagingPlaylistObject|array $playlists): self
     {
-        $obj = clone $this;
-        $obj['playlists'] = $playlists;
+        $self = clone $this;
+        $self['playlists'] = $playlists;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -263,10 +263,10 @@ final class SearchQueryResponse implements BaseModel
      */
     public function withShows(Shows|array $shows): self
     {
-        $obj = clone $this;
-        $obj['shows'] = $shows;
+        $self = clone $this;
+        $self['shows'] = $shows;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,9 +282,9 @@ final class SearchQueryResponse implements BaseModel
      */
     public function withTracks(Tracks|array $tracks): self
     {
-        $obj = clone $this;
-        $obj['tracks'] = $tracks;
+        $self = clone $this;
+        $self['tracks'] = $tracks;
 
-        return $obj;
+        return $self;
     }
 }

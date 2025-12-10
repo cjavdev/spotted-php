@@ -56,11 +56,11 @@ final class AudioFeatureBulkRetrieveParams implements BaseModel
      */
     public static function with(string $ids): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['ids'] = $ids;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,9 +69,9 @@ final class AudioFeatureBulkRetrieveParams implements BaseModel
      */
     public function withIDs(string $ids): self
     {
-        $obj = clone $this;
-        $obj['ids'] = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 }

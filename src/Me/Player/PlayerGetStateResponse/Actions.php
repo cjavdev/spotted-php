@@ -111,20 +111,20 @@ final class Actions implements BaseModel
         ?bool $togglingShuffle = null,
         ?bool $transferringPlayback = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $interruptingPlayback && $obj['interruptingPlayback'] = $interruptingPlayback;
-        null !== $pausing && $obj['pausing'] = $pausing;
-        null !== $resuming && $obj['resuming'] = $resuming;
-        null !== $seeking && $obj['seeking'] = $seeking;
-        null !== $skippingNext && $obj['skippingNext'] = $skippingNext;
-        null !== $skippingPrev && $obj['skippingPrev'] = $skippingPrev;
-        null !== $togglingRepeatContext && $obj['togglingRepeatContext'] = $togglingRepeatContext;
-        null !== $togglingRepeatTrack && $obj['togglingRepeatTrack'] = $togglingRepeatTrack;
-        null !== $togglingShuffle && $obj['togglingShuffle'] = $togglingShuffle;
-        null !== $transferringPlayback && $obj['transferringPlayback'] = $transferringPlayback;
+        null !== $interruptingPlayback && $self['interruptingPlayback'] = $interruptingPlayback;
+        null !== $pausing && $self['pausing'] = $pausing;
+        null !== $resuming && $self['resuming'] = $resuming;
+        null !== $seeking && $self['seeking'] = $seeking;
+        null !== $skippingNext && $self['skippingNext'] = $skippingNext;
+        null !== $skippingPrev && $self['skippingPrev'] = $skippingPrev;
+        null !== $togglingRepeatContext && $self['togglingRepeatContext'] = $togglingRepeatContext;
+        null !== $togglingRepeatTrack && $self['togglingRepeatTrack'] = $togglingRepeatTrack;
+        null !== $togglingShuffle && $self['togglingShuffle'] = $togglingShuffle;
+        null !== $transferringPlayback && $self['transferringPlayback'] = $transferringPlayback;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +132,10 @@ final class Actions implements BaseModel
      */
     public function withInterruptingPlayback(bool $interruptingPlayback): self
     {
-        $obj = clone $this;
-        $obj['interruptingPlayback'] = $interruptingPlayback;
+        $self = clone $this;
+        $self['interruptingPlayback'] = $interruptingPlayback;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class Actions implements BaseModel
      */
     public function withPausing(bool $pausing): self
     {
-        $obj = clone $this;
-        $obj['pausing'] = $pausing;
+        $self = clone $this;
+        $self['pausing'] = $pausing;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class Actions implements BaseModel
      */
     public function withResuming(bool $resuming): self
     {
-        $obj = clone $this;
-        $obj['resuming'] = $resuming;
+        $self = clone $this;
+        $self['resuming'] = $resuming;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class Actions implements BaseModel
      */
     public function withSeeking(bool $seeking): self
     {
-        $obj = clone $this;
-        $obj['seeking'] = $seeking;
+        $self = clone $this;
+        $self['seeking'] = $seeking;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +176,10 @@ final class Actions implements BaseModel
      */
     public function withSkippingNext(bool $skippingNext): self
     {
-        $obj = clone $this;
-        $obj['skippingNext'] = $skippingNext;
+        $self = clone $this;
+        $self['skippingNext'] = $skippingNext;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class Actions implements BaseModel
      */
     public function withSkippingPrev(bool $skippingPrev): self
     {
-        $obj = clone $this;
-        $obj['skippingPrev'] = $skippingPrev;
+        $self = clone $this;
+        $self['skippingPrev'] = $skippingPrev;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +198,10 @@ final class Actions implements BaseModel
      */
     public function withTogglingRepeatContext(bool $togglingRepeatContext): self
     {
-        $obj = clone $this;
-        $obj['togglingRepeatContext'] = $togglingRepeatContext;
+        $self = clone $this;
+        $self['togglingRepeatContext'] = $togglingRepeatContext;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +209,10 @@ final class Actions implements BaseModel
      */
     public function withTogglingRepeatTrack(bool $togglingRepeatTrack): self
     {
-        $obj = clone $this;
-        $obj['togglingRepeatTrack'] = $togglingRepeatTrack;
+        $self = clone $this;
+        $self['togglingRepeatTrack'] = $togglingRepeatTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,10 +220,10 @@ final class Actions implements BaseModel
      */
     public function withTogglingShuffle(bool $togglingShuffle): self
     {
-        $obj = clone $this;
-        $obj['togglingShuffle'] = $togglingShuffle;
+        $self = clone $this;
+        $self['togglingShuffle'] = $togglingShuffle;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -231,9 +231,9 @@ final class Actions implements BaseModel
      */
     public function withTransferringPlayback(bool $transferringPlayback): self
     {
-        $obj = clone $this;
-        $obj['transferringPlayback'] = $transferringPlayback;
+        $self = clone $this;
+        $self['transferringPlayback'] = $transferringPlayback;
 
-        return $obj;
+        return $self;
     }
 }

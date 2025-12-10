@@ -198,20 +198,20 @@ final class PlayerGetStateResponse implements BaseModel
         ?bool $shuffleState = null,
         ?int $timestamp = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $actions && $obj['actions'] = $actions;
-        null !== $context && $obj['context'] = $context;
-        null !== $currentlyPlayingType && $obj['currentlyPlayingType'] = $currentlyPlayingType;
-        null !== $device && $obj['device'] = $device;
-        null !== $isPlaying && $obj['isPlaying'] = $isPlaying;
-        null !== $item && $obj['item'] = $item;
-        null !== $progressMs && $obj['progressMs'] = $progressMs;
-        null !== $repeatState && $obj['repeatState'] = $repeatState;
-        null !== $shuffleState && $obj['shuffleState'] = $shuffleState;
-        null !== $timestamp && $obj['timestamp'] = $timestamp;
+        null !== $actions && $self['actions'] = $actions;
+        null !== $context && $self['context'] = $context;
+        null !== $currentlyPlayingType && $self['currentlyPlayingType'] = $currentlyPlayingType;
+        null !== $device && $self['device'] = $device;
+        null !== $isPlaying && $self['isPlaying'] = $isPlaying;
+        null !== $item && $self['item'] = $item;
+        null !== $progressMs && $self['progressMs'] = $progressMs;
+        null !== $repeatState && $self['repeatState'] = $repeatState;
+        null !== $shuffleState && $self['shuffleState'] = $shuffleState;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,10 +232,10 @@ final class PlayerGetStateResponse implements BaseModel
      */
     public function withActions(Actions|array $actions): self
     {
-        $obj = clone $this;
-        $obj['actions'] = $actions;
+        $self = clone $this;
+        $self['actions'] = $actions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -250,10 +250,10 @@ final class PlayerGetStateResponse implements BaseModel
      */
     public function withContext(ContextObject|array $context): self
     {
-        $obj = clone $this;
-        $obj['context'] = $context;
+        $self = clone $this;
+        $self['context'] = $context;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -261,10 +261,10 @@ final class PlayerGetStateResponse implements BaseModel
      */
     public function withCurrentlyPlayingType(string $currentlyPlayingType): self
     {
-        $obj = clone $this;
-        $obj['currentlyPlayingType'] = $currentlyPlayingType;
+        $self = clone $this;
+        $self['currentlyPlayingType'] = $currentlyPlayingType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -283,10 +283,10 @@ final class PlayerGetStateResponse implements BaseModel
      */
     public function withDevice(DeviceObject|array $device): self
     {
-        $obj = clone $this;
-        $obj['device'] = $device;
+        $self = clone $this;
+        $self['device'] = $device;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -294,10 +294,10 @@ final class PlayerGetStateResponse implements BaseModel
      */
     public function withIsPlaying(bool $isPlaying): self
     {
-        $obj = clone $this;
-        $obj['isPlaying'] = $isPlaying;
+        $self = clone $this;
+        $self['isPlaying'] = $isPlaying;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -350,10 +350,10 @@ final class PlayerGetStateResponse implements BaseModel
      */
     public function withItem(TrackObject|array|EpisodeObject $item): self
     {
-        $obj = clone $this;
-        $obj['item'] = $item;
+        $self = clone $this;
+        $self['item'] = $item;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -361,10 +361,10 @@ final class PlayerGetStateResponse implements BaseModel
      */
     public function withProgressMs(int $progressMs): self
     {
-        $obj = clone $this;
-        $obj['progressMs'] = $progressMs;
+        $self = clone $this;
+        $self['progressMs'] = $progressMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -372,10 +372,10 @@ final class PlayerGetStateResponse implements BaseModel
      */
     public function withRepeatState(string $repeatState): self
     {
-        $obj = clone $this;
-        $obj['repeatState'] = $repeatState;
+        $self = clone $this;
+        $self['repeatState'] = $repeatState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -383,10 +383,10 @@ final class PlayerGetStateResponse implements BaseModel
      */
     public function withShuffleState(bool $shuffleState): self
     {
-        $obj = clone $this;
-        $obj['shuffleState'] = $shuffleState;
+        $self = clone $this;
+        $self['shuffleState'] = $shuffleState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -394,9 +394,9 @@ final class PlayerGetStateResponse implements BaseModel
      */
     public function withTimestamp(int $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 }

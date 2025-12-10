@@ -76,12 +76,12 @@ final class EpisodeListResponse implements BaseModel
         ?\DateTimeInterface $addedAt = null,
         EpisodeObject|array|null $episode = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $addedAt && $obj['addedAt'] = $addedAt;
-        null !== $episode && $obj['episode'] = $episode;
+        null !== $addedAt && $self['addedAt'] = $addedAt;
+        null !== $episode && $self['episode'] = $episode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +90,10 @@ final class EpisodeListResponse implements BaseModel
      */
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
-        $obj = clone $this;
-        $obj['addedAt'] = $addedAt;
+        $self = clone $this;
+        $self['addedAt'] = $addedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,9 +125,9 @@ final class EpisodeListResponse implements BaseModel
      */
     public function withEpisode(EpisodeObject|array $episode): self
     {
-        $obj = clone $this;
-        $obj['episode'] = $episode;
+        $self = clone $this;
+        $self['episode'] = $episode;
 
-        return $obj;
+        return $self;
     }
 }

@@ -95,16 +95,16 @@ final class Artists implements BaseModel
         ?string $next = null,
         ?int $total = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $cursors && $obj['cursors'] = $cursors;
-        null !== $href && $obj['href'] = $href;
-        null !== $items && $obj['items'] = $items;
-        null !== $limit && $obj['limit'] = $limit;
-        null !== $next && $obj['next'] = $next;
-        null !== $total && $obj['total'] = $total;
+        null !== $cursors && $self['cursors'] = $cursors;
+        null !== $href && $self['href'] = $href;
+        null !== $items && $self['items'] = $items;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $next && $self['next'] = $next;
+        null !== $total && $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class Artists implements BaseModel
      */
     public function withCursors(Cursors|array $cursors): self
     {
-        $obj = clone $this;
-        $obj['cursors'] = $cursors;
+        $self = clone $this;
+        $self['cursors'] = $cursors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Artists implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj['href'] = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class Artists implements BaseModel
      */
     public function withItems(array $items): self
     {
-        $obj = clone $this;
-        $obj['items'] = $items;
+        $self = clone $this;
+        $self['items'] = $items;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class Artists implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj['limit'] = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +169,10 @@ final class Artists implements BaseModel
      */
     public function withNext(string $next): self
     {
-        $obj = clone $this;
-        $obj['next'] = $next;
+        $self = clone $this;
+        $self['next'] = $next;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,9 +180,9 @@ final class Artists implements BaseModel
      */
     public function withTotal(int $total): self
     {
-        $obj = clone $this;
-        $obj['total'] = $total;
+        $self = clone $this;
+        $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 }

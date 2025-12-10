@@ -90,13 +90,13 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
         ?\DateTimeInterface $playedAt = null,
         TrackObject|array|null $track = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $context && $obj['context'] = $context;
-        null !== $playedAt && $obj['playedAt'] = $playedAt;
-        null !== $track && $obj['track'] = $track;
+        null !== $context && $self['context'] = $context;
+        null !== $playedAt && $self['playedAt'] = $playedAt;
+        null !== $track && $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
      */
     public function withContext(ContextObject|array $context): self
     {
-        $obj = clone $this;
-        $obj['context'] = $context;
+        $self = clone $this;
+        $self['context'] = $context;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
      */
     public function withPlayedAt(\DateTimeInterface $playedAt): self
     {
-        $obj = clone $this;
-        $obj['playedAt'] = $playedAt;
+        $self = clone $this;
+        $self['playedAt'] = $playedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,9 +156,9 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
      */
     public function withTrack(TrackObject|array $track): self
     {
-        $obj = clone $this;
-        $obj['track'] = $track;
+        $self = clone $this;
+        $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 }
