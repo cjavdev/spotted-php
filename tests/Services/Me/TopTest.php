@@ -5,8 +5,10 @@ namespace Tests\Services\Me;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Spotted\ArtistObject;
 use Spotted\Client;
 use Spotted\CursorURLPage;
+use Spotted\TrackObject;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,10 +40,15 @@ final class TopTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->top->listTopArtists();
+        $page = $this->client->me->top->listTopArtists();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CursorURLPage::class, $result);
+        $this->assertInstanceOf(CursorURLPage::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ArtistObject::class, $item);
+        }
     }
 
     #[Test]
@@ -51,9 +58,14 @@ final class TopTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->top->listTopTracks();
+        $page = $this->client->me->top->listTopTracks();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CursorURLPage::class, $result);
+        $this->assertInstanceOf(CursorURLPage::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(TrackObject::class, $item);
+        }
     }
 }

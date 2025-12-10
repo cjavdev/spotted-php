@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
 use Spotted\CursorURLPage;
+use Spotted\Me\Shows\ShowListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,10 +39,15 @@ final class ShowsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->shows->list();
+        $page = $this->client->me->shows->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CursorURLPage::class, $result);
+        $this->assertInstanceOf(CursorURLPage::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ShowListResponse::class, $item);
+        }
     }
 
     #[Test]

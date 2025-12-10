@@ -10,6 +10,7 @@ use Spotted\CursorURLPage;
 use Spotted\Playlists\Tracks\TrackAddResponse;
 use Spotted\Playlists\Tracks\TrackRemoveResponse;
 use Spotted\Playlists\Tracks\TrackUpdateResponse;
+use Spotted\PlaylistTrackObject;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -56,10 +57,15 @@ final class TracksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->playlists->tracks->list('3cEYpjA9oz9GiPac4AsH4n');
+        $page = $this->client->playlists->tracks->list('3cEYpjA9oz9GiPac4AsH4n');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CursorURLPage::class, $result);
+        $this->assertInstanceOf(CursorURLPage::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PlaylistTrackObject::class, $item);
+        }
     }
 
     #[Test]
