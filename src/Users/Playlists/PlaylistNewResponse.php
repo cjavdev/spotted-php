@@ -26,6 +26,7 @@ use Spotted\Users\Playlists\PlaylistNewResponse\Tracks;
  *   images?: list<ImageObject>|null,
  *   name?: string|null,
  *   owner?: Owner|null,
+ *   public?: bool|null,
  *   snapshotID?: string|null,
  *   tracks?: Tracks|null,
  *   type?: string|null,
@@ -94,6 +95,12 @@ final class PlaylistNewResponse implements BaseModel
     public ?Owner $owner;
 
     /**
+     * The playlist's public/private status (if it is added to the user's profile): `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $public;
+
+    /**
      * The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version.
      */
     #[Optional('snapshot_id')]
@@ -160,6 +167,7 @@ final class PlaylistNewResponse implements BaseModel
         ?array $images = null,
         ?string $name = null,
         Owner|array|null $owner = null,
+        ?bool $public = null,
         ?string $snapshotID = null,
         Tracks|array|null $tracks = null,
         ?string $type = null,
@@ -176,6 +184,7 @@ final class PlaylistNewResponse implements BaseModel
         null !== $images && $self['images'] = $images;
         null !== $name && $self['name'] = $name;
         null !== $owner && $self['owner'] = $owner;
+        null !== $public && $self['public'] = $public;
         null !== $snapshotID && $self['snapshotID'] = $snapshotID;
         null !== $tracks && $self['tracks'] = $tracks;
         null !== $type && $self['type'] = $type;
@@ -297,6 +306,17 @@ final class PlaylistNewResponse implements BaseModel
     {
         $self = clone $this;
         $self['owner'] = $owner;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it is added to the user's profile): `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublic(bool $public): self
+    {
+        $self = clone $this;
+        $self['public'] = $public;
 
         return $self;
     }
