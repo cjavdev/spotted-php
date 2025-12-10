@@ -70,14 +70,14 @@ final class ArtistListAlbumsParams implements BaseModel
         ?string $market = null,
         ?int $offset = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $includeGroups && $obj['includeGroups'] = $includeGroups;
-        null !== $limit && $obj['limit'] = $limit;
-        null !== $market && $obj['market'] = $market;
-        null !== $offset && $obj['offset'] = $offset;
+        null !== $includeGroups && $self['includeGroups'] = $includeGroups;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $market && $self['market'] = $market;
+        null !== $offset && $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +86,10 @@ final class ArtistListAlbumsParams implements BaseModel
      */
     public function withIncludeGroups(string $includeGroups): self
     {
-        $obj = clone $this;
-        $obj['includeGroups'] = $includeGroups;
+        $self = clone $this;
+        $self['includeGroups'] = $includeGroups;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class ArtistListAlbumsParams implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj['limit'] = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +113,10 @@ final class ArtistListAlbumsParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj['market'] = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,9 +124,9 @@ final class ArtistListAlbumsParams implements BaseModel
      */
     public function withOffset(int $offset): self
     {
-        $obj = clone $this;
-        $obj['offset'] = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 }

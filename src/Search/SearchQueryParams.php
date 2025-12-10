@@ -125,17 +125,17 @@ final class SearchQueryParams implements BaseModel
         ?string $market = null,
         ?int $offset = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['q'] = $q;
-        $obj['type'] = $type;
+        $self['q'] = $q;
+        $self['type'] = $type;
 
-        null !== $includeExternal && $obj['includeExternal'] = $includeExternal;
-        null !== $limit && $obj['limit'] = $limit;
-        null !== $market && $obj['market'] = $market;
-        null !== $offset && $obj['offset'] = $offset;
+        null !== $includeExternal && $self['includeExternal'] = $includeExternal;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $market && $self['market'] = $market;
+        null !== $offset && $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +151,10 @@ final class SearchQueryParams implements BaseModel
      */
     public function withQ(string $q): self
     {
-        $obj = clone $this;
-        $obj['q'] = $q;
+        $self = clone $this;
+        $self['q'] = $q;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class SearchQueryParams implements BaseModel
      */
     public function withType(array $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +181,10 @@ final class SearchQueryParams implements BaseModel
     public function withIncludeExternal(
         IncludeExternal|string $includeExternal
     ): self {
-        $obj = clone $this;
-        $obj['includeExternal'] = $includeExternal;
+        $self = clone $this;
+        $self['includeExternal'] = $includeExternal;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,10 +192,10 @@ final class SearchQueryParams implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj['limit'] = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,10 +208,10 @@ final class SearchQueryParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj['market'] = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,9 +220,9 @@ final class SearchQueryParams implements BaseModel
      */
     public function withOffset(int $offset): self
     {
-        $obj = clone $this;
-        $obj['offset'] = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 }

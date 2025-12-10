@@ -256,29 +256,29 @@ final class AudiobookBase implements BaseModel
         string $uri,
         ?string $edition = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['authors'] = $authors;
-        $obj['availableMarkets'] = $availableMarkets;
-        $obj['copyrights'] = $copyrights;
-        $obj['description'] = $description;
-        $obj['explicit'] = $explicit;
-        $obj['externalURLs'] = $externalURLs;
-        $obj['href'] = $href;
-        $obj['htmlDescription'] = $htmlDescription;
-        $obj['images'] = $images;
-        $obj['languages'] = $languages;
-        $obj['mediaType'] = $mediaType;
-        $obj['name'] = $name;
-        $obj['narrators'] = $narrators;
-        $obj['publisher'] = $publisher;
-        $obj['totalChapters'] = $totalChapters;
-        $obj['uri'] = $uri;
+        $self['id'] = $id;
+        $self['authors'] = $authors;
+        $self['availableMarkets'] = $availableMarkets;
+        $self['copyrights'] = $copyrights;
+        $self['description'] = $description;
+        $self['explicit'] = $explicit;
+        $self['externalURLs'] = $externalURLs;
+        $self['href'] = $href;
+        $self['htmlDescription'] = $htmlDescription;
+        $self['images'] = $images;
+        $self['languages'] = $languages;
+        $self['mediaType'] = $mediaType;
+        $self['name'] = $name;
+        $self['narrators'] = $narrators;
+        $self['publisher'] = $publisher;
+        $self['totalChapters'] = $totalChapters;
+        $self['uri'] = $uri;
 
-        null !== $edition && $obj['edition'] = $edition;
+        null !== $edition && $self['edition'] = $edition;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -286,10 +286,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -299,10 +299,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withAuthors(array $authors): self
     {
-        $obj = clone $this;
-        $obj['authors'] = $authors;
+        $self = clone $this;
+        $self['authors'] = $authors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -312,10 +312,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withAvailableMarkets(array $availableMarkets): self
     {
-        $obj = clone $this;
-        $obj['availableMarkets'] = $availableMarkets;
+        $self = clone $this;
+        $self['availableMarkets'] = $availableMarkets;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -327,10 +327,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withCopyrights(array $copyrights): self
     {
-        $obj = clone $this;
-        $obj['copyrights'] = $copyrights;
+        $self = clone $this;
+        $self['copyrights'] = $copyrights;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -338,10 +338,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -349,10 +349,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withExplicit(bool $explicit): self
     {
-        $obj = clone $this;
-        $obj['explicit'] = $explicit;
+        $self = clone $this;
+        $self['explicit'] = $explicit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -363,10 +363,10 @@ final class AudiobookBase implements BaseModel
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
     ): self {
-        $obj = clone $this;
-        $obj['externalURLs'] = $externalURLs;
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -374,10 +374,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj['href'] = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -385,10 +385,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withHTMLDescription(string $htmlDescription): self
     {
-        $obj = clone $this;
-        $obj['htmlDescription'] = $htmlDescription;
+        $self = clone $this;
+        $self['htmlDescription'] = $htmlDescription;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -400,10 +400,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withImages(array $images): self
     {
-        $obj = clone $this;
-        $obj['images'] = $images;
+        $self = clone $this;
+        $self['images'] = $images;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -413,10 +413,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withLanguages(array $languages): self
     {
-        $obj = clone $this;
-        $obj['languages'] = $languages;
+        $self = clone $this;
+        $self['languages'] = $languages;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -424,10 +424,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withMediaType(string $mediaType): self
     {
-        $obj = clone $this;
-        $obj['mediaType'] = $mediaType;
+        $self = clone $this;
+        $self['mediaType'] = $mediaType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -435,10 +435,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -448,10 +448,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withNarrators(array $narrators): self
     {
-        $obj = clone $this;
-        $obj['narrators'] = $narrators;
+        $self = clone $this;
+        $self['narrators'] = $narrators;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -459,10 +459,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withPublisher(string $publisher): self
     {
-        $obj = clone $this;
-        $obj['publisher'] = $publisher;
+        $self = clone $this;
+        $self['publisher'] = $publisher;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -470,10 +470,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withTotalChapters(int $totalChapters): self
     {
-        $obj = clone $this;
-        $obj['totalChapters'] = $totalChapters;
+        $self = clone $this;
+        $self['totalChapters'] = $totalChapters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -481,10 +481,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -492,9 +492,9 @@ final class AudiobookBase implements BaseModel
      */
     public function withEdition(string $edition): self
     {
-        $obj = clone $this;
-        $obj['edition'] = $edition;
+        $self = clone $this;
+        $self['edition'] = $edition;
 
-        return $obj;
+        return $self;
     }
 }

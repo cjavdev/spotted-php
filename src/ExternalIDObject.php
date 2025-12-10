@@ -51,13 +51,13 @@ final class ExternalIDObject implements BaseModel
         ?string $isrc = null,
         ?string $upc = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $ean && $obj['ean'] = $ean;
-        null !== $isrc && $obj['isrc'] = $isrc;
-        null !== $upc && $obj['upc'] = $upc;
+        null !== $ean && $self['ean'] = $ean;
+        null !== $isrc && $self['isrc'] = $isrc;
+        null !== $upc && $self['upc'] = $upc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,10 +65,10 @@ final class ExternalIDObject implements BaseModel
      */
     public function withEan(string $ean): self
     {
-        $obj = clone $this;
-        $obj['ean'] = $ean;
+        $self = clone $this;
+        $self['ean'] = $ean;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class ExternalIDObject implements BaseModel
      */
     public function withIsrc(string $isrc): self
     {
-        $obj = clone $this;
-        $obj['isrc'] = $isrc;
+        $self = clone $this;
+        $self['isrc'] = $isrc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,9 +87,9 @@ final class ExternalIDObject implements BaseModel
      */
     public function withUpc(string $upc): self
     {
-        $obj = clone $this;
-        $obj['upc'] = $upc;
+        $self = clone $this;
+        $self['upc'] = $upc;
 
-        return $obj;
+        return $self;
     }
 }

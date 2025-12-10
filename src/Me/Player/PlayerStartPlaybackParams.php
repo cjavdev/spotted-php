@@ -87,15 +87,15 @@ final class PlayerStartPlaybackParams implements BaseModel
         ?int $positionMs = null,
         ?array $uris = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $deviceID && $obj['deviceID'] = $deviceID;
-        null !== $contextUri && $obj['contextUri'] = $contextUri;
-        null !== $offset && $obj['offset'] = $offset;
-        null !== $positionMs && $obj['positionMs'] = $positionMs;
-        null !== $uris && $obj['uris'] = $uris;
+        null !== $deviceID && $self['deviceID'] = $deviceID;
+        null !== $contextUri && $self['contextUri'] = $contextUri;
+        null !== $offset && $self['offset'] = $offset;
+        null !== $positionMs && $self['positionMs'] = $positionMs;
+        null !== $uris && $self['uris'] = $uris;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class PlayerStartPlaybackParams implements BaseModel
      */
     public function withDeviceID(string $deviceID): self
     {
-        $obj = clone $this;
-        $obj['deviceID'] = $deviceID;
+        $self = clone $this;
+        $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class PlayerStartPlaybackParams implements BaseModel
      */
     public function withContextUri(string $contextUri): self
     {
-        $obj = clone $this;
-        $obj['contextUri'] = $contextUri;
+        $self = clone $this;
+        $self['contextUri'] = $contextUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class PlayerStartPlaybackParams implements BaseModel
      */
     public function withOffset(array $offset): self
     {
-        $obj = clone $this;
-        $obj['offset'] = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class PlayerStartPlaybackParams implements BaseModel
      */
     public function withPositionMs(int $positionMs): self
     {
-        $obj = clone $this;
-        $obj['positionMs'] = $positionMs;
+        $self = clone $this;
+        $self['positionMs'] = $positionMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,9 +156,9 @@ final class PlayerStartPlaybackParams implements BaseModel
      */
     public function withUris(array $uris): self
     {
-        $obj = clone $this;
-        $obj['uris'] = $uris;
+        $self = clone $this;
+        $self['uris'] = $uris;
 
-        return $obj;
+        return $self;
     }
 }

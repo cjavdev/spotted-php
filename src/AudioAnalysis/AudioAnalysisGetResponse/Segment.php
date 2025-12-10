@@ -117,19 +117,19 @@ final class Segment implements BaseModel
         ?float $start = null,
         ?array $timbre = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $confidence && $obj['confidence'] = $confidence;
-        null !== $duration && $obj['duration'] = $duration;
-        null !== $loudnessEnd && $obj['loudnessEnd'] = $loudnessEnd;
-        null !== $loudnessMax && $obj['loudnessMax'] = $loudnessMax;
-        null !== $loudnessMaxTime && $obj['loudnessMaxTime'] = $loudnessMaxTime;
-        null !== $loudnessStart && $obj['loudnessStart'] = $loudnessStart;
-        null !== $pitches && $obj['pitches'] = $pitches;
-        null !== $start && $obj['start'] = $start;
-        null !== $timbre && $obj['timbre'] = $timbre;
+        null !== $confidence && $self['confidence'] = $confidence;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $loudnessEnd && $self['loudnessEnd'] = $loudnessEnd;
+        null !== $loudnessMax && $self['loudnessMax'] = $loudnessMax;
+        null !== $loudnessMaxTime && $self['loudnessMaxTime'] = $loudnessMaxTime;
+        null !== $loudnessStart && $self['loudnessStart'] = $loudnessStart;
+        null !== $pitches && $self['pitches'] = $pitches;
+        null !== $start && $self['start'] = $start;
+        null !== $timbre && $self['timbre'] = $timbre;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class Segment implements BaseModel
      */
     public function withConfidence(float $confidence): self
     {
-        $obj = clone $this;
-        $obj['confidence'] = $confidence;
+        $self = clone $this;
+        $self['confidence'] = $confidence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +148,10 @@ final class Segment implements BaseModel
      */
     public function withDuration(float $duration): self
     {
-        $obj = clone $this;
-        $obj['duration'] = $duration;
+        $self = clone $this;
+        $self['duration'] = $duration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class Segment implements BaseModel
      */
     public function withLoudnessEnd(float $loudnessEnd): self
     {
-        $obj = clone $this;
-        $obj['loudnessEnd'] = $loudnessEnd;
+        $self = clone $this;
+        $self['loudnessEnd'] = $loudnessEnd;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +170,10 @@ final class Segment implements BaseModel
      */
     public function withLoudnessMax(float $loudnessMax): self
     {
-        $obj = clone $this;
-        $obj['loudnessMax'] = $loudnessMax;
+        $self = clone $this;
+        $self['loudnessMax'] = $loudnessMax;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +181,10 @@ final class Segment implements BaseModel
      */
     public function withLoudnessMaxTime(float $loudnessMaxTime): self
     {
-        $obj = clone $this;
-        $obj['loudnessMaxTime'] = $loudnessMaxTime;
+        $self = clone $this;
+        $self['loudnessMaxTime'] = $loudnessMaxTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,10 +192,10 @@ final class Segment implements BaseModel
      */
     public function withLoudnessStart(float $loudnessStart): self
     {
-        $obj = clone $this;
-        $obj['loudnessStart'] = $loudnessStart;
+        $self = clone $this;
+        $self['loudnessStart'] = $loudnessStart;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +209,10 @@ final class Segment implements BaseModel
      */
     public function withPitches(array $pitches): self
     {
-        $obj = clone $this;
-        $obj['pitches'] = $pitches;
+        $self = clone $this;
+        $self['pitches'] = $pitches;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,10 +220,10 @@ final class Segment implements BaseModel
      */
     public function withStart(float $start): self
     {
-        $obj = clone $this;
-        $obj['start'] = $start;
+        $self = clone $this;
+        $self['start'] = $start;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -238,9 +238,9 @@ final class Segment implements BaseModel
      */
     public function withTimbre(array $timbre): self
     {
-        $obj = clone $this;
-        $obj['timbre'] = $timbre;
+        $self = clone $this;
+        $self['timbre'] = $timbre;
 
-        return $obj;
+        return $self;
     }
 }

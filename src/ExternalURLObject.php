@@ -34,11 +34,11 @@ final class ExternalURLObject implements BaseModel
      */
     public static function with(?string $spotify = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $spotify && $obj['spotify'] = $spotify;
+        null !== $spotify && $self['spotify'] = $spotify;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class ExternalURLObject implements BaseModel
      */
     public function withSpotify(string $spotify): self
     {
-        $obj = clone $this;
-        $obj['spotify'] = $spotify;
+        $self = clone $this;
+        $self['spotify'] = $spotify;
 
-        return $obj;
+        return $self;
     }
 }

@@ -40,11 +40,11 @@ final class FollowerFollowParams implements BaseModel
      */
     public static function with(?bool $public = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $public && $obj['public'] = $public;
+        null !== $public && $self['public'] = $public;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class FollowerFollowParams implements BaseModel
      */
     public function withPublic(bool $public): self
     {
-        $obj = clone $this;
-        $obj['public'] = $public;
+        $self = clone $this;
+        $self['public'] = $public;
 
-        return $obj;
+        return $self;
     }
 }

@@ -67,13 +67,13 @@ final class PlayerSetRepeatModeParams implements BaseModel
      */
     public static function with(string $state, ?string $deviceID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['state'] = $state;
+        $self['state'] = $state;
 
-        null !== $deviceID && $obj['deviceID'] = $deviceID;
+        null !== $deviceID && $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +84,10 @@ final class PlayerSetRepeatModeParams implements BaseModel
      */
     public function withState(string $state): self
     {
-        $obj = clone $this;
-        $obj['state'] = $state;
+        $self = clone $this;
+        $self['state'] = $state;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,9 +96,9 @@ final class PlayerSetRepeatModeParams implements BaseModel
      */
     public function withDeviceID(string $deviceID): self
     {
-        $obj = clone $this;
-        $obj['deviceID'] = $deviceID;
+        $self = clone $this;
+        $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 }

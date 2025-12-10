@@ -42,12 +42,12 @@ final class CopyrightObject implements BaseModel
      */
     public static function with(?string $text = null, ?string $type = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $text && $obj['text'] = $text;
-        null !== $type && $obj['type'] = $type;
+        null !== $text && $self['text'] = $text;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class CopyrightObject implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj['text'] = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class CopyrightObject implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

@@ -53,12 +53,12 @@ final class CategoryGetPlaylistsResponse implements BaseModel
         ?string $message = null,
         PagingPlaylistObject|array|null $playlists = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $message && $obj['message'] = $message;
-        null !== $playlists && $obj['playlists'] = $playlists;
+        null !== $message && $self['message'] = $message;
+        null !== $playlists && $self['playlists'] = $playlists;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,10 +66,10 @@ final class CategoryGetPlaylistsResponse implements BaseModel
      */
     public function withMessage(string $message): self
     {
-        $obj = clone $this;
-        $obj['message'] = $message;
+        $self = clone $this;
+        $self['message'] = $message;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,9 +85,9 @@ final class CategoryGetPlaylistsResponse implements BaseModel
      */
     public function withPlaylists(PagingPlaylistObject|array $playlists): self
     {
-        $obj = clone $this;
-        $obj['playlists'] = $playlists;
+        $self = clone $this;
+        $self['playlists'] = $playlists;
 
-        return $obj;
+        return $self;
     }
 }

@@ -46,11 +46,11 @@ final class EpisodeRetrieveParams implements BaseModel
      */
     public static function with(?string $market = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $market && $obj['market'] = $market;
+        null !== $market && $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,9 +63,9 @@ final class EpisodeRetrieveParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj['market'] = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 }

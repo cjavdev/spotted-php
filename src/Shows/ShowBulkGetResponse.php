@@ -70,11 +70,11 @@ final class ShowBulkGetResponse implements BaseModel
      */
     public static function with(array $shows): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['shows'] = $shows;
+        $self['shows'] = $shows;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,9 +100,9 @@ final class ShowBulkGetResponse implements BaseModel
      */
     public function withShows(array $shows): self
     {
-        $obj = clone $this;
-        $obj['shows'] = $shows;
+        $self = clone $this;
+        $self['shows'] = $shows;
 
-        return $obj;
+        return $self;
     }
 }

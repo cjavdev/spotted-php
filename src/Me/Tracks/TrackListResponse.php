@@ -77,12 +77,12 @@ final class TrackListResponse implements BaseModel
         ?\DateTimeInterface $addedAt = null,
         TrackObject|array|null $track = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $addedAt && $obj['addedAt'] = $addedAt;
-        null !== $track && $obj['track'] = $track;
+        null !== $addedAt && $self['addedAt'] = $addedAt;
+        null !== $track && $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class TrackListResponse implements BaseModel
      */
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
-        $obj = clone $this;
-        $obj['addedAt'] = $addedAt;
+        $self = clone $this;
+        $self['addedAt'] = $addedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,9 +126,9 @@ final class TrackListResponse implements BaseModel
      */
     public function withTrack(TrackObject|array $track): self
     {
-        $obj = clone $this;
-        $obj['track'] = $track;
+        $self = clone $this;
+        $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 }

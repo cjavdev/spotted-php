@@ -419,57 +419,57 @@ final class RecommendationGetParams implements BaseModel
         ?int $targetTimeSignature = null,
         ?float $targetValence = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $limit && $obj['limit'] = $limit;
-        null !== $market && $obj['market'] = $market;
-        null !== $maxAcousticness && $obj['maxAcousticness'] = $maxAcousticness;
-        null !== $maxDanceability && $obj['maxDanceability'] = $maxDanceability;
-        null !== $maxDurationMs && $obj['maxDurationMs'] = $maxDurationMs;
-        null !== $maxEnergy && $obj['maxEnergy'] = $maxEnergy;
-        null !== $maxInstrumentalness && $obj['maxInstrumentalness'] = $maxInstrumentalness;
-        null !== $maxKey && $obj['maxKey'] = $maxKey;
-        null !== $maxLiveness && $obj['maxLiveness'] = $maxLiveness;
-        null !== $maxLoudness && $obj['maxLoudness'] = $maxLoudness;
-        null !== $maxMode && $obj['maxMode'] = $maxMode;
-        null !== $maxPopularity && $obj['maxPopularity'] = $maxPopularity;
-        null !== $maxSpeechiness && $obj['maxSpeechiness'] = $maxSpeechiness;
-        null !== $maxTempo && $obj['maxTempo'] = $maxTempo;
-        null !== $maxTimeSignature && $obj['maxTimeSignature'] = $maxTimeSignature;
-        null !== $maxValence && $obj['maxValence'] = $maxValence;
-        null !== $minAcousticness && $obj['minAcousticness'] = $minAcousticness;
-        null !== $minDanceability && $obj['minDanceability'] = $minDanceability;
-        null !== $minDurationMs && $obj['minDurationMs'] = $minDurationMs;
-        null !== $minEnergy && $obj['minEnergy'] = $minEnergy;
-        null !== $minInstrumentalness && $obj['minInstrumentalness'] = $minInstrumentalness;
-        null !== $minKey && $obj['minKey'] = $minKey;
-        null !== $minLiveness && $obj['minLiveness'] = $minLiveness;
-        null !== $minLoudness && $obj['minLoudness'] = $minLoudness;
-        null !== $minMode && $obj['minMode'] = $minMode;
-        null !== $minPopularity && $obj['minPopularity'] = $minPopularity;
-        null !== $minSpeechiness && $obj['minSpeechiness'] = $minSpeechiness;
-        null !== $minTempo && $obj['minTempo'] = $minTempo;
-        null !== $minTimeSignature && $obj['minTimeSignature'] = $minTimeSignature;
-        null !== $minValence && $obj['minValence'] = $minValence;
-        null !== $seedArtists && $obj['seedArtists'] = $seedArtists;
-        null !== $seedGenres && $obj['seedGenres'] = $seedGenres;
-        null !== $seedTracks && $obj['seedTracks'] = $seedTracks;
-        null !== $targetAcousticness && $obj['targetAcousticness'] = $targetAcousticness;
-        null !== $targetDanceability && $obj['targetDanceability'] = $targetDanceability;
-        null !== $targetDurationMs && $obj['targetDurationMs'] = $targetDurationMs;
-        null !== $targetEnergy && $obj['targetEnergy'] = $targetEnergy;
-        null !== $targetInstrumentalness && $obj['targetInstrumentalness'] = $targetInstrumentalness;
-        null !== $targetKey && $obj['targetKey'] = $targetKey;
-        null !== $targetLiveness && $obj['targetLiveness'] = $targetLiveness;
-        null !== $targetLoudness && $obj['targetLoudness'] = $targetLoudness;
-        null !== $targetMode && $obj['targetMode'] = $targetMode;
-        null !== $targetPopularity && $obj['targetPopularity'] = $targetPopularity;
-        null !== $targetSpeechiness && $obj['targetSpeechiness'] = $targetSpeechiness;
-        null !== $targetTempo && $obj['targetTempo'] = $targetTempo;
-        null !== $targetTimeSignature && $obj['targetTimeSignature'] = $targetTimeSignature;
-        null !== $targetValence && $obj['targetValence'] = $targetValence;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $market && $self['market'] = $market;
+        null !== $maxAcousticness && $self['maxAcousticness'] = $maxAcousticness;
+        null !== $maxDanceability && $self['maxDanceability'] = $maxDanceability;
+        null !== $maxDurationMs && $self['maxDurationMs'] = $maxDurationMs;
+        null !== $maxEnergy && $self['maxEnergy'] = $maxEnergy;
+        null !== $maxInstrumentalness && $self['maxInstrumentalness'] = $maxInstrumentalness;
+        null !== $maxKey && $self['maxKey'] = $maxKey;
+        null !== $maxLiveness && $self['maxLiveness'] = $maxLiveness;
+        null !== $maxLoudness && $self['maxLoudness'] = $maxLoudness;
+        null !== $maxMode && $self['maxMode'] = $maxMode;
+        null !== $maxPopularity && $self['maxPopularity'] = $maxPopularity;
+        null !== $maxSpeechiness && $self['maxSpeechiness'] = $maxSpeechiness;
+        null !== $maxTempo && $self['maxTempo'] = $maxTempo;
+        null !== $maxTimeSignature && $self['maxTimeSignature'] = $maxTimeSignature;
+        null !== $maxValence && $self['maxValence'] = $maxValence;
+        null !== $minAcousticness && $self['minAcousticness'] = $minAcousticness;
+        null !== $minDanceability && $self['minDanceability'] = $minDanceability;
+        null !== $minDurationMs && $self['minDurationMs'] = $minDurationMs;
+        null !== $minEnergy && $self['minEnergy'] = $minEnergy;
+        null !== $minInstrumentalness && $self['minInstrumentalness'] = $minInstrumentalness;
+        null !== $minKey && $self['minKey'] = $minKey;
+        null !== $minLiveness && $self['minLiveness'] = $minLiveness;
+        null !== $minLoudness && $self['minLoudness'] = $minLoudness;
+        null !== $minMode && $self['minMode'] = $minMode;
+        null !== $minPopularity && $self['minPopularity'] = $minPopularity;
+        null !== $minSpeechiness && $self['minSpeechiness'] = $minSpeechiness;
+        null !== $minTempo && $self['minTempo'] = $minTempo;
+        null !== $minTimeSignature && $self['minTimeSignature'] = $minTimeSignature;
+        null !== $minValence && $self['minValence'] = $minValence;
+        null !== $seedArtists && $self['seedArtists'] = $seedArtists;
+        null !== $seedGenres && $self['seedGenres'] = $seedGenres;
+        null !== $seedTracks && $self['seedTracks'] = $seedTracks;
+        null !== $targetAcousticness && $self['targetAcousticness'] = $targetAcousticness;
+        null !== $targetDanceability && $self['targetDanceability'] = $targetDanceability;
+        null !== $targetDurationMs && $self['targetDurationMs'] = $targetDurationMs;
+        null !== $targetEnergy && $self['targetEnergy'] = $targetEnergy;
+        null !== $targetInstrumentalness && $self['targetInstrumentalness'] = $targetInstrumentalness;
+        null !== $targetKey && $self['targetKey'] = $targetKey;
+        null !== $targetLiveness && $self['targetLiveness'] = $targetLiveness;
+        null !== $targetLoudness && $self['targetLoudness'] = $targetLoudness;
+        null !== $targetMode && $self['targetMode'] = $targetMode;
+        null !== $targetPopularity && $self['targetPopularity'] = $targetPopularity;
+        null !== $targetSpeechiness && $self['targetSpeechiness'] = $targetSpeechiness;
+        null !== $targetTempo && $self['targetTempo'] = $targetTempo;
+        null !== $targetTimeSignature && $self['targetTimeSignature'] = $targetTimeSignature;
+        null !== $targetValence && $self['targetValence'] = $targetValence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -477,10 +477,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj['limit'] = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -493,10 +493,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj['market'] = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -504,10 +504,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMaxAcousticness(float $maxAcousticness): self
     {
-        $obj = clone $this;
-        $obj['maxAcousticness'] = $maxAcousticness;
+        $self = clone $this;
+        $self['maxAcousticness'] = $maxAcousticness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -515,10 +515,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMaxDanceability(float $maxDanceability): self
     {
-        $obj = clone $this;
-        $obj['maxDanceability'] = $maxDanceability;
+        $self = clone $this;
+        $self['maxDanceability'] = $maxDanceability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -526,10 +526,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMaxDurationMs(int $maxDurationMs): self
     {
-        $obj = clone $this;
-        $obj['maxDurationMs'] = $maxDurationMs;
+        $self = clone $this;
+        $self['maxDurationMs'] = $maxDurationMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -537,10 +537,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMaxEnergy(float $maxEnergy): self
     {
-        $obj = clone $this;
-        $obj['maxEnergy'] = $maxEnergy;
+        $self = clone $this;
+        $self['maxEnergy'] = $maxEnergy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -548,10 +548,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMaxInstrumentalness(float $maxInstrumentalness): self
     {
-        $obj = clone $this;
-        $obj['maxInstrumentalness'] = $maxInstrumentalness;
+        $self = clone $this;
+        $self['maxInstrumentalness'] = $maxInstrumentalness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -559,10 +559,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMaxKey(int $maxKey): self
     {
-        $obj = clone $this;
-        $obj['maxKey'] = $maxKey;
+        $self = clone $this;
+        $self['maxKey'] = $maxKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -570,10 +570,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMaxLiveness(float $maxLiveness): self
     {
-        $obj = clone $this;
-        $obj['maxLiveness'] = $maxLiveness;
+        $self = clone $this;
+        $self['maxLiveness'] = $maxLiveness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -581,10 +581,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMaxLoudness(float $maxLoudness): self
     {
-        $obj = clone $this;
-        $obj['maxLoudness'] = $maxLoudness;
+        $self = clone $this;
+        $self['maxLoudness'] = $maxLoudness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -592,10 +592,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMaxMode(int $maxMode): self
     {
-        $obj = clone $this;
-        $obj['maxMode'] = $maxMode;
+        $self = clone $this;
+        $self['maxMode'] = $maxMode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -603,10 +603,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMaxPopularity(int $maxPopularity): self
     {
-        $obj = clone $this;
-        $obj['maxPopularity'] = $maxPopularity;
+        $self = clone $this;
+        $self['maxPopularity'] = $maxPopularity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -614,10 +614,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMaxSpeechiness(float $maxSpeechiness): self
     {
-        $obj = clone $this;
-        $obj['maxSpeechiness'] = $maxSpeechiness;
+        $self = clone $this;
+        $self['maxSpeechiness'] = $maxSpeechiness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -625,10 +625,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMaxTempo(float $maxTempo): self
     {
-        $obj = clone $this;
-        $obj['maxTempo'] = $maxTempo;
+        $self = clone $this;
+        $self['maxTempo'] = $maxTempo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -636,10 +636,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMaxTimeSignature(int $maxTimeSignature): self
     {
-        $obj = clone $this;
-        $obj['maxTimeSignature'] = $maxTimeSignature;
+        $self = clone $this;
+        $self['maxTimeSignature'] = $maxTimeSignature;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -647,10 +647,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMaxValence(float $maxValence): self
     {
-        $obj = clone $this;
-        $obj['maxValence'] = $maxValence;
+        $self = clone $this;
+        $self['maxValence'] = $maxValence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -658,10 +658,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMinAcousticness(float $minAcousticness): self
     {
-        $obj = clone $this;
-        $obj['minAcousticness'] = $minAcousticness;
+        $self = clone $this;
+        $self['minAcousticness'] = $minAcousticness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -669,10 +669,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMinDanceability(float $minDanceability): self
     {
-        $obj = clone $this;
-        $obj['minDanceability'] = $minDanceability;
+        $self = clone $this;
+        $self['minDanceability'] = $minDanceability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -680,10 +680,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMinDurationMs(int $minDurationMs): self
     {
-        $obj = clone $this;
-        $obj['minDurationMs'] = $minDurationMs;
+        $self = clone $this;
+        $self['minDurationMs'] = $minDurationMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -691,10 +691,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMinEnergy(float $minEnergy): self
     {
-        $obj = clone $this;
-        $obj['minEnergy'] = $minEnergy;
+        $self = clone $this;
+        $self['minEnergy'] = $minEnergy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -702,10 +702,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMinInstrumentalness(float $minInstrumentalness): self
     {
-        $obj = clone $this;
-        $obj['minInstrumentalness'] = $minInstrumentalness;
+        $self = clone $this;
+        $self['minInstrumentalness'] = $minInstrumentalness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -713,10 +713,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMinKey(int $minKey): self
     {
-        $obj = clone $this;
-        $obj['minKey'] = $minKey;
+        $self = clone $this;
+        $self['minKey'] = $minKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -724,10 +724,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMinLiveness(float $minLiveness): self
     {
-        $obj = clone $this;
-        $obj['minLiveness'] = $minLiveness;
+        $self = clone $this;
+        $self['minLiveness'] = $minLiveness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -735,10 +735,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMinLoudness(float $minLoudness): self
     {
-        $obj = clone $this;
-        $obj['minLoudness'] = $minLoudness;
+        $self = clone $this;
+        $self['minLoudness'] = $minLoudness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -746,10 +746,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMinMode(int $minMode): self
     {
-        $obj = clone $this;
-        $obj['minMode'] = $minMode;
+        $self = clone $this;
+        $self['minMode'] = $minMode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -757,10 +757,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMinPopularity(int $minPopularity): self
     {
-        $obj = clone $this;
-        $obj['minPopularity'] = $minPopularity;
+        $self = clone $this;
+        $self['minPopularity'] = $minPopularity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -768,10 +768,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMinSpeechiness(float $minSpeechiness): self
     {
-        $obj = clone $this;
-        $obj['minSpeechiness'] = $minSpeechiness;
+        $self = clone $this;
+        $self['minSpeechiness'] = $minSpeechiness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -779,10 +779,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMinTempo(float $minTempo): self
     {
-        $obj = clone $this;
-        $obj['minTempo'] = $minTempo;
+        $self = clone $this;
+        $self['minTempo'] = $minTempo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -790,10 +790,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMinTimeSignature(int $minTimeSignature): self
     {
-        $obj = clone $this;
-        $obj['minTimeSignature'] = $minTimeSignature;
+        $self = clone $this;
+        $self['minTimeSignature'] = $minTimeSignature;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -801,10 +801,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withMinValence(float $minValence): self
     {
-        $obj = clone $this;
-        $obj['minValence'] = $minValence;
+        $self = clone $this;
+        $self['minValence'] = $minValence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -812,10 +812,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withSeedArtists(string $seedArtists): self
     {
-        $obj = clone $this;
-        $obj['seedArtists'] = $seedArtists;
+        $self = clone $this;
+        $self['seedArtists'] = $seedArtists;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -823,10 +823,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withSeedGenres(string $seedGenres): self
     {
-        $obj = clone $this;
-        $obj['seedGenres'] = $seedGenres;
+        $self = clone $this;
+        $self['seedGenres'] = $seedGenres;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -834,10 +834,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withSeedTracks(string $seedTracks): self
     {
-        $obj = clone $this;
-        $obj['seedTracks'] = $seedTracks;
+        $self = clone $this;
+        $self['seedTracks'] = $seedTracks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -845,10 +845,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withTargetAcousticness(float $targetAcousticness): self
     {
-        $obj = clone $this;
-        $obj['targetAcousticness'] = $targetAcousticness;
+        $self = clone $this;
+        $self['targetAcousticness'] = $targetAcousticness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -856,10 +856,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withTargetDanceability(float $targetDanceability): self
     {
-        $obj = clone $this;
-        $obj['targetDanceability'] = $targetDanceability;
+        $self = clone $this;
+        $self['targetDanceability'] = $targetDanceability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -867,10 +867,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withTargetDurationMs(int $targetDurationMs): self
     {
-        $obj = clone $this;
-        $obj['targetDurationMs'] = $targetDurationMs;
+        $self = clone $this;
+        $self['targetDurationMs'] = $targetDurationMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -878,10 +878,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withTargetEnergy(float $targetEnergy): self
     {
-        $obj = clone $this;
-        $obj['targetEnergy'] = $targetEnergy;
+        $self = clone $this;
+        $self['targetEnergy'] = $targetEnergy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -890,10 +890,10 @@ final class RecommendationGetParams implements BaseModel
     public function withTargetInstrumentalness(
         float $targetInstrumentalness
     ): self {
-        $obj = clone $this;
-        $obj['targetInstrumentalness'] = $targetInstrumentalness;
+        $self = clone $this;
+        $self['targetInstrumentalness'] = $targetInstrumentalness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -901,10 +901,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withTargetKey(int $targetKey): self
     {
-        $obj = clone $this;
-        $obj['targetKey'] = $targetKey;
+        $self = clone $this;
+        $self['targetKey'] = $targetKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -912,10 +912,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withTargetLiveness(float $targetLiveness): self
     {
-        $obj = clone $this;
-        $obj['targetLiveness'] = $targetLiveness;
+        $self = clone $this;
+        $self['targetLiveness'] = $targetLiveness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -923,10 +923,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withTargetLoudness(float $targetLoudness): self
     {
-        $obj = clone $this;
-        $obj['targetLoudness'] = $targetLoudness;
+        $self = clone $this;
+        $self['targetLoudness'] = $targetLoudness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -934,10 +934,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withTargetMode(int $targetMode): self
     {
-        $obj = clone $this;
-        $obj['targetMode'] = $targetMode;
+        $self = clone $this;
+        $self['targetMode'] = $targetMode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -945,10 +945,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withTargetPopularity(int $targetPopularity): self
     {
-        $obj = clone $this;
-        $obj['targetPopularity'] = $targetPopularity;
+        $self = clone $this;
+        $self['targetPopularity'] = $targetPopularity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -956,10 +956,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withTargetSpeechiness(float $targetSpeechiness): self
     {
-        $obj = clone $this;
-        $obj['targetSpeechiness'] = $targetSpeechiness;
+        $self = clone $this;
+        $self['targetSpeechiness'] = $targetSpeechiness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -967,10 +967,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withTargetTempo(float $targetTempo): self
     {
-        $obj = clone $this;
-        $obj['targetTempo'] = $targetTempo;
+        $self = clone $this;
+        $self['targetTempo'] = $targetTempo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -978,10 +978,10 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withTargetTimeSignature(int $targetTimeSignature): self
     {
-        $obj = clone $this;
-        $obj['targetTimeSignature'] = $targetTimeSignature;
+        $self = clone $this;
+        $self['targetTimeSignature'] = $targetTimeSignature;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -989,9 +989,9 @@ final class RecommendationGetParams implements BaseModel
      */
     public function withTargetValence(float $targetValence): self
     {
-        $obj = clone $this;
-        $obj['targetValence'] = $targetValence;
+        $self = clone $this;
+        $self['targetValence'] = $targetValence;
 
-        return $obj;
+        return $self;
     }
 }

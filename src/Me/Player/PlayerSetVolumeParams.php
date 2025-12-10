@@ -65,13 +65,13 @@ final class PlayerSetVolumeParams implements BaseModel
         int $volumePercent,
         ?string $deviceID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['volumePercent'] = $volumePercent;
+        $self['volumePercent'] = $volumePercent;
 
-        null !== $deviceID && $obj['deviceID'] = $deviceID;
+        null !== $deviceID && $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +79,10 @@ final class PlayerSetVolumeParams implements BaseModel
      */
     public function withVolumePercent(int $volumePercent): self
     {
-        $obj = clone $this;
-        $obj['volumePercent'] = $volumePercent;
+        $self = clone $this;
+        $self['volumePercent'] = $volumePercent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,9 +90,9 @@ final class PlayerSetVolumeParams implements BaseModel
      */
     public function withDeviceID(string $deviceID): self
     {
-        $obj = clone $this;
-        $obj['deviceID'] = $deviceID;
+        $self = clone $this;
+        $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -93,18 +93,18 @@ final class DeviceObject implements BaseModel
         ?string $type = null,
         ?int $volumePercent = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $isActive && $obj['isActive'] = $isActive;
-        null !== $isPrivateSession && $obj['isPrivateSession'] = $isPrivateSession;
-        null !== $isRestricted && $obj['isRestricted'] = $isRestricted;
-        null !== $name && $obj['name'] = $name;
-        null !== $supportsVolume && $obj['supportsVolume'] = $supportsVolume;
-        null !== $type && $obj['type'] = $type;
-        null !== $volumePercent && $obj['volumePercent'] = $volumePercent;
+        null !== $id && $self['id'] = $id;
+        null !== $isActive && $self['isActive'] = $isActive;
+        null !== $isPrivateSession && $self['isPrivateSession'] = $isPrivateSession;
+        null !== $isRestricted && $self['isRestricted'] = $isRestricted;
+        null !== $name && $self['name'] = $name;
+        null !== $supportsVolume && $self['supportsVolume'] = $supportsVolume;
+        null !== $type && $self['type'] = $type;
+        null !== $volumePercent && $self['volumePercent'] = $volumePercent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class DeviceObject implements BaseModel
      */
     public function withID(?string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class DeviceObject implements BaseModel
      */
     public function withIsActive(bool $isActive): self
     {
-        $obj = clone $this;
-        $obj['isActive'] = $isActive;
+        $self = clone $this;
+        $self['isActive'] = $isActive;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +134,10 @@ final class DeviceObject implements BaseModel
      */
     public function withIsPrivateSession(bool $isPrivateSession): self
     {
-        $obj = clone $this;
-        $obj['isPrivateSession'] = $isPrivateSession;
+        $self = clone $this;
+        $self['isPrivateSession'] = $isPrivateSession;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +145,10 @@ final class DeviceObject implements BaseModel
      */
     public function withIsRestricted(bool $isRestricted): self
     {
-        $obj = clone $this;
-        $obj['isRestricted'] = $isRestricted;
+        $self = clone $this;
+        $self['isRestricted'] = $isRestricted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,10 +156,10 @@ final class DeviceObject implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +167,10 @@ final class DeviceObject implements BaseModel
      */
     public function withSupportsVolume(bool $supportsVolume): self
     {
-        $obj = clone $this;
-        $obj['supportsVolume'] = $supportsVolume;
+        $self = clone $this;
+        $self['supportsVolume'] = $supportsVolume;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +178,10 @@ final class DeviceObject implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,9 +189,9 @@ final class DeviceObject implements BaseModel
      */
     public function withVolumePercent(?int $volumePercent): self
     {
-        $obj = clone $this;
-        $obj['volumePercent'] = $volumePercent;
+        $self = clone $this;
+        $self['volumePercent'] = $volumePercent;
 
-        return $obj;
+        return $self;
     }
 }

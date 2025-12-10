@@ -89,15 +89,15 @@ final class TrackListParams implements BaseModel
         ?string $market = null,
         ?int $offset = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additionalTypes && $obj['additionalTypes'] = $additionalTypes;
-        null !== $fields && $obj['fields'] = $fields;
-        null !== $limit && $obj['limit'] = $limit;
-        null !== $market && $obj['market'] = $market;
-        null !== $offset && $obj['offset'] = $offset;
+        null !== $additionalTypes && $self['additionalTypes'] = $additionalTypes;
+        null !== $fields && $self['fields'] = $fields;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $market && $self['market'] = $market;
+        null !== $offset && $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class TrackListParams implements BaseModel
      */
     public function withAdditionalTypes(string $additionalTypes): self
     {
-        $obj = clone $this;
-        $obj['additionalTypes'] = $additionalTypes;
+        $self = clone $this;
+        $self['additionalTypes'] = $additionalTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class TrackListParams implements BaseModel
      */
     public function withFields(string $fields): self
     {
-        $obj = clone $this;
-        $obj['fields'] = $fields;
+        $self = clone $this;
+        $self['fields'] = $fields;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class TrackListParams implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj['limit'] = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +152,10 @@ final class TrackListParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj['market'] = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,9 +163,9 @@ final class TrackListParams implements BaseModel
      */
     public function withOffset(int $offset): self
     {
-        $obj = clone $this;
-        $obj['offset'] = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 }

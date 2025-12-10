@@ -124,20 +124,20 @@ final class ArtistObject implements BaseModel
         Type|string|null $type = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $externalURLs && $obj['externalURLs'] = $externalURLs;
-        null !== $followers && $obj['followers'] = $followers;
-        null !== $genres && $obj['genres'] = $genres;
-        null !== $href && $obj['href'] = $href;
-        null !== $images && $obj['images'] = $images;
-        null !== $name && $obj['name'] = $name;
-        null !== $popularity && $obj['popularity'] = $popularity;
-        null !== $type && $obj['type'] = $type;
-        null !== $uri && $obj['uri'] = $uri;
+        null !== $id && $self['id'] = $id;
+        null !== $externalURLs && $self['externalURLs'] = $externalURLs;
+        null !== $followers && $self['followers'] = $followers;
+        null !== $genres && $self['genres'] = $genres;
+        null !== $href && $self['href'] = $href;
+        null !== $images && $self['images'] = $images;
+        null !== $name && $self['name'] = $name;
+        null !== $popularity && $self['popularity'] = $popularity;
+        null !== $type && $self['type'] = $type;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +145,10 @@ final class ArtistObject implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class ArtistObject implements BaseModel
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
     ): self {
-        $obj = clone $this;
-        $obj['externalURLs'] = $externalURLs;
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +172,10 @@ final class ArtistObject implements BaseModel
      */
     public function withFollowers(FollowersObject|array $followers): self
     {
-        $obj = clone $this;
-        $obj['followers'] = $followers;
+        $self = clone $this;
+        $self['followers'] = $followers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class ArtistObject implements BaseModel
      */
     public function withGenres(array $genres): self
     {
-        $obj = clone $this;
-        $obj['genres'] = $genres;
+        $self = clone $this;
+        $self['genres'] = $genres;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class ArtistObject implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj['href'] = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +211,10 @@ final class ArtistObject implements BaseModel
      */
     public function withImages(array $images): self
     {
-        $obj = clone $this;
-        $obj['images'] = $images;
+        $self = clone $this;
+        $self['images'] = $images;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -222,10 +222,10 @@ final class ArtistObject implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +233,10 @@ final class ArtistObject implements BaseModel
      */
     public function withPopularity(int $popularity): self
     {
-        $obj = clone $this;
-        $obj['popularity'] = $popularity;
+        $self = clone $this;
+        $self['popularity'] = $popularity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -246,10 +246,10 @@ final class ArtistObject implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -257,9 +257,9 @@ final class ArtistObject implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

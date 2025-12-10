@@ -221,24 +221,24 @@ final class Album implements BaseModel
         string $uri,
         AlbumRestrictionObject|array|null $restrictions = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['albumType'] = $albumType;
-        $obj['artists'] = $artists;
-        $obj['availableMarkets'] = $availableMarkets;
-        $obj['externalURLs'] = $externalURLs;
-        $obj['href'] = $href;
-        $obj['images'] = $images;
-        $obj['name'] = $name;
-        $obj['releaseDate'] = $releaseDate;
-        $obj['releaseDatePrecision'] = $releaseDatePrecision;
-        $obj['totalTracks'] = $totalTracks;
-        $obj['uri'] = $uri;
+        $self['id'] = $id;
+        $self['albumType'] = $albumType;
+        $self['artists'] = $artists;
+        $self['availableMarkets'] = $availableMarkets;
+        $self['externalURLs'] = $externalURLs;
+        $self['href'] = $href;
+        $self['images'] = $images;
+        $self['name'] = $name;
+        $self['releaseDate'] = $releaseDate;
+        $self['releaseDatePrecision'] = $releaseDatePrecision;
+        $self['totalTracks'] = $totalTracks;
+        $self['uri'] = $uri;
 
-        null !== $restrictions && $obj['restrictions'] = $restrictions;
+        null !== $restrictions && $self['restrictions'] = $restrictions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -246,10 +246,10 @@ final class Album implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -259,10 +259,10 @@ final class Album implements BaseModel
      */
     public function withAlbumType(AlbumType|string $albumType): self
     {
-        $obj = clone $this;
-        $obj['albumType'] = $albumType;
+        $self = clone $this;
+        $self['albumType'] = $albumType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -279,10 +279,10 @@ final class Album implements BaseModel
      */
     public function withArtists(array $artists): self
     {
-        $obj = clone $this;
-        $obj['artists'] = $artists;
+        $self = clone $this;
+        $self['artists'] = $artists;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -292,10 +292,10 @@ final class Album implements BaseModel
      */
     public function withAvailableMarkets(array $availableMarkets): self
     {
-        $obj = clone $this;
-        $obj['availableMarkets'] = $availableMarkets;
+        $self = clone $this;
+        $self['availableMarkets'] = $availableMarkets;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -306,10 +306,10 @@ final class Album implements BaseModel
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
     ): self {
-        $obj = clone $this;
-        $obj['externalURLs'] = $externalURLs;
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -317,10 +317,10 @@ final class Album implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj['href'] = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -332,10 +332,10 @@ final class Album implements BaseModel
      */
     public function withImages(array $images): self
     {
-        $obj = clone $this;
-        $obj['images'] = $images;
+        $self = clone $this;
+        $self['images'] = $images;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -343,10 +343,10 @@ final class Album implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -354,10 +354,10 @@ final class Album implements BaseModel
      */
     public function withReleaseDate(string $releaseDate): self
     {
-        $obj = clone $this;
-        $obj['releaseDate'] = $releaseDate;
+        $self = clone $this;
+        $self['releaseDate'] = $releaseDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -368,10 +368,10 @@ final class Album implements BaseModel
     public function withReleaseDatePrecision(
         ReleaseDatePrecision|string $releaseDatePrecision
     ): self {
-        $obj = clone $this;
-        $obj['releaseDatePrecision'] = $releaseDatePrecision;
+        $self = clone $this;
+        $self['releaseDatePrecision'] = $releaseDatePrecision;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -379,10 +379,10 @@ final class Album implements BaseModel
      */
     public function withTotalTracks(int $totalTracks): self
     {
-        $obj = clone $this;
-        $obj['totalTracks'] = $totalTracks;
+        $self = clone $this;
+        $self['totalTracks'] = $totalTracks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -390,10 +390,10 @@ final class Album implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -406,9 +406,9 @@ final class Album implements BaseModel
     public function withRestrictions(
         AlbumRestrictionObject|array $restrictions
     ): self {
-        $obj = clone $this;
-        $obj['restrictions'] = $restrictions;
+        $self = clone $this;
+        $self['restrictions'] = $restrictions;
 
-        return $obj;
+        return $self;
     }
 }

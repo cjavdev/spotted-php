@@ -68,13 +68,13 @@ final class ChapterBulkRetrieveParams implements BaseModel
      */
     public static function with(string $ids, ?string $market = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['ids'] = $ids;
+        $self['ids'] = $ids;
 
-        null !== $market && $obj['market'] = $market;
+        null !== $market && $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +82,10 @@ final class ChapterBulkRetrieveParams implements BaseModel
      */
     public function withIDs(string $ids): self
     {
-        $obj = clone $this;
-        $obj['ids'] = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,9 +98,9 @@ final class ChapterBulkRetrieveParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj['market'] = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 }

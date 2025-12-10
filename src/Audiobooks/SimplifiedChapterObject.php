@@ -265,30 +265,30 @@ final class SimplifiedChapterObject implements BaseModel
         ChapterRestrictionObject|array|null $restrictions = null,
         ResumePointObject|array|null $resumePoint = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['audioPreviewURL'] = $audioPreviewURL;
-        $obj['chapterNumber'] = $chapterNumber;
-        $obj['description'] = $description;
-        $obj['durationMs'] = $durationMs;
-        $obj['explicit'] = $explicit;
-        $obj['externalURLs'] = $externalURLs;
-        $obj['href'] = $href;
-        $obj['htmlDescription'] = $htmlDescription;
-        $obj['images'] = $images;
-        $obj['isPlayable'] = $isPlayable;
-        $obj['languages'] = $languages;
-        $obj['name'] = $name;
-        $obj['releaseDate'] = $releaseDate;
-        $obj['releaseDatePrecision'] = $releaseDatePrecision;
-        $obj['uri'] = $uri;
+        $self['id'] = $id;
+        $self['audioPreviewURL'] = $audioPreviewURL;
+        $self['chapterNumber'] = $chapterNumber;
+        $self['description'] = $description;
+        $self['durationMs'] = $durationMs;
+        $self['explicit'] = $explicit;
+        $self['externalURLs'] = $externalURLs;
+        $self['href'] = $href;
+        $self['htmlDescription'] = $htmlDescription;
+        $self['images'] = $images;
+        $self['isPlayable'] = $isPlayable;
+        $self['languages'] = $languages;
+        $self['name'] = $name;
+        $self['releaseDate'] = $releaseDate;
+        $self['releaseDatePrecision'] = $releaseDatePrecision;
+        $self['uri'] = $uri;
 
-        null !== $availableMarkets && $obj['availableMarkets'] = $availableMarkets;
-        null !== $restrictions && $obj['restrictions'] = $restrictions;
-        null !== $resumePoint && $obj['resumePoint'] = $resumePoint;
+        null !== $availableMarkets && $self['availableMarkets'] = $availableMarkets;
+        null !== $restrictions && $self['restrictions'] = $restrictions;
+        null !== $resumePoint && $self['resumePoint'] = $resumePoint;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -296,10 +296,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -307,10 +307,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withAudioPreviewURL(?string $audioPreviewURL): self
     {
-        $obj = clone $this;
-        $obj['audioPreviewURL'] = $audioPreviewURL;
+        $self = clone $this;
+        $self['audioPreviewURL'] = $audioPreviewURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -318,10 +318,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withChapterNumber(int $chapterNumber): self
     {
-        $obj = clone $this;
-        $obj['chapterNumber'] = $chapterNumber;
+        $self = clone $this;
+        $self['chapterNumber'] = $chapterNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -329,10 +329,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -340,10 +340,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withDurationMs(int $durationMs): self
     {
-        $obj = clone $this;
-        $obj['durationMs'] = $durationMs;
+        $self = clone $this;
+        $self['durationMs'] = $durationMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -351,10 +351,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withExplicit(bool $explicit): self
     {
-        $obj = clone $this;
-        $obj['explicit'] = $explicit;
+        $self = clone $this;
+        $self['explicit'] = $explicit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -365,10 +365,10 @@ final class SimplifiedChapterObject implements BaseModel
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
     ): self {
-        $obj = clone $this;
-        $obj['externalURLs'] = $externalURLs;
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -376,10 +376,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj['href'] = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -387,10 +387,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withHTMLDescription(string $htmlDescription): self
     {
-        $obj = clone $this;
-        $obj['htmlDescription'] = $htmlDescription;
+        $self = clone $this;
+        $self['htmlDescription'] = $htmlDescription;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -402,10 +402,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withImages(array $images): self
     {
-        $obj = clone $this;
-        $obj['images'] = $images;
+        $self = clone $this;
+        $self['images'] = $images;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -413,10 +413,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withIsPlayable(bool $isPlayable): self
     {
-        $obj = clone $this;
-        $obj['isPlayable'] = $isPlayable;
+        $self = clone $this;
+        $self['isPlayable'] = $isPlayable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -426,10 +426,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withLanguages(array $languages): self
     {
-        $obj = clone $this;
-        $obj['languages'] = $languages;
+        $self = clone $this;
+        $self['languages'] = $languages;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -437,10 +437,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -448,10 +448,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withReleaseDate(string $releaseDate): self
     {
-        $obj = clone $this;
-        $obj['releaseDate'] = $releaseDate;
+        $self = clone $this;
+        $self['releaseDate'] = $releaseDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -462,10 +462,10 @@ final class SimplifiedChapterObject implements BaseModel
     public function withReleaseDatePrecision(
         ReleaseDatePrecision|string $releaseDatePrecision
     ): self {
-        $obj = clone $this;
-        $obj['releaseDatePrecision'] = $releaseDatePrecision;
+        $self = clone $this;
+        $self['releaseDatePrecision'] = $releaseDatePrecision;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -473,10 +473,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -486,10 +486,10 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withAvailableMarkets(array $availableMarkets): self
     {
-        $obj = clone $this;
-        $obj['availableMarkets'] = $availableMarkets;
+        $self = clone $this;
+        $self['availableMarkets'] = $availableMarkets;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -500,10 +500,10 @@ final class SimplifiedChapterObject implements BaseModel
     public function withRestrictions(
         ChapterRestrictionObject|array $restrictions
     ): self {
-        $obj = clone $this;
-        $obj['restrictions'] = $restrictions;
+        $self = clone $this;
+        $self['restrictions'] = $restrictions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -515,9 +515,9 @@ final class SimplifiedChapterObject implements BaseModel
      */
     public function withResumePoint(ResumePointObject|array $resumePoint): self
     {
-        $obj = clone $this;
-        $obj['resumePoint'] = $resumePoint;
+        $self = clone $this;
+        $self['resumePoint'] = $resumePoint;
 
-        return $obj;
+        return $self;
     }
 }

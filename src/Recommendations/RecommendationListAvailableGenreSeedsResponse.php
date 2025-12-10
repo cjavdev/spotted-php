@@ -50,11 +50,11 @@ final class RecommendationListAvailableGenreSeedsResponse implements BaseModel
      */
     public static function with(array $genres): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['genres'] = $genres;
+        $self['genres'] = $genres;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,9 +62,9 @@ final class RecommendationListAvailableGenreSeedsResponse implements BaseModel
      */
     public function withGenres(array $genres): self
     {
-        $obj = clone $this;
-        $obj['genres'] = $genres;
+        $self = clone $this;
+        $self['genres'] = $genres;
 
-        return $obj;
+        return $self;
     }
 }

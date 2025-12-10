@@ -164,17 +164,17 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel
         ?int $progressMs = null,
         ?int $timestamp = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $actions && $obj['actions'] = $actions;
-        null !== $context && $obj['context'] = $context;
-        null !== $currentlyPlayingType && $obj['currentlyPlayingType'] = $currentlyPlayingType;
-        null !== $isPlaying && $obj['isPlaying'] = $isPlaying;
-        null !== $item && $obj['item'] = $item;
-        null !== $progressMs && $obj['progressMs'] = $progressMs;
-        null !== $timestamp && $obj['timestamp'] = $timestamp;
+        null !== $actions && $self['actions'] = $actions;
+        null !== $context && $self['context'] = $context;
+        null !== $currentlyPlayingType && $self['currentlyPlayingType'] = $currentlyPlayingType;
+        null !== $isPlaying && $self['isPlaying'] = $isPlaying;
+        null !== $item && $self['item'] = $item;
+        null !== $progressMs && $self['progressMs'] = $progressMs;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,10 +195,10 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel
      */
     public function withActions(Actions|array $actions): self
     {
-        $obj = clone $this;
-        $obj['actions'] = $actions;
+        $self = clone $this;
+        $self['actions'] = $actions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -213,10 +213,10 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel
      */
     public function withContext(ContextObject|array $context): self
     {
-        $obj = clone $this;
-        $obj['context'] = $context;
+        $self = clone $this;
+        $self['context'] = $context;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -224,10 +224,10 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel
      */
     public function withCurrentlyPlayingType(string $currentlyPlayingType): self
     {
-        $obj = clone $this;
-        $obj['currentlyPlayingType'] = $currentlyPlayingType;
+        $self = clone $this;
+        $self['currentlyPlayingType'] = $currentlyPlayingType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -235,10 +235,10 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel
      */
     public function withIsPlaying(bool $isPlaying): self
     {
-        $obj = clone $this;
-        $obj['isPlaying'] = $isPlaying;
+        $self = clone $this;
+        $self['isPlaying'] = $isPlaying;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -291,10 +291,10 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel
      */
     public function withItem(TrackObject|array|EpisodeObject $item): self
     {
-        $obj = clone $this;
-        $obj['item'] = $item;
+        $self = clone $this;
+        $self['item'] = $item;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -302,10 +302,10 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel
      */
     public function withProgressMs(int $progressMs): self
     {
-        $obj = clone $this;
-        $obj['progressMs'] = $progressMs;
+        $self = clone $this;
+        $self['progressMs'] = $progressMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -313,9 +313,9 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel
      */
     public function withTimestamp(int $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 }

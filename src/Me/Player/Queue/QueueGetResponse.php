@@ -152,12 +152,12 @@ final class QueueGetResponse implements BaseModel
         TrackObject|array|EpisodeObject|null $currentlyPlaying = null,
         ?array $queue = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $currentlyPlaying && $obj['currentlyPlaying'] = $currentlyPlaying;
-        null !== $queue && $obj['queue'] = $queue;
+        null !== $currentlyPlaying && $self['currentlyPlaying'] = $currentlyPlaying;
+        null !== $queue && $self['queue'] = $queue;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +211,10 @@ final class QueueGetResponse implements BaseModel
     public function withCurrentlyPlaying(
         TrackObject|array|EpisodeObject $currentlyPlaying
     ): self {
-        $obj = clone $this;
-        $obj['currentlyPlaying'] = $currentlyPlaying;
+        $self = clone $this;
+        $self['currentlyPlaying'] = $currentlyPlaying;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -267,9 +267,9 @@ final class QueueGetResponse implements BaseModel
      */
     public function withQueue(array $queue): self
     {
-        $obj = clone $this;
-        $obj['queue'] = $queue;
+        $self = clone $this;
+        $self['queue'] = $queue;
 
-        return $obj;
+        return $self;
     }
 }

@@ -231,26 +231,26 @@ final class ShowBase implements BaseModel
         int $totalEpisodes,
         string $uri,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['availableMarkets'] = $availableMarkets;
-        $obj['copyrights'] = $copyrights;
-        $obj['description'] = $description;
-        $obj['explicit'] = $explicit;
-        $obj['externalURLs'] = $externalURLs;
-        $obj['href'] = $href;
-        $obj['htmlDescription'] = $htmlDescription;
-        $obj['images'] = $images;
-        $obj['isExternallyHosted'] = $isExternallyHosted;
-        $obj['languages'] = $languages;
-        $obj['mediaType'] = $mediaType;
-        $obj['name'] = $name;
-        $obj['publisher'] = $publisher;
-        $obj['totalEpisodes'] = $totalEpisodes;
-        $obj['uri'] = $uri;
+        $self['id'] = $id;
+        $self['availableMarkets'] = $availableMarkets;
+        $self['copyrights'] = $copyrights;
+        $self['description'] = $description;
+        $self['explicit'] = $explicit;
+        $self['externalURLs'] = $externalURLs;
+        $self['href'] = $href;
+        $self['htmlDescription'] = $htmlDescription;
+        $self['images'] = $images;
+        $self['isExternallyHosted'] = $isExternallyHosted;
+        $self['languages'] = $languages;
+        $self['mediaType'] = $mediaType;
+        $self['name'] = $name;
+        $self['publisher'] = $publisher;
+        $self['totalEpisodes'] = $totalEpisodes;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -258,10 +258,10 @@ final class ShowBase implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -271,10 +271,10 @@ final class ShowBase implements BaseModel
      */
     public function withAvailableMarkets(array $availableMarkets): self
     {
-        $obj = clone $this;
-        $obj['availableMarkets'] = $availableMarkets;
+        $self = clone $this;
+        $self['availableMarkets'] = $availableMarkets;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -286,10 +286,10 @@ final class ShowBase implements BaseModel
      */
     public function withCopyrights(array $copyrights): self
     {
-        $obj = clone $this;
-        $obj['copyrights'] = $copyrights;
+        $self = clone $this;
+        $self['copyrights'] = $copyrights;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -297,10 +297,10 @@ final class ShowBase implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -308,10 +308,10 @@ final class ShowBase implements BaseModel
      */
     public function withExplicit(bool $explicit): self
     {
-        $obj = clone $this;
-        $obj['explicit'] = $explicit;
+        $self = clone $this;
+        $self['explicit'] = $explicit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -322,10 +322,10 @@ final class ShowBase implements BaseModel
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
     ): self {
-        $obj = clone $this;
-        $obj['externalURLs'] = $externalURLs;
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -333,10 +333,10 @@ final class ShowBase implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj['href'] = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -344,10 +344,10 @@ final class ShowBase implements BaseModel
      */
     public function withHTMLDescription(string $htmlDescription): self
     {
-        $obj = clone $this;
-        $obj['htmlDescription'] = $htmlDescription;
+        $self = clone $this;
+        $self['htmlDescription'] = $htmlDescription;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -359,10 +359,10 @@ final class ShowBase implements BaseModel
      */
     public function withImages(array $images): self
     {
-        $obj = clone $this;
-        $obj['images'] = $images;
+        $self = clone $this;
+        $self['images'] = $images;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -370,10 +370,10 @@ final class ShowBase implements BaseModel
      */
     public function withIsExternallyHosted(bool $isExternallyHosted): self
     {
-        $obj = clone $this;
-        $obj['isExternallyHosted'] = $isExternallyHosted;
+        $self = clone $this;
+        $self['isExternallyHosted'] = $isExternallyHosted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -383,10 +383,10 @@ final class ShowBase implements BaseModel
      */
     public function withLanguages(array $languages): self
     {
-        $obj = clone $this;
-        $obj['languages'] = $languages;
+        $self = clone $this;
+        $self['languages'] = $languages;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -394,10 +394,10 @@ final class ShowBase implements BaseModel
      */
     public function withMediaType(string $mediaType): self
     {
-        $obj = clone $this;
-        $obj['mediaType'] = $mediaType;
+        $self = clone $this;
+        $self['mediaType'] = $mediaType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -405,10 +405,10 @@ final class ShowBase implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -416,10 +416,10 @@ final class ShowBase implements BaseModel
      */
     public function withPublisher(string $publisher): self
     {
-        $obj = clone $this;
-        $obj['publisher'] = $publisher;
+        $self = clone $this;
+        $self['publisher'] = $publisher;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -427,10 +427,10 @@ final class ShowBase implements BaseModel
      */
     public function withTotalEpisodes(int $totalEpisodes): self
     {
-        $obj = clone $this;
-        $obj['totalEpisodes'] = $totalEpisodes;
+        $self = clone $this;
+        $self['totalEpisodes'] = $totalEpisodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -438,9 +438,9 @@ final class ShowBase implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

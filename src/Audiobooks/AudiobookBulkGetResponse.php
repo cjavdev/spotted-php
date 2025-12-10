@@ -76,11 +76,11 @@ final class AudiobookBulkGetResponse implements BaseModel
      */
     public static function with(array $audiobooks): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['audiobooks'] = $audiobooks;
+        $self['audiobooks'] = $audiobooks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,9 +109,9 @@ final class AudiobookBulkGetResponse implements BaseModel
      */
     public function withAudiobooks(array $audiobooks): self
     {
-        $obj = clone $this;
-        $obj['audiobooks'] = $audiobooks;
+        $self = clone $this;
+        $self['audiobooks'] = $audiobooks;
 
-        return $obj;
+        return $self;
     }
 }

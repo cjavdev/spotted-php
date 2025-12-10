@@ -165,17 +165,17 @@ final class AudioAnalysisGetResponse implements BaseModel
         ?array $tatums = null,
         Track|array|null $track = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $bars && $obj['bars'] = $bars;
-        null !== $beats && $obj['beats'] = $beats;
-        null !== $meta && $obj['meta'] = $meta;
-        null !== $sections && $obj['sections'] = $sections;
-        null !== $segments && $obj['segments'] = $segments;
-        null !== $tatums && $obj['tatums'] = $tatums;
-        null !== $track && $obj['track'] = $track;
+        null !== $bars && $self['bars'] = $bars;
+        null !== $beats && $self['beats'] = $beats;
+        null !== $meta && $self['meta'] = $meta;
+        null !== $sections && $self['sections'] = $sections;
+        null !== $segments && $self['segments'] = $segments;
+        null !== $tatums && $self['tatums'] = $tatums;
+        null !== $track && $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class AudioAnalysisGetResponse implements BaseModel
      */
     public function withBars(array $bars): self
     {
-        $obj = clone $this;
-        $obj['bars'] = $bars;
+        $self = clone $this;
+        $self['bars'] = $bars;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -202,10 +202,10 @@ final class AudioAnalysisGetResponse implements BaseModel
      */
     public function withBeats(array $beats): self
     {
-        $obj = clone $this;
-        $obj['beats'] = $beats;
+        $self = clone $this;
+        $self['beats'] = $beats;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +221,10 @@ final class AudioAnalysisGetResponse implements BaseModel
      */
     public function withMeta(Meta|array $meta): self
     {
-        $obj = clone $this;
-        $obj['meta'] = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -247,10 +247,10 @@ final class AudioAnalysisGetResponse implements BaseModel
      */
     public function withSections(array $sections): self
     {
-        $obj = clone $this;
-        $obj['sections'] = $sections;
+        $self = clone $this;
+        $self['sections'] = $sections;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -270,10 +270,10 @@ final class AudioAnalysisGetResponse implements BaseModel
      */
     public function withSegments(array $segments): self
     {
-        $obj = clone $this;
-        $obj['segments'] = $segments;
+        $self = clone $this;
+        $self['segments'] = $segments;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -285,10 +285,10 @@ final class AudioAnalysisGetResponse implements BaseModel
      */
     public function withTatums(array $tatums): self
     {
-        $obj = clone $this;
-        $obj['tatums'] = $tatums;
+        $self = clone $this;
+        $self['tatums'] = $tatums;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -323,9 +323,9 @@ final class AudioAnalysisGetResponse implements BaseModel
      */
     public function withTrack(Track|array $track): self
     {
-        $obj = clone $this;
-        $obj['track'] = $track;
+        $self = clone $this;
+        $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 }

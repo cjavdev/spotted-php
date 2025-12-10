@@ -153,23 +153,23 @@ final class SimplifiedPlaylistObject implements BaseModel
         ?string $type = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $collaborative && $obj['collaborative'] = $collaborative;
-        null !== $description && $obj['description'] = $description;
-        null !== $externalURLs && $obj['externalURLs'] = $externalURLs;
-        null !== $href && $obj['href'] = $href;
-        null !== $images && $obj['images'] = $images;
-        null !== $name && $obj['name'] = $name;
-        null !== $owner && $obj['owner'] = $owner;
-        null !== $published && $obj['published'] = $published;
-        null !== $snapshotID && $obj['snapshotID'] = $snapshotID;
-        null !== $tracks && $obj['tracks'] = $tracks;
-        null !== $type && $obj['type'] = $type;
-        null !== $uri && $obj['uri'] = $uri;
+        null !== $id && $self['id'] = $id;
+        null !== $collaborative && $self['collaborative'] = $collaborative;
+        null !== $description && $self['description'] = $description;
+        null !== $externalURLs && $self['externalURLs'] = $externalURLs;
+        null !== $href && $self['href'] = $href;
+        null !== $images && $self['images'] = $images;
+        null !== $name && $self['name'] = $name;
+        null !== $owner && $self['owner'] = $owner;
+        null !== $published && $self['published'] = $published;
+        null !== $snapshotID && $self['snapshotID'] = $snapshotID;
+        null !== $tracks && $self['tracks'] = $tracks;
+        null !== $type && $self['type'] = $type;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class SimplifiedPlaylistObject implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class SimplifiedPlaylistObject implements BaseModel
      */
     public function withCollaborative(bool $collaborative): self
     {
-        $obj = clone $this;
-        $obj['collaborative'] = $collaborative;
+        $self = clone $this;
+        $self['collaborative'] = $collaborative;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class SimplifiedPlaylistObject implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -213,10 +213,10 @@ final class SimplifiedPlaylistObject implements BaseModel
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
     ): self {
-        $obj = clone $this;
-        $obj['externalURLs'] = $externalURLs;
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -224,10 +224,10 @@ final class SimplifiedPlaylistObject implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj['href'] = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -239,10 +239,10 @@ final class SimplifiedPlaylistObject implements BaseModel
      */
     public function withImages(array $images): self
     {
-        $obj = clone $this;
-        $obj['images'] = $images;
+        $self = clone $this;
+        $self['images'] = $images;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -250,10 +250,10 @@ final class SimplifiedPlaylistObject implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -270,10 +270,10 @@ final class SimplifiedPlaylistObject implements BaseModel
      */
     public function withOwner(Owner|array $owner): self
     {
-        $obj = clone $this;
-        $obj['owner'] = $owner;
+        $self = clone $this;
+        $self['owner'] = $owner;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -281,10 +281,10 @@ final class SimplifiedPlaylistObject implements BaseModel
      */
     public function withPublished(bool $published): self
     {
-        $obj = clone $this;
-        $obj['published'] = $published;
+        $self = clone $this;
+        $self['published'] = $published;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -292,10 +292,10 @@ final class SimplifiedPlaylistObject implements BaseModel
      */
     public function withSnapshotID(string $snapshotID): self
     {
-        $obj = clone $this;
-        $obj['snapshotID'] = $snapshotID;
+        $self = clone $this;
+        $self['snapshotID'] = $snapshotID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -307,10 +307,10 @@ final class SimplifiedPlaylistObject implements BaseModel
      */
     public function withTracks(PlaylistTracksRefObject|array $tracks): self
     {
-        $obj = clone $this;
-        $obj['tracks'] = $tracks;
+        $self = clone $this;
+        $self['tracks'] = $tracks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -318,10 +318,10 @@ final class SimplifiedPlaylistObject implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -329,9 +329,9 @@ final class SimplifiedPlaylistObject implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

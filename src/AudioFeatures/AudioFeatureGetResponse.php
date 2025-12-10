@@ -178,28 +178,28 @@ final class AudioFeatureGetResponse implements BaseModel
         ?string $uri = null,
         ?float $valence = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $acousticness && $obj['acousticness'] = $acousticness;
-        null !== $analysisURL && $obj['analysisURL'] = $analysisURL;
-        null !== $danceability && $obj['danceability'] = $danceability;
-        null !== $durationMs && $obj['durationMs'] = $durationMs;
-        null !== $energy && $obj['energy'] = $energy;
-        null !== $instrumentalness && $obj['instrumentalness'] = $instrumentalness;
-        null !== $key && $obj['key'] = $key;
-        null !== $liveness && $obj['liveness'] = $liveness;
-        null !== $loudness && $obj['loudness'] = $loudness;
-        null !== $mode && $obj['mode'] = $mode;
-        null !== $speechiness && $obj['speechiness'] = $speechiness;
-        null !== $tempo && $obj['tempo'] = $tempo;
-        null !== $timeSignature && $obj['timeSignature'] = $timeSignature;
-        null !== $trackHref && $obj['trackHref'] = $trackHref;
-        null !== $type && $obj['type'] = $type;
-        null !== $uri && $obj['uri'] = $uri;
-        null !== $valence && $obj['valence'] = $valence;
+        null !== $id && $self['id'] = $id;
+        null !== $acousticness && $self['acousticness'] = $acousticness;
+        null !== $analysisURL && $self['analysisURL'] = $analysisURL;
+        null !== $danceability && $self['danceability'] = $danceability;
+        null !== $durationMs && $self['durationMs'] = $durationMs;
+        null !== $energy && $self['energy'] = $energy;
+        null !== $instrumentalness && $self['instrumentalness'] = $instrumentalness;
+        null !== $key && $self['key'] = $key;
+        null !== $liveness && $self['liveness'] = $liveness;
+        null !== $loudness && $self['loudness'] = $loudness;
+        null !== $mode && $self['mode'] = $mode;
+        null !== $speechiness && $self['speechiness'] = $speechiness;
+        null !== $tempo && $self['tempo'] = $tempo;
+        null !== $timeSignature && $self['timeSignature'] = $timeSignature;
+        null !== $trackHref && $self['trackHref'] = $trackHref;
+        null !== $type && $self['type'] = $type;
+        null !== $uri && $self['uri'] = $uri;
+        null !== $valence && $self['valence'] = $valence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +207,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +218,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withAcousticness(float $acousticness): self
     {
-        $obj = clone $this;
-        $obj['acousticness'] = $acousticness;
+        $self = clone $this;
+        $self['acousticness'] = $acousticness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +229,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withAnalysisURL(string $analysisURL): self
     {
-        $obj = clone $this;
-        $obj['analysisURL'] = $analysisURL;
+        $self = clone $this;
+        $self['analysisURL'] = $analysisURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -240,10 +240,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withDanceability(float $danceability): self
     {
-        $obj = clone $this;
-        $obj['danceability'] = $danceability;
+        $self = clone $this;
+        $self['danceability'] = $danceability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -251,10 +251,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withDurationMs(int $durationMs): self
     {
-        $obj = clone $this;
-        $obj['durationMs'] = $durationMs;
+        $self = clone $this;
+        $self['durationMs'] = $durationMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -262,10 +262,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withEnergy(float $energy): self
     {
-        $obj = clone $this;
-        $obj['energy'] = $energy;
+        $self = clone $this;
+        $self['energy'] = $energy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -273,10 +273,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withInstrumentalness(float $instrumentalness): self
     {
-        $obj = clone $this;
-        $obj['instrumentalness'] = $instrumentalness;
+        $self = clone $this;
+        $self['instrumentalness'] = $instrumentalness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -284,10 +284,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withKey(int $key): self
     {
-        $obj = clone $this;
-        $obj['key'] = $key;
+        $self = clone $this;
+        $self['key'] = $key;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -295,10 +295,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withLiveness(float $liveness): self
     {
-        $obj = clone $this;
-        $obj['liveness'] = $liveness;
+        $self = clone $this;
+        $self['liveness'] = $liveness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -306,10 +306,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withLoudness(float $loudness): self
     {
-        $obj = clone $this;
-        $obj['loudness'] = $loudness;
+        $self = clone $this;
+        $self['loudness'] = $loudness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -317,10 +317,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withMode(int $mode): self
     {
-        $obj = clone $this;
-        $obj['mode'] = $mode;
+        $self = clone $this;
+        $self['mode'] = $mode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -328,10 +328,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withSpeechiness(float $speechiness): self
     {
-        $obj = clone $this;
-        $obj['speechiness'] = $speechiness;
+        $self = clone $this;
+        $self['speechiness'] = $speechiness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -339,10 +339,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withTempo(float $tempo): self
     {
-        $obj = clone $this;
-        $obj['tempo'] = $tempo;
+        $self = clone $this;
+        $self['tempo'] = $tempo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -350,10 +350,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withTimeSignature(int $timeSignature): self
     {
-        $obj = clone $this;
-        $obj['timeSignature'] = $timeSignature;
+        $self = clone $this;
+        $self['timeSignature'] = $timeSignature;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -361,10 +361,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withTrackHref(string $trackHref): self
     {
-        $obj = clone $this;
-        $obj['trackHref'] = $trackHref;
+        $self = clone $this;
+        $self['trackHref'] = $trackHref;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -374,10 +374,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -385,10 +385,10 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -396,9 +396,9 @@ final class AudioFeatureGetResponse implements BaseModel
      */
     public function withValence(float $valence): self
     {
-        $obj = clone $this;
-        $obj['valence'] = $valence;
+        $self = clone $this;
+        $self['valence'] = $valence;
 
-        return $obj;
+        return $self;
     }
 }

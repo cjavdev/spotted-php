@@ -76,12 +76,12 @@ final class AudiobookListResponse implements BaseModel
         ?\DateTimeInterface $addedAt = null,
         Audiobook|array|null $audiobook = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $addedAt && $obj['addedAt'] = $addedAt;
-        null !== $audiobook && $obj['audiobook'] = $audiobook;
+        null !== $addedAt && $self['addedAt'] = $addedAt;
+        null !== $audiobook && $self['audiobook'] = $audiobook;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +91,10 @@ final class AudiobookListResponse implements BaseModel
      */
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
-        $obj = clone $this;
-        $obj['addedAt'] = $addedAt;
+        $self = clone $this;
+        $self['addedAt'] = $addedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,9 +125,9 @@ final class AudiobookListResponse implements BaseModel
      */
     public function withAudiobook(Audiobook|array $audiobook): self
     {
-        $obj = clone $this;
-        $obj['audiobook'] = $audiobook;
+        $self = clone $this;
+        $self['audiobook'] = $audiobook;
 
-        return $obj;
+        return $self;
     }
 }

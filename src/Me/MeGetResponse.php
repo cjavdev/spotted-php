@@ -140,22 +140,22 @@ final class MeGetResponse implements BaseModel
         ?string $type = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $country && $obj['country'] = $country;
-        null !== $displayName && $obj['displayName'] = $displayName;
-        null !== $email && $obj['email'] = $email;
-        null !== $explicitContent && $obj['explicitContent'] = $explicitContent;
-        null !== $externalURLs && $obj['externalURLs'] = $externalURLs;
-        null !== $followers && $obj['followers'] = $followers;
-        null !== $href && $obj['href'] = $href;
-        null !== $images && $obj['images'] = $images;
-        null !== $product && $obj['product'] = $product;
-        null !== $type && $obj['type'] = $type;
-        null !== $uri && $obj['uri'] = $uri;
+        null !== $id && $self['id'] = $id;
+        null !== $country && $self['country'] = $country;
+        null !== $displayName && $self['displayName'] = $displayName;
+        null !== $email && $self['email'] = $email;
+        null !== $explicitContent && $self['explicitContent'] = $explicitContent;
+        null !== $externalURLs && $self['externalURLs'] = $externalURLs;
+        null !== $followers && $self['followers'] = $followers;
+        null !== $href && $self['href'] = $href;
+        null !== $images && $self['images'] = $images;
+        null !== $product && $self['product'] = $product;
+        null !== $type && $self['type'] = $type;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class MeGetResponse implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class MeGetResponse implements BaseModel
      */
     public function withCountry(string $country): self
     {
-        $obj = clone $this;
-        $obj['country'] = $country;
+        $self = clone $this;
+        $self['country'] = $country;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class MeGetResponse implements BaseModel
      */
     public function withDisplayName(string $displayName): self
     {
-        $obj = clone $this;
-        $obj['displayName'] = $displayName;
+        $self = clone $this;
+        $self['displayName'] = $displayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class MeGetResponse implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -212,10 +212,10 @@ final class MeGetResponse implements BaseModel
     public function withExplicitContent(
         ExplicitContent|array $explicitContent
     ): self {
-        $obj = clone $this;
-        $obj['explicitContent'] = $explicitContent;
+        $self = clone $this;
+        $self['explicitContent'] = $explicitContent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -226,10 +226,10 @@ final class MeGetResponse implements BaseModel
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
     ): self {
-        $obj = clone $this;
-        $obj['externalURLs'] = $externalURLs;
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -239,10 +239,10 @@ final class MeGetResponse implements BaseModel
      */
     public function withFollowers(FollowersObject|array $followers): self
     {
-        $obj = clone $this;
-        $obj['followers'] = $followers;
+        $self = clone $this;
+        $self['followers'] = $followers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -250,10 +250,10 @@ final class MeGetResponse implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj['href'] = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -265,10 +265,10 @@ final class MeGetResponse implements BaseModel
      */
     public function withImages(array $images): self
     {
-        $obj = clone $this;
-        $obj['images'] = $images;
+        $self = clone $this;
+        $self['images'] = $images;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -276,10 +276,10 @@ final class MeGetResponse implements BaseModel
      */
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj['product'] = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -287,10 +287,10 @@ final class MeGetResponse implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -298,9 +298,9 @@ final class MeGetResponse implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj['uri'] = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

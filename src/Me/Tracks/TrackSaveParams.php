@@ -76,13 +76,13 @@ final class TrackSaveParams implements BaseModel
      */
     public static function with(array $ids, ?array $timestampedIDs = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['ids'] = $ids;
+        $self['ids'] = $ids;
 
-        null !== $timestampedIDs && $obj['timestampedIDs'] = $timestampedIDs;
+        null !== $timestampedIDs && $self['timestampedIDs'] = $timestampedIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class TrackSaveParams implements BaseModel
      */
     public function withIDs(array $ids): self
     {
-        $obj = clone $this;
-        $obj['ids'] = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,9 +107,9 @@ final class TrackSaveParams implements BaseModel
      */
     public function withTimestampedIDs(array $timestampedIDs): self
     {
-        $obj = clone $this;
-        $obj['timestampedIDs'] = $timestampedIDs;
+        $self = clone $this;
+        $self['timestampedIDs'] = $timestampedIDs;
 
-        return $obj;
+        return $self;
     }
 }

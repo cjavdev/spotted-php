@@ -44,11 +44,11 @@ final class AlbumSaveParams implements BaseModel
      */
     public static function with(?array $ids = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $ids && $obj['ids'] = $ids;
+        null !== $ids && $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -58,9 +58,9 @@ final class AlbumSaveParams implements BaseModel
      */
     public function withIDs(array $ids): self
     {
-        $obj = clone $this;
-        $obj['ids'] = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 }

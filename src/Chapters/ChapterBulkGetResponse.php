@@ -77,11 +77,11 @@ final class ChapterBulkGetResponse implements BaseModel
      */
     public static function with(array $chapters): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['chapters'] = $chapters;
+        $self['chapters'] = $chapters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,9 +111,9 @@ final class ChapterBulkGetResponse implements BaseModel
      */
     public function withChapters(array $chapters): self
     {
-        $obj = clone $this;
-        $obj['chapters'] = $chapters;
+        $self = clone $this;
+        $self['chapters'] = $chapters;
 
-        return $obj;
+        return $self;
     }
 }

@@ -34,11 +34,11 @@ final class MarketListResponse implements BaseModel
      */
     public static function with(?array $markets = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $markets && $obj['markets'] = $markets;
+        null !== $markets && $self['markets'] = $markets;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class MarketListResponse implements BaseModel
      */
     public function withMarkets(array $markets): self
     {
-        $obj = clone $this;
-        $obj['markets'] = $markets;
+        $self = clone $this;
+        $self['markets'] = $markets;
 
-        return $obj;
+        return $self;
     }
 }

@@ -77,11 +77,11 @@ final class ArtistTopTracksResponse implements BaseModel
      */
     public static function with(array $tracks): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['tracks'] = $tracks;
+        $self['tracks'] = $tracks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,9 +110,9 @@ final class ArtistTopTracksResponse implements BaseModel
      */
     public function withTracks(array $tracks): self
     {
-        $obj = clone $this;
-        $obj['tracks'] = $tracks;
+        $self = clone $this;
+        $self['tracks'] = $tracks;
 
-        return $obj;
+        return $self;
     }
 }

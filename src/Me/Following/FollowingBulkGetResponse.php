@@ -57,11 +57,11 @@ final class FollowingBulkGetResponse implements BaseModel
      */
     public static function with(Artists|array $artists): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['artists'] = $artists;
+        $self['artists'] = $artists;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,9 +76,9 @@ final class FollowingBulkGetResponse implements BaseModel
      */
     public function withArtists(Artists|array $artists): self
     {
-        $obj = clone $this;
-        $obj['artists'] = $artists;
+        $self = clone $this;
+        $self['artists'] = $artists;
 
-        return $obj;
+        return $self;
     }
 }

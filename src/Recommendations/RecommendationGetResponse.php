@@ -100,12 +100,12 @@ final class RecommendationGetResponse implements BaseModel
      */
     public static function with(array $seeds, array $tracks): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['seeds'] = $seeds;
-        $obj['tracks'] = $tracks;
+        $self['seeds'] = $seeds;
+        $self['tracks'] = $tracks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class RecommendationGetResponse implements BaseModel
      */
     public function withSeeds(array $seeds): self
     {
-        $obj = clone $this;
-        $obj['seeds'] = $seeds;
+        $self = clone $this;
+        $self['seeds'] = $seeds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,9 +156,9 @@ final class RecommendationGetResponse implements BaseModel
      */
     public function withTracks(array $tracks): self
     {
-        $obj = clone $this;
-        $obj['tracks'] = $tracks;
+        $self = clone $this;
+        $self['tracks'] = $tracks;
 
-        return $obj;
+        return $self;
     }
 }

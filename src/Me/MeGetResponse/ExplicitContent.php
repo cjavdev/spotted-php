@@ -46,12 +46,12 @@ final class ExplicitContent implements BaseModel
         ?bool $filterEnabled = null,
         ?bool $filterLocked = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filterEnabled && $obj['filterEnabled'] = $filterEnabled;
-        null !== $filterLocked && $obj['filterLocked'] = $filterLocked;
+        null !== $filterEnabled && $self['filterEnabled'] = $filterEnabled;
+        null !== $filterLocked && $self['filterLocked'] = $filterLocked;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class ExplicitContent implements BaseModel
      */
     public function withFilterEnabled(bool $filterEnabled): self
     {
-        $obj = clone $this;
-        $obj['filterEnabled'] = $filterEnabled;
+        $self = clone $this;
+        $self['filterEnabled'] = $filterEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class ExplicitContent implements BaseModel
      */
     public function withFilterLocked(bool $filterLocked): self
     {
-        $obj = clone $this;
-        $obj['filterLocked'] = $filterLocked;
+        $self = clone $this;
+        $self['filterLocked'] = $filterLocked;
 
-        return $obj;
+        return $self;
     }
 }

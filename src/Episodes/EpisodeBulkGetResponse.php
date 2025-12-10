@@ -77,11 +77,11 @@ final class EpisodeBulkGetResponse implements BaseModel
      */
     public static function with(array $episodes): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['episodes'] = $episodes;
+        $self['episodes'] = $episodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,9 +111,9 @@ final class EpisodeBulkGetResponse implements BaseModel
      */
     public function withEpisodes(array $episodes): self
     {
-        $obj = clone $this;
-        $obj['episodes'] = $episodes;
+        $self = clone $this;
+        $self['episodes'] = $episodes;
 
-        return $obj;
+        return $self;
     }
 }
