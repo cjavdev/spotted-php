@@ -38,7 +38,7 @@ final class PlaylistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->playlists->list([]);
+        $result = $this->client->me->playlists->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CursorURLPage::class, $result);

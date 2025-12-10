@@ -38,7 +38,7 @@ final class TopTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->top->listTopArtists([]);
+        $result = $this->client->me->top->listTopArtists();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CursorURLPage::class, $result);
@@ -51,7 +51,7 @@ final class TopTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->top->listTopTracks([]);
+        $result = $this->client->me->top->listTopTracks();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CursorURLPage::class, $result);

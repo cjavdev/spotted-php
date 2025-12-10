@@ -38,9 +38,10 @@ final class SearchTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->search->query([
-            'q' => 'remaster%20track:Doxy%20artist:Miles%20Davis', 'type' => ['album'],
-        ]);
+        $result = $this->client->search->query(
+            q: 'remaster%20track:Doxy%20artist:Miles%20Davis',
+            type: ['album']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(SearchQueryResponse::class, $result);
@@ -53,14 +54,14 @@ final class SearchTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->search->query([
-            'q' => 'remaster%20track:Doxy%20artist:Miles%20Davis',
-            'type' => ['album'],
-            'includeExternal' => 'audio',
-            'limit' => 10,
-            'market' => 'ES',
-            'offset' => 5,
-        ]);
+        $result = $this->client->search->query(
+            q: 'remaster%20track:Doxy%20artist:Miles%20Davis',
+            type: ['album'],
+            includeExternal: 'audio',
+            limit: 10,
+            market: 'ES',
+            offset: 5,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(SearchQueryResponse::class, $result);

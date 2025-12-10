@@ -38,8 +38,7 @@ final class FollowersTest extends TestCase
         }
 
         $result = $this->client->playlists->followers->check(
-            '3cEYpjA9oz9GiPac4AsH4n',
-            []
+            '3cEYpjA9oz9GiPac4AsH4n'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,8 +53,7 @@ final class FollowersTest extends TestCase
         }
 
         $result = $this->client->playlists->followers->follow(
-            '3cEYpjA9oz9GiPac4AsH4n',
-            []
+            '3cEYpjA9oz9GiPac4AsH4n'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

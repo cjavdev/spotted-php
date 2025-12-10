@@ -40,7 +40,7 @@ final class AudiobooksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->audiobooks->retrieve('7iHfbu1YPACw6oZPAFJtqe', []);
+        $result = $this->client->audiobooks->retrieve('7iHfbu1YPACw6oZPAFJtqe');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AudiobookGetResponse::class, $result);
@@ -53,9 +53,9 @@ final class AudiobooksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->audiobooks->bulkRetrieve([
-            'ids' => '18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ,7iHfbu1YPACw6oZPAFJtqe',
-        ]);
+        $result = $this->client->audiobooks->bulkRetrieve(
+            ids: '18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ,7iHfbu1YPACw6oZPAFJtqe',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AudiobookBulkGetResponse::class, $result);
@@ -68,10 +68,10 @@ final class AudiobooksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->audiobooks->bulkRetrieve([
-            'ids' => '18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ,7iHfbu1YPACw6oZPAFJtqe',
-            'market' => 'ES',
-        ]);
+        $result = $this->client->audiobooks->bulkRetrieve(
+            ids: '18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ,7iHfbu1YPACw6oZPAFJtqe',
+            market: 'ES',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AudiobookBulkGetResponse::class, $result);
@@ -84,10 +84,7 @@ final class AudiobooksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->audiobooks->listChapters(
-            '7iHfbu1YPACw6oZPAFJtqe',
-            []
-        );
+        $result = $this->client->audiobooks->listChapters('7iHfbu1YPACw6oZPAFJtqe');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CursorURLPage::class, $result);

@@ -6,10 +6,7 @@ namespace Spotted\ServiceContracts\Me;
 
 use Spotted\Core\Exceptions\APIException;
 use Spotted\Me\Following\FollowingBulkGetResponse;
-use Spotted\Me\Following\FollowingBulkRetrieveParams;
-use Spotted\Me\Following\FollowingCheckParams;
-use Spotted\Me\Following\FollowingFollowParams;
-use Spotted\Me\Following\FollowingUnfollowParams;
+use Spotted\Me\Following\FollowingCheckParams\Type;
 use Spotted\RequestOptions;
 
 interface FollowingContract
@@ -17,50 +14,57 @@ interface FollowingContract
     /**
      * @api
      *
-     * @param array<mixed>|FollowingBulkRetrieveParams $params
+     * @param 'artist' $type the ID type: currently only `artist` is supported
+     * @param string $after the last artist ID retrieved from the previous request
+     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      *
      * @throws APIException
      */
     public function bulkRetrieve(
-        array|FollowingBulkRetrieveParams $params,
+        string $type = 'artist',
+        ?string $after = null,
+        int $limit = 20,
         ?RequestOptions $requestOptions = null,
     ): FollowingBulkGetResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|FollowingCheckParams $params
+     * @param string $ids A comma-separated list of the artist or the user [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) to check. For example: `ids=74ASZWbe4lXaubB36ztrGX,08td7MxkoHQkXnWAYD8d6Q`. A maximum of 50 IDs can be sent in one request.
+     * @param 'artist'|'user'|Type $type the ID type: either `artist` or `user`
      *
      * @return list<bool>
      *
      * @throws APIException
      */
     public function check(
-        array|FollowingCheckParams $params,
+        string $ids,
+        string|Type $type,
         ?RequestOptions $requestOptions = null
     ): array;
 
     /**
      * @api
      *
-     * @param array<mixed>|FollowingFollowParams $params
+     * @param list<string> $ids A JSON array of the artist or user [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids).
+     * For example: `{ids:["74ASZWbe4lXaubB36ztrGX", "08td7MxkoHQkXnWAYD8d6Q"]}`. A maximum of 50 IDs can be sent in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._
      *
      * @throws APIException
      */
     public function follow(
-        array|FollowingFollowParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $ids,
+        ?RequestOptions $requestOptions = null
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<mixed>|FollowingUnfollowParams $params
+     * @param list<string> $ids A JSON array of the artist or user [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `{ids:["74ASZWbe4lXaubB36ztrGX", "08td7MxkoHQkXnWAYD8d6Q"]}`. A maximum of 50 IDs can be sent in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._
      *
      * @throws APIException
      */
     public function unfollow(
-        array|FollowingUnfollowParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $ids = null,
+        ?RequestOptions $requestOptions = null
     ): mixed;
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Spotted\Services;
 
 use Spotted\Client;
-use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\Markets\MarketListResponse;
 use Spotted\RequestOptions;
@@ -14,9 +13,17 @@ use Spotted\ServiceContracts\MarketsContract;
 final class MarketsService implements MarketsContract
 {
     /**
+     * @api
+     */
+    public MarketsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new MarketsRawService($client);
+    }
 
     /**
      * @api
@@ -28,13 +35,8 @@ final class MarketsService implements MarketsContract
     public function list(
         ?RequestOptions $requestOptions = null
     ): MarketListResponse {
-        /** @var BaseResponse<MarketListResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'markets',
-            options: $requestOptions,
-            convert: MarketListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Services;
 
 use Spotted\Client;
-use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
-use Spotted\Core\Util;
-use Spotted\Recommendations\RecommendationGetParams;
 use Spotted\Recommendations\RecommendationGetResponse;
 use Spotted\Recommendations\RecommendationListAvailableGenreSeedsResponse;
 use Spotted\RequestOptions;
@@ -17,9 +14,17 @@ use Spotted\ServiceContracts\RecommendationsContract;
 final class RecommendationsService implements RecommendationsContract
 {
     /**
+     * @api
+     */
+    public RecommendationsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new RecommendationsRawService($client);
+    }
 
     /**
      * @deprecated
@@ -30,124 +35,165 @@ final class RecommendationsService implements RecommendationsContract
      *
      * For artists and tracks that are very new or obscure there might not be enough data to generate a list of tracks.
      *
-     * @param array{
-     *   limit?: int,
-     *   market?: string,
-     *   maxAcousticness?: float,
-     *   maxDanceability?: float,
-     *   maxDurationMs?: int,
-     *   maxEnergy?: float,
-     *   maxInstrumentalness?: float,
-     *   maxKey?: int,
-     *   maxLiveness?: float,
-     *   maxLoudness?: float,
-     *   maxMode?: int,
-     *   maxPopularity?: int,
-     *   maxSpeechiness?: float,
-     *   maxTempo?: float,
-     *   maxTimeSignature?: int,
-     *   maxValence?: float,
-     *   minAcousticness?: float,
-     *   minDanceability?: float,
-     *   minDurationMs?: int,
-     *   minEnergy?: float,
-     *   minInstrumentalness?: float,
-     *   minKey?: int,
-     *   minLiveness?: float,
-     *   minLoudness?: float,
-     *   minMode?: int,
-     *   minPopularity?: int,
-     *   minSpeechiness?: float,
-     *   minTempo?: float,
-     *   minTimeSignature?: int,
-     *   minValence?: float,
-     *   seedArtists?: string,
-     *   seedGenres?: string,
-     *   seedTracks?: string,
-     *   targetAcousticness?: float,
-     *   targetDanceability?: float,
-     *   targetDurationMs?: int,
-     *   targetEnergy?: float,
-     *   targetInstrumentalness?: float,
-     *   targetKey?: int,
-     *   targetLiveness?: float,
-     *   targetLoudness?: float,
-     *   targetMode?: int,
-     *   targetPopularity?: int,
-     *   targetSpeechiness?: float,
-     *   targetTempo?: float,
-     *   targetTimeSignature?: int,
-     *   targetValence?: float,
-     * }|RecommendationGetParams $params
+     * @param int $limit The target size of the list of recommended tracks. For seeds with unusually small pools or when highly restrictive filtering is applied, it may be impossible to generate the requested number of recommended tracks. Debugging information for such cases is available in the response. Default: 20\. Minimum: 1\. Maximum: 100.
+     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     *   If a country code is specified, only content that is available in that market will be returned.<br/>
+     *   If a valid user access token is specified in the request header, the country associated with
+     *   the user account will take priority over this parameter.<br/>
+     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
+     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param float $maxAcousticness For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
+     * @param float $maxDanceability For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
+     * @param int $maxDurationMs For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
+     * @param float $maxEnergy For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
+     * @param float $maxInstrumentalness For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
+     * @param int $maxKey For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
+     * @param float $maxLiveness For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
+     * @param float $maxLoudness For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
+     * @param int $maxMode For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
+     * @param int $maxPopularity For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
+     * @param float $maxSpeechiness For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
+     * @param float $maxTempo For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
+     * @param int $maxTimeSignature For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
+     * @param float $maxValence For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.
+     * @param float $minAcousticness For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+     * @param float $minDanceability For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+     * @param int $minDurationMs For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+     * @param float $minEnergy For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+     * @param float $minInstrumentalness For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+     * @param int $minKey For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+     * @param float $minLiveness For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+     * @param float $minLoudness For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+     * @param int $minMode For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+     * @param int $minPopularity For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+     * @param float $minSpeechiness For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+     * @param float $minTempo For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+     * @param int $minTimeSignature For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+     * @param float $minValence For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
+     * @param string $seedArtists A comma separated list of [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for seed artists.  Up to 5 seed values may be provided in any combination of `seed_artists`, `seed_tracks` and `seed_genres`.<br/> _**Note**: only required if `seed_genres` and `seed_tracks` are not set_.
+     * @param string $seedGenres A comma separated list of any genres in the set of [available genre seeds](/documentation/web-api/reference/get-recommendation-genres). Up to 5 seed values may be provided in any combination of `seed_artists`, `seed_tracks` and `seed_genres`.<br/> _**Note**: only required if `seed_artists` and `seed_tracks` are not set_.
+     * @param string $seedTracks A comma separated list of [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for a seed track.  Up to 5 seed values may be provided in any combination of `seed_artists`, `seed_tracks` and `seed_genres`.<br/> _**Note**: only required if `seed_artists` and `seed_genres` are not set_.
+     * @param float $targetAcousticness For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
+     * @param float $targetDanceability For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
+     * @param int $targetDurationMs Target duration of the track (ms)
+     * @param float $targetEnergy For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
+     * @param float $targetInstrumentalness For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
+     * @param int $targetKey For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
+     * @param float $targetLiveness For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
+     * @param float $targetLoudness For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
+     * @param int $targetMode For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
+     * @param int $targetPopularity For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
+     * @param float $targetSpeechiness For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
+     * @param float $targetTempo Target tempo (BPM)
+     * @param int $targetTimeSignature For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
+     * @param float $targetValence For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      *
      * @throws APIException
      */
     public function get(
-        array|RecommendationGetParams $params,
+        int $limit = 20,
+        ?string $market = null,
+        ?float $maxAcousticness = null,
+        ?float $maxDanceability = null,
+        ?int $maxDurationMs = null,
+        ?float $maxEnergy = null,
+        ?float $maxInstrumentalness = null,
+        ?int $maxKey = null,
+        ?float $maxLiveness = null,
+        ?float $maxLoudness = null,
+        ?int $maxMode = null,
+        ?int $maxPopularity = null,
+        ?float $maxSpeechiness = null,
+        ?float $maxTempo = null,
+        ?int $maxTimeSignature = null,
+        ?float $maxValence = null,
+        ?float $minAcousticness = null,
+        ?float $minDanceability = null,
+        ?int $minDurationMs = null,
+        ?float $minEnergy = null,
+        ?float $minInstrumentalness = null,
+        ?int $minKey = null,
+        ?float $minLiveness = null,
+        ?float $minLoudness = null,
+        ?int $minMode = null,
+        ?int $minPopularity = null,
+        ?float $minSpeechiness = null,
+        ?float $minTempo = null,
+        ?int $minTimeSignature = null,
+        ?float $minValence = null,
+        ?string $seedArtists = null,
+        ?string $seedGenres = null,
+        ?string $seedTracks = null,
+        ?float $targetAcousticness = null,
+        ?float $targetDanceability = null,
+        ?int $targetDurationMs = null,
+        ?float $targetEnergy = null,
+        ?float $targetInstrumentalness = null,
+        ?int $targetKey = null,
+        ?float $targetLiveness = null,
+        ?float $targetLoudness = null,
+        ?int $targetMode = null,
+        ?int $targetPopularity = null,
+        ?float $targetSpeechiness = null,
+        ?float $targetTempo = null,
+        ?int $targetTimeSignature = null,
+        ?float $targetValence = null,
         ?RequestOptions $requestOptions = null,
     ): RecommendationGetResponse {
-        [$parsed, $options] = RecommendationGetParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'limit' => $limit,
+            'market' => $market,
+            'maxAcousticness' => $maxAcousticness,
+            'maxDanceability' => $maxDanceability,
+            'maxDurationMs' => $maxDurationMs,
+            'maxEnergy' => $maxEnergy,
+            'maxInstrumentalness' => $maxInstrumentalness,
+            'maxKey' => $maxKey,
+            'maxLiveness' => $maxLiveness,
+            'maxLoudness' => $maxLoudness,
+            'maxMode' => $maxMode,
+            'maxPopularity' => $maxPopularity,
+            'maxSpeechiness' => $maxSpeechiness,
+            'maxTempo' => $maxTempo,
+            'maxTimeSignature' => $maxTimeSignature,
+            'maxValence' => $maxValence,
+            'minAcousticness' => $minAcousticness,
+            'minDanceability' => $minDanceability,
+            'minDurationMs' => $minDurationMs,
+            'minEnergy' => $minEnergy,
+            'minInstrumentalness' => $minInstrumentalness,
+            'minKey' => $minKey,
+            'minLiveness' => $minLiveness,
+            'minLoudness' => $minLoudness,
+            'minMode' => $minMode,
+            'minPopularity' => $minPopularity,
+            'minSpeechiness' => $minSpeechiness,
+            'minTempo' => $minTempo,
+            'minTimeSignature' => $minTimeSignature,
+            'minValence' => $minValence,
+            'seedArtists' => $seedArtists,
+            'seedGenres' => $seedGenres,
+            'seedTracks' => $seedTracks,
+            'targetAcousticness' => $targetAcousticness,
+            'targetDanceability' => $targetDanceability,
+            'targetDurationMs' => $targetDurationMs,
+            'targetEnergy' => $targetEnergy,
+            'targetInstrumentalness' => $targetInstrumentalness,
+            'targetKey' => $targetKey,
+            'targetLiveness' => $targetLiveness,
+            'targetLoudness' => $targetLoudness,
+            'targetMode' => $targetMode,
+            'targetPopularity' => $targetPopularity,
+            'targetSpeechiness' => $targetSpeechiness,
+            'targetTempo' => $targetTempo,
+            'targetTimeSignature' => $targetTimeSignature,
+            'targetValence' => $targetValence,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<RecommendationGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'recommendations',
-            query: Util::array_transform_keys(
-                $parsed,
-                [
-                    'maxAcousticness' => 'max_acousticness',
-                    'maxDanceability' => 'max_danceability',
-                    'maxDurationMs' => 'max_duration_ms',
-                    'maxEnergy' => 'max_energy',
-                    'maxInstrumentalness' => 'max_instrumentalness',
-                    'maxKey' => 'max_key',
-                    'maxLiveness' => 'max_liveness',
-                    'maxLoudness' => 'max_loudness',
-                    'maxMode' => 'max_mode',
-                    'maxPopularity' => 'max_popularity',
-                    'maxSpeechiness' => 'max_speechiness',
-                    'maxTempo' => 'max_tempo',
-                    'maxTimeSignature' => 'max_time_signature',
-                    'maxValence' => 'max_valence',
-                    'minAcousticness' => 'min_acousticness',
-                    'minDanceability' => 'min_danceability',
-                    'minDurationMs' => 'min_duration_ms',
-                    'minEnergy' => 'min_energy',
-                    'minInstrumentalness' => 'min_instrumentalness',
-                    'minKey' => 'min_key',
-                    'minLiveness' => 'min_liveness',
-                    'minLoudness' => 'min_loudness',
-                    'minMode' => 'min_mode',
-                    'minPopularity' => 'min_popularity',
-                    'minSpeechiness' => 'min_speechiness',
-                    'minTempo' => 'min_tempo',
-                    'minTimeSignature' => 'min_time_signature',
-                    'minValence' => 'min_valence',
-                    'seedArtists' => 'seed_artists',
-                    'seedGenres' => 'seed_genres',
-                    'seedTracks' => 'seed_tracks',
-                    'targetAcousticness' => 'target_acousticness',
-                    'targetDanceability' => 'target_danceability',
-                    'targetDurationMs' => 'target_duration_ms',
-                    'targetEnergy' => 'target_energy',
-                    'targetInstrumentalness' => 'target_instrumentalness',
-                    'targetKey' => 'target_key',
-                    'targetLiveness' => 'target_liveness',
-                    'targetLoudness' => 'target_loudness',
-                    'targetMode' => 'target_mode',
-                    'targetPopularity' => 'target_popularity',
-                    'targetSpeechiness' => 'target_speechiness',
-                    'targetTempo' => 'target_tempo',
-                    'targetTimeSignature' => 'target_time_signature',
-                    'targetValence' => 'target_valence',
-                ],
-            ),
-            options: $options,
-            convert: RecommendationGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->get(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -164,13 +210,8 @@ final class RecommendationsService implements RecommendationsContract
     public function listAvailableGenreSeeds(
         ?RequestOptions $requestOptions = null
     ): RecommendationListAvailableGenreSeedsResponse {
-        /** @var BaseResponse<RecommendationListAvailableGenreSeedsResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'recommendations/available-genre-seeds',
-            options: $requestOptions,
-            convert: RecommendationListAvailableGenreSeedsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listAvailableGenreSeeds(requestOptions: $requestOptions);
 
         return $response->parse();
     }

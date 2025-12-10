@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace Spotted\Services;
 
 use Spotted\Client;
-use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
-use Spotted\Core\Util;
 use Spotted\RequestOptions;
-use Spotted\Search\SearchQueryParams;
 use Spotted\Search\SearchQueryParams\IncludeExternal;
 use Spotted\Search\SearchQueryParams\Type;
 use Spotted\Search\SearchQueryResponse;
@@ -18,9 +15,17 @@ use Spotted\ServiceContracts\SearchContract;
 final class SearchService implements SearchContract
 {
     /**
+     * @api
+     */
+    public SearchRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new SearchRawService($client);
+    }
 
     /**
      * @api
@@ -28,37 +33,54 @@ final class SearchService implements SearchContract
      * Get Spotify catalog information about albums, artists, playlists, tracks, shows, episodes or audiobooks
      * that match a keyword string. Audiobooks are only available within the US, UK, Canada, Ireland, New Zealand and Australia markets.
      *
-     * @param array{
-     *   q: string,
-     *   type: list<'album'|'artist'|'playlist'|'track'|'show'|'episode'|'audiobook'|Type>,
-     *   includeExternal?: 'audio'|IncludeExternal,
-     *   limit?: int,
-     *   market?: string,
-     *   offset?: int,
-     * }|SearchQueryParams $params
+     * @param string $q Your search query.
+     *
+     * You can narrow down your search using field filters. The available filters are `album`, `artist`, `track`, `year`, `upc`, `tag:hipster`, `tag:new`, `isrc`, and `genre`. Each field filter only applies to certain result types.
+     *
+     * The `artist` and `year` filters can be used while searching albums, artists and tracks. You can filter on a single `year` or a range (e.g. 1955-1960).<br />
+     * The `album` filter can be used while searching albums and tracks.<br />
+     * The `genre` filter can be used while searching artists and tracks.<br />
+     * The `isrc` and `track` filters can be used while searching tracks.<br />
+     * The `upc`, `tag:new` and `tag:hipster` filters can only be used while searching albums. The `tag:new` filter will return albums released in the past two weeks and `tag:hipster` can be used to return only albums with the lowest 10% popularity.<br />
+     * @param list<'album'|'artist'|'playlist'|'track'|'show'|'episode'|'audiobook'|Type> $type A comma-separated list of item types to search across. Search results include hits
+     * from all the specified item types. For example: `q=abacab&type=album,track` returns
+     * both albums and tracks matching "abacab".
+     * @param 'audio'|IncludeExternal $includeExternal If `include_external=audio` is specified it signals that the client can play externally hosted audio content, and marks
+     * the content as playable in the response. By default externally hosted audio content is marked as unplayable in the response.
+     * @param int $limit the maximum number of results to return in each item type
+     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     *   If a country code is specified, only content that is available in that market will be returned.<br/>
+     *   If a valid user access token is specified in the request header, the country associated with
+     *   the user account will take priority over this parameter.<br/>
+     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
+     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param int $offset The index of the first result to return. Use
+     * with limit to get the next page of search results.
      *
      * @throws APIException
      */
     public function query(
-        array|SearchQueryParams $params,
-        ?RequestOptions $requestOptions = null
+        string $q,
+        array $type,
+        string|IncludeExternal|null $includeExternal = null,
+        int $limit = 20,
+        ?string $market = null,
+        int $offset = 0,
+        ?RequestOptions $requestOptions = null,
     ): SearchQueryResponse {
-        [$parsed, $options] = SearchQueryParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'q' => $q,
+            'type' => $type,
+            'includeExternal' => $includeExternal,
+            'limit' => $limit,
+            'market' => $market,
+            'offset' => $offset,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<SearchQueryResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'search',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['includeExternal' => 'include_external']
-            ),
-            options: $options,
-            convert: SearchQueryResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->query(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

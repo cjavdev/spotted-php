@@ -5,54 +5,50 @@ declare(strict_types=1);
 namespace Spotted\Services\Me;
 
 use Spotted\Client;
-use Spotted\Core\Contracts\BaseResponse;
-use Spotted\Core\Conversion\ListOf;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
-use Spotted\Me\Audiobooks\AudiobookCheckParams;
-use Spotted\Me\Audiobooks\AudiobookListParams;
 use Spotted\Me\Audiobooks\AudiobookListResponse;
-use Spotted\Me\Audiobooks\AudiobookRemoveParams;
-use Spotted\Me\Audiobooks\AudiobookSaveParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\AudiobooksContract;
 
 final class AudiobooksService implements AudiobooksContract
 {
     /**
+     * @api
+     */
+    public AudiobooksRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AudiobooksRawService($client);
+    }
 
     /**
      * @api
      *
      * Get a list of the audiobooks saved in the current Spotify user's 'Your Music' library.
      *
-     * @param array{limit?: int, offset?: int}|AudiobookListParams $params
+     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      *
      * @return CursorURLPage<AudiobookListResponse>
      *
      * @throws APIException
      */
     public function list(
-        array|AudiobookListParams $params,
+        int $limit = 20,
+        int $offset = 0,
         ?RequestOptions $requestOptions = null
     ): CursorURLPage {
-        [$parsed, $options] = AudiobookListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['limit' => $limit, 'offset' => $offset];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CursorURLPage<AudiobookListResponse>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'me/audiobooks',
-            query: $parsed,
-            options: $options,
-            convert: AudiobookListResponse::class,
-            page: CursorURLPage::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -62,29 +58,20 @@ final class AudiobooksService implements AudiobooksContract
      *
      * Check if one or more audiobooks are already saved in the current Spotify user's library.
      *
-     * @param array{ids: string}|AudiobookCheckParams $params
+     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
      *
      * @return list<bool>
      *
      * @throws APIException
      */
     public function check(
-        array|AudiobookCheckParams $params,
+        string $ids,
         ?RequestOptions $requestOptions = null
     ): array {
-        [$parsed, $options] = AudiobookCheckParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['ids' => $ids];
 
-        /** @var BaseResponse<list<bool>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'me/audiobooks/contains',
-            query: $parsed,
-            options: $options,
-            convert: new ListOf('bool'),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->check(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -94,27 +81,18 @@ final class AudiobooksService implements AudiobooksContract
      *
      * Remove one or more audiobooks from the Spotify user's library.
      *
-     * @param array{ids: string}|AudiobookRemoveParams $params
+     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
      *
      * @throws APIException
      */
     public function remove(
-        array|AudiobookRemoveParams $params,
+        string $ids,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        [$parsed, $options] = AudiobookRemoveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['ids' => $ids];
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: 'me/audiobooks',
-            query: $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->remove(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -124,27 +102,18 @@ final class AudiobooksService implements AudiobooksContract
      *
      * Save one or more audiobooks to the current Spotify user's library.
      *
-     * @param array{ids: string}|AudiobookSaveParams $params
+     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
      *
      * @throws APIException
      */
     public function save(
-        array|AudiobookSaveParams $params,
+        string $ids,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        [$parsed, $options] = AudiobookSaveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['ids' => $ids];
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'put',
-            path: 'me/audiobooks',
-            query: $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->save(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

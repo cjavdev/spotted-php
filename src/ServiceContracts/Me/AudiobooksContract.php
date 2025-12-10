@@ -6,11 +6,7 @@ namespace Spotted\ServiceContracts\Me;
 
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
-use Spotted\Me\Audiobooks\AudiobookCheckParams;
-use Spotted\Me\Audiobooks\AudiobookListParams;
 use Spotted\Me\Audiobooks\AudiobookListResponse;
-use Spotted\Me\Audiobooks\AudiobookRemoveParams;
-use Spotted\Me\Audiobooks\AudiobookSaveParams;
 use Spotted\RequestOptions;
 
 interface AudiobooksContract
@@ -18,52 +14,54 @@ interface AudiobooksContract
     /**
      * @api
      *
-     * @param array<mixed>|AudiobookListParams $params
+     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      *
      * @return CursorURLPage<AudiobookListResponse>
      *
      * @throws APIException
      */
     public function list(
-        array|AudiobookListParams $params,
+        int $limit = 20,
+        int $offset = 0,
         ?RequestOptions $requestOptions = null
     ): CursorURLPage;
 
     /**
      * @api
      *
-     * @param array<mixed>|AudiobookCheckParams $params
+     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
      *
      * @return list<bool>
      *
      * @throws APIException
      */
     public function check(
-        array|AudiobookCheckParams $params,
+        string $ids,
         ?RequestOptions $requestOptions = null
     ): array;
 
     /**
      * @api
      *
-     * @param array<mixed>|AudiobookRemoveParams $params
+     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
      *
      * @throws APIException
      */
     public function remove(
-        array|AudiobookRemoveParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $ids,
+        ?RequestOptions $requestOptions = null
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<mixed>|AudiobookSaveParams $params
+     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
      *
      * @throws APIException
      */
     public function save(
-        array|AudiobookSaveParams $params,
+        string $ids,
         ?RequestOptions $requestOptions = null
     ): mixed;
 }

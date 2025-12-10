@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Spotted\Services;
 
 use Spotted\AudioFeatures\AudioFeatureBulkGetResponse;
-use Spotted\AudioFeatures\AudioFeatureBulkRetrieveParams;
 use Spotted\AudioFeatures\AudioFeatureGetResponse;
 use Spotted\Client;
-use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\AudioFeaturesContract;
@@ -16,9 +14,17 @@ use Spotted\ServiceContracts\AudioFeaturesContract;
 final class AudioFeaturesService implements AudioFeaturesContract
 {
     /**
+     * @api
+     */
+    public AudioFeaturesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AudioFeaturesRawService($client);
+    }
 
     /**
      * @deprecated
@@ -28,19 +34,16 @@ final class AudioFeaturesService implements AudioFeaturesContract
      * Get audio feature information for a single track identified by its unique
      * Spotify ID.
      *
+     * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the track
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): AudioFeatureGetResponse {
-        /** @var BaseResponse<AudioFeatureGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['audio-features/%1$s', $id],
-            options: $requestOptions,
-            convert: AudioFeatureGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -52,27 +55,19 @@ final class AudioFeaturesService implements AudioFeaturesContract
      *
      * Get audio features for multiple tracks based on their Spotify IDs.
      *
-     * @param array{ids: string}|AudioFeatureBulkRetrieveParams $params
+     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids)
+     * for the tracks. Maximum: 100 IDs.
      *
      * @throws APIException
      */
     public function bulkRetrieve(
-        array|AudioFeatureBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $ids,
+        ?RequestOptions $requestOptions = null
     ): AudioFeatureBulkGetResponse {
-        [$parsed, $options] = AudioFeatureBulkRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['ids' => $ids];
 
-        /** @var BaseResponse<AudioFeatureBulkGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'audio-features',
-            query: $parsed,
-            options: $options,
-            convert: AudioFeatureBulkGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->bulkRetrieve(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

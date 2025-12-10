@@ -38,7 +38,7 @@ final class TracksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->tracks->list([]);
+        $result = $this->client->me->tracks->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CursorURLPage::class, $result);
@@ -51,9 +51,9 @@ final class TracksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->tracks->check([
-            'ids' => '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
-        ]);
+        $result = $this->client->me->tracks->check(
+            ids: '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);
@@ -66,9 +66,9 @@ final class TracksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->tracks->check([
-            'ids' => '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
-        ]);
+        $result = $this->client->me->tracks->check(
+            ids: '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);
@@ -81,7 +81,7 @@ final class TracksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->tracks->remove([]);
+        $result = $this->client->me->tracks->remove();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -94,7 +94,7 @@ final class TracksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->tracks->save(['ids' => ['string']]);
+        $result = $this->client->me->tracks->save(ids: ['string']);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -107,15 +107,15 @@ final class TracksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->tracks->save([
-            'ids' => ['string'],
-            'timestampedIDs' => [
+        $result = $this->client->me->tracks->save(
+            ids: ['string'],
+            timestampedIDs: [
                 [
                     'id' => 'id',
                     'addedAt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
                 ],
             ],
-        ]);
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);

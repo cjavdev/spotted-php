@@ -5,32 +5,23 @@ declare(strict_types=1);
 namespace Spotted\Services\Me;
 
 use Spotted\Client;
-use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
-use Spotted\Core\Util;
 use Spotted\CursorURLPage;
-use Spotted\Me\Player\PlayerGetCurrentlyPlayingParams;
 use Spotted\Me\Player\PlayerGetCurrentlyPlayingResponse;
 use Spotted\Me\Player\PlayerGetDevicesResponse;
-use Spotted\Me\Player\PlayerGetStateParams;
 use Spotted\Me\Player\PlayerGetStateResponse;
-use Spotted\Me\Player\PlayerListRecentlyPlayedParams;
 use Spotted\Me\Player\PlayerListRecentlyPlayedResponse;
-use Spotted\Me\Player\PlayerPausePlaybackParams;
-use Spotted\Me\Player\PlayerSeekToPositionParams;
-use Spotted\Me\Player\PlayerSetRepeatModeParams;
-use Spotted\Me\Player\PlayerSetVolumeParams;
-use Spotted\Me\Player\PlayerSkipNextParams;
-use Spotted\Me\Player\PlayerSkipPreviousParams;
-use Spotted\Me\Player\PlayerStartPlaybackParams;
-use Spotted\Me\Player\PlayerToggleShuffleParams;
-use Spotted\Me\Player\PlayerTransferParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\PlayerContract;
 use Spotted\Services\Me\Player\QueueService;
 
 final class PlayerService implements PlayerContract
 {
+    /**
+     * @api
+     */
+    public PlayerRawService $raw;
+
     /**
      * @api
      */
@@ -41,6 +32,7 @@ final class PlayerService implements PlayerContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new PlayerRawService($client);
         $this->queue = new QueueService($client);
     }
 
@@ -49,32 +41,29 @@ final class PlayerService implements PlayerContract
      *
      * Get the object currently being played on the user's Spotify account.
      *
-     * @param array{
-     *   additionalTypes?: string, market?: string
-     * }|PlayerGetCurrentlyPlayingParams $params
+     * @param string $additionalTypes A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`.<br/>
+     * _**Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future._<br/>
+     * In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.
+     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     *   If a country code is specified, only content that is available in that market will be returned.<br/>
+     *   If a valid user access token is specified in the request header, the country associated with
+     *   the user account will take priority over this parameter.<br/>
+     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
+     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      *
      * @throws APIException
      */
     public function getCurrentlyPlaying(
-        array|PlayerGetCurrentlyPlayingParams $params,
+        ?string $additionalTypes = null,
+        ?string $market = null,
         ?RequestOptions $requestOptions = null,
     ): PlayerGetCurrentlyPlayingResponse {
-        [$parsed, $options] = PlayerGetCurrentlyPlayingParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['additionalTypes' => $additionalTypes, 'market' => $market];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PlayerGetCurrentlyPlayingResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'me/player/currently-playing',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['additionalTypes' => 'additional_types']
-            ),
-            options: $options,
-            convert: PlayerGetCurrentlyPlayingResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getCurrentlyPlaying(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -89,13 +78,8 @@ final class PlayerService implements PlayerContract
     public function getDevices(
         ?RequestOptions $requestOptions = null
     ): PlayerGetDevicesResponse {
-        /** @var BaseResponse<PlayerGetDevicesResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'me/player/devices',
-            options: $requestOptions,
-            convert: PlayerGetDevicesResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getDevices(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -105,32 +89,29 @@ final class PlayerService implements PlayerContract
      *
      * Get information about the user’s current playback state, including track or episode, progress, and active device.
      *
-     * @param array{
-     *   additionalTypes?: string, market?: string
-     * }|PlayerGetStateParams $params
+     * @param string $additionalTypes A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`.<br/>
+     * _**Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future._<br/>
+     * In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.
+     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     *   If a country code is specified, only content that is available in that market will be returned.<br/>
+     *   If a valid user access token is specified in the request header, the country associated with
+     *   the user account will take priority over this parameter.<br/>
+     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
+     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      *
      * @throws APIException
      */
     public function getState(
-        array|PlayerGetStateParams $params,
-        ?RequestOptions $requestOptions = null
+        ?string $additionalTypes = null,
+        ?string $market = null,
+        ?RequestOptions $requestOptions = null,
     ): PlayerGetStateResponse {
-        [$parsed, $options] = PlayerGetStateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['additionalTypes' => $additionalTypes, 'market' => $market];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PlayerGetStateResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'me/player',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['additionalTypes' => 'additional_types']
-            ),
-            options: $options,
-            convert: PlayerGetStateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getState(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -141,32 +122,30 @@ final class PlayerService implements PlayerContract
      * Get tracks from the current user's recently played tracks.
      * _**Note**: Currently doesn't support podcast episodes._
      *
-     * @param array{
-     *   after?: int, before?: int, limit?: int
-     * }|PlayerListRecentlyPlayedParams $params
+     * @param int $after A Unix timestamp in milliseconds. Returns all items
+     * after (but not including) this cursor position. If `after` is specified, `before`
+     * must not be specified.
+     * @param int $before A Unix timestamp in milliseconds. Returns all items
+     * before (but not including) this cursor position. If `before` is specified,
+     * `after` must not be specified.
+     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      *
      * @return CursorURLPage<PlayerListRecentlyPlayedResponse>
      *
      * @throws APIException
      */
     public function listRecentlyPlayed(
-        array|PlayerListRecentlyPlayedParams $params,
+        ?int $after = null,
+        ?int $before = null,
+        int $limit = 20,
         ?RequestOptions $requestOptions = null,
     ): CursorURLPage {
-        [$parsed, $options] = PlayerListRecentlyPlayedParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['after' => $after, 'before' => $before, 'limit' => $limit];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CursorURLPage<PlayerListRecentlyPlayedResponse>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'me/player/recently-played',
-            query: $parsed,
-            options: $options,
-            convert: PlayerListRecentlyPlayedResponse::class,
-            page: CursorURLPage::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listRecentlyPlayed(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -176,27 +155,20 @@ final class PlayerService implements PlayerContract
      *
      * Pause playback on the user's account. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{deviceID?: string}|PlayerPausePlaybackParams $params
+     * @param string $deviceID The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      *
      * @throws APIException
      */
     public function pausePlayback(
-        array|PlayerPausePlaybackParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $deviceID = null,
+        ?RequestOptions $requestOptions = null
     ): mixed {
-        [$parsed, $options] = PlayerPausePlaybackParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['deviceID' => $deviceID];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'put',
-            path: 'me/player/pause',
-            query: Util::array_transform_keys($parsed, ['deviceID' => 'device_id']),
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->pausePlayback(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -206,32 +178,25 @@ final class PlayerService implements PlayerContract
      *
      * Seeks to the given position in the user’s currently playing track. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{
-     *   positionMs: int, deviceID?: string
-     * }|PlayerSeekToPositionParams $params
+     * @param int $positionMs The position in milliseconds to seek to. Must be a
+     * positive number. Passing in a position that is greater than the length of
+     * the track will cause the player to start playing the next song.
+     * @param string $deviceID The id of the device this command is targeting. If
+     * not supplied, the user's currently active device is the target.
      *
      * @throws APIException
      */
     public function seekToPosition(
-        array|PlayerSeekToPositionParams $params,
+        int $positionMs,
+        ?string $deviceID = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = PlayerSeekToPositionParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['positionMs' => $positionMs, 'deviceID' => $deviceID];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'put',
-            path: 'me/player/seek',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['positionMs' => 'position_ms', 'deviceID' => 'device_id']
-            ),
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->seekToPosition(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -241,27 +206,26 @@ final class PlayerService implements PlayerContract
      *
      * Set the repeat mode for the user's playback. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{state: string, deviceID?: string}|PlayerSetRepeatModeParams $params
+     * @param string $state **track**, **context** or **off**.<br/>
+     * **track** will repeat the current track.<br/>
+     * **context** will repeat the current context.<br/>
+     * **off** will turn repeat off.
+     * @param string $deviceID The id of the device this command is targeting. If
+     * not supplied, the user's currently active device is the target.
      *
      * @throws APIException
      */
     public function setRepeatMode(
-        array|PlayerSetRepeatModeParams $params,
+        string $state,
+        ?string $deviceID = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = PlayerSetRepeatModeParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['state' => $state, 'deviceID' => $deviceID];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'put',
-            path: 'me/player/repeat',
-            query: Util::array_transform_keys($parsed, ['deviceID' => 'device_id']),
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->setRepeatMode(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -271,32 +235,22 @@ final class PlayerService implements PlayerContract
      *
      * Set the volume for the user’s current playback device. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{
-     *   volumePercent: int, deviceID?: string
-     * }|PlayerSetVolumeParams $params
+     * @param int $volumePercent The volume to set. Must be a value from 0 to 100 inclusive.
+     * @param string $deviceID The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      *
      * @throws APIException
      */
     public function setVolume(
-        array|PlayerSetVolumeParams $params,
-        ?RequestOptions $requestOptions = null
+        int $volumePercent,
+        ?string $deviceID = null,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = PlayerSetVolumeParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['volumePercent' => $volumePercent, 'deviceID' => $deviceID];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'put',
-            path: 'me/player/volume',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['volumePercent' => 'volume_percent', 'deviceID' => 'device_id'],
-            ),
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->setVolume(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -306,27 +260,20 @@ final class PlayerService implements PlayerContract
      *
      * Skips to next track in the user’s queue. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{deviceID?: string}|PlayerSkipNextParams $params
+     * @param string $deviceID The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      *
      * @throws APIException
      */
     public function skipNext(
-        array|PlayerSkipNextParams $params,
+        ?string $deviceID = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        [$parsed, $options] = PlayerSkipNextParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['deviceID' => $deviceID];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'me/player/next',
-            query: Util::array_transform_keys($parsed, ['deviceID' => 'device_id']),
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->skipNext(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -336,27 +283,21 @@ final class PlayerService implements PlayerContract
      *
      * Skips to previous track in the user’s queue. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{deviceID?: string}|PlayerSkipPreviousParams $params
+     * @param string $deviceID The id of the device this command is targeting. If
+     * not supplied, the user's currently active device is the target.
      *
      * @throws APIException
      */
     public function skipPrevious(
-        array|PlayerSkipPreviousParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $deviceID = null,
+        ?RequestOptions $requestOptions = null
     ): mixed {
-        [$parsed, $options] = PlayerSkipPreviousParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['deviceID' => $deviceID];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'me/player/previous',
-            query: Util::array_transform_keys($parsed, ['deviceID' => 'device_id']),
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->skipPrevious(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -366,38 +307,39 @@ final class PlayerService implements PlayerContract
      *
      * Start a new context or resume current playback on the user's active device. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{
-     *   deviceID?: string,
-     *   contextUri?: string,
-     *   offset?: array<string,mixed>,
-     *   positionMs?: int,
-     *   uris?: list<string>,
-     * }|PlayerStartPlaybackParams $params
+     * @param string $deviceID Query param: The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
+     * @param string $contextUri Body param: Optional. Spotify URI of the context to play.
+     * Valid contexts are albums, artists & playlists.
+     * `{context_uri:"spotify:album:1Je1IMUlBXcx1Fz0WE7oPT"}`
+     * @param array<string,mixed> $offset Body param: Optional. Indicates from where in the context playback should start. Only available when context_uri corresponds to an album or playlist object
+     * "position" is zero based and can’t be negative. Example: `"offset": {"position": 5}`
+     * "uri" is a string representing the uri of the item to start at. Example: `"offset": {"uri": "spotify:track:1301WleyT98MSxVHPZCA6M"}`
+     * @param int $positionMs Body param: Indicates from what position to start playback. Must be a positive number. Passing in a position that is greater than the length of the track will cause the player to start playing the next song.
+     * @param list<string> $uris Body param: Optional. A JSON array of the Spotify track URIs to play.
+     * For example: `{"uris": ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh", "spotify:track:1301WleyT98MSxVHPZCA6M"]}`
      *
      * @throws APIException
      */
     public function startPlayback(
-        array|PlayerStartPlaybackParams $params,
+        ?string $deviceID = null,
+        ?string $contextUri = null,
+        ?array $offset = null,
+        ?int $positionMs = null,
+        ?array $uris = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = PlayerStartPlaybackParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $query_params = ['device_id'];
+        $params = [
+            'deviceID' => $deviceID,
+            'contextUri' => $contextUri,
+            'offset' => $offset,
+            'positionMs' => $positionMs,
+            'uris' => $uris,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'put',
-            path: 'me/player/play',
-            query: Util::array_transform_keys(
-                array_diff_key($parsed, $query_params),
-                ['deviceID' => 'device_id']
-            ),
-            body: (object) array_diff_key($parsed, $query_params),
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->startPlayback(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -407,27 +349,24 @@ final class PlayerService implements PlayerContract
      *
      * Toggle shuffle on or off for user’s playback. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{state: bool, deviceID?: string}|PlayerToggleShuffleParams $params
+     * @param bool $state **true** : Shuffle user's playback.<br/>
+     * **false** : Do not shuffle user's playback.
+     * @param string $deviceID The id of the device this command is targeting. If
+     * not supplied, the user's currently active device is the target.
      *
      * @throws APIException
      */
     public function toggleShuffle(
-        array|PlayerToggleShuffleParams $params,
-        ?RequestOptions $requestOptions = null,
+        bool $state,
+        ?string $deviceID = null,
+        ?RequestOptions $requestOptions = null
     ): mixed {
-        [$parsed, $options] = PlayerToggleShuffleParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['state' => $state, 'deviceID' => $deviceID];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'put',
-            path: 'me/player/shuffle',
-            query: Util::array_transform_keys($parsed, ['deviceID' => 'device_id']),
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->toggleShuffle(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -437,27 +376,22 @@ final class PlayerService implements PlayerContract
      *
      * Transfer playback to a new device and optionally begin playback. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{deviceIDs: list<string>, play?: bool}|PlayerTransferParams $params
+     * @param list<string> $deviceIDs A JSON array containing the ID of the device on which playback should be started/transferred.<br/>For example:`{device_ids:["74ASZWbe4lXaubB36ztrGX"]}`<br/>_**Note**: Although an array is accepted, only a single device_id is currently supported. Supplying more than one will return `400 Bad Request`_
+     * @param bool $play **true**: ensure playback happens on new device.<br/>**false** or not provided: keep the current playback state.
      *
      * @throws APIException
      */
     public function transfer(
-        array|PlayerTransferParams $params,
+        array $deviceIDs,
+        ?bool $play = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        [$parsed, $options] = PlayerTransferParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['deviceIDs' => $deviceIDs, 'play' => $play];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'put',
-            path: 'me/player',
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->transfer(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

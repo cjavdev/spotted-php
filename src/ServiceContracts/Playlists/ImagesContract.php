@@ -13,6 +13,9 @@ interface ImagesContract
     /**
      * @api
      *
+     * @param string $playlistID path param: The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
+     * @param string $body body param: Base64 encoded JPEG image data, maximum payload size is 256 KB
+     *
      * @throws APIException
      */
     public function update(
@@ -23,6 +26,8 @@ interface ImagesContract
 
     /**
      * @api
+     *
+     * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      *
      * @return list<ImageObject>
      *

@@ -38,9 +38,9 @@ final class QueueTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->queue->add([
-            'uri' => 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh',
-        ]);
+        $result = $this->client->me->player->queue->add(
+            uri: 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -53,10 +53,10 @@ final class QueueTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->queue->add([
-            'uri' => 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh',
-            'deviceID' => '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
-        ]);
+        $result = $this->client->me->player->queue->add(
+            uri: 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh',
+            deviceID: '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
