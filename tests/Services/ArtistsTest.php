@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\ArtistObject;
 use Spotted\Artists\ArtistBulkGetResponse;
+use Spotted\Artists\ArtistListAlbumsResponse;
 use Spotted\Artists\ArtistListRelatedArtistsResponse;
 use Spotted\Artists\ArtistTopTracksResponse;
 use Spotted\Client;
@@ -85,10 +86,15 @@ final class ArtistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->artists->listAlbums('0TnOYISbd1XYRBk9myaseg');
+        $page = $this->client->artists->listAlbums('0TnOYISbd1XYRBk9myaseg');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CursorURLPage::class, $result);
+        $this->assertInstanceOf(CursorURLPage::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ArtistListAlbumsResponse::class, $item);
+        }
     }
 
     #[Test]

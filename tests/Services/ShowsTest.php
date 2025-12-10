@@ -9,6 +9,7 @@ use Spotted\Client;
 use Spotted\CursorURLPage;
 use Spotted\Shows\ShowBulkGetResponse;
 use Spotted\Shows\ShowGetResponse;
+use Spotted\SimplifiedEpisodeObject;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -84,9 +85,14 @@ final class ShowsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->shows->listEpisodes('38bS44xjbVVZ3No3ByF1dJ');
+        $page = $this->client->shows->listEpisodes('38bS44xjbVVZ3No3ByF1dJ');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CursorURLPage::class, $result);
+        $this->assertInstanceOf(CursorURLPage::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(SimplifiedEpisodeObject::class, $item);
+        }
     }
 }

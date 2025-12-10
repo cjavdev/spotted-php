@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
 use Spotted\CursorURLPage;
+use Spotted\SimplifiedPlaylistObject;
 use Spotted\Users\Playlists\PlaylistNewResponse;
 use Tests\UnsupportedMockTests;
 
@@ -74,9 +75,14 @@ final class PlaylistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->users->playlists->list('smedjan');
+        $page = $this->client->users->playlists->list('smedjan');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CursorURLPage::class, $result);
+        $this->assertInstanceOf(CursorURLPage::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(SimplifiedPlaylistObject::class, $item);
+        }
     }
 }

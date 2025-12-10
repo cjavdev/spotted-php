@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Audiobooks\AudiobookBulkGetResponse;
 use Spotted\Audiobooks\AudiobookGetResponse;
+use Spotted\Audiobooks\SimplifiedChapterObject;
 use Spotted\Client;
 use Spotted\CursorURLPage;
 use Tests\UnsupportedMockTests;
@@ -84,9 +85,14 @@ final class AudiobooksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->audiobooks->listChapters('7iHfbu1YPACw6oZPAFJtqe');
+        $page = $this->client->audiobooks->listChapters('7iHfbu1YPACw6oZPAFJtqe');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CursorURLPage::class, $result);
+        $this->assertInstanceOf(CursorURLPage::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(SimplifiedChapterObject::class, $item);
+        }
     }
 }

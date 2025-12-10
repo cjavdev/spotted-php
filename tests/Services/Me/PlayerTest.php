@@ -10,6 +10,7 @@ use Spotted\CursorURLPage;
 use Spotted\Me\Player\PlayerGetCurrentlyPlayingResponse;
 use Spotted\Me\Player\PlayerGetDevicesResponse;
 use Spotted\Me\Player\PlayerGetStateResponse;
+use Spotted\Me\Player\PlayerListRecentlyPlayedResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -80,10 +81,15 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->listRecentlyPlayed();
+        $page = $this->client->me->player->listRecentlyPlayed();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CursorURLPage::class, $result);
+        $this->assertInstanceOf(CursorURLPage::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PlayerListRecentlyPlayedResponse::class, $item);
+        }
     }
 
     #[Test]

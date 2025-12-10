@@ -9,6 +9,7 @@ use Spotted\Albums\AlbumBulkGetResponse;
 use Spotted\Albums\AlbumGetResponse;
 use Spotted\Client;
 use Spotted\CursorURLPage;
+use Spotted\SimplifiedTrackObject;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -84,9 +85,14 @@ final class AlbumsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->albums->listTracks('4aawyAB9vmqN3uQ7FjRGTy');
+        $page = $this->client->albums->listTracks('4aawyAB9vmqN3uQ7FjRGTy');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CursorURLPage::class, $result);
+        $this->assertInstanceOf(CursorURLPage::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(SimplifiedTrackObject::class, $item);
+        }
     }
 }
