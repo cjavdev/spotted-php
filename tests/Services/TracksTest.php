@@ -39,7 +39,7 @@ final class TracksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->tracks->retrieve('11dFghVXANMlKmJXsNCbNl', []);
+        $result = $this->client->tracks->retrieve('11dFghVXANMlKmJXsNCbNl');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TrackObject::class, $result);
@@ -52,9 +52,9 @@ final class TracksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->tracks->bulkRetrieve([
-            'ids' => '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
-        ]);
+        $result = $this->client->tracks->bulkRetrieve(
+            ids: '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TrackBulkGetResponse::class, $result);
@@ -67,10 +67,10 @@ final class TracksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->tracks->bulkRetrieve([
-            'ids' => '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
-            'market' => 'ES',
-        ]);
+        $result = $this->client->tracks->bulkRetrieve(
+            ids: '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
+            market: 'ES',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TrackBulkGetResponse::class, $result);

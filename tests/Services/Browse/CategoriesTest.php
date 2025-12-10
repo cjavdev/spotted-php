@@ -40,7 +40,7 @@ final class CategoriesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->browse->categories->retrieve('dinner', []);
+        $result = $this->client->browse->categories->retrieve('dinner');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CategoryGetResponse::class, $result);
@@ -53,7 +53,7 @@ final class CategoriesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->browse->categories->list([]);
+        $result = $this->client->browse->categories->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CategoryListResponse::class, $result);
@@ -66,7 +66,7 @@ final class CategoriesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->browse->categories->getPlaylists('dinner', []);
+        $result = $this->client->browse->categories->getPlaylists('dinner');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CategoryGetPlaylistsResponse::class, $result);

@@ -6,7 +6,6 @@ namespace Spotted\Services;
 
 use Spotted\AudioAnalysis\AudioAnalysisGetResponse;
 use Spotted\Client;
-use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\AudioAnalysisContract;
@@ -14,9 +13,17 @@ use Spotted\ServiceContracts\AudioAnalysisContract;
 final class AudioAnalysisService implements AudioAnalysisContract
 {
     /**
+     * @api
+     */
+    public AudioAnalysisRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AudioAnalysisRawService($client);
+    }
 
     /**
      * @deprecated
@@ -25,19 +32,17 @@ final class AudioAnalysisService implements AudioAnalysisContract
      *
      * Get a low-level audio analysis for a track in the Spotify catalog. The audio analysis describes the track’s structure and musical content, including rhythm, pitch, and timbre.
      *
+     * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
+     * for the track
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): AudioAnalysisGetResponse {
-        /** @var BaseResponse<AudioAnalysisGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['audio-analysis/%1$s', $id],
-            options: $requestOptions,
-            convert: AudioAnalysisGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

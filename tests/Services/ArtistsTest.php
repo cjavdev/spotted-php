@@ -55,9 +55,9 @@ final class ArtistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->artists->bulkRetrieve([
-            'ids' => '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
-        ]);
+        $result = $this->client->artists->bulkRetrieve(
+            ids: '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ArtistBulkGetResponse::class, $result);
@@ -70,9 +70,9 @@ final class ArtistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->artists->bulkRetrieve([
-            'ids' => '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
-        ]);
+        $result = $this->client->artists->bulkRetrieve(
+            ids: '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ArtistBulkGetResponse::class, $result);
@@ -85,7 +85,7 @@ final class ArtistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->artists->listAlbums('0TnOYISbd1XYRBk9myaseg', []);
+        $result = $this->client->artists->listAlbums('0TnOYISbd1XYRBk9myaseg');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CursorURLPage::class, $result);
@@ -113,7 +113,7 @@ final class ArtistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->artists->topTracks('0TnOYISbd1XYRBk9myaseg', []);
+        $result = $this->client->artists->topTracks('0TnOYISbd1XYRBk9myaseg');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ArtistTopTracksResponse::class, $result);

@@ -39,7 +39,7 @@ final class ChaptersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->chapters->retrieve('0D5wENdkdwbqlrHoaJ9g29', []);
+        $result = $this->client->chapters->retrieve('0D5wENdkdwbqlrHoaJ9g29');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ChapterGetResponse::class, $result);
@@ -52,9 +52,9 @@ final class ChaptersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->chapters->bulkRetrieve([
-            'ids' => '0IsXVP0JmcB2adSE338GkK,3ZXb8FKZGU0EHALYX6uCzU,0D5wENdkdwbqlrHoaJ9g29',
-        ]);
+        $result = $this->client->chapters->bulkRetrieve(
+            ids: '0IsXVP0JmcB2adSE338GkK,3ZXb8FKZGU0EHALYX6uCzU,0D5wENdkdwbqlrHoaJ9g29',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ChapterBulkGetResponse::class, $result);
@@ -67,10 +67,10 @@ final class ChaptersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->chapters->bulkRetrieve([
-            'ids' => '0IsXVP0JmcB2adSE338GkK,3ZXb8FKZGU0EHALYX6uCzU,0D5wENdkdwbqlrHoaJ9g29',
-            'market' => 'ES',
-        ]);
+        $result = $this->client->chapters->bulkRetrieve(
+            ids: '0IsXVP0JmcB2adSE338GkK,3ZXb8FKZGU0EHALYX6uCzU,0D5wENdkdwbqlrHoaJ9g29',
+            market: 'ES',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ChapterBulkGetResponse::class, $result);

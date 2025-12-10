@@ -40,7 +40,7 @@ $client = new Client(
   clientSecret: getenv('SPOTIFY_CLIENT_SECRET') ?: 'My Client Secret',
 );
 
-$album = $client->albums->retrieve('4aawyAB9vmqN3uQ7FjRGTy', []);
+$album = $client->albums->retrieve('4aawyAB9vmqN3uQ7FjRGTy');
 
 var_dump($album->id);
 ```
@@ -68,7 +68,7 @@ $client = new Client(
   clientSecret: getenv('SPOTIFY_CLIENT_SECRET') ?: 'My Client Secret',
 );
 
-$page = $client->shows->listEpisodes('showid', ['limit' => 5, 'offset' => 10]);
+$page = $client->shows->listEpisodes('showid', limit: 5, offset: 10);
 
 var_dump($page);
 
@@ -92,11 +92,11 @@ When the library is unable to connect to the API, or if the API returns a non-su
 use Spotted\Core\Exceptions\APIConnectionException;
 
 try {
-  $album = $client->albums->retrieve('4aawyAB9vmqN3uQ7FjRGTy', []);
+  $album = $client->albums->retrieve('4aawyAB9vmqN3uQ7FjRGTy');
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
-} catch (RateLimitError $_) {
+} catch (RateLimitError $e) {
   echo "A 429 status code was received; we should back off a bit.", PHP_EOL;
 } catch (APIStatusError $e) {
   echo "Another non-200-range status code was received", PHP_EOL;
@@ -139,7 +139,7 @@ $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
 $result = $client->albums->retrieve(
-  '4aawyAB9vmqN3uQ7FjRGTy', [], RequestOptions::with(maxRetries: 5)
+  '4aawyAB9vmqN3uQ7FjRGTy', requestOptions: RequestOptions::with(maxRetries: 5)
 );
 ```
 
@@ -160,8 +160,7 @@ use Spotted\RequestOptions;
 
 $album = $client->albums->retrieve(
   '4aawyAB9vmqN3uQ7FjRGTy',
-  [],
-  RequestOptions::with(
+  requestOptions: RequestOptions::with(
     extraQueryParams: ['my_query_parameter' => 'value'],
     extraBodyParams: ['my_body_parameter' => 'value'],
     extraHeaders: ['my-header' => 'value'],

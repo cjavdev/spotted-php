@@ -38,7 +38,7 @@ final class PlaylistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->playlists->retrieve('3cEYpjA9oz9GiPac4AsH4n', []);
+        $result = $this->client->playlists->retrieve('3cEYpjA9oz9GiPac4AsH4n');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PlaylistGetResponse::class, $result);
@@ -51,7 +51,7 @@ final class PlaylistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->playlists->update('3cEYpjA9oz9GiPac4AsH4n', []);
+        $result = $this->client->playlists->update('3cEYpjA9oz9GiPac4AsH4n');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Spotted\Services;
 
 use Spotted\Client;
-use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\Me\MeGetResponse;
 use Spotted\RequestOptions;
@@ -22,6 +21,11 @@ use Spotted\Services\Me\TracksService;
 
 final class MeService implements MeContract
 {
+    /**
+     * @api
+     */
+    public MeRawService $raw;
+
     /**
      * @api
      */
@@ -72,6 +76,7 @@ final class MeService implements MeContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new MeRawService($client);
         $this->audiobooks = new AudiobooksService($client);
         $this->playlists = new PlaylistsService($client);
         $this->top = new TopService($client);
@@ -94,13 +99,8 @@ final class MeService implements MeContract
     public function retrieve(
         ?RequestOptions $requestOptions = null
     ): MeGetResponse {
-        /** @var BaseResponse<MeGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'me',
-            options: $requestOptions,
-            convert: MeGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve(requestOptions: $requestOptions);
 
         return $response->parse();
     }

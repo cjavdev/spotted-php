@@ -15,6 +15,9 @@ interface AudioAnalysisContract
      *
      * @api
      *
+     * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
+     * for the track
+     *
      * @throws APIException
      */
     public function retrieve(

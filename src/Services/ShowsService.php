@@ -5,24 +5,28 @@ declare(strict_types=1);
 namespace Spotted\Services;
 
 use Spotted\Client;
-use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\ShowsContract;
 use Spotted\Shows\ShowBulkGetResponse;
-use Spotted\Shows\ShowBulkRetrieveParams;
 use Spotted\Shows\ShowGetResponse;
-use Spotted\Shows\ShowListEpisodesParams;
-use Spotted\Shows\ShowRetrieveParams;
 use Spotted\SimplifiedEpisodeObject;
 
 final class ShowsService implements ShowsContract
 {
     /**
+     * @api
+     */
+    public ShowsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ShowsRawService($client);
+    }
 
     /**
      * @api
@@ -30,28 +34,28 @@ final class ShowsService implements ShowsContract
      * Get Spotify catalog information for a single show identified by its
      * unique Spotify ID.
      *
-     * @param array{market?: string}|ShowRetrieveParams $params
+     * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
+     * for the show
+     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     *   If a country code is specified, only content that is available in that market will be returned.<br/>
+     *   If a valid user access token is specified in the request header, the country associated with
+     *   the user account will take priority over this parameter.<br/>
+     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
+     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        array|ShowRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $market = null,
+        ?RequestOptions $requestOptions = null
     ): ShowGetResponse {
-        [$parsed, $options] = ShowRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['market' => $market];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ShowGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['shows/%1$s', $id],
-            query: $parsed,
-            options: $options,
-            convert: ShowGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -61,27 +65,27 @@ final class ShowsService implements ShowsContract
      *
      * Get Spotify catalog information for several shows based on their Spotify IDs.
      *
-     * @param array{ids: string, market?: string}|ShowBulkRetrieveParams $params
+     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the shows. Maximum: 50 IDs.
+     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     *   If a country code is specified, only content that is available in that market will be returned.<br/>
+     *   If a valid user access token is specified in the request header, the country associated with
+     *   the user account will take priority over this parameter.<br/>
+     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
+     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      *
      * @throws APIException
      */
     public function bulkRetrieve(
-        array|ShowBulkRetrieveParams $params,
+        string $ids,
+        ?string $market = null,
         ?RequestOptions $requestOptions = null
     ): ShowBulkGetResponse {
-        [$parsed, $options] = ShowBulkRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['ids' => $ids, 'market' => $market];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ShowBulkGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'shows',
-            query: $parsed,
-            options: $options,
-            convert: ShowBulkGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->bulkRetrieve(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -91,9 +95,16 @@ final class ShowsService implements ShowsContract
      *
      * Get Spotify catalog information about an show’s episodes. Optional parameters can be used to limit the number of episodes returned.
      *
-     * @param array{
-     *   limit?: int, market?: string, offset?: int
-     * }|ShowListEpisodesParams $params
+     * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
+     * for the show
+     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     *   If a country code is specified, only content that is available in that market will be returned.<br/>
+     *   If a valid user access token is specified in the request header, the country associated with
+     *   the user account will take priority over this parameter.<br/>
+     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
+     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      *
      * @return CursorURLPage<SimplifiedEpisodeObject>
      *
@@ -101,23 +112,17 @@ final class ShowsService implements ShowsContract
      */
     public function listEpisodes(
         string $id,
-        array|ShowListEpisodesParams $params,
+        int $limit = 20,
+        ?string $market = null,
+        int $offset = 0,
         ?RequestOptions $requestOptions = null,
     ): CursorURLPage {
-        [$parsed, $options] = ShowListEpisodesParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['limit' => $limit, 'market' => $market, 'offset' => $offset];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CursorURLPage<SimplifiedEpisodeObject>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['shows/%1$s/episodes', $id],
-            query: $parsed,
-            options: $options,
-            convert: SimplifiedEpisodeObject::class,
-            page: CursorURLPage::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listEpisodes($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

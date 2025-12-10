@@ -41,7 +41,7 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->getCurrentlyPlaying([]);
+        $result = $this->client->me->player->getCurrentlyPlaying();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PlayerGetCurrentlyPlayingResponse::class, $result);
@@ -67,7 +67,7 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->getState([]);
+        $result = $this->client->me->player->getState();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PlayerGetStateResponse::class, $result);
@@ -80,7 +80,7 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->listRecentlyPlayed([]);
+        $result = $this->client->me->player->listRecentlyPlayed();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CursorURLPage::class, $result);
@@ -93,7 +93,7 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->pausePlayback([]);
+        $result = $this->client->me->player->pausePlayback();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -106,9 +106,7 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->seekToPosition([
-            'positionMs' => 25000,
-        ]);
+        $result = $this->client->me->player->seekToPosition(positionMs: 25000);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -121,10 +119,10 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->seekToPosition([
-            'positionMs' => 25000,
-            'deviceID' => '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
-        ]);
+        $result = $this->client->me->player->seekToPosition(
+            positionMs: 25000,
+            deviceID: '0d1841b0976bae2a3a310dd74c0f3df354899bc8'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -137,7 +135,7 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->setRepeatMode(['state' => 'context']);
+        $result = $this->client->me->player->setRepeatMode(state: 'context');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -150,10 +148,10 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->setRepeatMode([
-            'state' => 'context',
-            'deviceID' => '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
-        ]);
+        $result = $this->client->me->player->setRepeatMode(
+            state: 'context',
+            deviceID: '0d1841b0976bae2a3a310dd74c0f3df354899bc8'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -166,7 +164,7 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->setVolume(['volumePercent' => 50]);
+        $result = $this->client->me->player->setVolume(volumePercent: 50);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -179,10 +177,10 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->setVolume([
-            'volumePercent' => 50,
-            'deviceID' => '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
-        ]);
+        $result = $this->client->me->player->setVolume(
+            volumePercent: 50,
+            deviceID: '0d1841b0976bae2a3a310dd74c0f3df354899bc8'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -195,7 +193,7 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->skipNext([]);
+        $result = $this->client->me->player->skipNext();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -208,7 +206,7 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->skipPrevious([]);
+        $result = $this->client->me->player->skipPrevious();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -221,7 +219,7 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->startPlayback([]);
+        $result = $this->client->me->player->startPlayback();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -234,7 +232,7 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->toggleShuffle(['state' => true]);
+        $result = $this->client->me->player->toggleShuffle(state: true);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -247,9 +245,10 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->toggleShuffle([
-            'state' => true, 'deviceID' => '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
-        ]);
+        $result = $this->client->me->player->toggleShuffle(
+            state: true,
+            deviceID: '0d1841b0976bae2a3a310dd74c0f3df354899bc8'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -262,9 +261,9 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->transfer([
-            'deviceIDs' => ['74ASZWbe4lXaubB36ztrGX'],
-        ]);
+        $result = $this->client->me->player->transfer(
+            deviceIDs: ['74ASZWbe4lXaubB36ztrGX']
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -277,9 +276,10 @@ final class PlayerTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->transfer([
-            'deviceIDs' => ['74ASZWbe4lXaubB36ztrGX'], 'play' => true,
-        ]);
+        $result = $this->client->me->player->transfer(
+            deviceIDs: ['74ASZWbe4lXaubB36ztrGX'],
+            play: true
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);

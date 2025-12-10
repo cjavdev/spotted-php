@@ -39,7 +39,7 @@ final class BrowseTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->browse->getFeaturedPlaylists([]);
+        $result = $this->client->browse->getFeaturedPlaylists();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(BrowseGetFeaturedPlaylistsResponse::class, $result);
@@ -52,7 +52,7 @@ final class BrowseTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->browse->getNewReleases([]);
+        $result = $this->client->browse->getNewReleases();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(BrowseGetNewReleasesResponse::class, $result);

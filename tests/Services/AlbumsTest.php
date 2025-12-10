@@ -40,7 +40,7 @@ final class AlbumsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->albums->retrieve('4aawyAB9vmqN3uQ7FjRGTy', []);
+        $result = $this->client->albums->retrieve('4aawyAB9vmqN3uQ7FjRGTy');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AlbumGetResponse::class, $result);
@@ -53,9 +53,9 @@ final class AlbumsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->albums->bulkRetrieve([
-            'ids' => '382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc',
-        ]);
+        $result = $this->client->albums->bulkRetrieve(
+            ids: '382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AlbumBulkGetResponse::class, $result);
@@ -68,10 +68,10 @@ final class AlbumsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->albums->bulkRetrieve([
-            'ids' => '382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc',
-            'market' => 'ES',
-        ]);
+        $result = $this->client->albums->bulkRetrieve(
+            ids: '382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc',
+            market: 'ES',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AlbumBulkGetResponse::class, $result);
@@ -84,7 +84,7 @@ final class AlbumsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->albums->listTracks('4aawyAB9vmqN3uQ7FjRGTy', []);
+        $result = $this->client->albums->listTracks('4aawyAB9vmqN3uQ7FjRGTy');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CursorURLPage::class, $result);

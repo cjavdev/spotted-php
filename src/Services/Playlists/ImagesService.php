@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Spotted\Services\Playlists;
 
 use Spotted\Client;
-use Spotted\Core\Contracts\BaseResponse;
-use Spotted\Core\Conversion\ListOf;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\ImageObject;
 use Spotted\RequestOptions;
@@ -15,14 +13,25 @@ use Spotted\ServiceContracts\Playlists\ImagesContract;
 final class ImagesService implements ImagesContract
 {
     /**
+     * @api
+     */
+    public ImagesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ImagesRawService($client);
+    }
 
     /**
      * @api
      *
      * Replace the image used to represent a specific playlist.
+     *
+     * @param string $playlistID path param: The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
+     * @param string $body body param: Base64 encoded JPEG image data, maximum payload size is 256 KB
      *
      * @throws APIException
      */
@@ -31,17 +40,8 @@ final class ImagesService implements ImagesContract
         string $body,
         ?RequestOptions $requestOptions = null
     ): string {
-        /** @var BaseResponse<string> */
-        $response = $this->client->request(
-            method: 'put',
-            path: ['playlists/%1$s/images', $playlistID],
-            headers: [
-                'Content-Type' => 'image/jpeg', 'Accept' => 'application/binary',
-            ],
-            body: $body,
-            options: $requestOptions,
-            convert: 'string',
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($playlistID, $body, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -51,6 +51,8 @@ final class ImagesService implements ImagesContract
      *
      * Get the current image associated with a specific playlist.
      *
+     * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
+     *
      * @return list<ImageObject>
      *
      * @throws APIException
@@ -59,13 +61,8 @@ final class ImagesService implements ImagesContract
         string $playlistID,
         ?RequestOptions $requestOptions = null
     ): array {
-        /** @var BaseResponse<list<ImageObject>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['playlists/%1$s/images', $playlistID],
-            options: $requestOptions,
-            convert: new ListOf(ImageObject::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($playlistID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

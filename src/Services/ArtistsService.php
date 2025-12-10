@@ -6,16 +6,11 @@ namespace Spotted\Services;
 
 use Spotted\ArtistObject;
 use Spotted\Artists\ArtistBulkGetResponse;
-use Spotted\Artists\ArtistBulkRetrieveParams;
-use Spotted\Artists\ArtistListAlbumsParams;
 use Spotted\Artists\ArtistListAlbumsResponse;
 use Spotted\Artists\ArtistListRelatedArtistsResponse;
-use Spotted\Artists\ArtistTopTracksParams;
 use Spotted\Artists\ArtistTopTracksResponse;
 use Spotted\Client;
-use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
-use Spotted\Core\Util;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\ArtistsContract;
@@ -23,14 +18,24 @@ use Spotted\ServiceContracts\ArtistsContract;
 final class ArtistsService implements ArtistsContract
 {
     /**
+     * @api
+     */
+    public ArtistsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ArtistsRawService($client);
+    }
 
     /**
      * @api
      *
      * Get Spotify catalog information for a single artist identified by their unique Spotify ID.
+     *
+     * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
      *
      * @throws APIException
      */
@@ -38,13 +43,8 @@ final class ArtistsService implements ArtistsContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): ArtistObject {
-        /** @var BaseResponse<ArtistObject> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['artists/%1$s', $id],
-            options: $requestOptions,
-            convert: ArtistObject::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -54,27 +54,18 @@ final class ArtistsService implements ArtistsContract
      *
      * Get Spotify catalog information for several artists based on their Spotify IDs.
      *
-     * @param array{ids: string}|ArtistBulkRetrieveParams $params
+     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the artists. Maximum: 50 IDs.
      *
      * @throws APIException
      */
     public function bulkRetrieve(
-        array|ArtistBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $ids,
+        ?RequestOptions $requestOptions = null
     ): ArtistBulkGetResponse {
-        [$parsed, $options] = ArtistBulkRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['ids' => $ids];
 
-        /** @var BaseResponse<ArtistBulkGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'artists',
-            query: $parsed,
-            options: $options,
-            convert: ArtistBulkGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->bulkRetrieve(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -84,9 +75,17 @@ final class ArtistsService implements ArtistsContract
      *
      * Get Spotify catalog information about an artist's albums.
      *
-     * @param array{
-     *   includeGroups?: string, limit?: int, market?: string, offset?: int
-     * }|ArtistListAlbumsParams $params
+     * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
+     * @param string $includeGroups A comma-separated list of keywords that will be used to filter the response. If not supplied, all album types will be returned. <br/>
+     * Valid values are:<br/>- `album`<br/>- `single`<br/>- `appears_on`<br/>- `compilation`<br/>For example: `include_groups=album,single`.
+     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     *   If a country code is specified, only content that is available in that market will be returned.<br/>
+     *   If a valid user access token is specified in the request header, the country associated with
+     *   the user account will take priority over this parameter.<br/>
+     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
+     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      *
      * @return CursorURLPage<ArtistListAlbumsResponse>
      *
@@ -94,26 +93,23 @@ final class ArtistsService implements ArtistsContract
      */
     public function listAlbums(
         string $id,
-        array|ArtistListAlbumsParams $params,
+        ?string $includeGroups = null,
+        int $limit = 20,
+        ?string $market = null,
+        int $offset = 0,
         ?RequestOptions $requestOptions = null,
     ): CursorURLPage {
-        [$parsed, $options] = ArtistListAlbumsParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'includeGroups' => $includeGroups,
+            'limit' => $limit,
+            'market' => $market,
+            'offset' => $offset,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<CursorURLPage<ArtistListAlbumsResponse>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['artists/%1$s/albums', $id],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['includeGroups' => 'include_groups']
-            ),
-            options: $options,
-            convert: ArtistListAlbumsResponse::class,
-            page: CursorURLPage::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listAlbums($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -125,19 +121,16 @@ final class ArtistsService implements ArtistsContract
      *
      * Get Spotify catalog information about artists similar to a given artist. Similarity is based on analysis of the Spotify community's listening history.
      *
+     * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
+     *
      * @throws APIException
      */
     public function listRelatedArtists(
         string $id,
         ?RequestOptions $requestOptions = null
     ): ArtistListRelatedArtistsResponse {
-        /** @var BaseResponse<ArtistListRelatedArtistsResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['artists/%1$s/related-artists', $id],
-            options: $requestOptions,
-            convert: ArtistListRelatedArtistsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listRelatedArtists($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -147,28 +140,27 @@ final class ArtistsService implements ArtistsContract
      *
      * Get Spotify catalog information about an artist's top tracks by country.
      *
-     * @param array{market?: string}|ArtistTopTracksParams $params
+     * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
+     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     *   If a country code is specified, only content that is available in that market will be returned.<br/>
+     *   If a valid user access token is specified in the request header, the country associated with
+     *   the user account will take priority over this parameter.<br/>
+     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
+     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      *
      * @throws APIException
      */
     public function topTracks(
         string $id,
-        array|ArtistTopTracksParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $market = null,
+        ?RequestOptions $requestOptions = null
     ): ArtistTopTracksResponse {
-        [$parsed, $options] = ArtistTopTracksParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['market' => $market];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<ArtistTopTracksResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['artists/%1$s/top-tracks', $id],
-            query: $parsed,
-            options: $options,
-            convert: ArtistTopTracksResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->topTracks($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

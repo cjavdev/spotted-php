@@ -38,7 +38,7 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->bulkRetrieve([]);
+        $result = $this->client->me->following->bulkRetrieve();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FollowingBulkGetResponse::class, $result);
@@ -51,9 +51,11 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->bulkRetrieve([
-            'type' => 'artist', 'after' => '0I2XqVXqHScXjHhk6AYYRe', 'limit' => 10,
-        ]);
+        $result = $this->client->me->following->bulkRetrieve(
+            type: 'artist',
+            after: '0I2XqVXqHScXjHhk6AYYRe',
+            limit: 10
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FollowingBulkGetResponse::class, $result);
@@ -66,10 +68,10 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->check([
-            'ids' => '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
-            'type' => 'artist',
-        ]);
+        $result = $this->client->me->following->check(
+            ids: '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
+            type: 'artist',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);
@@ -82,10 +84,10 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->check([
-            'ids' => '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
-            'type' => 'artist',
-        ]);
+        $result = $this->client->me->following->check(
+            ids: '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
+            type: 'artist',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);
@@ -98,7 +100,7 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->follow(['ids' => ['string']]);
+        $result = $this->client->me->following->follow(ids: ['string']);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -111,7 +113,7 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->follow(['ids' => ['string']]);
+        $result = $this->client->me->following->follow(ids: ['string']);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -124,7 +126,7 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->unfollow([]);
+        $result = $this->client->me->following->unfollow();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);

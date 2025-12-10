@@ -41,7 +41,7 @@ final class PlaylistsTest extends TestCase
 
         $result = $this->client->users->playlists->create(
             'smedjan',
-            ['name' => 'New Playlist']
+            name: 'New Playlist'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -57,12 +57,10 @@ final class PlaylistsTest extends TestCase
 
         $result = $this->client->users->playlists->create(
             'smedjan',
-            [
-                'name' => 'New Playlist',
-                'collaborative' => true,
-                'description' => 'New playlist description',
-                'public' => false,
-            ],
+            name: 'New Playlist',
+            collaborative: true,
+            description: 'New playlist description',
+            public: false,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -76,7 +74,7 @@ final class PlaylistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->users->playlists->list('smedjan', []);
+        $result = $this->client->users->playlists->list('smedjan');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CursorURLPage::class, $result);
