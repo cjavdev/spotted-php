@@ -6,6 +6,7 @@ namespace Spotted\Services\Me;
 
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\Me\Following\FollowingBulkGetResponse;
 use Spotted\Me\Following\FollowingCheckParams\Type;
 use Spotted\RequestOptions;
@@ -43,9 +44,9 @@ final class FollowingService implements FollowingContract
         int $limit = 20,
         ?RequestOptions $requestOptions = null,
     ): FollowingBulkGetResponse {
-        $params = ['type' => $type, 'after' => $after, 'limit' => $limit];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['type' => $type, 'after' => $after, 'limit' => $limit]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->bulkRetrieve(params: $params, requestOptions: $requestOptions);
@@ -70,7 +71,7 @@ final class FollowingService implements FollowingContract
         string|Type $type,
         ?RequestOptions $requestOptions = null
     ): array {
-        $params = ['ids' => $ids, 'type' => $type];
+        $params = Util::removeNulls(['ids' => $ids, 'type' => $type]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->check(params: $params, requestOptions: $requestOptions);
@@ -92,7 +93,7 @@ final class FollowingService implements FollowingContract
         array $ids,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = ['ids' => $ids];
+        $params = Util::removeNulls(['ids' => $ids]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->follow(params: $params, requestOptions: $requestOptions);
@@ -113,9 +114,7 @@ final class FollowingService implements FollowingContract
         ?array $ids = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = ['ids' => $ids];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['ids' => $ids]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->unfollow(params: $params, requestOptions: $requestOptions);

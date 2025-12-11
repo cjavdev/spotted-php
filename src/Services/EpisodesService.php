@@ -6,6 +6,7 @@ namespace Spotted\Services;
 
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\EpisodeObject;
 use Spotted\Episodes\EpisodeBulkGetResponse;
 use Spotted\RequestOptions;
@@ -47,9 +48,7 @@ final class EpisodesService implements EpisodesContract
         ?string $market = null,
         ?RequestOptions $requestOptions = null
     ): EpisodeObject {
-        $params = ['market' => $market];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['market' => $market]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
@@ -77,9 +76,7 @@ final class EpisodesService implements EpisodesContract
         ?string $market = null,
         ?RequestOptions $requestOptions = null
     ): EpisodeBulkGetResponse {
-        $params = ['ids' => $ids, 'market' => $market];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['ids' => $ids, 'market' => $market]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->bulkRetrieve(params: $params, requestOptions: $requestOptions);

@@ -8,6 +8,7 @@ use Spotted\AudioFeatures\AudioFeatureBulkGetResponse;
 use Spotted\AudioFeatures\AudioFeatureGetResponse;
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\AudioFeaturesContract;
 
@@ -64,7 +65,7 @@ final class AudioFeaturesService implements AudioFeaturesContract
         string $ids,
         ?RequestOptions $requestOptions = null
     ): AudioFeatureBulkGetResponse {
-        $params = ['ids' => $ids];
+        $params = Util::removeNulls(['ids' => $ids]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->bulkRetrieve(params: $params, requestOptions: $requestOptions);

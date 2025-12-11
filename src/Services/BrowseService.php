@@ -8,6 +8,7 @@ use Spotted\Browse\BrowseGetFeaturedPlaylistsResponse;
 use Spotted\Browse\BrowseGetNewReleasesResponse;
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\BrowseContract;
 use Spotted\Services\Browse\CategoriesService;
@@ -52,9 +53,9 @@ final class BrowseService implements BrowseContract
         int $offset = 0,
         ?RequestOptions $requestOptions = null,
     ): BrowseGetFeaturedPlaylistsResponse {
-        $params = ['limit' => $limit, 'locale' => $locale, 'offset' => $offset];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['limit' => $limit, 'locale' => $locale, 'offset' => $offset]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getFeaturedPlaylists(params: $params, requestOptions: $requestOptions);
@@ -77,9 +78,7 @@ final class BrowseService implements BrowseContract
         int $offset = 0,
         ?RequestOptions $requestOptions = null
     ): BrowseGetNewReleasesResponse {
-        $params = ['limit' => $limit, 'offset' => $offset];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['limit' => $limit, 'offset' => $offset]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getNewReleases(params: $params, requestOptions: $requestOptions);

@@ -8,6 +8,7 @@ use Spotted\Chapters\ChapterBulkGetResponse;
 use Spotted\Chapters\ChapterGetResponse;
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\ChaptersContract;
 
@@ -47,9 +48,7 @@ final class ChaptersService implements ChaptersContract
         ?string $market = null,
         ?RequestOptions $requestOptions = null
     ): ChapterGetResponse {
-        $params = ['market' => $market];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['market' => $market]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
@@ -77,9 +76,7 @@ final class ChaptersService implements ChaptersContract
         ?string $market = null,
         ?RequestOptions $requestOptions = null
     ): ChapterBulkGetResponse {
-        $params = ['ids' => $ids, 'market' => $market];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['ids' => $ids, 'market' => $market]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->bulkRetrieve(params: $params, requestOptions: $requestOptions);

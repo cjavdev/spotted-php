@@ -6,6 +6,7 @@ namespace Spotted\Services;
 
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\TracksContract;
 use Spotted\TrackObject;
@@ -48,9 +49,7 @@ final class TracksService implements TracksContract
         ?string $market = null,
         ?RequestOptions $requestOptions = null
     ): TrackObject {
-        $params = ['market' => $market];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['market' => $market]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
@@ -78,9 +77,7 @@ final class TracksService implements TracksContract
         ?string $market = null,
         ?RequestOptions $requestOptions = null
     ): TrackBulkGetResponse {
-        $params = ['ids' => $ids, 'market' => $market];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['ids' => $ids, 'market' => $market]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->bulkRetrieve(params: $params, requestOptions: $requestOptions);

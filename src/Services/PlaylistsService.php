@@ -6,6 +6,7 @@ namespace Spotted\Services;
 
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\Playlists\PlaylistGetResponse;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\PlaylistsContract;
@@ -80,13 +81,13 @@ final class PlaylistsService implements PlaylistsContract
         ?string $market = null,
         ?RequestOptions $requestOptions = null,
     ): PlaylistGetResponse {
-        $params = [
-            'additionalTypes' => $additionalTypes,
-            'fields' => $fields,
-            'market' => $market,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'additionalTypes' => $additionalTypes,
+                'fields' => $fields,
+                'market' => $market,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($playlistID, params: $params, requestOptions: $requestOptions);
@@ -117,14 +118,14 @@ final class PlaylistsService implements PlaylistsContract
         ?bool $public = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'collaborative' => $collaborative,
-            'description' => $description,
-            'name' => $name,
-            'public' => $public,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'collaborative' => $collaborative,
+                'description' => $description,
+                'name' => $name,
+                'public' => $public,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($playlistID, params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Spotted\Services\Playlists;
 
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Playlists\FollowersContract;
 
@@ -41,9 +42,7 @@ final class FollowersService implements FollowersContract
         ?string $ids = null,
         ?RequestOptions $requestOptions = null,
     ): array {
-        $params = ['ids' => $ids];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['ids' => $ids]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->check($playlistID, params: $params, requestOptions: $requestOptions);
@@ -66,9 +65,7 @@ final class FollowersService implements FollowersContract
         ?bool $public = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = ['public' => $public];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['public' => $public]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->follow($playlistID, params: $params, requestOptions: $requestOptions);
