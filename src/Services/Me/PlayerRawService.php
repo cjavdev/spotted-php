@@ -376,7 +376,7 @@ final class PlayerRawService implements PlayerRawContract
             $params,
             $requestOptions,
         );
-        $query_params = ['device_id'];
+        $query_params = array_flip(['device_id']);
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
