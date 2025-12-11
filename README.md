@@ -20,7 +20,7 @@ The REST API documentation can be found on [spotted.stldocs.com](https://spotted
 <!-- x-release-please-start-version -->
 
 ```
-composer require "cjavdev/spotted 0.0.1"
+composer require "cjavdev/spotted 0.3.0"
 ```
 
 <!-- x-release-please-end -->
