@@ -376,14 +376,14 @@ final class PlayerRawService implements PlayerRawContract
             $params,
             $requestOptions,
         );
-        $query_params = array_flip(['device_id']);
+        $query_params = array_flip(['deviceID']);
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: 'me/player/play',
             query: Util::array_transform_keys(
-                array_diff_key($parsed, $query_params),
+                array_intersect_key($parsed, $query_params),
                 ['deviceID' => 'device_id']
             ),
             body: (object) array_diff_key($parsed, $query_params),

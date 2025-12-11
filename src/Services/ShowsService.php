@@ -6,6 +6,7 @@ namespace Spotted\Services;
 
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\ShowsContract;
@@ -50,9 +51,7 @@ final class ShowsService implements ShowsContract
         ?string $market = null,
         ?RequestOptions $requestOptions = null
     ): ShowGetResponse {
-        $params = ['market' => $market];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['market' => $market]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
@@ -80,9 +79,7 @@ final class ShowsService implements ShowsContract
         ?string $market = null,
         ?RequestOptions $requestOptions = null
     ): ShowBulkGetResponse {
-        $params = ['ids' => $ids, 'market' => $market];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['ids' => $ids, 'market' => $market]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->bulkRetrieve(params: $params, requestOptions: $requestOptions);
@@ -117,9 +114,9 @@ final class ShowsService implements ShowsContract
         int $offset = 0,
         ?RequestOptions $requestOptions = null,
     ): CursorURLPage {
-        $params = ['limit' => $limit, 'market' => $market, 'offset' => $offset];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['limit' => $limit, 'market' => $market, 'offset' => $offset]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listEpisodes($id, params: $params, requestOptions: $requestOptions);

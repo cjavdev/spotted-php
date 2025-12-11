@@ -11,6 +11,7 @@ use Spotted\Artists\ArtistListRelatedArtistsResponse;
 use Spotted\Artists\ArtistTopTracksResponse;
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\ArtistsContract;
@@ -62,7 +63,7 @@ final class ArtistsService implements ArtistsContract
         string $ids,
         ?RequestOptions $requestOptions = null
     ): ArtistBulkGetResponse {
-        $params = ['ids' => $ids];
+        $params = Util::removeNulls(['ids' => $ids]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->bulkRetrieve(params: $params, requestOptions: $requestOptions);
@@ -99,14 +100,14 @@ final class ArtistsService implements ArtistsContract
         int $offset = 0,
         ?RequestOptions $requestOptions = null,
     ): CursorURLPage {
-        $params = [
-            'includeGroups' => $includeGroups,
-            'limit' => $limit,
-            'market' => $market,
-            'offset' => $offset,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'includeGroups' => $includeGroups,
+                'limit' => $limit,
+                'market' => $market,
+                'offset' => $offset,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listAlbums($id, params: $params, requestOptions: $requestOptions);
@@ -155,9 +156,7 @@ final class ArtistsService implements ArtistsContract
         ?string $market = null,
         ?RequestOptions $requestOptions = null
     ): ArtistTopTracksResponse {
-        $params = ['market' => $market];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['market' => $market]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->topTracks($id, params: $params, requestOptions: $requestOptions);

@@ -7,6 +7,7 @@ namespace Spotted\Services\Me;
 use Spotted\ArtistObject;
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\TopContract;
@@ -46,11 +47,9 @@ final class TopService implements TopContract
         string $timeRange = 'medium_term',
         ?RequestOptions $requestOptions = null,
     ): CursorURLPage {
-        $params = [
-            'limit' => $limit, 'offset' => $offset, 'timeRange' => $timeRange,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['limit' => $limit, 'offset' => $offset, 'timeRange' => $timeRange]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listTopArtists(params: $params, requestOptions: $requestOptions);
@@ -77,11 +76,9 @@ final class TopService implements TopContract
         string $timeRange = 'medium_term',
         ?RequestOptions $requestOptions = null,
     ): CursorURLPage {
-        $params = [
-            'limit' => $limit, 'offset' => $offset, 'timeRange' => $timeRange,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['limit' => $limit, 'offset' => $offset, 'timeRange' => $timeRange]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listTopTracks(params: $params, requestOptions: $requestOptions);

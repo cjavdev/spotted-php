@@ -6,6 +6,7 @@ namespace Spotted\Services\Me;
 
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
 use Spotted\Me\Player\PlayerGetCurrentlyPlayingResponse;
 use Spotted\Me\Player\PlayerGetDevicesResponse;
@@ -58,9 +59,9 @@ final class PlayerService implements PlayerContract
         ?string $market = null,
         ?RequestOptions $requestOptions = null,
     ): PlayerGetCurrentlyPlayingResponse {
-        $params = ['additionalTypes' => $additionalTypes, 'market' => $market];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['additionalTypes' => $additionalTypes, 'market' => $market]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getCurrentlyPlaying(params: $params, requestOptions: $requestOptions);
@@ -106,9 +107,9 @@ final class PlayerService implements PlayerContract
         ?string $market = null,
         ?RequestOptions $requestOptions = null,
     ): PlayerGetStateResponse {
-        $params = ['additionalTypes' => $additionalTypes, 'market' => $market];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['additionalTypes' => $additionalTypes, 'market' => $market]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getState(params: $params, requestOptions: $requestOptions);
@@ -140,9 +141,9 @@ final class PlayerService implements PlayerContract
         int $limit = 20,
         ?RequestOptions $requestOptions = null,
     ): CursorURLPage {
-        $params = ['after' => $after, 'before' => $before, 'limit' => $limit];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['after' => $after, 'before' => $before, 'limit' => $limit]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listRecentlyPlayed(params: $params, requestOptions: $requestOptions);
@@ -163,9 +164,7 @@ final class PlayerService implements PlayerContract
         ?string $deviceID = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = ['deviceID' => $deviceID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['deviceID' => $deviceID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->pausePlayback(params: $params, requestOptions: $requestOptions);
@@ -191,9 +190,9 @@ final class PlayerService implements PlayerContract
         ?string $deviceID = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = ['positionMs' => $positionMs, 'deviceID' => $deviceID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['positionMs' => $positionMs, 'deviceID' => $deviceID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->seekToPosition(params: $params, requestOptions: $requestOptions);
@@ -220,9 +219,7 @@ final class PlayerService implements PlayerContract
         ?string $deviceID = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = ['state' => $state, 'deviceID' => $deviceID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['state' => $state, 'deviceID' => $deviceID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->setRepeatMode(params: $params, requestOptions: $requestOptions);
@@ -245,9 +242,9 @@ final class PlayerService implements PlayerContract
         ?string $deviceID = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = ['volumePercent' => $volumePercent, 'deviceID' => $deviceID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['volumePercent' => $volumePercent, 'deviceID' => $deviceID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->setVolume(params: $params, requestOptions: $requestOptions);
@@ -268,9 +265,7 @@ final class PlayerService implements PlayerContract
         ?string $deviceID = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = ['deviceID' => $deviceID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['deviceID' => $deviceID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->skipNext(params: $params, requestOptions: $requestOptions);
@@ -292,9 +287,7 @@ final class PlayerService implements PlayerContract
         ?string $deviceID = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = ['deviceID' => $deviceID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['deviceID' => $deviceID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->skipPrevious(params: $params, requestOptions: $requestOptions);
@@ -328,15 +321,15 @@ final class PlayerService implements PlayerContract
         ?array $uris = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'deviceID' => $deviceID,
-            'contextUri' => $contextUri,
-            'offset' => $offset,
-            'positionMs' => $positionMs,
-            'uris' => $uris,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'deviceID' => $deviceID,
+                'contextUri' => $contextUri,
+                'offset' => $offset,
+                'positionMs' => $positionMs,
+                'uris' => $uris,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->startPlayback(params: $params, requestOptions: $requestOptions);
@@ -361,9 +354,7 @@ final class PlayerService implements PlayerContract
         ?string $deviceID = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = ['state' => $state, 'deviceID' => $deviceID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['state' => $state, 'deviceID' => $deviceID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->toggleShuffle(params: $params, requestOptions: $requestOptions);
@@ -386,9 +377,7 @@ final class PlayerService implements PlayerContract
         ?bool $play = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = ['deviceIDs' => $deviceIDs, 'play' => $play];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['deviceIDs' => $deviceIDs, 'play' => $play]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->transfer(params: $params, requestOptions: $requestOptions);

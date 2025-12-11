@@ -9,6 +9,7 @@ use Spotted\Browse\Categories\CategoryGetResponse;
 use Spotted\Browse\Categories\CategoryListResponse;
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Browse\CategoriesContract;
 
@@ -42,9 +43,7 @@ final class CategoriesService implements CategoriesContract
         ?string $locale = null,
         ?RequestOptions $requestOptions = null,
     ): CategoryGetResponse {
-        $params = ['locale' => $locale];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['locale' => $locale]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($categoryID, params: $params, requestOptions: $requestOptions);
@@ -69,9 +68,9 @@ final class CategoriesService implements CategoriesContract
         int $offset = 0,
         ?RequestOptions $requestOptions = null,
     ): CategoryListResponse {
-        $params = ['limit' => $limit, 'locale' => $locale, 'offset' => $offset];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['limit' => $limit, 'locale' => $locale, 'offset' => $offset]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -98,9 +97,7 @@ final class CategoriesService implements CategoriesContract
         int $offset = 0,
         ?RequestOptions $requestOptions = null,
     ): CategoryGetPlaylistsResponse {
-        $params = ['limit' => $limit, 'offset' => $offset];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['limit' => $limit, 'offset' => $offset]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getPlaylists($categoryID, params: $params, requestOptions: $requestOptions);

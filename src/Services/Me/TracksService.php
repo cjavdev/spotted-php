@@ -6,6 +6,7 @@ namespace Spotted\Services\Me;
 
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
 use Spotted\Me\Tracks\TrackListResponse;
 use Spotted\RequestOptions;
@@ -50,9 +51,9 @@ final class TracksService implements TracksContract
         int $offset = 0,
         ?RequestOptions $requestOptions = null,
     ): CursorURLPage {
-        $params = ['limit' => $limit, 'market' => $market, 'offset' => $offset];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['limit' => $limit, 'market' => $market, 'offset' => $offset]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -75,7 +76,7 @@ final class TracksService implements TracksContract
         string $ids,
         ?RequestOptions $requestOptions = null
     ): array {
-        $params = ['ids' => $ids];
+        $params = Util::removeNulls(['ids' => $ids]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->check(params: $params, requestOptions: $requestOptions);
@@ -96,9 +97,7 @@ final class TracksService implements TracksContract
         ?array $ids = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = ['ids' => $ids];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['ids' => $ids]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->remove(params: $params, requestOptions: $requestOptions);
@@ -123,9 +122,9 @@ final class TracksService implements TracksContract
         ?array $timestampedIDs = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = ['ids' => $ids, 'timestampedIDs' => $timestampedIDs];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['ids' => $ids, 'timestampedIDs' => $timestampedIDs]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->save(params: $params, requestOptions: $requestOptions);

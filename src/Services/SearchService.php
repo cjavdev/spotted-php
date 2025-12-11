@@ -6,6 +6,7 @@ namespace Spotted\Services;
 
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\RequestOptions;
 use Spotted\Search\SearchQueryParams\IncludeExternal;
 use Spotted\Search\SearchQueryParams\Type;
@@ -68,16 +69,16 @@ final class SearchService implements SearchContract
         int $offset = 0,
         ?RequestOptions $requestOptions = null,
     ): SearchQueryResponse {
-        $params = [
-            'q' => $q,
-            'type' => $type,
-            'includeExternal' => $includeExternal,
-            'limit' => $limit,
-            'market' => $market,
-            'offset' => $offset,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'q' => $q,
+                'type' => $type,
+                'includeExternal' => $includeExternal,
+                'limit' => $limit,
+                'market' => $market,
+                'offset' => $offset,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->query(params: $params, requestOptions: $requestOptions);

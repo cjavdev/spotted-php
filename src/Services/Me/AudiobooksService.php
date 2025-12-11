@@ -6,6 +6,7 @@ namespace Spotted\Services\Me;
 
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
 use Spotted\Me\Audiobooks\AudiobookListResponse;
 use Spotted\RequestOptions;
@@ -43,9 +44,7 @@ final class AudiobooksService implements AudiobooksContract
         int $offset = 0,
         ?RequestOptions $requestOptions = null
     ): CursorURLPage {
-        $params = ['limit' => $limit, 'offset' => $offset];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['limit' => $limit, 'offset' => $offset]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -68,7 +67,7 @@ final class AudiobooksService implements AudiobooksContract
         string $ids,
         ?RequestOptions $requestOptions = null
     ): array {
-        $params = ['ids' => $ids];
+        $params = Util::removeNulls(['ids' => $ids]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->check(params: $params, requestOptions: $requestOptions);
@@ -89,7 +88,7 @@ final class AudiobooksService implements AudiobooksContract
         string $ids,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = ['ids' => $ids];
+        $params = Util::removeNulls(['ids' => $ids]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->remove(params: $params, requestOptions: $requestOptions);
@@ -110,7 +109,7 @@ final class AudiobooksService implements AudiobooksContract
         string $ids,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = ['ids' => $ids];
+        $params = Util::removeNulls(['ids' => $ids]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->save(params: $params, requestOptions: $requestOptions);

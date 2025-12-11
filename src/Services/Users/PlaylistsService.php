@@ -6,6 +6,7 @@ namespace Spotted\Services\Users;
 
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Users\PlaylistsContract;
@@ -50,14 +51,14 @@ final class PlaylistsService implements PlaylistsContract
         ?bool $public = null,
         ?RequestOptions $requestOptions = null,
     ): PlaylistNewResponse {
-        $params = [
-            'name' => $name,
-            'collaborative' => $collaborative,
-            'description' => $description,
-            'public' => $public,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'name' => $name,
+                'collaborative' => $collaborative,
+                'description' => $description,
+                'public' => $public,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($userID, params: $params, requestOptions: $requestOptions);
@@ -86,9 +87,7 @@ final class PlaylistsService implements PlaylistsContract
         int $offset = 0,
         ?RequestOptions $requestOptions = null,
     ): CursorURLPage {
-        $params = ['limit' => $limit, 'offset' => $offset];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['limit' => $limit, 'offset' => $offset]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($userID, params: $params, requestOptions: $requestOptions);

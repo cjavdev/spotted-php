@@ -6,6 +6,7 @@ namespace Spotted\Services\Playlists;
 
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
 use Spotted\Playlists\Tracks\TrackAddResponse;
 use Spotted\Playlists\Tracks\TrackRemoveResponse;
@@ -58,15 +59,15 @@ final class TracksService implements TracksContract
         ?array $uris = null,
         ?RequestOptions $requestOptions = null,
     ): TrackUpdateResponse {
-        $params = [
-            'insertBefore' => $insertBefore,
-            'rangeLength' => $rangeLength,
-            'rangeStart' => $rangeStart,
-            'snapshotID' => $snapshotID,
-            'uris' => $uris,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'insertBefore' => $insertBefore,
+                'rangeLength' => $rangeLength,
+                'rangeStart' => $rangeStart,
+                'snapshotID' => $snapshotID,
+                'uris' => $uris,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($playlistID, params: $params, requestOptions: $requestOptions);
@@ -113,15 +114,15 @@ final class TracksService implements TracksContract
         int $offset = 0,
         ?RequestOptions $requestOptions = null,
     ): CursorURLPage {
-        $params = [
-            'additionalTypes' => $additionalTypes,
-            'fields' => $fields,
-            'limit' => $limit,
-            'market' => $market,
-            'offset' => $offset,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'additionalTypes' => $additionalTypes,
+                'fields' => $fields,
+                'limit' => $limit,
+                'market' => $market,
+                'offset' => $offset,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($playlistID, params: $params, requestOptions: $requestOptions);
@@ -146,9 +147,7 @@ final class TracksService implements TracksContract
         ?array $uris = null,
         ?RequestOptions $requestOptions = null,
     ): TrackAddResponse {
-        $params = ['position' => $position, 'uris' => $uris];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['position' => $position, 'uris' => $uris]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->add($playlistID, params: $params, requestOptions: $requestOptions);
@@ -178,9 +177,9 @@ final class TracksService implements TracksContract
         ?string $snapshotID = null,
         ?RequestOptions $requestOptions = null,
     ): TrackRemoveResponse {
-        $params = ['tracks' => $tracks, 'snapshotID' => $snapshotID];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['tracks' => $tracks, 'snapshotID' => $snapshotID]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->remove($playlistID, params: $params, requestOptions: $requestOptions);
