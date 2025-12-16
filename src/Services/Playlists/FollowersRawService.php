@@ -59,7 +59,7 @@ final class FollowersRawService implements FollowersRawContract
      * Add the current user as a follower of a playlist.
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
-     * @param array{public?: bool, published?: bool}|FollowerFollowParams $params
+     * @param array{published?: bool}|FollowerFollowParams $params
      *
      * @return BaseResponse<mixed>
      *

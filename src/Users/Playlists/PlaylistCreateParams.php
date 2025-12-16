@@ -18,11 +18,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Users\PlaylistsService::create()
  *
  * @phpstan-type PlaylistCreateParamsShape = array{
- *   name: string,
- *   collaborative?: bool,
- *   description?: string,
- *   public?: bool,
- *   published?: bool,
+ *   name: string, collaborative?: bool, description?: string, published?: bool
  * }
  */
 final class PlaylistCreateParams implements BaseModel
@@ -48,12 +44,6 @@ final class PlaylistCreateParams implements BaseModel
      */
     #[Optional]
     public ?string $description;
-
-    /**
-     * Defaults to `true`. The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private. To be able to create private playlists, the user must have granted the `playlist-modify-private` [scope](/documentation/web-api/concepts/scopes/#list-of-scopes). For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
-     */
-    #[Optional]
-    public ?bool $public;
 
     /**
      * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
@@ -89,7 +79,6 @@ final class PlaylistCreateParams implements BaseModel
         string $name,
         ?bool $collaborative = null,
         ?string $description = null,
-        ?bool $public = null,
         ?bool $published = null,
     ): self {
         $self = new self;
@@ -98,7 +87,6 @@ final class PlaylistCreateParams implements BaseModel
 
         null !== $collaborative && $self['collaborative'] = $collaborative;
         null !== $description && $self['description'] = $description;
-        null !== $public && $self['public'] = $public;
         null !== $published && $self['published'] = $published;
 
         return $self;
@@ -133,17 +121,6 @@ final class PlaylistCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['description'] = $description;
-
-        return $self;
-    }
-
-    /**
-     * Defaults to `true`. The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private. To be able to create private playlists, the user must have granted the `playlist-modify-private` [scope](/documentation/web-api/concepts/scopes/#list-of-scopes). For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
-     */
-    public function withPublic(bool $public): self
-    {
-        $self = clone $this;
-        $self['public'] = $public;
 
         return $self;
     }

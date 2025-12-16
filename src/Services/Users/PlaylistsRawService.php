@@ -32,11 +32,7 @@ final class PlaylistsRawService implements PlaylistsRawContract
      *
      * @param string $userID the user's [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids)
      * @param array{
-     *   name: string,
-     *   collaborative?: bool,
-     *   description?: string,
-     *   public?: bool,
-     *   published?: bool,
+     *   name: string, collaborative?: bool, description?: string, published?: bool
      * }|PlaylistCreateParams $params
      *
      * @return BaseResponse<PlaylistNewResponse>
