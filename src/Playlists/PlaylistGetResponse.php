@@ -95,7 +95,7 @@ final class PlaylistGetResponse implements BaseModel
     public ?Owner $owner;
 
     /**
-     * The playlist's public/private status (if it is added to the user's profile): `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
     #[Optional]
     public ?bool $published;
@@ -134,15 +134,20 @@ final class PlaylistGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
-     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
+     * @param FollowersObject|array{
+     *   href?: string|null, published?: bool|null, total?: int|null
+     * } $followers
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      * @param Owner|array{
      *   id?: string|null,
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
+     *   published?: bool|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      *   displayName?: string|null,
@@ -155,6 +160,7 @@ final class PlaylistGetResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<PlaylistTrackObject>|null,
+     *   published?: bool|null,
      * } $tracks
      */
     public static function with(
@@ -229,7 +235,9 @@ final class PlaylistGetResponse implements BaseModel
     /**
      * Known external URLs for this playlist.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -243,7 +251,9 @@ final class PlaylistGetResponse implements BaseModel
     /**
      * Information about the followers of the playlist.
      *
-     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
+     * @param FollowersObject|array{
+     *   href?: string|null, published?: bool|null, total?: int|null
+     * } $followers
      */
     public function withFollowers(FollowersObject|array $followers): self
     {
@@ -268,7 +278,7 @@ final class PlaylistGetResponse implements BaseModel
      * Images for the playlist. The array may be empty or contain up to three images. The images are returned by size in descending order. See [Working with Playlists](/documentation/web-api/concepts/playlists). _**Note**: If returned, the source URL for the image (`url`) is temporary and will expire in less than a day._.
      *
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      */
     public function withImages(array $images): self
@@ -297,6 +307,7 @@ final class PlaylistGetResponse implements BaseModel
      *   id?: string|null,
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
+     *   published?: bool|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      *   displayName?: string|null,
@@ -311,7 +322,7 @@ final class PlaylistGetResponse implements BaseModel
     }
 
     /**
-     * The playlist's public/private status (if it is added to the user's profile): `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
     public function withPublished(bool $published): self
     {
@@ -343,6 +354,7 @@ final class PlaylistGetResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<PlaylistTrackObject>|null,
+     *   published?: bool|null,
      * } $tracks
      */
     public function withTracks(Tracks|array $tracks): self

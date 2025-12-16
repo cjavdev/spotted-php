@@ -19,6 +19,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   images?: list<ImageObject>|null,
  *   name?: string|null,
  *   popularity?: int|null,
+ *   published?: bool|null,
  *   type?: value-of<Type>|null,
  *   uri?: string|null,
  * }
@@ -81,6 +82,12 @@ final class ArtistObject implements BaseModel
     public ?int $popularity;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * The object type.
      *
      * @var value-of<Type>|null $type
@@ -104,11 +111,15 @@ final class ArtistObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
-     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
+     * @param FollowersObject|array{
+     *   href?: string|null, published?: bool|null, total?: int|null
+     * } $followers
      * @param list<string> $genres
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      * @param Type|value-of<Type> $type
      */
@@ -121,6 +132,7 @@ final class ArtistObject implements BaseModel
         ?array $images = null,
         ?string $name = null,
         ?int $popularity = null,
+        ?bool $published = null,
         Type|string|null $type = null,
         ?string $uri = null,
     ): self {
@@ -134,6 +146,7 @@ final class ArtistObject implements BaseModel
         null !== $images && $self['images'] = $images;
         null !== $name && $self['name'] = $name;
         null !== $popularity && $self['popularity'] = $popularity;
+        null !== $published && $self['published'] = $published;
         null !== $type && $self['type'] = $type;
         null !== $uri && $self['uri'] = $uri;
 
@@ -154,7 +167,9 @@ final class ArtistObject implements BaseModel
     /**
      * Known external URLs for this artist.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -168,7 +183,9 @@ final class ArtistObject implements BaseModel
     /**
      * Information about the followers of the artist.
      *
-     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
+     * @param FollowersObject|array{
+     *   href?: string|null, published?: bool|null, total?: int|null
+     * } $followers
      */
     public function withFollowers(FollowersObject|array $followers): self
     {
@@ -206,7 +223,7 @@ final class ArtistObject implements BaseModel
      * Images of the artist in various sizes, widest first.
      *
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      */
     public function withImages(array $images): self
@@ -235,6 +252,17 @@ final class ArtistObject implements BaseModel
     {
         $self = clone $this;
         $self['popularity'] = $popularity;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

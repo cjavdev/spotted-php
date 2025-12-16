@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted;
 
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
@@ -27,6 +28,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   totalEpisodes: int,
  *   type?: 'show',
  *   uri: string,
+ *   published?: bool|null,
  * }
  */
 final class ShowBase implements BaseModel
@@ -147,6 +149,12 @@ final class ShowBase implements BaseModel
     public string $uri;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * `new ShowBase()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -205,11 +213,13 @@ final class ShowBase implements BaseModel
      *
      * @param list<string> $availableMarkets
      * @param list<CopyrightObject|array{
-     *   text?: string|null, type?: string|null
+     *   published?: bool|null, text?: string|null, type?: string|null
      * }> $copyrights
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      * @param list<string> $languages
      */
@@ -230,6 +240,7 @@ final class ShowBase implements BaseModel
         string $publisher,
         int $totalEpisodes,
         string $uri,
+        ?bool $published = null,
     ): self {
         $self = new self;
 
@@ -249,6 +260,8 @@ final class ShowBase implements BaseModel
         $self['publisher'] = $publisher;
         $self['totalEpisodes'] = $totalEpisodes;
         $self['uri'] = $uri;
+
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -281,7 +294,7 @@ final class ShowBase implements BaseModel
      * The copyright statements of the show.
      *
      * @param list<CopyrightObject|array{
-     *   text?: string|null, type?: string|null
+     *   published?: bool|null, text?: string|null, type?: string|null
      * }> $copyrights
      */
     public function withCopyrights(array $copyrights): self
@@ -317,7 +330,9 @@ final class ShowBase implements BaseModel
     /**
      * External URLs for this show.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -354,7 +369,7 @@ final class ShowBase implements BaseModel
      * The cover art for the show in various sizes, widest first.
      *
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      */
     public function withImages(array $images): self
@@ -440,6 +455,17 @@ final class ShowBase implements BaseModel
     {
         $self = clone $this;
         $self['uri'] = $uri;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

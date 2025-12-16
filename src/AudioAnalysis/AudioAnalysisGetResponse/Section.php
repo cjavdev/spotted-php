@@ -17,6 +17,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   loudness?: float|null,
  *   mode?: float|null,
  *   modeConfidence?: float|null,
+ *   published?: bool|null,
  *   start?: float|null,
  *   tempo?: float|null,
  *   tempoConfidence?: float|null,
@@ -72,6 +73,12 @@ final class Section implements BaseModel
     public ?float $modeConfidence;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * The starting point (in seconds) of the section.
      */
     #[Optional]
@@ -119,6 +126,7 @@ final class Section implements BaseModel
         ?float $loudness = null,
         ?float $mode = null,
         ?float $modeConfidence = null,
+        ?bool $published = null,
         ?float $start = null,
         ?float $tempo = null,
         ?float $tempoConfidence = null,
@@ -134,6 +142,7 @@ final class Section implements BaseModel
         null !== $loudness && $self['loudness'] = $loudness;
         null !== $mode && $self['mode'] = $mode;
         null !== $modeConfidence && $self['modeConfidence'] = $modeConfidence;
+        null !== $published && $self['published'] = $published;
         null !== $start && $self['start'] = $start;
         null !== $tempo && $self['tempo'] = $tempo;
         null !== $tempoConfidence && $self['tempoConfidence'] = $tempoConfidence;
@@ -216,6 +225,17 @@ final class Section implements BaseModel
     {
         $self = clone $this;
         $self['modeConfidence'] = $modeConfidence;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

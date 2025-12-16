@@ -15,6 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   isPrivateSession?: bool|null,
  *   isRestricted?: bool|null,
  *   name?: string|null,
+ *   published?: bool|null,
  *   supportsVolume?: bool|null,
  *   type?: string|null,
  *   volumePercent?: int|null,
@@ -56,6 +57,12 @@ final class DeviceObject implements BaseModel
     public ?string $name;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * If this device can be used to set the volume.
      */
     #[Optional('supports_volume')]
@@ -89,6 +96,7 @@ final class DeviceObject implements BaseModel
         ?bool $isPrivateSession = null,
         ?bool $isRestricted = null,
         ?string $name = null,
+        ?bool $published = null,
         ?bool $supportsVolume = null,
         ?string $type = null,
         ?int $volumePercent = null,
@@ -100,6 +108,7 @@ final class DeviceObject implements BaseModel
         null !== $isPrivateSession && $self['isPrivateSession'] = $isPrivateSession;
         null !== $isRestricted && $self['isRestricted'] = $isRestricted;
         null !== $name && $self['name'] = $name;
+        null !== $published && $self['published'] = $published;
         null !== $supportsVolume && $self['supportsVolume'] = $supportsVolume;
         null !== $type && $self['type'] = $type;
         null !== $volumePercent && $self['volumePercent'] = $volumePercent;
@@ -158,6 +167,17 @@ final class DeviceObject implements BaseModel
     {
         $self = clone $this;
         $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

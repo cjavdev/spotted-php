@@ -22,6 +22,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   liveness?: float|null,
  *   loudness?: float|null,
  *   mode?: int|null,
+ *   published?: bool|null,
  *   speechiness?: float|null,
  *   tempo?: float|null,
  *   timeSignature?: int|null,
@@ -103,6 +104,12 @@ final class AudioFeatureGetResponse implements BaseModel
     public ?int $mode;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks.
      */
     #[Optional]
@@ -170,6 +177,7 @@ final class AudioFeatureGetResponse implements BaseModel
         ?float $liveness = null,
         ?float $loudness = null,
         ?int $mode = null,
+        ?bool $published = null,
         ?float $speechiness = null,
         ?float $tempo = null,
         ?int $timeSignature = null,
@@ -191,6 +199,7 @@ final class AudioFeatureGetResponse implements BaseModel
         null !== $liveness && $self['liveness'] = $liveness;
         null !== $loudness && $self['loudness'] = $loudness;
         null !== $mode && $self['mode'] = $mode;
+        null !== $published && $self['published'] = $published;
         null !== $speechiness && $self['speechiness'] = $speechiness;
         null !== $tempo && $self['tempo'] = $tempo;
         null !== $timeSignature && $self['timeSignature'] = $timeSignature;
@@ -319,6 +328,17 @@ final class AudioFeatureGetResponse implements BaseModel
     {
         $self = clone $this;
         $self['mode'] = $mode;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

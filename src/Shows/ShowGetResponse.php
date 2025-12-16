@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spotted\Shows;
 
 use Spotted\CopyrightObject;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
@@ -32,6 +33,7 @@ use Spotted\SimplifiedEpisodeObject;
  *   totalEpisodes: int,
  *   type?: 'show',
  *   uri: string,
+ *   published?: bool|null,
  *   episodes: Episodes,
  * }
  */
@@ -150,6 +152,12 @@ final class ShowGetResponse implements BaseModel
     public string $uri;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * The episodes of the show.
      */
     #[Required]
@@ -216,11 +224,13 @@ final class ShowGetResponse implements BaseModel
      *
      * @param list<string> $availableMarkets
      * @param list<CopyrightObject|array{
-     *   text?: string|null, type?: string|null
+     *   published?: bool|null, text?: string|null, type?: string|null
      * }> $copyrights
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      * @param list<string> $languages
      * @param Episodes|array{
@@ -231,6 +241,7 @@ final class ShowGetResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<SimplifiedEpisodeObject>|null,
+     *   published?: bool|null,
      * } $episodes
      */
     public static function with(
@@ -251,6 +262,7 @@ final class ShowGetResponse implements BaseModel
         int $totalEpisodes,
         string $uri,
         Episodes|array $episodes,
+        ?bool $published = null,
     ): self {
         $self = new self;
 
@@ -271,6 +283,8 @@ final class ShowGetResponse implements BaseModel
         $self['totalEpisodes'] = $totalEpisodes;
         $self['uri'] = $uri;
         $self['episodes'] = $episodes;
+
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -303,7 +317,7 @@ final class ShowGetResponse implements BaseModel
      * The copyright statements of the show.
      *
      * @param list<CopyrightObject|array{
-     *   text?: string|null, type?: string|null
+     *   published?: bool|null, text?: string|null, type?: string|null
      * }> $copyrights
      */
     public function withCopyrights(array $copyrights): self
@@ -337,7 +351,9 @@ final class ShowGetResponse implements BaseModel
     }
 
     /**
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -374,7 +390,7 @@ final class ShowGetResponse implements BaseModel
      * The cover art for the show in various sizes, widest first.
      *
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      */
     public function withImages(array $images): self
@@ -465,6 +481,17 @@ final class ShowGetResponse implements BaseModel
     }
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
+    }
+
+    /**
      * The episodes of the show.
      *
      * @param Episodes|array{
@@ -475,6 +502,7 @@ final class ShowGetResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<SimplifiedEpisodeObject>|null,
+     *   published?: bool|null,
      * } $episodes
      */
     public function withEpisodes(Episodes|array $episodes): self

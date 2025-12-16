@@ -17,6 +17,7 @@ use Spotted\PlaylistUserObject\Type;
  *   id?: string|null,
  *   externalURLs?: ExternalURLObject|null,
  *   href?: string|null,
+ *   published?: bool|null,
  *   type?: value-of<Type>|null,
  *   uri?: string|null,
  *   displayName?: string|null,
@@ -41,6 +42,12 @@ final class Owner implements BaseModel
      */
     #[Optional]
     public ?string $href;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The object type.
@@ -72,13 +79,16 @@ final class Owner implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      * @param Type|value-of<Type> $type
      */
     public static function with(
         ?string $id = null,
         ExternalURLObject|array|null $externalURLs = null,
         ?string $href = null,
+        ?bool $published = null,
         Type|string|null $type = null,
         ?string $uri = null,
         ?string $displayName = null,
@@ -88,6 +98,7 @@ final class Owner implements BaseModel
         null !== $id && $self['id'] = $id;
         null !== $externalURLs && $self['externalURLs'] = $externalURLs;
         null !== $href && $self['href'] = $href;
+        null !== $published && $self['published'] = $published;
         null !== $type && $self['type'] = $type;
         null !== $uri && $self['uri'] = $uri;
         null !== $displayName && $self['displayName'] = $displayName;
@@ -107,7 +118,9 @@ final class Owner implements BaseModel
     }
 
     /**
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -125,6 +138,17 @@ final class Owner implements BaseModel
     {
         $self = clone $this;
         $self['href'] = $href;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

@@ -33,6 +33,7 @@ use Spotted\TrackRestrictionObject;
  *   isPlaying?: bool|null,
  *   item?: null|TrackObject|EpisodeObject,
  *   progressMs?: int|null,
+ *   published?: bool|null,
  *   repeatState?: string|null,
  *   shuffleState?: bool|null,
  *   timestamp?: int|null,
@@ -86,6 +87,12 @@ final class PlayerGetStateResponse implements BaseModel
     public ?int $progressMs;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * off, track, context.
      */
     #[Optional('repeat_state')]
@@ -116,6 +123,7 @@ final class PlayerGetStateResponse implements BaseModel
      * @param Actions|array{
      *   interruptingPlayback?: bool|null,
      *   pausing?: bool|null,
+     *   published?: bool|null,
      *   resuming?: bool|null,
      *   seeking?: bool|null,
      *   skippingNext?: bool|null,
@@ -128,6 +136,7 @@ final class PlayerGetStateResponse implements BaseModel
      * @param ContextObject|array{
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
+     *   published?: bool|null,
      *   type?: string|null,
      *   uri?: string|null,
      * } $context
@@ -137,6 +146,7 @@ final class PlayerGetStateResponse implements BaseModel
      *   isPrivateSession?: bool|null,
      *   isRestricted?: bool|null,
      *   name?: string|null,
+     *   published?: bool|null,
      *   supportsVolume?: bool|null,
      *   type?: string|null,
      *   volumePercent?: int|null,
@@ -158,6 +168,7 @@ final class PlayerGetStateResponse implements BaseModel
      *   name?: string|null,
      *   popularity?: int|null,
      *   previewURL?: string|null,
+     *   published?: bool|null,
      *   restrictions?: TrackRestrictionObject|null,
      *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
@@ -182,6 +193,7 @@ final class PlayerGetStateResponse implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
+     *   published?: bool|null,
      *   restrictions?: EpisodeRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * } $item
@@ -194,6 +206,7 @@ final class PlayerGetStateResponse implements BaseModel
         ?bool $isPlaying = null,
         TrackObject|array|EpisodeObject|null $item = null,
         ?int $progressMs = null,
+        ?bool $published = null,
         ?string $repeatState = null,
         ?bool $shuffleState = null,
         ?int $timestamp = null,
@@ -207,6 +220,7 @@ final class PlayerGetStateResponse implements BaseModel
         null !== $isPlaying && $self['isPlaying'] = $isPlaying;
         null !== $item && $self['item'] = $item;
         null !== $progressMs && $self['progressMs'] = $progressMs;
+        null !== $published && $self['published'] = $published;
         null !== $repeatState && $self['repeatState'] = $repeatState;
         null !== $shuffleState && $self['shuffleState'] = $shuffleState;
         null !== $timestamp && $self['timestamp'] = $timestamp;
@@ -220,6 +234,7 @@ final class PlayerGetStateResponse implements BaseModel
      * @param Actions|array{
      *   interruptingPlayback?: bool|null,
      *   pausing?: bool|null,
+     *   published?: bool|null,
      *   resuming?: bool|null,
      *   seeking?: bool|null,
      *   skippingNext?: bool|null,
@@ -244,6 +259,7 @@ final class PlayerGetStateResponse implements BaseModel
      * @param ContextObject|array{
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
+     *   published?: bool|null,
      *   type?: string|null,
      *   uri?: string|null,
      * } $context
@@ -276,6 +292,7 @@ final class PlayerGetStateResponse implements BaseModel
      *   isPrivateSession?: bool|null,
      *   isRestricted?: bool|null,
      *   name?: string|null,
+     *   published?: bool|null,
      *   supportsVolume?: bool|null,
      *   type?: string|null,
      *   volumePercent?: int|null,
@@ -320,6 +337,7 @@ final class PlayerGetStateResponse implements BaseModel
      *   name?: string|null,
      *   popularity?: int|null,
      *   previewURL?: string|null,
+     *   published?: bool|null,
      *   restrictions?: TrackRestrictionObject|null,
      *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
@@ -344,6 +362,7 @@ final class PlayerGetStateResponse implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
+     *   published?: bool|null,
      *   restrictions?: EpisodeRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * } $item
@@ -363,6 +382,17 @@ final class PlayerGetStateResponse implements BaseModel
     {
         $self = clone $this;
         $self['progressMs'] = $progressMs;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

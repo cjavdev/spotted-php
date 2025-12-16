@@ -9,7 +9,9 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type FollowersObjectShape = array{href?: string|null, total?: int|null}
+ * @phpstan-type FollowersObjectShape = array{
+ *   href?: string|null, published?: bool|null, total?: int|null
+ * }
  */
 final class FollowersObject implements BaseModel
 {
@@ -21,6 +23,12 @@ final class FollowersObject implements BaseModel
      */
     #[Optional(nullable: true)]
     public ?string $href;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The total number of followers.
@@ -38,11 +46,15 @@ final class FollowersObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $href = null, ?int $total = null): self
-    {
+    public static function with(
+        ?string $href = null,
+        ?bool $published = null,
+        ?int $total = null
+    ): self {
         $self = new self;
 
         null !== $href && $self['href'] = $href;
+        null !== $published && $self['published'] = $published;
         null !== $total && $self['total'] = $total;
 
         return $self;
@@ -55,6 +67,17 @@ final class FollowersObject implements BaseModel
     {
         $self = clone $this;
         $self['href'] = $href;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

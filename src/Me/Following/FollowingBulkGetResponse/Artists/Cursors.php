@@ -11,7 +11,9 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * The cursors used to find the next set of items.
  *
- * @phpstan-type CursorsShape = array{after?: string|null, before?: string|null}
+ * @phpstan-type CursorsShape = array{
+ *   after?: string|null, before?: string|null, published?: bool|null
+ * }
  */
 final class Cursors implements BaseModel
 {
@@ -30,6 +32,12 @@ final class Cursors implements BaseModel
     #[Optional]
     public ?string $before;
 
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
     public function __construct()
     {
         $this->initialize();
@@ -42,12 +50,14 @@ final class Cursors implements BaseModel
      */
     public static function with(
         ?string $after = null,
-        ?string $before = null
+        ?string $before = null,
+        ?bool $published = null
     ): self {
         $self = new self;
 
         null !== $after && $self['after'] = $after;
         null !== $before && $self['before'] = $before;
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -70,6 +80,17 @@ final class Cursors implements BaseModel
     {
         $self = clone $this;
         $self['before'] = $before;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

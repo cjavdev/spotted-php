@@ -77,6 +77,7 @@ final class SearchQueryResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<Item>|null,
+     *   published?: bool|null,
      * } $albums
      * @param Artists|array{
      *   href: string,
@@ -86,6 +87,7 @@ final class SearchQueryResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<ArtistObject>|null,
+     *   published?: bool|null,
      * } $artists
      * @param Audiobooks|array{
      *   href: string,
@@ -95,6 +97,7 @@ final class SearchQueryResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<AudiobookBase>|null,
+     *   published?: bool|null,
      * } $audiobooks
      * @param Episodes|array{
      *   href: string,
@@ -104,6 +107,7 @@ final class SearchQueryResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<SimplifiedEpisodeObject>|null,
+     *   published?: bool|null,
      * } $episodes
      * @param PagingPlaylistObject|array{
      *   href: string,
@@ -113,6 +117,7 @@ final class SearchQueryResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<SimplifiedPlaylistObject>|null,
+     *   published?: bool|null,
      * } $playlists
      * @param Shows|array{
      *   href: string,
@@ -122,6 +127,7 @@ final class SearchQueryResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<ShowBase>|null,
+     *   published?: bool|null,
      * } $shows
      * @param Tracks|array{
      *   href: string,
@@ -131,6 +137,7 @@ final class SearchQueryResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<TrackObject>|null,
+     *   published?: bool|null,
      * } $tracks
      */
     public static function with(
@@ -164,6 +171,7 @@ final class SearchQueryResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<Item>|null,
+     *   published?: bool|null,
      * } $albums
      */
     public function withAlbums(Albums|array $albums): self
@@ -183,6 +191,7 @@ final class SearchQueryResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<ArtistObject>|null,
+     *   published?: bool|null,
      * } $artists
      */
     public function withArtists(Artists|array $artists): self
@@ -202,6 +211,7 @@ final class SearchQueryResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<AudiobookBase>|null,
+     *   published?: bool|null,
      * } $audiobooks
      */
     public function withAudiobooks(Audiobooks|array $audiobooks): self
@@ -221,6 +231,7 @@ final class SearchQueryResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<SimplifiedEpisodeObject>|null,
+     *   published?: bool|null,
      * } $episodes
      */
     public function withEpisodes(Episodes|array $episodes): self
@@ -240,6 +251,7 @@ final class SearchQueryResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<SimplifiedPlaylistObject>|null,
+     *   published?: bool|null,
      * } $playlists
      */
     public function withPlaylists(PagingPlaylistObject|array $playlists): self
@@ -259,6 +271,7 @@ final class SearchQueryResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<ShowBase>|null,
+     *   published?: bool|null,
      * } $shows
      */
     public function withShows(Shows|array $shows): self
@@ -278,6 +291,7 @@ final class SearchQueryResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<TrackObject>|null,
+     *   published?: bool|null,
      * } $tracks
      */
     public function withTracks(Tracks|array $tracks): self

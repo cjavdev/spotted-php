@@ -30,6 +30,7 @@ use Spotted\SimplifiedEpisodeObject\ReleaseDatePrecision;
  *   type?: 'episode',
  *   uri: string,
  *   language?: string|null,
+ *   published?: bool|null,
  *   restrictions?: EpisodeRestrictionObject|null,
  *   resumePoint?: ResumePointObject|null,
  * }
@@ -160,6 +161,12 @@ final class SimplifiedEpisodeObject implements BaseModel
     public ?string $language;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * Included in the response when a content restriction is applied.
      */
     #[Optional]
@@ -228,15 +235,19 @@ final class SimplifiedEpisodeObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      * @param list<string> $languages
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
-     * @param EpisodeRestrictionObject|array{reason?: string|null} $restrictions
+     * @param EpisodeRestrictionObject|array{
+     *   published?: bool|null, reason?: string|null
+     * } $restrictions
      * @param ResumePointObject|array{
-     *   fullyPlayed?: bool|null, resumePositionMs?: int|null
+     *   fullyPlayed?: bool|null, published?: bool|null, resumePositionMs?: int|null
      * } $resumePoint
      */
     public static function with(
@@ -257,6 +268,7 @@ final class SimplifiedEpisodeObject implements BaseModel
         ReleaseDatePrecision|string $releaseDatePrecision,
         string $uri,
         ?string $language = null,
+        ?bool $published = null,
         EpisodeRestrictionObject|array|null $restrictions = null,
         ResumePointObject|array|null $resumePoint = null,
     ): self {
@@ -280,6 +292,7 @@ final class SimplifiedEpisodeObject implements BaseModel
         $self['uri'] = $uri;
 
         null !== $language && $self['language'] = $language;
+        null !== $published && $self['published'] = $published;
         null !== $restrictions && $self['restrictions'] = $restrictions;
         null !== $resumePoint && $self['resumePoint'] = $resumePoint;
 
@@ -344,7 +357,9 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * External URLs for this episode.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -381,7 +396,7 @@ final class SimplifiedEpisodeObject implements BaseModel
      * The cover art for the episode in various sizes, widest first.
      *
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      */
     public function withImages(array $images): self
@@ -486,9 +501,22 @@ final class SimplifiedEpisodeObject implements BaseModel
     }
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
+    }
+
+    /**
      * Included in the response when a content restriction is applied.
      *
-     * @param EpisodeRestrictionObject|array{reason?: string|null} $restrictions
+     * @param EpisodeRestrictionObject|array{
+     *   published?: bool|null, reason?: string|null
+     * } $restrictions
      */
     public function withRestrictions(
         EpisodeRestrictionObject|array $restrictions
@@ -503,7 +531,7 @@ final class SimplifiedEpisodeObject implements BaseModel
      * The user's most recent position in the episode. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
      *
      * @param ResumePointObject|array{
-     *   fullyPlayed?: bool|null, resumePositionMs?: int|null
+     *   fullyPlayed?: bool|null, published?: bool|null, resumePositionMs?: int|null
      * } $resumePoint
      */
     public function withResumePoint(ResumePointObject|array $resumePoint): self

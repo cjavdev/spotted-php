@@ -24,6 +24,7 @@ use Spotted\SimplifiedArtistObject\Type;
  *   linkedFrom?: LinkedTrackObject|null,
  *   name?: string|null,
  *   previewURL?: string|null,
+ *   published?: bool|null,
  *   restrictions?: TrackRestrictionObject|null,
  *   trackNumber?: int|null,
  *   type?: string|null,
@@ -120,6 +121,12 @@ final class SimplifiedTrackObject implements BaseModel
     public ?string $previewURL;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * Included in the response when a content restriction is applied.
      */
     #[Optional]
@@ -158,19 +165,25 @@ final class SimplifiedTrackObject implements BaseModel
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   name?: string|null,
+     *   published?: bool|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * }> $artists
      * @param list<string> $availableMarkets
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      * @param LinkedTrackObject|array{
      *   id?: string|null,
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
+     *   published?: bool|null,
      *   type?: string|null,
      *   uri?: string|null,
      * } $linkedFrom
-     * @param TrackRestrictionObject|array{reason?: string|null} $restrictions
+     * @param TrackRestrictionObject|array{
+     *   published?: bool|null, reason?: string|null
+     * } $restrictions
      */
     public static function with(
         ?string $id = null,
@@ -186,6 +199,7 @@ final class SimplifiedTrackObject implements BaseModel
         LinkedTrackObject|array|null $linkedFrom = null,
         ?string $name = null,
         ?string $previewURL = null,
+        ?bool $published = null,
         TrackRestrictionObject|array|null $restrictions = null,
         ?int $trackNumber = null,
         ?string $type = null,
@@ -206,6 +220,7 @@ final class SimplifiedTrackObject implements BaseModel
         null !== $linkedFrom && $self['linkedFrom'] = $linkedFrom;
         null !== $name && $self['name'] = $name;
         null !== $previewURL && $self['previewURL'] = $previewURL;
+        null !== $published && $self['published'] = $published;
         null !== $restrictions && $self['restrictions'] = $restrictions;
         null !== $trackNumber && $self['trackNumber'] = $trackNumber;
         null !== $type && $self['type'] = $type;
@@ -233,6 +248,7 @@ final class SimplifiedTrackObject implements BaseModel
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   name?: string|null,
+     *   published?: bool|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * }> $artists
@@ -294,7 +310,9 @@ final class SimplifiedTrackObject implements BaseModel
     /**
      * External URLs for this track.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -345,6 +363,7 @@ final class SimplifiedTrackObject implements BaseModel
      *   id?: string|null,
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
+     *   published?: bool|null,
      *   type?: string|null,
      *   uri?: string|null,
      * } $linkedFrom
@@ -380,9 +399,22 @@ final class SimplifiedTrackObject implements BaseModel
     }
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
+    }
+
+    /**
      * Included in the response when a content restriction is applied.
      *
-     * @param TrackRestrictionObject|array{reason?: string|null} $restrictions
+     * @param TrackRestrictionObject|array{
+     *   published?: bool|null, reason?: string|null
+     * } $restrictions
      */
     public function withRestrictions(
         TrackRestrictionObject|array $restrictions

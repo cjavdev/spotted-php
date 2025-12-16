@@ -24,6 +24,7 @@ use Spotted\NarratorObject;
  *   previous: string|null,
  *   total: int,
  *   items?: list<AudiobookBase>|null,
+ *   published?: bool|null,
  * }
  */
 final class Audiobooks implements BaseModel
@@ -70,6 +71,12 @@ final class Audiobooks implements BaseModel
     /** @var list<AudiobookBase>|null $items */
     #[Optional(list: AudiobookBase::class)]
     public ?array $items;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * `new Audiobooks()` is missing required properties by the API.
@@ -123,6 +130,7 @@ final class Audiobooks implements BaseModel
      *   type?: 'audiobook',
      *   uri: string,
      *   edition?: string|null,
+     *   published?: bool|null,
      * }> $items
      */
     public static function with(
@@ -133,6 +141,7 @@ final class Audiobooks implements BaseModel
         ?string $previous,
         int $total,
         ?array $items = null,
+        ?bool $published = null,
     ): self {
         $self = new self;
 
@@ -144,6 +153,7 @@ final class Audiobooks implements BaseModel
         $self['total'] = $total;
 
         null !== $items && $self['items'] = $items;
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -235,12 +245,24 @@ final class Audiobooks implements BaseModel
      *   type?: 'audiobook',
      *   uri: string,
      *   edition?: string|null,
+     *   published?: bool|null,
      * }> $items
      */
     public function withItems(array $items): self
     {
         $self = clone $this;
         $self['items'] = $items;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

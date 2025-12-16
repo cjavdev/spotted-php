@@ -20,6 +20,7 @@ use Spotted\TrackRestrictionObject;
  * @phpstan-type PlayerListRecentlyPlayedResponseShape = array{
  *   context?: ContextObject|null,
  *   playedAt?: \DateTimeInterface|null,
+ *   published?: bool|null,
  *   track?: TrackObject|null,
  * }
  */
@@ -41,6 +42,12 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
     public ?\DateTimeInterface $playedAt;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * The track the user listened to.
      */
     #[Optional]
@@ -59,6 +66,7 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
      * @param ContextObject|array{
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
+     *   published?: bool|null,
      *   type?: string|null,
      *   uri?: string|null,
      * } $context
@@ -79,6 +87,7 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
      *   name?: string|null,
      *   popularity?: int|null,
      *   previewURL?: string|null,
+     *   published?: bool|null,
      *   restrictions?: TrackRestrictionObject|null,
      *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
@@ -88,12 +97,14 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
     public static function with(
         ContextObject|array|null $context = null,
         ?\DateTimeInterface $playedAt = null,
+        ?bool $published = null,
         TrackObject|array|null $track = null,
     ): self {
         $self = new self;
 
         null !== $context && $self['context'] = $context;
         null !== $playedAt && $self['playedAt'] = $playedAt;
+        null !== $published && $self['published'] = $published;
         null !== $track && $self['track'] = $track;
 
         return $self;
@@ -105,6 +116,7 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
      * @param ContextObject|array{
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
+     *   published?: bool|null,
      *   type?: string|null,
      *   uri?: string|null,
      * } $context
@@ -129,6 +141,17 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
     }
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
+    }
+
+    /**
      * The track the user listened to.
      *
      * @param TrackObject|array{
@@ -148,6 +171,7 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
      *   name?: string|null,
      *   popularity?: int|null,
      *   previewURL?: string|null,
+     *   published?: bool|null,
      *   restrictions?: TrackRestrictionObject|null,
      *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,

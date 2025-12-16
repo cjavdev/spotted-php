@@ -53,6 +53,7 @@ final class CategoryListResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<Item>|null,
+     *   published?: bool|null,
      * } $categories
      */
     public static function with(Categories|array $categories): self
@@ -73,6 +74,7 @@ final class CategoryListResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<Item>|null,
+     *   published?: bool|null,
      * } $categories
      */
     public function withCategories(Categories|array $categories): self

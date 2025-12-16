@@ -9,12 +9,20 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type TrackRestrictionObjectShape = array{reason?: string|null}
+ * @phpstan-type TrackRestrictionObjectShape = array{
+ *   published?: bool|null, reason?: string|null
+ * }
  */
 final class TrackRestrictionObject implements BaseModel
 {
     /** @use SdkModel<TrackRestrictionObjectShape> */
     use SdkModel;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The reason for the restriction. Supported values:
@@ -38,11 +46,25 @@ final class TrackRestrictionObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $reason = null): self
-    {
+    public static function with(
+        ?bool $published = null,
+        ?string $reason = null
+    ): self {
         $self = new self;
 
+        null !== $published && $self['published'] = $published;
         null !== $reason && $self['reason'] = $reason;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

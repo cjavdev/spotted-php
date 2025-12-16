@@ -22,6 +22,7 @@ use Spotted\ShowBase;
  *   previous: string|null,
  *   total: int,
  *   items?: list<ShowBase>|null,
+ *   published?: bool|null,
  * }
  */
 final class Shows implements BaseModel
@@ -68,6 +69,12 @@ final class Shows implements BaseModel
     /** @var list<ShowBase>|null $items */
     #[Optional(list: ShowBase::class)]
     public ?array $items;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * `new Shows()` is missing required properties by the API.
@@ -119,6 +126,7 @@ final class Shows implements BaseModel
      *   totalEpisodes: int,
      *   type?: 'show',
      *   uri: string,
+     *   published?: bool|null,
      * }> $items
      */
     public static function with(
@@ -129,6 +137,7 @@ final class Shows implements BaseModel
         ?string $previous,
         int $total,
         ?array $items = null,
+        ?bool $published = null,
     ): self {
         $self = new self;
 
@@ -140,6 +149,7 @@ final class Shows implements BaseModel
         $self['total'] = $total;
 
         null !== $items && $self['items'] = $items;
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -229,12 +239,24 @@ final class Shows implements BaseModel
      *   totalEpisodes: int,
      *   type?: 'show',
      *   uri: string,
+     *   published?: bool|null,
      * }> $items
      */
     public function withItems(array $items): self
     {
         $self = clone $this;
         $self['items'] = $items;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

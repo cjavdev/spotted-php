@@ -53,6 +53,7 @@ final class BrowseGetNewReleasesResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<Item>|null,
+     *   published?: bool|null,
      * } $albums
      */
     public static function with(Albums|array $albums): self
@@ -73,6 +74,7 @@ final class BrowseGetNewReleasesResponse implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<Item>|null,
+     *   published?: bool|null,
      * } $albums
      */
     public function withAlbums(Albums|array $albums): self

@@ -17,7 +17,9 @@ use Spotted\ShowBase;
 
 /**
  * @phpstan-type EpisodeListResponseShape = array{
- *   addedAt?: \DateTimeInterface|null, episode?: EpisodeObject|null
+ *   addedAt?: \DateTimeInterface|null,
+ *   episode?: EpisodeObject|null,
+ *   published?: bool|null,
  * }
  */
 final class EpisodeListResponse implements BaseModel
@@ -37,6 +39,12 @@ final class EpisodeListResponse implements BaseModel
      */
     #[Optional]
     public ?EpisodeObject $episode;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     public function __construct()
     {
@@ -68,18 +76,21 @@ final class EpisodeListResponse implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
+     *   published?: bool|null,
      *   restrictions?: EpisodeRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * } $episode
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
-        EpisodeObject|array|null $episode = null
+        EpisodeObject|array|null $episode = null,
+        ?bool $published = null,
     ): self {
         $self = new self;
 
         null !== $addedAt && $self['addedAt'] = $addedAt;
         null !== $episode && $self['episode'] = $episode;
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -119,6 +130,7 @@ final class EpisodeListResponse implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
+     *   published?: bool|null,
      *   restrictions?: EpisodeRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * } $episode
@@ -127,6 +139,17 @@ final class EpisodeListResponse implements BaseModel
     {
         $self = clone $this;
         $self['episode'] = $episode;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

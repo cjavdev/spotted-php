@@ -10,7 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ResumePointObjectShape = array{
- *   fullyPlayed?: bool|null, resumePositionMs?: int|null
+ *   fullyPlayed?: bool|null, published?: bool|null, resumePositionMs?: int|null
  * }
  */
 final class ResumePointObject implements BaseModel
@@ -23,6 +23,12 @@ final class ResumePointObject implements BaseModel
      */
     #[Optional('fully_played')]
     public ?bool $fullyPlayed;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The user's most recent position in the episode in milliseconds.
@@ -42,11 +48,13 @@ final class ResumePointObject implements BaseModel
      */
     public static function with(
         ?bool $fullyPlayed = null,
-        ?int $resumePositionMs = null
+        ?bool $published = null,
+        ?int $resumePositionMs = null,
     ): self {
         $self = new self;
 
         null !== $fullyPlayed && $self['fullyPlayed'] = $fullyPlayed;
+        null !== $published && $self['published'] = $published;
         null !== $resumePositionMs && $self['resumePositionMs'] = $resumePositionMs;
 
         return $self;
@@ -59,6 +67,17 @@ final class ResumePointObject implements BaseModel
     {
         $self = clone $this;
         $self['fullyPlayed'] = $fullyPlayed;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

@@ -27,6 +27,7 @@ use Spotted\TrackRestrictionObject;
 /**
  * @phpstan-type QueueGetResponseShape = array{
  *   currentlyPlaying?: null|TrackObject|EpisodeObject,
+ *   published?: bool|null,
  *   queue?: list<TrackObject|EpisodeObject>|null,
  * }
  */
@@ -40,6 +41,12 @@ final class QueueGetResponse implements BaseModel
      */
     #[Optional('currently_playing', union: CurrentlyPlaying::class)]
     public TrackObject|EpisodeObject|null $currentlyPlaying;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The tracks or episodes in the queue. Can be empty.
@@ -76,6 +83,7 @@ final class QueueGetResponse implements BaseModel
      *   name?: string|null,
      *   popularity?: int|null,
      *   previewURL?: string|null,
+     *   published?: bool|null,
      *   restrictions?: TrackRestrictionObject|null,
      *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
@@ -100,6 +108,7 @@ final class QueueGetResponse implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
+     *   published?: bool|null,
      *   restrictions?: EpisodeRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * } $currentlyPlaying
@@ -120,6 +129,7 @@ final class QueueGetResponse implements BaseModel
      *   name?: string|null,
      *   popularity?: int|null,
      *   previewURL?: string|null,
+     *   published?: bool|null,
      *   restrictions?: TrackRestrictionObject|null,
      *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
@@ -144,17 +154,20 @@ final class QueueGetResponse implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
+     *   published?: bool|null,
      *   restrictions?: EpisodeRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * }> $queue
      */
     public static function with(
         TrackObject|array|EpisodeObject|null $currentlyPlaying = null,
+        ?bool $published = null,
         ?array $queue = null,
     ): self {
         $self = new self;
 
         null !== $currentlyPlaying && $self['currentlyPlaying'] = $currentlyPlaying;
+        null !== $published && $self['published'] = $published;
         null !== $queue && $self['queue'] = $queue;
 
         return $self;
@@ -180,6 +193,7 @@ final class QueueGetResponse implements BaseModel
      *   name?: string|null,
      *   popularity?: int|null,
      *   previewURL?: string|null,
+     *   published?: bool|null,
      *   restrictions?: TrackRestrictionObject|null,
      *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
@@ -204,6 +218,7 @@ final class QueueGetResponse implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
+     *   published?: bool|null,
      *   restrictions?: EpisodeRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * } $currentlyPlaying
@@ -213,6 +228,17 @@ final class QueueGetResponse implements BaseModel
     ): self {
         $self = clone $this;
         $self['currentlyPlaying'] = $currentlyPlaying;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }
@@ -237,6 +263,7 @@ final class QueueGetResponse implements BaseModel
      *   name?: string|null,
      *   popularity?: int|null,
      *   previewURL?: string|null,
+     *   published?: bool|null,
      *   restrictions?: TrackRestrictionObject|null,
      *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
@@ -261,6 +288,7 @@ final class QueueGetResponse implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
+     *   published?: bool|null,
      *   restrictions?: EpisodeRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * }> $queue
