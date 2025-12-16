@@ -61,7 +61,6 @@ final class PlaylistsTest extends TestCase
             name: 'New Playlist',
             collaborative: true,
             description: 'New playlist description',
-            public: false,
             published: true,
         );
 
