@@ -22,6 +22,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @phpstan-type TrackUpdateParamsShape = array{
  *   insertBefore?: int,
+ *   published?: bool,
  *   rangeLength?: int,
  *   rangeStart?: int,
  *   snapshotID?: string,
@@ -39,6 +40,12 @@ final class TrackUpdateParams implements BaseModel
      */
     #[Optional('insert_before')]
     public ?int $insertBefore;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The amount of items to be reordered. Defaults to 1 if not set.<br/>The range of items to be reordered begins from the _range_start_ position, and includes the _range_length_ subsequent items.<br/>Example:<br/>To move the items at index 9-10 to the start of the playlist, _range_start_ is set to 9, and _range_length_ is set to 2.
@@ -76,6 +83,7 @@ final class TrackUpdateParams implements BaseModel
      */
     public static function with(
         ?int $insertBefore = null,
+        ?bool $published = null,
         ?int $rangeLength = null,
         ?int $rangeStart = null,
         ?string $snapshotID = null,
@@ -84,6 +92,7 @@ final class TrackUpdateParams implements BaseModel
         $self = new self;
 
         null !== $insertBefore && $self['insertBefore'] = $insertBefore;
+        null !== $published && $self['published'] = $published;
         null !== $rangeLength && $self['rangeLength'] = $rangeLength;
         null !== $rangeStart && $self['rangeStart'] = $rangeStart;
         null !== $snapshotID && $self['snapshotID'] = $snapshotID;
@@ -99,6 +108,17 @@ final class TrackUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['insertBefore'] = $insertBefore;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

@@ -93,14 +93,16 @@ final class EpisodesService implements EpisodesContract
      * This API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
      *
      * @param list<string> $ids A JSON array of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). <br/>A maximum of 50 items can be specified in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._
+     * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
      *
      * @throws APIException
      */
     public function remove(
         ?array $ids = null,
-        ?RequestOptions $requestOptions = null
+        ?bool $published = null,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['ids' => $ids]);
+        $params = Util::removeNulls(['ids' => $ids, 'published' => $published]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->remove(params: $params, requestOptions: $requestOptions);
@@ -115,14 +117,16 @@ final class EpisodesService implements EpisodesContract
      * This API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
      *
      * @param list<string> $ids A JSON array of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). <br/>A maximum of 50 items can be specified in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._
+     * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
      *
      * @throws APIException
      */
     public function save(
         array $ids,
+        ?bool $published = null,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        $params = Util::removeNulls(['ids' => $ids]);
+        $params = Util::removeNulls(['ids' => $ids, 'published' => $published]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->save(params: $params, requestOptions: $requestOptions);

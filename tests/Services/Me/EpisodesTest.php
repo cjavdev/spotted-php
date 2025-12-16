@@ -113,7 +113,10 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->episodes->save(ids: ['string']);
+        $result = $this->client->me->episodes->save(
+            ids: ['string'],
+            published: true
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);

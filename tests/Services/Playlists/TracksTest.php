@@ -107,6 +107,7 @@ final class TracksTest extends TestCase
         $result = $this->client->playlists->tracks->remove(
             '3cEYpjA9oz9GiPac4AsH4n',
             tracks: [['uri' => 'uri']],
+            published: true,
             snapshotID: 'snapshot_id',
         );
 

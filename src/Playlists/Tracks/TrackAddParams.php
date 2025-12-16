@@ -14,7 +14,9 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Playlists\TracksService::add()
  *
- * @phpstan-type TrackAddParamsShape = array{position?: int, uris?: list<string>}
+ * @phpstan-type TrackAddParamsShape = array{
+ *   position?: int, published?: bool, uris?: list<string>
+ * }
  */
 final class TrackAddParams implements BaseModel
 {
@@ -27,6 +29,12 @@ final class TrackAddParams implements BaseModel
      */
     #[Optional]
     public ?int $position;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * A JSON array of the [Spotify URIs](/documentation/web-api/concepts/spotify-uris-ids) to add. For example: `{"uris": ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh","spotify:track:1301WleyT98MSxVHPZCA6M", "spotify:episode:512ojhOuo1ktJprKbVcKyQ"]}`<br/>A maximum of 100 items can be added in one request. _**Note**: if the `uris` parameter is present in the query string, any URIs listed here in the body will be ignored._.
@@ -48,11 +56,15 @@ final class TrackAddParams implements BaseModel
      *
      * @param list<string> $uris
      */
-    public static function with(?int $position = null, ?array $uris = null): self
-    {
+    public static function with(
+        ?int $position = null,
+        ?bool $published = null,
+        ?array $uris = null
+    ): self {
         $self = new self;
 
         null !== $position && $self['position'] = $position;
+        null !== $published && $self['published'] = $published;
         null !== $uris && $self['uris'] = $uris;
 
         return $self;
@@ -65,6 +77,17 @@ final class TrackAddParams implements BaseModel
     {
         $self = clone $this;
         $self['position'] = $position;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

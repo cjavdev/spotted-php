@@ -18,6 +18,7 @@ use Spotted\Me\Tracks\TrackSaveParams\TimestampedID;
  *
  * @phpstan-type TrackSaveParamsShape = array{
  *   ids: list<string>,
+ *   published?: bool,
  *   timestampedIDs?: list<TimestampedID|array{
  *     id: string, addedAt: \DateTimeInterface
  *   }>,
@@ -36,6 +37,12 @@ final class TrackSaveParams implements BaseModel
      */
     #[Required(list: 'string')]
     public array $ids;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * A JSON array of objects containing track IDs with their corresponding timestamps. Each object must include a track ID and an `added_at` timestamp. This allows you to specify when tracks were added to maintain a specific chronological order in the user's library.<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `timestamped_ids` is present in the body, any IDs listed in the query parameters (deprecated) or the `ids` field in the body will be ignored._.
@@ -74,12 +81,16 @@ final class TrackSaveParams implements BaseModel
      *   id: string, addedAt: \DateTimeInterface
      * }> $timestampedIDs
      */
-    public static function with(array $ids, ?array $timestampedIDs = null): self
-    {
+    public static function with(
+        array $ids,
+        ?bool $published = null,
+        ?array $timestampedIDs = null
+    ): self {
         $self = new self;
 
         $self['ids'] = $ids;
 
+        null !== $published && $self['published'] = $published;
         null !== $timestampedIDs && $self['timestampedIDs'] = $timestampedIDs;
 
         return $self;
@@ -94,6 +105,17 @@ final class TrackSaveParams implements BaseModel
     {
         $self = clone $this;
         $self['ids'] = $ids;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

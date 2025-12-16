@@ -284,7 +284,8 @@ final class PlayerTest extends TestCase
 
         $result = $this->client->me->player->transfer(
             deviceIDs: ['74ASZWbe4lXaubB36ztrGX'],
-            play: true
+            play: true,
+            published: true
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

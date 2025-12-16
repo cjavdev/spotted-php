@@ -19,6 +19,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   contextUri?: string,
  *   offset?: array<string,mixed>,
  *   positionMs?: int,
+ *   published?: bool,
  *   uris?: list<string>,
  * }
  */
@@ -59,6 +60,12 @@ final class PlayerStartPlaybackParams implements BaseModel
     public ?int $positionMs;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * Optional. A JSON array of the Spotify track URIs to play.
      * For example: `{"uris": ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh", "spotify:track:1301WleyT98MSxVHPZCA6M"]}`.
      *
@@ -85,6 +92,7 @@ final class PlayerStartPlaybackParams implements BaseModel
         ?string $contextUri = null,
         ?array $offset = null,
         ?int $positionMs = null,
+        ?bool $published = null,
         ?array $uris = null,
     ): self {
         $self = new self;
@@ -93,6 +101,7 @@ final class PlayerStartPlaybackParams implements BaseModel
         null !== $contextUri && $self['contextUri'] = $contextUri;
         null !== $offset && $self['offset'] = $offset;
         null !== $positionMs && $self['positionMs'] = $positionMs;
+        null !== $published && $self['published'] = $published;
         null !== $uris && $self['uris'] = $uris;
 
         return $self;
@@ -144,6 +153,17 @@ final class PlayerStartPlaybackParams implements BaseModel
     {
         $self = clone $this;
         $self['positionMs'] = $positionMs;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

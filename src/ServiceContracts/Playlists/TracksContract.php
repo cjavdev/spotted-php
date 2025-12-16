@@ -19,6 +19,7 @@ interface TracksContract
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param int $insertBefore The position where the items should be inserted.<br/>To reorder the items to the end of the playlist, simply set _insert_before_ to the position after the last item.<br/>Examples:<br/>To reorder the first item to the last position in a playlist with 10 items, set _range_start_ to 0, and _insert_before_ to 10.<br/>To reorder the last item in a playlist with 10 items to the start of the playlist, set _range_start_ to 9, and _insert_before_ to 0.
+     * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
      * @param int $rangeLength The amount of items to be reordered. Defaults to 1 if not set.<br/>The range of items to be reordered begins from the _range_start_ position, and includes the _range_length_ subsequent items.<br/>Example:<br/>To move the items at index 9-10 to the start of the playlist, _range_start_ is set to 9, and _range_length_ is set to 2.
      * @param int $rangeStart the position of the first item to be reordered
      * @param string $snapshotID the playlist's snapshot ID against which you want to make the changes
@@ -29,6 +30,7 @@ interface TracksContract
     public function update(
         string $playlistID,
         ?int $insertBefore = null,
+        ?bool $published = null,
         ?int $rangeLength = null,
         ?int $rangeStart = null,
         ?string $snapshotID = null,
@@ -79,6 +81,7 @@ interface TracksContract
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param int $position The position to insert the items, a zero-based index. For example, to insert the items in the first position: `position=0` ; to insert the items in the third position: `position=2`. If omitted, the items will be appended to the playlist. Items are added in the order they appear in the uris array. For example: `{"uris": ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh","spotify:track:1301WleyT98MSxVHPZCA6M"], "position": 3}`
+     * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
      * @param list<string> $uris A JSON array of the [Spotify URIs](/documentation/web-api/concepts/spotify-uris-ids) to add. For example: `{"uris": ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh","spotify:track:1301WleyT98MSxVHPZCA6M", "spotify:episode:512ojhOuo1ktJprKbVcKyQ"]}`<br/>A maximum of 100 items can be added in one request. _**Note**: if the `uris` parameter is present in the query string, any URIs listed here in the body will be ignored._
      *
      * @throws APIException
@@ -86,6 +89,7 @@ interface TracksContract
     public function add(
         string $playlistID,
         ?int $position = null,
+        ?bool $published = null,
         ?array $uris = null,
         ?RequestOptions $requestOptions = null,
     ): TrackAddResponse;
@@ -98,6 +102,7 @@ interface TracksContract
      *   uri?: string
      * }> $tracks An array of objects containing [Spotify URIs](/documentation/web-api/concepts/spotify-uris-ids) of the tracks or episodes to remove.
      * For example: `{ "tracks": [{ "uri": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh" },{ "uri": "spotify:track:1301WleyT98MSxVHPZCA6M" }] }`. A maximum of 100 objects can be sent at once.
+     * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
      * @param string $snapshotID The playlist's snapshot ID against which you want to make the changes.
      * The API will validate that the specified items exist and in the specified positions and make the changes,
      * even if more recent changes have been made to the playlist.
@@ -107,6 +112,7 @@ interface TracksContract
     public function remove(
         string $playlistID,
         array $tracks,
+        ?bool $published = null,
         ?string $snapshotID = null,
         ?RequestOptions $requestOptions = null,
     ): TrackRemoveResponse;
