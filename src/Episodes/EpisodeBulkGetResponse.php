@@ -71,6 +71,7 @@ final class EpisodeBulkGetResponse implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
+     *   published?: bool|null,
      *   restrictions?: EpisodeRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * }> $episodes
@@ -105,6 +106,7 @@ final class EpisodeBulkGetResponse implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
+     *   published?: bool|null,
      *   restrictions?: EpisodeRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * }> $episodes

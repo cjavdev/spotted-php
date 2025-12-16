@@ -17,6 +17,7 @@ use Spotted\TrackObject\Album;
  *   addedAt?: \DateTimeInterface|null,
  *   addedBy?: PlaylistUserObject|null,
  *   isLocal?: bool|null,
+ *   published?: bool|null,
  *   track?: null|TrackObject|EpisodeObject,
  * }
  */
@@ -44,6 +45,12 @@ final class PlaylistTrackObject implements BaseModel
     public ?bool $isLocal;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * Information about the track or episode.
      */
     #[Optional(union: Track::class)]
@@ -63,6 +70,7 @@ final class PlaylistTrackObject implements BaseModel
      *   id?: string|null,
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
+     *   published?: bool|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * } $addedBy
@@ -83,6 +91,7 @@ final class PlaylistTrackObject implements BaseModel
      *   name?: string|null,
      *   popularity?: int|null,
      *   previewURL?: string|null,
+     *   published?: bool|null,
      *   restrictions?: TrackRestrictionObject|null,
      *   trackNumber?: int|null,
      *   type?: value-of<TrackObject\Type>|null,
@@ -107,6 +116,7 @@ final class PlaylistTrackObject implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
+     *   published?: bool|null,
      *   restrictions?: EpisodeRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * } $track
@@ -115,6 +125,7 @@ final class PlaylistTrackObject implements BaseModel
         ?\DateTimeInterface $addedAt = null,
         PlaylistUserObject|array|null $addedBy = null,
         ?bool $isLocal = null,
+        ?bool $published = null,
         TrackObject|array|EpisodeObject|null $track = null,
     ): self {
         $self = new self;
@@ -122,6 +133,7 @@ final class PlaylistTrackObject implements BaseModel
         null !== $addedAt && $self['addedAt'] = $addedAt;
         null !== $addedBy && $self['addedBy'] = $addedBy;
         null !== $isLocal && $self['isLocal'] = $isLocal;
+        null !== $published && $self['published'] = $published;
         null !== $track && $self['track'] = $track;
 
         return $self;
@@ -145,6 +157,7 @@ final class PlaylistTrackObject implements BaseModel
      *   id?: string|null,
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
+     *   published?: bool|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * } $addedBy
@@ -169,6 +182,17 @@ final class PlaylistTrackObject implements BaseModel
     }
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
+    }
+
+    /**
      * Information about the track or episode.
      *
      * @param TrackObject|array{
@@ -188,6 +212,7 @@ final class PlaylistTrackObject implements BaseModel
      *   name?: string|null,
      *   popularity?: int|null,
      *   previewURL?: string|null,
+     *   published?: bool|null,
      *   restrictions?: TrackRestrictionObject|null,
      *   trackNumber?: int|null,
      *   type?: value-of<TrackObject\Type>|null,
@@ -212,6 +237,7 @@ final class PlaylistTrackObject implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   language?: string|null,
+     *   published?: bool|null,
      *   restrictions?: EpisodeRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * } $track

@@ -19,6 +19,7 @@ use Spotted\SimplifiedPlaylistObject\Owner;
  *   previous: string|null,
  *   total: int,
  *   items?: list<SimplifiedPlaylistObject>|null,
+ *   published?: bool|null,
  * }
  */
 final class PagingPlaylistObject implements BaseModel
@@ -65,6 +66,12 @@ final class PagingPlaylistObject implements BaseModel
     /** @var list<SimplifiedPlaylistObject>|null $items */
     #[Optional(list: SimplifiedPlaylistObject::class)]
     public ?array $items;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * `new PagingPlaylistObject()` is missing required properties by the API.
@@ -122,6 +129,7 @@ final class PagingPlaylistObject implements BaseModel
         ?string $previous,
         int $total,
         ?array $items = null,
+        ?bool $published = null,
     ): self {
         $self = new self;
 
@@ -133,6 +141,7 @@ final class PagingPlaylistObject implements BaseModel
         $self['total'] = $total;
 
         null !== $items && $self['items'] = $items;
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -224,6 +233,17 @@ final class PagingPlaylistObject implements BaseModel
     {
         $self = clone $this;
         $self['items'] = $items;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

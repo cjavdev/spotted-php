@@ -10,7 +10,10 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ExternalIDObjectShape = array{
- *   ean?: string|null, isrc?: string|null, upc?: string|null
+ *   ean?: string|null,
+ *   isrc?: string|null,
+ *   published?: bool|null,
+ *   upc?: string|null,
  * }
  */
 final class ExternalIDObject implements BaseModel
@@ -31,6 +34,12 @@ final class ExternalIDObject implements BaseModel
     public ?string $isrc;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * [Universal Product Code](http://en.wikipedia.org/wiki/Universal_Product_Code).
      */
     #[Optional]
@@ -49,12 +58,14 @@ final class ExternalIDObject implements BaseModel
     public static function with(
         ?string $ean = null,
         ?string $isrc = null,
-        ?string $upc = null
+        ?bool $published = null,
+        ?string $upc = null,
     ): self {
         $self = new self;
 
         null !== $ean && $self['ean'] = $ean;
         null !== $isrc && $self['isrc'] = $isrc;
+        null !== $published && $self['published'] = $published;
         null !== $upc && $self['upc'] = $upc;
 
         return $self;
@@ -78,6 +89,17 @@ final class ExternalIDObject implements BaseModel
     {
         $self = clone $this;
         $self['isrc'] = $isrc;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

@@ -71,6 +71,7 @@ final class AudiobookBulkGetResponse implements BaseModel
      *   type?: 'audiobook',
      *   uri: string,
      *   edition?: string|null,
+     *   published?: bool|null,
      *   chapters: Chapters,
      * }> $audiobooks
      */
@@ -104,6 +105,7 @@ final class AudiobookBulkGetResponse implements BaseModel
      *   type?: 'audiobook',
      *   uri: string,
      *   edition?: string|null,
+     *   published?: bool|null,
      *   chapters: Chapters,
      * }> $audiobooks
      */

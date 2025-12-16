@@ -34,6 +34,7 @@ use Spotted\TrackObject\Album\ReleaseDatePrecision;
  *   totalTracks: int,
  *   type?: 'album',
  *   uri: string,
+ *   published?: bool|null,
  *   restrictions?: AlbumRestrictionObject|null,
  * }
  */
@@ -133,6 +134,12 @@ final class Album implements BaseModel
     public string $uri;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * Included in the response when a content restriction is applied.
      */
     #[Optional]
@@ -193,17 +200,20 @@ final class Album implements BaseModel
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   name?: string|null,
+     *   published?: bool|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * }> $artists
      * @param list<string> $availableMarkets
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
      * @param AlbumRestrictionObject|array{
-     *   reason?: value-of<Reason>|null
+     *   published?: bool|null, reason?: value-of<Reason>|null
      * } $restrictions
      */
     public static function with(
@@ -219,6 +229,7 @@ final class Album implements BaseModel
         ReleaseDatePrecision|string $releaseDatePrecision,
         int $totalTracks,
         string $uri,
+        ?bool $published = null,
         AlbumRestrictionObject|array|null $restrictions = null,
     ): self {
         $self = new self;
@@ -236,6 +247,7 @@ final class Album implements BaseModel
         $self['totalTracks'] = $totalTracks;
         $self['uri'] = $uri;
 
+        null !== $published && $self['published'] = $published;
         null !== $restrictions && $self['restrictions'] = $restrictions;
 
         return $self;
@@ -273,6 +285,7 @@ final class Album implements BaseModel
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   name?: string|null,
+     *   published?: bool|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * }> $artists
@@ -301,7 +314,9 @@ final class Album implements BaseModel
     /**
      * Known external URLs for this album.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -327,7 +342,7 @@ final class Album implements BaseModel
      * The cover art for the album in various sizes, widest first.
      *
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      */
     public function withImages(array $images): self
@@ -397,10 +412,21 @@ final class Album implements BaseModel
     }
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
+    }
+
+    /**
      * Included in the response when a content restriction is applied.
      *
      * @param AlbumRestrictionObject|array{
-     *   reason?: value-of<Reason>|null
+     *   published?: bool|null, reason?: value-of<Reason>|null
      * } $restrictions
      */
     public function withRestrictions(

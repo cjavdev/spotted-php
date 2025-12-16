@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Recommendations;
 
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
@@ -19,7 +20,7 @@ use Spotted\TrackRestrictionObject;
 
 /**
  * @phpstan-type RecommendationGetResponseShape = array{
- *   seeds: list<Seed>, tracks: list<TrackObject>
+ *   seeds: list<Seed>, tracks: list<TrackObject>, published?: bool|null
  * }
  */
 final class RecommendationGetResponse implements BaseModel
@@ -42,6 +43,12 @@ final class RecommendationGetResponse implements BaseModel
      */
     #[Required(list: TrackObject::class)]
     public array $tracks;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * `new RecommendationGetResponse()` is missing required properties by the API.
@@ -73,6 +80,7 @@ final class RecommendationGetResponse implements BaseModel
      *   afterRelinkingSize?: int|null,
      *   href?: string|null,
      *   initialPoolSize?: int|null,
+     *   published?: bool|null,
      *   type?: string|null,
      * }> $seeds
      * @param list<TrackObject|array{
@@ -92,18 +100,24 @@ final class RecommendationGetResponse implements BaseModel
      *   name?: string|null,
      *   popularity?: int|null,
      *   previewURL?: string|null,
+     *   published?: bool|null,
      *   restrictions?: TrackRestrictionObject|null,
      *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * }> $tracks
      */
-    public static function with(array $seeds, array $tracks): self
-    {
+    public static function with(
+        array $seeds,
+        array $tracks,
+        ?bool $published = null
+    ): self {
         $self = new self;
 
         $self['seeds'] = $seeds;
         $self['tracks'] = $tracks;
+
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -117,6 +131,7 @@ final class RecommendationGetResponse implements BaseModel
      *   afterRelinkingSize?: int|null,
      *   href?: string|null,
      *   initialPoolSize?: int|null,
+     *   published?: bool|null,
      *   type?: string|null,
      * }> $seeds
      */
@@ -148,6 +163,7 @@ final class RecommendationGetResponse implements BaseModel
      *   name?: string|null,
      *   popularity?: int|null,
      *   previewURL?: string|null,
+     *   published?: bool|null,
      *   restrictions?: TrackRestrictionObject|null,
      *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
@@ -158,6 +174,17 @@ final class RecommendationGetResponse implements BaseModel
     {
         $self = clone $this;
         $self['tracks'] = $tracks;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

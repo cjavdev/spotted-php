@@ -17,6 +17,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   bars?: list<TimeIntervalObject>|null,
  *   beats?: list<TimeIntervalObject>|null,
  *   meta?: Meta|null,
+ *   published?: bool|null,
  *   sections?: list<Section>|null,
  *   segments?: list<Segment>|null,
  *   tatums?: list<TimeIntervalObject>|null,
@@ -46,6 +47,12 @@ final class AudioAnalysisGetResponse implements BaseModel
 
     #[Optional]
     public ?Meta $meta;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * Sections are defined by large variations in rhythm or timbre, e.g. chorus, verse, bridge, guitar solo, etc. Each section contains its own descriptions of tempo, key, mode, time_signature, and loudness.
@@ -85,10 +92,16 @@ final class AudioAnalysisGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<TimeIntervalObject|array{
-     *   confidence?: float|null, duration?: float|null, start?: float|null
+     *   confidence?: float|null,
+     *   duration?: float|null,
+     *   published?: bool|null,
+     *   start?: float|null,
      * }> $bars
      * @param list<TimeIntervalObject|array{
-     *   confidence?: float|null, duration?: float|null, start?: float|null
+     *   confidence?: float|null,
+     *   duration?: float|null,
+     *   published?: bool|null,
+     *   start?: float|null,
      * }> $beats
      * @param Meta|array{
      *   analysisTime?: float|null,
@@ -107,6 +120,7 @@ final class AudioAnalysisGetResponse implements BaseModel
      *   loudness?: float|null,
      *   mode?: float|null,
      *   modeConfidence?: float|null,
+     *   published?: bool|null,
      *   start?: float|null,
      *   tempo?: float|null,
      *   tempoConfidence?: float|null,
@@ -121,11 +135,15 @@ final class AudioAnalysisGetResponse implements BaseModel
      *   loudnessMaxTime?: float|null,
      *   loudnessStart?: float|null,
      *   pitches?: list<float>|null,
+     *   published?: bool|null,
      *   start?: float|null,
      *   timbre?: list<float>|null,
      * }> $segments
      * @param list<TimeIntervalObject|array{
-     *   confidence?: float|null, duration?: float|null, start?: float|null
+     *   confidence?: float|null,
+     *   duration?: float|null,
+     *   published?: bool|null,
+     *   start?: float|null,
      * }> $tatums
      * @param Track|array{
      *   analysisChannels?: int|null,
@@ -160,6 +178,7 @@ final class AudioAnalysisGetResponse implements BaseModel
         ?array $bars = null,
         ?array $beats = null,
         Meta|array|null $meta = null,
+        ?bool $published = null,
         ?array $sections = null,
         ?array $segments = null,
         ?array $tatums = null,
@@ -170,6 +189,7 @@ final class AudioAnalysisGetResponse implements BaseModel
         null !== $bars && $self['bars'] = $bars;
         null !== $beats && $self['beats'] = $beats;
         null !== $meta && $self['meta'] = $meta;
+        null !== $published && $self['published'] = $published;
         null !== $sections && $self['sections'] = $sections;
         null !== $segments && $self['segments'] = $segments;
         null !== $tatums && $self['tatums'] = $tatums;
@@ -182,7 +202,10 @@ final class AudioAnalysisGetResponse implements BaseModel
      * The time intervals of the bars throughout the track. A bar (or measure) is a segment of time defined as a given number of beats.
      *
      * @param list<TimeIntervalObject|array{
-     *   confidence?: float|null, duration?: float|null, start?: float|null
+     *   confidence?: float|null,
+     *   duration?: float|null,
+     *   published?: bool|null,
+     *   start?: float|null,
      * }> $bars
      */
     public function withBars(array $bars): self
@@ -197,7 +220,10 @@ final class AudioAnalysisGetResponse implements BaseModel
      * The time intervals of beats throughout the track. A beat is the basic time unit of a piece of music; for example, each tick of a metronome. Beats are typically multiples of tatums.
      *
      * @param list<TimeIntervalObject|array{
-     *   confidence?: float|null, duration?: float|null, start?: float|null
+     *   confidence?: float|null,
+     *   duration?: float|null,
+     *   published?: bool|null,
+     *   start?: float|null,
      * }> $beats
      */
     public function withBeats(array $beats): self
@@ -228,6 +254,17 @@ final class AudioAnalysisGetResponse implements BaseModel
     }
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
+    }
+
+    /**
      * Sections are defined by large variations in rhythm or timbre, e.g. chorus, verse, bridge, guitar solo, etc. Each section contains its own descriptions of tempo, key, mode, time_signature, and loudness.
      *
      * @param list<Section|array{
@@ -238,6 +275,7 @@ final class AudioAnalysisGetResponse implements BaseModel
      *   loudness?: float|null,
      *   mode?: float|null,
      *   modeConfidence?: float|null,
+     *   published?: bool|null,
      *   start?: float|null,
      *   tempo?: float|null,
      *   tempoConfidence?: float|null,
@@ -264,6 +302,7 @@ final class AudioAnalysisGetResponse implements BaseModel
      *   loudnessMaxTime?: float|null,
      *   loudnessStart?: float|null,
      *   pitches?: list<float>|null,
+     *   published?: bool|null,
      *   start?: float|null,
      *   timbre?: list<float>|null,
      * }> $segments
@@ -280,7 +319,10 @@ final class AudioAnalysisGetResponse implements BaseModel
      * A tatum represents the lowest regular pulse train that a listener intuitively infers from the timing of perceived musical events (segments).
      *
      * @param list<TimeIntervalObject|array{
-     *   confidence?: float|null, duration?: float|null, start?: float|null
+     *   confidence?: float|null,
+     *   duration?: float|null,
+     *   published?: bool|null,
+     *   start?: float|null,
      * }> $tatums
      */
     public function withTatums(array $tatums): self

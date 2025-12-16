@@ -52,6 +52,7 @@ final class FollowingBulkGetResponse implements BaseModel
      *   items?: list<ArtistObject>|null,
      *   limit?: int|null,
      *   next?: string|null,
+     *   published?: bool|null,
      *   total?: int|null,
      * } $artists
      */
@@ -71,6 +72,7 @@ final class FollowingBulkGetResponse implements BaseModel
      *   items?: list<ArtistObject>|null,
      *   limit?: int|null,
      *   next?: string|null,
+     *   published?: bool|null,
      *   total?: int|null,
      * } $artists
      */

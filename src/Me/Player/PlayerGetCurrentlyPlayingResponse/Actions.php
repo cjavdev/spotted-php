@@ -14,6 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @phpstan-type ActionsShape = array{
  *   interruptingPlayback?: bool|null,
  *   pausing?: bool|null,
+ *   published?: bool|null,
  *   resuming?: bool|null,
  *   seeking?: bool|null,
  *   skippingNext?: bool|null,
@@ -40,6 +41,12 @@ final class Actions implements BaseModel
      */
     #[Optional]
     public ?bool $pausing;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * Resuming. Optional field.
@@ -102,6 +109,7 @@ final class Actions implements BaseModel
     public static function with(
         ?bool $interruptingPlayback = null,
         ?bool $pausing = null,
+        ?bool $published = null,
         ?bool $resuming = null,
         ?bool $seeking = null,
         ?bool $skippingNext = null,
@@ -115,6 +123,7 @@ final class Actions implements BaseModel
 
         null !== $interruptingPlayback && $self['interruptingPlayback'] = $interruptingPlayback;
         null !== $pausing && $self['pausing'] = $pausing;
+        null !== $published && $self['published'] = $published;
         null !== $resuming && $self['resuming'] = $resuming;
         null !== $seeking && $self['seeking'] = $seeking;
         null !== $skippingNext && $self['skippingNext'] = $skippingNext;
@@ -145,6 +154,17 @@ final class Actions implements BaseModel
     {
         $self = clone $this;
         $self['pausing'] = $pausing;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

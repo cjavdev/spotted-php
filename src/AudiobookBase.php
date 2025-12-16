@@ -30,6 +30,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   type?: 'audiobook',
  *   uri: string,
  *   edition?: string|null,
+ *   published?: bool|null,
  * }
  */
 final class AudiobookBase implements BaseModel
@@ -166,6 +167,12 @@ final class AudiobookBase implements BaseModel
     public ?string $edition;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * `new AudiobookBase()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -224,17 +231,23 @@ final class AudiobookBase implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AuthorObject|array{name?: string|null}> $authors
+     * @param list<AuthorObject|array{
+     *   name?: string|null, published?: bool|null
+     * }> $authors
      * @param list<string> $availableMarkets
      * @param list<CopyrightObject|array{
-     *   text?: string|null, type?: string|null
+     *   published?: bool|null, text?: string|null, type?: string|null
      * }> $copyrights
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      * @param list<string> $languages
-     * @param list<NarratorObject|array{name?: string|null}> $narrators
+     * @param list<NarratorObject|array{
+     *   name?: string|null, published?: bool|null
+     * }> $narrators
      */
     public static function with(
         string $id,
@@ -255,6 +268,7 @@ final class AudiobookBase implements BaseModel
         int $totalChapters,
         string $uri,
         ?string $edition = null,
+        ?bool $published = null,
     ): self {
         $self = new self;
 
@@ -277,6 +291,7 @@ final class AudiobookBase implements BaseModel
         $self['uri'] = $uri;
 
         null !== $edition && $self['edition'] = $edition;
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -295,7 +310,9 @@ final class AudiobookBase implements BaseModel
     /**
      * The author(s) for the audiobook.
      *
-     * @param list<AuthorObject|array{name?: string|null}> $authors
+     * @param list<AuthorObject|array{
+     *   name?: string|null, published?: bool|null
+     * }> $authors
      */
     public function withAuthors(array $authors): self
     {
@@ -322,7 +339,7 @@ final class AudiobookBase implements BaseModel
      * The copyright statements of the audiobook.
      *
      * @param list<CopyrightObject|array{
-     *   text?: string|null, type?: string|null
+     *   published?: bool|null, text?: string|null, type?: string|null
      * }> $copyrights
      */
     public function withCopyrights(array $copyrights): self
@@ -358,7 +375,9 @@ final class AudiobookBase implements BaseModel
     /**
      * External URLs for this audiobook.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -395,7 +414,7 @@ final class AudiobookBase implements BaseModel
      * The cover art for the audiobook in various sizes, widest first.
      *
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      */
     public function withImages(array $images): self
@@ -444,7 +463,9 @@ final class AudiobookBase implements BaseModel
     /**
      * The narrator(s) for the audiobook.
      *
-     * @param list<NarratorObject|array{name?: string|null}> $narrators
+     * @param list<NarratorObject|array{
+     *   name?: string|null, published?: bool|null
+     * }> $narrators
      */
     public function withNarrators(array $narrators): self
     {
@@ -494,6 +515,17 @@ final class AudiobookBase implements BaseModel
     {
         $self = clone $this;
         $self['edition'] = $edition;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

@@ -9,7 +9,9 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type NarratorObjectShape = array{name?: string|null}
+ * @phpstan-type NarratorObjectShape = array{
+ *   name?: string|null, published?: bool|null
+ * }
  */
 final class NarratorObject implements BaseModel
 {
@@ -22,6 +24,12 @@ final class NarratorObject implements BaseModel
     #[Optional]
     public ?string $name;
 
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
     public function __construct()
     {
         $this->initialize();
@@ -32,11 +40,14 @@ final class NarratorObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $name = null): self
-    {
+    public static function with(
+        ?string $name = null,
+        ?bool $published = null
+    ): self {
         $self = new self;
 
         null !== $name && $self['name'] = $name;
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -48,6 +59,17 @@ final class NarratorObject implements BaseModel
     {
         $self = clone $this;
         $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

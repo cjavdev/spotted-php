@@ -24,6 +24,7 @@ use Spotted\Me\MeGetResponse\ExplicitContent;
  *   href?: string|null,
  *   images?: list<ImageObject>|null,
  *   product?: string|null,
+ *   published?: bool|null,
  *   type?: string|null,
  *   uri?: string|null,
  * }
@@ -96,6 +97,12 @@ final class MeGetResponse implements BaseModel
     public ?string $product;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * The object type: "user".
      */
     #[Optional]
@@ -118,12 +125,16 @@ final class MeGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ExplicitContent|array{
-     *   filterEnabled?: bool|null, filterLocked?: bool|null
+     *   filterEnabled?: bool|null, filterLocked?: bool|null, published?: bool|null
      * } $explicitContent
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
-     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
+     * @param FollowersObject|array{
+     *   href?: string|null, published?: bool|null, total?: int|null
+     * } $followers
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      */
     public static function with(
@@ -137,6 +148,7 @@ final class MeGetResponse implements BaseModel
         ?string $href = null,
         ?array $images = null,
         ?string $product = null,
+        ?bool $published = null,
         ?string $type = null,
         ?string $uri = null,
     ): self {
@@ -152,6 +164,7 @@ final class MeGetResponse implements BaseModel
         null !== $href && $self['href'] = $href;
         null !== $images && $self['images'] = $images;
         null !== $product && $self['product'] = $product;
+        null !== $published && $self['published'] = $published;
         null !== $type && $self['type'] = $type;
         null !== $uri && $self['uri'] = $uri;
 
@@ -206,7 +219,7 @@ final class MeGetResponse implements BaseModel
      * The user's explicit content settings. _This field is only available when the current user has granted access to the [user-read-private](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
      *
      * @param ExplicitContent|array{
-     *   filterEnabled?: bool|null, filterLocked?: bool|null
+     *   filterEnabled?: bool|null, filterLocked?: bool|null, published?: bool|null
      * } $explicitContent
      */
     public function withExplicitContent(
@@ -221,7 +234,9 @@ final class MeGetResponse implements BaseModel
     /**
      * Known external URLs for this user.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -235,7 +250,9 @@ final class MeGetResponse implements BaseModel
     /**
      * Information about the followers of the user.
      *
-     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
+     * @param FollowersObject|array{
+     *   href?: string|null, published?: bool|null, total?: int|null
+     * } $followers
      */
     public function withFollowers(FollowersObject|array $followers): self
     {
@@ -260,7 +277,7 @@ final class MeGetResponse implements BaseModel
      * The user's profile image.
      *
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      */
     public function withImages(array $images): self
@@ -278,6 +295,17 @@ final class MeGetResponse implements BaseModel
     {
         $self = clone $this;
         $self['product'] = $product;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

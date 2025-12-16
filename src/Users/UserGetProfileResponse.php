@@ -20,6 +20,7 @@ use Spotted\Users\UserGetProfileResponse\Type;
  *   followers?: FollowersObject|null,
  *   href?: string|null,
  *   images?: list<ImageObject>|null,
+ *   published?: bool|null,
  *   type?: value-of<Type>|null,
  *   uri?: string|null,
  * }
@@ -68,6 +69,12 @@ final class UserGetProfileResponse implements BaseModel
     public ?array $images;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * The object type.
      *
      * @var value-of<Type>|null $type
@@ -91,10 +98,14 @@ final class UserGetProfileResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
-     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
+     * @param FollowersObject|array{
+     *   href?: string|null, published?: bool|null, total?: int|null
+     * } $followers
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      * @param Type|value-of<Type> $type
      */
@@ -105,6 +116,7 @@ final class UserGetProfileResponse implements BaseModel
         FollowersObject|array|null $followers = null,
         ?string $href = null,
         ?array $images = null,
+        ?bool $published = null,
         Type|string|null $type = null,
         ?string $uri = null,
     ): self {
@@ -116,6 +128,7 @@ final class UserGetProfileResponse implements BaseModel
         null !== $followers && $self['followers'] = $followers;
         null !== $href && $self['href'] = $href;
         null !== $images && $self['images'] = $images;
+        null !== $published && $self['published'] = $published;
         null !== $type && $self['type'] = $type;
         null !== $uri && $self['uri'] = $uri;
 
@@ -147,7 +160,9 @@ final class UserGetProfileResponse implements BaseModel
     /**
      * Known public external URLs for this user.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -161,7 +176,9 @@ final class UserGetProfileResponse implements BaseModel
     /**
      * Information about the followers of this user.
      *
-     * @param FollowersObject|array{href?: string|null, total?: int|null} $followers
+     * @param FollowersObject|array{
+     *   href?: string|null, published?: bool|null, total?: int|null
+     * } $followers
      */
     public function withFollowers(FollowersObject|array $followers): self
     {
@@ -186,13 +203,24 @@ final class UserGetProfileResponse implements BaseModel
      * The user's profile image.
      *
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      */
     public function withImages(array $images): self
     {
         $self = clone $this;
         $self['images'] = $images;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

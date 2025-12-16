@@ -21,6 +21,7 @@ use Spotted\Me\Following\FollowingBulkGetResponse\Artists\Cursors;
  *   items?: list<ArtistObject>|null,
  *   limit?: int|null,
  *   next?: string|null,
+ *   published?: bool|null,
  *   total?: int|null,
  * }
  */
@@ -58,6 +59,12 @@ final class Artists implements BaseModel
     public ?string $next;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * The total number of items available to return.
      */
     #[Optional]
@@ -73,7 +80,9 @@ final class Artists implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Cursors|array{after?: string|null, before?: string|null} $cursors
+     * @param Cursors|array{
+     *   after?: string|null, before?: string|null, published?: bool|null
+     * } $cursors
      * @param list<ArtistObject|array{
      *   id?: string|null,
      *   externalURLs?: ExternalURLObject|null,
@@ -83,6 +92,7 @@ final class Artists implements BaseModel
      *   images?: list<ImageObject>|null,
      *   name?: string|null,
      *   popularity?: int|null,
+     *   published?: bool|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * }> $items
@@ -93,6 +103,7 @@ final class Artists implements BaseModel
         ?array $items = null,
         ?int $limit = null,
         ?string $next = null,
+        ?bool $published = null,
         ?int $total = null,
     ): self {
         $self = new self;
@@ -102,6 +113,7 @@ final class Artists implements BaseModel
         null !== $items && $self['items'] = $items;
         null !== $limit && $self['limit'] = $limit;
         null !== $next && $self['next'] = $next;
+        null !== $published && $self['published'] = $published;
         null !== $total && $self['total'] = $total;
 
         return $self;
@@ -110,7 +122,9 @@ final class Artists implements BaseModel
     /**
      * The cursors used to find the next set of items.
      *
-     * @param Cursors|array{after?: string|null, before?: string|null} $cursors
+     * @param Cursors|array{
+     *   after?: string|null, before?: string|null, published?: bool|null
+     * } $cursors
      */
     public function withCursors(Cursors|array $cursors): self
     {
@@ -141,6 +155,7 @@ final class Artists implements BaseModel
      *   images?: list<ImageObject>|null,
      *   name?: string|null,
      *   popularity?: int|null,
+     *   published?: bool|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * }> $items
@@ -171,6 +186,17 @@ final class Artists implements BaseModel
     {
         $self = clone $this;
         $self['next'] = $next;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

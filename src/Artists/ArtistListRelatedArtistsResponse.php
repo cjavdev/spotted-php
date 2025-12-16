@@ -60,6 +60,7 @@ final class ArtistListRelatedArtistsResponse implements BaseModel
      *   images?: list<ImageObject>|null,
      *   name?: string|null,
      *   popularity?: int|null,
+     *   published?: bool|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * }> $artists
@@ -83,6 +84,7 @@ final class ArtistListRelatedArtistsResponse implements BaseModel
      *   images?: list<ImageObject>|null,
      *   name?: string|null,
      *   popularity?: int|null,
+     *   published?: bool|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * }> $artists

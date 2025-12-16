@@ -71,6 +71,7 @@ final class ChapterBulkGetResponse implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   availableMarkets?: list<string>|null,
+     *   published?: bool|null,
      *   restrictions?: ChapterRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * }> $chapters
@@ -105,6 +106,7 @@ final class ChapterBulkGetResponse implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   availableMarkets?: list<string>|null,
+     *   published?: bool|null,
      *   restrictions?: ChapterRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * }> $chapters

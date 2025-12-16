@@ -20,6 +20,7 @@ use Spotted\ImageObject;
  *   previous: string|null,
  *   total: int,
  *   items?: list<Item>|null,
+ *   published?: bool|null,
  * }
  */
 final class Categories implements BaseModel
@@ -68,6 +69,12 @@ final class Categories implements BaseModel
     public ?array $items;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * `new Categories()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -100,7 +107,11 @@ final class Categories implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Item|array{
-     *   id: string, href: string, icons: list<ImageObject>, name: string
+     *   id: string,
+     *   href: string,
+     *   icons: list<ImageObject>,
+     *   name: string,
+     *   published?: bool|null,
      * }> $items
      */
     public static function with(
@@ -111,6 +122,7 @@ final class Categories implements BaseModel
         ?string $previous,
         int $total,
         ?array $items = null,
+        ?bool $published = null,
     ): self {
         $self = new self;
 
@@ -122,6 +134,7 @@ final class Categories implements BaseModel
         $self['total'] = $total;
 
         null !== $items && $self['items'] = $items;
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -194,13 +207,28 @@ final class Categories implements BaseModel
 
     /**
      * @param list<Item|array{
-     *   id: string, href: string, icons: list<ImageObject>, name: string
+     *   id: string,
+     *   href: string,
+     *   icons: list<ImageObject>,
+     *   name: string,
+     *   published?: bool|null,
      * }> $items
      */
     public function withItems(array $items): self
     {
         $self = clone $this;
         $self['items'] = $items;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

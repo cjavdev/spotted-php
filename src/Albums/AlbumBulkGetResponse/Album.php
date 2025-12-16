@@ -41,6 +41,7 @@ use Spotted\SimplifiedTrackObject;
  *   genres?: list<string>|null,
  *   label?: string|null,
  *   popularity?: int|null,
+ *   published?: bool|null,
  *   restrictions?: AlbumRestrictionObject|null,
  *   tracks?: Tracks|null,
  * }
@@ -177,6 +178,12 @@ final class Album implements BaseModel
     public ?int $popularity;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * Included in the response when a content restriction is applied.
      */
     #[Optional]
@@ -237,9 +244,11 @@ final class Album implements BaseModel
      *
      * @param AlbumType|value-of<AlbumType> $albumType
      * @param list<string> $availableMarkets
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
      * @param list<SimplifiedArtistObject|array{
@@ -247,18 +256,22 @@ final class Album implements BaseModel
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   name?: string|null,
+     *   published?: bool|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * }> $artists
      * @param list<CopyrightObject|array{
-     *   text?: string|null, type?: string|null
+     *   published?: bool|null, text?: string|null, type?: string|null
      * }> $copyrights
      * @param ExternalIDObject|array{
-     *   ean?: string|null, isrc?: string|null, upc?: string|null
+     *   ean?: string|null,
+     *   isrc?: string|null,
+     *   published?: bool|null,
+     *   upc?: string|null,
      * } $externalIDs
      * @param list<string> $genres
      * @param AlbumRestrictionObject|array{
-     *   reason?: value-of<Reason>|null
+     *   published?: bool|null, reason?: value-of<Reason>|null
      * } $restrictions
      * @param Tracks|array{
      *   href: string,
@@ -268,6 +281,7 @@ final class Album implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<SimplifiedTrackObject>|null,
+     *   published?: bool|null,
      * } $tracks
      */
     public static function with(
@@ -288,6 +302,7 @@ final class Album implements BaseModel
         ?array $genres = null,
         ?string $label = null,
         ?int $popularity = null,
+        ?bool $published = null,
         AlbumRestrictionObject|array|null $restrictions = null,
         Tracks|array|null $tracks = null,
     ): self {
@@ -311,6 +326,7 @@ final class Album implements BaseModel
         null !== $genres && $self['genres'] = $genres;
         null !== $label && $self['label'] = $label;
         null !== $popularity && $self['popularity'] = $popularity;
+        null !== $published && $self['published'] = $published;
         null !== $restrictions && $self['restrictions'] = $restrictions;
         null !== $tracks && $self['tracks'] = $tracks;
 
@@ -357,7 +373,9 @@ final class Album implements BaseModel
     /**
      * Known external URLs for this album.
      *
-     * @param ExternalURLObject|array{spotify?: string|null} $externalURLs
+     * @param ExternalURLObject|array{
+     *   published?: bool|null, spotify?: string|null
+     * } $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -383,7 +401,7 @@ final class Album implements BaseModel
      * The cover art for the album in various sizes, widest first.
      *
      * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null
+     *   height: int|null, url: string, width: int|null, published?: bool|null
      * }> $images
      */
     public function withImages(array $images): self
@@ -460,6 +478,7 @@ final class Album implements BaseModel
      *   externalURLs?: ExternalURLObject|null,
      *   href?: string|null,
      *   name?: string|null,
+     *   published?: bool|null,
      *   type?: value-of<Type>|null,
      *   uri?: string|null,
      * }> $artists
@@ -476,7 +495,7 @@ final class Album implements BaseModel
      * The copyright statements of the album.
      *
      * @param list<CopyrightObject|array{
-     *   text?: string|null, type?: string|null
+     *   published?: bool|null, text?: string|null, type?: string|null
      * }> $copyrights
      */
     public function withCopyrights(array $copyrights): self
@@ -491,7 +510,10 @@ final class Album implements BaseModel
      * Known external IDs for the album.
      *
      * @param ExternalIDObject|array{
-     *   ean?: string|null, isrc?: string|null, upc?: string|null
+     *   ean?: string|null,
+     *   isrc?: string|null,
+     *   published?: bool|null,
+     *   upc?: string|null,
      * } $externalIDs
      */
     public function withExternalIDs(ExternalIDObject|array $externalIDs): self
@@ -538,10 +560,21 @@ final class Album implements BaseModel
     }
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
+    }
+
+    /**
      * Included in the response when a content restriction is applied.
      *
      * @param AlbumRestrictionObject|array{
-     *   reason?: value-of<Reason>|null
+     *   published?: bool|null, reason?: value-of<Reason>|null
      * } $restrictions
      */
     public function withRestrictions(
@@ -564,6 +597,7 @@ final class Album implements BaseModel
      *   previous: string|null,
      *   total: int,
      *   items?: list<SimplifiedTrackObject>|null,
+     *   published?: bool|null,
      * } $tracks
      */
     public function withTracks(Tracks|array $tracks): self

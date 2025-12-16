@@ -18,7 +18,9 @@ use Spotted\TrackRestrictionObject;
 
 /**
  * @phpstan-type TrackListResponseShape = array{
- *   addedAt?: \DateTimeInterface|null, track?: TrackObject|null
+ *   addedAt?: \DateTimeInterface|null,
+ *   published?: bool|null,
+ *   track?: TrackObject|null,
  * }
  */
 final class TrackListResponse implements BaseModel
@@ -33,6 +35,12 @@ final class TrackListResponse implements BaseModel
      */
     #[Optional('added_at')]
     public ?\DateTimeInterface $addedAt;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * Information about the track.
@@ -67,6 +75,7 @@ final class TrackListResponse implements BaseModel
      *   name?: string|null,
      *   popularity?: int|null,
      *   previewURL?: string|null,
+     *   published?: bool|null,
      *   restrictions?: TrackRestrictionObject|null,
      *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,
@@ -75,11 +84,13 @@ final class TrackListResponse implements BaseModel
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
-        TrackObject|array|null $track = null
+        ?bool $published = null,
+        TrackObject|array|null $track = null,
     ): self {
         $self = new self;
 
         null !== $addedAt && $self['addedAt'] = $addedAt;
+        null !== $published && $self['published'] = $published;
         null !== $track && $self['track'] = $track;
 
         return $self;
@@ -94,6 +105,17 @@ final class TrackListResponse implements BaseModel
     {
         $self = clone $this;
         $self['addedAt'] = $addedAt;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }
@@ -118,6 +140,7 @@ final class TrackListResponse implements BaseModel
      *   name?: string|null,
      *   popularity?: int|null,
      *   previewURL?: string|null,
+     *   published?: bool|null,
      *   restrictions?: TrackRestrictionObject|null,
      *   trackNumber?: int|null,
      *   type?: value-of<Type>|null,

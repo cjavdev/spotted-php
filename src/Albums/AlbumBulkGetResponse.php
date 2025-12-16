@@ -73,6 +73,7 @@ final class AlbumBulkGetResponse implements BaseModel
      *   genres?: list<string>|null,
      *   label?: string|null,
      *   popularity?: int|null,
+     *   published?: bool|null,
      *   restrictions?: AlbumRestrictionObject|null,
      *   tracks?: Tracks|null,
      * }> $albums
@@ -106,6 +107,7 @@ final class AlbumBulkGetResponse implements BaseModel
      *   genres?: list<string>|null,
      *   label?: string|null,
      *   popularity?: int|null,
+     *   published?: bool|null,
      *   restrictions?: AlbumRestrictionObject|null,
      *   tracks?: Tracks|null,
      * }> $albums

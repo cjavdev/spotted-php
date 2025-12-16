@@ -15,6 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   afterRelinkingSize?: int|null,
  *   href?: string|null,
  *   initialPoolSize?: int|null,
+ *   published?: bool|null,
  *   type?: string|null,
  * }
  */
@@ -54,6 +55,12 @@ final class Seed implements BaseModel
     public ?int $initialPoolSize;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * The entity type of this seed. One of `artist`, `track` or `genre`.
      */
     #[Optional]
@@ -75,6 +82,7 @@ final class Seed implements BaseModel
         ?int $afterRelinkingSize = null,
         ?string $href = null,
         ?int $initialPoolSize = null,
+        ?bool $published = null,
         ?string $type = null,
     ): self {
         $self = new self;
@@ -84,6 +92,7 @@ final class Seed implements BaseModel
         null !== $afterRelinkingSize && $self['afterRelinkingSize'] = $afterRelinkingSize;
         null !== $href && $self['href'] = $href;
         null !== $initialPoolSize && $self['initialPoolSize'] = $initialPoolSize;
+        null !== $published && $self['published'] = $published;
         null !== $type && $self['type'] = $type;
 
         return $self;
@@ -140,6 +149,17 @@ final class Seed implements BaseModel
     {
         $self = clone $this;
         $self['initialPoolSize'] = $initialPoolSize;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

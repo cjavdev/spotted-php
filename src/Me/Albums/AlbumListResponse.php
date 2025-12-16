@@ -20,7 +20,7 @@ use Spotted\SimplifiedArtistObject;
 
 /**
  * @phpstan-type AlbumListResponseShape = array{
- *   addedAt?: \DateTimeInterface|null, album?: Album|null
+ *   addedAt?: \DateTimeInterface|null, album?: Album|null, published?: bool|null
  * }
  */
 final class AlbumListResponse implements BaseModel
@@ -41,6 +41,12 @@ final class AlbumListResponse implements BaseModel
      */
     #[Optional]
     public ?Album $album;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     public function __construct()
     {
@@ -71,18 +77,21 @@ final class AlbumListResponse implements BaseModel
      *   genres?: list<string>|null,
      *   label?: string|null,
      *   popularity?: int|null,
+     *   published?: bool|null,
      *   restrictions?: AlbumRestrictionObject|null,
      *   tracks?: Tracks|null,
      * } $album
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
-        Album|array|null $album = null
+        Album|array|null $album = null,
+        ?bool $published = null,
     ): self {
         $self = new self;
 
         null !== $addedAt && $self['addedAt'] = $addedAt;
         null !== $album && $self['album'] = $album;
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -122,6 +131,7 @@ final class AlbumListResponse implements BaseModel
      *   genres?: list<string>|null,
      *   label?: string|null,
      *   popularity?: int|null,
+     *   published?: bool|null,
      *   restrictions?: AlbumRestrictionObject|null,
      *   tracks?: Tracks|null,
      * } $album
@@ -130,6 +140,17 @@ final class AlbumListResponse implements BaseModel
     {
         $self = clone $this;
         $self['album'] = $album;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

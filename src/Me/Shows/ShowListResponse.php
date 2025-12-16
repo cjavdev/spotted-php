@@ -14,7 +14,7 @@ use Spotted\ShowBase;
 
 /**
  * @phpstan-type ShowListResponseShape = array{
- *   addedAt?: \DateTimeInterface|null, show?: ShowBase|null
+ *   addedAt?: \DateTimeInterface|null, published?: bool|null, show?: ShowBase|null
  * }
  */
 final class ShowListResponse implements BaseModel
@@ -29,6 +29,12 @@ final class ShowListResponse implements BaseModel
      */
     #[Optional('added_at')]
     public ?\DateTimeInterface $addedAt;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * Information about the show.
@@ -64,15 +70,18 @@ final class ShowListResponse implements BaseModel
      *   totalEpisodes: int,
      *   type?: 'show',
      *   uri: string,
+     *   published?: bool|null,
      * } $show
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
-        ShowBase|array|null $show = null
+        ?bool $published = null,
+        ShowBase|array|null $show = null,
     ): self {
         $self = new self;
 
         null !== $addedAt && $self['addedAt'] = $addedAt;
+        null !== $published && $self['published'] = $published;
         null !== $show && $self['show'] = $show;
 
         return $self;
@@ -87,6 +96,17 @@ final class ShowListResponse implements BaseModel
     {
         $self = clone $this;
         $self['addedAt'] = $addedAt;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }
@@ -112,6 +132,7 @@ final class ShowListResponse implements BaseModel
      *   totalEpisodes: int,
      *   type?: 'show',
      *   uri: string,
+     *   published?: bool|null,
      * } $show
      */
     public function withShow(ShowBase|array $show): self

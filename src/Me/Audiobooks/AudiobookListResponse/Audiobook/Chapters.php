@@ -26,6 +26,7 @@ use Spotted\ResumePointObject;
  *   previous: string|null,
  *   total: int,
  *   items?: list<SimplifiedChapterObject>|null,
+ *   published?: bool|null,
  * }
  */
 final class Chapters implements BaseModel
@@ -72,6 +73,12 @@ final class Chapters implements BaseModel
     /** @var list<SimplifiedChapterObject>|null $items */
     #[Optional(list: SimplifiedChapterObject::class)]
     public ?array $items;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * `new Chapters()` is missing required properties by the API.
@@ -124,6 +131,7 @@ final class Chapters implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   availableMarkets?: list<string>|null,
+     *   published?: bool|null,
      *   restrictions?: ChapterRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * }> $items
@@ -136,6 +144,7 @@ final class Chapters implements BaseModel
         ?string $previous,
         int $total,
         ?array $items = null,
+        ?bool $published = null,
     ): self {
         $self = new self;
 
@@ -147,6 +156,7 @@ final class Chapters implements BaseModel
         $self['total'] = $total;
 
         null !== $items && $self['items'] = $items;
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -237,6 +247,7 @@ final class Chapters implements BaseModel
      *   type?: 'episode',
      *   uri: string,
      *   availableMarkets?: list<string>|null,
+     *   published?: bool|null,
      *   restrictions?: ChapterRestrictionObject|null,
      *   resumePoint?: ResumePointObject|null,
      * }> $items
@@ -245,6 +256,17 @@ final class Chapters implements BaseModel
     {
         $self = clone $this;
         $self['items'] = $items;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

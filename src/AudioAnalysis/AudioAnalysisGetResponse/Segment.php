@@ -17,6 +17,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   loudnessMaxTime?: float|null,
  *   loudnessStart?: float|null,
  *   pitches?: list<float>|null,
+ *   published?: bool|null,
  *   start?: float|null,
  *   timbre?: list<float>|null,
  * }
@@ -75,6 +76,12 @@ final class Segment implements BaseModel
     public ?array $pitches;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * The starting point (in seconds) of the segment.
      */
     #[Optional]
@@ -114,6 +121,7 @@ final class Segment implements BaseModel
         ?float $loudnessMaxTime = null,
         ?float $loudnessStart = null,
         ?array $pitches = null,
+        ?bool $published = null,
         ?float $start = null,
         ?array $timbre = null,
     ): self {
@@ -126,6 +134,7 @@ final class Segment implements BaseModel
         null !== $loudnessMaxTime && $self['loudnessMaxTime'] = $loudnessMaxTime;
         null !== $loudnessStart && $self['loudnessStart'] = $loudnessStart;
         null !== $pitches && $self['pitches'] = $pitches;
+        null !== $published && $self['published'] = $published;
         null !== $start && $self['start'] = $start;
         null !== $timbre && $self['timbre'] = $timbre;
 
@@ -211,6 +220,17 @@ final class Segment implements BaseModel
     {
         $self = clone $this;
         $self['pitches'] = $pitches;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

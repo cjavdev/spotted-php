@@ -66,6 +66,7 @@ final class ShowBulkGetResponse implements BaseModel
      *   totalEpisodes: int,
      *   type?: 'show',
      *   uri: string,
+     *   published?: bool|null,
      * }> $shows
      */
     public static function with(array $shows): self
@@ -96,6 +97,7 @@ final class ShowBulkGetResponse implements BaseModel
      *   totalEpisodes: int,
      *   type?: 'show',
      *   uri: string,
+     *   published?: bool|null,
      * }> $shows
      */
     public function withShows(array $shows): self

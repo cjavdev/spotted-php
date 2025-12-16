@@ -10,7 +10,10 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TimeIntervalObjectShape = array{
- *   confidence?: float|null, duration?: float|null, start?: float|null
+ *   confidence?: float|null,
+ *   duration?: float|null,
+ *   published?: bool|null,
+ *   start?: float|null,
  * }
  */
 final class TimeIntervalObject implements BaseModel
@@ -31,6 +34,12 @@ final class TimeIntervalObject implements BaseModel
     public ?float $duration;
 
     /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
+
+    /**
      * The starting point (in seconds) of the time interval.
      */
     #[Optional]
@@ -49,12 +58,14 @@ final class TimeIntervalObject implements BaseModel
     public static function with(
         ?float $confidence = null,
         ?float $duration = null,
-        ?float $start = null
+        ?bool $published = null,
+        ?float $start = null,
     ): self {
         $self = new self;
 
         null !== $confidence && $self['confidence'] = $confidence;
         null !== $duration && $self['duration'] = $duration;
+        null !== $published && $self['published'] = $published;
         null !== $start && $self['start'] = $start;
 
         return $self;
@@ -78,6 +89,17 @@ final class TimeIntervalObject implements BaseModel
     {
         $self = clone $this;
         $self['duration'] = $duration;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }
