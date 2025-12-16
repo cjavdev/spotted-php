@@ -96,7 +96,7 @@ final class EpisodesRawService implements EpisodesRawContract
      * Remove one or more episodes from the current user's library.<br/>
      * This API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
      *
-     * @param array{ids?: list<string>}|EpisodeRemoveParams $params
+     * @param array{ids?: list<string>, published?: bool}|EpisodeRemoveParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -127,7 +127,7 @@ final class EpisodesRawService implements EpisodesRawContract
      * Save one or more episodes to the current user's library.<br/>
      * This API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
      *
-     * @param array{ids: list<string>}|EpisodeSaveParams $params
+     * @param array{ids: list<string>, published?: bool}|EpisodeSaveParams $params
      *
      * @return BaseResponse<mixed>
      *

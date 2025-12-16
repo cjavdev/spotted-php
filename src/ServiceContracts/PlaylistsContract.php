@@ -52,6 +52,7 @@ interface PlaylistsContract
      * @param string $description value for playlist description as displayed in Spotify Clients and in the Web API
      * @param string $name The new name for the playlist, for example `"My New Playlist Title"`
      * @param bool $public The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
+     * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
      *
      * @throws APIException
      */
@@ -61,6 +62,7 @@ interface PlaylistsContract
         ?string $description = null,
         ?string $name = null,
         ?bool $public = null,
+        ?bool $published = null,
         ?RequestOptions $requestOptions = null,
     ): mixed;
 }

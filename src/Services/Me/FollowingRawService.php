@@ -94,7 +94,7 @@ final class FollowingRawService implements FollowingRawContract
      *
      * Add the current user as a follower of one or more artists or other Spotify users.
      *
-     * @param array{ids: list<string>}|FollowingFollowParams $params
+     * @param array{ids: list<string>, published?: bool}|FollowingFollowParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -124,7 +124,9 @@ final class FollowingRawService implements FollowingRawContract
      *
      * Remove the current user as a follower of one or more artists or other Spotify users.
      *
-     * @param array{ids?: list<string>}|FollowingUnfollowParams $params
+     * @param array{
+     *   ids?: list<string>, published?: bool
+     * }|FollowingUnfollowParams $params
      *
      * @return BaseResponse<mixed>
      *

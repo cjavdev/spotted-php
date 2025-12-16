@@ -91,7 +91,7 @@ final class ShowsRawService implements ShowsRawContract
      *
      * Delete one or more shows from current Spotify user's library.
      *
-     * @param array{ids?: list<string>}|ShowRemoveParams $params
+     * @param array{ids?: list<string>, published?: bool}|ShowRemoveParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -121,7 +121,7 @@ final class ShowsRawService implements ShowsRawContract
      *
      * Save one or more shows to current Spotify user's library.
      *
-     * @param array{ids?: list<string>}|ShowSaveParams $params
+     * @param array{ids?: list<string>, published?: bool}|ShowSaveParams $params
      *
      * @return BaseResponse<mixed>
      *

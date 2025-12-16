@@ -308,6 +308,7 @@ final class PlayerService implements PlayerContract
      * "position" is zero based and can’t be negative. Example: `"offset": {"position": 5}`
      * "uri" is a string representing the uri of the item to start at. Example: `"offset": {"uri": "spotify:track:1301WleyT98MSxVHPZCA6M"}`
      * @param int $positionMs Body param: Indicates from what position to start playback. Must be a positive number. Passing in a position that is greater than the length of the track will cause the player to start playing the next song.
+     * @param bool $published Body param: The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
      * @param list<string> $uris Body param: Optional. A JSON array of the Spotify track URIs to play.
      * For example: `{"uris": ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh", "spotify:track:1301WleyT98MSxVHPZCA6M"]}`
      *
@@ -318,6 +319,7 @@ final class PlayerService implements PlayerContract
         ?string $contextUri = null,
         ?array $offset = null,
         ?int $positionMs = null,
+        ?bool $published = null,
         ?array $uris = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
@@ -327,6 +329,7 @@ final class PlayerService implements PlayerContract
                 'contextUri' => $contextUri,
                 'offset' => $offset,
                 'positionMs' => $positionMs,
+                'published' => $published,
                 'uris' => $uris,
             ],
         );
@@ -369,15 +372,19 @@ final class PlayerService implements PlayerContract
      *
      * @param list<string> $deviceIDs A JSON array containing the ID of the device on which playback should be started/transferred.<br/>For example:`{device_ids:["74ASZWbe4lXaubB36ztrGX"]}`<br/>_**Note**: Although an array is accepted, only a single device_id is currently supported. Supplying more than one will return `400 Bad Request`_
      * @param bool $play **true**: ensure playback happens on new device.<br/>**false** or not provided: keep the current playback state.
+     * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
      *
      * @throws APIException
      */
     public function transfer(
         array $deviceIDs,
         ?bool $play = null,
-        ?RequestOptions $requestOptions = null
+        ?bool $published = null,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = Util::removeNulls(['deviceIDs' => $deviceIDs, 'play' => $play]);
+        $params = Util::removeNulls(
+            ['deviceIDs' => $deviceIDs, 'play' => $play, 'published' => $published]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->transfer(params: $params, requestOptions: $requestOptions);

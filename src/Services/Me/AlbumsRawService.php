@@ -91,7 +91,7 @@ final class AlbumsRawService implements AlbumsRawContract
      *
      * Remove one or more albums from the current user's 'Your Music' library.
      *
-     * @param array{ids?: list<string>}|AlbumRemoveParams $params
+     * @param array{ids?: list<string>, published?: bool}|AlbumRemoveParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -121,7 +121,7 @@ final class AlbumsRawService implements AlbumsRawContract
      *
      * Save one or more albums to the current user's 'Your Music' library.
      *
-     * @param array{ids?: list<string>}|AlbumSaveParams $params
+     * @param array{ids?: list<string>, published?: bool}|AlbumSaveParams $params
      *
      * @return BaseResponse<mixed>
      *

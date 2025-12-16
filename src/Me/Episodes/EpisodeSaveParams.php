@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Episodes;
 
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
@@ -15,7 +16,9 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Me\EpisodesService::save()
  *
- * @phpstan-type EpisodeSaveParamsShape = array{ids: list<string>}
+ * @phpstan-type EpisodeSaveParamsShape = array{
+ *   ids: list<string>, published?: bool
+ * }
  */
 final class EpisodeSaveParams implements BaseModel
 {
@@ -30,6 +33,12 @@ final class EpisodeSaveParams implements BaseModel
      */
     #[Required(list: 'string')]
     public array $ids;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * `new EpisodeSaveParams()` is missing required properties by the API.
@@ -57,11 +66,13 @@ final class EpisodeSaveParams implements BaseModel
      *
      * @param list<string> $ids
      */
-    public static function with(array $ids): self
+    public static function with(array $ids, ?bool $published = null): self
     {
         $self = new self;
 
         $self['ids'] = $ids;
+
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -75,6 +86,17 @@ final class EpisodeSaveParams implements BaseModel
     {
         $self = clone $this;
         $self['ids'] = $ids;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

@@ -361,6 +361,7 @@ final class PlayerRawService implements PlayerRawContract
      *   contextUri?: string,
      *   offset?: array<string,mixed>,
      *   positionMs?: int,
+     *   published?: bool,
      *   uris?: list<string>,
      * }|PlayerStartPlaybackParams $params
      *
@@ -427,7 +428,9 @@ final class PlayerRawService implements PlayerRawContract
      *
      * Transfer playback to a new device and optionally begin playback. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
-     * @param array{deviceIDs: list<string>, play?: bool}|PlayerTransferParams $params
+     * @param array{
+     *   deviceIDs: list<string>, play?: bool, published?: bool
+     * }|PlayerTransferParams $params
      *
      * @return BaseResponse<mixed>
      *

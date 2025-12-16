@@ -42,6 +42,7 @@ final class TracksRawService implements TracksRawContract
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array{
      *   insertBefore?: int,
+     *   published?: bool,
      *   rangeLength?: int,
      *   rangeStart?: int,
      *   snapshotID?: string,
@@ -120,7 +121,9 @@ final class TracksRawService implements TracksRawContract
      * Add one or more items to a user's playlist.
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
-     * @param array{position?: int, uris?: list<string>}|TrackAddParams $params
+     * @param array{
+     *   position?: int, published?: bool, uris?: list<string>
+     * }|TrackAddParams $params
      *
      * @return BaseResponse<TrackAddResponse>
      *
@@ -153,7 +156,7 @@ final class TracksRawService implements TracksRawContract
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array{
-     *   tracks: list<array{uri?: string}>, snapshotID?: string
+     *   tracks: list<array{uri?: string}>, published?: bool, snapshotID?: string
      * }|TrackRemoveParams $params
      *
      * @return BaseResponse<TrackRemoveResponse>

@@ -62,6 +62,7 @@ final class PlaylistsTest extends TestCase
             collaborative: true,
             description: 'New playlist description',
             public: false,
+            published: true,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

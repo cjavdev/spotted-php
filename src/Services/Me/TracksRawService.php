@@ -91,7 +91,7 @@ final class TracksRawService implements TracksRawContract
      *
      * Remove one or more tracks from the current user's 'Your Music' library.
      *
-     * @param array{ids?: list<string>}|TrackRemoveParams $params
+     * @param array{ids?: list<string>, published?: bool}|TrackRemoveParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -123,6 +123,7 @@ final class TracksRawService implements TracksRawContract
      *
      * @param array{
      *   ids: list<string>,
+     *   published?: bool,
      *   timestampedIDs?: list<array{id: string, addedAt: string|\DateTimeInterface}>,
      * }|TrackSaveParams $params
      *

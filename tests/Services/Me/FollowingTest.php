@@ -113,7 +113,10 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->follow(ids: ['string']);
+        $result = $this->client->me->following->follow(
+            ids: ['string'],
+            published: true
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);

@@ -67,7 +67,11 @@ final class PlaylistsRawService implements PlaylistsRawContract
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array{
-     *   collaborative?: bool, description?: string, name?: string, public?: bool
+     *   collaborative?: bool,
+     *   description?: string,
+     *   name?: string,
+     *   public?: bool,
+     *   published?: bool,
      * }|PlaylistUpdateParams $params
      *
      * @return BaseResponse<mixed>

@@ -115,6 +115,7 @@ final class TracksTest extends TestCase
 
         $result = $this->client->me->tracks->save(
             ids: ['string'],
+            published: true,
             timestampedIDs: [
                 [
                     'id' => 'id',

@@ -17,7 +17,9 @@ use Spotted\Playlists\Tracks\TrackRemoveParams\Track;
  * @see Spotted\Services\Playlists\TracksService::remove()
  *
  * @phpstan-type TrackRemoveParamsShape = array{
- *   tracks: list<Track|array{uri?: string|null}>, snapshotID?: string
+ *   tracks: list<Track|array{uri?: string|null}>,
+ *   published?: bool,
+ *   snapshotID?: string,
  * }
  */
 final class TrackRemoveParams implements BaseModel
@@ -34,6 +36,12 @@ final class TrackRemoveParams implements BaseModel
      */
     #[Required(list: Track::class)]
     public array $tracks;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The playlist's snapshot ID against which you want to make the changes.
@@ -69,12 +77,16 @@ final class TrackRemoveParams implements BaseModel
      *
      * @param list<Track|array{uri?: string|null}> $tracks
      */
-    public static function with(array $tracks, ?string $snapshotID = null): self
-    {
+    public static function with(
+        array $tracks,
+        ?bool $published = null,
+        ?string $snapshotID = null
+    ): self {
         $self = new self;
 
         $self['tracks'] = $tracks;
 
+        null !== $published && $self['published'] = $published;
         null !== $snapshotID && $self['snapshotID'] = $snapshotID;
 
         return $self;
@@ -90,6 +102,17 @@ final class TrackRemoveParams implements BaseModel
     {
         $self = clone $this;
         $self['tracks'] = $tracks;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }

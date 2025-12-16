@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::transfer()
  *
  * @phpstan-type PlayerTransferParamsShape = array{
- *   deviceIDs: list<string>, play?: bool
+ *   deviceIDs: list<string>, play?: bool, published?: bool
  * }
  */
 final class PlayerTransferParams implements BaseModel
@@ -38,6 +38,12 @@ final class PlayerTransferParams implements BaseModel
      */
     #[Optional]
     public ?bool $play;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * `new PlayerTransferParams()` is missing required properties by the API.
@@ -65,13 +71,17 @@ final class PlayerTransferParams implements BaseModel
      *
      * @param list<string> $deviceIDs
      */
-    public static function with(array $deviceIDs, ?bool $play = null): self
-    {
+    public static function with(
+        array $deviceIDs,
+        ?bool $play = null,
+        ?bool $published = null
+    ): self {
         $self = new self;
 
         $self['deviceIDs'] = $deviceIDs;
 
         null !== $play && $self['play'] = $play;
+        null !== $published && $self['published'] = $published;
 
         return $self;
     }
@@ -96,6 +106,17 @@ final class PlayerTransferParams implements BaseModel
     {
         $self = clone $this;
         $self['play'] = $play;
+
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
 
         return $self;
     }
