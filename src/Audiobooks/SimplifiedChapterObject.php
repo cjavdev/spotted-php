@@ -15,6 +15,11 @@ use Spotted\ImageObject;
 use Spotted\ResumePointObject;
 
 /**
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ * @phpstan-import-type ChapterRestrictionObjectShape from \Spotted\ChapterRestrictionObject
+ * @phpstan-import-type ResumePointObjectShape from \Spotted\ResumePointObject
+ *
  * @phpstan-type SimplifiedChapterObjectShape = array{
  *   id: string,
  *   audioPreviewURL: string|null,
@@ -22,21 +27,21 @@ use Spotted\ResumePointObject;
  *   description: string,
  *   durationMs: int,
  *   explicit: bool,
- *   externalURLs: ExternalURLObject,
+ *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
  *   htmlDescription: string,
- *   images: list<ImageObject>,
+ *   images: list<ImageObjectShape>,
  *   isPlayable: bool,
  *   languages: list<string>,
  *   name: string,
  *   releaseDate: string,
- *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
- *   type?: 'episode',
+ *   releaseDatePrecision: ReleaseDatePrecision|value-of<ReleaseDatePrecision>,
+ *   type: 'episode',
  *   uri: string,
  *   availableMarkets?: list<string>|null,
  *   published?: bool|null,
- *   restrictions?: ChapterRestrictionObject|null,
- *   resumePoint?: ResumePointObject|null,
+ *   restrictions?: null|ChapterRestrictionObject|ChapterRestrictionObjectShape,
+ *   resumePoint?: null|ResumePointObject|ResumePointObjectShape,
  * }
  */
 final class SimplifiedChapterObject implements BaseModel
@@ -239,21 +244,13 @@ final class SimplifiedChapterObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param ExternalURLObjectShape $externalURLs
+     * @param list<ImageObjectShape> $images
      * @param list<string> $languages
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
      * @param list<string> $availableMarkets
-     * @param ChapterRestrictionObject|array{
-     *   published?: bool|null, reason?: string|null
-     * } $restrictions
-     * @param ResumePointObject|array{
-     *   fullyPlayed?: bool|null, published?: bool|null, resumePositionMs?: int|null
-     * } $resumePoint
+     * @param ChapterRestrictionObjectShape $restrictions
+     * @param ResumePointObjectShape $resumePoint
      */
     public static function with(
         string $id,
@@ -373,9 +370,7 @@ final class SimplifiedChapterObject implements BaseModel
     /**
      * External URLs for this chapter.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -411,9 +406,7 @@ final class SimplifiedChapterObject implements BaseModel
     /**
      * The cover art for the chapter in various sizes, widest first.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
@@ -521,9 +514,7 @@ final class SimplifiedChapterObject implements BaseModel
     /**
      * Included in the response when a content restriction is applied.
      *
-     * @param ChapterRestrictionObject|array{
-     *   published?: bool|null, reason?: string|null
-     * } $restrictions
+     * @param ChapterRestrictionObjectShape $restrictions
      */
     public function withRestrictions(
         ChapterRestrictionObject|array $restrictions
@@ -537,9 +528,7 @@ final class SimplifiedChapterObject implements BaseModel
     /**
      * The user's most recent position in the chapter. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
      *
-     * @param ResumePointObject|array{
-     *   fullyPlayed?: bool|null, published?: bool|null, resumePositionMs?: int|null
-     * } $resumePoint
+     * @param ResumePointObjectShape $resumePoint
      */
     public function withResumePoint(ResumePointObject|array $resumePoint): self
     {

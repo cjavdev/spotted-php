@@ -23,7 +23,7 @@ interface TracksRawContract
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
-     * @param array<mixed>|TrackUpdateParams $params
+     * @param array<string,mixed>|TrackUpdateParams $params
      *
      * @return BaseResponse<TrackUpdateResponse>
      *
@@ -39,7 +39,7 @@ interface TracksRawContract
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
-     * @param array<mixed>|TrackListParams $params
+     * @param array<string,mixed>|TrackListParams $params
      *
      * @return BaseResponse<CursorURLPage<PlaylistTrackObject>>
      *
@@ -55,7 +55,7 @@ interface TracksRawContract
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
-     * @param array<mixed>|TrackAddParams $params
+     * @param array<string,mixed>|TrackAddParams $params
      *
      * @return BaseResponse<TrackAddResponse>
      *
@@ -71,7 +71,7 @@ interface TracksRawContract
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
-     * @param array<mixed>|TrackRemoveParams $params
+     * @param array<string,mixed>|TrackRemoveParams $params
      *
      * @return BaseResponse<TrackRemoveResponse>
      *

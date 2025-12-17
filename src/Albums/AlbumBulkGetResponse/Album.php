@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Spotted\Albums\AlbumBulkGetResponse;
 
 use Spotted\AlbumRestrictionObject;
-use Spotted\AlbumRestrictionObject\Reason;
 use Spotted\Albums\AlbumBulkGetResponse\Album\AlbumType;
 use Spotted\Albums\AlbumBulkGetResponse\Album\ReleaseDatePrecision;
 use Spotted\Albums\AlbumBulkGetResponse\Album\Tracks;
@@ -18,32 +17,38 @@ use Spotted\ExternalIDObject;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
 use Spotted\SimplifiedArtistObject;
-use Spotted\SimplifiedArtistObject\Type;
-use Spotted\SimplifiedTrackObject;
 
 /**
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ * @phpstan-import-type SimplifiedArtistObjectShape from \Spotted\SimplifiedArtistObject
+ * @phpstan-import-type CopyrightObjectShape from \Spotted\CopyrightObject
+ * @phpstan-import-type ExternalIDObjectShape from \Spotted\ExternalIDObject
+ * @phpstan-import-type AlbumRestrictionObjectShape from \Spotted\AlbumRestrictionObject
+ * @phpstan-import-type TracksShape from \Spotted\Albums\AlbumBulkGetResponse\Album\Tracks
+ *
  * @phpstan-type AlbumShape = array{
  *   id: string,
- *   albumType: value-of<AlbumType>,
+ *   albumType: AlbumType|value-of<AlbumType>,
  *   availableMarkets: list<string>,
- *   externalURLs: ExternalURLObject,
+ *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
- *   images: list<ImageObject>,
+ *   images: list<ImageObjectShape>,
  *   name: string,
  *   releaseDate: string,
- *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
+ *   releaseDatePrecision: ReleaseDatePrecision|value-of<ReleaseDatePrecision>,
  *   totalTracks: int,
- *   type?: 'album',
+ *   type: 'album',
  *   uri: string,
- *   artists?: list<SimplifiedArtistObject>|null,
- *   copyrights?: list<CopyrightObject>|null,
- *   externalIDs?: ExternalIDObject|null,
+ *   artists?: list<SimplifiedArtistObjectShape>|null,
+ *   copyrights?: list<CopyrightObjectShape>|null,
+ *   externalIDs?: null|ExternalIDObject|ExternalIDObjectShape,
  *   genres?: list<string>|null,
  *   label?: string|null,
  *   popularity?: int|null,
  *   published?: bool|null,
- *   restrictions?: AlbumRestrictionObject|null,
- *   tracks?: Tracks|null,
+ *   restrictions?: null|AlbumRestrictionObject|AlbumRestrictionObjectShape,
+ *   tracks?: null|Tracks|TracksShape,
  * }
  */
 final class Album implements BaseModel
@@ -244,45 +249,15 @@ final class Album implements BaseModel
      *
      * @param AlbumType|value-of<AlbumType> $albumType
      * @param list<string> $availableMarkets
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param ExternalURLObjectShape $externalURLs
+     * @param list<ImageObjectShape> $images
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
-     * @param list<SimplifiedArtistObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   name?: string|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }> $artists
-     * @param list<CopyrightObject|array{
-     *   published?: bool|null, text?: string|null, type?: string|null
-     * }> $copyrights
-     * @param ExternalIDObject|array{
-     *   ean?: string|null,
-     *   isrc?: string|null,
-     *   published?: bool|null,
-     *   upc?: string|null,
-     * } $externalIDs
+     * @param list<SimplifiedArtistObjectShape> $artists
+     * @param list<CopyrightObjectShape> $copyrights
+     * @param ExternalIDObjectShape $externalIDs
      * @param list<string> $genres
-     * @param AlbumRestrictionObject|array{
-     *   published?: bool|null, reason?: value-of<Reason>|null
-     * } $restrictions
-     * @param Tracks|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<SimplifiedTrackObject>|null,
-     *   published?: bool|null,
-     * } $tracks
+     * @param AlbumRestrictionObjectShape $restrictions
+     * @param TracksShape $tracks
      */
     public static function with(
         string $id,
@@ -373,9 +348,7 @@ final class Album implements BaseModel
     /**
      * Known external URLs for this album.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -400,9 +373,7 @@ final class Album implements BaseModel
     /**
      * The cover art for the album in various sizes, widest first.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
@@ -473,15 +444,7 @@ final class Album implements BaseModel
     /**
      * The artists of the album. Each artist object includes a link in `href` to more detailed information about the artist.
      *
-     * @param list<SimplifiedArtistObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   name?: string|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }> $artists
+     * @param list<SimplifiedArtistObjectShape> $artists
      */
     public function withArtists(array $artists): self
     {
@@ -494,9 +457,7 @@ final class Album implements BaseModel
     /**
      * The copyright statements of the album.
      *
-     * @param list<CopyrightObject|array{
-     *   published?: bool|null, text?: string|null, type?: string|null
-     * }> $copyrights
+     * @param list<CopyrightObjectShape> $copyrights
      */
     public function withCopyrights(array $copyrights): self
     {
@@ -509,12 +470,7 @@ final class Album implements BaseModel
     /**
      * Known external IDs for the album.
      *
-     * @param ExternalIDObject|array{
-     *   ean?: string|null,
-     *   isrc?: string|null,
-     *   published?: bool|null,
-     *   upc?: string|null,
-     * } $externalIDs
+     * @param ExternalIDObjectShape $externalIDs
      */
     public function withExternalIDs(ExternalIDObject|array $externalIDs): self
     {
@@ -573,9 +529,7 @@ final class Album implements BaseModel
     /**
      * Included in the response when a content restriction is applied.
      *
-     * @param AlbumRestrictionObject|array{
-     *   published?: bool|null, reason?: value-of<Reason>|null
-     * } $restrictions
+     * @param AlbumRestrictionObjectShape $restrictions
      */
     public function withRestrictions(
         AlbumRestrictionObject|array $restrictions
@@ -589,16 +543,7 @@ final class Album implements BaseModel
     /**
      * The tracks of the album.
      *
-     * @param Tracks|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<SimplifiedTrackObject>|null,
-     *   published?: bool|null,
-     * } $tracks
+     * @param TracksShape $tracks
      */
     public function withTracks(Tracks|array $tracks): self
     {

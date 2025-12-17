@@ -5,17 +5,14 @@ declare(strict_types=1);
 namespace Spotted\Search\SearchQueryResponse;
 
 use Spotted\AudiobookBase;
-use Spotted\AuthorObject;
-use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ExternalURLObject;
-use Spotted\ImageObject;
-use Spotted\NarratorObject;
 
 /**
+ * @phpstan-import-type AudiobookBaseShape from \Spotted\AudiobookBase
+ *
  * @phpstan-type AudiobooksShape = array{
  *   href: string,
  *   limit: int,
@@ -23,7 +20,7 @@ use Spotted\NarratorObject;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<AudiobookBase>|null,
+ *   items?: list<AudiobookBaseShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -110,28 +107,7 @@ final class Audiobooks implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AudiobookBase|array{
-     *   id: string,
-     *   authors: list<AuthorObject>,
-     *   availableMarkets: list<string>,
-     *   copyrights: list<CopyrightObject>,
-     *   description: string,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   languages: list<string>,
-     *   mediaType: string,
-     *   name: string,
-     *   narrators: list<NarratorObject>,
-     *   publisher: string,
-     *   totalChapters: int,
-     *   type?: 'audiobook',
-     *   uri: string,
-     *   edition?: string|null,
-     *   published?: bool|null,
-     * }> $items
+     * @param list<AudiobookBaseShape> $items
      */
     public static function with(
         string $href,
@@ -225,28 +201,7 @@ final class Audiobooks implements BaseModel
     }
 
     /**
-     * @param list<AudiobookBase|array{
-     *   id: string,
-     *   authors: list<AuthorObject>,
-     *   availableMarkets: list<string>,
-     *   copyrights: list<CopyrightObject>,
-     *   description: string,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   languages: list<string>,
-     *   mediaType: string,
-     *   name: string,
-     *   narrators: list<NarratorObject>,
-     *   publisher: string,
-     *   totalChapters: int,
-     *   type?: 'audiobook',
-     *   uri: string,
-     *   edition?: string|null,
-     *   published?: bool|null,
-     * }> $items
+     * @param list<AudiobookBaseShape> $items
      */
     public function withItems(array $items): self
     {

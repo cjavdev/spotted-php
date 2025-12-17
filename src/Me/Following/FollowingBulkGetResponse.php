@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Following;
 
-use Spotted\ArtistObject;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\Me\Following\FollowingBulkGetResponse\Artists;
-use Spotted\Me\Following\FollowingBulkGetResponse\Artists\Cursors;
 
 /**
- * @phpstan-type FollowingBulkGetResponseShape = array{artists: Artists}
+ * @phpstan-import-type ArtistsShape from \Spotted\Me\Following\FollowingBulkGetResponse\Artists
+ *
+ * @phpstan-type FollowingBulkGetResponseShape = array{
+ *   artists: Artists|ArtistsShape
+ * }
  */
 final class FollowingBulkGetResponse implements BaseModel
 {
@@ -46,15 +48,7 @@ final class FollowingBulkGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Artists|array{
-     *   cursors?: Cursors|null,
-     *   href?: string|null,
-     *   items?: list<ArtistObject>|null,
-     *   limit?: int|null,
-     *   next?: string|null,
-     *   published?: bool|null,
-     *   total?: int|null,
-     * } $artists
+     * @param ArtistsShape $artists
      */
     public static function with(Artists|array $artists): self
     {
@@ -66,15 +60,7 @@ final class FollowingBulkGetResponse implements BaseModel
     }
 
     /**
-     * @param Artists|array{
-     *   cursors?: Cursors|null,
-     *   href?: string|null,
-     *   items?: list<ArtistObject>|null,
-     *   limit?: int|null,
-     *   next?: string|null,
-     *   published?: bool|null,
-     *   total?: int|null,
-     * } $artists
+     * @param ArtistsShape $artists
      */
     public function withArtists(Artists|array $artists): self
     {

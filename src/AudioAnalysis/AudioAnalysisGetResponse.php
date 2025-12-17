@@ -13,15 +13,21 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type TimeIntervalObjectShape from \Spotted\AudioAnalysis\TimeIntervalObject
+ * @phpstan-import-type MetaShape from \Spotted\AudioAnalysis\AudioAnalysisGetResponse\Meta
+ * @phpstan-import-type SectionShape from \Spotted\AudioAnalysis\AudioAnalysisGetResponse\Section
+ * @phpstan-import-type SegmentShape from \Spotted\AudioAnalysis\AudioAnalysisGetResponse\Segment
+ * @phpstan-import-type TrackShape from \Spotted\AudioAnalysis\AudioAnalysisGetResponse\Track
+ *
  * @phpstan-type AudioAnalysisGetResponseShape = array{
- *   bars?: list<TimeIntervalObject>|null,
- *   beats?: list<TimeIntervalObject>|null,
- *   meta?: Meta|null,
+ *   bars?: list<TimeIntervalObjectShape>|null,
+ *   beats?: list<TimeIntervalObjectShape>|null,
+ *   meta?: null|Meta|MetaShape,
  *   published?: bool|null,
- *   sections?: list<Section>|null,
- *   segments?: list<Segment>|null,
- *   tatums?: list<TimeIntervalObject>|null,
- *   track?: Track|null,
+ *   sections?: list<SectionShape>|null,
+ *   segments?: list<SegmentShape>|null,
+ *   tatums?: list<TimeIntervalObjectShape>|null,
+ *   track?: null|Track|TrackShape,
  * }
  */
 final class AudioAnalysisGetResponse implements BaseModel
@@ -91,88 +97,13 @@ final class AudioAnalysisGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TimeIntervalObject|array{
-     *   confidence?: float|null,
-     *   duration?: float|null,
-     *   published?: bool|null,
-     *   start?: float|null,
-     * }> $bars
-     * @param list<TimeIntervalObject|array{
-     *   confidence?: float|null,
-     *   duration?: float|null,
-     *   published?: bool|null,
-     *   start?: float|null,
-     * }> $beats
-     * @param Meta|array{
-     *   analysisTime?: float|null,
-     *   analyzerVersion?: string|null,
-     *   detailedStatus?: string|null,
-     *   inputProcess?: string|null,
-     *   platform?: string|null,
-     *   statusCode?: int|null,
-     *   timestamp?: int|null,
-     * } $meta
-     * @param list<Section|array{
-     *   confidence?: float|null,
-     *   duration?: float|null,
-     *   key?: int|null,
-     *   keyConfidence?: float|null,
-     *   loudness?: float|null,
-     *   mode?: float|null,
-     *   modeConfidence?: float|null,
-     *   published?: bool|null,
-     *   start?: float|null,
-     *   tempo?: float|null,
-     *   tempoConfidence?: float|null,
-     *   timeSignature?: int|null,
-     *   timeSignatureConfidence?: float|null,
-     * }> $sections
-     * @param list<Segment|array{
-     *   confidence?: float|null,
-     *   duration?: float|null,
-     *   loudnessEnd?: float|null,
-     *   loudnessMax?: float|null,
-     *   loudnessMaxTime?: float|null,
-     *   loudnessStart?: float|null,
-     *   pitches?: list<float>|null,
-     *   published?: bool|null,
-     *   start?: float|null,
-     *   timbre?: list<float>|null,
-     * }> $segments
-     * @param list<TimeIntervalObject|array{
-     *   confidence?: float|null,
-     *   duration?: float|null,
-     *   published?: bool|null,
-     *   start?: float|null,
-     * }> $tatums
-     * @param Track|array{
-     *   analysisChannels?: int|null,
-     *   analysisSampleRate?: int|null,
-     *   codeVersion?: float|null,
-     *   codestring?: string|null,
-     *   duration?: float|null,
-     *   echoprintVersion?: float|null,
-     *   echoprintstring?: string|null,
-     *   endOfFadeIn?: float|null,
-     *   key?: int|null,
-     *   keyConfidence?: float|null,
-     *   loudness?: float|null,
-     *   mode?: int|null,
-     *   modeConfidence?: float|null,
-     *   numSamples?: int|null,
-     *   offsetSeconds?: int|null,
-     *   rhythmVersion?: float|null,
-     *   rhythmstring?: string|null,
-     *   sampleMd5?: string|null,
-     *   startOfFadeOut?: float|null,
-     *   synchVersion?: float|null,
-     *   synchstring?: string|null,
-     *   tempo?: float|null,
-     *   tempoConfidence?: float|null,
-     *   timeSignature?: int|null,
-     *   timeSignatureConfidence?: float|null,
-     *   windowSeconds?: int|null,
-     * } $track
+     * @param list<TimeIntervalObjectShape> $bars
+     * @param list<TimeIntervalObjectShape> $beats
+     * @param MetaShape $meta
+     * @param list<SectionShape> $sections
+     * @param list<SegmentShape> $segments
+     * @param list<TimeIntervalObjectShape> $tatums
+     * @param TrackShape $track
      */
     public static function with(
         ?array $bars = null,
@@ -201,12 +132,7 @@ final class AudioAnalysisGetResponse implements BaseModel
     /**
      * The time intervals of the bars throughout the track. A bar (or measure) is a segment of time defined as a given number of beats.
      *
-     * @param list<TimeIntervalObject|array{
-     *   confidence?: float|null,
-     *   duration?: float|null,
-     *   published?: bool|null,
-     *   start?: float|null,
-     * }> $bars
+     * @param list<TimeIntervalObjectShape> $bars
      */
     public function withBars(array $bars): self
     {
@@ -219,12 +145,7 @@ final class AudioAnalysisGetResponse implements BaseModel
     /**
      * The time intervals of beats throughout the track. A beat is the basic time unit of a piece of music; for example, each tick of a metronome. Beats are typically multiples of tatums.
      *
-     * @param list<TimeIntervalObject|array{
-     *   confidence?: float|null,
-     *   duration?: float|null,
-     *   published?: bool|null,
-     *   start?: float|null,
-     * }> $beats
+     * @param list<TimeIntervalObjectShape> $beats
      */
     public function withBeats(array $beats): self
     {
@@ -235,15 +156,7 @@ final class AudioAnalysisGetResponse implements BaseModel
     }
 
     /**
-     * @param Meta|array{
-     *   analysisTime?: float|null,
-     *   analyzerVersion?: string|null,
-     *   detailedStatus?: string|null,
-     *   inputProcess?: string|null,
-     *   platform?: string|null,
-     *   statusCode?: int|null,
-     *   timestamp?: int|null,
-     * } $meta
+     * @param MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {
@@ -267,21 +180,7 @@ final class AudioAnalysisGetResponse implements BaseModel
     /**
      * Sections are defined by large variations in rhythm or timbre, e.g. chorus, verse, bridge, guitar solo, etc. Each section contains its own descriptions of tempo, key, mode, time_signature, and loudness.
      *
-     * @param list<Section|array{
-     *   confidence?: float|null,
-     *   duration?: float|null,
-     *   key?: int|null,
-     *   keyConfidence?: float|null,
-     *   loudness?: float|null,
-     *   mode?: float|null,
-     *   modeConfidence?: float|null,
-     *   published?: bool|null,
-     *   start?: float|null,
-     *   tempo?: float|null,
-     *   tempoConfidence?: float|null,
-     *   timeSignature?: int|null,
-     *   timeSignatureConfidence?: float|null,
-     * }> $sections
+     * @param list<SectionShape> $sections
      */
     public function withSections(array $sections): self
     {
@@ -294,18 +193,7 @@ final class AudioAnalysisGetResponse implements BaseModel
     /**
      * Each segment contains a roughly conisistent sound throughout its duration.
      *
-     * @param list<Segment|array{
-     *   confidence?: float|null,
-     *   duration?: float|null,
-     *   loudnessEnd?: float|null,
-     *   loudnessMax?: float|null,
-     *   loudnessMaxTime?: float|null,
-     *   loudnessStart?: float|null,
-     *   pitches?: list<float>|null,
-     *   published?: bool|null,
-     *   start?: float|null,
-     *   timbre?: list<float>|null,
-     * }> $segments
+     * @param list<SegmentShape> $segments
      */
     public function withSegments(array $segments): self
     {
@@ -318,12 +206,7 @@ final class AudioAnalysisGetResponse implements BaseModel
     /**
      * A tatum represents the lowest regular pulse train that a listener intuitively infers from the timing of perceived musical events (segments).
      *
-     * @param list<TimeIntervalObject|array{
-     *   confidence?: float|null,
-     *   duration?: float|null,
-     *   published?: bool|null,
-     *   start?: float|null,
-     * }> $tatums
+     * @param list<TimeIntervalObjectShape> $tatums
      */
     public function withTatums(array $tatums): self
     {
@@ -334,34 +217,7 @@ final class AudioAnalysisGetResponse implements BaseModel
     }
 
     /**
-     * @param Track|array{
-     *   analysisChannels?: int|null,
-     *   analysisSampleRate?: int|null,
-     *   codeVersion?: float|null,
-     *   codestring?: string|null,
-     *   duration?: float|null,
-     *   echoprintVersion?: float|null,
-     *   echoprintstring?: string|null,
-     *   endOfFadeIn?: float|null,
-     *   key?: int|null,
-     *   keyConfidence?: float|null,
-     *   loudness?: float|null,
-     *   mode?: int|null,
-     *   modeConfidence?: float|null,
-     *   numSamples?: int|null,
-     *   offsetSeconds?: int|null,
-     *   rhythmVersion?: float|null,
-     *   rhythmstring?: string|null,
-     *   sampleMd5?: string|null,
-     *   startOfFadeOut?: float|null,
-     *   synchVersion?: float|null,
-     *   synchstring?: string|null,
-     *   tempo?: float|null,
-     *   tempoConfidence?: float|null,
-     *   timeSignature?: int|null,
-     *   timeSignatureConfidence?: float|null,
-     *   windowSeconds?: int|null,
-     * } $track
+     * @param TrackShape $track
      */
     public function withTrack(Track|array $track): self
     {

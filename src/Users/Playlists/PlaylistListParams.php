@@ -14,7 +14,9 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Users\PlaylistsService::list()
  *
- * @phpstan-type PlaylistListParamsShape = array{limit?: int, offset?: int}
+ * @phpstan-type PlaylistListParamsShape = array{
+ *   limit?: int|null, offset?: int|null
+ * }
  */
 final class PlaylistListParams implements BaseModel
 {

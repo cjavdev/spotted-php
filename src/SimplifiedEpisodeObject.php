@@ -11,28 +11,33 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\SimplifiedEpisodeObject\ReleaseDatePrecision;
 
 /**
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ * @phpstan-import-type EpisodeRestrictionObjectShape from \Spotted\EpisodeRestrictionObject
+ * @phpstan-import-type ResumePointObjectShape from \Spotted\ResumePointObject
+ *
  * @phpstan-type SimplifiedEpisodeObjectShape = array{
  *   id: string,
  *   audioPreviewURL: string|null,
  *   description: string,
  *   durationMs: int,
  *   explicit: bool,
- *   externalURLs: ExternalURLObject,
+ *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
  *   htmlDescription: string,
- *   images: list<ImageObject>,
+ *   images: list<ImageObjectShape>,
  *   isExternallyHosted: bool,
  *   isPlayable: bool,
  *   languages: list<string>,
  *   name: string,
  *   releaseDate: string,
- *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
- *   type?: 'episode',
+ *   releaseDatePrecision: ReleaseDatePrecision|value-of<ReleaseDatePrecision>,
+ *   type: 'episode',
  *   uri: string,
  *   language?: string|null,
  *   published?: bool|null,
- *   restrictions?: EpisodeRestrictionObject|null,
- *   resumePoint?: ResumePointObject|null,
+ *   restrictions?: null|EpisodeRestrictionObject|EpisodeRestrictionObjectShape,
+ *   resumePoint?: null|ResumePointObject|ResumePointObjectShape,
  * }
  */
 final class SimplifiedEpisodeObject implements BaseModel
@@ -235,20 +240,12 @@ final class SimplifiedEpisodeObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param ExternalURLObjectShape $externalURLs
+     * @param list<ImageObjectShape> $images
      * @param list<string> $languages
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
-     * @param EpisodeRestrictionObject|array{
-     *   published?: bool|null, reason?: string|null
-     * } $restrictions
-     * @param ResumePointObject|array{
-     *   fullyPlayed?: bool|null, published?: bool|null, resumePositionMs?: int|null
-     * } $resumePoint
+     * @param EpisodeRestrictionObjectShape $restrictions
+     * @param ResumePointObjectShape $resumePoint
      */
     public static function with(
         string $id,
@@ -357,9 +354,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * External URLs for this episode.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -395,9 +390,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * The cover art for the episode in various sizes, widest first.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
@@ -514,9 +507,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * Included in the response when a content restriction is applied.
      *
-     * @param EpisodeRestrictionObject|array{
-     *   published?: bool|null, reason?: string|null
-     * } $restrictions
+     * @param EpisodeRestrictionObjectShape $restrictions
      */
     public function withRestrictions(
         EpisodeRestrictionObject|array $restrictions
@@ -530,9 +521,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * The user's most recent position in the episode. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
      *
-     * @param ResumePointObject|array{
-     *   fullyPlayed?: bool|null, published?: bool|null, resumePositionMs?: int|null
-     * } $resumePoint
+     * @param ResumePointObjectShape $resumePoint
      */
     public function withResumePoint(ResumePointObject|array $resumePoint): self
     {

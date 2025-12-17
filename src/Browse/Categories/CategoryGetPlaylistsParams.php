@@ -15,7 +15,9 @@ use Spotted\Core\Contracts\BaseModel;
  * @deprecated
  * @see Spotted\Services\Browse\CategoriesService::getPlaylists()
  *
- * @phpstan-type CategoryGetPlaylistsParamsShape = array{limit?: int, offset?: int}
+ * @phpstan-type CategoryGetPlaylistsParamsShape = array{
+ *   limit?: int|null, offset?: int|null
+ * }
  */
 final class CategoryGetPlaylistsParams implements BaseModel
 {

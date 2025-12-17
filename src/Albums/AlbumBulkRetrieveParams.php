@@ -15,7 +15,9 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\AlbumsService::bulkRetrieve()
  *
- * @phpstan-type AlbumBulkRetrieveParamsShape = array{ids: string, market?: string}
+ * @phpstan-type AlbumBulkRetrieveParamsShape = array{
+ *   ids: string, market?: string|null
+ * }
  */
 final class AlbumBulkRetrieveParams implements BaseModel
 {

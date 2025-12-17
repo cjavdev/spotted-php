@@ -10,17 +10,21 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type FollowersObjectShape from \Spotted\FollowersObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ *
  * @phpstan-type ArtistObjectShape = array{
  *   id?: string|null,
- *   externalURLs?: ExternalURLObject|null,
- *   followers?: FollowersObject|null,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
+ *   followers?: null|FollowersObject|FollowersObjectShape,
  *   genres?: list<string>|null,
  *   href?: string|null,
- *   images?: list<ImageObject>|null,
+ *   images?: list<ImageObjectShape>|null,
  *   name?: string|null,
  *   popularity?: int|null,
  *   published?: bool|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   uri?: string|null,
  * }
  */
@@ -111,16 +115,10 @@ final class ArtistObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param FollowersObject|array{
-     *   href?: string|null, published?: bool|null, total?: int|null
-     * } $followers
+     * @param ExternalURLObjectShape $externalURLs
+     * @param FollowersObjectShape $followers
      * @param list<string> $genres
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<ImageObjectShape> $images
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -167,9 +165,7 @@ final class ArtistObject implements BaseModel
     /**
      * Known external URLs for this artist.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -183,9 +179,7 @@ final class ArtistObject implements BaseModel
     /**
      * Information about the followers of the artist.
      *
-     * @param FollowersObject|array{
-     *   href?: string|null, published?: bool|null, total?: int|null
-     * } $followers
+     * @param FollowersObjectShape $followers
      */
     public function withFollowers(FollowersObject|array $followers): self
     {
@@ -222,9 +216,7 @@ final class ArtistObject implements BaseModel
     /**
      * Images of the artist in various sizes, widest first.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {

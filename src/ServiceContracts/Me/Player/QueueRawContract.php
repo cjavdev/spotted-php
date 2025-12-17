@@ -15,7 +15,7 @@ interface QueueRawContract
     /**
      * @api
      *
-     * @param array<mixed>|QueueAddParams $params
+     * @param array<string,mixed>|QueueAddParams $params
      *
      * @return BaseResponse<mixed>
      *

@@ -16,10 +16,10 @@ use Spotted\Playlists\Tracks\TrackRemoveParams\Track;
  *
  * @see Spotted\Services\Playlists\TracksService::remove()
  *
+ * @phpstan-import-type TrackShape from \Spotted\Playlists\Tracks\TrackRemoveParams\Track
+ *
  * @phpstan-type TrackRemoveParamsShape = array{
- *   tracks: list<Track|array{uri?: string|null}>,
- *   published?: bool,
- *   snapshotID?: string,
+ *   tracks: list<TrackShape>, published?: bool|null, snapshotID?: string|null
  * }
  */
 final class TrackRemoveParams implements BaseModel
@@ -75,7 +75,7 @@ final class TrackRemoveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Track|array{uri?: string|null}> $tracks
+     * @param list<TrackShape> $tracks
      */
     public static function with(
         array $tracks,
@@ -96,7 +96,7 @@ final class TrackRemoveParams implements BaseModel
      * An array of objects containing [Spotify URIs](/documentation/web-api/concepts/spotify-uris-ids) of the tracks or episodes to remove.
      * For example: `{ "tracks": [{ "uri": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh" },{ "uri": "spotify:track:1301WleyT98MSxVHPZCA6M" }] }`. A maximum of 100 objects can be sent at once.
      *
-     * @param list<Track|array{uri?: string|null}> $tracks
+     * @param list<TrackShape> $tracks
      */
     public function withTracks(array $tracks): self
     {

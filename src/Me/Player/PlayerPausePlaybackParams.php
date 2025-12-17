@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Me\PlayerService::pausePlayback()
  *
- * @phpstan-type PlayerPausePlaybackParamsShape = array{deviceID?: string}
+ * @phpstan-type PlayerPausePlaybackParamsShape = array{deviceID?: string|null}
  */
 final class PlayerPausePlaybackParams implements BaseModel
 {

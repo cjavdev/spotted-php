@@ -5,43 +5,46 @@ declare(strict_types=1);
 namespace Spotted\Chapters\ChapterBulkGetResponse;
 
 use Spotted\AudiobookBase;
-use Spotted\AuthorObject;
 use Spotted\ChapterRestrictionObject;
 use Spotted\Chapters\ChapterBulkGetResponse\Chapter\ReleaseDatePrecision;
-use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
-use Spotted\NarratorObject;
 use Spotted\ResumePointObject;
 
 /**
+ * @phpstan-import-type AudiobookBaseShape from \Spotted\AudiobookBase
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ * @phpstan-import-type ChapterRestrictionObjectShape from \Spotted\ChapterRestrictionObject
+ * @phpstan-import-type ResumePointObjectShape from \Spotted\ResumePointObject
+ *
  * @phpstan-type ChapterShape = array{
  *   id: string,
  *   audioPreviewURL: string|null,
- *   audiobook: AudiobookBase,
+ *   audiobook: AudiobookBase|AudiobookBaseShape,
  *   chapterNumber: int,
  *   description: string,
  *   durationMs: int,
  *   explicit: bool,
- *   externalURLs: ExternalURLObject,
+ *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
  *   htmlDescription: string,
- *   images: list<ImageObject>,
+ *   images: list<ImageObjectShape>,
  *   isPlayable: bool,
  *   languages: list<string>,
  *   name: string,
  *   releaseDate: string,
- *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
- *   type?: 'episode',
+ *   releaseDatePrecision: ReleaseDatePrecision|value-of<ReleaseDatePrecision>,
+ *   type: 'episode',
  *   uri: string,
  *   availableMarkets?: list<string>|null,
  *   published?: bool|null,
- *   restrictions?: ChapterRestrictionObject|null,
- *   resumePoint?: ResumePointObject|null,
+ *   restrictions?: null|ChapterRestrictionObject|ChapterRestrictionObjectShape,
+ *   resumePoint?: null|ResumePointObject|ResumePointObjectShape,
  * }
  */
 final class Chapter implements BaseModel
@@ -252,43 +255,14 @@ final class Chapter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AudiobookBase|array{
-     *   id: string,
-     *   authors: list<AuthorObject>,
-     *   availableMarkets: list<string>,
-     *   copyrights: list<CopyrightObject>,
-     *   description: string,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   languages: list<string>,
-     *   mediaType: string,
-     *   name: string,
-     *   narrators: list<NarratorObject>,
-     *   publisher: string,
-     *   totalChapters: int,
-     *   type?: 'audiobook',
-     *   uri: string,
-     *   edition?: string|null,
-     *   published?: bool|null,
-     * } $audiobook
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param AudiobookBaseShape $audiobook
+     * @param ExternalURLObjectShape $externalURLs
+     * @param list<ImageObjectShape> $images
      * @param list<string> $languages
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
      * @param list<string> $availableMarkets
-     * @param ChapterRestrictionObject|array{
-     *   published?: bool|null, reason?: string|null
-     * } $restrictions
-     * @param ResumePointObject|array{
-     *   fullyPlayed?: bool|null, published?: bool|null, resumePositionMs?: int|null
-     * } $resumePoint
+     * @param ChapterRestrictionObjectShape $restrictions
+     * @param ResumePointObjectShape $resumePoint
      */
     public static function with(
         string $id,
@@ -366,28 +340,7 @@ final class Chapter implements BaseModel
     /**
      * The audiobook for which the chapter belongs.
      *
-     * @param AudiobookBase|array{
-     *   id: string,
-     *   authors: list<AuthorObject>,
-     *   availableMarkets: list<string>,
-     *   copyrights: list<CopyrightObject>,
-     *   description: string,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   languages: list<string>,
-     *   mediaType: string,
-     *   name: string,
-     *   narrators: list<NarratorObject>,
-     *   publisher: string,
-     *   totalChapters: int,
-     *   type?: 'audiobook',
-     *   uri: string,
-     *   edition?: string|null,
-     *   published?: bool|null,
-     * } $audiobook
+     * @param AudiobookBaseShape $audiobook
      */
     public function withAudiobook(AudiobookBase|array $audiobook): self
     {
@@ -444,9 +397,7 @@ final class Chapter implements BaseModel
     /**
      * External URLs for this chapter.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -482,9 +433,7 @@ final class Chapter implements BaseModel
     /**
      * The cover art for the chapter in various sizes, widest first.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
@@ -592,9 +541,7 @@ final class Chapter implements BaseModel
     /**
      * Included in the response when a content restriction is applied.
      *
-     * @param ChapterRestrictionObject|array{
-     *   published?: bool|null, reason?: string|null
-     * } $restrictions
+     * @param ChapterRestrictionObjectShape $restrictions
      */
     public function withRestrictions(
         ChapterRestrictionObject|array $restrictions
@@ -608,9 +555,7 @@ final class Chapter implements BaseModel
     /**
      * The user's most recent position in the chapter. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
      *
-     * @param ResumePointObject|array{
-     *   fullyPlayed?: bool|null, published?: bool|null, resumePositionMs?: int|null
-     * } $resumePoint
+     * @param ResumePointObjectShape $resumePoint
      */
     public function withResumePoint(ResumePointObject|array $resumePoint): self
     {

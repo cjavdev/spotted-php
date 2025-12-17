@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\FollowingService::follow()
  *
  * @phpstan-type FollowingFollowParamsShape = array{
- *   ids: list<string>, published?: bool
+ *   ids: list<string>, published?: bool|null
  * }
  */
 final class FollowingFollowParams implements BaseModel

@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\EpisodesService::bulkRetrieve()
  *
  * @phpstan-type EpisodeBulkRetrieveParamsShape = array{
- *   ids: string, market?: string
+ *   ids: string, market?: string|null
  * }
  */
 final class EpisodeBulkRetrieveParams implements BaseModel

@@ -17,7 +17,7 @@ interface PlaylistsRawContract
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
-     * @param array<mixed>|PlaylistRetrieveParams $params
+     * @param array<string,mixed>|PlaylistRetrieveParams $params
      *
      * @return BaseResponse<PlaylistGetResponse>
      *
@@ -33,7 +33,7 @@ interface PlaylistsRawContract
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
-     * @param array<mixed>|PlaylistUpdateParams $params
+     * @param array<string,mixed>|PlaylistUpdateParams $params
      *
      * @return BaseResponse<mixed>
      *

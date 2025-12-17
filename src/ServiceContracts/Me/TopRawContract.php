@@ -18,7 +18,7 @@ interface TopRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TopListTopArtistsParams $params
+     * @param array<string,mixed>|TopListTopArtistsParams $params
      *
      * @return BaseResponse<CursorURLPage<ArtistObject>>
      *
@@ -32,7 +32,7 @@ interface TopRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TopListTopTracksParams $params
+     * @param array<string,mixed>|TopListTopTracksParams $params
      *
      * @return BaseResponse<CursorURLPage<TrackObject>>
      *

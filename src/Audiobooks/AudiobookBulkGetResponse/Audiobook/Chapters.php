@@ -5,18 +5,15 @@ declare(strict_types=1);
 namespace Spotted\Audiobooks\AudiobookBulkGetResponse\Audiobook;
 
 use Spotted\Audiobooks\SimplifiedChapterObject;
-use Spotted\Audiobooks\SimplifiedChapterObject\ReleaseDatePrecision;
-use Spotted\ChapterRestrictionObject;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ExternalURLObject;
-use Spotted\ImageObject;
-use Spotted\ResumePointObject;
 
 /**
  * The chapters of the audiobook.
+ *
+ * @phpstan-import-type SimplifiedChapterObjectShape from \Spotted\Audiobooks\SimplifiedChapterObject
  *
  * @phpstan-type ChaptersShape = array{
  *   href: string,
@@ -25,7 +22,7 @@ use Spotted\ResumePointObject;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<SimplifiedChapterObject>|null,
+ *   items?: list<SimplifiedChapterObjectShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -112,29 +109,7 @@ final class Chapters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedChapterObject|array{
-     *   id: string,
-     *   audioPreviewURL: string|null,
-     *   chapterNumber: int,
-     *   description: string,
-     *   durationMs: int,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isPlayable: bool,
-     *   languages: list<string>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   type?: 'episode',
-     *   uri: string,
-     *   availableMarkets?: list<string>|null,
-     *   published?: bool|null,
-     *   restrictions?: ChapterRestrictionObject|null,
-     *   resumePoint?: ResumePointObject|null,
-     * }> $items
+     * @param list<SimplifiedChapterObjectShape> $items
      */
     public static function with(
         string $href,
@@ -228,29 +203,7 @@ final class Chapters implements BaseModel
     }
 
     /**
-     * @param list<SimplifiedChapterObject|array{
-     *   id: string,
-     *   audioPreviewURL: string|null,
-     *   chapterNumber: int,
-     *   description: string,
-     *   durationMs: int,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isPlayable: bool,
-     *   languages: list<string>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   type?: 'episode',
-     *   uri: string,
-     *   availableMarkets?: list<string>|null,
-     *   published?: bool|null,
-     *   restrictions?: ChapterRestrictionObject|null,
-     *   resumePoint?: ResumePointObject|null,
-     * }> $items
+     * @param list<SimplifiedChapterObjectShape> $items
      */
     public function withItems(array $items): self
     {

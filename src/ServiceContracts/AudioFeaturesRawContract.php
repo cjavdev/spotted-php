@@ -34,7 +34,7 @@ interface AudioFeaturesRawContract
      *
      * @api
      *
-     * @param array<mixed>|AudioFeatureBulkRetrieveParams $params
+     * @param array<string,mixed>|AudioFeatureBulkRetrieveParams $params
      *
      * @return BaseResponse<AudioFeatureBulkGetResponse>
      *

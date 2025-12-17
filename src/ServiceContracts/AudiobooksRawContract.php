@@ -22,7 +22,7 @@ interface AudiobooksRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the audiobook
-     * @param array<mixed>|AudiobookRetrieveParams $params
+     * @param array<string,mixed>|AudiobookRetrieveParams $params
      *
      * @return BaseResponse<AudiobookGetResponse>
      *
@@ -37,7 +37,7 @@ interface AudiobooksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AudiobookBulkRetrieveParams $params
+     * @param array<string,mixed>|AudiobookBulkRetrieveParams $params
      *
      * @return BaseResponse<AudiobookBulkGetResponse>
      *
@@ -53,7 +53,7 @@ interface AudiobooksRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the audiobook
-     * @param array<mixed>|AudiobookListChaptersParams $params
+     * @param array<string,mixed>|AudiobookListChaptersParams $params
      *
      * @return BaseResponse<CursorURLPage<SimplifiedChapterObject>>
      *

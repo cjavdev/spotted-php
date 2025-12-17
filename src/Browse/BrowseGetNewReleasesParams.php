@@ -14,7 +14,9 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\BrowseService::getNewReleases()
  *
- * @phpstan-type BrowseGetNewReleasesParamsShape = array{limit?: int, offset?: int}
+ * @phpstan-type BrowseGetNewReleasesParamsShape = array{
+ *   limit?: int|null, offset?: int|null
+ * }
  */
 final class BrowseGetNewReleasesParams implements BaseModel
 {

@@ -18,7 +18,7 @@ interface EpisodesRawContract
      * @api
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the episode
-     * @param array<mixed>|EpisodeRetrieveParams $params
+     * @param array<string,mixed>|EpisodeRetrieveParams $params
      *
      * @return BaseResponse<EpisodeObject>
      *
@@ -33,7 +33,7 @@ interface EpisodesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|EpisodeBulkRetrieveParams $params
+     * @param array<string,mixed>|EpisodeBulkRetrieveParams $params
      *
      * @return BaseResponse<EpisodeBulkGetResponse>
      *

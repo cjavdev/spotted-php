@@ -19,7 +19,7 @@ interface ShowsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ShowListParams $params
+     * @param array<string,mixed>|ShowListParams $params
      *
      * @return BaseResponse<CursorURLPage<ShowListResponse>>
      *
@@ -33,7 +33,7 @@ interface ShowsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ShowCheckParams $params
+     * @param array<string,mixed>|ShowCheckParams $params
      *
      * @return BaseResponse<list<bool>>
      *
@@ -47,7 +47,7 @@ interface ShowsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ShowRemoveParams $params
+     * @param array<string,mixed>|ShowRemoveParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -61,7 +61,7 @@ interface ShowsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ShowSaveParams $params
+     * @param array<string,mixed>|ShowSaveParams $params
      *
      * @return BaseResponse<mixed>
      *

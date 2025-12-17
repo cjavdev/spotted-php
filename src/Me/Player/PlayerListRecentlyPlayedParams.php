@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::listRecentlyPlayed()
  *
  * @phpstan-type PlayerListRecentlyPlayedParamsShape = array{
- *   after?: int, before?: int, limit?: int
+ *   after?: int|null, before?: int|null, limit?: int|null
  * }
  */
 final class PlayerListRecentlyPlayedParams implements BaseModel

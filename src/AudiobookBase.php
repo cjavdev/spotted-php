@@ -10,24 +10,30 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AuthorObjectShape from \Spotted\AuthorObject
+ * @phpstan-import-type CopyrightObjectShape from \Spotted\CopyrightObject
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ * @phpstan-import-type NarratorObjectShape from \Spotted\NarratorObject
+ *
  * @phpstan-type AudiobookBaseShape = array{
  *   id: string,
- *   authors: list<AuthorObject>,
+ *   authors: list<AuthorObjectShape>,
  *   availableMarkets: list<string>,
- *   copyrights: list<CopyrightObject>,
+ *   copyrights: list<CopyrightObjectShape>,
  *   description: string,
  *   explicit: bool,
- *   externalURLs: ExternalURLObject,
+ *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
  *   htmlDescription: string,
- *   images: list<ImageObject>,
+ *   images: list<ImageObjectShape>,
  *   languages: list<string>,
  *   mediaType: string,
  *   name: string,
- *   narrators: list<NarratorObject>,
+ *   narrators: list<NarratorObjectShape>,
  *   publisher: string,
  *   totalChapters: int,
- *   type?: 'audiobook',
+ *   type: 'audiobook',
  *   uri: string,
  *   edition?: string|null,
  *   published?: bool|null,
@@ -231,23 +237,13 @@ final class AudiobookBase implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AuthorObject|array{
-     *   name?: string|null, published?: bool|null
-     * }> $authors
+     * @param list<AuthorObjectShape> $authors
      * @param list<string> $availableMarkets
-     * @param list<CopyrightObject|array{
-     *   published?: bool|null, text?: string|null, type?: string|null
-     * }> $copyrights
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<CopyrightObjectShape> $copyrights
+     * @param ExternalURLObjectShape $externalURLs
+     * @param list<ImageObjectShape> $images
      * @param list<string> $languages
-     * @param list<NarratorObject|array{
-     *   name?: string|null, published?: bool|null
-     * }> $narrators
+     * @param list<NarratorObjectShape> $narrators
      */
     public static function with(
         string $id,
@@ -310,9 +306,7 @@ final class AudiobookBase implements BaseModel
     /**
      * The author(s) for the audiobook.
      *
-     * @param list<AuthorObject|array{
-     *   name?: string|null, published?: bool|null
-     * }> $authors
+     * @param list<AuthorObjectShape> $authors
      */
     public function withAuthors(array $authors): self
     {
@@ -338,9 +332,7 @@ final class AudiobookBase implements BaseModel
     /**
      * The copyright statements of the audiobook.
      *
-     * @param list<CopyrightObject|array{
-     *   published?: bool|null, text?: string|null, type?: string|null
-     * }> $copyrights
+     * @param list<CopyrightObjectShape> $copyrights
      */
     public function withCopyrights(array $copyrights): self
     {
@@ -375,9 +367,7 @@ final class AudiobookBase implements BaseModel
     /**
      * External URLs for this audiobook.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -413,9 +403,7 @@ final class AudiobookBase implements BaseModel
     /**
      * The cover art for the audiobook in various sizes, widest first.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
@@ -463,9 +451,7 @@ final class AudiobookBase implements BaseModel
     /**
      * The narrator(s) for the audiobook.
      *
-     * @param list<NarratorObject|array{
-     *   name?: string|null, published?: bool|null
-     * }> $narrators
+     * @param list<NarratorObjectShape> $narrators
      */
     public function withNarrators(array $narrators): self
     {

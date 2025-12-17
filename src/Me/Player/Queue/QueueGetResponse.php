@@ -8,27 +8,18 @@ use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\EpisodeObject;
-use Spotted\EpisodeObject\ReleaseDatePrecision;
-use Spotted\EpisodeRestrictionObject;
-use Spotted\ExternalIDObject;
-use Spotted\ExternalURLObject;
-use Spotted\ImageObject;
-use Spotted\LinkedTrackObject;
 use Spotted\Me\Player\Queue\QueueGetResponse\CurrentlyPlaying;
 use Spotted\Me\Player\Queue\QueueGetResponse\Queue;
-use Spotted\ResumePointObject;
-use Spotted\ShowBase;
-use Spotted\SimplifiedArtistObject;
 use Spotted\TrackObject;
-use Spotted\TrackObject\Album;
-use Spotted\TrackObject\Type;
-use Spotted\TrackRestrictionObject;
 
 /**
+ * @phpstan-import-type CurrentlyPlayingShape from \Spotted\Me\Player\Queue\QueueGetResponse\CurrentlyPlaying
+ * @phpstan-import-type QueueShape from \Spotted\Me\Player\Queue\QueueGetResponse\Queue
+ *
  * @phpstan-type QueueGetResponseShape = array{
- *   currentlyPlaying?: null|TrackObject|EpisodeObject,
+ *   currentlyPlaying?: null|CurrentlyPlayingShape|TrackObject|EpisodeObject,
  *   published?: bool|null,
- *   queue?: list<TrackObject|EpisodeObject>|null,
+ *   queue?: list<QueueShape>|null,
  * }
  */
 final class QueueGetResponse implements BaseModel
@@ -66,98 +57,8 @@ final class QueueGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TrackObject|array{
-     *   id?: string|null,
-     *   album?: Album|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }|EpisodeObject|array{
-     *   id: string,
-     *   audioPreviewURL: string|null,
-     *   description: string,
-     *   durationMs: int,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   isPlayable: bool,
-     *   languages: list<string>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   show: ShowBase,
-     *   type?: 'episode',
-     *   uri: string,
-     *   language?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: EpisodeRestrictionObject|null,
-     *   resumePoint?: ResumePointObject|null,
-     * } $currentlyPlaying
-     * @param list<TrackObject|array{
-     *   id?: string|null,
-     *   album?: Album|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }|EpisodeObject|array{
-     *   id: string,
-     *   audioPreviewURL: string|null,
-     *   description: string,
-     *   durationMs: int,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   isPlayable: bool,
-     *   languages: list<string>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   show: ShowBase,
-     *   type?: 'episode',
-     *   uri: string,
-     *   language?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: EpisodeRestrictionObject|null,
-     *   resumePoint?: ResumePointObject|null,
-     * }> $queue
+     * @param CurrentlyPlayingShape $currentlyPlaying
+     * @param list<QueueShape> $queue
      */
     public static function with(
         TrackObject|array|EpisodeObject|null $currentlyPlaying = null,
@@ -176,52 +77,7 @@ final class QueueGetResponse implements BaseModel
     /**
      * The currently playing track or episode. Can be `null`.
      *
-     * @param TrackObject|array{
-     *   id?: string|null,
-     *   album?: Album|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }|EpisodeObject|array{
-     *   id: string,
-     *   audioPreviewURL: string|null,
-     *   description: string,
-     *   durationMs: int,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   isPlayable: bool,
-     *   languages: list<string>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   show: ShowBase,
-     *   type?: 'episode',
-     *   uri: string,
-     *   language?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: EpisodeRestrictionObject|null,
-     *   resumePoint?: ResumePointObject|null,
-     * } $currentlyPlaying
+     * @param CurrentlyPlayingShape $currentlyPlaying
      */
     public function withCurrentlyPlaying(
         TrackObject|array|EpisodeObject $currentlyPlaying
@@ -246,52 +102,7 @@ final class QueueGetResponse implements BaseModel
     /**
      * The tracks or episodes in the queue. Can be empty.
      *
-     * @param list<TrackObject|array{
-     *   id?: string|null,
-     *   album?: Album|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }|EpisodeObject|array{
-     *   id: string,
-     *   audioPreviewURL: string|null,
-     *   description: string,
-     *   durationMs: int,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   isPlayable: bool,
-     *   languages: list<string>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   show: ShowBase,
-     *   type?: 'episode',
-     *   uri: string,
-     *   language?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: EpisodeRestrictionObject|null,
-     *   resumePoint?: ResumePointObject|null,
-     * }> $queue
+     * @param list<QueueShape> $queue
      */
     public function withQueue(array $queue): self
     {

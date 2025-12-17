@@ -4,23 +4,18 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Albums;
 
-use Spotted\AlbumRestrictionObject;
-use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ExternalIDObject;
-use Spotted\ExternalURLObject;
-use Spotted\ImageObject;
 use Spotted\Me\Albums\AlbumListResponse\Album;
-use Spotted\Me\Albums\AlbumListResponse\Album\AlbumType;
-use Spotted\Me\Albums\AlbumListResponse\Album\ReleaseDatePrecision;
-use Spotted\Me\Albums\AlbumListResponse\Album\Tracks;
-use Spotted\SimplifiedArtistObject;
 
 /**
+ * @phpstan-import-type AlbumShape from \Spotted\Me\Albums\AlbumListResponse\Album
+ *
  * @phpstan-type AlbumListResponseShape = array{
- *   addedAt?: \DateTimeInterface|null, album?: Album|null, published?: bool|null
+ *   addedAt?: \DateTimeInterface|null,
+ *   album?: null|Album|AlbumShape,
+ *   published?: bool|null,
  * }
  */
 final class AlbumListResponse implements BaseModel
@@ -58,29 +53,7 @@ final class AlbumListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Album|array{
-     *   id: string,
-     *   albumType: value-of<AlbumType>,
-     *   availableMarkets: list<string>,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   images: list<ImageObject>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   totalTracks: int,
-     *   type?: 'album',
-     *   uri: string,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   copyrights?: list<CopyrightObject>|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   genres?: list<string>|null,
-     *   label?: string|null,
-     *   popularity?: int|null,
-     *   published?: bool|null,
-     *   restrictions?: AlbumRestrictionObject|null,
-     *   tracks?: Tracks|null,
-     * } $album
+     * @param AlbumShape $album
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
@@ -112,29 +85,7 @@ final class AlbumListResponse implements BaseModel
     /**
      * Information about the album.
      *
-     * @param Album|array{
-     *   id: string,
-     *   albumType: value-of<AlbumType>,
-     *   availableMarkets: list<string>,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   images: list<ImageObject>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   totalTracks: int,
-     *   type?: 'album',
-     *   uri: string,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   copyrights?: list<CopyrightObject>|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   genres?: list<string>|null,
-     *   label?: string|null,
-     *   popularity?: int|null,
-     *   published?: bool|null,
-     *   restrictions?: AlbumRestrictionObject|null,
-     *   tracks?: Tracks|null,
-     * } $album
+     * @param AlbumShape $album
      */
     public function withAlbum(Album|array $album): self
     {

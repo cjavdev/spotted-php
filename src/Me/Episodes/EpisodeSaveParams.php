@@ -17,7 +17,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\EpisodesService::save()
  *
  * @phpstan-type EpisodeSaveParamsShape = array{
- *   ids: list<string>, published?: bool
+ *   ids: list<string>, published?: bool|null
  * }
  */
 final class EpisodeSaveParams implements BaseModel

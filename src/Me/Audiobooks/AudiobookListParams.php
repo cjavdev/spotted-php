@@ -14,7 +14,9 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Me\AudiobooksService::list()
  *
- * @phpstan-type AudiobookListParamsShape = array{limit?: int, offset?: int}
+ * @phpstan-type AudiobookListParamsShape = array{
+ *   limit?: int|null, offset?: int|null
+ * }
  */
 final class AudiobookListParams implements BaseModel
 {

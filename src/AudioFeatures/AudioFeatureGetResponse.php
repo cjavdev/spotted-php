@@ -27,7 +27,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   tempo?: float|null,
  *   timeSignature?: int|null,
  *   trackHref?: string|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   uri?: string|null,
  *   valence?: float|null,
  * }

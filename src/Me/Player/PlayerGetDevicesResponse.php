@@ -9,7 +9,11 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type PlayerGetDevicesResponseShape = array{devices: list<DeviceObject>}
+ * @phpstan-import-type DeviceObjectShape from \Spotted\Me\Player\DeviceObject
+ *
+ * @phpstan-type PlayerGetDevicesResponseShape = array{
+ *   devices: list<DeviceObjectShape>
+ * }
  */
 final class PlayerGetDevicesResponse implements BaseModel
 {
@@ -44,17 +48,7 @@ final class PlayerGetDevicesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DeviceObject|array{
-     *   id?: string|null,
-     *   isActive?: bool|null,
-     *   isPrivateSession?: bool|null,
-     *   isRestricted?: bool|null,
-     *   name?: string|null,
-     *   published?: bool|null,
-     *   supportsVolume?: bool|null,
-     *   type?: string|null,
-     *   volumePercent?: int|null,
-     * }> $devices
+     * @param list<DeviceObjectShape> $devices
      */
     public static function with(array $devices): self
     {
@@ -66,17 +60,7 @@ final class PlayerGetDevicesResponse implements BaseModel
     }
 
     /**
-     * @param list<DeviceObject|array{
-     *   id?: string|null,
-     *   isActive?: bool|null,
-     *   isPrivateSession?: bool|null,
-     *   isRestricted?: bool|null,
-     *   name?: string|null,
-     *   published?: bool|null,
-     *   supportsVolume?: bool|null,
-     *   type?: string|null,
-     *   volumePercent?: int|null,
-     * }> $devices
+     * @param list<DeviceObjectShape> $devices
      */
     public function withDevices(array $devices): self
     {

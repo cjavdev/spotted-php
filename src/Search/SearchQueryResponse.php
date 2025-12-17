@@ -4,33 +4,34 @@ declare(strict_types=1);
 
 namespace Spotted\Search;
 
-use Spotted\ArtistObject;
-use Spotted\AudiobookBase;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\PagingPlaylistObject;
 use Spotted\Search\SearchQueryResponse\Albums;
-use Spotted\Search\SearchQueryResponse\Albums\Item;
 use Spotted\Search\SearchQueryResponse\Artists;
 use Spotted\Search\SearchQueryResponse\Audiobooks;
 use Spotted\Search\SearchQueryResponse\Episodes;
 use Spotted\Search\SearchQueryResponse\Shows;
 use Spotted\Search\SearchQueryResponse\Tracks;
-use Spotted\ShowBase;
-use Spotted\SimplifiedEpisodeObject;
-use Spotted\SimplifiedPlaylistObject;
-use Spotted\TrackObject;
 
 /**
+ * @phpstan-import-type AlbumsShape from \Spotted\Search\SearchQueryResponse\Albums
+ * @phpstan-import-type ArtistsShape from \Spotted\Search\SearchQueryResponse\Artists
+ * @phpstan-import-type AudiobooksShape from \Spotted\Search\SearchQueryResponse\Audiobooks
+ * @phpstan-import-type EpisodesShape from \Spotted\Search\SearchQueryResponse\Episodes
+ * @phpstan-import-type PagingPlaylistObjectShape from \Spotted\PagingPlaylistObject
+ * @phpstan-import-type ShowsShape from \Spotted\Search\SearchQueryResponse\Shows
+ * @phpstan-import-type TracksShape from \Spotted\Search\SearchQueryResponse\Tracks
+ *
  * @phpstan-type SearchQueryResponseShape = array{
- *   albums?: Albums|null,
- *   artists?: Artists|null,
- *   audiobooks?: Audiobooks|null,
- *   episodes?: Episodes|null,
- *   playlists?: PagingPlaylistObject|null,
- *   shows?: Shows|null,
- *   tracks?: Tracks|null,
+ *   albums?: null|Albums|AlbumsShape,
+ *   artists?: null|Artists|ArtistsShape,
+ *   audiobooks?: null|Audiobooks|AudiobooksShape,
+ *   episodes?: null|Episodes|EpisodesShape,
+ *   playlists?: null|PagingPlaylistObject|PagingPlaylistObjectShape,
+ *   shows?: null|Shows|ShowsShape,
+ *   tracks?: null|Tracks|TracksShape,
  * }
  */
 final class SearchQueryResponse implements BaseModel
@@ -69,76 +70,13 @@ final class SearchQueryResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Albums|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<Item>|null,
-     *   published?: bool|null,
-     * } $albums
-     * @param Artists|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<ArtistObject>|null,
-     *   published?: bool|null,
-     * } $artists
-     * @param Audiobooks|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<AudiobookBase>|null,
-     *   published?: bool|null,
-     * } $audiobooks
-     * @param Episodes|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<SimplifiedEpisodeObject>|null,
-     *   published?: bool|null,
-     * } $episodes
-     * @param PagingPlaylistObject|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<SimplifiedPlaylistObject>|null,
-     *   published?: bool|null,
-     * } $playlists
-     * @param Shows|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<ShowBase>|null,
-     *   published?: bool|null,
-     * } $shows
-     * @param Tracks|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<TrackObject>|null,
-     *   published?: bool|null,
-     * } $tracks
+     * @param AlbumsShape $albums
+     * @param ArtistsShape $artists
+     * @param AudiobooksShape $audiobooks
+     * @param EpisodesShape $episodes
+     * @param PagingPlaylistObjectShape $playlists
+     * @param ShowsShape $shows
+     * @param TracksShape $tracks
      */
     public static function with(
         Albums|array|null $albums = null,
@@ -163,16 +101,7 @@ final class SearchQueryResponse implements BaseModel
     }
 
     /**
-     * @param Albums|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<Item>|null,
-     *   published?: bool|null,
-     * } $albums
+     * @param AlbumsShape $albums
      */
     public function withAlbums(Albums|array $albums): self
     {
@@ -183,16 +112,7 @@ final class SearchQueryResponse implements BaseModel
     }
 
     /**
-     * @param Artists|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<ArtistObject>|null,
-     *   published?: bool|null,
-     * } $artists
+     * @param ArtistsShape $artists
      */
     public function withArtists(Artists|array $artists): self
     {
@@ -203,16 +123,7 @@ final class SearchQueryResponse implements BaseModel
     }
 
     /**
-     * @param Audiobooks|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<AudiobookBase>|null,
-     *   published?: bool|null,
-     * } $audiobooks
+     * @param AudiobooksShape $audiobooks
      */
     public function withAudiobooks(Audiobooks|array $audiobooks): self
     {
@@ -223,16 +134,7 @@ final class SearchQueryResponse implements BaseModel
     }
 
     /**
-     * @param Episodes|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<SimplifiedEpisodeObject>|null,
-     *   published?: bool|null,
-     * } $episodes
+     * @param EpisodesShape $episodes
      */
     public function withEpisodes(Episodes|array $episodes): self
     {
@@ -243,16 +145,7 @@ final class SearchQueryResponse implements BaseModel
     }
 
     /**
-     * @param PagingPlaylistObject|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<SimplifiedPlaylistObject>|null,
-     *   published?: bool|null,
-     * } $playlists
+     * @param PagingPlaylistObjectShape $playlists
      */
     public function withPlaylists(PagingPlaylistObject|array $playlists): self
     {
@@ -263,16 +156,7 @@ final class SearchQueryResponse implements BaseModel
     }
 
     /**
-     * @param Shows|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<ShowBase>|null,
-     *   published?: bool|null,
-     * } $shows
+     * @param ShowsShape $shows
      */
     public function withShows(Shows|array $shows): self
     {
@@ -283,16 +167,7 @@ final class SearchQueryResponse implements BaseModel
     }
 
     /**
-     * @param Tracks|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<TrackObject>|null,
-     *   published?: bool|null,
-     * } $tracks
+     * @param TracksShape $tracks
      */
     public function withTracks(Tracks|array $tracks): self
     {

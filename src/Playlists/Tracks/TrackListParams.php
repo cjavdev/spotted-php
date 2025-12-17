@@ -15,11 +15,11 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Playlists\TracksService::list()
  *
  * @phpstan-type TrackListParamsShape = array{
- *   additionalTypes?: string,
- *   fields?: string,
- *   limit?: int,
- *   market?: string,
- *   offset?: int,
+ *   additionalTypes?: string|null,
+ *   fields?: string|null,
+ *   limit?: int|null,
+ *   market?: string|null,
+ *   offset?: int|null,
  * }
  */
 final class TrackListParams implements BaseModel

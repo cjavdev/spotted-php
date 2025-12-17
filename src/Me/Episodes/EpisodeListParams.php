@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\EpisodesService::list()
  *
  * @phpstan-type EpisodeListParamsShape = array{
- *   limit?: int, market?: string, offset?: int
+ *   limit?: int|null, market?: string|null, offset?: int|null
  * }
  */
 final class EpisodeListParams implements BaseModel

@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::transfer()
  *
  * @phpstan-type PlayerTransferParamsShape = array{
- *   deviceIDs: list<string>, play?: bool, published?: bool
+ *   deviceIDs: list<string>, play?: bool|null, published?: bool|null
  * }
  */
 final class PlayerTransferParams implements BaseModel

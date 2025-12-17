@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::toggleShuffle()
  *
  * @phpstan-type PlayerToggleShuffleParamsShape = array{
- *   state: bool, deviceID?: string
+ *   state: bool, deviceID?: string|null
  * }
  */
 final class PlayerToggleShuffleParams implements BaseModel

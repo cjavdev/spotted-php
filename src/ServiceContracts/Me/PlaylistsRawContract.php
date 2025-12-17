@@ -16,7 +16,7 @@ interface PlaylistsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PlaylistListParams $params
+     * @param array<string,mixed>|PlaylistListParams $params
      *
      * @return BaseResponse<CursorURLPage<SimplifiedPlaylistObject>>
      *

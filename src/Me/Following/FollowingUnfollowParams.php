@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\FollowingService::unfollow()
  *
  * @phpstan-type FollowingUnfollowParamsShape = array{
- *   ids?: list<string>, published?: bool
+ *   ids?: list<string>|null, published?: bool|null
  * }
  */
 final class FollowingUnfollowParams implements BaseModel

@@ -36,7 +36,7 @@ interface ArtistsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ArtistBulkRetrieveParams $params
+     * @param array<string,mixed>|ArtistBulkRetrieveParams $params
      *
      * @return BaseResponse<ArtistBulkGetResponse>
      *
@@ -51,7 +51,7 @@ interface ArtistsRawContract
      * @api
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
-     * @param array<mixed>|ArtistListAlbumsParams $params
+     * @param array<string,mixed>|ArtistListAlbumsParams $params
      *
      * @return BaseResponse<CursorURLPage<ArtistListAlbumsResponse>>
      *
@@ -83,7 +83,7 @@ interface ArtistsRawContract
      * @api
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
-     * @param array<mixed>|ArtistTopTracksParams $params
+     * @param array<string,mixed>|ArtistTopTracksParams $params
      *
      * @return BaseResponse<ArtistTopTracksResponse>
      *

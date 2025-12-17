@@ -15,7 +15,7 @@ interface SearchRawContract
     /**
      * @api
      *
-     * @param array<mixed>|SearchQueryParams $params
+     * @param array<string,mixed>|SearchQueryParams $params
      *
      * @return BaseResponse<SearchQueryResponse>
      *

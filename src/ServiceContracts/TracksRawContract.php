@@ -19,7 +19,7 @@ interface TracksRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the track
-     * @param array<mixed>|TrackRetrieveParams $params
+     * @param array<string,mixed>|TrackRetrieveParams $params
      *
      * @return BaseResponse<TrackObject>
      *
@@ -34,7 +34,7 @@ interface TracksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TrackBulkRetrieveParams $params
+     * @param array<string,mixed>|TrackBulkRetrieveParams $params
      *
      * @return BaseResponse<TrackBulkGetResponse>
      *

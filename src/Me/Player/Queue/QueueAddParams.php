@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Me\Player\QueueService::add()
  *
- * @phpstan-type QueueAddParamsShape = array{uri: string, deviceID?: string}
+ * @phpstan-type QueueAddParamsShape = array{uri: string, deviceID?: string|null}
  */
 final class QueueAddParams implements BaseModel
 {

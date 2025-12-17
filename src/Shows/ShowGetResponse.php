@@ -12,29 +12,33 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
 use Spotted\ImageObject;
 use Spotted\Shows\ShowGetResponse\Episodes;
-use Spotted\SimplifiedEpisodeObject;
 
 /**
+ * @phpstan-import-type CopyrightObjectShape from \Spotted\CopyrightObject
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ * @phpstan-import-type EpisodesShape from \Spotted\Shows\ShowGetResponse\Episodes
+ *
  * @phpstan-type ShowGetResponseShape = array{
  *   id: string,
  *   availableMarkets: list<string>,
- *   copyrights: list<CopyrightObject>,
+ *   copyrights: list<CopyrightObjectShape>,
  *   description: string,
  *   explicit: bool,
- *   externalURLs: ExternalURLObject,
+ *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
  *   htmlDescription: string,
- *   images: list<ImageObject>,
+ *   images: list<ImageObjectShape>,
  *   isExternallyHosted: bool,
  *   languages: list<string>,
  *   mediaType: string,
  *   name: string,
  *   publisher: string,
  *   totalEpisodes: int,
- *   type?: 'show',
+ *   type: 'show',
  *   uri: string,
  *   published?: bool|null,
- *   episodes: Episodes,
+ *   episodes: Episodes|EpisodesShape,
  * }
  */
 final class ShowGetResponse implements BaseModel
@@ -223,26 +227,11 @@ final class ShowGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $availableMarkets
-     * @param list<CopyrightObject|array{
-     *   published?: bool|null, text?: string|null, type?: string|null
-     * }> $copyrights
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<CopyrightObjectShape> $copyrights
+     * @param ExternalURLObjectShape $externalURLs
+     * @param list<ImageObjectShape> $images
      * @param list<string> $languages
-     * @param Episodes|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<SimplifiedEpisodeObject>|null,
-     *   published?: bool|null,
-     * } $episodes
+     * @param EpisodesShape $episodes
      */
     public static function with(
         string $id,
@@ -316,9 +305,7 @@ final class ShowGetResponse implements BaseModel
     /**
      * The copyright statements of the show.
      *
-     * @param list<CopyrightObject|array{
-     *   published?: bool|null, text?: string|null, type?: string|null
-     * }> $copyrights
+     * @param list<CopyrightObjectShape> $copyrights
      */
     public function withCopyrights(array $copyrights): self
     {
@@ -351,9 +338,7 @@ final class ShowGetResponse implements BaseModel
     }
 
     /**
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -389,9 +374,7 @@ final class ShowGetResponse implements BaseModel
     /**
      * The cover art for the show in various sizes, widest first.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
@@ -494,16 +477,7 @@ final class ShowGetResponse implements BaseModel
     /**
      * The episodes of the show.
      *
-     * @param Episodes|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<SimplifiedEpisodeObject>|null,
-     *   published?: bool|null,
-     * } $episodes
+     * @param EpisodesShape $episodes
      */
     public function withEpisodes(Episodes|array $episodes): self
     {

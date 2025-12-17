@@ -7,25 +7,29 @@ namespace Spotted;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\SimplifiedArtistObject\Type;
 
 /**
+ * @phpstan-import-type SimplifiedArtistObjectShape from \Spotted\SimplifiedArtistObject
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type LinkedTrackObjectShape from \Spotted\LinkedTrackObject
+ * @phpstan-import-type TrackRestrictionObjectShape from \Spotted\TrackRestrictionObject
+ *
  * @phpstan-type SimplifiedTrackObjectShape = array{
  *   id?: string|null,
- *   artists?: list<SimplifiedArtistObject>|null,
+ *   artists?: list<SimplifiedArtistObjectShape>|null,
  *   availableMarkets?: list<string>|null,
  *   discNumber?: int|null,
  *   durationMs?: int|null,
  *   explicit?: bool|null,
- *   externalURLs?: ExternalURLObject|null,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
  *   href?: string|null,
  *   isLocal?: bool|null,
  *   isPlayable?: bool|null,
- *   linkedFrom?: LinkedTrackObject|null,
+ *   linkedFrom?: null|LinkedTrackObject|LinkedTrackObjectShape,
  *   name?: string|null,
  *   previewURL?: string|null,
  *   published?: bool|null,
- *   restrictions?: TrackRestrictionObject|null,
+ *   restrictions?: null|TrackRestrictionObject|TrackRestrictionObjectShape,
  *   trackNumber?: int|null,
  *   type?: string|null,
  *   uri?: string|null,
@@ -160,30 +164,11 @@ final class SimplifiedTrackObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedArtistObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   name?: string|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }> $artists
+     * @param list<SimplifiedArtistObjectShape> $artists
      * @param list<string> $availableMarkets
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param LinkedTrackObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   published?: bool|null,
-     *   type?: string|null,
-     *   uri?: string|null,
-     * } $linkedFrom
-     * @param TrackRestrictionObject|array{
-     *   published?: bool|null, reason?: string|null
-     * } $restrictions
+     * @param ExternalURLObjectShape $externalURLs
+     * @param LinkedTrackObjectShape $linkedFrom
+     * @param TrackRestrictionObjectShape $restrictions
      */
     public static function with(
         ?string $id = null,
@@ -243,15 +228,7 @@ final class SimplifiedTrackObject implements BaseModel
     /**
      * The artists who performed the track. Each artist object includes a link in `href` to more detailed information about the artist.
      *
-     * @param list<SimplifiedArtistObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   name?: string|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }> $artists
+     * @param list<SimplifiedArtistObjectShape> $artists
      */
     public function withArtists(array $artists): self
     {
@@ -310,9 +287,7 @@ final class SimplifiedTrackObject implements BaseModel
     /**
      * External URLs for this track.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -359,14 +334,7 @@ final class SimplifiedTrackObject implements BaseModel
     /**
      * Part of the response when [Track Relinking](/documentation/web-api/concepts/track-relinking/) is applied and is only part of the response if the track linking, in fact, exists. The requested track has been replaced with a different track. The track in the `linked_from` object contains information about the originally requested track.
      *
-     * @param LinkedTrackObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   published?: bool|null,
-     *   type?: string|null,
-     *   uri?: string|null,
-     * } $linkedFrom
+     * @param LinkedTrackObjectShape $linkedFrom
      */
     public function withLinkedFrom(LinkedTrackObject|array $linkedFrom): self
     {
@@ -412,9 +380,7 @@ final class SimplifiedTrackObject implements BaseModel
     /**
      * Included in the response when a content restriction is applied.
      *
-     * @param TrackRestrictionObject|array{
-     *   published?: bool|null, reason?: string|null
-     * } $restrictions
+     * @param TrackRestrictionObjectShape $restrictions
      */
     public function withRestrictions(
         TrackRestrictionObject|array $restrictions

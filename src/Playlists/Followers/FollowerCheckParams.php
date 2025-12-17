@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Playlists\FollowersService::check()
  *
- * @phpstan-type FollowerCheckParamsShape = array{ids?: string}
+ * @phpstan-type FollowerCheckParamsShape = array{ids?: string|null}
  */
 final class FollowerCheckParams implements BaseModel
 {

@@ -19,7 +19,7 @@ interface BrowseRawContract
      *
      * @api
      *
-     * @param array<mixed>|BrowseGetFeaturedPlaylistsParams $params
+     * @param array<string,mixed>|BrowseGetFeaturedPlaylistsParams $params
      *
      * @return BaseResponse<BrowseGetFeaturedPlaylistsResponse>
      *
@@ -33,7 +33,7 @@ interface BrowseRawContract
     /**
      * @api
      *
-     * @param array<mixed>|BrowseGetNewReleasesParams $params
+     * @param array<string,mixed>|BrowseGetNewReleasesParams $params
      *
      * @return BaseResponse<BrowseGetNewReleasesResponse>
      *

@@ -18,7 +18,7 @@ interface RecommendationsRawContract
      *
      * @api
      *
-     * @param array<mixed>|RecommendationGetParams $params
+     * @param array<string,mixed>|RecommendationGetParams $params
      *
      * @return BaseResponse<RecommendationGetResponse>
      *

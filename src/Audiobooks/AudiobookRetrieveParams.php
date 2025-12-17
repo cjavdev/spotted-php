@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\AudiobooksService::retrieve()
  *
- * @phpstan-type AudiobookRetrieveParamsShape = array{market?: string}
+ * @phpstan-type AudiobookRetrieveParamsShape = array{market?: string|null}
  */
 final class AudiobookRetrieveParams implements BaseModel
 {

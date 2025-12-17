@@ -19,7 +19,7 @@ interface TracksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TrackListParams $params
+     * @param array<string,mixed>|TrackListParams $params
      *
      * @return BaseResponse<CursorURLPage<TrackListResponse>>
      *
@@ -33,7 +33,7 @@ interface TracksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TrackCheckParams $params
+     * @param array<string,mixed>|TrackCheckParams $params
      *
      * @return BaseResponse<list<bool>>
      *
@@ -47,7 +47,7 @@ interface TracksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TrackRemoveParams $params
+     * @param array<string,mixed>|TrackRemoveParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -61,7 +61,7 @@ interface TracksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TrackSaveParams $params
+     * @param array<string,mixed>|TrackSaveParams $params
      *
      * @return BaseResponse<mixed>
      *

@@ -19,7 +19,7 @@ interface EpisodesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|EpisodeListParams $params
+     * @param array<string,mixed>|EpisodeListParams $params
      *
      * @return BaseResponse<CursorURLPage<EpisodeListResponse>>
      *
@@ -33,7 +33,7 @@ interface EpisodesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|EpisodeCheckParams $params
+     * @param array<string,mixed>|EpisodeCheckParams $params
      *
      * @return BaseResponse<list<bool>>
      *
@@ -47,7 +47,7 @@ interface EpisodesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|EpisodeRemoveParams $params
+     * @param array<string,mixed>|EpisodeRemoveParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -61,7 +61,7 @@ interface EpisodesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|EpisodeSaveParams $params
+     * @param array<string,mixed>|EpisodeSaveParams $params
      *
      * @return BaseResponse<mixed>
      *

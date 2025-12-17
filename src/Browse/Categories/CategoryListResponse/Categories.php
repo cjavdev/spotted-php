@@ -9,9 +9,10 @@ use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ImageObject;
 
 /**
+ * @phpstan-import-type ItemShape from \Spotted\Browse\Categories\CategoryListResponse\Categories\Item
+ *
  * @phpstan-type CategoriesShape = array{
  *   href: string,
  *   limit: int,
@@ -19,7 +20,7 @@ use Spotted\ImageObject;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<Item>|null,
+ *   items?: list<ItemShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -106,13 +107,7 @@ final class Categories implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Item|array{
-     *   id: string,
-     *   href: string,
-     *   icons: list<ImageObject>,
-     *   name: string,
-     *   published?: bool|null,
-     * }> $items
+     * @param list<ItemShape> $items
      */
     public static function with(
         string $href,
@@ -206,13 +201,7 @@ final class Categories implements BaseModel
     }
 
     /**
-     * @param list<Item|array{
-     *   id: string,
-     *   href: string,
-     *   icons: list<ImageObject>,
-     *   name: string,
-     *   published?: bool|null,
-     * }> $items
+     * @param list<ItemShape> $items
      */
     public function withItems(array $items): self
     {

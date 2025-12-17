@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\TracksService::retrieve()
  *
- * @phpstan-type TrackRetrieveParamsShape = array{market?: string}
+ * @phpstan-type TrackRetrieveParamsShape = array{market?: string|null}
  */
 final class TrackRetrieveParams implements BaseModel
 {

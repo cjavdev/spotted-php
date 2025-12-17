@@ -21,12 +21,12 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Playlists\TracksService::update()
  *
  * @phpstan-type TrackUpdateParamsShape = array{
- *   insertBefore?: int,
- *   published?: bool,
- *   rangeLength?: int,
- *   rangeStart?: int,
- *   snapshotID?: string,
- *   uris?: list<string>,
+ *   insertBefore?: int|null,
+ *   published?: bool|null,
+ *   rangeLength?: int|null,
+ *   rangeStart?: int|null,
+ *   snapshotID?: string|null,
+ *   uris?: list<string>|null,
  * }
  */
 final class TrackUpdateParams implements BaseModel

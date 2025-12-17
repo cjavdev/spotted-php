@@ -30,7 +30,7 @@ interface PlayerRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PlayerGetCurrentlyPlayingParams $params
+     * @param array<string,mixed>|PlayerGetCurrentlyPlayingParams $params
      *
      * @return BaseResponse<PlayerGetCurrentlyPlayingResponse>
      *
@@ -55,7 +55,7 @@ interface PlayerRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PlayerGetStateParams $params
+     * @param array<string,mixed>|PlayerGetStateParams $params
      *
      * @return BaseResponse<PlayerGetStateResponse>
      *
@@ -69,7 +69,7 @@ interface PlayerRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PlayerListRecentlyPlayedParams $params
+     * @param array<string,mixed>|PlayerListRecentlyPlayedParams $params
      *
      * @return BaseResponse<CursorURLPage<PlayerListRecentlyPlayedResponse>>
      *
@@ -83,7 +83,7 @@ interface PlayerRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PlayerPausePlaybackParams $params
+     * @param array<string,mixed>|PlayerPausePlaybackParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -97,7 +97,7 @@ interface PlayerRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PlayerSeekToPositionParams $params
+     * @param array<string,mixed>|PlayerSeekToPositionParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -111,7 +111,7 @@ interface PlayerRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PlayerSetRepeatModeParams $params
+     * @param array<string,mixed>|PlayerSetRepeatModeParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -125,7 +125,7 @@ interface PlayerRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PlayerSetVolumeParams $params
+     * @param array<string,mixed>|PlayerSetVolumeParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -139,7 +139,7 @@ interface PlayerRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PlayerSkipNextParams $params
+     * @param array<string,mixed>|PlayerSkipNextParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -153,7 +153,7 @@ interface PlayerRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PlayerSkipPreviousParams $params
+     * @param array<string,mixed>|PlayerSkipPreviousParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -167,7 +167,7 @@ interface PlayerRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PlayerStartPlaybackParams $params
+     * @param array<string,mixed>|PlayerStartPlaybackParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -181,7 +181,7 @@ interface PlayerRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PlayerToggleShuffleParams $params
+     * @param array<string,mixed>|PlayerToggleShuffleParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -195,7 +195,7 @@ interface PlayerRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PlayerTransferParams $params
+     * @param array<string,mixed>|PlayerTransferParams $params
      *
      * @return BaseResponse<mixed>
      *

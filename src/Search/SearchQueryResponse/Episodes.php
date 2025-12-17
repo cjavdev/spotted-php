@@ -8,14 +8,11 @@ use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\EpisodeRestrictionObject;
-use Spotted\ExternalURLObject;
-use Spotted\ImageObject;
-use Spotted\ResumePointObject;
 use Spotted\SimplifiedEpisodeObject;
-use Spotted\SimplifiedEpisodeObject\ReleaseDatePrecision;
 
 /**
+ * @phpstan-import-type SimplifiedEpisodeObjectShape from \Spotted\SimplifiedEpisodeObject
+ *
  * @phpstan-type EpisodesShape = array{
  *   href: string,
  *   limit: int,
@@ -23,7 +20,7 @@ use Spotted\SimplifiedEpisodeObject\ReleaseDatePrecision;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<SimplifiedEpisodeObject>|null,
+ *   items?: list<SimplifiedEpisodeObjectShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -110,29 +107,7 @@ final class Episodes implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedEpisodeObject|array{
-     *   id: string,
-     *   audioPreviewURL: string|null,
-     *   description: string,
-     *   durationMs: int,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   isPlayable: bool,
-     *   languages: list<string>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   type?: 'episode',
-     *   uri: string,
-     *   language?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: EpisodeRestrictionObject|null,
-     *   resumePoint?: ResumePointObject|null,
-     * }> $items
+     * @param list<SimplifiedEpisodeObjectShape> $items
      */
     public static function with(
         string $href,
@@ -226,29 +201,7 @@ final class Episodes implements BaseModel
     }
 
     /**
-     * @param list<SimplifiedEpisodeObject|array{
-     *   id: string,
-     *   audioPreviewURL: string|null,
-     *   description: string,
-     *   durationMs: int,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   isPlayable: bool,
-     *   languages: list<string>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   type?: 'episode',
-     *   uri: string,
-     *   language?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: EpisodeRestrictionObject|null,
-     *   resumePoint?: ResumePointObject|null,
-     * }> $items
+     * @param list<SimplifiedEpisodeObjectShape> $items
      */
     public function withItems(array $items): self
     {

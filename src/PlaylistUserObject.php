@@ -10,12 +10,14 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\PlaylistUserObject\Type;
 
 /**
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ *
  * @phpstan-type PlaylistUserObjectShape = array{
  *   id?: string|null,
- *   externalURLs?: ExternalURLObject|null,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
  *   href?: string|null,
  *   published?: bool|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   uri?: string|null,
  * }
  */
@@ -72,9 +74,7 @@ final class PlaylistUserObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -111,9 +111,7 @@ final class PlaylistUserObject implements BaseModel
     /**
      * Known public external URLs for this user.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs

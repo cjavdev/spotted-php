@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::setRepeatMode()
  *
  * @phpstan-type PlayerSetRepeatModeParamsShape = array{
- *   state: string, deviceID?: string
+ *   state: string, deviceID?: string|null
  * }
  */
 final class PlayerSetRepeatModeParams implements BaseModel

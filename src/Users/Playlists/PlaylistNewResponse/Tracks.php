@@ -8,13 +8,12 @@ use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\EpisodeObject;
 use Spotted\PlaylistTrackObject;
-use Spotted\PlaylistUserObject;
-use Spotted\TrackObject;
 
 /**
  * The tracks of the playlist.
+ *
+ * @phpstan-import-type PlaylistTrackObjectShape from \Spotted\PlaylistTrackObject
  *
  * @phpstan-type TracksShape = array{
  *   href: string,
@@ -23,7 +22,7 @@ use Spotted\TrackObject;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<PlaylistTrackObject>|null,
+ *   items?: list<PlaylistTrackObjectShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -110,13 +109,7 @@ final class Tracks implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PlaylistTrackObject|array{
-     *   addedAt?: \DateTimeInterface|null,
-     *   addedBy?: PlaylistUserObject|null,
-     *   isLocal?: bool|null,
-     *   published?: bool|null,
-     *   track?: TrackObject|EpisodeObject|null,
-     * }> $items
+     * @param list<PlaylistTrackObjectShape> $items
      */
     public static function with(
         string $href,
@@ -210,13 +203,7 @@ final class Tracks implements BaseModel
     }
 
     /**
-     * @param list<PlaylistTrackObject|array{
-     *   addedAt?: \DateTimeInterface|null,
-     *   addedBy?: PlaylistUserObject|null,
-     *   isLocal?: bool|null,
-     *   published?: bool|null,
-     *   track?: TrackObject|EpisodeObject|null,
-     * }> $items
+     * @param list<PlaylistTrackObjectShape> $items
      */
     public function withItems(array $items): self
     {

@@ -4,19 +4,15 @@ declare(strict_types=1);
 
 namespace Spotted\Browse\BrowseGetNewReleasesResponse;
 
-use Spotted\AlbumRestrictionObject;
 use Spotted\Browse\BrowseGetNewReleasesResponse\Albums\Item;
-use Spotted\Browse\BrowseGetNewReleasesResponse\Albums\Item\AlbumType;
-use Spotted\Browse\BrowseGetNewReleasesResponse\Albums\Item\ReleaseDatePrecision;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ExternalURLObject;
-use Spotted\ImageObject;
-use Spotted\SimplifiedArtistObject;
 
 /**
+ * @phpstan-import-type ItemShape from \Spotted\Browse\BrowseGetNewReleasesResponse\Albums\Item
+ *
  * @phpstan-type AlbumsShape = array{
  *   href: string,
  *   limit: int,
@@ -24,7 +20,7 @@ use Spotted\SimplifiedArtistObject;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<Item>|null,
+ *   items?: list<ItemShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -111,23 +107,7 @@ final class Albums implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Item|array{
-     *   id: string,
-     *   albumType: value-of<AlbumType>,
-     *   artists: list<SimplifiedArtistObject>,
-     *   availableMarkets: list<string>,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   images: list<ImageObject>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   totalTracks: int,
-     *   type?: 'album',
-     *   uri: string,
-     *   published?: bool|null,
-     *   restrictions?: AlbumRestrictionObject|null,
-     * }> $items
+     * @param list<ItemShape> $items
      */
     public static function with(
         string $href,
@@ -221,23 +201,7 @@ final class Albums implements BaseModel
     }
 
     /**
-     * @param list<Item|array{
-     *   id: string,
-     *   albumType: value-of<AlbumType>,
-     *   artists: list<SimplifiedArtistObject>,
-     *   availableMarkets: list<string>,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   images: list<ImageObject>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   totalTracks: int,
-     *   type?: 'album',
-     *   uri: string,
-     *   published?: bool|null,
-     *   restrictions?: AlbumRestrictionObject|null,
-     * }> $items
+     * @param list<ItemShape> $items
      */
     public function withItems(array $items): self
     {
