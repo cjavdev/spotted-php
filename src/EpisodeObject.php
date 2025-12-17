@@ -11,29 +11,35 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\EpisodeObject\ReleaseDatePrecision;
 
 /**
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ * @phpstan-import-type ShowBaseShape from \Spotted\ShowBase
+ * @phpstan-import-type EpisodeRestrictionObjectShape from \Spotted\EpisodeRestrictionObject
+ * @phpstan-import-type ResumePointObjectShape from \Spotted\ResumePointObject
+ *
  * @phpstan-type EpisodeObjectShape = array{
  *   id: string,
  *   audioPreviewURL: string|null,
  *   description: string,
  *   durationMs: int,
  *   explicit: bool,
- *   externalURLs: ExternalURLObject,
+ *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
  *   htmlDescription: string,
- *   images: list<ImageObject>,
+ *   images: list<ImageObjectShape>,
  *   isExternallyHosted: bool,
  *   isPlayable: bool,
  *   languages: list<string>,
  *   name: string,
  *   releaseDate: string,
- *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
- *   show: ShowBase,
- *   type?: 'episode',
+ *   releaseDatePrecision: ReleaseDatePrecision|value-of<ReleaseDatePrecision>,
+ *   show: ShowBase|ShowBaseShape,
+ *   type: 'episode',
  *   uri: string,
  *   language?: string|null,
  *   published?: bool|null,
- *   restrictions?: EpisodeRestrictionObject|null,
- *   resumePoint?: ResumePointObject|null,
+ *   restrictions?: null|EpisodeRestrictionObject|EpisodeRestrictionObjectShape,
+ *   resumePoint?: null|ResumePointObject|ResumePointObjectShape,
  * }
  */
 final class EpisodeObject implements BaseModel
@@ -244,40 +250,13 @@ final class EpisodeObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param ExternalURLObjectShape $externalURLs
+     * @param list<ImageObjectShape> $images
      * @param list<string> $languages
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
-     * @param ShowBase|array{
-     *   id: string,
-     *   availableMarkets: list<string>,
-     *   copyrights: list<CopyrightObject>,
-     *   description: string,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   languages: list<string>,
-     *   mediaType: string,
-     *   name: string,
-     *   publisher: string,
-     *   totalEpisodes: int,
-     *   type?: 'show',
-     *   uri: string,
-     *   published?: bool|null,
-     * } $show
-     * @param EpisodeRestrictionObject|array{
-     *   published?: bool|null, reason?: string|null
-     * } $restrictions
-     * @param ResumePointObject|array{
-     *   fullyPlayed?: bool|null, published?: bool|null, resumePositionMs?: int|null
-     * } $resumePoint
+     * @param ShowBaseShape $show
+     * @param EpisodeRestrictionObjectShape $restrictions
+     * @param ResumePointObjectShape $resumePoint
      */
     public static function with(
         string $id,
@@ -388,9 +367,7 @@ final class EpisodeObject implements BaseModel
     /**
      * External URLs for this episode.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -426,9 +403,7 @@ final class EpisodeObject implements BaseModel
     /**
      * The cover art for the episode in various sizes, widest first.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
@@ -512,26 +487,7 @@ final class EpisodeObject implements BaseModel
     /**
      * The show on which the episode belongs.
      *
-     * @param ShowBase|array{
-     *   id: string,
-     *   availableMarkets: list<string>,
-     *   copyrights: list<CopyrightObject>,
-     *   description: string,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   languages: list<string>,
-     *   mediaType: string,
-     *   name: string,
-     *   publisher: string,
-     *   totalEpisodes: int,
-     *   type?: 'show',
-     *   uri: string,
-     *   published?: bool|null,
-     * } $show
+     * @param ShowBaseShape $show
      */
     public function withShow(ShowBase|array $show): self
     {
@@ -577,9 +533,7 @@ final class EpisodeObject implements BaseModel
     /**
      * Included in the response when a content restriction is applied.
      *
-     * @param EpisodeRestrictionObject|array{
-     *   published?: bool|null, reason?: string|null
-     * } $restrictions
+     * @param EpisodeRestrictionObjectShape $restrictions
      */
     public function withRestrictions(
         EpisodeRestrictionObject|array $restrictions
@@ -593,9 +547,7 @@ final class EpisodeObject implements BaseModel
     /**
      * The user's most recent position in the episode. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
      *
-     * @param ResumePointObject|array{
-     *   fullyPlayed?: bool|null, published?: bool|null, resumePositionMs?: int|null
-     * } $resumePoint
+     * @param ResumePointObjectShape $resumePoint
      */
     public function withResumePoint(ResumePointObject|array $resumePoint): self
     {

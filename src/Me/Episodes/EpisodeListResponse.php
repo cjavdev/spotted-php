@@ -8,17 +8,13 @@ use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\EpisodeObject;
-use Spotted\EpisodeObject\ReleaseDatePrecision;
-use Spotted\EpisodeRestrictionObject;
-use Spotted\ExternalURLObject;
-use Spotted\ImageObject;
-use Spotted\ResumePointObject;
-use Spotted\ShowBase;
 
 /**
+ * @phpstan-import-type EpisodeObjectShape from \Spotted\EpisodeObject
+ *
  * @phpstan-type EpisodeListResponseShape = array{
  *   addedAt?: \DateTimeInterface|null,
- *   episode?: EpisodeObject|null,
+ *   episode?: null|EpisodeObject|EpisodeObjectShape,
  *   published?: bool|null,
  * }
  */
@@ -56,30 +52,7 @@ final class EpisodeListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EpisodeObject|array{
-     *   id: string,
-     *   audioPreviewURL: string|null,
-     *   description: string,
-     *   durationMs: int,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   isPlayable: bool,
-     *   languages: list<string>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   show: ShowBase,
-     *   type?: 'episode',
-     *   uri: string,
-     *   language?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: EpisodeRestrictionObject|null,
-     *   resumePoint?: ResumePointObject|null,
-     * } $episode
+     * @param EpisodeObjectShape $episode
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
@@ -110,30 +83,7 @@ final class EpisodeListResponse implements BaseModel
     /**
      * Information about the episode.
      *
-     * @param EpisodeObject|array{
-     *   id: string,
-     *   audioPreviewURL: string|null,
-     *   description: string,
-     *   durationMs: int,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   isPlayable: bool,
-     *   languages: list<string>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   show: ShowBase,
-     *   type?: 'episode',
-     *   uri: string,
-     *   language?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: EpisodeRestrictionObject|null,
-     *   resumePoint?: ResumePointObject|null,
-     * } $episode
+     * @param EpisodeObjectShape $episode
      */
     public function withEpisode(EpisodeObject|array $episode): self
     {

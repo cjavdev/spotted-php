@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\AlbumsService::remove()
  *
  * @phpstan-type AlbumRemoveParamsShape = array{
- *   ids?: list<string>, published?: bool
+ *   ids?: list<string>|null, published?: bool|null
  * }
  */
 final class AlbumRemoveParams implements BaseModel

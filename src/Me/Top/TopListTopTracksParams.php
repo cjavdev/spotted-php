@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\TopService::listTopTracks()
  *
  * @phpstan-type TopListTopTracksParamsShape = array{
- *   limit?: int, offset?: int, timeRange?: string
+ *   limit?: int|null, offset?: int|null, timeRange?: string|null
  * }
  */
 final class TopListTopTracksParams implements BaseModel

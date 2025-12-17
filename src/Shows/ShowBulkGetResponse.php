@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Spotted\Shows;
 
-use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ExternalURLObject;
-use Spotted\ImageObject;
 use Spotted\ShowBase;
 
 /**
- * @phpstan-type ShowBulkGetResponseShape = array{shows: list<ShowBase>}
+ * @phpstan-import-type ShowBaseShape from \Spotted\ShowBase
+ *
+ * @phpstan-type ShowBulkGetResponseShape = array{shows: list<ShowBaseShape>}
  */
 final class ShowBulkGetResponse implements BaseModel
 {
@@ -48,26 +47,7 @@ final class ShowBulkGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ShowBase|array{
-     *   id: string,
-     *   availableMarkets: list<string>,
-     *   copyrights: list<CopyrightObject>,
-     *   description: string,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   languages: list<string>,
-     *   mediaType: string,
-     *   name: string,
-     *   publisher: string,
-     *   totalEpisodes: int,
-     *   type?: 'show',
-     *   uri: string,
-     *   published?: bool|null,
-     * }> $shows
+     * @param list<ShowBaseShape> $shows
      */
     public static function with(array $shows): self
     {
@@ -79,26 +59,7 @@ final class ShowBulkGetResponse implements BaseModel
     }
 
     /**
-     * @param list<ShowBase|array{
-     *   id: string,
-     *   availableMarkets: list<string>,
-     *   copyrights: list<CopyrightObject>,
-     *   description: string,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   languages: list<string>,
-     *   mediaType: string,
-     *   name: string,
-     *   publisher: string,
-     *   totalEpisodes: int,
-     *   type?: 'show',
-     *   uri: string,
-     *   published?: bool|null,
-     * }> $shows
+     * @param list<ShowBaseShape> $shows
      */
     public function withShows(array $shows): self
     {

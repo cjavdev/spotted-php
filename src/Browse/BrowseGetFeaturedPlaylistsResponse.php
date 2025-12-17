@@ -8,12 +8,13 @@ use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\PagingPlaylistObject;
-use Spotted\SimplifiedPlaylistObject;
 
 /**
+ * @phpstan-import-type PagingPlaylistObjectShape from \Spotted\PagingPlaylistObject
+ *
  * @phpstan-type BrowseGetFeaturedPlaylistsResponseShape = array{
  *   message?: string|null,
- *   playlists?: PagingPlaylistObject|null,
+ *   playlists?: null|PagingPlaylistObject|PagingPlaylistObjectShape,
  *   published?: bool|null,
  * }
  */
@@ -47,16 +48,7 @@ final class BrowseGetFeaturedPlaylistsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PagingPlaylistObject|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<SimplifiedPlaylistObject>|null,
-     *   published?: bool|null,
-     * } $playlists
+     * @param PagingPlaylistObjectShape $playlists
      */
     public static function with(
         ?string $message = null,
@@ -84,16 +76,7 @@ final class BrowseGetFeaturedPlaylistsResponse implements BaseModel
     }
 
     /**
-     * @param PagingPlaylistObject|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<SimplifiedPlaylistObject>|null,
-     *   published?: bool|null,
-     * } $playlists
+     * @param PagingPlaylistObjectShape $playlists
      */
     public function withPlaylists(PagingPlaylistObject|array $playlists): self
     {

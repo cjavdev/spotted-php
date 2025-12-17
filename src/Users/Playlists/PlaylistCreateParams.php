@@ -18,7 +18,10 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Users\PlaylistsService::create()
  *
  * @phpstan-type PlaylistCreateParamsShape = array{
- *   name: string, collaborative?: bool, description?: string, published?: bool
+ *   name: string,
+ *   collaborative?: bool|null,
+ *   description?: string|null,
+ *   published?: bool|null,
  * }
  */
 final class PlaylistCreateParams implements BaseModel

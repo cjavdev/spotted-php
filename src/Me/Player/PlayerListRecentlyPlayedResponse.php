@@ -7,21 +7,17 @@ namespace Spotted\Me\Player;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ExternalIDObject;
-use Spotted\ExternalURLObject;
-use Spotted\LinkedTrackObject;
-use Spotted\SimplifiedArtistObject;
 use Spotted\TrackObject;
-use Spotted\TrackObject\Album;
-use Spotted\TrackObject\Type;
-use Spotted\TrackRestrictionObject;
 
 /**
+ * @phpstan-import-type ContextObjectShape from \Spotted\Me\Player\ContextObject
+ * @phpstan-import-type TrackObjectShape from \Spotted\TrackObject
+ *
  * @phpstan-type PlayerListRecentlyPlayedResponseShape = array{
- *   context?: ContextObject|null,
+ *   context?: null|ContextObject|ContextObjectShape,
  *   playedAt?: \DateTimeInterface|null,
  *   published?: bool|null,
- *   track?: TrackObject|null,
+ *   track?: null|TrackObject|TrackObjectShape,
  * }
  */
 final class PlayerListRecentlyPlayedResponse implements BaseModel
@@ -63,36 +59,8 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ContextObject|array{
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   published?: bool|null,
-     *   type?: string|null,
-     *   uri?: string|null,
-     * } $context
-     * @param TrackObject|array{
-     *   id?: string|null,
-     *   album?: Album|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * } $track
+     * @param ContextObjectShape $context
+     * @param TrackObjectShape $track
      */
     public static function with(
         ContextObject|array|null $context = null,
@@ -113,13 +81,7 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
     /**
      * The context the track was played from.
      *
-     * @param ContextObject|array{
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   published?: bool|null,
-     *   type?: string|null,
-     *   uri?: string|null,
-     * } $context
+     * @param ContextObjectShape $context
      */
     public function withContext(ContextObject|array $context): self
     {
@@ -154,29 +116,7 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
     /**
      * The track the user listened to.
      *
-     * @param TrackObject|array{
-     *   id?: string|null,
-     *   album?: Album|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * } $track
+     * @param TrackObjectShape $track
      */
     public function withTrack(TrackObject|array $track): self
     {

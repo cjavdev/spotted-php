@@ -9,9 +9,11 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ *
  * @phpstan-type LinkedTrackObjectShape = array{
  *   id?: string|null,
- *   externalURLs?: ExternalURLObject|null,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
  *   href?: string|null,
  *   published?: bool|null,
  *   type?: string|null,
@@ -69,9 +71,7 @@ final class LinkedTrackObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public static function with(
         ?string $id = null,
@@ -107,9 +107,7 @@ final class LinkedTrackObject implements BaseModel
     /**
      * Known external URLs for this track.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs

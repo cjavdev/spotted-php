@@ -13,12 +13,14 @@ use Spotted\PlaylistUserObject\Type;
 /**
  * The user who owns the playlist.
  *
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ *
  * @phpstan-type OwnerShape = array{
  *   id?: string|null,
- *   externalURLs?: ExternalURLObject|null,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
  *   href?: string|null,
  *   published?: bool|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   uri?: string|null,
  *   displayName?: string|null,
  * }
@@ -79,9 +81,7 @@ final class Owner implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -118,9 +118,7 @@ final class Owner implements BaseModel
     }
 
     /**
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs

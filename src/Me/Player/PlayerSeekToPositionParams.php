@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::seekToPosition()
  *
  * @phpstan-type PlayerSeekToPositionParamsShape = array{
- *   positionMs: int, deviceID?: string
+ *   positionMs: int, deviceID?: string|null
  * }
  */
 final class PlayerSeekToPositionParams implements BaseModel

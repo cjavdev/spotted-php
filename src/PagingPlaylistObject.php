@@ -8,9 +8,10 @@ use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\SimplifiedPlaylistObject\Owner;
 
 /**
+ * @phpstan-import-type SimplifiedPlaylistObjectShape from \Spotted\SimplifiedPlaylistObject
+ *
  * @phpstan-type PagingPlaylistObjectShape = array{
  *   href: string,
  *   limit: int,
@@ -18,7 +19,7 @@ use Spotted\SimplifiedPlaylistObject\Owner;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<SimplifiedPlaylistObject>|null,
+ *   items?: list<SimplifiedPlaylistObjectShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -105,21 +106,7 @@ final class PagingPlaylistObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedPlaylistObject|array{
-     *   id?: string|null,
-     *   collaborative?: bool|null,
-     *   description?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   images?: list<ImageObject>|null,
-     *   name?: string|null,
-     *   owner?: Owner|null,
-     *   published?: bool|null,
-     *   snapshotID?: string|null,
-     *   tracks?: PlaylistTracksRefObject|null,
-     *   type?: string|null,
-     *   uri?: string|null,
-     * }> $items
+     * @param list<SimplifiedPlaylistObjectShape> $items
      */
     public static function with(
         string $href,
@@ -213,21 +200,7 @@ final class PagingPlaylistObject implements BaseModel
     }
 
     /**
-     * @param list<SimplifiedPlaylistObject|array{
-     *   id?: string|null,
-     *   collaborative?: bool|null,
-     *   description?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   images?: list<ImageObject>|null,
-     *   name?: string|null,
-     *   owner?: Owner|null,
-     *   published?: bool|null,
-     *   snapshotID?: string|null,
-     *   tracks?: PlaylistTracksRefObject|null,
-     *   type?: string|null,
-     *   uri?: string|null,
-     * }> $items
+     * @param list<SimplifiedPlaylistObjectShape> $items
      */
     public function withItems(array $items): self
     {

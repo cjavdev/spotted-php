@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\BrowseService::getFeaturedPlaylists()
  *
  * @phpstan-type BrowseGetFeaturedPlaylistsParamsShape = array{
- *   limit?: int, locale?: string, offset?: int
+ *   limit?: int|null, locale?: string|null, offset?: int|null
  * }
  */
 final class BrowseGetFeaturedPlaylistsParams implements BaseModel

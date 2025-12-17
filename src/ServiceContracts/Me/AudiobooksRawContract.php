@@ -19,7 +19,7 @@ interface AudiobooksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AudiobookListParams $params
+     * @param array<string,mixed>|AudiobookListParams $params
      *
      * @return BaseResponse<CursorURLPage<AudiobookListResponse>>
      *
@@ -33,7 +33,7 @@ interface AudiobooksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AudiobookCheckParams $params
+     * @param array<string,mixed>|AudiobookCheckParams $params
      *
      * @return BaseResponse<list<bool>>
      *
@@ -47,7 +47,7 @@ interface AudiobooksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AudiobookRemoveParams $params
+     * @param array<string,mixed>|AudiobookRemoveParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -61,7 +61,7 @@ interface AudiobooksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AudiobookSaveParams $params
+     * @param array<string,mixed>|AudiobookSaveParams $params
      *
      * @return BaseResponse<mixed>
      *

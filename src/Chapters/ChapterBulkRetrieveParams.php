@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\ChaptersService::bulkRetrieve()
  *
  * @phpstan-type ChapterBulkRetrieveParamsShape = array{
- *   ids: string, market?: string
+ *   ids: string, market?: string|null
  * }
  */
 final class ChapterBulkRetrieveParams implements BaseModel

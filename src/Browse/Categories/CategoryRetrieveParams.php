@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Browse\CategoriesService::retrieve()
  *
- * @phpstan-type CategoryRetrieveParamsShape = array{locale?: string}
+ * @phpstan-type CategoryRetrieveParamsShape = array{locale?: string|null}
  */
 final class CategoryRetrieveParams implements BaseModel
 {

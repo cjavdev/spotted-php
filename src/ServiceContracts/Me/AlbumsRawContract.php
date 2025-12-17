@@ -19,7 +19,7 @@ interface AlbumsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AlbumListParams $params
+     * @param array<string,mixed>|AlbumListParams $params
      *
      * @return BaseResponse<CursorURLPage<AlbumListResponse>>
      *
@@ -33,7 +33,7 @@ interface AlbumsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AlbumCheckParams $params
+     * @param array<string,mixed>|AlbumCheckParams $params
      *
      * @return BaseResponse<list<bool>>
      *
@@ -47,7 +47,7 @@ interface AlbumsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AlbumRemoveParams $params
+     * @param array<string,mixed>|AlbumRemoveParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -61,7 +61,7 @@ interface AlbumsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AlbumSaveParams $params
+     * @param array<string,mixed>|AlbumSaveParams $params
      *
      * @return BaseResponse<mixed>
      *

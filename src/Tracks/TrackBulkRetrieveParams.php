@@ -15,7 +15,9 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\TracksService::bulkRetrieve()
  *
- * @phpstan-type TrackBulkRetrieveParamsShape = array{ids: string, market?: string}
+ * @phpstan-type TrackBulkRetrieveParamsShape = array{
+ *   ids: string, market?: string|null
+ * }
  */
 final class TrackBulkRetrieveParams implements BaseModel
 {

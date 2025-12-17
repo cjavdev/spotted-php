@@ -21,7 +21,7 @@ interface AlbumsRawContract
      * @api
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the album
-     * @param array<mixed>|AlbumRetrieveParams $params
+     * @param array<string,mixed>|AlbumRetrieveParams $params
      *
      * @return BaseResponse<AlbumGetResponse>
      *
@@ -36,7 +36,7 @@ interface AlbumsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AlbumBulkRetrieveParams $params
+     * @param array<string,mixed>|AlbumBulkRetrieveParams $params
      *
      * @return BaseResponse<AlbumBulkGetResponse>
      *
@@ -51,7 +51,7 @@ interface AlbumsRawContract
      * @api
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the album
-     * @param array<mixed>|AlbumListTracksParams $params
+     * @param array<string,mixed>|AlbumListTracksParams $params
      *
      * @return BaseResponse<CursorURLPage<SimplifiedTrackObject>>
      *

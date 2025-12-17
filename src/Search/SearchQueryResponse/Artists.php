@@ -5,16 +5,14 @@ declare(strict_types=1);
 namespace Spotted\Search\SearchQueryResponse;
 
 use Spotted\ArtistObject;
-use Spotted\ArtistObject\Type;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ExternalURLObject;
-use Spotted\FollowersObject;
-use Spotted\ImageObject;
 
 /**
+ * @phpstan-import-type ArtistObjectShape from \Spotted\ArtistObject
+ *
  * @phpstan-type ArtistsShape = array{
  *   href: string,
  *   limit: int,
@@ -22,7 +20,7 @@ use Spotted\ImageObject;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<ArtistObject>|null,
+ *   items?: list<ArtistObjectShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -109,19 +107,7 @@ final class Artists implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ArtistObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   followers?: FollowersObject|null,
-     *   genres?: list<string>|null,
-     *   href?: string|null,
-     *   images?: list<ImageObject>|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }> $items
+     * @param list<ArtistObjectShape> $items
      */
     public static function with(
         string $href,
@@ -215,19 +201,7 @@ final class Artists implements BaseModel
     }
 
     /**
-     * @param list<ArtistObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   followers?: FollowersObject|null,
-     *   genres?: list<string>|null,
-     *   href?: string|null,
-     *   images?: list<ImageObject>|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }> $items
+     * @param list<ArtistObjectShape> $items
      */
     public function withItems(array $items): self
     {

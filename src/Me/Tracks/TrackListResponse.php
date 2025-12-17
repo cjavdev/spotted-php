@@ -7,20 +7,15 @@ namespace Spotted\Me\Tracks;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ExternalIDObject;
-use Spotted\ExternalURLObject;
-use Spotted\LinkedTrackObject;
-use Spotted\SimplifiedArtistObject;
 use Spotted\TrackObject;
-use Spotted\TrackObject\Album;
-use Spotted\TrackObject\Type;
-use Spotted\TrackRestrictionObject;
 
 /**
+ * @phpstan-import-type TrackObjectShape from \Spotted\TrackObject
+ *
  * @phpstan-type TrackListResponseShape = array{
  *   addedAt?: \DateTimeInterface|null,
  *   published?: bool|null,
- *   track?: TrackObject|null,
+ *   track?: null|TrackObject|TrackObjectShape,
  * }
  */
 final class TrackListResponse implements BaseModel
@@ -58,29 +53,7 @@ final class TrackListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TrackObject|array{
-     *   id?: string|null,
-     *   album?: Album|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * } $track
+     * @param TrackObjectShape $track
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
@@ -123,29 +96,7 @@ final class TrackListResponse implements BaseModel
     /**
      * Information about the track.
      *
-     * @param TrackObject|array{
-     *   id?: string|null,
-     *   album?: Album|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * } $track
+     * @param TrackObjectShape $track
      */
     public function withTrack(TrackObject|array $track): self
     {

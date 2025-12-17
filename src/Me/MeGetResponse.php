@@ -13,16 +13,21 @@ use Spotted\ImageObject;
 use Spotted\Me\MeGetResponse\ExplicitContent;
 
 /**
+ * @phpstan-import-type ExplicitContentShape from \Spotted\Me\MeGetResponse\ExplicitContent
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type FollowersObjectShape from \Spotted\FollowersObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ *
  * @phpstan-type MeGetResponseShape = array{
  *   id?: string|null,
  *   country?: string|null,
  *   displayName?: string|null,
  *   email?: string|null,
- *   explicitContent?: ExplicitContent|null,
- *   externalURLs?: ExternalURLObject|null,
- *   followers?: FollowersObject|null,
+ *   explicitContent?: null|ExplicitContent|ExplicitContentShape,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
+ *   followers?: null|FollowersObject|FollowersObjectShape,
  *   href?: string|null,
- *   images?: list<ImageObject>|null,
+ *   images?: list<ImageObjectShape>|null,
  *   product?: string|null,
  *   published?: bool|null,
  *   type?: string|null,
@@ -124,18 +129,10 @@ final class MeGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExplicitContent|array{
-     *   filterEnabled?: bool|null, filterLocked?: bool|null, published?: bool|null
-     * } $explicitContent
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param FollowersObject|array{
-     *   href?: string|null, published?: bool|null, total?: int|null
-     * } $followers
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param ExplicitContentShape $explicitContent
+     * @param ExternalURLObjectShape $externalURLs
+     * @param FollowersObjectShape $followers
+     * @param list<ImageObjectShape> $images
      */
     public static function with(
         ?string $id = null,
@@ -218,9 +215,7 @@ final class MeGetResponse implements BaseModel
     /**
      * The user's explicit content settings. _This field is only available when the current user has granted access to the [user-read-private](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
      *
-     * @param ExplicitContent|array{
-     *   filterEnabled?: bool|null, filterLocked?: bool|null, published?: bool|null
-     * } $explicitContent
+     * @param ExplicitContentShape $explicitContent
      */
     public function withExplicitContent(
         ExplicitContent|array $explicitContent
@@ -234,9 +229,7 @@ final class MeGetResponse implements BaseModel
     /**
      * Known external URLs for this user.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -250,9 +243,7 @@ final class MeGetResponse implements BaseModel
     /**
      * Information about the followers of the user.
      *
-     * @param FollowersObject|array{
-     *   href?: string|null, published?: bool|null, total?: int|null
-     * } $followers
+     * @param FollowersObjectShape $followers
      */
     public function withFollowers(FollowersObject|array $followers): self
     {
@@ -276,9 +267,7 @@ final class MeGetResponse implements BaseModel
     /**
      * The user's profile image.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {

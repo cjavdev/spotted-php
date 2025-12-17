@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Me\ShowsService::list()
  *
- * @phpstan-type ShowListParamsShape = array{limit?: int, offset?: int}
+ * @phpstan-type ShowListParamsShape = array{limit?: int|null, offset?: int|null}
  */
 final class ShowListParams implements BaseModel
 {

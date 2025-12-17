@@ -11,7 +11,7 @@ use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AlbumRestrictionObjectShape = array{
- *   published?: bool|null, reason?: value-of<Reason>|null
+ *   published?: bool|null, reason?: null|Reason|value-of<Reason>
  * }
  */
 final class AlbumRestrictionObject implements BaseModel

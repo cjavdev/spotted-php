@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\AudiobooksService::bulkRetrieve()
  *
  * @phpstan-type AudiobookBulkRetrieveParamsShape = array{
- *   ids: string, market?: string
+ *   ids: string, market?: string|null
  * }
  */
 final class AudiobookBulkRetrieveParams implements BaseModel

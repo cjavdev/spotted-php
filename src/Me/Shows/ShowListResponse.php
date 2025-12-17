@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Shows;
 
-use Spotted\CopyrightObject;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ExternalURLObject;
-use Spotted\ImageObject;
 use Spotted\ShowBase;
 
 /**
+ * @phpstan-import-type ShowBaseShape from \Spotted\ShowBase
+ *
  * @phpstan-type ShowListResponseShape = array{
- *   addedAt?: \DateTimeInterface|null, published?: bool|null, show?: ShowBase|null
+ *   addedAt?: \DateTimeInterface|null,
+ *   published?: bool|null,
+ *   show?: null|ShowBase|ShowBaseShape,
  * }
  */
 final class ShowListResponse implements BaseModel
@@ -52,26 +53,7 @@ final class ShowListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ShowBase|array{
-     *   id: string,
-     *   availableMarkets: list<string>,
-     *   copyrights: list<CopyrightObject>,
-     *   description: string,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   languages: list<string>,
-     *   mediaType: string,
-     *   name: string,
-     *   publisher: string,
-     *   totalEpisodes: int,
-     *   type?: 'show',
-     *   uri: string,
-     *   published?: bool|null,
-     * } $show
+     * @param ShowBaseShape $show
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
@@ -114,26 +96,7 @@ final class ShowListResponse implements BaseModel
     /**
      * Information about the show.
      *
-     * @param ShowBase|array{
-     *   id: string,
-     *   availableMarkets: list<string>,
-     *   copyrights: list<CopyrightObject>,
-     *   description: string,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   languages: list<string>,
-     *   mediaType: string,
-     *   name: string,
-     *   publisher: string,
-     *   totalEpisodes: int,
-     *   type?: 'show',
-     *   uri: string,
-     *   published?: bool|null,
-     * } $show
+     * @param ShowBaseShape $show
      */
     public function withShow(ShowBase|array $show): self
     {

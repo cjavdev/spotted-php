@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Me\PlayerService::skipNext()
  *
- * @phpstan-type PlayerSkipNextParamsShape = array{deviceID?: string}
+ * @phpstan-type PlayerSkipNextParamsShape = array{deviceID?: string|null}
  */
 final class PlayerSkipNextParams implements BaseModel
 {

@@ -5,20 +5,19 @@ declare(strict_types=1);
 namespace Spotted\Me\Following\FollowingBulkGetResponse;
 
 use Spotted\ArtistObject;
-use Spotted\ArtistObject\Type;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ExternalURLObject;
-use Spotted\FollowersObject;
-use Spotted\ImageObject;
 use Spotted\Me\Following\FollowingBulkGetResponse\Artists\Cursors;
 
 /**
+ * @phpstan-import-type CursorsShape from \Spotted\Me\Following\FollowingBulkGetResponse\Artists\Cursors
+ * @phpstan-import-type ArtistObjectShape from \Spotted\ArtistObject
+ *
  * @phpstan-type ArtistsShape = array{
- *   cursors?: Cursors|null,
+ *   cursors?: null|Cursors|CursorsShape,
  *   href?: string|null,
- *   items?: list<ArtistObject>|null,
+ *   items?: list<ArtistObjectShape>|null,
  *   limit?: int|null,
  *   next?: string|null,
  *   published?: bool|null,
@@ -80,22 +79,8 @@ final class Artists implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Cursors|array{
-     *   after?: string|null, before?: string|null, published?: bool|null
-     * } $cursors
-     * @param list<ArtistObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   followers?: FollowersObject|null,
-     *   genres?: list<string>|null,
-     *   href?: string|null,
-     *   images?: list<ImageObject>|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }> $items
+     * @param CursorsShape $cursors
+     * @param list<ArtistObjectShape> $items
      */
     public static function with(
         Cursors|array|null $cursors = null,
@@ -122,9 +107,7 @@ final class Artists implements BaseModel
     /**
      * The cursors used to find the next set of items.
      *
-     * @param Cursors|array{
-     *   after?: string|null, before?: string|null, published?: bool|null
-     * } $cursors
+     * @param CursorsShape $cursors
      */
     public function withCursors(Cursors|array $cursors): self
     {
@@ -146,19 +129,7 @@ final class Artists implements BaseModel
     }
 
     /**
-     * @param list<ArtistObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   followers?: FollowersObject|null,
-     *   genres?: list<string>|null,
-     *   href?: string|null,
-     *   images?: list<ImageObject>|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }> $items
+     * @param list<ArtistObjectShape> $items
      */
     public function withItems(array $items): self
     {

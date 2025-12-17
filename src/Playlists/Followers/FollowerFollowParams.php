@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Playlists\FollowersService::follow()
  *
- * @phpstan-type FollowerFollowParamsShape = array{published?: bool}
+ * @phpstan-type FollowerFollowParamsShape = array{published?: bool|null}
  */
 final class FollowerFollowParams implements BaseModel
 {

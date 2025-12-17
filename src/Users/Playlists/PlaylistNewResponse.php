@@ -10,25 +10,29 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
 use Spotted\FollowersObject;
 use Spotted\ImageObject;
-use Spotted\PlaylistTrackObject;
-use Spotted\PlaylistUserObject\Type;
 use Spotted\Users\Playlists\PlaylistNewResponse\Owner;
 use Spotted\Users\Playlists\PlaylistNewResponse\Tracks;
 
 /**
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type FollowersObjectShape from \Spotted\FollowersObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ * @phpstan-import-type OwnerShape from \Spotted\Users\Playlists\PlaylistNewResponse\Owner
+ * @phpstan-import-type TracksShape from \Spotted\Users\Playlists\PlaylistNewResponse\Tracks
+ *
  * @phpstan-type PlaylistNewResponseShape = array{
  *   id?: string|null,
  *   collaborative?: bool|null,
  *   description?: string|null,
- *   externalURLs?: ExternalURLObject|null,
- *   followers?: FollowersObject|null,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
+ *   followers?: null|FollowersObject|FollowersObjectShape,
  *   href?: string|null,
- *   images?: list<ImageObject>|null,
+ *   images?: list<ImageObjectShape>|null,
  *   name?: string|null,
- *   owner?: Owner|null,
+ *   owner?: null|Owner|OwnerShape,
  *   published?: bool|null,
  *   snapshotID?: string|null,
- *   tracks?: Tracks|null,
+ *   tracks?: null|Tracks|TracksShape,
  *   type?: string|null,
  *   uri?: string|null,
  * }
@@ -134,34 +138,11 @@ final class PlaylistNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param FollowersObject|array{
-     *   href?: string|null, published?: bool|null, total?: int|null
-     * } $followers
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
-     * @param Owner|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     *   displayName?: string|null,
-     * } $owner
-     * @param Tracks|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<PlaylistTrackObject>|null,
-     *   published?: bool|null,
-     * } $tracks
+     * @param ExternalURLObjectShape $externalURLs
+     * @param FollowersObjectShape $followers
+     * @param list<ImageObjectShape> $images
+     * @param OwnerShape $owner
+     * @param TracksShape $tracks
      */
     public static function with(
         ?string $id = null,
@@ -235,9 +216,7 @@ final class PlaylistNewResponse implements BaseModel
     /**
      * Known external URLs for this playlist.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -251,9 +230,7 @@ final class PlaylistNewResponse implements BaseModel
     /**
      * Information about the followers of the playlist.
      *
-     * @param FollowersObject|array{
-     *   href?: string|null, published?: bool|null, total?: int|null
-     * } $followers
+     * @param FollowersObjectShape $followers
      */
     public function withFollowers(FollowersObject|array $followers): self
     {
@@ -277,9 +254,7 @@ final class PlaylistNewResponse implements BaseModel
     /**
      * Images for the playlist. The array may be empty or contain up to three images. The images are returned by size in descending order. See [Working with Playlists](/documentation/web-api/concepts/playlists). _**Note**: If returned, the source URL for the image (`url`) is temporary and will expire in less than a day._.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
@@ -303,15 +278,7 @@ final class PlaylistNewResponse implements BaseModel
     /**
      * The user who owns the playlist.
      *
-     * @param Owner|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     *   displayName?: string|null,
-     * } $owner
+     * @param OwnerShape $owner
      */
     public function withOwner(Owner|array $owner): self
     {
@@ -346,16 +313,7 @@ final class PlaylistNewResponse implements BaseModel
     /**
      * The tracks of the playlist.
      *
-     * @param Tracks|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<PlaylistTrackObject>|null,
-     *   published?: bool|null,
-     * } $tracks
+     * @param TracksShape $tracks
      */
     public function withTracks(Tracks|array $tracks): self
     {

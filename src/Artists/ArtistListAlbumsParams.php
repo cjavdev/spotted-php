@@ -15,7 +15,10 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\ArtistsService::listAlbums()
  *
  * @phpstan-type ArtistListAlbumsParamsShape = array{
- *   includeGroups?: string, limit?: int, market?: string, offset?: int
+ *   includeGroups?: string|null,
+ *   limit?: int|null,
+ *   market?: string|null,
+ *   offset?: int|null,
  * }
  */
 final class ArtistListAlbumsParams implements BaseModel

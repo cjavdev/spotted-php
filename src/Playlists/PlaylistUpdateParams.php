@@ -16,7 +16,10 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\PlaylistsService::update()
  *
  * @phpstan-type PlaylistUpdateParamsShape = array{
- *   collaborative?: bool, description?: string, name?: string, published?: bool
+ *   collaborative?: bool|null,
+ *   description?: string|null,
+ *   name?: string|null,
+ *   published?: bool|null,
  * }
  */
 final class PlaylistUpdateParams implements BaseModel

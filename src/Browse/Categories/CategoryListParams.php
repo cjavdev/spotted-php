@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Browse\CategoriesService::list()
  *
  * @phpstan-type CategoryListParamsShape = array{
- *   limit?: int, locale?: string, offset?: int
+ *   limit?: int|null, locale?: string|null, offset?: int|null
  * }
  */
 final class CategoryListParams implements BaseModel

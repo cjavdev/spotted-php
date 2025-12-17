@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::getCurrentlyPlaying()
  *
  * @phpstan-type PlayerGetCurrentlyPlayingParamsShape = array{
- *   additionalTypes?: string, market?: string
+ *   additionalTypes?: string|null, market?: string|null
  * }
  */
 final class PlayerGetCurrentlyPlayingParams implements BaseModel

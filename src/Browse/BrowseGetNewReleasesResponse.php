@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace Spotted\Browse;
 
 use Spotted\Browse\BrowseGetNewReleasesResponse\Albums;
-use Spotted\Browse\BrowseGetNewReleasesResponse\Albums\Item;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type BrowseGetNewReleasesResponseShape = array{albums: Albums}
+ * @phpstan-import-type AlbumsShape from \Spotted\Browse\BrowseGetNewReleasesResponse\Albums
+ *
+ * @phpstan-type BrowseGetNewReleasesResponseShape = array{
+ *   albums: Albums|AlbumsShape
+ * }
  */
 final class BrowseGetNewReleasesResponse implements BaseModel
 {
@@ -45,16 +48,7 @@ final class BrowseGetNewReleasesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Albums|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<Item>|null,
-     *   published?: bool|null,
-     * } $albums
+     * @param AlbumsShape $albums
      */
     public static function with(Albums|array $albums): self
     {
@@ -66,16 +60,7 @@ final class BrowseGetNewReleasesResponse implements BaseModel
     }
 
     /**
-     * @param Albums|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<Item>|null,
-     *   published?: bool|null,
-     * } $albums
+     * @param AlbumsShape $albums
      */
     public function withAlbums(Albums|array $albums): self
     {

@@ -10,23 +10,27 @@ use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type CopyrightObjectShape from \Spotted\CopyrightObject
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ *
  * @phpstan-type ShowBaseShape = array{
  *   id: string,
  *   availableMarkets: list<string>,
- *   copyrights: list<CopyrightObject>,
+ *   copyrights: list<CopyrightObjectShape>,
  *   description: string,
  *   explicit: bool,
- *   externalURLs: ExternalURLObject,
+ *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
  *   htmlDescription: string,
- *   images: list<ImageObject>,
+ *   images: list<ImageObjectShape>,
  *   isExternallyHosted: bool,
  *   languages: list<string>,
  *   mediaType: string,
  *   name: string,
  *   publisher: string,
  *   totalEpisodes: int,
- *   type?: 'show',
+ *   type: 'show',
  *   uri: string,
  *   published?: bool|null,
  * }
@@ -212,15 +216,9 @@ final class ShowBase implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $availableMarkets
-     * @param list<CopyrightObject|array{
-     *   published?: bool|null, text?: string|null, type?: string|null
-     * }> $copyrights
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<CopyrightObjectShape> $copyrights
+     * @param ExternalURLObjectShape $externalURLs
+     * @param list<ImageObjectShape> $images
      * @param list<string> $languages
      */
     public static function with(
@@ -293,9 +291,7 @@ final class ShowBase implements BaseModel
     /**
      * The copyright statements of the show.
      *
-     * @param list<CopyrightObject|array{
-     *   published?: bool|null, text?: string|null, type?: string|null
-     * }> $copyrights
+     * @param list<CopyrightObjectShape> $copyrights
      */
     public function withCopyrights(array $copyrights): self
     {
@@ -330,9 +326,7 @@ final class ShowBase implements BaseModel
     /**
      * External URLs for this show.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -368,9 +362,7 @@ final class ShowBase implements BaseModel
     /**
      * The cover art for the show in various sizes, widest first.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {

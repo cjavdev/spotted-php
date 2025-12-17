@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace Spotted\Browse\Categories;
 
 use Spotted\Browse\Categories\CategoryListResponse\Categories;
-use Spotted\Browse\Categories\CategoryListResponse\Categories\Item;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CategoryListResponseShape = array{categories: Categories}
+ * @phpstan-import-type CategoriesShape from \Spotted\Browse\Categories\CategoryListResponse\Categories
+ *
+ * @phpstan-type CategoryListResponseShape = array{
+ *   categories: Categories|CategoriesShape
+ * }
  */
 final class CategoryListResponse implements BaseModel
 {
@@ -45,16 +48,7 @@ final class CategoryListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Categories|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<Item>|null,
-     *   published?: bool|null,
-     * } $categories
+     * @param CategoriesShape $categories
      */
     public static function with(Categories|array $categories): self
     {
@@ -66,16 +60,7 @@ final class CategoryListResponse implements BaseModel
     }
 
     /**
-     * @param Categories|array{
-     *   href: string,
-     *   limit: int,
-     *   next: string|null,
-     *   offset: int,
-     *   previous: string|null,
-     *   total: int,
-     *   items?: list<Item>|null,
-     *   published?: bool|null,
-     * } $categories
+     * @param CategoriesShape $categories
      */
     public function withCategories(Categories|array $categories): self
     {

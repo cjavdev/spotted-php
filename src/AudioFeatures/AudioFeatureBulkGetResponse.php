@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace Spotted\AudioFeatures;
 
 use Spotted\AudioFeatures\AudioFeatureBulkGetResponse\AudioFeature;
-use Spotted\AudioFeatures\AudioFeatureBulkGetResponse\AudioFeature\Type;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AudioFeatureShape from \Spotted\AudioFeatures\AudioFeatureBulkGetResponse\AudioFeature
+ *
  * @phpstan-type AudioFeatureBulkGetResponseShape = array{
- *   audioFeatures: list<AudioFeature>
+ *   audioFeatures: list<AudioFeatureShape>
  * }
  */
 final class AudioFeatureBulkGetResponse implements BaseModel
@@ -48,27 +49,7 @@ final class AudioFeatureBulkGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AudioFeature|array{
-     *   id?: string|null,
-     *   acousticness?: float|null,
-     *   analysisURL?: string|null,
-     *   danceability?: float|null,
-     *   durationMs?: int|null,
-     *   energy?: float|null,
-     *   instrumentalness?: float|null,
-     *   key?: int|null,
-     *   liveness?: float|null,
-     *   loudness?: float|null,
-     *   mode?: int|null,
-     *   published?: bool|null,
-     *   speechiness?: float|null,
-     *   tempo?: float|null,
-     *   timeSignature?: int|null,
-     *   trackHref?: string|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     *   valence?: float|null,
-     * }> $audioFeatures
+     * @param list<AudioFeatureShape> $audioFeatures
      */
     public static function with(array $audioFeatures): self
     {
@@ -80,27 +61,7 @@ final class AudioFeatureBulkGetResponse implements BaseModel
     }
 
     /**
-     * @param list<AudioFeature|array{
-     *   id?: string|null,
-     *   acousticness?: float|null,
-     *   analysisURL?: string|null,
-     *   danceability?: float|null,
-     *   durationMs?: int|null,
-     *   energy?: float|null,
-     *   instrumentalness?: float|null,
-     *   key?: int|null,
-     *   liveness?: float|null,
-     *   loudness?: float|null,
-     *   mode?: int|null,
-     *   published?: bool|null,
-     *   speechiness?: float|null,
-     *   tempo?: float|null,
-     *   timeSignature?: int|null,
-     *   trackHref?: string|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     *   valence?: float|null,
-     * }> $audioFeatures
+     * @param list<AudioFeatureShape> $audioFeatures
      */
     public function withAudioFeatures(array $audioFeatures): self
     {

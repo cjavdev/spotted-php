@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Playlists\TracksService::add()
  *
  * @phpstan-type TrackAddParamsShape = array{
- *   position?: int, published?: bool, uris?: list<string>
+ *   position?: int|null, published?: bool|null, uris?: list<string>|null
  * }
  */
 final class TrackAddParams implements BaseModel

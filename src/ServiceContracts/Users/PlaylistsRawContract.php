@@ -19,7 +19,7 @@ interface PlaylistsRawContract
      * @api
      *
      * @param string $userID the user's [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids)
-     * @param array<mixed>|PlaylistCreateParams $params
+     * @param array<string,mixed>|PlaylistCreateParams $params
      *
      * @return BaseResponse<PlaylistNewResponse>
      *
@@ -35,7 +35,7 @@ interface PlaylistsRawContract
      * @api
      *
      * @param string $userID the user's [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids)
-     * @param array<mixed>|PlaylistListParams $params
+     * @param array<string,mixed>|PlaylistListParams $params
      *
      * @return BaseResponse<CursorURLPage<SimplifiedPlaylistObject>>
      *

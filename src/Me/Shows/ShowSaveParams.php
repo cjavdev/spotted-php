@@ -14,7 +14,9 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Me\ShowsService::save()
  *
- * @phpstan-type ShowSaveParamsShape = array{ids?: list<string>, published?: bool}
+ * @phpstan-type ShowSaveParamsShape = array{
+ *   ids?: list<string>|null, published?: bool|null
+ * }
  */
 final class ShowSaveParams implements BaseModel
 {

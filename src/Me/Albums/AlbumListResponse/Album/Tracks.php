@@ -8,14 +8,12 @@ use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ExternalURLObject;
-use Spotted\LinkedTrackObject;
-use Spotted\SimplifiedArtistObject;
 use Spotted\SimplifiedTrackObject;
-use Spotted\TrackRestrictionObject;
 
 /**
  * The tracks of the album.
+ *
+ * @phpstan-import-type SimplifiedTrackObjectShape from \Spotted\SimplifiedTrackObject
  *
  * @phpstan-type TracksShape = array{
  *   href: string,
@@ -24,7 +22,7 @@ use Spotted\TrackRestrictionObject;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<SimplifiedTrackObject>|null,
+ *   items?: list<SimplifiedTrackObjectShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -111,26 +109,7 @@ final class Tracks implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedTrackObject|array{
-     *   id?: string|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: string|null,
-     *   uri?: string|null,
-     * }> $items
+     * @param list<SimplifiedTrackObjectShape> $items
      */
     public static function with(
         string $href,
@@ -224,26 +203,7 @@ final class Tracks implements BaseModel
     }
 
     /**
-     * @param list<SimplifiedTrackObject|array{
-     *   id?: string|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: string|null,
-     *   uri?: string|null,
-     * }> $items
+     * @param list<SimplifiedTrackObjectShape> $items
      */
     public function withItems(array $items): self
     {

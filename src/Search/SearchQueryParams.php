@@ -21,10 +21,10 @@ use Spotted\Search\SearchQueryParams\Type;
  * @phpstan-type SearchQueryParamsShape = array{
  *   q: string,
  *   type: list<Type|value-of<Type>>,
- *   includeExternal?: IncludeExternal|value-of<IncludeExternal>,
- *   limit?: int,
- *   market?: string,
- *   offset?: int,
+ *   includeExternal?: null|IncludeExternal|value-of<IncludeExternal>,
+ *   limit?: int|null,
+ *   market?: string|null,
+ *   offset?: int|null,
  * }
  */
 final class SearchQueryParams implements BaseModel

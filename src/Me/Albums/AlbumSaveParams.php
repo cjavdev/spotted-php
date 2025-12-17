@@ -14,7 +14,9 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Me\AlbumsService::save()
  *
- * @phpstan-type AlbumSaveParamsShape = array{ids?: list<string>, published?: bool}
+ * @phpstan-type AlbumSaveParamsShape = array{
+ *   ids?: list<string>|null, published?: bool|null
+ * }
  */
 final class AlbumSaveParams implements BaseModel
 {

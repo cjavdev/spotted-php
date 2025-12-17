@@ -18,7 +18,7 @@ interface FollowingRawContract
     /**
      * @api
      *
-     * @param array<mixed>|FollowingBulkRetrieveParams $params
+     * @param array<string,mixed>|FollowingBulkRetrieveParams $params
      *
      * @return BaseResponse<FollowingBulkGetResponse>
      *
@@ -32,7 +32,7 @@ interface FollowingRawContract
     /**
      * @api
      *
-     * @param array<mixed>|FollowingCheckParams $params
+     * @param array<string,mixed>|FollowingCheckParams $params
      *
      * @return BaseResponse<list<bool>>
      *
@@ -46,7 +46,7 @@ interface FollowingRawContract
     /**
      * @api
      *
-     * @param array<mixed>|FollowingFollowParams $params
+     * @param array<string,mixed>|FollowingFollowParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -60,7 +60,7 @@ interface FollowingRawContract
     /**
      * @api
      *
-     * @param array<mixed>|FollowingUnfollowParams $params
+     * @param array<string,mixed>|FollowingUnfollowParams $params
      *
      * @return BaseResponse<mixed>
      *

@@ -11,10 +11,12 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\ImageObject;
 
 /**
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ *
  * @phpstan-type CategoryGetResponseShape = array{
  *   id: string,
  *   href: string,
- *   icons: list<ImageObject>,
+ *   icons: list<ImageObjectShape>,
  *   name: string,
  *   published?: bool|null,
  * }
@@ -84,9 +86,7 @@ final class CategoryGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $icons
+     * @param list<ImageObjectShape> $icons
      */
     public static function with(
         string $id,
@@ -132,9 +132,7 @@ final class CategoryGetResponse implements BaseModel
     /**
      * The category icon, in various sizes.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $icons
+     * @param list<ImageObjectShape> $icons
      */
     public function withIcons(array $icons): self
     {

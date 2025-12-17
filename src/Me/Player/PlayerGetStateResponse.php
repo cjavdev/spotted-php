@@ -8,30 +8,23 @@ use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\EpisodeObject;
-use Spotted\EpisodeObject\ReleaseDatePrecision;
-use Spotted\EpisodeRestrictionObject;
-use Spotted\ExternalIDObject;
-use Spotted\ExternalURLObject;
-use Spotted\ImageObject;
-use Spotted\LinkedTrackObject;
 use Spotted\Me\Player\PlayerGetStateResponse\Actions;
 use Spotted\Me\Player\PlayerGetStateResponse\Item;
-use Spotted\ResumePointObject;
-use Spotted\ShowBase;
-use Spotted\SimplifiedArtistObject;
 use Spotted\TrackObject;
-use Spotted\TrackObject\Album;
-use Spotted\TrackObject\Type;
-use Spotted\TrackRestrictionObject;
 
 /**
+ * @phpstan-import-type ActionsShape from \Spotted\Me\Player\PlayerGetStateResponse\Actions
+ * @phpstan-import-type ContextObjectShape from \Spotted\Me\Player\ContextObject
+ * @phpstan-import-type DeviceObjectShape from \Spotted\Me\Player\DeviceObject
+ * @phpstan-import-type ItemShape from \Spotted\Me\Player\PlayerGetStateResponse\Item
+ *
  * @phpstan-type PlayerGetStateResponseShape = array{
- *   actions?: Actions|null,
- *   context?: ContextObject|null,
+ *   actions?: null|Actions|ActionsShape,
+ *   context?: null|ContextObject|ContextObjectShape,
  *   currentlyPlayingType?: string|null,
- *   device?: DeviceObject|null,
+ *   device?: null|DeviceObject|DeviceObjectShape,
  *   isPlaying?: bool|null,
- *   item?: null|TrackObject|EpisodeObject,
+ *   item?: null|ItemShape|TrackObject|EpisodeObject,
  *   progressMs?: int|null,
  *   published?: bool|null,
  *   repeatState?: string|null,
@@ -120,83 +113,10 @@ final class PlayerGetStateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Actions|array{
-     *   interruptingPlayback?: bool|null,
-     *   pausing?: bool|null,
-     *   published?: bool|null,
-     *   resuming?: bool|null,
-     *   seeking?: bool|null,
-     *   skippingNext?: bool|null,
-     *   skippingPrev?: bool|null,
-     *   togglingRepeatContext?: bool|null,
-     *   togglingRepeatTrack?: bool|null,
-     *   togglingShuffle?: bool|null,
-     *   transferringPlayback?: bool|null,
-     * } $actions
-     * @param ContextObject|array{
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   published?: bool|null,
-     *   type?: string|null,
-     *   uri?: string|null,
-     * } $context
-     * @param DeviceObject|array{
-     *   id?: string|null,
-     *   isActive?: bool|null,
-     *   isPrivateSession?: bool|null,
-     *   isRestricted?: bool|null,
-     *   name?: string|null,
-     *   published?: bool|null,
-     *   supportsVolume?: bool|null,
-     *   type?: string|null,
-     *   volumePercent?: int|null,
-     * } $device
-     * @param TrackObject|array{
-     *   id?: string|null,
-     *   album?: Album|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }|EpisodeObject|array{
-     *   id: string,
-     *   audioPreviewURL: string|null,
-     *   description: string,
-     *   durationMs: int,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   isPlayable: bool,
-     *   languages: list<string>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   show: ShowBase,
-     *   type?: 'episode',
-     *   uri: string,
-     *   language?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: EpisodeRestrictionObject|null,
-     *   resumePoint?: ResumePointObject|null,
-     * } $item
+     * @param ActionsShape $actions
+     * @param ContextObjectShape $context
+     * @param DeviceObjectShape $device
+     * @param ItemShape $item
      */
     public static function with(
         Actions|array|null $actions = null,
@@ -231,19 +151,7 @@ final class PlayerGetStateResponse implements BaseModel
     /**
      * Allows to update the user interface based on which playback actions are available within the current context.
      *
-     * @param Actions|array{
-     *   interruptingPlayback?: bool|null,
-     *   pausing?: bool|null,
-     *   published?: bool|null,
-     *   resuming?: bool|null,
-     *   seeking?: bool|null,
-     *   skippingNext?: bool|null,
-     *   skippingPrev?: bool|null,
-     *   togglingRepeatContext?: bool|null,
-     *   togglingRepeatTrack?: bool|null,
-     *   togglingShuffle?: bool|null,
-     *   transferringPlayback?: bool|null,
-     * } $actions
+     * @param ActionsShape $actions
      */
     public function withActions(Actions|array $actions): self
     {
@@ -256,13 +164,7 @@ final class PlayerGetStateResponse implements BaseModel
     /**
      * A Context Object. Can be `null`.
      *
-     * @param ContextObject|array{
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   published?: bool|null,
-     *   type?: string|null,
-     *   uri?: string|null,
-     * } $context
+     * @param ContextObjectShape $context
      */
     public function withContext(ContextObject|array $context): self
     {
@@ -286,17 +188,7 @@ final class PlayerGetStateResponse implements BaseModel
     /**
      * The device that is currently active.
      *
-     * @param DeviceObject|array{
-     *   id?: string|null,
-     *   isActive?: bool|null,
-     *   isPrivateSession?: bool|null,
-     *   isRestricted?: bool|null,
-     *   name?: string|null,
-     *   published?: bool|null,
-     *   supportsVolume?: bool|null,
-     *   type?: string|null,
-     *   volumePercent?: int|null,
-     * } $device
+     * @param DeviceObjectShape $device
      */
     public function withDevice(DeviceObject|array $device): self
     {
@@ -320,52 +212,7 @@ final class PlayerGetStateResponse implements BaseModel
     /**
      * The currently playing track or episode. Can be `null`.
      *
-     * @param TrackObject|array{
-     *   id?: string|null,
-     *   album?: Album|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }|EpisodeObject|array{
-     *   id: string,
-     *   audioPreviewURL: string|null,
-     *   description: string,
-     *   durationMs: int,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   isPlayable: bool,
-     *   languages: list<string>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   show: ShowBase,
-     *   type?: 'episode',
-     *   uri: string,
-     *   language?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: EpisodeRestrictionObject|null,
-     *   resumePoint?: ResumePointObject|null,
-     * } $item
+     * @param ItemShape $item
      */
     public function withItem(TrackObject|array|EpisodeObject $item): self
     {

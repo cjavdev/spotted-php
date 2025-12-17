@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\TracksService::remove()
  *
  * @phpstan-type TrackRemoveParamsShape = array{
- *   ids?: list<string>, published?: bool
+ *   ids?: list<string>|null, published?: bool|null
  * }
  */
 final class TrackRemoveParams implements BaseModel

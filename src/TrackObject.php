@@ -8,32 +8,37 @@ use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\TrackObject\Album;
-use Spotted\TrackObject\Album\AlbumType;
-use Spotted\TrackObject\Album\ReleaseDatePrecision;
 use Spotted\TrackObject\Type;
 
 /**
+ * @phpstan-import-type AlbumShape from \Spotted\TrackObject\Album
+ * @phpstan-import-type SimplifiedArtistObjectShape from \Spotted\SimplifiedArtistObject
+ * @phpstan-import-type ExternalIDObjectShape from \Spotted\ExternalIDObject
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type LinkedTrackObjectShape from \Spotted\LinkedTrackObject
+ * @phpstan-import-type TrackRestrictionObjectShape from \Spotted\TrackRestrictionObject
+ *
  * @phpstan-type TrackObjectShape = array{
  *   id?: string|null,
- *   album?: Album|null,
- *   artists?: list<SimplifiedArtistObject>|null,
+ *   album?: null|Album|AlbumShape,
+ *   artists?: list<SimplifiedArtistObjectShape>|null,
  *   availableMarkets?: list<string>|null,
  *   discNumber?: int|null,
  *   durationMs?: int|null,
  *   explicit?: bool|null,
- *   externalIDs?: ExternalIDObject|null,
- *   externalURLs?: ExternalURLObject|null,
+ *   externalIDs?: null|ExternalIDObject|ExternalIDObjectShape,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
  *   href?: string|null,
  *   isLocal?: bool|null,
  *   isPlayable?: bool|null,
- *   linkedFrom?: LinkedTrackObject|null,
+ *   linkedFrom?: null|LinkedTrackObject|LinkedTrackObjectShape,
  *   name?: string|null,
  *   popularity?: int|null,
  *   previewURL?: string|null,
  *   published?: bool|null,
- *   restrictions?: TrackRestrictionObject|null,
+ *   restrictions?: null|TrackRestrictionObject|TrackRestrictionObjectShape,
  *   trackNumber?: int|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   uri?: string|null,
  * }
  */
@@ -186,53 +191,13 @@ final class TrackObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Album|array{
-     *   id: string,
-     *   albumType: value-of<AlbumType>,
-     *   artists: list<SimplifiedArtistObject>,
-     *   availableMarkets: list<string>,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   images: list<ImageObject>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   totalTracks: int,
-     *   type?: 'album',
-     *   uri: string,
-     *   published?: bool|null,
-     *   restrictions?: AlbumRestrictionObject|null,
-     * } $album
-     * @param list<SimplifiedArtistObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   name?: string|null,
-     *   published?: bool|null,
-     *   type?: value-of<SimplifiedArtistObject\Type>|null,
-     *   uri?: string|null,
-     * }> $artists
+     * @param AlbumShape $album
+     * @param list<SimplifiedArtistObjectShape> $artists
      * @param list<string> $availableMarkets
-     * @param ExternalIDObject|array{
-     *   ean?: string|null,
-     *   isrc?: string|null,
-     *   published?: bool|null,
-     *   upc?: string|null,
-     * } $externalIDs
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param LinkedTrackObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   published?: bool|null,
-     *   type?: string|null,
-     *   uri?: string|null,
-     * } $linkedFrom
-     * @param TrackRestrictionObject|array{
-     *   published?: bool|null, reason?: string|null
-     * } $restrictions
+     * @param ExternalIDObjectShape $externalIDs
+     * @param ExternalURLObjectShape $externalURLs
+     * @param LinkedTrackObjectShape $linkedFrom
+     * @param TrackRestrictionObjectShape $restrictions
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -299,23 +264,7 @@ final class TrackObject implements BaseModel
     /**
      * The album on which the track appears. The album object includes a link in `href` to full information about the album.
      *
-     * @param Album|array{
-     *   id: string,
-     *   albumType: value-of<AlbumType>,
-     *   artists: list<SimplifiedArtistObject>,
-     *   availableMarkets: list<string>,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   images: list<ImageObject>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   totalTracks: int,
-     *   type?: 'album',
-     *   uri: string,
-     *   published?: bool|null,
-     *   restrictions?: AlbumRestrictionObject|null,
-     * } $album
+     * @param AlbumShape $album
      */
     public function withAlbum(Album|array $album): self
     {
@@ -328,15 +277,7 @@ final class TrackObject implements BaseModel
     /**
      * The artists who performed the track. Each artist object includes a link in `href` to more detailed information about the artist.
      *
-     * @param list<SimplifiedArtistObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   name?: string|null,
-     *   published?: bool|null,
-     *   type?: value-of<SimplifiedArtistObject\Type>|null,
-     *   uri?: string|null,
-     * }> $artists
+     * @param list<SimplifiedArtistObjectShape> $artists
      */
     public function withArtists(array $artists): self
     {
@@ -395,12 +336,7 @@ final class TrackObject implements BaseModel
     /**
      * Known external IDs for the track.
      *
-     * @param ExternalIDObject|array{
-     *   ean?: string|null,
-     *   isrc?: string|null,
-     *   published?: bool|null,
-     *   upc?: string|null,
-     * } $externalIDs
+     * @param ExternalIDObjectShape $externalIDs
      */
     public function withExternalIDs(ExternalIDObject|array $externalIDs): self
     {
@@ -413,9 +349,7 @@ final class TrackObject implements BaseModel
     /**
      * Known external URLs for this track.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -462,14 +396,7 @@ final class TrackObject implements BaseModel
     /**
      * Part of the response when [Track Relinking](/documentation/web-api/concepts/track-relinking) is applied, and the requested track has been replaced with different track. The track in the `linked_from` object contains information about the originally requested track.
      *
-     * @param LinkedTrackObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   published?: bool|null,
-     *   type?: string|null,
-     *   uri?: string|null,
-     * } $linkedFrom
+     * @param LinkedTrackObjectShape $linkedFrom
      */
     public function withLinkedFrom(LinkedTrackObject|array $linkedFrom): self
     {
@@ -526,9 +453,7 @@ final class TrackObject implements BaseModel
     /**
      * Included in the response when a content restriction is applied.
      *
-     * @param TrackRestrictionObject|array{
-     *   published?: bool|null, reason?: string|null
-     * } $restrictions
+     * @param TrackRestrictionObjectShape $restrictions
      */
     public function withRestrictions(
         TrackRestrictionObject|array $restrictions

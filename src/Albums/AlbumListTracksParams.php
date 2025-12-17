@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\AlbumsService::listTracks()
  *
  * @phpstan-type AlbumListTracksParamsShape = array{
- *   limit?: int, market?: string, offset?: int
+ *   limit?: int|null, market?: string|null, offset?: int|null
  * }
  */
 final class AlbumListTracksParams implements BaseModel

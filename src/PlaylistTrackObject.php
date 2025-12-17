@@ -7,18 +7,18 @@ namespace Spotted;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\EpisodeObject\ReleaseDatePrecision;
 use Spotted\PlaylistTrackObject\Track;
-use Spotted\PlaylistUserObject\Type;
-use Spotted\TrackObject\Album;
 
 /**
+ * @phpstan-import-type PlaylistUserObjectShape from \Spotted\PlaylistUserObject
+ * @phpstan-import-type TrackShape from \Spotted\PlaylistTrackObject\Track
+ *
  * @phpstan-type PlaylistTrackObjectShape = array{
  *   addedAt?: \DateTimeInterface|null,
- *   addedBy?: PlaylistUserObject|null,
+ *   addedBy?: null|PlaylistUserObject|PlaylistUserObjectShape,
  *   isLocal?: bool|null,
  *   published?: bool|null,
- *   track?: null|TrackObject|EpisodeObject,
+ *   track?: null|TrackShape|TrackObject|EpisodeObject,
  * }
  */
 final class PlaylistTrackObject implements BaseModel
@@ -66,60 +66,8 @@ final class PlaylistTrackObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PlaylistUserObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * } $addedBy
-     * @param TrackObject|array{
-     *   id?: string|null,
-     *   album?: Album|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: value-of<TrackObject\Type>|null,
-     *   uri?: string|null,
-     * }|EpisodeObject|array{
-     *   id: string,
-     *   audioPreviewURL: string|null,
-     *   description: string,
-     *   durationMs: int,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   isPlayable: bool,
-     *   languages: list<string>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   show: ShowBase,
-     *   type?: 'episode',
-     *   uri: string,
-     *   language?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: EpisodeRestrictionObject|null,
-     *   resumePoint?: ResumePointObject|null,
-     * } $track
+     * @param PlaylistUserObjectShape $addedBy
+     * @param TrackShape $track
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
@@ -153,14 +101,7 @@ final class PlaylistTrackObject implements BaseModel
     /**
      * The Spotify user who added the track or episode. _**Note**: some very old playlists may return `null` in this field._.
      *
-     * @param PlaylistUserObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * } $addedBy
+     * @param PlaylistUserObjectShape $addedBy
      */
     public function withAddedBy(PlaylistUserObject|array $addedBy): self
     {
@@ -195,52 +136,7 @@ final class PlaylistTrackObject implements BaseModel
     /**
      * Information about the track or episode.
      *
-     * @param TrackObject|array{
-     *   id?: string|null,
-     *   album?: Album|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: value-of<TrackObject\Type>|null,
-     *   uri?: string|null,
-     * }|EpisodeObject|array{
-     *   id: string,
-     *   audioPreviewURL: string|null,
-     *   description: string,
-     *   durationMs: int,
-     *   explicit: bool,
-     *   externalURLs: ExternalURLObject,
-     *   href: string,
-     *   htmlDescription: string,
-     *   images: list<ImageObject>,
-     *   isExternallyHosted: bool,
-     *   isPlayable: bool,
-     *   languages: list<string>,
-     *   name: string,
-     *   releaseDate: string,
-     *   releaseDatePrecision: value-of<ReleaseDatePrecision>,
-     *   show: ShowBase,
-     *   type?: 'episode',
-     *   uri: string,
-     *   language?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: EpisodeRestrictionObject|null,
-     *   resumePoint?: ResumePointObject|null,
-     * } $track
+     * @param TrackShape $track
      */
     public function withTrack(TrackObject|array|EpisodeObject $track): self
     {

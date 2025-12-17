@@ -10,6 +10,12 @@ use Spotted\Core\Conversion\Contracts\ConverterSource;
 use Spotted\EpisodeObject;
 use Spotted\TrackObject;
 
+/**
+ * @phpstan-import-type TrackObjectShape from \Spotted\TrackObject
+ * @phpstan-import-type EpisodeObjectShape from \Spotted\EpisodeObject
+ *
+ * @phpstan-type QueueShape = TrackObjectShape|EpisodeObjectShape
+ */
 final class Queue implements ConverterSource
 {
     use SdkUnion;

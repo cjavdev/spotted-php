@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\PlaylistsService::retrieve()
  *
  * @phpstan-type PlaylistRetrieveParamsShape = array{
- *   additionalTypes?: string, fields?: string, market?: string
+ *   additionalTypes?: string|null, fields?: string|null, market?: string|null
  * }
  */
 final class PlaylistRetrieveParams implements BaseModel

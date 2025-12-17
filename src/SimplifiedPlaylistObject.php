@@ -7,22 +7,26 @@ namespace Spotted;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\PlaylistUserObject\Type;
 use Spotted\SimplifiedPlaylistObject\Owner;
 
 /**
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ * @phpstan-import-type OwnerShape from \Spotted\SimplifiedPlaylistObject\Owner
+ * @phpstan-import-type PlaylistTracksRefObjectShape from \Spotted\PlaylistTracksRefObject
+ *
  * @phpstan-type SimplifiedPlaylistObjectShape = array{
  *   id?: string|null,
  *   collaborative?: bool|null,
  *   description?: string|null,
- *   externalURLs?: ExternalURLObject|null,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
  *   href?: string|null,
- *   images?: list<ImageObject>|null,
+ *   images?: list<ImageObjectShape>|null,
  *   name?: string|null,
- *   owner?: Owner|null,
+ *   owner?: null|Owner|OwnerShape,
  *   published?: bool|null,
  *   snapshotID?: string|null,
- *   tracks?: PlaylistTracksRefObject|null,
+ *   tracks?: null|PlaylistTracksRefObject|PlaylistTracksRefObjectShape,
  *   type?: string|null,
  *   uri?: string|null,
  * }
@@ -122,24 +126,10 @@ final class SimplifiedPlaylistObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
-     * @param Owner|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     *   displayName?: string|null,
-     * } $owner
-     * @param PlaylistTracksRefObject|array{
-     *   href?: string|null, published?: bool|null, total?: int|null
-     * } $tracks
+     * @param ExternalURLObjectShape $externalURLs
+     * @param list<ImageObjectShape> $images
+     * @param OwnerShape $owner
+     * @param PlaylistTracksRefObjectShape $tracks
      */
     public static function with(
         ?string $id = null,
@@ -211,9 +201,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     /**
      * Known external URLs for this playlist.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -238,9 +226,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     /**
      * Images for the playlist. The array may be empty or contain up to three images. The images are returned by size in descending order. See [Working with Playlists](/documentation/web-api/concepts/playlists). _**Note**: If returned, the source URL for the image (`url`) is temporary and will expire in less than a day._.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
@@ -264,15 +250,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     /**
      * The user who owns the playlist.
      *
-     * @param Owner|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     *   displayName?: string|null,
-     * } $owner
+     * @param OwnerShape $owner
      */
     public function withOwner(Owner|array $owner): self
     {
@@ -307,9 +285,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     /**
      * A collection containing a link ( `href` ) to the Web API endpoint where full details of the playlist's tracks can be retrieved, along with the `total` number of tracks in the playlist. Note, a track object may be `null`. This can happen if a track is no longer available.
      *
-     * @param PlaylistTracksRefObject|array{
-     *   href?: string|null, published?: bool|null, total?: int|null
-     * } $tracks
+     * @param PlaylistTracksRefObjectShape $tracks
      */
     public function withTracks(PlaylistTracksRefObject|array $tracks): self
     {

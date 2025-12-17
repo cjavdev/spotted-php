@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\EpisodesService::retrieve()
  *
- * @phpstan-type EpisodeRetrieveParamsShape = array{market?: string}
+ * @phpstan-type EpisodeRetrieveParamsShape = array{market?: string|null}
  */
 final class EpisodeRetrieveParams implements BaseModel
 {

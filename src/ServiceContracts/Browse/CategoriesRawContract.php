@@ -20,7 +20,7 @@ interface CategoriesRawContract
      * @api
      *
      * @param string $categoryID the [Spotify category ID](/documentation/web-api/concepts/spotify-uris-ids) for the category
-     * @param array<mixed>|CategoryRetrieveParams $params
+     * @param array<string,mixed>|CategoryRetrieveParams $params
      *
      * @return BaseResponse<CategoryGetResponse>
      *
@@ -35,7 +35,7 @@ interface CategoriesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CategoryListParams $params
+     * @param array<string,mixed>|CategoryListParams $params
      *
      * @return BaseResponse<CategoryListResponse>
      *
@@ -52,7 +52,7 @@ interface CategoriesRawContract
      * @api
      *
      * @param string $categoryID the [Spotify category ID](/documentation/web-api/concepts/spotify-uris-ids) for the category
-     * @param array<mixed>|CategoryGetPlaylistsParams $params
+     * @param array<string,mixed>|CategoryGetPlaylistsParams $params
      *
      * @return BaseResponse<CategoryGetPlaylistsResponse>
      *

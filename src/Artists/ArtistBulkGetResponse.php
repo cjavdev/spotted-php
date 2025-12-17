@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Spotted\Artists;
 
 use Spotted\ArtistObject;
-use Spotted\ArtistObject\Type;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ExternalURLObject;
-use Spotted\FollowersObject;
-use Spotted\ImageObject;
 
 /**
- * @phpstan-type ArtistBulkGetResponseShape = array{artists: list<ArtistObject>}
+ * @phpstan-import-type ArtistObjectShape from \Spotted\ArtistObject
+ *
+ * @phpstan-type ArtistBulkGetResponseShape = array{
+ *   artists: list<ArtistObjectShape>
+ * }
  */
 final class ArtistBulkGetResponse implements BaseModel
 {
@@ -49,19 +49,7 @@ final class ArtistBulkGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ArtistObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   followers?: FollowersObject|null,
-     *   genres?: list<string>|null,
-     *   href?: string|null,
-     *   images?: list<ImageObject>|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }> $artists
+     * @param list<ArtistObjectShape> $artists
      */
     public static function with(array $artists): self
     {
@@ -73,19 +61,7 @@ final class ArtistBulkGetResponse implements BaseModel
     }
 
     /**
-     * @param list<ArtistObject|array{
-     *   id?: string|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   followers?: FollowersObject|null,
-     *   genres?: list<string>|null,
-     *   href?: string|null,
-     *   images?: list<ImageObject>|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   published?: bool|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }> $artists
+     * @param list<ArtistObjectShape> $artists
      */
     public function withArtists(array $artists): self
     {

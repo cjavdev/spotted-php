@@ -13,15 +13,19 @@ use Spotted\ImageObject;
 use Spotted\Users\UserGetProfileResponse\Type;
 
 /**
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type FollowersObjectShape from \Spotted\FollowersObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ *
  * @phpstan-type UserGetProfileResponseShape = array{
  *   id?: string|null,
  *   displayName?: string|null,
- *   externalURLs?: ExternalURLObject|null,
- *   followers?: FollowersObject|null,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
+ *   followers?: null|FollowersObject|FollowersObjectShape,
  *   href?: string|null,
- *   images?: list<ImageObject>|null,
+ *   images?: list<ImageObjectShape>|null,
  *   published?: bool|null,
- *   type?: value-of<Type>|null,
+ *   type?: null|Type|value-of<Type>,
  *   uri?: string|null,
  * }
  */
@@ -98,15 +102,9 @@ final class UserGetProfileResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
-     * @param FollowersObject|array{
-     *   href?: string|null, published?: bool|null, total?: int|null
-     * } $followers
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param ExternalURLObjectShape $externalURLs
+     * @param FollowersObjectShape $followers
+     * @param list<ImageObjectShape> $images
      * @param Type|value-of<Type> $type
      */
     public static function with(
@@ -160,9 +158,7 @@ final class UserGetProfileResponse implements BaseModel
     /**
      * Known public external URLs for this user.
      *
-     * @param ExternalURLObject|array{
-     *   published?: bool|null, spotify?: string|null
-     * } $externalURLs
+     * @param ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -176,9 +172,7 @@ final class UserGetProfileResponse implements BaseModel
     /**
      * Information about the followers of this user.
      *
-     * @param FollowersObject|array{
-     *   href?: string|null, published?: bool|null, total?: int|null
-     * } $followers
+     * @param FollowersObjectShape $followers
      */
     public function withFollowers(FollowersObject|array $followers): self
     {
@@ -202,9 +196,7 @@ final class UserGetProfileResponse implements BaseModel
     /**
      * The user's profile image.
      *
-     * @param list<ImageObject|array{
-     *   height: int|null, url: string, width: int|null, published?: bool|null
-     * }> $images
+     * @param list<ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {

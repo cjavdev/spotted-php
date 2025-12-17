@@ -19,7 +19,7 @@ interface ChaptersRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the chapter
-     * @param array<mixed>|ChapterRetrieveParams $params
+     * @param array<string,mixed>|ChapterRetrieveParams $params
      *
      * @return BaseResponse<ChapterGetResponse>
      *
@@ -34,7 +34,7 @@ interface ChaptersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ChapterBulkRetrieveParams $params
+     * @param array<string,mixed>|ChapterBulkRetrieveParams $params
      *
      * @return BaseResponse<ChapterBulkGetResponse>
      *

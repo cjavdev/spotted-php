@@ -16,7 +16,7 @@ interface FollowersRawContract
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
-     * @param array<mixed>|FollowerCheckParams $params
+     * @param array<string,mixed>|FollowerCheckParams $params
      *
      * @return BaseResponse<list<bool>>
      *
@@ -32,7 +32,7 @@ interface FollowersRawContract
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
-     * @param array<mixed>|FollowerFollowParams $params
+     * @param array<string,mixed>|FollowerFollowParams $params
      *
      * @return BaseResponse<mixed>
      *

@@ -15,12 +15,12 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::startPlayback()
  *
  * @phpstan-type PlayerStartPlaybackParamsShape = array{
- *   deviceID?: string,
- *   contextUri?: string,
- *   offset?: array<string,mixed>,
- *   positionMs?: int,
- *   published?: bool,
- *   uris?: list<string>,
+ *   deviceID?: string|null,
+ *   contextUri?: string|null,
+ *   offset?: array<string,mixed>|null,
+ *   positionMs?: int|null,
+ *   published?: bool|null,
+ *   uris?: list<string>|null,
  * }
  */
 final class PlayerStartPlaybackParams implements BaseModel

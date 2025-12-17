@@ -22,7 +22,7 @@ interface ShowsRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the show
-     * @param array<mixed>|ShowRetrieveParams $params
+     * @param array<string,mixed>|ShowRetrieveParams $params
      *
      * @return BaseResponse<ShowGetResponse>
      *
@@ -37,7 +37,7 @@ interface ShowsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ShowBulkRetrieveParams $params
+     * @param array<string,mixed>|ShowBulkRetrieveParams $params
      *
      * @return BaseResponse<ShowBulkGetResponse>
      *
@@ -53,7 +53,7 @@ interface ShowsRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the show
-     * @param array<mixed>|ShowListEpisodesParams $params
+     * @param array<string,mixed>|ShowListEpisodesParams $params
      *
      * @return BaseResponse<CursorURLPage<SimplifiedEpisodeObject>>
      *

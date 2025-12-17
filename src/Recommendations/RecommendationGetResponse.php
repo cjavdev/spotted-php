@@ -8,19 +8,15 @@ use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\ExternalIDObject;
-use Spotted\ExternalURLObject;
-use Spotted\LinkedTrackObject;
 use Spotted\Recommendations\RecommendationGetResponse\Seed;
-use Spotted\SimplifiedArtistObject;
 use Spotted\TrackObject;
-use Spotted\TrackObject\Album;
-use Spotted\TrackObject\Type;
-use Spotted\TrackRestrictionObject;
 
 /**
+ * @phpstan-import-type SeedShape from \Spotted\Recommendations\RecommendationGetResponse\Seed
+ * @phpstan-import-type TrackObjectShape from \Spotted\TrackObject
+ *
  * @phpstan-type RecommendationGetResponseShape = array{
- *   seeds: list<Seed>, tracks: list<TrackObject>, published?: bool|null
+ *   seeds: list<SeedShape>, tracks: list<TrackObjectShape>, published?: bool|null
  * }
  */
 final class RecommendationGetResponse implements BaseModel
@@ -74,38 +70,8 @@ final class RecommendationGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Seed|array{
-     *   id?: string|null,
-     *   afterFilteringSize?: int|null,
-     *   afterRelinkingSize?: int|null,
-     *   href?: string|null,
-     *   initialPoolSize?: int|null,
-     *   published?: bool|null,
-     *   type?: string|null,
-     * }> $seeds
-     * @param list<TrackObject|array{
-     *   id?: string|null,
-     *   album?: Album|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }> $tracks
+     * @param list<SeedShape> $seeds
+     * @param list<TrackObjectShape> $tracks
      */
     public static function with(
         array $seeds,
@@ -125,15 +91,7 @@ final class RecommendationGetResponse implements BaseModel
     /**
      * An array of recommendation seed objects.
      *
-     * @param list<Seed|array{
-     *   id?: string|null,
-     *   afterFilteringSize?: int|null,
-     *   afterRelinkingSize?: int|null,
-     *   href?: string|null,
-     *   initialPoolSize?: int|null,
-     *   published?: bool|null,
-     *   type?: string|null,
-     * }> $seeds
+     * @param list<SeedShape> $seeds
      */
     public function withSeeds(array $seeds): self
     {
@@ -146,29 +104,7 @@ final class RecommendationGetResponse implements BaseModel
     /**
      * An array of track objects ordered according to the parameters supplied.
      *
-     * @param list<TrackObject|array{
-     *   id?: string|null,
-     *   album?: Album|null,
-     *   artists?: list<SimplifiedArtistObject>|null,
-     *   availableMarkets?: list<string>|null,
-     *   discNumber?: int|null,
-     *   durationMs?: int|null,
-     *   explicit?: bool|null,
-     *   externalIDs?: ExternalIDObject|null,
-     *   externalURLs?: ExternalURLObject|null,
-     *   href?: string|null,
-     *   isLocal?: bool|null,
-     *   isPlayable?: bool|null,
-     *   linkedFrom?: LinkedTrackObject|null,
-     *   name?: string|null,
-     *   popularity?: int|null,
-     *   previewURL?: string|null,
-     *   published?: bool|null,
-     *   restrictions?: TrackRestrictionObject|null,
-     *   trackNumber?: int|null,
-     *   type?: value-of<Type>|null,
-     *   uri?: string|null,
-     * }> $tracks
+     * @param list<TrackObjectShape> $tracks
      */
     public function withTracks(array $tracks): self
     {

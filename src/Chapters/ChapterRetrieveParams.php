@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\ChaptersService::retrieve()
  *
- * @phpstan-type ChapterRetrieveParamsShape = array{market?: string}
+ * @phpstan-type ChapterRetrieveParamsShape = array{market?: string|null}
  */
 final class ChapterRetrieveParams implements BaseModel
 {

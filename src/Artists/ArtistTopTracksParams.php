@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\ArtistsService::topTracks()
  *
- * @phpstan-type ArtistTopTracksParamsShape = array{market?: string}
+ * @phpstan-type ArtistTopTracksParamsShape = array{market?: string|null}
  */
 final class ArtistTopTracksParams implements BaseModel
 {

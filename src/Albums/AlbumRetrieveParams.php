@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\AlbumsService::retrieve()
  *
- * @phpstan-type AlbumRetrieveParamsShape = array{market?: string}
+ * @phpstan-type AlbumRetrieveParamsShape = array{market?: string|null}
  */
 final class AlbumRetrieveParams implements BaseModel
 {
