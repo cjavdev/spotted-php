@@ -68,7 +68,7 @@ $client = new Client(
   clientSecret: getenv('SPOTIFY_CLIENT_SECRET') ?: 'My Client Secret',
 );
 
-$page = $client->shows->listEpisodes('showid', limit: 5, offset: 10);
+$page = $client->shows->listEpisodes('showid', limit: 10, offset: 20);
 
 var_dump($page);
 
