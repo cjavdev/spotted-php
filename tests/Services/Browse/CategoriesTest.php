@@ -9,6 +9,7 @@ use Spotted\Browse\Categories\CategoryGetPlaylistsResponse;
 use Spotted\Browse\Categories\CategoryGetResponse;
 use Spotted\Browse\Categories\CategoryListResponse;
 use Spotted\Client;
+use Spotted\CursorURLPage;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -53,10 +54,15 @@ final class CategoriesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->browse->categories->list();
+        $page = $this->client->browse->categories->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CategoryListResponse::class, $result);
+        $this->assertInstanceOf(CursorURLPage::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(CategoryListResponse::class, $item);
+        }
     }
 
     #[Test]

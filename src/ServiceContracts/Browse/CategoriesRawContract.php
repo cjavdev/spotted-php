@@ -12,6 +12,7 @@ use Spotted\Browse\Categories\CategoryListResponse;
 use Spotted\Browse\Categories\CategoryRetrieveParams;
 use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 
 interface CategoriesRawContract
@@ -37,7 +38,7 @@ interface CategoriesRawContract
      *
      * @param array<string,mixed>|CategoryListParams $params
      *
-     * @return BaseResponse<CategoryListResponse>
+     * @return BaseResponse<CursorURLPage<CategoryListResponse>>
      *
      * @throws APIException
      */
