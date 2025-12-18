@@ -251,15 +251,15 @@ final class Album implements BaseModel
      *
      * @param AlbumType|value-of<AlbumType> $albumType
      * @param list<string> $availableMarkets
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      * @param list<ImageObjectShape> $images
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
-     * @param list<SimplifiedArtistObjectShape> $artists
-     * @param list<CopyrightObjectShape> $copyrights
-     * @param ExternalIDObjectShape $externalIDs
-     * @param list<string> $genres
-     * @param AlbumRestrictionObjectShape $restrictions
-     * @param TracksShape $tracks
+     * @param list<SimplifiedArtistObjectShape>|null $artists
+     * @param list<CopyrightObjectShape>|null $copyrights
+     * @param ExternalIDObject|ExternalIDObjectShape|null $externalIDs
+     * @param list<string>|null $genres
+     * @param AlbumRestrictionObject|AlbumRestrictionObjectShape|null $restrictions
+     * @param Tracks|TracksShape|null $tracks
      */
     public static function with(
         string $id,
@@ -350,7 +350,7 @@ final class Album implements BaseModel
     /**
      * Known external URLs for this album.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -472,7 +472,7 @@ final class Album implements BaseModel
     /**
      * Known external IDs for the album.
      *
-     * @param ExternalIDObjectShape $externalIDs
+     * @param ExternalIDObject|ExternalIDObjectShape $externalIDs
      */
     public function withExternalIDs(ExternalIDObject|array $externalIDs): self
     {
@@ -531,7 +531,7 @@ final class Album implements BaseModel
     /**
      * Included in the response when a content restriction is applied.
      *
-     * @param AlbumRestrictionObjectShape $restrictions
+     * @param AlbumRestrictionObject|AlbumRestrictionObjectShape $restrictions
      */
     public function withRestrictions(
         AlbumRestrictionObject|array $restrictions
@@ -545,7 +545,7 @@ final class Album implements BaseModel
     /**
      * The tracks of the album.
      *
-     * @param TracksShape $tracks
+     * @param Tracks|TracksShape $tracks
      */
     public function withTracks(Tracks|array $tracks): self
     {

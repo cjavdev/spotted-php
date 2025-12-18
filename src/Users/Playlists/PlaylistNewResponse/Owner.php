@@ -81,8 +81,8 @@ final class Owner implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObjectShape $externalURLs
-     * @param Type|value-of<Type> $type
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
@@ -118,7 +118,7 @@ final class Owner implements BaseModel
     }
 
     /**
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs

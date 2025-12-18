@@ -53,7 +53,7 @@ final class TrackListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TrackObjectShape $track
+     * @param TrackObject|TrackObjectShape|null $track
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
@@ -96,7 +96,7 @@ final class TrackListResponse implements BaseModel
     /**
      * Information about the track.
      *
-     * @param TrackObjectShape $track
+     * @param TrackObject|TrackObjectShape $track
      */
     public function withTrack(TrackObject|array $track): self
     {

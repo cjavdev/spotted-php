@@ -54,7 +54,7 @@ final class TrackAddParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $uris
+     * @param list<string>|null $uris
      */
     public static function with(
         ?int $position = null,

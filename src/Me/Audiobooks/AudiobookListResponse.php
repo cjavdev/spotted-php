@@ -53,7 +53,7 @@ final class AudiobookListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AudiobookShape $audiobook
+     * @param Audiobook|AudiobookShape|null $audiobook
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
@@ -85,7 +85,7 @@ final class AudiobookListResponse implements BaseModel
     /**
      * Information about the audiobook.
      *
-     * @param AudiobookShape $audiobook
+     * @param Audiobook|AudiobookShape $audiobook
      */
     public function withAudiobook(Audiobook|array $audiobook): self
     {

@@ -228,10 +228,10 @@ final class ShowGetResponse implements BaseModel
      *
      * @param list<string> $availableMarkets
      * @param list<CopyrightObjectShape> $copyrights
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      * @param list<ImageObjectShape> $images
      * @param list<string> $languages
-     * @param EpisodesShape $episodes
+     * @param Episodes|EpisodesShape $episodes
      */
     public static function with(
         string $id,
@@ -338,7 +338,7 @@ final class ShowGetResponse implements BaseModel
     }
 
     /**
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -477,7 +477,7 @@ final class ShowGetResponse implements BaseModel
     /**
      * The episodes of the show.
      *
-     * @param EpisodesShape $episodes
+     * @param Episodes|EpisodesShape $episodes
      */
     public function withEpisodes(Episodes|array $episodes): self
     {

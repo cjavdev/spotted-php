@@ -48,7 +48,7 @@ final class FollowingBulkGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ArtistsShape $artists
+     * @param Artists|ArtistsShape $artists
      */
     public static function with(Artists|array $artists): self
     {
@@ -60,7 +60,7 @@ final class FollowingBulkGetResponse implements BaseModel
     }
 
     /**
-     * @param ArtistsShape $artists
+     * @param Artists|ArtistsShape $artists
      */
     public function withArtists(Artists|array $artists): self
     {

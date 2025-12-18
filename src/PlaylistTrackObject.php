@@ -18,7 +18,7 @@ use Spotted\PlaylistTrackObject\Track;
  *   addedBy?: null|PlaylistUserObject|PlaylistUserObjectShape,
  *   isLocal?: bool|null,
  *   published?: bool|null,
- *   track?: null|TrackShape|TrackObject|EpisodeObject,
+ *   track?: TrackShape|null,
  * }
  */
 final class PlaylistTrackObject implements BaseModel
@@ -66,8 +66,8 @@ final class PlaylistTrackObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PlaylistUserObjectShape $addedBy
-     * @param TrackShape $track
+     * @param PlaylistUserObject|PlaylistUserObjectShape|null $addedBy
+     * @param TrackShape|null $track
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
@@ -101,7 +101,7 @@ final class PlaylistTrackObject implements BaseModel
     /**
      * The Spotify user who added the track or episode. _**Note**: some very old playlists may return `null` in this field._.
      *
-     * @param PlaylistUserObjectShape $addedBy
+     * @param PlaylistUserObject|PlaylistUserObjectShape $addedBy
      */
     public function withAddedBy(PlaylistUserObject|array $addedBy): self
     {

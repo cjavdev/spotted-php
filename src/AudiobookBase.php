@@ -240,7 +240,7 @@ final class AudiobookBase implements BaseModel
      * @param list<AuthorObjectShape> $authors
      * @param list<string> $availableMarkets
      * @param list<CopyrightObjectShape> $copyrights
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      * @param list<ImageObjectShape> $images
      * @param list<string> $languages
      * @param list<NarratorObjectShape> $narrators
@@ -367,7 +367,7 @@ final class AudiobookBase implements BaseModel
     /**
      * External URLs for this audiobook.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs

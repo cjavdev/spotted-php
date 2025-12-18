@@ -59,8 +59,8 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ContextObjectShape $context
-     * @param TrackObjectShape $track
+     * @param ContextObject|ContextObjectShape|null $context
+     * @param TrackObject|TrackObjectShape|null $track
      */
     public static function with(
         ContextObject|array|null $context = null,
@@ -81,7 +81,7 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
     /**
      * The context the track was played from.
      *
-     * @param ContextObjectShape $context
+     * @param ContextObject|ContextObjectShape $context
      */
     public function withContext(ContextObject|array $context): self
     {
@@ -116,7 +116,7 @@ final class PlayerListRecentlyPlayedResponse implements BaseModel
     /**
      * The track the user listened to.
      *
-     * @param TrackObjectShape $track
+     * @param TrackObject|TrackObjectShape $track
      */
     public function withTrack(TrackObject|array $track): self
     {

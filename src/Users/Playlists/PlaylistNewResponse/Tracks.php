@@ -109,7 +109,7 @@ final class Tracks implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PlaylistTrackObjectShape> $items
+     * @param list<PlaylistTrackObjectShape>|null $items
      */
     public static function with(
         string $href,

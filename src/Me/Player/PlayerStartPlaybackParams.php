@@ -84,8 +84,8 @@ final class PlayerStartPlaybackParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $offset
-     * @param list<string> $uris
+     * @param array<string,mixed>|null $offset
+     * @param list<string>|null $uris
      */
     public static function with(
         ?string $deviceID = null,

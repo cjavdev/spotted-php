@@ -115,7 +115,7 @@ final class SearchQueryParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Type|value-of<Type>> $type
-     * @param IncludeExternal|value-of<IncludeExternal> $includeExternal
+     * @param IncludeExternal|value-of<IncludeExternal>|null $includeExternal
      */
     public static function with(
         string $q,

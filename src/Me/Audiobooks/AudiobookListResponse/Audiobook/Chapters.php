@@ -109,7 +109,7 @@ final class Chapters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedChapterObjectShape> $items
+     * @param list<SimplifiedChapterObjectShape>|null $items
      */
     public static function with(
         string $href,

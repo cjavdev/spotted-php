@@ -48,7 +48,7 @@ final class CategoryListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CategoriesShape $categories
+     * @param Categories|CategoriesShape $categories
      */
     public static function with(Categories|array $categories): self
     {
@@ -60,7 +60,7 @@ final class CategoryListResponse implements BaseModel
     }
 
     /**
-     * @param CategoriesShape $categories
+     * @param Categories|CategoriesShape $categories
      */
     public function withCategories(Categories|array $categories): self
     {

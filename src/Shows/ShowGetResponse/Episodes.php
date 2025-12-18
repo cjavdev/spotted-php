@@ -109,7 +109,7 @@ final class Episodes implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedEpisodeObjectShape> $items
+     * @param list<SimplifiedEpisodeObjectShape>|null $items
      */
     public static function with(
         string $href,

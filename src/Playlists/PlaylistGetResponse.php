@@ -138,11 +138,11 @@ final class PlaylistGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObjectShape $externalURLs
-     * @param FollowersObjectShape $followers
-     * @param list<ImageObjectShape> $images
-     * @param OwnerShape $owner
-     * @param TracksShape $tracks
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
+     * @param FollowersObject|FollowersObjectShape|null $followers
+     * @param list<ImageObjectShape>|null $images
+     * @param Owner|OwnerShape|null $owner
+     * @param Tracks|TracksShape|null $tracks
      */
     public static function with(
         ?string $id = null,
@@ -216,7 +216,7 @@ final class PlaylistGetResponse implements BaseModel
     /**
      * Known external URLs for this playlist.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -230,7 +230,7 @@ final class PlaylistGetResponse implements BaseModel
     /**
      * Information about the followers of the playlist.
      *
-     * @param FollowersObjectShape $followers
+     * @param FollowersObject|FollowersObjectShape $followers
      */
     public function withFollowers(FollowersObject|array $followers): self
     {
@@ -278,7 +278,7 @@ final class PlaylistGetResponse implements BaseModel
     /**
      * The user who owns the playlist.
      *
-     * @param OwnerShape $owner
+     * @param Owner|OwnerShape $owner
      */
     public function withOwner(Owner|array $owner): self
     {
@@ -313,7 +313,7 @@ final class PlaylistGetResponse implements BaseModel
     /**
      * The tracks of the playlist.
      *
-     * @param TracksShape $tracks
+     * @param Tracks|TracksShape $tracks
      */
     public function withTracks(Tracks|array $tracks): self
     {

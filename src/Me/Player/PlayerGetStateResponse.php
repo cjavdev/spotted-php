@@ -24,7 +24,7 @@ use Spotted\TrackObject;
  *   currentlyPlayingType?: string|null,
  *   device?: null|DeviceObject|DeviceObjectShape,
  *   isPlaying?: bool|null,
- *   item?: null|ItemShape|TrackObject|EpisodeObject,
+ *   item?: ItemShape|null,
  *   progressMs?: int|null,
  *   published?: bool|null,
  *   repeatState?: string|null,
@@ -113,10 +113,10 @@ final class PlayerGetStateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActionsShape $actions
-     * @param ContextObjectShape $context
-     * @param DeviceObjectShape $device
-     * @param ItemShape $item
+     * @param Actions|ActionsShape|null $actions
+     * @param ContextObject|ContextObjectShape|null $context
+     * @param DeviceObject|DeviceObjectShape|null $device
+     * @param ItemShape|null $item
      */
     public static function with(
         Actions|array|null $actions = null,
@@ -151,7 +151,7 @@ final class PlayerGetStateResponse implements BaseModel
     /**
      * Allows to update the user interface based on which playback actions are available within the current context.
      *
-     * @param ActionsShape $actions
+     * @param Actions|ActionsShape $actions
      */
     public function withActions(Actions|array $actions): self
     {
@@ -164,7 +164,7 @@ final class PlayerGetStateResponse implements BaseModel
     /**
      * A Context Object. Can be `null`.
      *
-     * @param ContextObjectShape $context
+     * @param ContextObject|ContextObjectShape $context
      */
     public function withContext(ContextObject|array $context): self
     {
@@ -188,7 +188,7 @@ final class PlayerGetStateResponse implements BaseModel
     /**
      * The device that is currently active.
      *
-     * @param DeviceObjectShape $device
+     * @param DeviceObject|DeviceObjectShape $device
      */
     public function withDevice(DeviceObject|array $device): self
     {

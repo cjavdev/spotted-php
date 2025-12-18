@@ -97,13 +97,13 @@ final class AudioAnalysisGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TimeIntervalObjectShape> $bars
-     * @param list<TimeIntervalObjectShape> $beats
-     * @param MetaShape $meta
-     * @param list<SectionShape> $sections
-     * @param list<SegmentShape> $segments
-     * @param list<TimeIntervalObjectShape> $tatums
-     * @param TrackShape $track
+     * @param list<TimeIntervalObjectShape>|null $bars
+     * @param list<TimeIntervalObjectShape>|null $beats
+     * @param Meta|MetaShape|null $meta
+     * @param list<SectionShape>|null $sections
+     * @param list<SegmentShape>|null $segments
+     * @param list<TimeIntervalObjectShape>|null $tatums
+     * @param Track|TrackShape|null $track
      */
     public static function with(
         ?array $bars = null,
@@ -156,7 +156,7 @@ final class AudioAnalysisGetResponse implements BaseModel
     }
 
     /**
-     * @param MetaShape $meta
+     * @param Meta|MetaShape $meta
      */
     public function withMeta(Meta|array $meta): self
     {
@@ -217,7 +217,7 @@ final class AudioAnalysisGetResponse implements BaseModel
     }
 
     /**
-     * @param TrackShape $track
+     * @param Track|TrackShape $track
      */
     public function withTrack(Track|array $track): self
     {

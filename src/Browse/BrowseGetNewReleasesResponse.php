@@ -48,7 +48,7 @@ final class BrowseGetNewReleasesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AlbumsShape $albums
+     * @param Albums|AlbumsShape $albums
      */
     public static function with(Albums|array $albums): self
     {
@@ -60,7 +60,7 @@ final class BrowseGetNewReleasesResponse implements BaseModel
     }
 
     /**
-     * @param AlbumsShape $albums
+     * @param Albums|AlbumsShape $albums
      */
     public function withAlbums(Albums|array $albums): self
     {

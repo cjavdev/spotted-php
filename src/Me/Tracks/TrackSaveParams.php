@@ -77,7 +77,7 @@ final class TrackSaveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $ids
-     * @param list<TimestampedIDShape> $timestampedIDs
+     * @param list<TimestampedIDShape>|null $timestampedIDs
      */
     public static function with(
         array $ids,

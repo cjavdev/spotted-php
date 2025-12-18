@@ -240,12 +240,12 @@ final class SimplifiedEpisodeObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      * @param list<ImageObjectShape> $images
      * @param list<string> $languages
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
-     * @param EpisodeRestrictionObjectShape $restrictions
-     * @param ResumePointObjectShape $resumePoint
+     * @param EpisodeRestrictionObject|EpisodeRestrictionObjectShape|null $restrictions
+     * @param ResumePointObject|ResumePointObjectShape|null $resumePoint
      */
     public static function with(
         string $id,
@@ -354,7 +354,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * External URLs for this episode.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -507,7 +507,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * Included in the response when a content restriction is applied.
      *
-     * @param EpisodeRestrictionObjectShape $restrictions
+     * @param EpisodeRestrictionObject|EpisodeRestrictionObjectShape $restrictions
      */
     public function withRestrictions(
         EpisodeRestrictionObject|array $restrictions
@@ -521,7 +521,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * The user's most recent position in the episode. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
      *
-     * @param ResumePointObjectShape $resumePoint
+     * @param ResumePointObject|ResumePointObjectShape $resumePoint
      */
     public function withResumePoint(ResumePointObject|array $resumePoint): self
     {

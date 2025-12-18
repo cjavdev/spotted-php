@@ -107,7 +107,7 @@ final class Audiobooks implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AudiobookBaseShape> $items
+     * @param list<AudiobookBaseShape>|null $items
      */
     public static function with(
         string $href,

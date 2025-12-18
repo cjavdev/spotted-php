@@ -253,11 +253,11 @@ final class Audiobook implements BaseModel
      * @param list<AuthorObjectShape> $authors
      * @param list<string> $availableMarkets
      * @param list<CopyrightObjectShape> $copyrights
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      * @param list<ImageObjectShape> $images
      * @param list<string> $languages
      * @param list<NarratorObjectShape> $narrators
-     * @param ChaptersShape $chapters
+     * @param Chapters|ChaptersShape $chapters
      */
     public static function with(
         string $id,
@@ -381,7 +381,7 @@ final class Audiobook implements BaseModel
     }
 
     /**
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -533,7 +533,7 @@ final class Audiobook implements BaseModel
     /**
      * The chapters of the audiobook.
      *
-     * @param ChaptersShape $chapters
+     * @param Chapters|ChaptersShape $chapters
      */
     public function withChapters(Chapters|array $chapters): self
     {

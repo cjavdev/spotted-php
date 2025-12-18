@@ -48,7 +48,7 @@ final class CategoryGetPlaylistsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PagingPlaylistObjectShape $playlists
+     * @param PagingPlaylistObject|PagingPlaylistObjectShape|null $playlists
      */
     public static function with(
         ?string $message = null,
@@ -76,7 +76,7 @@ final class CategoryGetPlaylistsResponse implements BaseModel
     }
 
     /**
-     * @param PagingPlaylistObjectShape $playlists
+     * @param PagingPlaylistObject|PagingPlaylistObjectShape $playlists
      */
     public function withPlaylists(PagingPlaylistObject|array $playlists): self
     {

@@ -244,13 +244,13 @@ final class SimplifiedChapterObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      * @param list<ImageObjectShape> $images
      * @param list<string> $languages
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
-     * @param list<string> $availableMarkets
-     * @param ChapterRestrictionObjectShape $restrictions
-     * @param ResumePointObjectShape $resumePoint
+     * @param list<string>|null $availableMarkets
+     * @param ChapterRestrictionObject|ChapterRestrictionObjectShape|null $restrictions
+     * @param ResumePointObject|ResumePointObjectShape|null $resumePoint
      */
     public static function with(
         string $id,
@@ -370,7 +370,7 @@ final class SimplifiedChapterObject implements BaseModel
     /**
      * External URLs for this chapter.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -514,7 +514,7 @@ final class SimplifiedChapterObject implements BaseModel
     /**
      * Included in the response when a content restriction is applied.
      *
-     * @param ChapterRestrictionObjectShape $restrictions
+     * @param ChapterRestrictionObject|ChapterRestrictionObjectShape $restrictions
      */
     public function withRestrictions(
         ChapterRestrictionObject|array $restrictions
@@ -528,7 +528,7 @@ final class SimplifiedChapterObject implements BaseModel
     /**
      * The user's most recent position in the chapter. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
      *
-     * @param ResumePointObjectShape $resumePoint
+     * @param ResumePointObject|ResumePointObjectShape $resumePoint
      */
     public function withResumePoint(ResumePointObject|array $resumePoint): self
     {

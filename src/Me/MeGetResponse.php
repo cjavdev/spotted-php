@@ -129,10 +129,10 @@ final class MeGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExplicitContentShape $explicitContent
-     * @param ExternalURLObjectShape $externalURLs
-     * @param FollowersObjectShape $followers
-     * @param list<ImageObjectShape> $images
+     * @param ExplicitContent|ExplicitContentShape|null $explicitContent
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
+     * @param FollowersObject|FollowersObjectShape|null $followers
+     * @param list<ImageObjectShape>|null $images
      */
     public static function with(
         ?string $id = null,
@@ -215,7 +215,7 @@ final class MeGetResponse implements BaseModel
     /**
      * The user's explicit content settings. _This field is only available when the current user has granted access to the [user-read-private](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
      *
-     * @param ExplicitContentShape $explicitContent
+     * @param ExplicitContent|ExplicitContentShape $explicitContent
      */
     public function withExplicitContent(
         ExplicitContent|array $explicitContent
@@ -229,7 +229,7 @@ final class MeGetResponse implements BaseModel
     /**
      * Known external URLs for this user.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -243,7 +243,7 @@ final class MeGetResponse implements BaseModel
     /**
      * Information about the followers of the user.
      *
-     * @param FollowersObjectShape $followers
+     * @param FollowersObject|FollowersObjectShape $followers
      */
     public function withFollowers(FollowersObject|array $followers): self
     {

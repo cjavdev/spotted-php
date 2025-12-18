@@ -107,7 +107,7 @@ final class Shows implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ShowBaseShape> $items
+     * @param list<ShowBaseShape>|null $items
      */
     public static function with(
         string $href,

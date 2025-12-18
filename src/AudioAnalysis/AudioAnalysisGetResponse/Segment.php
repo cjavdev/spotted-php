@@ -110,8 +110,8 @@ final class Segment implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<float> $pitches
-     * @param list<float> $timbre
+     * @param list<float>|null $pitches
+     * @param list<float>|null $timbre
      */
     public static function with(
         ?float $confidence = null,

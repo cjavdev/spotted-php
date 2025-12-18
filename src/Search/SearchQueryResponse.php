@@ -70,13 +70,13 @@ final class SearchQueryResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AlbumsShape $albums
-     * @param ArtistsShape $artists
-     * @param AudiobooksShape $audiobooks
-     * @param EpisodesShape $episodes
-     * @param PagingPlaylistObjectShape $playlists
-     * @param ShowsShape $shows
-     * @param TracksShape $tracks
+     * @param Albums|AlbumsShape|null $albums
+     * @param Artists|ArtistsShape|null $artists
+     * @param Audiobooks|AudiobooksShape|null $audiobooks
+     * @param Episodes|EpisodesShape|null $episodes
+     * @param PagingPlaylistObject|PagingPlaylistObjectShape|null $playlists
+     * @param Shows|ShowsShape|null $shows
+     * @param Tracks|TracksShape|null $tracks
      */
     public static function with(
         Albums|array|null $albums = null,
@@ -101,7 +101,7 @@ final class SearchQueryResponse implements BaseModel
     }
 
     /**
-     * @param AlbumsShape $albums
+     * @param Albums|AlbumsShape $albums
      */
     public function withAlbums(Albums|array $albums): self
     {
@@ -112,7 +112,7 @@ final class SearchQueryResponse implements BaseModel
     }
 
     /**
-     * @param ArtistsShape $artists
+     * @param Artists|ArtistsShape $artists
      */
     public function withArtists(Artists|array $artists): self
     {
@@ -123,7 +123,7 @@ final class SearchQueryResponse implements BaseModel
     }
 
     /**
-     * @param AudiobooksShape $audiobooks
+     * @param Audiobooks|AudiobooksShape $audiobooks
      */
     public function withAudiobooks(Audiobooks|array $audiobooks): self
     {
@@ -134,7 +134,7 @@ final class SearchQueryResponse implements BaseModel
     }
 
     /**
-     * @param EpisodesShape $episodes
+     * @param Episodes|EpisodesShape $episodes
      */
     public function withEpisodes(Episodes|array $episodes): self
     {
@@ -145,7 +145,7 @@ final class SearchQueryResponse implements BaseModel
     }
 
     /**
-     * @param PagingPlaylistObjectShape $playlists
+     * @param PagingPlaylistObject|PagingPlaylistObjectShape $playlists
      */
     public function withPlaylists(PagingPlaylistObject|array $playlists): self
     {
@@ -156,7 +156,7 @@ final class SearchQueryResponse implements BaseModel
     }
 
     /**
-     * @param ShowsShape $shows
+     * @param Shows|ShowsShape $shows
      */
     public function withShows(Shows|array $shows): self
     {
@@ -167,7 +167,7 @@ final class SearchQueryResponse implements BaseModel
     }
 
     /**
-     * @param TracksShape $tracks
+     * @param Tracks|TracksShape $tracks
      */
     public function withTracks(Tracks|array $tracks): self
     {

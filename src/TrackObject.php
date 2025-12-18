@@ -191,14 +191,14 @@ final class TrackObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AlbumShape $album
-     * @param list<SimplifiedArtistObjectShape> $artists
-     * @param list<string> $availableMarkets
-     * @param ExternalIDObjectShape $externalIDs
-     * @param ExternalURLObjectShape $externalURLs
-     * @param LinkedTrackObjectShape $linkedFrom
-     * @param TrackRestrictionObjectShape $restrictions
-     * @param Type|value-of<Type> $type
+     * @param Album|AlbumShape|null $album
+     * @param list<SimplifiedArtistObjectShape>|null $artists
+     * @param list<string>|null $availableMarkets
+     * @param ExternalIDObject|ExternalIDObjectShape|null $externalIDs
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
+     * @param LinkedTrackObject|LinkedTrackObjectShape|null $linkedFrom
+     * @param TrackRestrictionObject|TrackRestrictionObjectShape|null $restrictions
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
@@ -264,7 +264,7 @@ final class TrackObject implements BaseModel
     /**
      * The album on which the track appears. The album object includes a link in `href` to full information about the album.
      *
-     * @param AlbumShape $album
+     * @param Album|AlbumShape $album
      */
     public function withAlbum(Album|array $album): self
     {
@@ -336,7 +336,7 @@ final class TrackObject implements BaseModel
     /**
      * Known external IDs for the track.
      *
-     * @param ExternalIDObjectShape $externalIDs
+     * @param ExternalIDObject|ExternalIDObjectShape $externalIDs
      */
     public function withExternalIDs(ExternalIDObject|array $externalIDs): self
     {
@@ -349,7 +349,7 @@ final class TrackObject implements BaseModel
     /**
      * Known external URLs for this track.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -396,7 +396,7 @@ final class TrackObject implements BaseModel
     /**
      * Part of the response when [Track Relinking](/documentation/web-api/concepts/track-relinking) is applied, and the requested track has been replaced with different track. The track in the `linked_from` object contains information about the originally requested track.
      *
-     * @param LinkedTrackObjectShape $linkedFrom
+     * @param LinkedTrackObject|LinkedTrackObjectShape $linkedFrom
      */
     public function withLinkedFrom(LinkedTrackObject|array $linkedFrom): self
     {
@@ -453,7 +453,7 @@ final class TrackObject implements BaseModel
     /**
      * Included in the response when a content restriction is applied.
      *
-     * @param TrackRestrictionObjectShape $restrictions
+     * @param TrackRestrictionObject|TrackRestrictionObjectShape $restrictions
      */
     public function withRestrictions(
         TrackRestrictionObject|array $restrictions

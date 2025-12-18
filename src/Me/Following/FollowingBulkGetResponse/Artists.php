@@ -79,8 +79,8 @@ final class Artists implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CursorsShape $cursors
-     * @param list<ArtistObjectShape> $items
+     * @param Cursors|CursorsShape|null $cursors
+     * @param list<ArtistObjectShape>|null $items
      */
     public static function with(
         Cursors|array|null $cursors = null,
@@ -107,7 +107,7 @@ final class Artists implements BaseModel
     /**
      * The cursors used to find the next set of items.
      *
-     * @param CursorsShape $cursors
+     * @param Cursors|CursorsShape $cursors
      */
     public function withCursors(Cursors|array $cursors): self
     {
