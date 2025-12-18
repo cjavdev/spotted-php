@@ -13,6 +13,7 @@ use Spotted\Browse\Categories\CategoryRetrieveParams;
 use Spotted\Client;
 use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Browse\CategoriesRawContract;
 
@@ -65,7 +66,7 @@ final class CategoriesRawService implements CategoriesRawContract
      *   limit?: int, locale?: string, offset?: int
      * }|CategoryListParams $params
      *
-     * @return BaseResponse<CategoryListResponse>
+     * @return BaseResponse<CursorURLPage<CategoryListResponse>>
      *
      * @throws APIException
      */
@@ -85,6 +86,7 @@ final class CategoriesRawService implements CategoriesRawContract
             query: $parsed,
             options: $options,
             convert: CategoryListResponse::class,
+            page: CursorURLPage::class,
         );
     }
 
