@@ -126,10 +126,10 @@ final class SimplifiedPlaylistObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObjectShape $externalURLs
-     * @param list<ImageObjectShape> $images
-     * @param OwnerShape $owner
-     * @param PlaylistTracksRefObjectShape $tracks
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
+     * @param list<ImageObjectShape>|null $images
+     * @param Owner|OwnerShape|null $owner
+     * @param PlaylistTracksRefObject|PlaylistTracksRefObjectShape|null $tracks
      */
     public static function with(
         ?string $id = null,
@@ -201,7 +201,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     /**
      * Known external URLs for this playlist.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -250,7 +250,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     /**
      * The user who owns the playlist.
      *
-     * @param OwnerShape $owner
+     * @param Owner|OwnerShape $owner
      */
     public function withOwner(Owner|array $owner): self
     {
@@ -285,7 +285,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     /**
      * A collection containing a link ( `href` ) to the Web API endpoint where full details of the playlist's tracks can be retrieved, along with the `total` number of tracks in the playlist. Note, a track object may be `null`. This can happen if a track is no longer available.
      *
-     * @param PlaylistTracksRefObjectShape $tracks
+     * @param PlaylistTracksRefObject|PlaylistTracksRefObjectShape $tracks
      */
     public function withTracks(PlaylistTracksRefObject|array $tracks): self
     {

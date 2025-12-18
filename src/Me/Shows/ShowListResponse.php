@@ -53,7 +53,7 @@ final class ShowListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ShowBaseShape $show
+     * @param ShowBase|ShowBaseShape|null $show
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
@@ -96,7 +96,7 @@ final class ShowListResponse implements BaseModel
     /**
      * Information about the show.
      *
-     * @param ShowBaseShape $show
+     * @param ShowBase|ShowBaseShape $show
      */
     public function withShow(ShowBase|array $show): self
     {

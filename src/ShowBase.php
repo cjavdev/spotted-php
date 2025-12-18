@@ -217,7 +217,7 @@ final class ShowBase implements BaseModel
      *
      * @param list<string> $availableMarkets
      * @param list<CopyrightObjectShape> $copyrights
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      * @param list<ImageObjectShape> $images
      * @param list<string> $languages
      */
@@ -326,7 +326,7 @@ final class ShowBase implements BaseModel
     /**
      * External URLs for this show.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs

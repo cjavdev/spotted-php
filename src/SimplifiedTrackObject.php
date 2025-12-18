@@ -164,11 +164,11 @@ final class SimplifiedTrackObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedArtistObjectShape> $artists
-     * @param list<string> $availableMarkets
-     * @param ExternalURLObjectShape $externalURLs
-     * @param LinkedTrackObjectShape $linkedFrom
-     * @param TrackRestrictionObjectShape $restrictions
+     * @param list<SimplifiedArtistObjectShape>|null $artists
+     * @param list<string>|null $availableMarkets
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
+     * @param LinkedTrackObject|LinkedTrackObjectShape|null $linkedFrom
+     * @param TrackRestrictionObject|TrackRestrictionObjectShape|null $restrictions
      */
     public static function with(
         ?string $id = null,
@@ -287,7 +287,7 @@ final class SimplifiedTrackObject implements BaseModel
     /**
      * External URLs for this track.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -334,7 +334,7 @@ final class SimplifiedTrackObject implements BaseModel
     /**
      * Part of the response when [Track Relinking](/documentation/web-api/concepts/track-relinking/) is applied and is only part of the response if the track linking, in fact, exists. The requested track has been replaced with a different track. The track in the `linked_from` object contains information about the originally requested track.
      *
-     * @param LinkedTrackObjectShape $linkedFrom
+     * @param LinkedTrackObject|LinkedTrackObjectShape $linkedFrom
      */
     public function withLinkedFrom(LinkedTrackObject|array $linkedFrom): self
     {
@@ -380,7 +380,7 @@ final class SimplifiedTrackObject implements BaseModel
     /**
      * Included in the response when a content restriction is applied.
      *
-     * @param TrackRestrictionObjectShape $restrictions
+     * @param TrackRestrictionObject|TrackRestrictionObjectShape $restrictions
      */
     public function withRestrictions(
         TrackRestrictionObject|array $restrictions

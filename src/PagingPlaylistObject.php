@@ -106,7 +106,7 @@ final class PagingPlaylistObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedPlaylistObjectShape> $items
+     * @param list<SimplifiedPlaylistObjectShape>|null $items
      */
     public static function with(
         string $href,

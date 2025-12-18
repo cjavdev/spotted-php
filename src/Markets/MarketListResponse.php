@@ -30,7 +30,7 @@ final class MarketListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $markets
+     * @param list<string>|null $markets
      */
     public static function with(?array $markets = null): self
     {

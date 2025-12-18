@@ -22,7 +22,7 @@ use Spotted\TrackObject;
  *   context?: null|ContextObject|ContextObjectShape,
  *   currentlyPlayingType?: string|null,
  *   isPlaying?: bool|null,
- *   item?: null|ItemShape|TrackObject|EpisodeObject,
+ *   item?: ItemShape|null,
  *   progressMs?: int|null,
  *   published?: bool|null,
  *   timestamp?: int|null,
@@ -91,9 +91,9 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActionsShape $actions
-     * @param ContextObjectShape $context
-     * @param ItemShape $item
+     * @param Actions|ActionsShape|null $actions
+     * @param ContextObject|ContextObjectShape|null $context
+     * @param ItemShape|null $item
      */
     public static function with(
         Actions|array|null $actions = null,
@@ -122,7 +122,7 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel
     /**
      * Allows to update the user interface based on which playback actions are available within the current context.
      *
-     * @param ActionsShape $actions
+     * @param Actions|ActionsShape $actions
      */
     public function withActions(Actions|array $actions): self
     {
@@ -135,7 +135,7 @@ final class PlayerGetCurrentlyPlayingResponse implements BaseModel
     /**
      * A Context Object. Can be `null`.
      *
-     * @param ContextObjectShape $context
+     * @param ContextObject|ContextObjectShape $context
      */
     public function withContext(ContextObject|array $context): self
     {

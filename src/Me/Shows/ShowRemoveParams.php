@@ -49,7 +49,7 @@ final class ShowRemoveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $ids
+     * @param list<string>|null $ids
      */
     public static function with(?array $ids = null, ?bool $published = null): self
     {

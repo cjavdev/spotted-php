@@ -65,7 +65,7 @@ final class ContextObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
      */
     public static function with(
         ExternalURLObject|array|null $externalURLs = null,
@@ -88,7 +88,7 @@ final class ContextObject implements BaseModel
     /**
      * External URLs for this context.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs

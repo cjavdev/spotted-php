@@ -107,7 +107,7 @@ final class Albums implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ItemShape> $items
+     * @param list<ItemShape>|null $items
      */
     public static function with(
         string $href,

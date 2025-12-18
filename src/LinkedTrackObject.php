@@ -71,7 +71,7 @@ final class LinkedTrackObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
      */
     public static function with(
         ?string $id = null,
@@ -107,7 +107,7 @@ final class LinkedTrackObject implements BaseModel
     /**
      * Known external URLs for this track.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs

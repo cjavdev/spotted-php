@@ -53,7 +53,7 @@ final class AlbumListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AlbumShape $album
+     * @param Album|AlbumShape|null $album
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
@@ -85,7 +85,7 @@ final class AlbumListResponse implements BaseModel
     /**
      * Information about the album.
      *
-     * @param AlbumShape $album
+     * @param Album|AlbumShape $album
      */
     public function withAlbum(Album|array $album): self
     {

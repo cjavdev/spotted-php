@@ -52,7 +52,7 @@ final class EpisodeListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EpisodeObjectShape $episode
+     * @param EpisodeObject|EpisodeObjectShape|null $episode
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
@@ -83,7 +83,7 @@ final class EpisodeListResponse implements BaseModel
     /**
      * Information about the episode.
      *
-     * @param EpisodeObjectShape $episode
+     * @param EpisodeObject|EpisodeObjectShape $episode
      */
     public function withEpisode(EpisodeObject|array $episode): self
     {

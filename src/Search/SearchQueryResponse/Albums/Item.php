@@ -198,10 +198,10 @@ final class Item implements BaseModel
      * @param AlbumType|value-of<AlbumType> $albumType
      * @param list<SimplifiedArtistObjectShape> $artists
      * @param list<string> $availableMarkets
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      * @param list<ImageObjectShape> $images
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
-     * @param AlbumRestrictionObjectShape $restrictions
+     * @param AlbumRestrictionObject|AlbumRestrictionObjectShape|null $restrictions
      */
     public static function with(
         string $id,
@@ -293,7 +293,7 @@ final class Item implements BaseModel
     /**
      * Known external URLs for this album.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -400,7 +400,7 @@ final class Item implements BaseModel
     /**
      * Included in the response when a content restriction is applied.
      *
-     * @param AlbumRestrictionObjectShape $restrictions
+     * @param AlbumRestrictionObject|AlbumRestrictionObjectShape $restrictions
      */
     public function withRestrictions(
         AlbumRestrictionObject|array $restrictions

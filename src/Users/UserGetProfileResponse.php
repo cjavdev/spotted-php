@@ -102,10 +102,10 @@ final class UserGetProfileResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalURLObjectShape $externalURLs
-     * @param FollowersObjectShape $followers
-     * @param list<ImageObjectShape> $images
-     * @param Type|value-of<Type> $type
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
+     * @param FollowersObject|FollowersObjectShape|null $followers
+     * @param list<ImageObjectShape>|null $images
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
@@ -158,7 +158,7 @@ final class UserGetProfileResponse implements BaseModel
     /**
      * Known public external URLs for this user.
      *
-     * @param ExternalURLObjectShape $externalURLs
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
     public function withExternalURLs(
         ExternalURLObject|array $externalURLs
@@ -172,7 +172,7 @@ final class UserGetProfileResponse implements BaseModel
     /**
      * Information about the followers of this user.
      *
-     * @param FollowersObjectShape $followers
+     * @param FollowersObject|FollowersObjectShape $followers
      */
     public function withFollowers(FollowersObject|array $followers): self
     {

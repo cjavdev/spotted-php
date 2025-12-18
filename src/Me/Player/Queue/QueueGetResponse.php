@@ -17,7 +17,7 @@ use Spotted\TrackObject;
  * @phpstan-import-type QueueShape from \Spotted\Me\Player\Queue\QueueGetResponse\Queue
  *
  * @phpstan-type QueueGetResponseShape = array{
- *   currentlyPlaying?: null|CurrentlyPlayingShape|TrackObject|EpisodeObject,
+ *   currentlyPlaying?: CurrentlyPlayingShape|null,
  *   published?: bool|null,
  *   queue?: list<QueueShape>|null,
  * }
@@ -57,8 +57,8 @@ final class QueueGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CurrentlyPlayingShape $currentlyPlaying
-     * @param list<QueueShape> $queue
+     * @param CurrentlyPlayingShape|null $currentlyPlaying
+     * @param list<QueueShape>|null $queue
      */
     public static function with(
         TrackObject|array|EpisodeObject|null $currentlyPlaying = null,

@@ -107,7 +107,7 @@ final class Artists implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ArtistObjectShape> $items
+     * @param list<ArtistObjectShape>|null $items
      */
     public static function with(
         string $href,
