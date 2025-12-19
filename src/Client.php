@@ -7,6 +7,7 @@ namespace Spotted;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 use Spotted\Core\BaseClient;
+use Spotted\Core\Util;
 use Spotted\Services\AlbumsService;
 use Spotted\Services\ArtistsService;
 use Spotted\Services\AudioAnalysisService;
