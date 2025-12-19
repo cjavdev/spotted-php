@@ -133,11 +133,10 @@ class Client extends BaseClient
         );
 
         parent::__construct(
-            // x-release-please-start-version
             headers: [
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
-                'User-Agent' => sprintf('spotted/PHP %s', '0.3.0'),
+                'User-Agent' => sprintf('spotted/PHP %s', VERSION),
                 'X-Stainless-Lang' => 'php',
                 'X-Stainless-Package-Version' => '0.3.0',
                 'X-Stainless-OS' => $this->getNormalizedOS(),
@@ -145,9 +144,8 @@ class Client extends BaseClient
                 'X-Stainless-Runtime' => 'php',
                 'X-Stainless-Runtime-Version' => phpversion(),
             ],
-            // x-release-please-end
             baseUrl: $baseUrl,
-            options: $options,
+            options: $options
         );
 
         $this->albums = new AlbumsService($this);
