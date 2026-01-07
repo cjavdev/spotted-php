@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Spotted\Core\Contracts;
 
 /**
- * @internal
+ * @phpstan-import-type NormalizedRequest from \Spotted\Core\BaseClient
  *
- * @phpstan-import-type normalized_request from \Spotted\Core\BaseClient
+ * @internal
  *
  * @template Item
  *
