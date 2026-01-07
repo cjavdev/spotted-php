@@ -25,6 +25,10 @@ use Spotted\Services\ShowsService;
 use Spotted\Services\TracksService;
 use Spotted\Services\UsersService;
 
+/**
+ * @phpstan-import-type NormalizedRequest from \Spotted\Core\BaseClient
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 class Client extends BaseClient
 {
     public string $clientID;
@@ -167,6 +171,12 @@ class Client extends BaseClient
     }
 
     /** @return array<string,string> */
+    protected function authHeaders(): array
+    {
+        return [...$this->bearerAuth(), ...$this->oauth2_0()];
+    }
+
+    /** @return array<string,string> */
     protected function bearerAuth(): array
     {
         return $this->accessToken ? [
@@ -178,5 +188,33 @@ class Client extends BaseClient
     protected function oauth2_0(): array
     {
         throw new \BadMethodCallException;
+    }
+
+    /**
+     * @internal
+     *
+     * @param string|list<string> $path
+     * @param array<string,mixed> $query
+     * @param array<string,string|int|list<string|int>|null> $headers
+     * @param RequestOpts|null $opts
+     *
+     * @return array{NormalizedRequest, RequestOptions}
+     */
+    protected function buildRequest(
+        string $method,
+        string|array $path,
+        array $query,
+        array $headers,
+        mixed $body,
+        RequestOptions|array|null $opts,
+    ): array {
+        return parent::buildRequest(
+            method: $method,
+            path: $path,
+            query: $query,
+            headers: [...$this->authHeaders(), ...$headers],
+            body: $body,
+            opts: $opts,
+        );
     }
 }
