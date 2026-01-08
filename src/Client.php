@@ -26,8 +26,8 @@ use Spotted\Services\TracksService;
 use Spotted\Services\UsersService;
 
 /**
- * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
  * @phpstan-import-type NormalizedRequest from \Spotted\Core\BaseClient
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
  */
 class Client extends BaseClient
 {
@@ -117,11 +117,15 @@ class Client extends BaseClient
      */
     public MarketsService $markets;
 
+    /**
+     * @param RequestOpts|null $requestOptions
+     */
     public function __construct(
         ?string $clientID = null,
         ?string $clientSecret = null,
         ?string $accessToken = null,
         ?string $baseUrl = null,
+        RequestOptions|array|null $requestOptions = null,
     ) {
         $this->clientID = (string) ($clientID ?? getenv('SPOTIFY_CLIENT_ID'));
         $this->clientSecret = (string) ($clientSecret ?? getenv('SPOTIFY_CLIENT_SECRET'));
@@ -129,11 +133,14 @@ class Client extends BaseClient
 
         $baseUrl ??= getenv('SPOTTED_BASE_URL') ?: 'https://api.spotify.com/v1';
 
-        $options = RequestOptions::with(
-            uriFactory: Psr17FactoryDiscovery::findUriFactory(),
-            streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
-            requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
-            transporter: Psr18ClientDiscovery::find(),
+        $options = RequestOptions::parse(
+            RequestOptions::with(
+                uriFactory: Psr17FactoryDiscovery::findUriFactory(),
+                streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
+                requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
+                transporter: Psr18ClientDiscovery::find(),
+            ),
+            $requestOptions,
         );
 
         parent::__construct(
