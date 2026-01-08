@@ -12,6 +12,9 @@ use Spotted\Me\Player\PlayerGetStateResponse;
 use Spotted\Me\Player\PlayerListRecentlyPlayedResponse;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface PlayerContract
 {
     /**
@@ -26,22 +29,25 @@ interface PlayerContract
      *   the user account will take priority over this parameter.<br/>
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function getCurrentlyPlaying(
         ?string $additionalTypes = null,
         ?string $market = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PlayerGetCurrentlyPlayingResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function getDevices(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PlayerGetDevicesResponse;
 
     /**
@@ -56,13 +62,14 @@ interface PlayerContract
      *   the user account will take priority over this parameter.<br/>
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function getState(
         ?string $additionalTypes = null,
         ?string $market = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PlayerGetStateResponse;
 
     /**
@@ -75,6 +82,7 @@ interface PlayerContract
      * before (but not including) this cursor position. If `before` is specified,
      * `after` must not be specified.
      * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param RequestOpts|null $requestOptions
      *
      * @return CursorURLPage<PlayerListRecentlyPlayedResponse>
      *
@@ -84,19 +92,20 @@ interface PlayerContract
         ?int $after = null,
         ?int $before = null,
         int $limit = 20,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CursorURLPage;
 
     /**
      * @api
      *
      * @param string $deviceID The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function pausePlayback(
         ?string $deviceID = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 
     /**
@@ -107,13 +116,14 @@ interface PlayerContract
      * the track will cause the player to start playing the next song.
      * @param string $deviceID The id of the device this command is targeting. If
      * not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function seekToPosition(
         int $positionMs,
         ?string $deviceID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
@@ -125,13 +135,14 @@ interface PlayerContract
      * **off** will turn repeat off.
      * @param string $deviceID The id of the device this command is targeting. If
      * not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function setRepeatMode(
         string $state,
         ?string $deviceID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
@@ -139,25 +150,27 @@ interface PlayerContract
      *
      * @param int $volumePercent The volume to set. Must be a value from 0 to 100 inclusive.
      * @param string $deviceID The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function setVolume(
         int $volumePercent,
         ?string $deviceID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
      * @param string $deviceID The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function skipNext(
         ?string $deviceID = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 
     /**
@@ -165,12 +178,13 @@ interface PlayerContract
      *
      * @param string $deviceID The id of the device this command is targeting. If
      * not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function skipPrevious(
         ?string $deviceID = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 
     /**
@@ -187,6 +201,7 @@ interface PlayerContract
      * @param bool $published Body param: The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
      * @param list<string> $uris Body param: Optional. A JSON array of the Spotify track URIs to play.
      * For example: `{"uris": ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh", "spotify:track:1301WleyT98MSxVHPZCA6M"]}`
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -197,7 +212,7 @@ interface PlayerContract
         ?int $positionMs = null,
         ?bool $published = null,
         ?array $uris = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
@@ -207,13 +222,14 @@ interface PlayerContract
      * **false** : Do not shuffle user's playback.
      * @param string $deviceID The id of the device this command is targeting. If
      * not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function toggleShuffle(
         bool $state,
         ?string $deviceID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
@@ -222,6 +238,7 @@ interface PlayerContract
      * @param list<string> $deviceIDs A JSON array containing the ID of the device on which playback should be started/transferred.<br/>For example:`{device_ids:["74ASZWbe4lXaubB36ztrGX"]}`<br/>_**Note**: Although an array is accepted, only a single device_id is currently supported. Supplying more than one will return `400 Bad Request`_
      * @param bool $play **true**: ensure playback happens on new device.<br/>**false** or not provided: keep the current playback state.
      * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -229,6 +246,6 @@ interface PlayerContract
         array $deviceIDs,
         ?bool $play = null,
         ?bool $published = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 }

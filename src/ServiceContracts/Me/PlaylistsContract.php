@@ -9,6 +9,9 @@ use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\SimplifiedPlaylistObject;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface PlaylistsContract
 {
     /**
@@ -18,6 +21,7 @@ interface PlaylistsContract
      * @param int $offset 'The index of the first playlist to return. Default:
      * 0 (the first object). Maximum offset: 100.000\. Use with `limit` to get the
      * next set of playlists.'
+     * @param RequestOpts|null $requestOptions
      *
      * @return CursorURLPage<SimplifiedPlaylistObject>
      *
@@ -26,6 +30,6 @@ interface PlaylistsContract
     public function list(
         int $limit = 20,
         int $offset = 0,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): CursorURLPage;
 }

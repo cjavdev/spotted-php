@@ -13,6 +13,8 @@ use Spotted\Me\Player\Queue\QueueGetResponse\Queue;
 use Spotted\TrackObject;
 
 /**
+ * @phpstan-import-type CurrentlyPlayingVariants from \Spotted\Me\Player\Queue\QueueGetResponse\CurrentlyPlaying
+ * @phpstan-import-type QueueVariants from \Spotted\Me\Player\Queue\QueueGetResponse\Queue
  * @phpstan-import-type CurrentlyPlayingShape from \Spotted\Me\Player\Queue\QueueGetResponse\CurrentlyPlaying
  * @phpstan-import-type QueueShape from \Spotted\Me\Player\Queue\QueueGetResponse\Queue
  *
@@ -29,6 +31,8 @@ final class QueueGetResponse implements BaseModel
 
     /**
      * The currently playing track or episode. Can be `null`.
+     *
+     * @var CurrentlyPlayingVariants|null $currentlyPlaying
      */
     #[Optional('currently_playing', union: CurrentlyPlaying::class)]
     public TrackObject|EpisodeObject|null $currentlyPlaying;
@@ -42,7 +46,7 @@ final class QueueGetResponse implements BaseModel
     /**
      * The tracks or episodes in the queue. Can be empty.
      *
-     * @var list<TrackObject|EpisodeObject>|null $queue
+     * @var list<QueueVariants>|null $queue
      */
     #[Optional(list: Queue::class)]
     public ?array $queue;

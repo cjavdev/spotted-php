@@ -15,6 +15,9 @@ use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface AudiobooksRawContract
 {
     /**
@@ -23,6 +26,7 @@ interface AudiobooksRawContract
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the audiobook
      * @param array<string,mixed>|AudiobookRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AudiobookGetResponse>
      *
@@ -31,13 +35,14 @@ interface AudiobooksRawContract
     public function retrieve(
         string $id,
         array|AudiobookRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AudiobookBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AudiobookBulkGetResponse>
      *
@@ -45,7 +50,7 @@ interface AudiobooksRawContract
      */
     public function bulkRetrieve(
         array|AudiobookBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -54,6 +59,7 @@ interface AudiobooksRawContract
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the audiobook
      * @param array<string,mixed>|AudiobookListChaptersParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<SimplifiedChapterObject>>
      *
@@ -62,6 +68,6 @@ interface AudiobooksRawContract
     public function listChapters(
         string $id,
         array|AudiobookListChaptersParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

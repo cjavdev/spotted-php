@@ -8,6 +8,9 @@ use Spotted\Core\Exceptions\APIException;
 use Spotted\Playlists\PlaylistGetResponse;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface PlaylistsContract
 {
     /**
@@ -32,6 +35,7 @@ interface PlaylistsContract
      *   the user account will take priority over this parameter.<br/>
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -40,7 +44,7 @@ interface PlaylistsContract
         ?string $additionalTypes = null,
         ?string $fields = null,
         ?string $market = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PlaylistGetResponse;
 
     /**
@@ -52,6 +56,7 @@ interface PlaylistsContract
      * @param string $description value for playlist description as displayed in Spotify Clients and in the Web API
      * @param string $name The new name for the playlist, for example `"My New Playlist Title"`
      * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -61,6 +66,6 @@ interface PlaylistsContract
         ?string $description = null,
         ?string $name = null,
         ?bool $published = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 }

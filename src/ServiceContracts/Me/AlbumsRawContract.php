@@ -14,12 +14,16 @@ use Spotted\Me\Albums\AlbumRemoveParams;
 use Spotted\Me\Albums\AlbumSaveParams;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface AlbumsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|AlbumListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<AlbumListResponse>>
      *
@@ -27,13 +31,14 @@ interface AlbumsRawContract
      */
     public function list(
         array|AlbumListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AlbumCheckParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<bool>>
      *
@@ -41,13 +46,14 @@ interface AlbumsRawContract
      */
     public function check(
         array|AlbumCheckParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AlbumRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -55,13 +61,14 @@ interface AlbumsRawContract
      */
     public function remove(
         array|AlbumRemoveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AlbumSaveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -69,6 +76,6 @@ interface AlbumsRawContract
      */
     public function save(
         array|AlbumSaveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

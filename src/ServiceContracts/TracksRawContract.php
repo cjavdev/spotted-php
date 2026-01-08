@@ -12,6 +12,9 @@ use Spotted\Tracks\TrackBulkGetResponse;
 use Spotted\Tracks\TrackBulkRetrieveParams;
 use Spotted\Tracks\TrackRetrieveParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface TracksRawContract
 {
     /**
@@ -20,6 +23,7 @@ interface TracksRawContract
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the track
      * @param array<string,mixed>|TrackRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TrackObject>
      *
@@ -28,13 +32,14 @@ interface TracksRawContract
     public function retrieve(
         string $id,
         array|TrackRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|TrackBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TrackBulkGetResponse>
      *
@@ -42,6 +47,6 @@ interface TracksRawContract
      */
     public function bulkRetrieve(
         array|TrackBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

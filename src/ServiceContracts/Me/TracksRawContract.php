@@ -14,12 +14,16 @@ use Spotted\Me\Tracks\TrackRemoveParams;
 use Spotted\Me\Tracks\TrackSaveParams;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface TracksRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|TrackListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<TrackListResponse>>
      *
@@ -27,13 +31,14 @@ interface TracksRawContract
      */
     public function list(
         array|TrackListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|TrackCheckParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<bool>>
      *
@@ -41,13 +46,14 @@ interface TracksRawContract
      */
     public function check(
         array|TrackCheckParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|TrackRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -55,13 +61,14 @@ interface TracksRawContract
      */
     public function remove(
         array|TrackRemoveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|TrackSaveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -69,6 +76,6 @@ interface TracksRawContract
      */
     public function save(
         array|TrackSaveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

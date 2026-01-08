@@ -13,7 +13,7 @@ use Spotted\EpisodeObject;
  * @phpstan-import-type EpisodeObjectShape from \Spotted\EpisodeObject
  *
  * @phpstan-type EpisodeBulkGetResponseShape = array{
- *   episodes: list<EpisodeObjectShape>
+ *   episodes: list<EpisodeObject|EpisodeObjectShape>
  * }
  */
 final class EpisodeBulkGetResponse implements BaseModel
@@ -49,7 +49,7 @@ final class EpisodeBulkGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<EpisodeObjectShape> $episodes
+     * @param list<EpisodeObject|EpisodeObjectShape> $episodes
      */
     public static function with(array $episodes): self
     {
@@ -61,7 +61,7 @@ final class EpisodeBulkGetResponse implements BaseModel
     }
 
     /**
-     * @param list<EpisodeObjectShape> $episodes
+     * @param list<EpisodeObject|EpisodeObjectShape> $episodes
      */
     public function withEpisodes(array $episodes): self
     {

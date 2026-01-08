@@ -25,12 +25,16 @@ use Spotted\Me\Player\PlayerToggleShuffleParams;
 use Spotted\Me\Player\PlayerTransferParams;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface PlayerRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|PlayerGetCurrentlyPlayingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PlayerGetCurrentlyPlayingResponse>
      *
@@ -38,24 +42,27 @@ interface PlayerRawContract
      */
     public function getCurrentlyPlaying(
         array|PlayerGetCurrentlyPlayingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PlayerGetDevicesResponse>
      *
      * @throws APIException
      */
     public function getDevices(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PlayerGetStateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PlayerGetStateResponse>
      *
@@ -63,13 +70,14 @@ interface PlayerRawContract
      */
     public function getState(
         array|PlayerGetStateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PlayerListRecentlyPlayedParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<PlayerListRecentlyPlayedResponse>>
      *
@@ -77,13 +85,14 @@ interface PlayerRawContract
      */
     public function listRecentlyPlayed(
         array|PlayerListRecentlyPlayedParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PlayerPausePlaybackParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -91,13 +100,14 @@ interface PlayerRawContract
      */
     public function pausePlayback(
         array|PlayerPausePlaybackParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PlayerSeekToPositionParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -105,13 +115,14 @@ interface PlayerRawContract
      */
     public function seekToPosition(
         array|PlayerSeekToPositionParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PlayerSetRepeatModeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -119,13 +130,14 @@ interface PlayerRawContract
      */
     public function setRepeatMode(
         array|PlayerSetRepeatModeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PlayerSetVolumeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -133,13 +145,14 @@ interface PlayerRawContract
      */
     public function setVolume(
         array|PlayerSetVolumeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PlayerSkipNextParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -147,13 +160,14 @@ interface PlayerRawContract
      */
     public function skipNext(
         array|PlayerSkipNextParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PlayerSkipPreviousParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -161,13 +175,14 @@ interface PlayerRawContract
      */
     public function skipPrevious(
         array|PlayerSkipPreviousParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PlayerStartPlaybackParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -175,13 +190,14 @@ interface PlayerRawContract
      */
     public function startPlayback(
         array|PlayerStartPlaybackParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PlayerToggleShuffleParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -189,13 +205,14 @@ interface PlayerRawContract
      */
     public function toggleShuffle(
         array|PlayerToggleShuffleParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PlayerTransferParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -203,6 +220,6 @@ interface PlayerRawContract
      */
     public function transfer(
         array|PlayerTransferParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

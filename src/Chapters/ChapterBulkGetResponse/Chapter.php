@@ -33,7 +33,7 @@ use Spotted\ResumePointObject;
  *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
  *   htmlDescription: string,
- *   images: list<ImageObjectShape>,
+ *   images: list<ImageObject|ImageObjectShape>,
  *   isPlayable: bool,
  *   languages: list<string>,
  *   name: string,
@@ -257,7 +257,7 @@ final class Chapter implements BaseModel
      *
      * @param AudiobookBase|AudiobookBaseShape $audiobook
      * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      * @param list<string> $languages
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
      * @param list<string>|null $availableMarkets
@@ -433,7 +433,7 @@ final class Chapter implements BaseModel
     /**
      * The cover art for the chapter in various sizes, widest first.
      *
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {

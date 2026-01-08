@@ -14,6 +14,9 @@ use Spotted\Playlists\PlaylistUpdateParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\PlaylistsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class PlaylistsRawService implements PlaylistsRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +34,7 @@ final class PlaylistsRawService implements PlaylistsRawContract
      * @param array{
      *   additionalTypes?: string, fields?: string, market?: string
      * }|PlaylistRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PlaylistGetResponse>
      *
@@ -39,7 +43,7 @@ final class PlaylistsRawService implements PlaylistsRawContract
     public function retrieve(
         string $playlistID,
         array|PlaylistRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlaylistRetrieveParams::parseRequest(
             $params,
@@ -69,6 +73,7 @@ final class PlaylistsRawService implements PlaylistsRawContract
      * @param array{
      *   collaborative?: bool, description?: string, name?: string, published?: bool
      * }|PlaylistUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -77,7 +82,7 @@ final class PlaylistsRawService implements PlaylistsRawContract
     public function update(
         string $playlistID,
         array|PlaylistUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlaylistUpdateParams::parseRequest(
             $params,

@@ -11,6 +11,9 @@ use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\AudioAnalysisRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class AudioAnalysisRawService implements AudioAnalysisRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,6 +31,7 @@ final class AudioAnalysisRawService implements AudioAnalysisRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the track
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AudioAnalysisGetResponse>
      *
@@ -35,7 +39,7 @@ final class AudioAnalysisRawService implements AudioAnalysisRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

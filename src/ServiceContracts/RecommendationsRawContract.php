@@ -11,6 +11,9 @@ use Spotted\Recommendations\RecommendationGetResponse;
 use Spotted\Recommendations\RecommendationListAvailableGenreSeedsResponse;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface RecommendationsRawContract
 {
     /**
@@ -19,6 +22,7 @@ interface RecommendationsRawContract
      * @api
      *
      * @param array<string,mixed>|RecommendationGetParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecommendationGetResponse>
      *
@@ -26,7 +30,7 @@ interface RecommendationsRawContract
      */
     public function get(
         array|RecommendationGetParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -34,11 +38,13 @@ interface RecommendationsRawContract
      *
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<RecommendationListAvailableGenreSeedsResponse>
      *
      * @throws APIException
      */
     public function listAvailableGenreSeeds(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

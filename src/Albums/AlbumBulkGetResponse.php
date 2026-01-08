@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * @phpstan-import-type AlbumShape from \Spotted\Albums\AlbumBulkGetResponse\Album
  *
- * @phpstan-type AlbumBulkGetResponseShape = array{albums: list<AlbumShape>}
+ * @phpstan-type AlbumBulkGetResponseShape = array{albums: list<Album|AlbumShape>}
  */
 final class AlbumBulkGetResponse implements BaseModel
 {
@@ -47,7 +47,7 @@ final class AlbumBulkGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AlbumShape> $albums
+     * @param list<Album|AlbumShape> $albums
      */
     public static function with(array $albums): self
     {
@@ -59,7 +59,7 @@ final class AlbumBulkGetResponse implements BaseModel
     }
 
     /**
-     * @param list<AlbumShape> $albums
+     * @param list<Album|AlbumShape> $albums
      */
     public function withAlbums(array $albums): self
     {

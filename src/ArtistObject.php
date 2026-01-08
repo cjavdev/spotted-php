@@ -20,7 +20,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   followers?: null|FollowersObject|FollowersObjectShape,
  *   genres?: list<string>|null,
  *   href?: string|null,
- *   images?: list<ImageObjectShape>|null,
+ *   images?: list<ImageObject|ImageObjectShape>|null,
  *   name?: string|null,
  *   popularity?: int|null,
  *   published?: bool|null,
@@ -118,7 +118,7 @@ final class ArtistObject implements BaseModel
      * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
      * @param FollowersObject|FollowersObjectShape|null $followers
      * @param list<string>|null $genres
-     * @param list<ImageObjectShape>|null $images
+     * @param list<ImageObject|ImageObjectShape>|null $images
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
@@ -216,7 +216,7 @@ final class ArtistObject implements BaseModel
     /**
      * Images of the artist in various sizes, widest first.
      *
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {

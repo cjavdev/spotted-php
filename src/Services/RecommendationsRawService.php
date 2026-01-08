@@ -14,6 +14,9 @@ use Spotted\Recommendations\RecommendationListAvailableGenreSeedsResponse;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\RecommendationsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class RecommendationsRawService implements RecommendationsRawContract
 {
     // @phpstan-ignore-next-line
@@ -80,6 +83,7 @@ final class RecommendationsRawService implements RecommendationsRawContract
      *   targetTimeSignature?: int,
      *   targetValence?: float,
      * }|RecommendationGetParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RecommendationGetResponse>
      *
@@ -87,7 +91,7 @@ final class RecommendationsRawService implements RecommendationsRawContract
      */
     public function get(
         array|RecommendationGetParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RecommendationGetParams::parseRequest(
             $params,
@@ -160,12 +164,14 @@ final class RecommendationsRawService implements RecommendationsRawContract
      *
      * Retrieve a list of available genres seed parameter values for [recommendations](/documentation/web-api/reference/get-recommendations).
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<RecommendationListAvailableGenreSeedsResponse>
      *
      * @throws APIException
      */
     public function listAvailableGenreSeeds(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

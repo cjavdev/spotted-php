@@ -13,7 +13,7 @@ use Spotted\TrackObject;
  * @phpstan-import-type TrackObjectShape from \Spotted\TrackObject
  *
  * @phpstan-type ArtistTopTracksResponseShape = array{
- *   tracks: list<TrackObjectShape>
+ *   tracks: list<TrackObject|TrackObjectShape>
  * }
  */
 final class ArtistTopTracksResponse implements BaseModel
@@ -49,7 +49,7 @@ final class ArtistTopTracksResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TrackObjectShape> $tracks
+     * @param list<TrackObject|TrackObjectShape> $tracks
      */
     public static function with(array $tracks): self
     {
@@ -61,7 +61,7 @@ final class ArtistTopTracksResponse implements BaseModel
     }
 
     /**
-     * @param list<TrackObjectShape> $tracks
+     * @param list<TrackObject|TrackObjectShape> $tracks
      */
     public function withTracks(array $tracks): self
     {

@@ -16,6 +16,9 @@ use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\TopRawContract;
 use Spotted\TrackObject;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class TopRawService implements TopRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,6 +35,7 @@ final class TopRawService implements TopRawContract
      * @param array{
      *   limit?: int, offset?: int, timeRange?: string
      * }|TopListTopArtistsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<ArtistObject>>
      *
@@ -39,7 +43,7 @@ final class TopRawService implements TopRawContract
      */
     public function listTopArtists(
         array|TopListTopArtistsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TopListTopArtistsParams::parseRequest(
             $params,
@@ -65,6 +69,7 @@ final class TopRawService implements TopRawContract
      * @param array{
      *   limit?: int, offset?: int, timeRange?: string
      * }|TopListTopTracksParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<TrackObject>>
      *
@@ -72,7 +77,7 @@ final class TopRawService implements TopRawContract
      */
     public function listTopTracks(
         array|TopListTopTracksParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TopListTopTracksParams::parseRequest(
             $params,

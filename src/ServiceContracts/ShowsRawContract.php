@@ -15,6 +15,9 @@ use Spotted\Shows\ShowListEpisodesParams;
 use Spotted\Shows\ShowRetrieveParams;
 use Spotted\SimplifiedEpisodeObject;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface ShowsRawContract
 {
     /**
@@ -23,6 +26,7 @@ interface ShowsRawContract
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the show
      * @param array<string,mixed>|ShowRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ShowGetResponse>
      *
@@ -31,13 +35,14 @@ interface ShowsRawContract
     public function retrieve(
         string $id,
         array|ShowRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ShowBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ShowBulkGetResponse>
      *
@@ -45,7 +50,7 @@ interface ShowsRawContract
      */
     public function bulkRetrieve(
         array|ShowBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -54,6 +59,7 @@ interface ShowsRawContract
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the show
      * @param array<string,mixed>|ShowListEpisodesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<SimplifiedEpisodeObject>>
      *
@@ -62,6 +68,6 @@ interface ShowsRawContract
     public function listEpisodes(
         string $id,
         array|ShowListEpisodesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

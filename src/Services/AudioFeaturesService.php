@@ -12,6 +12,9 @@ use Spotted\Core\Util;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\AudioFeaturesContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class AudioFeaturesService implements AudioFeaturesContract
 {
     /**
@@ -36,12 +39,13 @@ final class AudioFeaturesService implements AudioFeaturesContract
      * Spotify ID.
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the track
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AudioFeatureGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -58,12 +62,13 @@ final class AudioFeaturesService implements AudioFeaturesContract
      *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids)
      * for the tracks. Maximum: 100 IDs.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function bulkRetrieve(
         string $ids,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AudioFeatureBulkGetResponse {
         $params = Util::removeNulls(['ids' => $ids]);
 

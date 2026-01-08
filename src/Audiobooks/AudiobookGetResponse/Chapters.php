@@ -22,7 +22,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<SimplifiedChapterObjectShape>|null,
+ *   items?: list<SimplifiedChapterObject|SimplifiedChapterObjectShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -109,7 +109,7 @@ final class Chapters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedChapterObjectShape>|null $items
+     * @param list<SimplifiedChapterObject|SimplifiedChapterObjectShape>|null $items
      */
     public static function with(
         string $href,
@@ -203,7 +203,7 @@ final class Chapters implements BaseModel
     }
 
     /**
-     * @param list<SimplifiedChapterObjectShape> $items
+     * @param list<SimplifiedChapterObject|SimplifiedChapterObjectShape> $items
      */
     public function withItems(array $items): self
     {

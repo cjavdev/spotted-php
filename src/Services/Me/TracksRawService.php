@@ -14,9 +14,14 @@ use Spotted\Me\Tracks\TrackListParams;
 use Spotted\Me\Tracks\TrackListResponse;
 use Spotted\Me\Tracks\TrackRemoveParams;
 use Spotted\Me\Tracks\TrackSaveParams;
+use Spotted\Me\Tracks\TrackSaveParams\TimestampedID;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\TracksRawContract;
 
+/**
+ * @phpstan-import-type TimestampedIDShape from \Spotted\Me\Tracks\TrackSaveParams\TimestampedID
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class TracksRawService implements TracksRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +36,7 @@ final class TracksRawService implements TracksRawContract
      * Get a list of the songs saved in the current Spotify user's 'Your Music' library.
      *
      * @param array{limit?: int, market?: string, offset?: int}|TrackListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<TrackListResponse>>
      *
@@ -38,7 +44,7 @@ final class TracksRawService implements TracksRawContract
      */
     public function list(
         array|TrackListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TrackListParams::parseRequest(
             $params,
@@ -62,6 +68,7 @@ final class TracksRawService implements TracksRawContract
      * Check if one or more tracks is already saved in the current Spotify user's 'Your Music' library.
      *
      * @param array{ids: string}|TrackCheckParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<bool>>
      *
@@ -69,7 +76,7 @@ final class TracksRawService implements TracksRawContract
      */
     public function check(
         array|TrackCheckParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TrackCheckParams::parseRequest(
             $params,
@@ -92,6 +99,7 @@ final class TracksRawService implements TracksRawContract
      * Remove one or more tracks from the current user's 'Your Music' library.
      *
      * @param array{ids?: list<string>, published?: bool}|TrackRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -99,7 +107,7 @@ final class TracksRawService implements TracksRawContract
      */
     public function remove(
         array|TrackRemoveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TrackRemoveParams::parseRequest(
             $params,
@@ -124,8 +132,9 @@ final class TracksRawService implements TracksRawContract
      * @param array{
      *   ids: list<string>,
      *   published?: bool,
-     *   timestampedIDs?: list<array{id: string, addedAt: string|\DateTimeInterface}>,
+     *   timestampedIDs?: list<TimestampedID|TimestampedIDShape>,
      * }|TrackSaveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -133,7 +142,7 @@ final class TracksRawService implements TracksRawContract
      */
     public function save(
         array|TrackSaveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TrackSaveParams::parseRequest(
             $params,

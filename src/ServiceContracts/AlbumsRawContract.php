@@ -15,6 +15,9 @@ use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\SimplifiedTrackObject;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface AlbumsRawContract
 {
     /**
@@ -22,6 +25,7 @@ interface AlbumsRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the album
      * @param array<string,mixed>|AlbumRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AlbumGetResponse>
      *
@@ -30,13 +34,14 @@ interface AlbumsRawContract
     public function retrieve(
         string $id,
         array|AlbumRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AlbumBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AlbumBulkGetResponse>
      *
@@ -44,7 +49,7 @@ interface AlbumsRawContract
      */
     public function bulkRetrieve(
         array|AlbumBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface AlbumsRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the album
      * @param array<string,mixed>|AlbumListTracksParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<SimplifiedTrackObject>>
      *
@@ -60,6 +66,6 @@ interface AlbumsRawContract
     public function listTracks(
         string $id,
         array|AlbumListTracksParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

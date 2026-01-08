@@ -16,7 +16,7 @@ use Spotted\ImageObject;
  * @phpstan-type CategoryListResponseShape = array{
  *   id: string,
  *   href: string,
- *   icons: list<ImageObjectShape>,
+ *   icons: list<ImageObject|ImageObjectShape>,
  *   name: string,
  *   published?: bool|null,
  * }
@@ -86,7 +86,7 @@ final class CategoryListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ImageObjectShape> $icons
+     * @param list<ImageObject|ImageObjectShape> $icons
      */
     public static function with(
         string $id,
@@ -132,7 +132,7 @@ final class CategoryListResponse implements BaseModel
     /**
      * The category icon, in various sizes.
      *
-     * @param list<ImageObjectShape> $icons
+     * @param list<ImageObject|ImageObjectShape> $icons
      */
     public function withIcons(array $icons): self
     {

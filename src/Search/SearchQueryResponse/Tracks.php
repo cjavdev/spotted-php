@@ -20,7 +20,7 @@ use Spotted\TrackObject;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<TrackObjectShape>|null,
+ *   items?: list<TrackObject|TrackObjectShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -107,7 +107,7 @@ final class Tracks implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TrackObjectShape>|null $items
+     * @param list<TrackObject|TrackObjectShape>|null $items
      */
     public static function with(
         string $href,
@@ -201,7 +201,7 @@ final class Tracks implements BaseModel
     }
 
     /**
-     * @param list<TrackObjectShape> $items
+     * @param list<TrackObject|TrackObjectShape> $items
      */
     public function withItems(array $items): self
     {

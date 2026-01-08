@@ -22,13 +22,13 @@ use Spotted\Shows\ShowGetResponse\Episodes;
  * @phpstan-type ShowGetResponseShape = array{
  *   id: string,
  *   availableMarkets: list<string>,
- *   copyrights: list<CopyrightObjectShape>,
+ *   copyrights: list<CopyrightObject|CopyrightObjectShape>,
  *   description: string,
  *   explicit: bool,
  *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
  *   htmlDescription: string,
- *   images: list<ImageObjectShape>,
+ *   images: list<ImageObject|ImageObjectShape>,
  *   isExternallyHosted: bool,
  *   languages: list<string>,
  *   mediaType: string,
@@ -227,9 +227,9 @@ final class ShowGetResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $availableMarkets
-     * @param list<CopyrightObjectShape> $copyrights
+     * @param list<CopyrightObject|CopyrightObjectShape> $copyrights
      * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      * @param list<string> $languages
      * @param Episodes|EpisodesShape $episodes
      */
@@ -305,7 +305,7 @@ final class ShowGetResponse implements BaseModel
     /**
      * The copyright statements of the show.
      *
-     * @param list<CopyrightObjectShape> $copyrights
+     * @param list<CopyrightObject|CopyrightObjectShape> $copyrights
      */
     public function withCopyrights(array $copyrights): self
     {
@@ -374,7 +374,7 @@ final class ShowGetResponse implements BaseModel
     /**
      * The cover art for the show in various sizes, widest first.
      *
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {

@@ -17,6 +17,9 @@ use Spotted\Me\Following\FollowingUnfollowParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\FollowingRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class FollowingRawService implements FollowingRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,6 +36,7 @@ final class FollowingRawService implements FollowingRawContract
      * @param array{
      *   type?: 'artist', after?: string, limit?: int
      * }|FollowingBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FollowingBulkGetResponse>
      *
@@ -40,7 +44,7 @@ final class FollowingRawService implements FollowingRawContract
      */
     public function bulkRetrieve(
         array|FollowingBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = FollowingBulkRetrieveParams::parseRequest(
             $params,
@@ -63,8 +67,9 @@ final class FollowingRawService implements FollowingRawContract
      * Check to see if the current user is following one or more artists or other Spotify users.
      *
      * @param array{
-     *   ids: string, type: 'artist'|'user'|Type
+     *   ids: string, type: Type|value-of<Type>
      * }|FollowingCheckParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<bool>>
      *
@@ -72,7 +77,7 @@ final class FollowingRawService implements FollowingRawContract
      */
     public function check(
         array|FollowingCheckParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = FollowingCheckParams::parseRequest(
             $params,
@@ -95,6 +100,7 @@ final class FollowingRawService implements FollowingRawContract
      * Add the current user as a follower of one or more artists or other Spotify users.
      *
      * @param array{ids: list<string>, published?: bool}|FollowingFollowParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -102,7 +108,7 @@ final class FollowingRawService implements FollowingRawContract
      */
     public function follow(
         array|FollowingFollowParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = FollowingFollowParams::parseRequest(
             $params,
@@ -127,6 +133,7 @@ final class FollowingRawService implements FollowingRawContract
      * @param array{
      *   ids?: list<string>, published?: bool
      * }|FollowingUnfollowParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -134,7 +141,7 @@ final class FollowingRawService implements FollowingRawContract
      */
     public function unfollow(
         array|FollowingUnfollowParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = FollowingUnfollowParams::parseRequest(
             $params,

@@ -12,7 +12,9 @@ use Spotted\TrackObject;
 /**
  * @phpstan-import-type TrackObjectShape from \Spotted\TrackObject
  *
- * @phpstan-type TrackBulkGetResponseShape = array{tracks: list<TrackObjectShape>}
+ * @phpstan-type TrackBulkGetResponseShape = array{
+ *   tracks: list<TrackObject|TrackObjectShape>
+ * }
  */
 final class TrackBulkGetResponse implements BaseModel
 {
@@ -47,7 +49,7 @@ final class TrackBulkGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TrackObjectShape> $tracks
+     * @param list<TrackObject|TrackObjectShape> $tracks
      */
     public static function with(array $tracks): self
     {
@@ -59,7 +61,7 @@ final class TrackBulkGetResponse implements BaseModel
     }
 
     /**
-     * @param list<TrackObjectShape> $tracks
+     * @param list<TrackObject|TrackObjectShape> $tracks
      */
     public function withTracks(array $tracks): self
     {

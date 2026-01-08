@@ -25,7 +25,7 @@ use Spotted\SimplifiedEpisodeObject\ReleaseDatePrecision;
  *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
  *   htmlDescription: string,
- *   images: list<ImageObjectShape>,
+ *   images: list<ImageObject|ImageObjectShape>,
  *   isExternallyHosted: bool,
  *   isPlayable: bool,
  *   languages: list<string>,
@@ -241,7 +241,7 @@ final class SimplifiedEpisodeObject implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      * @param list<string> $languages
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
      * @param EpisodeRestrictionObject|EpisodeRestrictionObjectShape|null $restrictions
@@ -390,7 +390,7 @@ final class SimplifiedEpisodeObject implements BaseModel
     /**
      * The cover art for the episode in various sizes, widest first.
      *
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {

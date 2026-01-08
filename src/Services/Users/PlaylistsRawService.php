@@ -15,6 +15,9 @@ use Spotted\Users\Playlists\PlaylistCreateParams;
 use Spotted\Users\Playlists\PlaylistListParams;
 use Spotted\Users\Playlists\PlaylistNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class PlaylistsRawService implements PlaylistsRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,6 +37,7 @@ final class PlaylistsRawService implements PlaylistsRawContract
      * @param array{
      *   name: string, collaborative?: bool, description?: string, published?: bool
      * }|PlaylistCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PlaylistNewResponse>
      *
@@ -42,7 +46,7 @@ final class PlaylistsRawService implements PlaylistsRawContract
     public function create(
         string $userID,
         array|PlaylistCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlaylistCreateParams::parseRequest(
             $params,
@@ -66,6 +70,7 @@ final class PlaylistsRawService implements PlaylistsRawContract
      *
      * @param string $userID the user's [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids)
      * @param array{limit?: int, offset?: int}|PlaylistListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<SimplifiedPlaylistObject>>
      *
@@ -74,7 +79,7 @@ final class PlaylistsRawService implements PlaylistsRawContract
     public function list(
         string $userID,
         array|PlaylistListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlaylistListParams::parseRequest(
             $params,

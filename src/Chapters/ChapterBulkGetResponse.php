@@ -12,7 +12,9 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * @phpstan-import-type ChapterShape from \Spotted\Chapters\ChapterBulkGetResponse\Chapter
  *
- * @phpstan-type ChapterBulkGetResponseShape = array{chapters: list<ChapterShape>}
+ * @phpstan-type ChapterBulkGetResponseShape = array{
+ *   chapters: list<Chapter|ChapterShape>
+ * }
  */
 final class ChapterBulkGetResponse implements BaseModel
 {
@@ -47,7 +49,7 @@ final class ChapterBulkGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ChapterShape> $chapters
+     * @param list<Chapter|ChapterShape> $chapters
      */
     public static function with(array $chapters): self
     {
@@ -59,7 +61,7 @@ final class ChapterBulkGetResponse implements BaseModel
     }
 
     /**
-     * @param list<ChapterShape> $chapters
+     * @param list<Chapter|ChapterShape> $chapters
      */
     public function withChapters(array $chapters): self
     {

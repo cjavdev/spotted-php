@@ -20,7 +20,7 @@ use Spotted\Search\SearchQueryResponse\Albums\Item;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<ItemShape>|null,
+ *   items?: list<Item|ItemShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -107,7 +107,7 @@ final class Albums implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ItemShape>|null $items
+     * @param list<Item|ItemShape>|null $items
      */
     public static function with(
         string $href,
@@ -201,7 +201,7 @@ final class Albums implements BaseModel
     }
 
     /**
-     * @param list<ItemShape> $items
+     * @param list<Item|ItemShape> $items
      */
     public function withItems(array $items): self
     {

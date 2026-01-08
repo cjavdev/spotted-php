@@ -14,6 +14,9 @@ use Spotted\Episodes\EpisodeRetrieveParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\EpisodesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class EpisodesRawService implements EpisodesRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +33,7 @@ final class EpisodesRawService implements EpisodesRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the episode
      * @param array{market?: string}|EpisodeRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EpisodeObject>
      *
@@ -38,7 +42,7 @@ final class EpisodesRawService implements EpisodesRawContract
     public function retrieve(
         string $id,
         array|EpisodeRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = EpisodeRetrieveParams::parseRequest(
             $params,
@@ -61,6 +65,7 @@ final class EpisodesRawService implements EpisodesRawContract
      * Get Spotify catalog information for several episodes based on their Spotify IDs.
      *
      * @param array{ids: string, market?: string}|EpisodeBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EpisodeBulkGetResponse>
      *
@@ -68,7 +73,7 @@ final class EpisodesRawService implements EpisodesRawContract
      */
     public function bulkRetrieve(
         array|EpisodeBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = EpisodeBulkRetrieveParams::parseRequest(
             $params,

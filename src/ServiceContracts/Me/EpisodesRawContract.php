@@ -14,12 +14,16 @@ use Spotted\Me\Episodes\EpisodeRemoveParams;
 use Spotted\Me\Episodes\EpisodeSaveParams;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface EpisodesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|EpisodeListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<EpisodeListResponse>>
      *
@@ -27,13 +31,14 @@ interface EpisodesRawContract
      */
     public function list(
         array|EpisodeListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|EpisodeCheckParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<bool>>
      *
@@ -41,13 +46,14 @@ interface EpisodesRawContract
      */
     public function check(
         array|EpisodeCheckParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|EpisodeRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -55,13 +61,14 @@ interface EpisodesRawContract
      */
     public function remove(
         array|EpisodeRemoveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|EpisodeSaveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -69,6 +76,6 @@ interface EpisodesRawContract
      */
     public function save(
         array|EpisodeSaveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

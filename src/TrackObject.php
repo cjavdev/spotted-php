@@ -21,7 +21,7 @@ use Spotted\TrackObject\Type;
  * @phpstan-type TrackObjectShape = array{
  *   id?: string|null,
  *   album?: null|Album|AlbumShape,
- *   artists?: list<SimplifiedArtistObjectShape>|null,
+ *   artists?: list<SimplifiedArtistObject|SimplifiedArtistObjectShape>|null,
  *   availableMarkets?: list<string>|null,
  *   discNumber?: int|null,
  *   durationMs?: int|null,
@@ -192,7 +192,7 @@ final class TrackObject implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Album|AlbumShape|null $album
-     * @param list<SimplifiedArtistObjectShape>|null $artists
+     * @param list<SimplifiedArtistObject|SimplifiedArtistObjectShape>|null $artists
      * @param list<string>|null $availableMarkets
      * @param ExternalIDObject|ExternalIDObjectShape|null $externalIDs
      * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
@@ -277,7 +277,7 @@ final class TrackObject implements BaseModel
     /**
      * The artists who performed the track. Each artist object includes a link in `href` to more detailed information about the artist.
      *
-     * @param list<SimplifiedArtistObjectShape> $artists
+     * @param list<SimplifiedArtistObject|SimplifiedArtistObjectShape> $artists
      */
     public function withArtists(array $artists): self
     {

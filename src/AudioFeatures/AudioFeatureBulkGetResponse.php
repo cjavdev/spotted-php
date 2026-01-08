@@ -13,7 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @phpstan-import-type AudioFeatureShape from \Spotted\AudioFeatures\AudioFeatureBulkGetResponse\AudioFeature
  *
  * @phpstan-type AudioFeatureBulkGetResponseShape = array{
- *   audioFeatures: list<AudioFeatureShape>
+ *   audioFeatures: list<AudioFeature|AudioFeatureShape>
  * }
  */
 final class AudioFeatureBulkGetResponse implements BaseModel
@@ -49,7 +49,7 @@ final class AudioFeatureBulkGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AudioFeatureShape> $audioFeatures
+     * @param list<AudioFeature|AudioFeatureShape> $audioFeatures
      */
     public static function with(array $audioFeatures): self
     {
@@ -61,7 +61,7 @@ final class AudioFeatureBulkGetResponse implements BaseModel
     }
 
     /**
-     * @param list<AudioFeatureShape> $audioFeatures
+     * @param list<AudioFeature|AudioFeatureShape> $audioFeatures
      */
     public function withAudioFeatures(array $audioFeatures): self
     {

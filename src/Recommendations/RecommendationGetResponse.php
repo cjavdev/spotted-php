@@ -16,7 +16,9 @@ use Spotted\TrackObject;
  * @phpstan-import-type TrackObjectShape from \Spotted\TrackObject
  *
  * @phpstan-type RecommendationGetResponseShape = array{
- *   seeds: list<SeedShape>, tracks: list<TrackObjectShape>, published?: bool|null
+ *   seeds: list<Seed|SeedShape>,
+ *   tracks: list<TrackObject|TrackObjectShape>,
+ *   published?: bool|null,
  * }
  */
 final class RecommendationGetResponse implements BaseModel
@@ -70,8 +72,8 @@ final class RecommendationGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SeedShape> $seeds
-     * @param list<TrackObjectShape> $tracks
+     * @param list<Seed|SeedShape> $seeds
+     * @param list<TrackObject|TrackObjectShape> $tracks
      */
     public static function with(
         array $seeds,
@@ -91,7 +93,7 @@ final class RecommendationGetResponse implements BaseModel
     /**
      * An array of recommendation seed objects.
      *
-     * @param list<SeedShape> $seeds
+     * @param list<Seed|SeedShape> $seeds
      */
     public function withSeeds(array $seeds): self
     {
@@ -104,7 +106,7 @@ final class RecommendationGetResponse implements BaseModel
     /**
      * An array of track objects ordered according to the parameters supplied.
      *
-     * @param list<TrackObjectShape> $tracks
+     * @param list<TrackObject|TrackObjectShape> $tracks
      */
     public function withTracks(array $tracks): self
     {

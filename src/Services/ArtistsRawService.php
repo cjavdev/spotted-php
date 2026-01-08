@@ -20,6 +20,9 @@ use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\ArtistsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class ArtistsRawService implements ArtistsRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,6 +37,7 @@ final class ArtistsRawService implements ArtistsRawContract
      * Get Spotify catalog information for a single artist identified by their unique Spotify ID.
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ArtistObject>
      *
@@ -41,7 +45,7 @@ final class ArtistsRawService implements ArtistsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -58,6 +62,7 @@ final class ArtistsRawService implements ArtistsRawContract
      * Get Spotify catalog information for several artists based on their Spotify IDs.
      *
      * @param array{ids: string}|ArtistBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ArtistBulkGetResponse>
      *
@@ -65,7 +70,7 @@ final class ArtistsRawService implements ArtistsRawContract
      */
     public function bulkRetrieve(
         array|ArtistBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ArtistBulkRetrieveParams::parseRequest(
             $params,
@@ -91,6 +96,7 @@ final class ArtistsRawService implements ArtistsRawContract
      * @param array{
      *   includeGroups?: string, limit?: int, market?: string, offset?: int
      * }|ArtistListAlbumsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<ArtistListAlbumsResponse>>
      *
@@ -99,7 +105,7 @@ final class ArtistsRawService implements ArtistsRawContract
     public function listAlbums(
         string $id,
         array|ArtistListAlbumsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ArtistListAlbumsParams::parseRequest(
             $params,
@@ -128,6 +134,7 @@ final class ArtistsRawService implements ArtistsRawContract
      * Get Spotify catalog information about artists similar to a given artist. Similarity is based on analysis of the Spotify community's listening history.
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ArtistListRelatedArtistsResponse>
      *
@@ -135,7 +142,7 @@ final class ArtistsRawService implements ArtistsRawContract
      */
     public function listRelatedArtists(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -153,6 +160,7 @@ final class ArtistsRawService implements ArtistsRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
      * @param array{market?: string}|ArtistTopTracksParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ArtistTopTracksResponse>
      *
@@ -161,7 +169,7 @@ final class ArtistsRawService implements ArtistsRawContract
     public function topTracks(
         string $id,
         array|ArtistTopTracksParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ArtistTopTracksParams::parseRequest(
             $params,

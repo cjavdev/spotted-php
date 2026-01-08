@@ -20,7 +20,7 @@ use Spotted\SimplifiedEpisodeObject;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<SimplifiedEpisodeObjectShape>|null,
+ *   items?: list<SimplifiedEpisodeObject|SimplifiedEpisodeObjectShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -107,7 +107,7 @@ final class Episodes implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedEpisodeObjectShape>|null $items
+     * @param list<SimplifiedEpisodeObject|SimplifiedEpisodeObjectShape>|null $items
      */
     public static function with(
         string $href,
@@ -201,7 +201,7 @@ final class Episodes implements BaseModel
     }
 
     /**
-     * @param list<SimplifiedEpisodeObjectShape> $items
+     * @param list<SimplifiedEpisodeObject|SimplifiedEpisodeObjectShape> $items
      */
     public function withItems(array $items): self
     {

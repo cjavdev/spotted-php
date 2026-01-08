@@ -10,6 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\PlaylistTrackObject\Track;
 
 /**
+ * @phpstan-import-type TrackVariants from \Spotted\PlaylistTrackObject\Track
  * @phpstan-import-type PlaylistUserObjectShape from \Spotted\PlaylistUserObject
  * @phpstan-import-type TrackShape from \Spotted\PlaylistTrackObject\Track
  *
@@ -52,6 +53,8 @@ final class PlaylistTrackObject implements BaseModel
 
     /**
      * Information about the track or episode.
+     *
+     * @var TrackVariants|null $track
      */
     #[Optional(union: Track::class)]
     public TrackObject|EpisodeObject|null $track;

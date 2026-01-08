@@ -23,7 +23,7 @@ use Spotted\Users\UserGetProfileResponse\Type;
  *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
  *   followers?: null|FollowersObject|FollowersObjectShape,
  *   href?: string|null,
- *   images?: list<ImageObjectShape>|null,
+ *   images?: list<ImageObject|ImageObjectShape>|null,
  *   published?: bool|null,
  *   type?: null|Type|value-of<Type>,
  *   uri?: string|null,
@@ -104,7 +104,7 @@ final class UserGetProfileResponse implements BaseModel
      *
      * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
      * @param FollowersObject|FollowersObjectShape|null $followers
-     * @param list<ImageObjectShape>|null $images
+     * @param list<ImageObject|ImageObjectShape>|null $images
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
@@ -196,7 +196,7 @@ final class UserGetProfileResponse implements BaseModel
     /**
      * The user's profile image.
      *
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {

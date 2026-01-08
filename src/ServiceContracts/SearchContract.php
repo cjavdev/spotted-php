@@ -10,6 +10,9 @@ use Spotted\Search\SearchQueryParams\IncludeExternal;
 use Spotted\Search\SearchQueryParams\Type;
 use Spotted\Search\SearchQueryResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface SearchContract
 {
     /**
@@ -24,10 +27,10 @@ interface SearchContract
      * The `genre` filter can be used while searching artists and tracks.<br />
      * The `isrc` and `track` filters can be used while searching tracks.<br />
      * The `upc`, `tag:new` and `tag:hipster` filters can only be used while searching albums. The `tag:new` filter will return albums released in the past two weeks and `tag:hipster` can be used to return only albums with the lowest 10% popularity.<br />
-     * @param list<'album'|'artist'|'playlist'|'track'|'show'|'episode'|'audiobook'|Type> $type A comma-separated list of item types to search across. Search results include hits
+     * @param list<Type|value-of<Type>> $type A comma-separated list of item types to search across. Search results include hits
      * from all the specified item types. For example: `q=abacab&type=album,track` returns
      * both albums and tracks matching "abacab".
-     * @param 'audio'|IncludeExternal $includeExternal If `include_external=audio` is specified it signals that the client can play externally hosted audio content, and marks
+     * @param IncludeExternal|value-of<IncludeExternal> $includeExternal If `include_external=audio` is specified it signals that the client can play externally hosted audio content, and marks
      * the content as playable in the response. By default externally hosted audio content is marked as unplayable in the response.
      * @param int $limit the maximum number of results to return in each item type
      * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
@@ -38,16 +41,17 @@ interface SearchContract
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      * @param int $offset The index of the first result to return. Use
      * with limit to get the next page of search results.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function query(
         string $q,
         array $type,
-        string|IncludeExternal|null $includeExternal = null,
+        IncludeExternal|string|null $includeExternal = null,
         int $limit = 20,
         ?string $market = null,
         int $offset = 0,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SearchQueryResponse;
 }

@@ -12,7 +12,9 @@ use Spotted\ShowBase;
 /**
  * @phpstan-import-type ShowBaseShape from \Spotted\ShowBase
  *
- * @phpstan-type ShowBulkGetResponseShape = array{shows: list<ShowBaseShape>}
+ * @phpstan-type ShowBulkGetResponseShape = array{
+ *   shows: list<ShowBase|ShowBaseShape>
+ * }
  */
 final class ShowBulkGetResponse implements BaseModel
 {
@@ -47,7 +49,7 @@ final class ShowBulkGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ShowBaseShape> $shows
+     * @param list<ShowBase|ShowBaseShape> $shows
      */
     public static function with(array $shows): self
     {
@@ -59,7 +61,7 @@ final class ShowBulkGetResponse implements BaseModel
     }
 
     /**
-     * @param list<ShowBaseShape> $shows
+     * @param list<ShowBase|ShowBaseShape> $shows
      */
     public function withShows(array $shows): self
     {

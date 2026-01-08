@@ -27,19 +27,19 @@ use Spotted\NarratorObject;
  *
  * @phpstan-type AudiobookShape = array{
  *   id: string,
- *   authors: list<AuthorObjectShape>,
+ *   authors: list<AuthorObject|AuthorObjectShape>,
  *   availableMarkets: list<string>,
- *   copyrights: list<CopyrightObjectShape>,
+ *   copyrights: list<CopyrightObject|CopyrightObjectShape>,
  *   description: string,
  *   explicit: bool,
  *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
  *   htmlDescription: string,
- *   images: list<ImageObjectShape>,
+ *   images: list<ImageObject|ImageObjectShape>,
  *   languages: list<string>,
  *   mediaType: string,
  *   name: string,
- *   narrators: list<NarratorObjectShape>,
+ *   narrators: list<NarratorObject|NarratorObjectShape>,
  *   publisher: string,
  *   totalChapters: int,
  *   type: 'audiobook',
@@ -252,13 +252,13 @@ final class Audiobook implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AuthorObjectShape> $authors
+     * @param list<AuthorObject|AuthorObjectShape> $authors
      * @param list<string> $availableMarkets
-     * @param list<CopyrightObjectShape> $copyrights
+     * @param list<CopyrightObject|CopyrightObjectShape> $copyrights
      * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      * @param list<string> $languages
-     * @param list<NarratorObjectShape> $narrators
+     * @param list<NarratorObject|NarratorObjectShape> $narrators
      * @param Chapters|ChaptersShape $chapters
      */
     public static function with(
@@ -324,7 +324,7 @@ final class Audiobook implements BaseModel
     /**
      * The author(s) for the audiobook.
      *
-     * @param list<AuthorObjectShape> $authors
+     * @param list<AuthorObject|AuthorObjectShape> $authors
      */
     public function withAuthors(array $authors): self
     {
@@ -350,7 +350,7 @@ final class Audiobook implements BaseModel
     /**
      * The copyright statements of the audiobook.
      *
-     * @param list<CopyrightObjectShape> $copyrights
+     * @param list<CopyrightObject|CopyrightObjectShape> $copyrights
      */
     public function withCopyrights(array $copyrights): self
     {
@@ -419,7 +419,7 @@ final class Audiobook implements BaseModel
     /**
      * The cover art for the audiobook in various sizes, widest first.
      *
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
@@ -467,7 +467,7 @@ final class Audiobook implements BaseModel
     /**
      * The narrator(s) for the audiobook.
      *
-     * @param list<NarratorObjectShape> $narrators
+     * @param list<NarratorObject|NarratorObjectShape> $narrators
      */
     public function withNarrators(array $narrators): self
     {

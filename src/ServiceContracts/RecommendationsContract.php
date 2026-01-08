@@ -9,6 +9,9 @@ use Spotted\Recommendations\RecommendationGetResponse;
 use Spotted\Recommendations\RecommendationListAvailableGenreSeedsResponse;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface RecommendationsContract
 {
     /**
@@ -68,6 +71,7 @@ interface RecommendationsContract
      * @param float $targetTempo Target tempo (BPM)
      * @param int $targetTimeSignature For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      * @param float $targetValence For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -119,7 +123,7 @@ interface RecommendationsContract
         ?float $targetTempo = null,
         ?int $targetTimeSignature = null,
         ?float $targetValence = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RecommendationGetResponse;
 
     /**
@@ -127,9 +131,11 @@ interface RecommendationsContract
      *
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function listAvailableGenreSeeds(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): RecommendationListAvailableGenreSeedsResponse;
 }

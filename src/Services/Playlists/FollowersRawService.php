@@ -13,6 +13,9 @@ use Spotted\Playlists\Followers\FollowerFollowParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Playlists\FollowersRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class FollowersRawService implements FollowersRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,6 +31,7 @@ final class FollowersRawService implements FollowersRawContract
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array{ids?: string}|FollowerCheckParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<bool>>
      *
@@ -36,7 +40,7 @@ final class FollowersRawService implements FollowersRawContract
     public function check(
         string $playlistID,
         array|FollowerCheckParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = FollowerCheckParams::parseRequest(
             $params,
@@ -60,6 +64,7 @@ final class FollowersRawService implements FollowersRawContract
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array{published?: bool}|FollowerFollowParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -68,7 +73,7 @@ final class FollowersRawService implements FollowersRawContract
     public function follow(
         string $playlistID,
         array|FollowerFollowParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = FollowerFollowParams::parseRequest(
             $params,
@@ -91,6 +96,7 @@ final class FollowersRawService implements FollowersRawContract
      * Remove the current user as a follower of a playlist.
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -98,7 +104,7 @@ final class FollowersRawService implements FollowersRawContract
      */
     public function unfollow(
         string $playlistID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

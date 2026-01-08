@@ -27,7 +27,7 @@ use Spotted\Me\MeGetResponse\ExplicitContent;
  *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
  *   followers?: null|FollowersObject|FollowersObjectShape,
  *   href?: string|null,
- *   images?: list<ImageObjectShape>|null,
+ *   images?: list<ImageObject|ImageObjectShape>|null,
  *   product?: string|null,
  *   published?: bool|null,
  *   type?: string|null,
@@ -132,7 +132,7 @@ final class MeGetResponse implements BaseModel
      * @param ExplicitContent|ExplicitContentShape|null $explicitContent
      * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
      * @param FollowersObject|FollowersObjectShape|null $followers
-     * @param list<ImageObjectShape>|null $images
+     * @param list<ImageObject|ImageObjectShape>|null $images
      */
     public static function with(
         ?string $id = null,
@@ -267,7 +267,7 @@ final class MeGetResponse implements BaseModel
     /**
      * The user's profile image.
      *
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {

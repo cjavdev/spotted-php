@@ -11,6 +11,9 @@ use Spotted\Playlists\PlaylistRetrieveParams;
 use Spotted\Playlists\PlaylistUpdateParams;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface PlaylistsRawContract
 {
     /**
@@ -18,6 +21,7 @@ interface PlaylistsRawContract
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array<string,mixed>|PlaylistRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PlaylistGetResponse>
      *
@@ -26,7 +30,7 @@ interface PlaylistsRawContract
     public function retrieve(
         string $playlistID,
         array|PlaylistRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -34,6 +38,7 @@ interface PlaylistsRawContract
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array<string,mixed>|PlaylistUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -42,6 +47,6 @@ interface PlaylistsRawContract
     public function update(
         string $playlistID,
         array|PlaylistUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

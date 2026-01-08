@@ -20,13 +20,13 @@ use Spotted\Core\Contracts\BaseModel;
  * @phpstan-import-type TrackShape from \Spotted\AudioAnalysis\AudioAnalysisGetResponse\Track
  *
  * @phpstan-type AudioAnalysisGetResponseShape = array{
- *   bars?: list<TimeIntervalObjectShape>|null,
- *   beats?: list<TimeIntervalObjectShape>|null,
+ *   bars?: list<TimeIntervalObject|TimeIntervalObjectShape>|null,
+ *   beats?: list<TimeIntervalObject|TimeIntervalObjectShape>|null,
  *   meta?: null|Meta|MetaShape,
  *   published?: bool|null,
- *   sections?: list<SectionShape>|null,
- *   segments?: list<SegmentShape>|null,
- *   tatums?: list<TimeIntervalObjectShape>|null,
+ *   sections?: list<Section|SectionShape>|null,
+ *   segments?: list<Segment|SegmentShape>|null,
+ *   tatums?: list<TimeIntervalObject|TimeIntervalObjectShape>|null,
  *   track?: null|Track|TrackShape,
  * }
  */
@@ -97,12 +97,12 @@ final class AudioAnalysisGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TimeIntervalObjectShape>|null $bars
-     * @param list<TimeIntervalObjectShape>|null $beats
+     * @param list<TimeIntervalObject|TimeIntervalObjectShape>|null $bars
+     * @param list<TimeIntervalObject|TimeIntervalObjectShape>|null $beats
      * @param Meta|MetaShape|null $meta
-     * @param list<SectionShape>|null $sections
-     * @param list<SegmentShape>|null $segments
-     * @param list<TimeIntervalObjectShape>|null $tatums
+     * @param list<Section|SectionShape>|null $sections
+     * @param list<Segment|SegmentShape>|null $segments
+     * @param list<TimeIntervalObject|TimeIntervalObjectShape>|null $tatums
      * @param Track|TrackShape|null $track
      */
     public static function with(
@@ -132,7 +132,7 @@ final class AudioAnalysisGetResponse implements BaseModel
     /**
      * The time intervals of the bars throughout the track. A bar (or measure) is a segment of time defined as a given number of beats.
      *
-     * @param list<TimeIntervalObjectShape> $bars
+     * @param list<TimeIntervalObject|TimeIntervalObjectShape> $bars
      */
     public function withBars(array $bars): self
     {
@@ -145,7 +145,7 @@ final class AudioAnalysisGetResponse implements BaseModel
     /**
      * The time intervals of beats throughout the track. A beat is the basic time unit of a piece of music; for example, each tick of a metronome. Beats are typically multiples of tatums.
      *
-     * @param list<TimeIntervalObjectShape> $beats
+     * @param list<TimeIntervalObject|TimeIntervalObjectShape> $beats
      */
     public function withBeats(array $beats): self
     {
@@ -180,7 +180,7 @@ final class AudioAnalysisGetResponse implements BaseModel
     /**
      * Sections are defined by large variations in rhythm or timbre, e.g. chorus, verse, bridge, guitar solo, etc. Each section contains its own descriptions of tempo, key, mode, time_signature, and loudness.
      *
-     * @param list<SectionShape> $sections
+     * @param list<Section|SectionShape> $sections
      */
     public function withSections(array $sections): self
     {
@@ -193,7 +193,7 @@ final class AudioAnalysisGetResponse implements BaseModel
     /**
      * Each segment contains a roughly conisistent sound throughout its duration.
      *
-     * @param list<SegmentShape> $segments
+     * @param list<Segment|SegmentShape> $segments
      */
     public function withSegments(array $segments): self
     {
@@ -206,7 +206,7 @@ final class AudioAnalysisGetResponse implements BaseModel
     /**
      * A tatum represents the lowest regular pulse train that a listener intuitively infers from the timing of perceived musical events (segments).
      *
-     * @param list<TimeIntervalObjectShape> $tatums
+     * @param list<TimeIntervalObject|TimeIntervalObjectShape> $tatums
      */
     public function withTatums(array $tatums): self
     {

@@ -13,7 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @phpstan-import-type ArtistObjectShape from \Spotted\ArtistObject
  *
  * @phpstan-type ArtistBulkGetResponseShape = array{
- *   artists: list<ArtistObjectShape>
+ *   artists: list<ArtistObject|ArtistObjectShape>
  * }
  */
 final class ArtistBulkGetResponse implements BaseModel
@@ -49,7 +49,7 @@ final class ArtistBulkGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ArtistObjectShape> $artists
+     * @param list<ArtistObject|ArtistObjectShape> $artists
      */
     public static function with(array $artists): self
     {
@@ -61,7 +61,7 @@ final class ArtistBulkGetResponse implements BaseModel
     }
 
     /**
-     * @param list<ArtistObjectShape> $artists
+     * @param list<ArtistObject|ArtistObjectShape> $artists
      */
     public function withArtists(array $artists): self
     {
