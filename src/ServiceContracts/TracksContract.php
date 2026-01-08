@@ -9,6 +9,9 @@ use Spotted\RequestOptions;
 use Spotted\TrackObject;
 use Spotted\Tracks\TrackBulkGetResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface TracksContract
 {
     /**
@@ -22,13 +25,14 @@ interface TracksContract
      *   the user account will take priority over this parameter.<br/>
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?string $market = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): TrackObject;
 
     /**
@@ -41,12 +45,13 @@ interface TracksContract
      *   the user account will take priority over this parameter.<br/>
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function bulkRetrieve(
         string $ids,
         ?string $market = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): TrackBulkGetResponse;
 }

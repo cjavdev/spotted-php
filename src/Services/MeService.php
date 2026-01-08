@@ -19,6 +19,9 @@ use Spotted\Services\Me\ShowsService;
 use Spotted\Services\Me\TopService;
 use Spotted\Services\Me\TracksService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class MeService implements MeContract
 {
     /**
@@ -94,10 +97,12 @@ final class MeService implements MeContract
      * Get detailed profile information about the current user (including the
      * current user's username).
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MeGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve(requestOptions: $requestOptions);

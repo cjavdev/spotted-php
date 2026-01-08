@@ -13,30 +13,35 @@ use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface ArtistsContract
 {
     /**
      * @api
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ArtistObject;
 
     /**
      * @api
      *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the artists. Maximum: 50 IDs.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function bulkRetrieve(
         string $ids,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ArtistBulkGetResponse;
 
     /**
@@ -53,6 +58,7 @@ interface ArtistsContract
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param RequestOpts|null $requestOptions
      *
      * @return CursorURLPage<ArtistListAlbumsResponse>
      *
@@ -64,7 +70,7 @@ interface ArtistsContract
         int $limit = 20,
         ?string $market = null,
         int $offset = 0,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CursorURLPage;
 
     /**
@@ -73,12 +79,13 @@ interface ArtistsContract
      * @api
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function listRelatedArtists(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ArtistListRelatedArtistsResponse;
 
     /**
@@ -91,12 +98,13 @@ interface ArtistsContract
      *   the user account will take priority over this parameter.<br/>
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function topTracks(
         string $id,
         ?string $market = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): ArtistTopTracksResponse;
 }

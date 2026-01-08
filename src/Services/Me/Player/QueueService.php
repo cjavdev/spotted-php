@@ -11,6 +11,9 @@ use Spotted\Me\Player\Queue\QueueGetResponse;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\Player\QueueContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class QueueService implements QueueContract
 {
     /**
@@ -34,13 +37,14 @@ final class QueueService implements QueueContract
      * @param string $uri The uri of the item to add to the queue. Must be a track or an episode uri.
      * @param string $deviceID The id of the device this command is targeting. If
      * not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function add(
         string $uri,
         ?string $deviceID = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
         $params = Util::removeNulls(['uri' => $uri, 'deviceID' => $deviceID]);
 
@@ -55,10 +59,12 @@ final class QueueService implements QueueContract
      *
      * Get the list of objects that make up the user's queue.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function get(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): QueueGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->get(requestOptions: $requestOptions);

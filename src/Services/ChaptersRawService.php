@@ -14,6 +14,9 @@ use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\ChaptersRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class ChaptersRawService implements ChaptersRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +33,7 @@ final class ChaptersRawService implements ChaptersRawContract
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the chapter
      * @param array{market?: string}|ChapterRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ChapterGetResponse>
      *
@@ -38,7 +42,7 @@ final class ChaptersRawService implements ChaptersRawContract
     public function retrieve(
         string $id,
         array|ChapterRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ChapterRetrieveParams::parseRequest(
             $params,
@@ -61,6 +65,7 @@ final class ChaptersRawService implements ChaptersRawContract
      * Get Spotify catalog information for several audiobook chapters identified by their Spotify IDs. Chapters are only available within the US, UK, Canada, Ireland, New Zealand and Australia markets.
      *
      * @param array{ids: string, market?: string}|ChapterBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ChapterBulkGetResponse>
      *
@@ -68,7 +73,7 @@ final class ChaptersRawService implements ChaptersRawContract
      */
     public function bulkRetrieve(
         array|ChapterBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ChapterBulkRetrieveParams::parseRequest(
             $params,

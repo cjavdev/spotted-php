@@ -22,7 +22,7 @@ use Spotted\PlaylistTrackObject;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<PlaylistTrackObjectShape>|null,
+ *   items?: list<PlaylistTrackObject|PlaylistTrackObjectShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -109,7 +109,7 @@ final class Tracks implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PlaylistTrackObjectShape>|null $items
+     * @param list<PlaylistTrackObject|PlaylistTrackObjectShape>|null $items
      */
     public static function with(
         string $href,
@@ -203,7 +203,7 @@ final class Tracks implements BaseModel
     }
 
     /**
-     * @param list<PlaylistTrackObjectShape> $items
+     * @param list<PlaylistTrackObject|PlaylistTrackObjectShape> $items
      */
     public function withItems(array $items): self
     {

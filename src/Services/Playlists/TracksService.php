@@ -9,12 +9,17 @@ use Spotted\Core\Exceptions\APIException;
 use Spotted\Core\Util;
 use Spotted\CursorURLPage;
 use Spotted\Playlists\Tracks\TrackAddResponse;
+use Spotted\Playlists\Tracks\TrackRemoveParams\Track;
 use Spotted\Playlists\Tracks\TrackRemoveResponse;
 use Spotted\Playlists\Tracks\TrackUpdateResponse;
 use Spotted\PlaylistTrackObject;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Playlists\TracksContract;
 
+/**
+ * @phpstan-import-type TrackShape from \Spotted\Playlists\Tracks\TrackRemoveParams\Track
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class TracksService implements TracksContract
 {
     /**
@@ -48,6 +53,7 @@ final class TracksService implements TracksContract
      * @param int $rangeStart the position of the first item to be reordered
      * @param string $snapshotID the playlist's snapshot ID against which you want to make the changes
      * @param list<string> $uris
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -59,7 +65,7 @@ final class TracksService implements TracksContract
         ?int $rangeStart = null,
         ?string $snapshotID = null,
         ?array $uris = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TrackUpdateResponse {
         $params = Util::removeNulls(
             [
@@ -103,6 +109,7 @@ final class TracksService implements TracksContract
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param RequestOpts|null $requestOptions
      *
      * @return CursorURLPage<PlaylistTrackObject>
      *
@@ -115,7 +122,7 @@ final class TracksService implements TracksContract
         int $limit = 20,
         ?string $market = null,
         int $offset = 0,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CursorURLPage {
         $params = Util::removeNulls(
             [
@@ -142,6 +149,7 @@ final class TracksService implements TracksContract
      * @param int $position The position to insert the items, a zero-based index. For example, to insert the items in the first position: `position=0` ; to insert the items in the third position: `position=2`. If omitted, the items will be appended to the playlist. Items are added in the order they appear in the uris array. For example: `{"uris": ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh","spotify:track:1301WleyT98MSxVHPZCA6M"], "position": 3}`
      * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
      * @param list<string> $uris A JSON array of the [Spotify URIs](/documentation/web-api/concepts/spotify-uris-ids) to add. For example: `{"uris": ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh","spotify:track:1301WleyT98MSxVHPZCA6M", "spotify:episode:512ojhOuo1ktJprKbVcKyQ"]}`<br/>A maximum of 100 items can be added in one request. _**Note**: if the `uris` parameter is present in the query string, any URIs listed here in the body will be ignored._
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -150,7 +158,7 @@ final class TracksService implements TracksContract
         ?int $position = null,
         ?bool $published = null,
         ?array $uris = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TrackAddResponse {
         $params = Util::removeNulls(
             ['position' => $position, 'published' => $published, 'uris' => $uris]
@@ -168,14 +176,13 @@ final class TracksService implements TracksContract
      * Remove one or more items from a user's playlist.
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
-     * @param list<array{
-     *   uri?: string
-     * }> $tracks An array of objects containing [Spotify URIs](/documentation/web-api/concepts/spotify-uris-ids) of the tracks or episodes to remove.
+     * @param list<Track|TrackShape> $tracks An array of objects containing [Spotify URIs](/documentation/web-api/concepts/spotify-uris-ids) of the tracks or episodes to remove.
      * For example: `{ "tracks": [{ "uri": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh" },{ "uri": "spotify:track:1301WleyT98MSxVHPZCA6M" }] }`. A maximum of 100 objects can be sent at once.
      * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
      * @param string $snapshotID The playlist's snapshot ID against which you want to make the changes.
      * The API will validate that the specified items exist and in the specified positions and make the changes,
      * even if more recent changes have been made to the playlist.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -184,7 +191,7 @@ final class TracksService implements TracksContract
         array $tracks,
         ?bool $published = null,
         ?string $snapshotID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TrackRemoveResponse {
         $params = Util::removeNulls(
             [

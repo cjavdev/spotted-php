@@ -13,12 +13,16 @@ use Spotted\Me\Following\FollowingFollowParams;
 use Spotted\Me\Following\FollowingUnfollowParams;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface FollowingRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|FollowingBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FollowingBulkGetResponse>
      *
@@ -26,13 +30,14 @@ interface FollowingRawContract
      */
     public function bulkRetrieve(
         array|FollowingBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|FollowingCheckParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<bool>>
      *
@@ -40,13 +45,14 @@ interface FollowingRawContract
      */
     public function check(
         array|FollowingCheckParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|FollowingFollowParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -54,13 +60,14 @@ interface FollowingRawContract
      */
     public function follow(
         array|FollowingFollowParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|FollowingUnfollowParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -68,6 +75,6 @@ interface FollowingRawContract
      */
     public function unfollow(
         array|FollowingUnfollowParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

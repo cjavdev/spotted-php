@@ -14,12 +14,16 @@ use Spotted\Me\Shows\ShowRemoveParams;
 use Spotted\Me\Shows\ShowSaveParams;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface ShowsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|ShowListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<ShowListResponse>>
      *
@@ -27,13 +31,14 @@ interface ShowsRawContract
      */
     public function list(
         array|ShowListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ShowCheckParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<bool>>
      *
@@ -41,13 +46,14 @@ interface ShowsRawContract
      */
     public function check(
         array|ShowCheckParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ShowRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -55,13 +61,14 @@ interface ShowsRawContract
      */
     public function remove(
         array|ShowRemoveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ShowSaveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -69,6 +76,6 @@ interface ShowsRawContract
      */
     public function save(
         array|ShowSaveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

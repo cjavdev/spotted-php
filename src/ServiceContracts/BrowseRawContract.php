@@ -12,6 +12,9 @@ use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface BrowseRawContract
 {
     /**
@@ -20,6 +23,7 @@ interface BrowseRawContract
      * @api
      *
      * @param array<string,mixed>|BrowseGetFeaturedPlaylistsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrowseGetFeaturedPlaylistsResponse>
      *
@@ -27,13 +31,14 @@ interface BrowseRawContract
      */
     public function getFeaturedPlaylists(
         array|BrowseGetFeaturedPlaylistsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|BrowseGetNewReleasesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrowseGetNewReleasesResponse>
      *
@@ -41,6 +46,6 @@ interface BrowseRawContract
      */
     public function getNewReleases(
         array|BrowseGetNewReleasesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -13,12 +13,16 @@ use Spotted\Me\Top\TopListTopTracksParams;
 use Spotted\RequestOptions;
 use Spotted\TrackObject;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface TopRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|TopListTopArtistsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<ArtistObject>>
      *
@@ -26,13 +30,14 @@ interface TopRawContract
      */
     public function listTopArtists(
         array|TopListTopArtistsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|TopListTopTracksParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<TrackObject>>
      *
@@ -40,6 +45,6 @@ interface TopRawContract
      */
     public function listTopTracks(
         array|TopListTopTracksParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -12,6 +12,9 @@ use Spotted\ImageObject;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Playlists\ImagesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class ImagesRawService implements ImagesRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,6 +30,7 @@ final class ImagesRawService implements ImagesRawContract
      *
      * @param string $playlistID path param: The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param string $body body param: Base64 encoded JPEG image data, maximum payload size is 256 KB
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
@@ -35,7 +39,7 @@ final class ImagesRawService implements ImagesRawContract
     public function update(
         string $playlistID,
         string $body,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -56,6 +60,7 @@ final class ImagesRawService implements ImagesRawContract
      * Get the current image associated with a specific playlist.
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<ImageObject>>
      *
@@ -63,7 +68,7 @@ final class ImagesRawService implements ImagesRawContract
      */
     public function list(
         string $playlistID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

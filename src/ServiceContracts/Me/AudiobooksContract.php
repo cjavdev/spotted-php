@@ -9,6 +9,9 @@ use Spotted\CursorURLPage;
 use Spotted\Me\Audiobooks\AudiobookListResponse;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface AudiobooksContract
 {
     /**
@@ -16,6 +19,7 @@ interface AudiobooksContract
      *
      * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param RequestOpts|null $requestOptions
      *
      * @return CursorURLPage<AudiobookListResponse>
      *
@@ -24,13 +28,14 @@ interface AudiobooksContract
     public function list(
         int $limit = 20,
         int $offset = 0,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): CursorURLPage;
 
     /**
      * @api
      *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<bool>
      *
@@ -38,30 +43,32 @@ interface AudiobooksContract
      */
     public function check(
         string $ids,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array;
 
     /**
      * @api
      *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function remove(
         string $ids,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 
     /**
      * @api
      *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function save(
         string $ids,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 }

@@ -19,7 +19,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<SimplifiedPlaylistObjectShape>|null,
+ *   items?: list<SimplifiedPlaylistObject|SimplifiedPlaylistObjectShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -106,7 +106,7 @@ final class PagingPlaylistObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedPlaylistObjectShape>|null $items
+     * @param list<SimplifiedPlaylistObject|SimplifiedPlaylistObjectShape>|null $items
      */
     public static function with(
         string $href,
@@ -200,7 +200,7 @@ final class PagingPlaylistObject implements BaseModel
     }
 
     /**
-     * @param list<SimplifiedPlaylistObjectShape> $items
+     * @param list<SimplifiedPlaylistObject|SimplifiedPlaylistObjectShape> $items
      */
     public function withItems(array $items): self
     {

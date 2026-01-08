@@ -28,6 +28,9 @@ use Spotted\Me\Player\PlayerTransferParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\PlayerRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class PlayerRawService implements PlayerRawContract
 {
     // @phpstan-ignore-next-line
@@ -44,6 +47,7 @@ final class PlayerRawService implements PlayerRawContract
      * @param array{
      *   additionalTypes?: string, market?: string
      * }|PlayerGetCurrentlyPlayingParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PlayerGetCurrentlyPlayingResponse>
      *
@@ -51,7 +55,7 @@ final class PlayerRawService implements PlayerRawContract
      */
     public function getCurrentlyPlaying(
         array|PlayerGetCurrentlyPlayingParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlayerGetCurrentlyPlayingParams::parseRequest(
             $params,
@@ -76,12 +80,14 @@ final class PlayerRawService implements PlayerRawContract
      *
      * Get information about a user’s available Spotify Connect devices. Some device models are not supported and will not be listed in the API response.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<PlayerGetDevicesResponse>
      *
      * @throws APIException
      */
     public function getDevices(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -100,6 +106,7 @@ final class PlayerRawService implements PlayerRawContract
      * @param array{
      *   additionalTypes?: string, market?: string
      * }|PlayerGetStateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PlayerGetStateResponse>
      *
@@ -107,7 +114,7 @@ final class PlayerRawService implements PlayerRawContract
      */
     public function getState(
         array|PlayerGetStateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlayerGetStateParams::parseRequest(
             $params,
@@ -136,6 +143,7 @@ final class PlayerRawService implements PlayerRawContract
      * @param array{
      *   after?: int, before?: int, limit?: int
      * }|PlayerListRecentlyPlayedParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<PlayerListRecentlyPlayedResponse>>
      *
@@ -143,7 +151,7 @@ final class PlayerRawService implements PlayerRawContract
      */
     public function listRecentlyPlayed(
         array|PlayerListRecentlyPlayedParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlayerListRecentlyPlayedParams::parseRequest(
             $params,
@@ -167,6 +175,7 @@ final class PlayerRawService implements PlayerRawContract
      * Pause playback on the user's account. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
      * @param array{deviceID?: string}|PlayerPausePlaybackParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -174,7 +183,7 @@ final class PlayerRawService implements PlayerRawContract
      */
     public function pausePlayback(
         array|PlayerPausePlaybackParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlayerPausePlaybackParams::parseRequest(
             $params,
@@ -199,6 +208,7 @@ final class PlayerRawService implements PlayerRawContract
      * @param array{
      *   positionMs: int, deviceID?: string
      * }|PlayerSeekToPositionParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -206,7 +216,7 @@ final class PlayerRawService implements PlayerRawContract
      */
     public function seekToPosition(
         array|PlayerSeekToPositionParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlayerSeekToPositionParams::parseRequest(
             $params,
@@ -232,6 +242,7 @@ final class PlayerRawService implements PlayerRawContract
      * Set the repeat mode for the user's playback. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
      * @param array{state: string, deviceID?: string}|PlayerSetRepeatModeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -239,7 +250,7 @@ final class PlayerRawService implements PlayerRawContract
      */
     public function setRepeatMode(
         array|PlayerSetRepeatModeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlayerSetRepeatModeParams::parseRequest(
             $params,
@@ -264,6 +275,7 @@ final class PlayerRawService implements PlayerRawContract
      * @param array{
      *   volumePercent: int, deviceID?: string
      * }|PlayerSetVolumeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -271,7 +283,7 @@ final class PlayerRawService implements PlayerRawContract
      */
     public function setVolume(
         array|PlayerSetVolumeParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlayerSetVolumeParams::parseRequest(
             $params,
@@ -297,6 +309,7 @@ final class PlayerRawService implements PlayerRawContract
      * Skips to next track in the user’s queue. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
      * @param array{deviceID?: string}|PlayerSkipNextParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -304,7 +317,7 @@ final class PlayerRawService implements PlayerRawContract
      */
     public function skipNext(
         array|PlayerSkipNextParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlayerSkipNextParams::parseRequest(
             $params,
@@ -327,6 +340,7 @@ final class PlayerRawService implements PlayerRawContract
      * Skips to previous track in the user’s queue. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
      * @param array{deviceID?: string}|PlayerSkipPreviousParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -334,7 +348,7 @@ final class PlayerRawService implements PlayerRawContract
      */
     public function skipPrevious(
         array|PlayerSkipPreviousParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlayerSkipPreviousParams::parseRequest(
             $params,
@@ -364,6 +378,7 @@ final class PlayerRawService implements PlayerRawContract
      *   published?: bool,
      *   uris?: list<string>,
      * }|PlayerStartPlaybackParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -371,7 +386,7 @@ final class PlayerRawService implements PlayerRawContract
      */
     public function startPlayback(
         array|PlayerStartPlaybackParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlayerStartPlaybackParams::parseRequest(
             $params,
@@ -399,6 +414,7 @@ final class PlayerRawService implements PlayerRawContract
      * Toggle shuffle on or off for user’s playback. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
      * @param array{state: bool, deviceID?: string}|PlayerToggleShuffleParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -406,7 +422,7 @@ final class PlayerRawService implements PlayerRawContract
      */
     public function toggleShuffle(
         array|PlayerToggleShuffleParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlayerToggleShuffleParams::parseRequest(
             $params,
@@ -431,6 +447,7 @@ final class PlayerRawService implements PlayerRawContract
      * @param array{
      *   deviceIDs: list<string>, play?: bool, published?: bool
      * }|PlayerTransferParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -438,7 +455,7 @@ final class PlayerRawService implements PlayerRawContract
      */
     public function transfer(
         array|PlayerTransferParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlayerTransferParams::parseRequest(
             $params,

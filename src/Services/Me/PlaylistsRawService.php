@@ -13,6 +13,9 @@ use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\PlaylistsRawContract;
 use Spotted\SimplifiedPlaylistObject;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class PlaylistsRawService implements PlaylistsRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,6 +31,7 @@ final class PlaylistsRawService implements PlaylistsRawContract
      * user.
      *
      * @param array{limit?: int, offset?: int}|PlaylistListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<SimplifiedPlaylistObject>>
      *
@@ -35,7 +39,7 @@ final class PlaylistsRawService implements PlaylistsRawContract
      */
     public function list(
         array|PlaylistListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PlaylistListParams::parseRequest(
             $params,

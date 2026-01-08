@@ -14,12 +14,16 @@ use Spotted\Me\Audiobooks\AudiobookRemoveParams;
 use Spotted\Me\Audiobooks\AudiobookSaveParams;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface AudiobooksRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|AudiobookListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<AudiobookListResponse>>
      *
@@ -27,13 +31,14 @@ interface AudiobooksRawContract
      */
     public function list(
         array|AudiobookListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AudiobookCheckParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<bool>>
      *
@@ -41,13 +46,14 @@ interface AudiobooksRawContract
      */
     public function check(
         array|AudiobookCheckParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AudiobookRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -55,13 +61,14 @@ interface AudiobooksRawContract
      */
     public function remove(
         array|AudiobookRemoveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AudiobookSaveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -69,6 +76,6 @@ interface AudiobooksRawContract
      */
     public function save(
         array|AudiobookSaveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

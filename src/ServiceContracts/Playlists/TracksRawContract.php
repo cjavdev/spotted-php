@@ -17,6 +17,9 @@ use Spotted\Playlists\Tracks\TrackUpdateResponse;
 use Spotted\PlaylistTrackObject;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface TracksRawContract
 {
     /**
@@ -24,6 +27,7 @@ interface TracksRawContract
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array<string,mixed>|TrackUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TrackUpdateResponse>
      *
@@ -32,7 +36,7 @@ interface TracksRawContract
     public function update(
         string $playlistID,
         array|TrackUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -40,6 +44,7 @@ interface TracksRawContract
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array<string,mixed>|TrackListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<PlaylistTrackObject>>
      *
@@ -48,7 +53,7 @@ interface TracksRawContract
     public function list(
         string $playlistID,
         array|TrackListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -56,6 +61,7 @@ interface TracksRawContract
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array<string,mixed>|TrackAddParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TrackAddResponse>
      *
@@ -64,7 +70,7 @@ interface TracksRawContract
     public function add(
         string $playlistID,
         array|TrackAddParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -72,6 +78,7 @@ interface TracksRawContract
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array<string,mixed>|TrackRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TrackRemoveResponse>
      *
@@ -80,6 +87,6 @@ interface TracksRawContract
     public function remove(
         string $playlistID,
         array|TrackRemoveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

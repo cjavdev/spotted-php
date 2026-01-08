@@ -12,6 +12,9 @@ use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\PlaylistsContract;
 use Spotted\SimplifiedPlaylistObject;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class PlaylistsService implements PlaylistsContract
 {
     /**
@@ -37,6 +40,7 @@ final class PlaylistsService implements PlaylistsContract
      * @param int $offset 'The index of the first playlist to return. Default:
      * 0 (the first object). Maximum offset: 100.000\. Use with `limit` to get the
      * next set of playlists.'
+     * @param RequestOpts|null $requestOptions
      *
      * @return CursorURLPage<SimplifiedPlaylistObject>
      *
@@ -45,7 +49,7 @@ final class PlaylistsService implements PlaylistsContract
     public function list(
         int $limit = 20,
         int $offset = 0,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): CursorURLPage {
         $params = Util::removeNulls(['limit' => $limit, 'offset' => $offset]);
 

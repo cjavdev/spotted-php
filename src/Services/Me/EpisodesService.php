@@ -12,6 +12,9 @@ use Spotted\Me\Episodes\EpisodeListResponse;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\EpisodesContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class EpisodesService implements EpisodesContract
 {
     /**
@@ -41,6 +44,7 @@ final class EpisodesService implements EpisodesContract
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param RequestOpts|null $requestOptions
      *
      * @return CursorURLPage<EpisodeListResponse>
      *
@@ -50,7 +54,7 @@ final class EpisodesService implements EpisodesContract
         int $limit = 20,
         ?string $market = null,
         int $offset = 0,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CursorURLPage {
         $params = Util::removeNulls(
             ['limit' => $limit, 'market' => $market, 'offset' => $offset]
@@ -69,6 +73,7 @@ final class EpisodesService implements EpisodesContract
      * This API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer)..
      *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the episodes. Maximum: 50 IDs.
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<bool>
      *
@@ -76,7 +81,7 @@ final class EpisodesService implements EpisodesContract
      */
     public function check(
         string $ids,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array {
         $params = Util::removeNulls(['ids' => $ids]);
 
@@ -94,13 +99,14 @@ final class EpisodesService implements EpisodesContract
      *
      * @param list<string> $ids A JSON array of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). <br/>A maximum of 50 items can be specified in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._
      * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function remove(
         ?array $ids = null,
         ?bool $published = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
         $params = Util::removeNulls(['ids' => $ids, 'published' => $published]);
 
@@ -118,13 +124,14 @@ final class EpisodesService implements EpisodesContract
      *
      * @param list<string> $ids A JSON array of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). <br/>A maximum of 50 items can be specified in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._
      * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function save(
         array $ids,
         ?bool $published = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
         $params = Util::removeNulls(['ids' => $ids, 'published' => $published]);
 

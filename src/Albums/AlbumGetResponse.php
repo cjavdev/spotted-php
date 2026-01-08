@@ -33,15 +33,15 @@ use Spotted\SimplifiedArtistObject;
  *   availableMarkets: list<string>,
  *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
- *   images: list<ImageObjectShape>,
+ *   images: list<ImageObject|ImageObjectShape>,
  *   name: string,
  *   releaseDate: string,
  *   releaseDatePrecision: ReleaseDatePrecision|value-of<ReleaseDatePrecision>,
  *   totalTracks: int,
  *   type: 'album',
  *   uri: string,
- *   artists?: list<SimplifiedArtistObjectShape>|null,
- *   copyrights?: list<CopyrightObjectShape>|null,
+ *   artists?: list<SimplifiedArtistObject|SimplifiedArtistObjectShape>|null,
+ *   copyrights?: list<CopyrightObject|CopyrightObjectShape>|null,
  *   externalIDs?: null|ExternalIDObject|ExternalIDObjectShape,
  *   genres?: list<string>|null,
  *   label?: string|null,
@@ -250,10 +250,10 @@ final class AlbumGetResponse implements BaseModel
      * @param AlbumType|value-of<AlbumType> $albumType
      * @param list<string> $availableMarkets
      * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
-     * @param list<SimplifiedArtistObjectShape>|null $artists
-     * @param list<CopyrightObjectShape>|null $copyrights
+     * @param list<SimplifiedArtistObject|SimplifiedArtistObjectShape>|null $artists
+     * @param list<CopyrightObject|CopyrightObjectShape>|null $copyrights
      * @param ExternalIDObject|ExternalIDObjectShape|null $externalIDs
      * @param list<string>|null $genres
      * @param AlbumRestrictionObject|AlbumRestrictionObjectShape|null $restrictions
@@ -373,7 +373,7 @@ final class AlbumGetResponse implements BaseModel
     /**
      * The cover art for the album in various sizes, widest first.
      *
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
@@ -444,7 +444,7 @@ final class AlbumGetResponse implements BaseModel
     /**
      * The artists of the album. Each artist object includes a link in `href` to more detailed information about the artist.
      *
-     * @param list<SimplifiedArtistObjectShape> $artists
+     * @param list<SimplifiedArtistObject|SimplifiedArtistObjectShape> $artists
      */
     public function withArtists(array $artists): self
     {
@@ -457,7 +457,7 @@ final class AlbumGetResponse implements BaseModel
     /**
      * The copyright statements of the album.
      *
-     * @param list<CopyrightObjectShape> $copyrights
+     * @param list<CopyrightObject|CopyrightObjectShape> $copyrights
      */
     public function withCopyrights(array $copyrights): self
     {

@@ -12,6 +12,9 @@ use Spotted\Episodes\EpisodeBulkGetResponse;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\EpisodesContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class EpisodesService implements EpisodesContract
 {
     /**
@@ -40,13 +43,14 @@ final class EpisodesService implements EpisodesContract
      *   the user account will take priority over this parameter.<br/>
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?string $market = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): EpisodeObject {
         $params = Util::removeNulls(['market' => $market]);
 
@@ -68,13 +72,14 @@ final class EpisodesService implements EpisodesContract
      *   the user account will take priority over this parameter.<br/>
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function bulkRetrieve(
         string $ids,
         ?string $market = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): EpisodeBulkGetResponse {
         $params = Util::removeNulls(['ids' => $ids, 'market' => $market]);
 

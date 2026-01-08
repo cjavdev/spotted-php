@@ -13,6 +13,9 @@ use Spotted\Me\Player\Queue\QueueGetResponse;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\Player\QueueRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class QueueRawService implements QueueRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,6 +30,7 @@ final class QueueRawService implements QueueRawContract
      * Add an item to be played next in the user's current playback queue. This API only works for users who have Spotify Premium. The order of execution is not guaranteed when you use this API with other Player API endpoints.
      *
      * @param array{uri: string, deviceID?: string}|QueueAddParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -34,7 +38,7 @@ final class QueueRawService implements QueueRawContract
      */
     public function add(
         array|QueueAddParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = QueueAddParams::parseRequest(
             $params,
@@ -56,12 +60,15 @@ final class QueueRawService implements QueueRawContract
      *
      * Get the list of objects that make up the user's queue.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<QueueGetResponse>
      *
      * @throws APIException
      */
-    public function get(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function get(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',

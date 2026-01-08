@@ -27,7 +27,7 @@ use Spotted\Users\Playlists\PlaylistNewResponse\Tracks;
  *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
  *   followers?: null|FollowersObject|FollowersObjectShape,
  *   href?: string|null,
- *   images?: list<ImageObjectShape>|null,
+ *   images?: list<ImageObject|ImageObjectShape>|null,
  *   name?: string|null,
  *   owner?: null|Owner|OwnerShape,
  *   published?: bool|null,
@@ -140,7 +140,7 @@ final class PlaylistNewResponse implements BaseModel
      *
      * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
      * @param FollowersObject|FollowersObjectShape|null $followers
-     * @param list<ImageObjectShape>|null $images
+     * @param list<ImageObject|ImageObjectShape>|null $images
      * @param Owner|OwnerShape|null $owner
      * @param Tracks|TracksShape|null $tracks
      */
@@ -254,7 +254,7 @@ final class PlaylistNewResponse implements BaseModel
     /**
      * Images for the playlist. The array may be empty or contain up to three images. The images are returned by size in descending order. See [Working with Playlists](/documentation/web-api/concepts/playlists). _**Note**: If returned, the source URL for the image (`url`) is temporary and will expire in less than a day._.
      *
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {

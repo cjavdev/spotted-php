@@ -20,7 +20,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<AudiobookBaseShape>|null,
+ *   items?: list<AudiobookBase|AudiobookBaseShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -107,7 +107,7 @@ final class Audiobooks implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AudiobookBaseShape>|null $items
+     * @param list<AudiobookBase|AudiobookBaseShape>|null $items
      */
     public static function with(
         string $href,
@@ -201,7 +201,7 @@ final class Audiobooks implements BaseModel
     }
 
     /**
-     * @param list<AudiobookBaseShape> $items
+     * @param list<AudiobookBase|AudiobookBaseShape> $items
      */
     public function withItems(array $items): self
     {

@@ -11,12 +11,16 @@ use Spotted\Me\Playlists\PlaylistListParams;
 use Spotted\RequestOptions;
 use Spotted\SimplifiedPlaylistObject;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface PlaylistsRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|PlaylistListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<SimplifiedPlaylistObject>>
      *
@@ -24,6 +28,6 @@ interface PlaylistsRawContract
      */
     public function list(
         array|PlaylistListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -11,6 +11,9 @@ use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface AudioFeaturesRawContract
 {
     /**
@@ -19,6 +22,7 @@ interface AudioFeaturesRawContract
      * @api
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the track
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AudioFeatureGetResponse>
      *
@@ -26,7 +30,7 @@ interface AudioFeaturesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -35,6 +39,7 @@ interface AudioFeaturesRawContract
      * @api
      *
      * @param array<string,mixed>|AudioFeatureBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AudioFeatureBulkGetResponse>
      *
@@ -42,6 +47,6 @@ interface AudioFeaturesRawContract
      */
     public function bulkRetrieve(
         array|AudioFeatureBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

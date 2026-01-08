@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @phpstan-type SimplifiedTrackObjectShape = array{
  *   id?: string|null,
- *   artists?: list<SimplifiedArtistObjectShape>|null,
+ *   artists?: list<SimplifiedArtistObject|SimplifiedArtistObjectShape>|null,
  *   availableMarkets?: list<string>|null,
  *   discNumber?: int|null,
  *   durationMs?: int|null,
@@ -164,7 +164,7 @@ final class SimplifiedTrackObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedArtistObjectShape>|null $artists
+     * @param list<SimplifiedArtistObject|SimplifiedArtistObjectShape>|null $artists
      * @param list<string>|null $availableMarkets
      * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
      * @param LinkedTrackObject|LinkedTrackObjectShape|null $linkedFrom
@@ -228,7 +228,7 @@ final class SimplifiedTrackObject implements BaseModel
     /**
      * The artists who performed the track. Each artist object includes a link in `href` to more detailed information about the artist.
      *
-     * @param list<SimplifiedArtistObjectShape> $artists
+     * @param list<SimplifiedArtistObject|SimplifiedArtistObjectShape> $artists
      */
     public function withArtists(array $artists): self
     {

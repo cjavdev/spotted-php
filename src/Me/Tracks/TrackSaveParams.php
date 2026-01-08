@@ -21,7 +21,7 @@ use Spotted\Me\Tracks\TrackSaveParams\TimestampedID;
  * @phpstan-type TrackSaveParamsShape = array{
  *   ids: list<string>,
  *   published?: bool|null,
- *   timestampedIDs?: list<TimestampedIDShape>|null,
+ *   timestampedIDs?: list<TimestampedID|TimestampedIDShape>|null,
  * }
  */
 final class TrackSaveParams implements BaseModel
@@ -77,7 +77,7 @@ final class TrackSaveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $ids
-     * @param list<TimestampedIDShape>|null $timestampedIDs
+     * @param list<TimestampedID|TimestampedIDShape>|null $timestampedIDs
      */
     public static function with(
         array $ids,
@@ -121,7 +121,7 @@ final class TrackSaveParams implements BaseModel
     /**
      * A JSON array of objects containing track IDs with their corresponding timestamps. Each object must include a track ID and an `added_at` timestamp. This allows you to specify when tracks were added to maintain a specific chronological order in the user's library.<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `timestamped_ids` is present in the body, any IDs listed in the query parameters (deprecated) or the `ids` field in the body will be ignored._.
      *
-     * @param list<TimestampedIDShape> $timestampedIDs
+     * @param list<TimestampedID|TimestampedIDShape> $timestampedIDs
      */
     public function withTimestampedIDs(array $timestampedIDs): self
     {

@@ -16,7 +16,8 @@ use Spotted\TrackObject;
  * @phpstan-import-type TrackObjectShape from \Spotted\TrackObject
  * @phpstan-import-type EpisodeObjectShape from \Spotted\EpisodeObject
  *
- * @phpstan-type ItemShape = TrackObjectShape|EpisodeObjectShape
+ * @phpstan-type ItemVariants = TrackObject|EpisodeObject
+ * @phpstan-type ItemShape = ItemVariants|TrackObjectShape|EpisodeObjectShape
  */
 final class Item implements ConverterSource
 {

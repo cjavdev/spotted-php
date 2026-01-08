@@ -17,6 +17,9 @@ use Spotted\RequestOptions;
 use Spotted\ServiceContracts\AlbumsRawContract;
 use Spotted\SimplifiedTrackObject;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class AlbumsRawService implements AlbumsRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,6 +35,7 @@ final class AlbumsRawService implements AlbumsRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the album
      * @param array{market?: string}|AlbumRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AlbumGetResponse>
      *
@@ -40,7 +44,7 @@ final class AlbumsRawService implements AlbumsRawContract
     public function retrieve(
         string $id,
         array|AlbumRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AlbumRetrieveParams::parseRequest(
             $params,
@@ -63,6 +67,7 @@ final class AlbumsRawService implements AlbumsRawContract
      * Get Spotify catalog information for multiple albums identified by their Spotify IDs.
      *
      * @param array{ids: string, market?: string}|AlbumBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AlbumBulkGetResponse>
      *
@@ -70,7 +75,7 @@ final class AlbumsRawService implements AlbumsRawContract
      */
     public function bulkRetrieve(
         array|AlbumBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AlbumBulkRetrieveParams::parseRequest(
             $params,
@@ -97,6 +102,7 @@ final class AlbumsRawService implements AlbumsRawContract
      * @param array{
      *   limit?: int, market?: string, offset?: int
      * }|AlbumListTracksParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<SimplifiedTrackObject>>
      *
@@ -105,7 +111,7 @@ final class AlbumsRawService implements AlbumsRawContract
     public function listTracks(
         string $id,
         array|AlbumListTracksParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AlbumListTracksParams::parseRequest(
             $params,

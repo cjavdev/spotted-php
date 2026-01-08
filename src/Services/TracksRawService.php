@@ -14,6 +14,9 @@ use Spotted\Tracks\TrackBulkGetResponse;
 use Spotted\Tracks\TrackBulkRetrieveParams;
 use Spotted\Tracks\TrackRetrieveParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class TracksRawService implements TracksRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +34,7 @@ final class TracksRawService implements TracksRawContract
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the track
      * @param array{market?: string}|TrackRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TrackObject>
      *
@@ -39,7 +43,7 @@ final class TracksRawService implements TracksRawContract
     public function retrieve(
         string $id,
         array|TrackRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TrackRetrieveParams::parseRequest(
             $params,
@@ -62,6 +66,7 @@ final class TracksRawService implements TracksRawContract
      * Get Spotify catalog information for multiple tracks based on their Spotify IDs.
      *
      * @param array{ids: string, market?: string}|TrackBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TrackBulkGetResponse>
      *
@@ -69,7 +74,7 @@ final class TracksRawService implements TracksRawContract
      */
     public function bulkRetrieve(
         array|TrackBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TrackBulkRetrieveParams::parseRequest(
             $params,

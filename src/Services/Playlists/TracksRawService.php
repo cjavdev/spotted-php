@@ -13,6 +13,7 @@ use Spotted\Playlists\Tracks\TrackAddParams;
 use Spotted\Playlists\Tracks\TrackAddResponse;
 use Spotted\Playlists\Tracks\TrackListParams;
 use Spotted\Playlists\Tracks\TrackRemoveParams;
+use Spotted\Playlists\Tracks\TrackRemoveParams\Track;
 use Spotted\Playlists\Tracks\TrackRemoveResponse;
 use Spotted\Playlists\Tracks\TrackUpdateParams;
 use Spotted\Playlists\Tracks\TrackUpdateResponse;
@@ -20,6 +21,10 @@ use Spotted\PlaylistTrackObject;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Playlists\TracksRawContract;
 
+/**
+ * @phpstan-import-type TrackShape from \Spotted\Playlists\Tracks\TrackRemoveParams\Track
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class TracksRawService implements TracksRawContract
 {
     // @phpstan-ignore-next-line
@@ -48,6 +53,7 @@ final class TracksRawService implements TracksRawContract
      *   snapshotID?: string,
      *   uris?: list<string>,
      * }|TrackUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TrackUpdateResponse>
      *
@@ -56,7 +62,7 @@ final class TracksRawService implements TracksRawContract
     public function update(
         string $playlistID,
         array|TrackUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TrackUpdateParams::parseRequest(
             $params,
@@ -86,6 +92,7 @@ final class TracksRawService implements TracksRawContract
      *   market?: string,
      *   offset?: int,
      * }|TrackListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<PlaylistTrackObject>>
      *
@@ -94,7 +101,7 @@ final class TracksRawService implements TracksRawContract
     public function list(
         string $playlistID,
         array|TrackListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TrackListParams::parseRequest(
             $params,
@@ -124,6 +131,7 @@ final class TracksRawService implements TracksRawContract
      * @param array{
      *   position?: int, published?: bool, uris?: list<string>
      * }|TrackAddParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TrackAddResponse>
      *
@@ -132,7 +140,7 @@ final class TracksRawService implements TracksRawContract
     public function add(
         string $playlistID,
         array|TrackAddParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TrackAddParams::parseRequest(
             $params,
@@ -156,8 +164,9 @@ final class TracksRawService implements TracksRawContract
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array{
-     *   tracks: list<array{uri?: string}>, published?: bool, snapshotID?: string
+     *   tracks: list<Track|TrackShape>, published?: bool, snapshotID?: string
      * }|TrackRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TrackRemoveResponse>
      *
@@ -166,7 +175,7 @@ final class TracksRawService implements TracksRawContract
     public function remove(
         string $playlistID,
         array|TrackRemoveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TrackRemoveParams::parseRequest(
             $params,

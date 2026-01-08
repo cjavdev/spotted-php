@@ -11,6 +11,9 @@ use Spotted\Shows\ShowBulkGetResponse;
 use Spotted\Shows\ShowGetResponse;
 use Spotted\SimplifiedEpisodeObject;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface ShowsContract
 {
     /**
@@ -24,13 +27,14 @@ interface ShowsContract
      *   the user account will take priority over this parameter.<br/>
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?string $market = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): ShowGetResponse;
 
     /**
@@ -43,13 +47,14 @@ interface ShowsContract
      *   the user account will take priority over this parameter.<br/>
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function bulkRetrieve(
         string $ids,
         ?string $market = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): ShowBulkGetResponse;
 
     /**
@@ -65,6 +70,7 @@ interface ShowsContract
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param RequestOpts|null $requestOptions
      *
      * @return CursorURLPage<SimplifiedEpisodeObject>
      *
@@ -75,6 +81,6 @@ interface ShowsContract
         int $limit = 20,
         ?string $market = null,
         int $offset = 0,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CursorURLPage;
 }

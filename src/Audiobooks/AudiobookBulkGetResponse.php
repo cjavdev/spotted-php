@@ -13,7 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @phpstan-import-type AudiobookShape from \Spotted\Audiobooks\AudiobookBulkGetResponse\Audiobook
  *
  * @phpstan-type AudiobookBulkGetResponseShape = array{
- *   audiobooks: list<AudiobookShape>
+ *   audiobooks: list<Audiobook|AudiobookShape>
  * }
  */
 final class AudiobookBulkGetResponse implements BaseModel
@@ -49,7 +49,7 @@ final class AudiobookBulkGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AudiobookShape> $audiobooks
+     * @param list<Audiobook|AudiobookShape> $audiobooks
      */
     public static function with(array $audiobooks): self
     {
@@ -61,7 +61,7 @@ final class AudiobookBulkGetResponse implements BaseModel
     }
 
     /**
-     * @param list<AudiobookShape> $audiobooks
+     * @param list<Audiobook|AudiobookShape> $audiobooks
      */
     public function withAudiobooks(array $audiobooks): self
     {

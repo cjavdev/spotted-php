@@ -17,6 +17,9 @@ use Spotted\Me\Audiobooks\AudiobookSaveParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\AudiobooksRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class AudiobooksRawService implements AudiobooksRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +34,7 @@ final class AudiobooksRawService implements AudiobooksRawContract
      * Get a list of the audiobooks saved in the current Spotify user's 'Your Music' library.
      *
      * @param array{limit?: int, offset?: int}|AudiobookListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<AudiobookListResponse>>
      *
@@ -38,7 +42,7 @@ final class AudiobooksRawService implements AudiobooksRawContract
      */
     public function list(
         array|AudiobookListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AudiobookListParams::parseRequest(
             $params,
@@ -62,6 +66,7 @@ final class AudiobooksRawService implements AudiobooksRawContract
      * Check if one or more audiobooks are already saved in the current Spotify user's library.
      *
      * @param array{ids: string}|AudiobookCheckParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<bool>>
      *
@@ -69,7 +74,7 @@ final class AudiobooksRawService implements AudiobooksRawContract
      */
     public function check(
         array|AudiobookCheckParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AudiobookCheckParams::parseRequest(
             $params,
@@ -92,6 +97,7 @@ final class AudiobooksRawService implements AudiobooksRawContract
      * Remove one or more audiobooks from the Spotify user's library.
      *
      * @param array{ids: string}|AudiobookRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -99,7 +105,7 @@ final class AudiobooksRawService implements AudiobooksRawContract
      */
     public function remove(
         array|AudiobookRemoveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AudiobookRemoveParams::parseRequest(
             $params,
@@ -122,6 +128,7 @@ final class AudiobooksRawService implements AudiobooksRawContract
      * Save one or more audiobooks to the current Spotify user's library.
      *
      * @param array{ids: string}|AudiobookSaveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -129,7 +136,7 @@ final class AudiobooksRawService implements AudiobooksRawContract
      */
     public function save(
         array|AudiobookSaveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AudiobookSaveParams::parseRequest(
             $params,

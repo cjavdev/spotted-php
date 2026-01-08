@@ -12,6 +12,9 @@ use Spotted\Recommendations\RecommendationListAvailableGenreSeedsResponse;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\RecommendationsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class RecommendationsService implements RecommendationsContract
 {
     /**
@@ -88,6 +91,7 @@ final class RecommendationsService implements RecommendationsContract
      * @param float $targetTempo Target tempo (BPM)
      * @param int $targetTimeSignature For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
      * @param float $targetValence For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -139,7 +143,7 @@ final class RecommendationsService implements RecommendationsContract
         ?float $targetTempo = null,
         ?int $targetTimeSignature = null,
         ?float $targetValence = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RecommendationGetResponse {
         $params = Util::removeNulls(
             [
@@ -206,10 +210,12 @@ final class RecommendationsService implements RecommendationsContract
      *
      * Retrieve a list of available genres seed parameter values for [recommendations](/documentation/web-api/reference/get-recommendations).
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function listAvailableGenreSeeds(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): RecommendationListAvailableGenreSeedsResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listAvailableGenreSeeds(requestOptions: $requestOptions);

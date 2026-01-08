@@ -13,6 +13,7 @@ use Spotted\Me\Player\PlayerGetStateResponse\Item;
 use Spotted\TrackObject;
 
 /**
+ * @phpstan-import-type ItemVariants from \Spotted\Me\Player\PlayerGetStateResponse\Item
  * @phpstan-import-type ActionsShape from \Spotted\Me\Player\PlayerGetStateResponse\Actions
  * @phpstan-import-type ContextObjectShape from \Spotted\Me\Player\ContextObject
  * @phpstan-import-type DeviceObjectShape from \Spotted\Me\Player\DeviceObject
@@ -69,6 +70,8 @@ final class PlayerGetStateResponse implements BaseModel
 
     /**
      * The currently playing track or episode. Can be `null`.
+     *
+     * @var ItemVariants|null $item
      */
     #[Optional(union: Item::class)]
     public TrackObject|EpisodeObject|null $item;

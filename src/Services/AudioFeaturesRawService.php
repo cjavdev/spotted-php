@@ -13,6 +13,9 @@ use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\AudioFeaturesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class AudioFeaturesRawService implements AudioFeaturesRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +33,7 @@ final class AudioFeaturesRawService implements AudioFeaturesRawContract
      * Spotify ID.
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the track
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AudioFeatureGetResponse>
      *
@@ -37,7 +41,7 @@ final class AudioFeaturesRawService implements AudioFeaturesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -56,6 +60,7 @@ final class AudioFeaturesRawService implements AudioFeaturesRawContract
      * Get audio features for multiple tracks based on their Spotify IDs.
      *
      * @param array{ids: string}|AudioFeatureBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AudioFeatureBulkGetResponse>
      *
@@ -63,7 +68,7 @@ final class AudioFeaturesRawService implements AudioFeaturesRawContract
      */
     public function bulkRetrieve(
         array|AudioFeatureBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AudioFeatureBulkRetrieveParams::parseRequest(
             $params,

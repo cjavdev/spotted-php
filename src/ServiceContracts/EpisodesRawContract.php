@@ -12,6 +12,9 @@ use Spotted\Episodes\EpisodeBulkRetrieveParams;
 use Spotted\Episodes\EpisodeRetrieveParams;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface EpisodesRawContract
 {
     /**
@@ -19,6 +22,7 @@ interface EpisodesRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the episode
      * @param array<string,mixed>|EpisodeRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EpisodeObject>
      *
@@ -27,13 +31,14 @@ interface EpisodesRawContract
     public function retrieve(
         string $id,
         array|EpisodeRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|EpisodeBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EpisodeBulkGetResponse>
      *
@@ -41,6 +46,6 @@ interface EpisodesRawContract
      */
     public function bulkRetrieve(
         array|EpisodeBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

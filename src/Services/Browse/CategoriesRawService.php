@@ -17,6 +17,9 @@ use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Browse\CategoriesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class CategoriesRawService implements CategoriesRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,6 +35,7 @@ final class CategoriesRawService implements CategoriesRawContract
      *
      * @param string $categoryID the [Spotify category ID](/documentation/web-api/concepts/spotify-uris-ids) for the category
      * @param array{locale?: string}|CategoryRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CategoryGetResponse>
      *
@@ -40,7 +44,7 @@ final class CategoriesRawService implements CategoriesRawContract
     public function retrieve(
         string $categoryID,
         array|CategoryRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CategoryRetrieveParams::parseRequest(
             $params,
@@ -65,6 +69,7 @@ final class CategoriesRawService implements CategoriesRawContract
      * @param array{
      *   limit?: int, locale?: string, offset?: int
      * }|CategoryListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<CategoryListResponse>>
      *
@@ -72,7 +77,7 @@ final class CategoriesRawService implements CategoriesRawContract
      */
     public function list(
         array|CategoryListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CategoryListParams::parseRequest(
             $params,
@@ -99,6 +104,7 @@ final class CategoriesRawService implements CategoriesRawContract
      *
      * @param string $categoryID the [Spotify category ID](/documentation/web-api/concepts/spotify-uris-ids) for the category
      * @param array{limit?: int, offset?: int}|CategoryGetPlaylistsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CategoryGetPlaylistsResponse>
      *
@@ -107,7 +113,7 @@ final class CategoriesRawService implements CategoriesRawContract
     public function getPlaylists(
         string $categoryID,
         array|CategoryGetPlaylistsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CategoryGetPlaylistsParams::parseRequest(
             $params,

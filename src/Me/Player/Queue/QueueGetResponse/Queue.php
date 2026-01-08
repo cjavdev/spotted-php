@@ -14,7 +14,8 @@ use Spotted\TrackObject;
  * @phpstan-import-type TrackObjectShape from \Spotted\TrackObject
  * @phpstan-import-type EpisodeObjectShape from \Spotted\EpisodeObject
  *
- * @phpstan-type QueueShape = TrackObjectShape|EpisodeObjectShape
+ * @phpstan-type QueueVariants = TrackObject|EpisodeObject
+ * @phpstan-type QueueShape = QueueVariants|TrackObjectShape|EpisodeObjectShape
  */
 final class Queue implements ConverterSource
 {

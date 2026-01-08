@@ -26,8 +26,8 @@ use Spotted\Services\TracksService;
 use Spotted\Services\UsersService;
 
 /**
- * @phpstan-import-type NormalizedRequest from \Spotted\Core\BaseClient
  * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ * @phpstan-import-type NormalizedRequest from \Spotted\Core\BaseClient
  */
 class Client extends BaseClient
 {

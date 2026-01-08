@@ -12,6 +12,9 @@ use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface ChaptersRawContract
 {
     /**
@@ -20,6 +23,7 @@ interface ChaptersRawContract
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the chapter
      * @param array<string,mixed>|ChapterRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ChapterGetResponse>
      *
@@ -28,13 +32,14 @@ interface ChaptersRawContract
     public function retrieve(
         string $id,
         array|ChapterRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ChapterBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ChapterBulkGetResponse>
      *
@@ -42,6 +47,6 @@ interface ChaptersRawContract
      */
     public function bulkRetrieve(
         array|ChapterBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

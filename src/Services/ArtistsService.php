@@ -16,6 +16,9 @@ use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\ArtistsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class ArtistsService implements ArtistsContract
 {
     /**
@@ -37,12 +40,13 @@ final class ArtistsService implements ArtistsContract
      * Get Spotify catalog information for a single artist identified by their unique Spotify ID.
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ArtistObject {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -56,12 +60,13 @@ final class ArtistsService implements ArtistsContract
      * Get Spotify catalog information for several artists based on their Spotify IDs.
      *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the artists. Maximum: 50 IDs.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function bulkRetrieve(
         string $ids,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ArtistBulkGetResponse {
         $params = Util::removeNulls(['ids' => $ids]);
 
@@ -87,6 +92,7 @@ final class ArtistsService implements ArtistsContract
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param RequestOpts|null $requestOptions
      *
      * @return CursorURLPage<ArtistListAlbumsResponse>
      *
@@ -98,7 +104,7 @@ final class ArtistsService implements ArtistsContract
         int $limit = 20,
         ?string $market = null,
         int $offset = 0,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CursorURLPage {
         $params = Util::removeNulls(
             [
@@ -123,12 +129,13 @@ final class ArtistsService implements ArtistsContract
      * Get Spotify catalog information about artists similar to a given artist. Similarity is based on analysis of the Spotify community's listening history.
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function listRelatedArtists(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ArtistListRelatedArtistsResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listRelatedArtists($id, requestOptions: $requestOptions);
@@ -148,13 +155,14 @@ final class ArtistsService implements ArtistsContract
      *   the user account will take priority over this parameter.<br/>
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function topTracks(
         string $id,
         ?string $market = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): ArtistTopTracksResponse {
         $params = Util::removeNulls(['market' => $market]);
 

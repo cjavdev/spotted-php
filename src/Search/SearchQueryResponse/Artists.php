@@ -20,7 +20,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<ArtistObjectShape>|null,
+ *   items?: list<ArtistObject|ArtistObjectShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -107,7 +107,7 @@ final class Artists implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ArtistObjectShape>|null $items
+     * @param list<ArtistObject|ArtistObjectShape>|null $items
      */
     public static function with(
         string $href,
@@ -201,7 +201,7 @@ final class Artists implements BaseModel
     }
 
     /**
-     * @param list<ArtistObjectShape> $items
+     * @param list<ArtistObject|ArtistObjectShape> $items
      */
     public function withItems(array $items): self
     {

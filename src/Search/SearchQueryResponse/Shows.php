@@ -20,7 +20,7 @@ use Spotted\ShowBase;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<ShowBaseShape>|null,
+ *   items?: list<ShowBase|ShowBaseShape>|null,
  *   published?: bool|null,
  * }
  */
@@ -107,7 +107,7 @@ final class Shows implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ShowBaseShape>|null $items
+     * @param list<ShowBase|ShowBaseShape>|null $items
      */
     public static function with(
         string $href,
@@ -201,7 +201,7 @@ final class Shows implements BaseModel
     }
 
     /**
-     * @param list<ShowBaseShape> $items
+     * @param list<ShowBase|ShowBaseShape> $items
      */
     public function withItems(array $items): self
     {

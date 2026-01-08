@@ -17,6 +17,9 @@ use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\AudiobooksRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class AudiobooksRawService implements AudiobooksRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,6 +36,7 @@ final class AudiobooksRawService implements AudiobooksRawContract
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)
      * for the audiobook
      * @param array{market?: string}|AudiobookRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AudiobookGetResponse>
      *
@@ -41,7 +45,7 @@ final class AudiobooksRawService implements AudiobooksRawContract
     public function retrieve(
         string $id,
         array|AudiobookRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AudiobookRetrieveParams::parseRequest(
             $params,
@@ -64,6 +68,7 @@ final class AudiobooksRawService implements AudiobooksRawContract
      * Get Spotify catalog information for several audiobooks identified by their Spotify IDs. Audiobooks are only available within the US, UK, Canada, Ireland, New Zealand and Australia markets.
      *
      * @param array{ids: string, market?: string}|AudiobookBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AudiobookBulkGetResponse>
      *
@@ -71,7 +76,7 @@ final class AudiobooksRawService implements AudiobooksRawContract
      */
     public function bulkRetrieve(
         array|AudiobookBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AudiobookBulkRetrieveParams::parseRequest(
             $params,
@@ -98,6 +103,7 @@ final class AudiobooksRawService implements AudiobooksRawContract
      * @param array{
      *   limit?: int, market?: string, offset?: int
      * }|AudiobookListChaptersParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<SimplifiedChapterObject>>
      *
@@ -106,7 +112,7 @@ final class AudiobooksRawService implements AudiobooksRawContract
     public function listChapters(
         string $id,
         array|AudiobookListChaptersParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AudiobookListChaptersParams::parseRequest(
             $params,

@@ -10,12 +10,16 @@ use Spotted\Me\Player\Queue\QueueAddParams;
 use Spotted\Me\Player\Queue\QueueGetResponse;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface QueueRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|QueueAddParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -23,15 +27,19 @@ interface QueueRawContract
      */
     public function add(
         array|QueueAddParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<QueueGetResponse>
      *
      * @throws APIException
      */
-    public function get(?RequestOptions $requestOptions = null): BaseResponse;
+    public function get(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
 }

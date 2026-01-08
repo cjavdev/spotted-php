@@ -24,11 +24,11 @@ use Spotted\SimplifiedArtistObject;
  * @phpstan-type ItemShape = array{
  *   id: string,
  *   albumType: AlbumType|value-of<AlbumType>,
- *   artists: list<SimplifiedArtistObjectShape>,
+ *   artists: list<SimplifiedArtistObject|SimplifiedArtistObjectShape>,
  *   availableMarkets: list<string>,
  *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
- *   images: list<ImageObjectShape>,
+ *   images: list<ImageObject|ImageObjectShape>,
  *   name: string,
  *   releaseDate: string,
  *   releaseDatePrecision: ReleaseDatePrecision|value-of<ReleaseDatePrecision>,
@@ -196,10 +196,10 @@ final class Item implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AlbumType|value-of<AlbumType> $albumType
-     * @param list<SimplifiedArtistObjectShape> $artists
+     * @param list<SimplifiedArtistObject|SimplifiedArtistObjectShape> $artists
      * @param list<string> $availableMarkets
      * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
      * @param AlbumRestrictionObject|AlbumRestrictionObjectShape|null $restrictions
      */
@@ -267,7 +267,7 @@ final class Item implements BaseModel
     /**
      * The artists of the album. Each artist object includes a link in `href` to more detailed information about the artist.
      *
-     * @param list<SimplifiedArtistObjectShape> $artists
+     * @param list<SimplifiedArtistObject|SimplifiedArtistObjectShape> $artists
      */
     public function withArtists(array $artists): self
     {
@@ -318,7 +318,7 @@ final class Item implements BaseModel
     /**
      * The cover art for the album in various sizes, widest first.
      *
-     * @param list<ImageObjectShape> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {

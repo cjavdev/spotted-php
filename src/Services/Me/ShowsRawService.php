@@ -17,6 +17,9 @@ use Spotted\Me\Shows\ShowSaveParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\ShowsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class ShowsRawService implements ShowsRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,6 +34,7 @@ final class ShowsRawService implements ShowsRawContract
      * Get a list of shows saved in the current Spotify user's library. Optional parameters can be used to limit the number of shows returned.
      *
      * @param array{limit?: int, offset?: int}|ShowListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<ShowListResponse>>
      *
@@ -38,7 +42,7 @@ final class ShowsRawService implements ShowsRawContract
      */
     public function list(
         array|ShowListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ShowListParams::parseRequest(
             $params,
@@ -62,6 +66,7 @@ final class ShowsRawService implements ShowsRawContract
      * Check if one or more shows is already saved in the current Spotify user's library.
      *
      * @param array{ids: string}|ShowCheckParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<bool>>
      *
@@ -69,7 +74,7 @@ final class ShowsRawService implements ShowsRawContract
      */
     public function check(
         array|ShowCheckParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ShowCheckParams::parseRequest(
             $params,
@@ -92,6 +97,7 @@ final class ShowsRawService implements ShowsRawContract
      * Delete one or more shows from current Spotify user's library.
      *
      * @param array{ids?: list<string>, published?: bool}|ShowRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -99,7 +105,7 @@ final class ShowsRawService implements ShowsRawContract
      */
     public function remove(
         array|ShowRemoveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ShowRemoveParams::parseRequest(
             $params,
@@ -122,6 +128,7 @@ final class ShowsRawService implements ShowsRawContract
      * Save one or more shows to current Spotify user's library.
      *
      * @param array{ids?: list<string>, published?: bool}|ShowSaveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -129,7 +136,7 @@ final class ShowsRawService implements ShowsRawContract
      */
     public function save(
         array|ShowSaveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ShowSaveParams::parseRequest(
             $params,

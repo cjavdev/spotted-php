@@ -17,12 +17,16 @@ use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface ArtistsRawContract
 {
     /**
      * @api
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ArtistObject>
      *
@@ -30,13 +34,14 @@ interface ArtistsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|ArtistBulkRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ArtistBulkGetResponse>
      *
@@ -44,7 +49,7 @@ interface ArtistsRawContract
      */
     public function bulkRetrieve(
         array|ArtistBulkRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -52,6 +57,7 @@ interface ArtistsRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
      * @param array<string,mixed>|ArtistListAlbumsParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<ArtistListAlbumsResponse>>
      *
@@ -60,7 +66,7 @@ interface ArtistsRawContract
     public function listAlbums(
         string $id,
         array|ArtistListAlbumsParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -69,6 +75,7 @@ interface ArtistsRawContract
      * @api
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ArtistListRelatedArtistsResponse>
      *
@@ -76,7 +83,7 @@ interface ArtistsRawContract
      */
     public function listRelatedArtists(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -84,6 +91,7 @@ interface ArtistsRawContract
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
      * @param array<string,mixed>|ArtistTopTracksParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ArtistTopTracksResponse>
      *
@@ -92,6 +100,6 @@ interface ArtistsRawContract
     public function topTracks(
         string $id,
         array|ArtistTopTracksParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

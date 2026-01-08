@@ -15,6 +15,9 @@ use Spotted\Search\SearchQueryParams\Type;
 use Spotted\Search\SearchQueryResponse;
 use Spotted\ServiceContracts\SearchRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class SearchRawService implements SearchRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,12 +34,13 @@ final class SearchRawService implements SearchRawContract
      *
      * @param array{
      *   q: string,
-     *   type: list<'album'|'artist'|'playlist'|'track'|'show'|'episode'|'audiobook'|Type>,
-     *   includeExternal?: 'audio'|IncludeExternal,
+     *   type: list<Type|value-of<Type>>,
+     *   includeExternal?: IncludeExternal|value-of<IncludeExternal>,
      *   limit?: int,
      *   market?: string,
      *   offset?: int,
      * }|SearchQueryParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SearchQueryResponse>
      *
@@ -44,7 +48,7 @@ final class SearchRawService implements SearchRawContract
      */
     public function query(
         array|SearchQueryParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SearchQueryParams::parseRequest(
             $params,

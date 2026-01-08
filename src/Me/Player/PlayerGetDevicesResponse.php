@@ -12,7 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @phpstan-import-type DeviceObjectShape from \Spotted\Me\Player\DeviceObject
  *
  * @phpstan-type PlayerGetDevicesResponseShape = array{
- *   devices: list<DeviceObjectShape>
+ *   devices: list<DeviceObject|DeviceObjectShape>
  * }
  */
 final class PlayerGetDevicesResponse implements BaseModel
@@ -48,7 +48,7 @@ final class PlayerGetDevicesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DeviceObjectShape> $devices
+     * @param list<DeviceObject|DeviceObjectShape> $devices
      */
     public static function with(array $devices): self
     {
@@ -60,7 +60,7 @@ final class PlayerGetDevicesResponse implements BaseModel
     }
 
     /**
-     * @param list<DeviceObjectShape> $devices
+     * @param list<DeviceObject|DeviceObjectShape> $devices
      */
     public function withDevices(array $devices): self
     {

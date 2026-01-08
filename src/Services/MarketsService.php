@@ -10,6 +10,9 @@ use Spotted\Markets\MarketListResponse;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\MarketsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class MarketsService implements MarketsContract
 {
     /**
@@ -30,10 +33,12 @@ final class MarketsService implements MarketsContract
      *
      * Get the list of markets where Spotify is available.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MarketListResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(requestOptions: $requestOptions);

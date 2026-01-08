@@ -17,6 +17,9 @@ use Spotted\Me\Episodes\EpisodeSaveParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\EpisodesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class EpisodesRawService implements EpisodesRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,6 +37,7 @@ final class EpisodesRawService implements EpisodesRawContract
      * @param array{
      *   limit?: int, market?: string, offset?: int
      * }|EpisodeListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CursorURLPage<EpisodeListResponse>>
      *
@@ -41,7 +45,7 @@ final class EpisodesRawService implements EpisodesRawContract
      */
     public function list(
         array|EpisodeListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = EpisodeListParams::parseRequest(
             $params,
@@ -66,6 +70,7 @@ final class EpisodesRawService implements EpisodesRawContract
      * This API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer)..
      *
      * @param array{ids: string}|EpisodeCheckParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<bool>>
      *
@@ -73,7 +78,7 @@ final class EpisodesRawService implements EpisodesRawContract
      */
     public function check(
         array|EpisodeCheckParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = EpisodeCheckParams::parseRequest(
             $params,
@@ -97,6 +102,7 @@ final class EpisodesRawService implements EpisodesRawContract
      * This API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
      *
      * @param array{ids?: list<string>, published?: bool}|EpisodeRemoveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -104,7 +110,7 @@ final class EpisodesRawService implements EpisodesRawContract
      */
     public function remove(
         array|EpisodeRemoveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = EpisodeRemoveParams::parseRequest(
             $params,
@@ -128,6 +134,7 @@ final class EpisodesRawService implements EpisodesRawContract
      * This API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
      *
      * @param array{ids: list<string>, published?: bool}|EpisodeSaveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -135,7 +142,7 @@ final class EpisodesRawService implements EpisodesRawContract
      */
     public function save(
         array|EpisodeSaveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = EpisodeSaveParams::parseRequest(
             $params,
