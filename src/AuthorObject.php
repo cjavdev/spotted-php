@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type AuthorObjectShape = array{name?: string|null}
+ * @phpstan-type AuthorObjectShape = array{
+ *   name?: string|null, published?: bool|null
+ * }
  */
 final class AuthorObject implements BaseModel
 {
@@ -19,8 +21,14 @@ final class AuthorObject implements BaseModel
     /**
      * The name of the author.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     public function __construct()
     {
@@ -32,13 +40,16 @@ final class AuthorObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $name = null): self
-    {
-        $obj = new self;
+    public static function with(
+        ?string $name = null,
+        ?bool $published = null
+    ): self {
+        $self = new self;
 
-        null !== $name && $obj->name = $name;
+        null !== $name && $self['name'] = $name;
+        null !== $published && $self['published'] = $published;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +57,20 @@ final class AuthorObject implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 }

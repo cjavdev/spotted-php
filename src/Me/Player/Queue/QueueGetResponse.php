@@ -4,41 +4,51 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player\Queue;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\EpisodeObject;
 use Spotted\Me\Player\Queue\QueueGetResponse\CurrentlyPlaying;
 use Spotted\Me\Player\Queue\QueueGetResponse\Queue;
 use Spotted\TrackObject;
 
 /**
+ * @phpstan-import-type CurrentlyPlayingVariants from \Spotted\Me\Player\Queue\QueueGetResponse\CurrentlyPlaying
+ * @phpstan-import-type QueueVariants from \Spotted\Me\Player\Queue\QueueGetResponse\Queue
+ * @phpstan-import-type CurrentlyPlayingShape from \Spotted\Me\Player\Queue\QueueGetResponse\CurrentlyPlaying
+ * @phpstan-import-type QueueShape from \Spotted\Me\Player\Queue\QueueGetResponse\Queue
+ *
  * @phpstan-type QueueGetResponseShape = array{
- *   currently_playing?: null|TrackObject|EpisodeObject,
- *   queue?: list<TrackObject|EpisodeObject>|null,
+ *   currentlyPlaying?: CurrentlyPlayingShape|null,
+ *   published?: bool|null,
+ *   queue?: list<QueueShape>|null,
  * }
  */
-final class QueueGetResponse implements BaseModel, ResponseConverter
+final class QueueGetResponse implements BaseModel
 {
     /** @use SdkModel<QueueGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * The currently playing track or episode. Can be `null`.
+     *
+     * @var CurrentlyPlayingVariants|null $currentlyPlaying
      */
-    #[Api(union: CurrentlyPlaying::class, optional: true)]
-    public TrackObject|EpisodeObject|null $currently_playing;
+    #[Optional('currently_playing', union: CurrentlyPlaying::class)]
+    public TrackObject|EpisodeObject|null $currentlyPlaying;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The tracks or episodes in the queue. Can be empty.
      *
-     * @var list<TrackObject|EpisodeObject>|null $queue
+     * @var list<QueueVariants>|null $queue
      */
-    #[Api(list: Queue::class, optional: true)]
+    #[Optional(list: Queue::class)]
     public ?array $queue;
 
     public function __construct()
@@ -51,42 +61,58 @@ final class QueueGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TrackObject|EpisodeObject> $queue
+     * @param CurrentlyPlayingShape|null $currentlyPlaying
+     * @param list<QueueShape>|null $queue
      */
     public static function with(
-        TrackObject|EpisodeObject|null $currently_playing = null,
-        ?array $queue = null
+        TrackObject|array|EpisodeObject|null $currentlyPlaying = null,
+        ?bool $published = null,
+        ?array $queue = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $currently_playing && $obj->currently_playing = $currently_playing;
-        null !== $queue && $obj->queue = $queue;
+        null !== $currentlyPlaying && $self['currentlyPlaying'] = $currentlyPlaying;
+        null !== $published && $self['published'] = $published;
+        null !== $queue && $self['queue'] = $queue;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The currently playing track or episode. Can be `null`.
+     *
+     * @param CurrentlyPlayingShape $currentlyPlaying
      */
     public function withCurrentlyPlaying(
-        TrackObject|EpisodeObject $currentlyPlaying
+        TrackObject|array|EpisodeObject $currentlyPlaying
     ): self {
-        $obj = clone $this;
-        $obj->currently_playing = $currentlyPlaying;
+        $self = clone $this;
+        $self['currentlyPlaying'] = $currentlyPlaying;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
      * The tracks or episodes in the queue. Can be empty.
      *
-     * @param list<TrackObject|EpisodeObject> $queue
+     * @param list<QueueShape> $queue
      */
     public function withQueue(array $queue): self
     {
-        $obj = clone $this;
-        $obj->queue = $queue;
+        $self = clone $this;
+        $self['queue'] = $queue;
 
-        return $obj;
+        return $self;
     }
 }

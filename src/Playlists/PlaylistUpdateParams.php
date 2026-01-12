@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Playlists;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -16,7 +16,10 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\PlaylistsService::update()
  *
  * @phpstan-type PlaylistUpdateParamsShape = array{
- *   collaborative?: bool, description?: string, name?: string, public?: bool
+ *   collaborative?: bool|null,
+ *   description?: string|null,
+ *   name?: string|null,
+ *   published?: bool|null,
  * }
  */
 final class PlaylistUpdateParams implements BaseModel
@@ -29,26 +32,26 @@ final class PlaylistUpdateParams implements BaseModel
      * If `true`, the playlist will become collaborative and other users will be able to modify the playlist in their Spotify client. <br/>
      * _**Note**: You can only set `collaborative` to `true` on non-public playlists._.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $collaborative;
 
     /**
      * Value for playlist description as displayed in Spotify Clients and in the Web API.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * The new name for the playlist, for example `"My New Playlist Title"`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
-    #[Api(optional: true)]
-    public ?bool $public;
+    #[Optional]
+    public ?bool $published;
 
     public function __construct()
     {
@@ -64,16 +67,16 @@ final class PlaylistUpdateParams implements BaseModel
         ?bool $collaborative = null,
         ?string $description = null,
         ?string $name = null,
-        ?bool $public = null,
+        ?bool $published = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $collaborative && $obj->collaborative = $collaborative;
-        null !== $description && $obj->description = $description;
-        null !== $name && $obj->name = $name;
-        null !== $public && $obj->public = $public;
+        null !== $collaborative && $self['collaborative'] = $collaborative;
+        null !== $description && $self['description'] = $description;
+        null !== $name && $self['name'] = $name;
+        null !== $published && $self['published'] = $published;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +85,10 @@ final class PlaylistUpdateParams implements BaseModel
      */
     public function withCollaborative(bool $collaborative): self
     {
-        $obj = clone $this;
-        $obj->collaborative = $collaborative;
+        $self = clone $this;
+        $self['collaborative'] = $collaborative;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +96,10 @@ final class PlaylistUpdateParams implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,20 +107,20 @@ final class PlaylistUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
-    public function withPublic(bool $public): self
+    public function withPublished(bool $published): self
     {
-        $obj = clone $this;
-        $obj->public = $public;
+        $self = clone $this;
+        $self['published'] = $published;
 
-        return $obj;
+        return $self;
     }
 }

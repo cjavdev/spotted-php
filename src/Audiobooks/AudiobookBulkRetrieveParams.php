@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Audiobooks;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -15,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\AudiobooksService::bulkRetrieve()
  *
  * @phpstan-type AudiobookBulkRetrieveParamsShape = array{
- *   ids: string, market?: string
+ *   ids: string, market?: string|null
  * }
  */
 final class AudiobookBulkRetrieveParams implements BaseModel
@@ -27,7 +28,7 @@ final class AudiobookBulkRetrieveParams implements BaseModel
     /**
      * A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
      */
-    #[Api]
+    #[Required]
     public string $ids;
 
     /**
@@ -38,7 +39,7 @@ final class AudiobookBulkRetrieveParams implements BaseModel
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $market;
 
     /**
@@ -67,13 +68,13 @@ final class AudiobookBulkRetrieveParams implements BaseModel
      */
     public static function with(string $ids, ?string $market = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->ids = $ids;
+        $self['ids'] = $ids;
 
-        null !== $market && $obj->market = $market;
+        null !== $market && $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +82,10 @@ final class AudiobookBulkRetrieveParams implements BaseModel
      */
     public function withIDs(string $ids): self
     {
-        $obj = clone $this;
-        $obj->ids = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,9 +98,9 @@ final class AudiobookBulkRetrieveParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj->market = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 }

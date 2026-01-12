@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\EpisodeObject;
+use Spotted\Episodes\EpisodeBulkGetResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,9 +39,10 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->episodes->retrieve('512ojhOuo1ktJprKbVcKyQ', []);
+        $result = $this->client->episodes->retrieve('512ojhOuo1ktJprKbVcKyQ');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(EpisodeObject::class, $result);
     }
 
     #[Test]
@@ -49,11 +52,12 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->episodes->bulkRetrieve([
-            'ids' => '77o6BIVlYM3msb4MMIL1jH,0Q86acNRm6V9GYx55SXKwf',
-        ]);
+        $result = $this->client->episodes->bulkRetrieve(
+            ids: '77o6BIVlYM3msb4MMIL1jH,0Q86acNRm6V9GYx55SXKwf'
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(EpisodeBulkGetResponse::class, $result);
     }
 
     #[Test]
@@ -63,10 +67,12 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->episodes->bulkRetrieve([
-            'ids' => '77o6BIVlYM3msb4MMIL1jH,0Q86acNRm6V9GYx55SXKwf',
-        ]);
+        $result = $this->client->episodes->bulkRetrieve(
+            ids: '77o6BIVlYM3msb4MMIL1jH,0Q86acNRm6V9GYx55SXKwf',
+            market: 'ES'
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(EpisodeBulkGetResponse::class, $result);
     }
 }

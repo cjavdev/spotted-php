@@ -11,8 +11,16 @@ use Spotted\ServiceContracts\UsersContract;
 use Spotted\Services\Users\PlaylistsService;
 use Spotted\Users\UserGetProfileResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class UsersService implements UsersContract
 {
+    /**
+     * @api
+     */
+    public UsersRawService $raw;
+
     /**
      * @api
      */
@@ -23,6 +31,7 @@ final class UsersService implements UsersContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new UsersRawService($client);
         $this->playlists = new PlaylistsService($client);
     }
 
@@ -31,18 +40,18 @@ final class UsersService implements UsersContract
      *
      * Get public profile information about a Spotify user.
      *
+     * @param string $userID the user's [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids)
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieveProfile(
         string $userID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): UserGetProfileResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['users/%1$s', $userID],
-            options: $requestOptions,
-            convert: UserGetProfileResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveProfile($userID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

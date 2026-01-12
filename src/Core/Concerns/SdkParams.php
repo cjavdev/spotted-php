@@ -6,7 +6,6 @@ namespace Spotted\Core\Concerns;
 
 use Spotted\Core\Conversion;
 use Spotted\Core\Conversion\DumpState;
-use Spotted\Core\Util;
 use Spotted\RequestOptions;
 
 /**
@@ -21,16 +20,17 @@ trait SdkParams
      */
     public static function parseRequest(mixed $params, array|RequestOptions|null $options): array
     {
-        $value = is_array($params) ? Util::array_filter_omit($params) : $params;
         $converter = self::converter();
         $state = new DumpState;
-        $dumped = (array) Conversion::dump($converter, value: $value, state: $state);
-        $opts = RequestOptions::parse($options); // @phpstan-ignore-line
+        $dumped = (array) Conversion::dump($converter, value: $params, state: $state);
+        // @phpstan-ignore-next-line argument.type
+        $opts = RequestOptions::parse($options);
 
         if (!$state->canRetry) {
             $opts->maxRetries = 0;
         }
 
-        return [$dumped, $opts]; // @phpstan-ignore-line
+        // @phpstan-ignore-next-line return.type
+        return [$dumped, $opts];
     }
 }

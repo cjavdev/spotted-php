@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Top;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\TopService::listTopTracks()
  *
  * @phpstan-type TopListTopTracksParamsShape = array{
- *   limit?: int, offset?: int, time_range?: string
+ *   limit?: int|null, offset?: int|null, timeRange?: string|null
  * }
  */
 final class TopListTopTracksParams implements BaseModel
@@ -27,20 +27,20 @@ final class TopListTopTracksParams implements BaseModel
     /**
      * The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     /**
      * The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $offset;
 
     /**
      * Over what time frame the affinities are computed. Valid values: `long_term` (calculated from ~1 year of data and including all new data as it becomes available), `medium_term` (approximately last 6 months), `short_term` (approximately last 4 weeks). Default: `medium_term`.
      */
-    #[Api(optional: true)]
-    public ?string $time_range;
+    #[Optional]
+    public ?string $timeRange;
 
     public function __construct()
     {
@@ -55,15 +55,15 @@ final class TopListTopTracksParams implements BaseModel
     public static function with(
         ?int $limit = null,
         ?int $offset = null,
-        ?string $time_range = null
+        ?string $timeRange = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $limit && $obj->limit = $limit;
-        null !== $offset && $obj->offset = $offset;
-        null !== $time_range && $obj->time_range = $time_range;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $offset && $self['offset'] = $offset;
+        null !== $timeRange && $self['timeRange'] = $timeRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,10 +71,10 @@ final class TopListTopTracksParams implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj->limit = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +82,10 @@ final class TopListTopTracksParams implements BaseModel
      */
     public function withOffset(int $offset): self
     {
-        $obj = clone $this;
-        $obj->offset = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,9 +93,9 @@ final class TopListTopTracksParams implements BaseModel
      */
     public function withTimeRange(string $timeRange): self
     {
-        $obj = clone $this;
-        $obj->time_range = $timeRange;
+        $self = clone $this;
+        $self['timeRange'] = $timeRange;
 
-        return $obj;
+        return $self;
     }
 }

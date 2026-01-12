@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Playlists\Tracks;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -15,11 +15,11 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Playlists\TracksService::list()
  *
  * @phpstan-type TrackListParamsShape = array{
- *   additional_types?: string,
- *   fields?: string,
- *   limit?: int,
- *   market?: string,
- *   offset?: int,
+ *   additionalTypes?: string|null,
+ *   fields?: string|null,
+ *   limit?: int|null,
+ *   market?: string|null,
+ *   offset?: int|null,
  * }
  */
 final class TrackListParams implements BaseModel
@@ -33,8 +33,8 @@ final class TrackListParams implements BaseModel
      * _**Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future._<br/>
      * In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.
      */
-    #[Api(optional: true)]
-    public ?string $additional_types;
+    #[Optional]
+    public ?string $additionalTypes;
 
     /**
      * Filters for the query: a comma-separated list of the
@@ -46,13 +46,13 @@ final class TrackListParams implements BaseModel
      * multiple parentheses to drill down into nested objects, for example:<br/>`fields=items(track(name,href,album(name,href)))`<br/>Fields
      * can be excluded by prefixing them with an exclamation mark, for example:<br/>`fields=items.track.album(!external_urls,images)`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fields;
 
     /**
      * The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 100.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     /**
@@ -63,13 +63,13 @@ final class TrackListParams implements BaseModel
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $market;
 
     /**
      * The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $offset;
 
     public function __construct()
@@ -83,21 +83,21 @@ final class TrackListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $additional_types = null,
+        ?string $additionalTypes = null,
         ?string $fields = null,
         ?int $limit = null,
         ?string $market = null,
         ?int $offset = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additional_types && $obj->additional_types = $additional_types;
-        null !== $fields && $obj->fields = $fields;
-        null !== $limit && $obj->limit = $limit;
-        null !== $market && $obj->market = $market;
-        null !== $offset && $obj->offset = $offset;
+        null !== $additionalTypes && $self['additionalTypes'] = $additionalTypes;
+        null !== $fields && $self['fields'] = $fields;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $market && $self['market'] = $market;
+        null !== $offset && $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class TrackListParams implements BaseModel
      */
     public function withAdditionalTypes(string $additionalTypes): self
     {
-        $obj = clone $this;
-        $obj->additional_types = $additionalTypes;
+        $self = clone $this;
+        $self['additionalTypes'] = $additionalTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class TrackListParams implements BaseModel
      */
     public function withFields(string $fields): self
     {
-        $obj = clone $this;
-        $obj->fields = $fields;
+        $self = clone $this;
+        $self['fields'] = $fields;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class TrackListParams implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj->limit = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +152,10 @@ final class TrackListParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj->market = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,9 +163,9 @@ final class TrackListParams implements BaseModel
      */
     public function withOffset(int $offset): self
     {
-        $obj = clone $this;
-        $obj->offset = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 }

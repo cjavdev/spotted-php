@@ -4,32 +4,34 @@ declare(strict_types=1);
 
 namespace Spotted\Recommendations;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\Recommendations\RecommendationGetResponse\Seed;
 use Spotted\TrackObject;
 
 /**
+ * @phpstan-import-type SeedShape from \Spotted\Recommendations\RecommendationGetResponse\Seed
+ * @phpstan-import-type TrackObjectShape from \Spotted\TrackObject
+ *
  * @phpstan-type RecommendationGetResponseShape = array{
- *   seeds: list<Seed>, tracks: list<TrackObject>
+ *   seeds: list<Seed|SeedShape>,
+ *   tracks: list<TrackObject|TrackObjectShape>,
+ *   published?: bool|null,
  * }
  */
-final class RecommendationGetResponse implements BaseModel, ResponseConverter
+final class RecommendationGetResponse implements BaseModel
 {
     /** @use SdkModel<RecommendationGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * An array of recommendation seed objects.
      *
      * @var list<Seed> $seeds
      */
-    #[Api(list: Seed::class)]
+    #[Required(list: Seed::class)]
     public array $seeds;
 
     /**
@@ -37,8 +39,14 @@ final class RecommendationGetResponse implements BaseModel, ResponseConverter
      *
      * @var list<TrackObject> $tracks
      */
-    #[Api(list: TrackObject::class)]
+    #[Required(list: TrackObject::class)]
     public array $tracks;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * `new RecommendationGetResponse()` is missing required properties by the API.
@@ -64,42 +72,58 @@ final class RecommendationGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Seed> $seeds
-     * @param list<TrackObject> $tracks
+     * @param list<Seed|SeedShape> $seeds
+     * @param list<TrackObject|TrackObjectShape> $tracks
      */
-    public static function with(array $seeds, array $tracks): self
-    {
-        $obj = new self;
+    public static function with(
+        array $seeds,
+        array $tracks,
+        ?bool $published = null
+    ): self {
+        $self = new self;
 
-        $obj->seeds = $seeds;
-        $obj->tracks = $tracks;
+        $self['seeds'] = $seeds;
+        $self['tracks'] = $tracks;
 
-        return $obj;
+        null !== $published && $self['published'] = $published;
+
+        return $self;
     }
 
     /**
      * An array of recommendation seed objects.
      *
-     * @param list<Seed> $seeds
+     * @param list<Seed|SeedShape> $seeds
      */
     public function withSeeds(array $seeds): self
     {
-        $obj = clone $this;
-        $obj->seeds = $seeds;
+        $self = clone $this;
+        $self['seeds'] = $seeds;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * An array of track objects ordered according to the parameters supplied.
      *
-     * @param list<TrackObject> $tracks
+     * @param list<TrackObject|TrackObjectShape> $tracks
      */
     public function withTracks(array $tracks): self
     {
-        $obj = clone $this;
-        $obj->tracks = $tracks;
+        $self = clone $this;
+        $self['tracks'] = $tracks;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Recommendations\RecommendationGetResponse;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -15,6 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  *   afterRelinkingSize?: int|null,
  *   href?: string|null,
  *   initialPoolSize?: int|null,
+ *   published?: bool|null,
  *   type?: string|null,
  * }
  */
@@ -26,37 +27,43 @@ final class Seed implements BaseModel
     /**
      * The id used to select this seed. This will be the same as the string used in the `seed_artists`, `seed_tracks` or `seed_genres` parameter.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The number of tracks available after min\_\* and max\_\* filters have been applied.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $afterFilteringSize;
 
     /**
      * The number of tracks available after relinking for regional availability.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $afterRelinkingSize;
 
     /**
      * A link to the full track or artist data for this seed. For tracks this will be a link to a Track Object. For artists a link to an Artist Object. For genre seeds, this value will be `null`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
 
     /**
      * The number of recommended tracks available for this seed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $initialPoolSize;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The entity type of this seed. One of `artist`, `track` or `genre`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     public function __construct()
@@ -75,18 +82,20 @@ final class Seed implements BaseModel
         ?int $afterRelinkingSize = null,
         ?string $href = null,
         ?int $initialPoolSize = null,
+        ?bool $published = null,
         ?string $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $afterFilteringSize && $obj->afterFilteringSize = $afterFilteringSize;
-        null !== $afterRelinkingSize && $obj->afterRelinkingSize = $afterRelinkingSize;
-        null !== $href && $obj->href = $href;
-        null !== $initialPoolSize && $obj->initialPoolSize = $initialPoolSize;
-        null !== $type && $obj->type = $type;
+        null !== $id && $self['id'] = $id;
+        null !== $afterFilteringSize && $self['afterFilteringSize'] = $afterFilteringSize;
+        null !== $afterRelinkingSize && $self['afterRelinkingSize'] = $afterRelinkingSize;
+        null !== $href && $self['href'] = $href;
+        null !== $initialPoolSize && $self['initialPoolSize'] = $initialPoolSize;
+        null !== $published && $self['published'] = $published;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +103,10 @@ final class Seed implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +114,10 @@ final class Seed implements BaseModel
      */
     public function withAfterFilteringSize(int $afterFilteringSize): self
     {
-        $obj = clone $this;
-        $obj->afterFilteringSize = $afterFilteringSize;
+        $self = clone $this;
+        $self['afterFilteringSize'] = $afterFilteringSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +125,10 @@ final class Seed implements BaseModel
      */
     public function withAfterRelinkingSize(int $afterRelinkingSize): self
     {
-        $obj = clone $this;
-        $obj->afterRelinkingSize = $afterRelinkingSize;
+        $self = clone $this;
+        $self['afterRelinkingSize'] = $afterRelinkingSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +136,10 @@ final class Seed implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj->href = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +147,21 @@ final class Seed implements BaseModel
      */
     public function withInitialPoolSize(int $initialPoolSize): self
     {
-        $obj = clone $this;
-        $obj->initialPoolSize = $initialPoolSize;
+        $self = clone $this;
+        $self['initialPoolSize'] = $initialPoolSize;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -149,9 +169,9 @@ final class Seed implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj->type = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

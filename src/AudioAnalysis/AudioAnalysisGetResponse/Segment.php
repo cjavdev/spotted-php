@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\AudioAnalysis\AudioAnalysisGetResponse;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -12,11 +12,12 @@ use Spotted\Core\Contracts\BaseModel;
  * @phpstan-type SegmentShape = array{
  *   confidence?: float|null,
  *   duration?: float|null,
- *   loudness_end?: float|null,
- *   loudness_max?: float|null,
- *   loudness_max_time?: float|null,
- *   loudness_start?: float|null,
+ *   loudnessEnd?: float|null,
+ *   loudnessMax?: float|null,
+ *   loudnessMaxTime?: float|null,
+ *   loudnessStart?: float|null,
  *   pitches?: list<float>|null,
+ *   published?: bool|null,
  *   start?: float|null,
  *   timbre?: list<float>|null,
  * }
@@ -29,38 +30,38 @@ final class Segment implements BaseModel
     /**
      * The confidence, from 0.0 to 1.0, of the reliability of the segmentation. Segments of the song which are difficult to logically segment (e.g: noise) may correspond to low values in this field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $confidence;
 
     /**
      * The duration (in seconds) of the segment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $duration;
 
     /**
      * The offset loudness of the segment in decibels (dB). This value should be equivalent to the loudness_start of the following segment.
      */
-    #[Api(optional: true)]
-    public ?float $loudness_end;
+    #[Optional('loudness_end')]
+    public ?float $loudnessEnd;
 
     /**
      * The peak loudness of the segment in decibels (dB). Combined with `loudness_start` and `loudness_max_time`, these components can be used to describe the "attack" of the segment.
      */
-    #[Api(optional: true)]
-    public ?float $loudness_max;
+    #[Optional('loudness_max')]
+    public ?float $loudnessMax;
 
     /**
      * The segment-relative offset of the segment peak loudness in seconds. Combined with `loudness_start` and `loudness_max`, these components can be used to desctibe the "attack" of the segment.
      */
-    #[Api(optional: true)]
-    public ?float $loudness_max_time;
+    #[Optional('loudness_max_time')]
+    public ?float $loudnessMaxTime;
 
     /**
      * The onset loudness of the segment in decibels (dB). Combined with `loudness_max` and `loudness_max_time`, these components can be used to describe the "attack" of the segment.
      */
-    #[Api(optional: true)]
-    public ?float $loudness_start;
+    #[Optional('loudness_start')]
+    public ?float $loudnessStart;
 
     /**
      * Pitch content is given by a “chroma” vector, corresponding to the 12 pitch classes C, C#, D to B, with values ranging from 0 to 1 that describe the relative dominance of every pitch in the chromatic scale. For example a C Major chord would likely be represented by large values of C, E and G (i.e. classes 0, 4, and 7).
@@ -71,13 +72,19 @@ final class Segment implements BaseModel
      *
      * @var list<float>|null $pitches
      */
-    #[Api(list: 'float', optional: true)]
+    #[Optional(list: 'float')]
     public ?array $pitches;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The starting point (in seconds) of the segment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $start;
 
     /**
@@ -90,7 +97,7 @@ final class Segment implements BaseModel
      *
      * @var list<float>|null $timbre
      */
-    #[Api(list: 'float', optional: true)]
+    #[Optional(list: 'float')]
     public ?array $timbre;
 
     public function __construct()
@@ -103,33 +110,35 @@ final class Segment implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<float> $pitches
-     * @param list<float> $timbre
+     * @param list<float>|null $pitches
+     * @param list<float>|null $timbre
      */
     public static function with(
         ?float $confidence = null,
         ?float $duration = null,
-        ?float $loudness_end = null,
-        ?float $loudness_max = null,
-        ?float $loudness_max_time = null,
-        ?float $loudness_start = null,
+        ?float $loudnessEnd = null,
+        ?float $loudnessMax = null,
+        ?float $loudnessMaxTime = null,
+        ?float $loudnessStart = null,
         ?array $pitches = null,
+        ?bool $published = null,
         ?float $start = null,
         ?array $timbre = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $confidence && $obj->confidence = $confidence;
-        null !== $duration && $obj->duration = $duration;
-        null !== $loudness_end && $obj->loudness_end = $loudness_end;
-        null !== $loudness_max && $obj->loudness_max = $loudness_max;
-        null !== $loudness_max_time && $obj->loudness_max_time = $loudness_max_time;
-        null !== $loudness_start && $obj->loudness_start = $loudness_start;
-        null !== $pitches && $obj->pitches = $pitches;
-        null !== $start && $obj->start = $start;
-        null !== $timbre && $obj->timbre = $timbre;
+        null !== $confidence && $self['confidence'] = $confidence;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $loudnessEnd && $self['loudnessEnd'] = $loudnessEnd;
+        null !== $loudnessMax && $self['loudnessMax'] = $loudnessMax;
+        null !== $loudnessMaxTime && $self['loudnessMaxTime'] = $loudnessMaxTime;
+        null !== $loudnessStart && $self['loudnessStart'] = $loudnessStart;
+        null !== $pitches && $self['pitches'] = $pitches;
+        null !== $published && $self['published'] = $published;
+        null !== $start && $self['start'] = $start;
+        null !== $timbre && $self['timbre'] = $timbre;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +146,10 @@ final class Segment implements BaseModel
      */
     public function withConfidence(float $confidence): self
     {
-        $obj = clone $this;
-        $obj->confidence = $confidence;
+        $self = clone $this;
+        $self['confidence'] = $confidence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +157,10 @@ final class Segment implements BaseModel
      */
     public function withDuration(float $duration): self
     {
-        $obj = clone $this;
-        $obj->duration = $duration;
+        $self = clone $this;
+        $self['duration'] = $duration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +168,10 @@ final class Segment implements BaseModel
      */
     public function withLoudnessEnd(float $loudnessEnd): self
     {
-        $obj = clone $this;
-        $obj->loudness_end = $loudnessEnd;
+        $self = clone $this;
+        $self['loudnessEnd'] = $loudnessEnd;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +179,10 @@ final class Segment implements BaseModel
      */
     public function withLoudnessMax(float $loudnessMax): self
     {
-        $obj = clone $this;
-        $obj->loudness_max = $loudnessMax;
+        $self = clone $this;
+        $self['loudnessMax'] = $loudnessMax;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +190,10 @@ final class Segment implements BaseModel
      */
     public function withLoudnessMaxTime(float $loudnessMaxTime): self
     {
-        $obj = clone $this;
-        $obj->loudness_max_time = $loudnessMaxTime;
+        $self = clone $this;
+        $self['loudnessMaxTime'] = $loudnessMaxTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,10 +201,10 @@ final class Segment implements BaseModel
      */
     public function withLoudnessStart(float $loudnessStart): self
     {
-        $obj = clone $this;
-        $obj->loudness_start = $loudnessStart;
+        $self = clone $this;
+        $self['loudnessStart'] = $loudnessStart;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +218,21 @@ final class Segment implements BaseModel
      */
     public function withPitches(array $pitches): self
     {
-        $obj = clone $this;
-        $obj->pitches = $pitches;
+        $self = clone $this;
+        $self['pitches'] = $pitches;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -220,10 +240,10 @@ final class Segment implements BaseModel
      */
     public function withStart(float $start): self
     {
-        $obj = clone $this;
-        $obj->start = $start;
+        $self = clone $this;
+        $self['start'] = $start;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -238,9 +258,9 @@ final class Segment implements BaseModel
      */
     public function withTimbre(array $timbre): self
     {
-        $obj = clone $this;
-        $obj->timbre = $timbre;
+        $self = clone $this;
+        $self['timbre'] = $timbre;
 
-        return $obj;
+        return $self;
     }
 }

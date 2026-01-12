@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Artists;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -15,7 +15,10 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\ArtistsService::listAlbums()
  *
  * @phpstan-type ArtistListAlbumsParamsShape = array{
- *   include_groups?: string, limit?: int, market?: string, offset?: int
+ *   includeGroups?: string|null,
+ *   limit?: int|null,
+ *   market?: string|null,
+ *   offset?: int|null,
  * }
  */
 final class ArtistListAlbumsParams implements BaseModel
@@ -28,13 +31,13 @@ final class ArtistListAlbumsParams implements BaseModel
      * A comma-separated list of keywords that will be used to filter the response. If not supplied, all album types will be returned. <br/>
      * Valid values are:<br/>- `album`<br/>- `single`<br/>- `appears_on`<br/>- `compilation`<br/>For example: `include_groups=album,single`.
      */
-    #[Api(optional: true)]
-    public ?string $include_groups;
+    #[Optional]
+    public ?string $includeGroups;
 
     /**
      * The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     /**
@@ -45,13 +48,13 @@ final class ArtistListAlbumsParams implements BaseModel
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $market;
 
     /**
      * The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $offset;
 
     public function __construct()
@@ -65,19 +68,19 @@ final class ArtistListAlbumsParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $include_groups = null,
+        ?string $includeGroups = null,
         ?int $limit = null,
         ?string $market = null,
         ?int $offset = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $include_groups && $obj->include_groups = $include_groups;
-        null !== $limit && $obj->limit = $limit;
-        null !== $market && $obj->market = $market;
-        null !== $offset && $obj->offset = $offset;
+        null !== $includeGroups && $self['includeGroups'] = $includeGroups;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $market && $self['market'] = $market;
+        null !== $offset && $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +89,10 @@ final class ArtistListAlbumsParams implements BaseModel
      */
     public function withIncludeGroups(string $includeGroups): self
     {
-        $obj = clone $this;
-        $obj->include_groups = $includeGroups;
+        $self = clone $this;
+        $self['includeGroups'] = $includeGroups;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +100,10 @@ final class ArtistListAlbumsParams implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj->limit = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +116,10 @@ final class ArtistListAlbumsParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj->market = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,9 +127,9 @@ final class ArtistListAlbumsParams implements BaseModel
      */
     public function withOffset(int $offset): self
     {
-        $obj = clone $this;
-        $obj->offset = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 }

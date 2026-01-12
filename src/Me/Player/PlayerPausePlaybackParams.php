@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Me\PlayerService::pausePlayback()
  *
- * @phpstan-type PlayerPausePlaybackParamsShape = array{device_id?: string}
+ * @phpstan-type PlayerPausePlaybackParamsShape = array{deviceID?: string|null}
  */
 final class PlayerPausePlaybackParams implements BaseModel
 {
@@ -25,8 +25,8 @@ final class PlayerPausePlaybackParams implements BaseModel
     /**
      * The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      */
-    #[Api(optional: true)]
-    public ?string $device_id;
+    #[Optional]
+    public ?string $deviceID;
 
     public function __construct()
     {
@@ -38,13 +38,13 @@ final class PlayerPausePlaybackParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $device_id = null): self
+    public static function with(?string $deviceID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $device_id && $obj->device_id = $device_id;
+        null !== $deviceID && $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class PlayerPausePlaybackParams implements BaseModel
      */
     public function withDeviceID(string $deviceID): self
     {
-        $obj = clone $this;
-        $obj->device_id = $deviceID;
+        $self = clone $this;
+        $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 }

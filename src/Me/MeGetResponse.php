@@ -4,85 +4,87 @@ declare(strict_types=1);
 
 namespace Spotted\Me;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\FollowersObject;
 use Spotted\ImageObject;
 use Spotted\Me\MeGetResponse\ExplicitContent;
 
 /**
+ * @phpstan-import-type ExplicitContentShape from \Spotted\Me\MeGetResponse\ExplicitContent
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type FollowersObjectShape from \Spotted\FollowersObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ *
  * @phpstan-type MeGetResponseShape = array{
  *   id?: string|null,
  *   country?: string|null,
- *   display_name?: string|null,
+ *   displayName?: string|null,
  *   email?: string|null,
- *   explicit_content?: ExplicitContent|null,
- *   external_urls?: ExternalURLObject|null,
- *   followers?: FollowersObject|null,
+ *   explicitContent?: null|ExplicitContent|ExplicitContentShape,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
+ *   followers?: null|FollowersObject|FollowersObjectShape,
  *   href?: string|null,
- *   images?: list<ImageObject>|null,
+ *   images?: list<ImageObject|ImageObjectShape>|null,
  *   product?: string|null,
+ *   published?: bool|null,
  *   type?: string|null,
  *   uri?: string|null,
  * }
  */
-final class MeGetResponse implements BaseModel, ResponseConverter
+final class MeGetResponse implements BaseModel
 {
     /** @use SdkModel<MeGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * The [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids) for the user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The country of the user, as set in the user's account profile. An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). _This field is only available when the current user has granted access to the [user-read-private](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country;
 
     /**
      * The name displayed on the user's profile. `null` if not available.
      */
-    #[Api(optional: true)]
-    public ?string $display_name;
+    #[Optional('display_name')]
+    public ?string $displayName;
 
     /**
      * The user's email address, as entered by the user when creating their account. _**Important!** This email address is unverified; there is no proof that it actually belongs to the user._ _This field is only available when the current user has granted access to the [user-read-email](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $email;
 
     /**
      * The user's explicit content settings. _This field is only available when the current user has granted access to the [user-read-private](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
      */
-    #[Api(optional: true)]
-    public ?ExplicitContent $explicit_content;
+    #[Optional('explicit_content')]
+    public ?ExplicitContent $explicitContent;
 
     /**
      * Known external URLs for this user.
      */
-    #[Api(optional: true)]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * Information about the followers of the user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?FollowersObject $followers;
 
     /**
      * A link to the Web API endpoint for this user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
 
     /**
@@ -90,25 +92,31 @@ final class MeGetResponse implements BaseModel, ResponseConverter
      *
      * @var list<ImageObject>|null $images
      */
-    #[Api(list: ImageObject::class, optional: true)]
+    #[Optional(list: ImageObject::class)]
     public ?array $images;
 
     /**
      * The user's Spotify subscription level: "premium", "free", etc. (The subscription level "open" can be considered the same as "free".) _This field is only available when the current user has granted access to the [user-read-private](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $product;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The object type: "user".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()
@@ -121,38 +129,43 @@ final class MeGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ImageObject> $images
+     * @param ExplicitContent|ExplicitContentShape|null $explicitContent
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
+     * @param FollowersObject|FollowersObjectShape|null $followers
+     * @param list<ImageObject|ImageObjectShape>|null $images
      */
     public static function with(
         ?string $id = null,
         ?string $country = null,
-        ?string $display_name = null,
+        ?string $displayName = null,
         ?string $email = null,
-        ?ExplicitContent $explicit_content = null,
-        ?ExternalURLObject $external_urls = null,
-        ?FollowersObject $followers = null,
+        ExplicitContent|array|null $explicitContent = null,
+        ExternalURLObject|array|null $externalURLs = null,
+        FollowersObject|array|null $followers = null,
         ?string $href = null,
         ?array $images = null,
         ?string $product = null,
+        ?bool $published = null,
         ?string $type = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $country && $obj->country = $country;
-        null !== $display_name && $obj->display_name = $display_name;
-        null !== $email && $obj->email = $email;
-        null !== $explicit_content && $obj->explicit_content = $explicit_content;
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $followers && $obj->followers = $followers;
-        null !== $href && $obj->href = $href;
-        null !== $images && $obj->images = $images;
-        null !== $product && $obj->product = $product;
-        null !== $type && $obj->type = $type;
-        null !== $uri && $obj->uri = $uri;
+        null !== $id && $self['id'] = $id;
+        null !== $country && $self['country'] = $country;
+        null !== $displayName && $self['displayName'] = $displayName;
+        null !== $email && $self['email'] = $email;
+        null !== $explicitContent && $self['explicitContent'] = $explicitContent;
+        null !== $externalURLs && $self['externalURLs'] = $externalURLs;
+        null !== $followers && $self['followers'] = $followers;
+        null !== $href && $self['href'] = $href;
+        null !== $images && $self['images'] = $images;
+        null !== $product && $self['product'] = $product;
+        null !== $published && $self['published'] = $published;
+        null !== $type && $self['type'] = $type;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,10 +173,10 @@ final class MeGetResponse implements BaseModel, ResponseConverter
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -171,10 +184,10 @@ final class MeGetResponse implements BaseModel, ResponseConverter
      */
     public function withCountry(string $country): self
     {
-        $obj = clone $this;
-        $obj->country = $country;
+        $self = clone $this;
+        $self['country'] = $country;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,10 +195,10 @@ final class MeGetResponse implements BaseModel, ResponseConverter
      */
     public function withDisplayName(string $displayName): self
     {
-        $obj = clone $this;
-        $obj->display_name = $displayName;
+        $self = clone $this;
+        $self['displayName'] = $displayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -193,43 +206,51 @@ final class MeGetResponse implements BaseModel, ResponseConverter
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj->email = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The user's explicit content settings. _This field is only available when the current user has granted access to the [user-read-private](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
+     *
+     * @param ExplicitContent|ExplicitContentShape $explicitContent
      */
-    public function withExplicitContent(ExplicitContent $explicitContent): self
-    {
-        $obj = clone $this;
-        $obj->explicit_content = $explicitContent;
+    public function withExplicitContent(
+        ExplicitContent|array $explicitContent
+    ): self {
+        $self = clone $this;
+        $self['explicitContent'] = $explicitContent;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Known external URLs for this user.
+     *
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
-        $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Information about the followers of the user.
+     *
+     * @param FollowersObject|FollowersObjectShape $followers
      */
-    public function withFollowers(FollowersObject $followers): self
+    public function withFollowers(FollowersObject|array $followers): self
     {
-        $obj = clone $this;
-        $obj->followers = $followers;
+        $self = clone $this;
+        $self['followers'] = $followers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -237,23 +258,23 @@ final class MeGetResponse implements BaseModel, ResponseConverter
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj->href = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The user's profile image.
      *
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
-        $obj = clone $this;
-        $obj->images = $images;
+        $self = clone $this;
+        $self['images'] = $images;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -261,10 +282,21 @@ final class MeGetResponse implements BaseModel, ResponseConverter
      */
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj->product = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -272,10 +304,10 @@ final class MeGetResponse implements BaseModel, ResponseConverter
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj->type = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -283,9 +315,9 @@ final class MeGetResponse implements BaseModel, ResponseConverter
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

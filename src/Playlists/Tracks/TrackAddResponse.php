@@ -4,24 +4,20 @@ declare(strict_types=1);
 
 namespace Spotted\Playlists\Tracks;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type TrackAddResponseShape = array{snapshot_id?: string|null}
+ * @phpstan-type TrackAddResponseShape = array{snapshotID?: string|null}
  */
-final class TrackAddResponse implements BaseModel, ResponseConverter
+final class TrackAddResponse implements BaseModel
 {
     /** @use SdkModel<TrackAddResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
-    public ?string $snapshot_id;
+    #[Optional('snapshot_id')]
+    public ?string $snapshotID;
 
     public function __construct()
     {
@@ -33,20 +29,20 @@ final class TrackAddResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $snapshot_id = null): self
+    public static function with(?string $snapshotID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
+        null !== $snapshotID && $self['snapshotID'] = $snapshotID;
 
-        return $obj;
+        return $self;
     }
 
     public function withSnapshotID(string $snapshotID): self
     {
-        $obj = clone $this;
-        $obj->snapshot_id = $snapshotID;
+        $self = clone $this;
+        $self['snapshotID'] = $snapshotID;
 
-        return $obj;
+        return $self;
     }
 }

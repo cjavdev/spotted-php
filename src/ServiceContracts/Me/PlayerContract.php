@@ -6,178 +6,246 @@ namespace Spotted\ServiceContracts\Me;
 
 use Spotted\Core\Exceptions\APIException;
 use Spotted\CursorURLPage;
-use Spotted\Me\Player\PlayerGetCurrentlyPlayingParams;
 use Spotted\Me\Player\PlayerGetCurrentlyPlayingResponse;
 use Spotted\Me\Player\PlayerGetDevicesResponse;
-use Spotted\Me\Player\PlayerGetStateParams;
 use Spotted\Me\Player\PlayerGetStateResponse;
-use Spotted\Me\Player\PlayerListRecentlyPlayedParams;
 use Spotted\Me\Player\PlayerListRecentlyPlayedResponse;
-use Spotted\Me\Player\PlayerPausePlaybackParams;
-use Spotted\Me\Player\PlayerSeekToPositionParams;
-use Spotted\Me\Player\PlayerSetRepeatModeParams;
-use Spotted\Me\Player\PlayerSetVolumeParams;
-use Spotted\Me\Player\PlayerSkipNextParams;
-use Spotted\Me\Player\PlayerSkipPreviousParams;
-use Spotted\Me\Player\PlayerStartPlaybackParams;
-use Spotted\Me\Player\PlayerToggleShuffleParams;
-use Spotted\Me\Player\PlayerTransferParams;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface PlayerContract
 {
     /**
      * @api
      *
-     * @param array<mixed>|PlayerGetCurrentlyPlayingParams $params
+     * @param string $additionalTypes A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`.<br/>
+     * _**Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future._<br/>
+     * In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.
+     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     *   If a country code is specified, only content that is available in that market will be returned.<br/>
+     *   If a valid user access token is specified in the request header, the country associated with
+     *   the user account will take priority over this parameter.<br/>
+     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
+     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function getCurrentlyPlaying(
-        array|PlayerGetCurrentlyPlayingParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $additionalTypes = null,
+        ?string $market = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PlayerGetCurrentlyPlayingResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function getDevices(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PlayerGetDevicesResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|PlayerGetStateParams $params
+     * @param string $additionalTypes A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`.<br/>
+     * _**Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future._<br/>
+     * In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.
+     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     *   If a country code is specified, only content that is available in that market will be returned.<br/>
+     *   If a valid user access token is specified in the request header, the country associated with
+     *   the user account will take priority over this parameter.<br/>
+     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
+     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function getState(
-        array|PlayerGetStateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $additionalTypes = null,
+        ?string $market = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PlayerGetStateResponse;
 
     /**
      * @api
      *
-     * @param array<mixed>|PlayerListRecentlyPlayedParams $params
+     * @param int $after A Unix timestamp in milliseconds. Returns all items
+     * after (but not including) this cursor position. If `after` is specified, `before`
+     * must not be specified.
+     * @param int $before A Unix timestamp in milliseconds. Returns all items
+     * before (but not including) this cursor position. If `before` is specified,
+     * `after` must not be specified.
+     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param RequestOpts|null $requestOptions
      *
      * @return CursorURLPage<PlayerListRecentlyPlayedResponse>
      *
      * @throws APIException
      */
     public function listRecentlyPlayed(
-        array|PlayerListRecentlyPlayedParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?int $after = null,
+        ?int $before = null,
+        int $limit = 20,
+        RequestOptions|array|null $requestOptions = null,
     ): CursorURLPage;
 
     /**
      * @api
      *
-     * @param array<mixed>|PlayerPausePlaybackParams $params
+     * @param string $deviceID The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function pausePlayback(
-        array|PlayerPausePlaybackParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $deviceID = null,
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<mixed>|PlayerSeekToPositionParams $params
+     * @param int $positionMs The position in milliseconds to seek to. Must be a
+     * positive number. Passing in a position that is greater than the length of
+     * the track will cause the player to start playing the next song.
+     * @param string $deviceID The id of the device this command is targeting. If
+     * not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function seekToPosition(
-        array|PlayerSeekToPositionParams $params,
-        ?RequestOptions $requestOptions = null,
+        int $positionMs,
+        ?string $deviceID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<mixed>|PlayerSetRepeatModeParams $params
+     * @param string $state **track**, **context** or **off**.<br/>
+     * **track** will repeat the current track.<br/>
+     * **context** will repeat the current context.<br/>
+     * **off** will turn repeat off.
+     * @param string $deviceID The id of the device this command is targeting. If
+     * not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function setRepeatMode(
-        array|PlayerSetRepeatModeParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $state,
+        ?string $deviceID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<mixed>|PlayerSetVolumeParams $params
+     * @param int $volumePercent The volume to set. Must be a value from 0 to 100 inclusive.
+     * @param string $deviceID The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function setVolume(
-        array|PlayerSetVolumeParams $params,
-        ?RequestOptions $requestOptions = null,
+        int $volumePercent,
+        ?string $deviceID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<mixed>|PlayerSkipNextParams $params
+     * @param string $deviceID The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function skipNext(
-        array|PlayerSkipNextParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $deviceID = null,
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<mixed>|PlayerSkipPreviousParams $params
+     * @param string $deviceID The id of the device this command is targeting. If
+     * not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function skipPrevious(
-        array|PlayerSkipPreviousParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $deviceID = null,
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<mixed>|PlayerStartPlaybackParams $params
+     * @param string $deviceID Query param: The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
+     * @param string $contextUri Body param: Optional. Spotify URI of the context to play.
+     * Valid contexts are albums, artists & playlists.
+     * `{context_uri:"spotify:album:1Je1IMUlBXcx1Fz0WE7oPT"}`
+     * @param array<string,mixed> $offset Body param: Optional. Indicates from where in the context playback should start. Only available when context_uri corresponds to an album or playlist object
+     * "position" is zero based and can’t be negative. Example: `"offset": {"position": 5}`
+     * "uri" is a string representing the uri of the item to start at. Example: `"offset": {"uri": "spotify:track:1301WleyT98MSxVHPZCA6M"}`
+     * @param int $positionMs Body param: Indicates from what position to start playback. Must be a positive number. Passing in a position that is greater than the length of the track will cause the player to start playing the next song.
+     * @param bool $published Body param: The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
+     * @param list<string> $uris Body param: Optional. A JSON array of the Spotify track URIs to play.
+     * For example: `{"uris": ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh", "spotify:track:1301WleyT98MSxVHPZCA6M"]}`
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function startPlayback(
-        array|PlayerStartPlaybackParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $deviceID = null,
+        ?string $contextUri = null,
+        ?array $offset = null,
+        ?int $positionMs = null,
+        ?bool $published = null,
+        ?array $uris = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<mixed>|PlayerToggleShuffleParams $params
+     * @param bool $state **true** : Shuffle user's playback.<br/>
+     * **false** : Do not shuffle user's playback.
+     * @param string $deviceID The id of the device this command is targeting. If
+     * not supplied, the user's currently active device is the target.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function toggleShuffle(
-        array|PlayerToggleShuffleParams $params,
-        ?RequestOptions $requestOptions = null,
+        bool $state,
+        ?string $deviceID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<mixed>|PlayerTransferParams $params
+     * @param list<string> $deviceIDs A JSON array containing the ID of the device on which playback should be started/transferred.<br/>For example:`{device_ids:["74ASZWbe4lXaubB36ztrGX"]}`<br/>_**Note**: Although an array is accepted, only a single device_id is currently supported. Supplying more than one will return `400 Bad Request`_
+     * @param bool $play **true**: ensure playback happens on new device.<br/>**false** or not provided: keep the current playback state.
+     * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function transfer(
-        array|PlayerTransferParams $params,
-        ?RequestOptions $requestOptions = null,
+        array $deviceIDs,
+        ?bool $play = null,
+        ?bool $published = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 }

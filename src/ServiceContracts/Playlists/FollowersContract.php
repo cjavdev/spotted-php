@@ -5,16 +5,19 @@ declare(strict_types=1);
 namespace Spotted\ServiceContracts\Playlists;
 
 use Spotted\Core\Exceptions\APIException;
-use Spotted\Playlists\Followers\FollowerCheckParams;
-use Spotted\Playlists\Followers\FollowerFollowParams;
 use Spotted\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 interface FollowersContract
 {
     /**
      * @api
      *
-     * @param array<mixed>|FollowerCheckParams $params
+     * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
+     * @param string $ids **Deprecated** A single item list containing current user's [Spotify Username](/documentation/web-api/concepts/spotify-uris-ids). Maximum: 1 id.
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<bool>
      *
@@ -22,30 +25,35 @@ interface FollowersContract
      */
     public function check(
         string $playlistID,
-        array|FollowerCheckParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $ids = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array;
 
     /**
      * @api
      *
-     * @param array<mixed>|FollowerFollowParams $params
+     * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
+     * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function follow(
         string $playlistID,
-        array|FollowerFollowParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?bool $published = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
+     * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function unfollow(
         string $playlistID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 }

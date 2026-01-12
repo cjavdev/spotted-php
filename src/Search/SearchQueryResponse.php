@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Spotted\Search;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\PagingPlaylistObject;
 use Spotted\Search\SearchQueryResponse\Albums;
 use Spotted\Search\SearchQueryResponse\Artists;
@@ -18,42 +16,48 @@ use Spotted\Search\SearchQueryResponse\Shows;
 use Spotted\Search\SearchQueryResponse\Tracks;
 
 /**
+ * @phpstan-import-type AlbumsShape from \Spotted\Search\SearchQueryResponse\Albums
+ * @phpstan-import-type ArtistsShape from \Spotted\Search\SearchQueryResponse\Artists
+ * @phpstan-import-type AudiobooksShape from \Spotted\Search\SearchQueryResponse\Audiobooks
+ * @phpstan-import-type EpisodesShape from \Spotted\Search\SearchQueryResponse\Episodes
+ * @phpstan-import-type PagingPlaylistObjectShape from \Spotted\PagingPlaylistObject
+ * @phpstan-import-type ShowsShape from \Spotted\Search\SearchQueryResponse\Shows
+ * @phpstan-import-type TracksShape from \Spotted\Search\SearchQueryResponse\Tracks
+ *
  * @phpstan-type SearchQueryResponseShape = array{
- *   albums?: Albums|null,
- *   artists?: Artists|null,
- *   audiobooks?: Audiobooks|null,
- *   episodes?: Episodes|null,
- *   playlists?: PagingPlaylistObject|null,
- *   shows?: Shows|null,
- *   tracks?: Tracks|null,
+ *   albums?: null|Albums|AlbumsShape,
+ *   artists?: null|Artists|ArtistsShape,
+ *   audiobooks?: null|Audiobooks|AudiobooksShape,
+ *   episodes?: null|Episodes|EpisodesShape,
+ *   playlists?: null|PagingPlaylistObject|PagingPlaylistObjectShape,
+ *   shows?: null|Shows|ShowsShape,
+ *   tracks?: null|Tracks|TracksShape,
  * }
  */
-final class SearchQueryResponse implements BaseModel, ResponseConverter
+final class SearchQueryResponse implements BaseModel
 {
     /** @use SdkModel<SearchQueryResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?Albums $albums;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Artists $artists;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Audiobooks $audiobooks;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Episodes $episodes;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PagingPlaylistObject $playlists;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Shows $shows;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Tracks $tracks;
 
     public function __construct()
@@ -65,82 +69,111 @@ final class SearchQueryResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Albums|AlbumsShape|null $albums
+     * @param Artists|ArtistsShape|null $artists
+     * @param Audiobooks|AudiobooksShape|null $audiobooks
+     * @param Episodes|EpisodesShape|null $episodes
+     * @param PagingPlaylistObject|PagingPlaylistObjectShape|null $playlists
+     * @param Shows|ShowsShape|null $shows
+     * @param Tracks|TracksShape|null $tracks
      */
     public static function with(
-        ?Albums $albums = null,
-        ?Artists $artists = null,
-        ?Audiobooks $audiobooks = null,
-        ?Episodes $episodes = null,
-        ?PagingPlaylistObject $playlists = null,
-        ?Shows $shows = null,
-        ?Tracks $tracks = null,
+        Albums|array|null $albums = null,
+        Artists|array|null $artists = null,
+        Audiobooks|array|null $audiobooks = null,
+        Episodes|array|null $episodes = null,
+        PagingPlaylistObject|array|null $playlists = null,
+        Shows|array|null $shows = null,
+        Tracks|array|null $tracks = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $albums && $obj->albums = $albums;
-        null !== $artists && $obj->artists = $artists;
-        null !== $audiobooks && $obj->audiobooks = $audiobooks;
-        null !== $episodes && $obj->episodes = $episodes;
-        null !== $playlists && $obj->playlists = $playlists;
-        null !== $shows && $obj->shows = $shows;
-        null !== $tracks && $obj->tracks = $tracks;
+        null !== $albums && $self['albums'] = $albums;
+        null !== $artists && $self['artists'] = $artists;
+        null !== $audiobooks && $self['audiobooks'] = $audiobooks;
+        null !== $episodes && $self['episodes'] = $episodes;
+        null !== $playlists && $self['playlists'] = $playlists;
+        null !== $shows && $self['shows'] = $shows;
+        null !== $tracks && $self['tracks'] = $tracks;
 
-        return $obj;
+        return $self;
     }
 
-    public function withAlbums(Albums $albums): self
+    /**
+     * @param Albums|AlbumsShape $albums
+     */
+    public function withAlbums(Albums|array $albums): self
     {
-        $obj = clone $this;
-        $obj->albums = $albums;
+        $self = clone $this;
+        $self['albums'] = $albums;
 
-        return $obj;
+        return $self;
     }
 
-    public function withArtists(Artists $artists): self
+    /**
+     * @param Artists|ArtistsShape $artists
+     */
+    public function withArtists(Artists|array $artists): self
     {
-        $obj = clone $this;
-        $obj->artists = $artists;
+        $self = clone $this;
+        $self['artists'] = $artists;
 
-        return $obj;
+        return $self;
     }
 
-    public function withAudiobooks(Audiobooks $audiobooks): self
+    /**
+     * @param Audiobooks|AudiobooksShape $audiobooks
+     */
+    public function withAudiobooks(Audiobooks|array $audiobooks): self
     {
-        $obj = clone $this;
-        $obj->audiobooks = $audiobooks;
+        $self = clone $this;
+        $self['audiobooks'] = $audiobooks;
 
-        return $obj;
+        return $self;
     }
 
-    public function withEpisodes(Episodes $episodes): self
+    /**
+     * @param Episodes|EpisodesShape $episodes
+     */
+    public function withEpisodes(Episodes|array $episodes): self
     {
-        $obj = clone $this;
-        $obj->episodes = $episodes;
+        $self = clone $this;
+        $self['episodes'] = $episodes;
 
-        return $obj;
+        return $self;
     }
 
-    public function withPlaylists(PagingPlaylistObject $playlists): self
+    /**
+     * @param PagingPlaylistObject|PagingPlaylistObjectShape $playlists
+     */
+    public function withPlaylists(PagingPlaylistObject|array $playlists): self
     {
-        $obj = clone $this;
-        $obj->playlists = $playlists;
+        $self = clone $this;
+        $self['playlists'] = $playlists;
 
-        return $obj;
+        return $self;
     }
 
-    public function withShows(Shows $shows): self
+    /**
+     * @param Shows|ShowsShape $shows
+     */
+    public function withShows(Shows|array $shows): self
     {
-        $obj = clone $this;
-        $obj->shows = $shows;
+        $self = clone $this;
+        $self['shows'] = $shows;
 
-        return $obj;
+        return $self;
     }
 
-    public function withTracks(Tracks $tracks): self
+    /**
+     * @param Tracks|TracksShape $tracks
+     */
+    public function withTracks(Tracks|array $tracks): self
     {
-        $obj = clone $this;
-        $obj->tracks = $tracks;
+        $self = clone $this;
+        $self['tracks'] = $tracks;
 
-        return $obj;
+        return $self;
     }
 }

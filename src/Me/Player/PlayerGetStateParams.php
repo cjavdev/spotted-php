@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::getState()
  *
  * @phpstan-type PlayerGetStateParamsShape = array{
- *   additional_types?: string, market?: string
+ *   additionalTypes?: string|null, market?: string|null
  * }
  */
 final class PlayerGetStateParams implements BaseModel
@@ -29,8 +29,8 @@ final class PlayerGetStateParams implements BaseModel
      * _**Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future._<br/>
      * In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.
      */
-    #[Api(optional: true)]
-    public ?string $additional_types;
+    #[Optional]
+    public ?string $additionalTypes;
 
     /**
      * An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
@@ -40,7 +40,7 @@ final class PlayerGetStateParams implements BaseModel
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $market;
 
     public function __construct()
@@ -54,15 +54,15 @@ final class PlayerGetStateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $additional_types = null,
+        ?string $additionalTypes = null,
         ?string $market = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additional_types && $obj->additional_types = $additional_types;
-        null !== $market && $obj->market = $market;
+        null !== $additionalTypes && $self['additionalTypes'] = $additionalTypes;
+        null !== $market && $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,10 +72,10 @@ final class PlayerGetStateParams implements BaseModel
      */
     public function withAdditionalTypes(string $additionalTypes): self
     {
-        $obj = clone $this;
-        $obj->additional_types = $additionalTypes;
+        $self = clone $this;
+        $self['additionalTypes'] = $additionalTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,9 +88,9 @@ final class PlayerGetStateParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj->market = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 }

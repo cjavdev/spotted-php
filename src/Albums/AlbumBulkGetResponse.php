@@ -5,24 +5,22 @@ declare(strict_types=1);
 namespace Spotted\Albums;
 
 use Spotted\Albums\AlbumBulkGetResponse\Album;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type AlbumBulkGetResponseShape = array{albums: list<Album>}
+ * @phpstan-import-type AlbumShape from \Spotted\Albums\AlbumBulkGetResponse\Album
+ *
+ * @phpstan-type AlbumBulkGetResponseShape = array{albums: list<Album|AlbumShape>}
  */
-final class AlbumBulkGetResponse implements BaseModel, ResponseConverter
+final class AlbumBulkGetResponse implements BaseModel
 {
     /** @use SdkModel<AlbumBulkGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<Album> $albums */
-    #[Api(list: Album::class)]
+    #[Required(list: Album::class)]
     public array $albums;
 
     /**
@@ -49,25 +47,25 @@ final class AlbumBulkGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Album> $albums
+     * @param list<Album|AlbumShape> $albums
      */
     public static function with(array $albums): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->albums = $albums;
+        $self['albums'] = $albums;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Album> $albums
+     * @param list<Album|AlbumShape> $albums
      */
     public function withAlbums(array $albums): self
     {
-        $obj = clone $this;
-        $obj->albums = $albums;
+        $self = clone $this;
+        $self['albums'] = $albums;
 
-        return $obj;
+        return $self;
     }
 }

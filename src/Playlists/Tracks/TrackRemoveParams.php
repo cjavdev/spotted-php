@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Playlists\Tracks;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -15,8 +16,12 @@ use Spotted\Playlists\Tracks\TrackRemoveParams\Track;
  *
  * @see Spotted\Services\Playlists\TracksService::remove()
  *
+ * @phpstan-import-type TrackShape from \Spotted\Playlists\Tracks\TrackRemoveParams\Track
+ *
  * @phpstan-type TrackRemoveParamsShape = array{
- *   tracks: list<Track>, snapshot_id?: string
+ *   tracks: list<Track|TrackShape>,
+ *   published?: bool|null,
+ *   snapshotID?: string|null,
  * }
  */
 final class TrackRemoveParams implements BaseModel
@@ -31,16 +36,22 @@ final class TrackRemoveParams implements BaseModel
      *
      * @var list<Track> $tracks
      */
-    #[Api(list: Track::class)]
+    #[Required(list: Track::class)]
     public array $tracks;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The playlist's snapshot ID against which you want to make the changes.
      * The API will validate that the specified items exist and in the specified positions and make the changes,
      * even if more recent changes have been made to the playlist.
      */
-    #[Api(optional: true)]
-    public ?string $snapshot_id;
+    #[Optional('snapshot_id')]
+    public ?string $snapshotID;
 
     /**
      * `new TrackRemoveParams()` is missing required properties by the API.
@@ -66,31 +77,46 @@ final class TrackRemoveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Track> $tracks
+     * @param list<Track|TrackShape> $tracks
      */
-    public static function with(array $tracks, ?string $snapshot_id = null): self
-    {
-        $obj = new self;
+    public static function with(
+        array $tracks,
+        ?bool $published = null,
+        ?string $snapshotID = null
+    ): self {
+        $self = new self;
 
-        $obj->tracks = $tracks;
+        $self['tracks'] = $tracks;
 
-        null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
+        null !== $published && $self['published'] = $published;
+        null !== $snapshotID && $self['snapshotID'] = $snapshotID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * An array of objects containing [Spotify URIs](/documentation/web-api/concepts/spotify-uris-ids) of the tracks or episodes to remove.
      * For example: `{ "tracks": [{ "uri": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh" },{ "uri": "spotify:track:1301WleyT98MSxVHPZCA6M" }] }`. A maximum of 100 objects can be sent at once.
      *
-     * @param list<Track> $tracks
+     * @param list<Track|TrackShape> $tracks
      */
     public function withTracks(array $tracks): self
     {
-        $obj = clone $this;
-        $obj->tracks = $tracks;
+        $self = clone $this;
+        $self['tracks'] = $tracks;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -100,9 +126,9 @@ final class TrackRemoveParams implements BaseModel
      */
     public function withSnapshotID(string $snapshotID): self
     {
-        $obj = clone $this;
-        $obj->snapshot_id = $snapshotID;
+        $self = clone $this;
+        $self['snapshotID'] = $snapshotID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ExternalIDObjectShape = array{
- *   ean?: string|null, isrc?: string|null, upc?: string|null
+ *   ean?: string|null,
+ *   isrc?: string|null,
+ *   published?: bool|null,
+ *   upc?: string|null,
  * }
  */
 final class ExternalIDObject implements BaseModel
@@ -21,19 +24,25 @@ final class ExternalIDObject implements BaseModel
     /**
      * [International Article Number](http://en.wikipedia.org/wiki/International_Article_Number_%28EAN%29).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ean;
 
     /**
      * [International Standard Recording Code](http://en.wikipedia.org/wiki/International_Standard_Recording_Code).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $isrc;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * [Universal Product Code](http://en.wikipedia.org/wiki/Universal_Product_Code).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $upc;
 
     public function __construct()
@@ -49,15 +58,17 @@ final class ExternalIDObject implements BaseModel
     public static function with(
         ?string $ean = null,
         ?string $isrc = null,
-        ?string $upc = null
+        ?bool $published = null,
+        ?string $upc = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $ean && $obj->ean = $ean;
-        null !== $isrc && $obj->isrc = $isrc;
-        null !== $upc && $obj->upc = $upc;
+        null !== $ean && $self['ean'] = $ean;
+        null !== $isrc && $self['isrc'] = $isrc;
+        null !== $published && $self['published'] = $published;
+        null !== $upc && $self['upc'] = $upc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,10 +76,10 @@ final class ExternalIDObject implements BaseModel
      */
     public function withEan(string $ean): self
     {
-        $obj = clone $this;
-        $obj->ean = $ean;
+        $self = clone $this;
+        $self['ean'] = $ean;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +87,21 @@ final class ExternalIDObject implements BaseModel
      */
     public function withIsrc(string $isrc): self
     {
-        $obj = clone $this;
-        $obj->isrc = $isrc;
+        $self = clone $this;
+        $self['isrc'] = $isrc;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -87,9 +109,9 @@ final class ExternalIDObject implements BaseModel
      */
     public function withUpc(string $upc): self
     {
-        $obj = clone $this;
-        $obj->upc = $upc;
+        $self = clone $this;
+        $self['upc'] = $upc;
 
-        return $obj;
+        return $self;
     }
 }

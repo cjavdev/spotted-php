@@ -10,29 +10,39 @@ use Spotted\Markets\MarketListResponse;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\MarketsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class MarketsService implements MarketsContract
 {
     /**
+     * @api
+     */
+    public MarketsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new MarketsRawService($client);
+    }
 
     /**
      * @api
      *
      * Get the list of markets where Spotify is available.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MarketListResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'markets',
-            options: $requestOptions,
-            convert: MarketListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Spotted\AudioFeatures\AudioFeatureBulkGetResponse;
 
 use Spotted\AudioFeatures\AudioFeatureBulkGetResponse\AudioFeature\Type;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -13,20 +13,21 @@ use Spotted\Core\Contracts\BaseModel;
  * @phpstan-type AudioFeatureShape = array{
  *   id?: string|null,
  *   acousticness?: float|null,
- *   analysis_url?: string|null,
+ *   analysisURL?: string|null,
  *   danceability?: float|null,
- *   duration_ms?: int|null,
+ *   durationMs?: int|null,
  *   energy?: float|null,
  *   instrumentalness?: float|null,
  *   key?: int|null,
  *   liveness?: float|null,
  *   loudness?: float|null,
  *   mode?: int|null,
+ *   published?: bool|null,
  *   speechiness?: float|null,
  *   tempo?: float|null,
- *   time_signature?: int|null,
- *   track_href?: string|null,
- *   type?: value-of<Type>|null,
+ *   timeSignature?: int|null,
+ *   trackHref?: string|null,
+ *   type?: null|Type|value-of<Type>,
  *   uri?: string|null,
  *   valence?: float|null,
  * }
@@ -39,111 +40,117 @@ final class AudioFeature implements BaseModel
     /**
      * The Spotify ID for the track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $acousticness;
 
     /**
      * A URL to access the full audio analysis of this track. An access token is required to access this data.
      */
-    #[Api(optional: true)]
-    public ?string $analysis_url;
+    #[Optional('analysis_url')]
+    public ?string $analysisURL;
 
     /**
      * Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $danceability;
 
     /**
      * The duration of the track in milliseconds.
      */
-    #[Api(optional: true)]
-    public ?int $duration_ms;
+    #[Optional('duration_ms')]
+    public ?int $durationMs;
 
     /**
      * Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $energy;
 
     /**
      * Predicts whether a track contains no vocals. "Ooh" and "aah" sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly "vocal". The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $instrumentalness;
 
     /**
      * The key the track is in. Integers map to pitches using standard [Pitch Class notation](https://en.wikipedia.org/wiki/Pitch_class). E.g. 0 = C, 1 = C♯/D♭, 2 = D, and so on. If no key was detected, the value is -1.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $key;
 
     /**
      * Detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live. A value above 0.8 provides strong likelihood that the track is live.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $liveness;
 
     /**
      * The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude). Values typically range between -60 and 0 db.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $loudness;
 
     /**
      * Mode indicates the modality (major or minor) of a track, the type of scale from which its melodic content is derived. Major is represented by 1 and minor is 0.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $mode;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $speechiness;
 
     /**
      * The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $tempo;
 
     /**
      * An estimated time signature. The time signature (meter) is a notational convention to specify how many beats are in each bar (or measure). The time signature ranges from 3 to 7 indicating time signatures of "3/4", to "7/4".
      */
-    #[Api(optional: true)]
-    public ?int $time_signature;
+    #[Optional('time_signature')]
+    public ?int $timeSignature;
 
     /**
      * A link to the Web API endpoint providing full details of the track.
      */
-    #[Api(optional: true)]
-    public ?string $track_href;
+    #[Optional('track_href')]
+    public ?string $trackHref;
 
     /**
      * The object type.
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * The Spotify URI for the track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     /**
      * A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $valence;
 
     public function __construct()
@@ -156,50 +163,52 @@ final class AudioFeature implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
         ?float $acousticness = null,
-        ?string $analysis_url = null,
+        ?string $analysisURL = null,
         ?float $danceability = null,
-        ?int $duration_ms = null,
+        ?int $durationMs = null,
         ?float $energy = null,
         ?float $instrumentalness = null,
         ?int $key = null,
         ?float $liveness = null,
         ?float $loudness = null,
         ?int $mode = null,
+        ?bool $published = null,
         ?float $speechiness = null,
         ?float $tempo = null,
-        ?int $time_signature = null,
-        ?string $track_href = null,
+        ?int $timeSignature = null,
+        ?string $trackHref = null,
         Type|string|null $type = null,
         ?string $uri = null,
         ?float $valence = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $acousticness && $obj->acousticness = $acousticness;
-        null !== $analysis_url && $obj->analysis_url = $analysis_url;
-        null !== $danceability && $obj->danceability = $danceability;
-        null !== $duration_ms && $obj->duration_ms = $duration_ms;
-        null !== $energy && $obj->energy = $energy;
-        null !== $instrumentalness && $obj->instrumentalness = $instrumentalness;
-        null !== $key && $obj->key = $key;
-        null !== $liveness && $obj->liveness = $liveness;
-        null !== $loudness && $obj->loudness = $loudness;
-        null !== $mode && $obj->mode = $mode;
-        null !== $speechiness && $obj->speechiness = $speechiness;
-        null !== $tempo && $obj->tempo = $tempo;
-        null !== $time_signature && $obj->time_signature = $time_signature;
-        null !== $track_href && $obj->track_href = $track_href;
-        null !== $type && $obj['type'] = $type;
-        null !== $uri && $obj->uri = $uri;
-        null !== $valence && $obj->valence = $valence;
+        null !== $id && $self['id'] = $id;
+        null !== $acousticness && $self['acousticness'] = $acousticness;
+        null !== $analysisURL && $self['analysisURL'] = $analysisURL;
+        null !== $danceability && $self['danceability'] = $danceability;
+        null !== $durationMs && $self['durationMs'] = $durationMs;
+        null !== $energy && $self['energy'] = $energy;
+        null !== $instrumentalness && $self['instrumentalness'] = $instrumentalness;
+        null !== $key && $self['key'] = $key;
+        null !== $liveness && $self['liveness'] = $liveness;
+        null !== $loudness && $self['loudness'] = $loudness;
+        null !== $mode && $self['mode'] = $mode;
+        null !== $published && $self['published'] = $published;
+        null !== $speechiness && $self['speechiness'] = $speechiness;
+        null !== $tempo && $self['tempo'] = $tempo;
+        null !== $timeSignature && $self['timeSignature'] = $timeSignature;
+        null !== $trackHref && $self['trackHref'] = $trackHref;
+        null !== $type && $self['type'] = $type;
+        null !== $uri && $self['uri'] = $uri;
+        null !== $valence && $self['valence'] = $valence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +216,10 @@ final class AudioFeature implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +227,10 @@ final class AudioFeature implements BaseModel
      */
     public function withAcousticness(float $acousticness): self
     {
-        $obj = clone $this;
-        $obj->acousticness = $acousticness;
+        $self = clone $this;
+        $self['acousticness'] = $acousticness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +238,10 @@ final class AudioFeature implements BaseModel
      */
     public function withAnalysisURL(string $analysisURL): self
     {
-        $obj = clone $this;
-        $obj->analysis_url = $analysisURL;
+        $self = clone $this;
+        $self['analysisURL'] = $analysisURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -240,10 +249,10 @@ final class AudioFeature implements BaseModel
      */
     public function withDanceability(float $danceability): self
     {
-        $obj = clone $this;
-        $obj->danceability = $danceability;
+        $self = clone $this;
+        $self['danceability'] = $danceability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -251,10 +260,10 @@ final class AudioFeature implements BaseModel
      */
     public function withDurationMs(int $durationMs): self
     {
-        $obj = clone $this;
-        $obj->duration_ms = $durationMs;
+        $self = clone $this;
+        $self['durationMs'] = $durationMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -262,10 +271,10 @@ final class AudioFeature implements BaseModel
      */
     public function withEnergy(float $energy): self
     {
-        $obj = clone $this;
-        $obj->energy = $energy;
+        $self = clone $this;
+        $self['energy'] = $energy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -273,10 +282,10 @@ final class AudioFeature implements BaseModel
      */
     public function withInstrumentalness(float $instrumentalness): self
     {
-        $obj = clone $this;
-        $obj->instrumentalness = $instrumentalness;
+        $self = clone $this;
+        $self['instrumentalness'] = $instrumentalness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -284,10 +293,10 @@ final class AudioFeature implements BaseModel
      */
     public function withKey(int $key): self
     {
-        $obj = clone $this;
-        $obj->key = $key;
+        $self = clone $this;
+        $self['key'] = $key;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -295,10 +304,10 @@ final class AudioFeature implements BaseModel
      */
     public function withLiveness(float $liveness): self
     {
-        $obj = clone $this;
-        $obj->liveness = $liveness;
+        $self = clone $this;
+        $self['liveness'] = $liveness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -306,10 +315,10 @@ final class AudioFeature implements BaseModel
      */
     public function withLoudness(float $loudness): self
     {
-        $obj = clone $this;
-        $obj->loudness = $loudness;
+        $self = clone $this;
+        $self['loudness'] = $loudness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -317,10 +326,21 @@ final class AudioFeature implements BaseModel
      */
     public function withMode(int $mode): self
     {
-        $obj = clone $this;
-        $obj->mode = $mode;
+        $self = clone $this;
+        $self['mode'] = $mode;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -328,10 +348,10 @@ final class AudioFeature implements BaseModel
      */
     public function withSpeechiness(float $speechiness): self
     {
-        $obj = clone $this;
-        $obj->speechiness = $speechiness;
+        $self = clone $this;
+        $self['speechiness'] = $speechiness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -339,10 +359,10 @@ final class AudioFeature implements BaseModel
      */
     public function withTempo(float $tempo): self
     {
-        $obj = clone $this;
-        $obj->tempo = $tempo;
+        $self = clone $this;
+        $self['tempo'] = $tempo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -350,10 +370,10 @@ final class AudioFeature implements BaseModel
      */
     public function withTimeSignature(int $timeSignature): self
     {
-        $obj = clone $this;
-        $obj->time_signature = $timeSignature;
+        $self = clone $this;
+        $self['timeSignature'] = $timeSignature;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -361,10 +381,10 @@ final class AudioFeature implements BaseModel
      */
     public function withTrackHref(string $trackHref): self
     {
-        $obj = clone $this;
-        $obj->track_href = $trackHref;
+        $self = clone $this;
+        $self['trackHref'] = $trackHref;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -374,10 +394,10 @@ final class AudioFeature implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -385,10 +405,10 @@ final class AudioFeature implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -396,9 +416,9 @@ final class AudioFeature implements BaseModel
      */
     public function withValence(float $valence): self
     {
-        $obj = clone $this;
-        $obj->valence = $valence;
+        $self = clone $this;
+        $self['valence'] = $valence;
 
-        return $obj;
+        return $self;
     }
 }

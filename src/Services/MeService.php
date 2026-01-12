@@ -19,8 +19,16 @@ use Spotted\Services\Me\ShowsService;
 use Spotted\Services\Me\TopService;
 use Spotted\Services\Me\TracksService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class MeService implements MeContract
 {
+    /**
+     * @api
+     */
+    public MeRawService $raw;
+
     /**
      * @api
      */
@@ -71,6 +79,7 @@ final class MeService implements MeContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new MeRawService($client);
         $this->audiobooks = new AudiobooksService($client);
         $this->playlists = new PlaylistsService($client);
         $this->top = new TopService($client);
@@ -88,17 +97,16 @@ final class MeService implements MeContract
      * Get detailed profile information about the current user (including the
      * current user's username).
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MeGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'me',
-            options: $requestOptions,
-            convert: MeGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve(requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

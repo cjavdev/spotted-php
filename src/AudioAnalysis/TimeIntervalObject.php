@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace Spotted\AudioAnalysis;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TimeIntervalObjectShape = array{
- *   confidence?: float|null, duration?: float|null, start?: float|null
+ *   confidence?: float|null,
+ *   duration?: float|null,
+ *   published?: bool|null,
+ *   start?: float|null,
  * }
  */
 final class TimeIntervalObject implements BaseModel
@@ -21,19 +24,25 @@ final class TimeIntervalObject implements BaseModel
     /**
      * The confidence, from 0.0 to 1.0, of the reliability of the interval.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $confidence;
 
     /**
      * The duration (in seconds) of the time interval.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $duration;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The starting point (in seconds) of the time interval.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $start;
 
     public function __construct()
@@ -49,15 +58,17 @@ final class TimeIntervalObject implements BaseModel
     public static function with(
         ?float $confidence = null,
         ?float $duration = null,
-        ?float $start = null
+        ?bool $published = null,
+        ?float $start = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $confidence && $obj->confidence = $confidence;
-        null !== $duration && $obj->duration = $duration;
-        null !== $start && $obj->start = $start;
+        null !== $confidence && $self['confidence'] = $confidence;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $published && $self['published'] = $published;
+        null !== $start && $self['start'] = $start;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,10 +76,10 @@ final class TimeIntervalObject implements BaseModel
      */
     public function withConfidence(float $confidence): self
     {
-        $obj = clone $this;
-        $obj->confidence = $confidence;
+        $self = clone $this;
+        $self['confidence'] = $confidence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +87,21 @@ final class TimeIntervalObject implements BaseModel
      */
     public function withDuration(float $duration): self
     {
-        $obj = clone $this;
-        $obj->duration = $duration;
+        $self = clone $this;
+        $self['duration'] = $duration;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -87,9 +109,9 @@ final class TimeIntervalObject implements BaseModel
      */
     public function withStart(float $start): self
     {
-        $obj = clone $this;
-        $obj->start = $start;
+        $self = clone $this;
+        $self['start'] = $start;
 
-        return $obj;
+        return $self;
     }
 }

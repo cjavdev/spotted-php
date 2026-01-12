@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Following;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -28,7 +28,7 @@ final class FollowingCheckParams implements BaseModel
     /**
      * A comma-separated list of the artist or the user [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) to check. For example: `ids=74ASZWbe4lXaubB36ztrGX,08td7MxkoHQkXnWAYD8d6Q`. A maximum of 50 IDs can be sent in one request.
      */
-    #[Api]
+    #[Required]
     public string $ids;
 
     /**
@@ -36,7 +36,7 @@ final class FollowingCheckParams implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
@@ -67,12 +67,12 @@ final class FollowingCheckParams implements BaseModel
      */
     public static function with(string $ids, Type|string $type): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->ids = $ids;
-        $obj['type'] = $type;
+        $self['ids'] = $ids;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +80,10 @@ final class FollowingCheckParams implements BaseModel
      */
     public function withIDs(string $ids): self
     {
-        $obj = clone $this;
-        $obj->ids = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,9 +93,9 @@ final class FollowingCheckParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Audiobooks;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class AudiobookRemoveParams implements BaseModel
     /**
      * A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
      */
-    #[Api]
+    #[Required]
     public string $ids;
 
     /**
@@ -54,11 +54,11 @@ final class AudiobookRemoveParams implements BaseModel
      */
     public static function with(string $ids): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->ids = $ids;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class AudiobookRemoveParams implements BaseModel
      */
     public function withIDs(string $ids): self
     {
-        $obj = clone $this;
-        $obj->ids = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 }

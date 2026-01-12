@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\CursorURLPage;
+use Spotted\Me\Episodes\EpisodeListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,9 +39,15 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->episodes->list([]);
+        $page = $this->client->me->episodes->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CursorURLPage::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(EpisodeListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -49,11 +57,12 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->episodes->check([
-            'ids' => '77o6BIVlYM3msb4MMIL1jH,0Q86acNRm6V9GYx55SXKwf',
-        ]);
+        $result = $this->client->me->episodes->check(
+            ids: '77o6BIVlYM3msb4MMIL1jH,0Q86acNRm6V9GYx55SXKwf'
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 
     #[Test]
@@ -63,11 +72,12 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->episodes->check([
-            'ids' => '77o6BIVlYM3msb4MMIL1jH,0Q86acNRm6V9GYx55SXKwf',
-        ]);
+        $result = $this->client->me->episodes->check(
+            ids: '77o6BIVlYM3msb4MMIL1jH,0Q86acNRm6V9GYx55SXKwf'
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 
     #[Test]
@@ -77,9 +87,10 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->episodes->remove([]);
+        $result = $this->client->me->episodes->remove();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -89,9 +100,10 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->episodes->save(['ids' => ['string']]);
+        $result = $this->client->me->episodes->save(ids: ['string']);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -101,8 +113,12 @@ final class EpisodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->episodes->save(['ids' => ['string']]);
+        $result = $this->client->me->episodes->save(
+            ids: ['string'],
+            published: true
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

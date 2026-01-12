@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\CursorURLPage;
+use Spotted\Shows\ShowBulkGetResponse;
+use Spotted\Shows\ShowGetResponse;
+use Spotted\SimplifiedEpisodeObject;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,9 +41,10 @@ final class ShowsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->shows->retrieve('38bS44xjbVVZ3No3ByF1dJ', []);
+        $result = $this->client->shows->retrieve('38bS44xjbVVZ3No3ByF1dJ');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ShowGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,11 +54,12 @@ final class ShowsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->shows->bulkRetrieve([
-            'ids' => '5CfCWKI5pZ28U0uOzXkDHe,5as3aKmN2k11yfDDDSrvaZ',
-        ]);
+        $result = $this->client->shows->bulkRetrieve(
+            ids: '5CfCWKI5pZ28U0uOzXkDHe,5as3aKmN2k11yfDDDSrvaZ'
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ShowBulkGetResponse::class, $result);
     }
 
     #[Test]
@@ -63,11 +69,13 @@ final class ShowsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->shows->bulkRetrieve([
-            'ids' => '5CfCWKI5pZ28U0uOzXkDHe,5as3aKmN2k11yfDDDSrvaZ',
-        ]);
+        $result = $this->client->shows->bulkRetrieve(
+            ids: '5CfCWKI5pZ28U0uOzXkDHe,5as3aKmN2k11yfDDDSrvaZ',
+            market: 'ES'
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ShowBulkGetResponse::class, $result);
     }
 
     #[Test]
@@ -77,8 +85,14 @@ final class ShowsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->shows->listEpisodes('38bS44xjbVVZ3No3ByF1dJ', []);
+        $page = $this->client->shows->listEpisodes('38bS44xjbVVZ3No3ByF1dJ');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CursorURLPage::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(SimplifiedEpisodeObject::class, $item);
+        }
     }
 }

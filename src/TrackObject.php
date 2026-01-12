@@ -4,33 +4,41 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\TrackObject\Album;
 use Spotted\TrackObject\Type;
 
 /**
+ * @phpstan-import-type AlbumShape from \Spotted\TrackObject\Album
+ * @phpstan-import-type SimplifiedArtistObjectShape from \Spotted\SimplifiedArtistObject
+ * @phpstan-import-type ExternalIDObjectShape from \Spotted\ExternalIDObject
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type LinkedTrackObjectShape from \Spotted\LinkedTrackObject
+ * @phpstan-import-type TrackRestrictionObjectShape from \Spotted\TrackRestrictionObject
+ *
  * @phpstan-type TrackObjectShape = array{
  *   id?: string|null,
- *   album?: Album|null,
- *   artists?: list<SimplifiedArtistObject>|null,
- *   available_markets?: list<string>|null,
- *   disc_number?: int|null,
- *   duration_ms?: int|null,
+ *   album?: null|Album|AlbumShape,
+ *   artists?: list<SimplifiedArtistObject|SimplifiedArtistObjectShape>|null,
+ *   availableMarkets?: list<string>|null,
+ *   discNumber?: int|null,
+ *   durationMs?: int|null,
  *   explicit?: bool|null,
- *   external_ids?: ExternalIDObject|null,
- *   external_urls?: ExternalURLObject|null,
+ *   externalIDs?: null|ExternalIDObject|ExternalIDObjectShape,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
  *   href?: string|null,
- *   is_local?: bool|null,
- *   is_playable?: bool|null,
- *   linked_from?: LinkedTrackObject|null,
+ *   isLocal?: bool|null,
+ *   isPlayable?: bool|null,
+ *   linkedFrom?: null|LinkedTrackObject|LinkedTrackObjectShape,
  *   name?: string|null,
  *   popularity?: int|null,
- *   preview_url?: string|null,
- *   restrictions?: TrackRestrictionObject|null,
- *   track_number?: int|null,
- *   type?: value-of<Type>|null,
+ *   previewURL?: string|null,
+ *   published?: bool|null,
+ *   restrictions?: null|TrackRestrictionObject|TrackRestrictionObjectShape,
+ *   trackNumber?: int|null,
+ *   type?: null|Type|value-of<Type>,
  *   uri?: string|null,
  * }
  */
@@ -42,13 +50,13 @@ final class TrackObject implements BaseModel
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The album on which the track appears. The album object includes a link in `href` to full information about the album.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Album $album;
 
     /**
@@ -56,81 +64,81 @@ final class TrackObject implements BaseModel
      *
      * @var list<SimplifiedArtistObject>|null $artists
      */
-    #[Api(list: SimplifiedArtistObject::class, optional: true)]
+    #[Optional(list: SimplifiedArtistObject::class)]
     public ?array $artists;
 
     /**
      * A list of the countries in which the track can be played, identified by their [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code.
      *
-     * @var list<string>|null $available_markets
+     * @var list<string>|null $availableMarkets
      */
-    #[Api(list: 'string', optional: true)]
-    public ?array $available_markets;
+    #[Optional('available_markets', list: 'string')]
+    public ?array $availableMarkets;
 
     /**
      * The disc number (usually `1` unless the album consists of more than one disc).
      */
-    #[Api(optional: true)]
-    public ?int $disc_number;
+    #[Optional('disc_number')]
+    public ?int $discNumber;
 
     /**
      * The track length in milliseconds.
      */
-    #[Api(optional: true)]
-    public ?int $duration_ms;
+    #[Optional('duration_ms')]
+    public ?int $durationMs;
 
     /**
      * Whether or not the track has explicit lyrics ( `true` = yes it does; `false` = no it does not OR unknown).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $explicit;
 
     /**
      * Known external IDs for the track.
      */
-    #[Api(optional: true)]
-    public ?ExternalIDObject $external_ids;
+    #[Optional('external_ids')]
+    public ?ExternalIDObject $externalIDs;
 
     /**
      * Known external URLs for this track.
      */
-    #[Api(optional: true)]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * A link to the Web API endpoint providing full details of the track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
 
     /**
      * Whether or not the track is from a local file.
      */
-    #[Api(optional: true)]
-    public ?bool $is_local;
+    #[Optional('is_local')]
+    public ?bool $isLocal;
 
     /**
      * Part of the response when [Track Relinking](/documentation/web-api/concepts/track-relinking) is applied. If `true`, the track is playable in the given market. Otherwise `false`.
      */
-    #[Api(optional: true)]
-    public ?bool $is_playable;
+    #[Optional('is_playable')]
+    public ?bool $isPlayable;
 
     /**
      * Part of the response when [Track Relinking](/documentation/web-api/concepts/track-relinking) is applied, and the requested track has been replaced with different track. The track in the `linked_from` object contains information about the originally requested track.
      */
-    #[Api(optional: true)]
-    public ?LinkedTrackObject $linked_from;
+    #[Optional('linked_from')]
+    public ?LinkedTrackObject $linkedFrom;
 
     /**
      * The name of the track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The popularity of the track. The value will be between 0 and 100, with 100 being the most popular.<br/>The popularity of a track is a value between 0 and 100, with 100 being the most popular. The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.<br/>Generally speaking, songs that are being played a lot now will have a higher popularity than songs that were played a lot in the past. Duplicate tracks (e.g. the same track from a single and an album) are rated independently. Artist and album popularity is derived mathematically from track popularity. _**Note**: the popularity value may lag actual popularity by a few days: the value is not updated in real time._.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $popularity;
 
     /**
@@ -138,33 +146,39 @@ final class TrackObject implements BaseModel
      *
      * A link to a 30 second preview (MP3 format) of the track. Can be `null`
      */
-    #[Api(nullable: true, optional: true)]
-    public ?string $preview_url;
+    #[Optional('preview_url', nullable: true)]
+    public ?string $previewURL;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * Included in the response when a content restriction is applied.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?TrackRestrictionObject $restrictions;
 
     /**
      * The number of the track. If an album has several discs, the track number is the number on the specified disc.
      */
-    #[Api(optional: true)]
-    public ?int $track_number;
+    #[Optional('track_number')]
+    public ?int $trackNumber;
 
     /**
      * The object type: "track".
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()
@@ -177,56 +191,63 @@ final class TrackObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimplifiedArtistObject> $artists
-     * @param list<string> $available_markets
-     * @param Type|value-of<Type> $type
+     * @param Album|AlbumShape|null $album
+     * @param list<SimplifiedArtistObject|SimplifiedArtistObjectShape>|null $artists
+     * @param list<string>|null $availableMarkets
+     * @param ExternalIDObject|ExternalIDObjectShape|null $externalIDs
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
+     * @param LinkedTrackObject|LinkedTrackObjectShape|null $linkedFrom
+     * @param TrackRestrictionObject|TrackRestrictionObjectShape|null $restrictions
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
-        ?Album $album = null,
+        Album|array|null $album = null,
         ?array $artists = null,
-        ?array $available_markets = null,
-        ?int $disc_number = null,
-        ?int $duration_ms = null,
+        ?array $availableMarkets = null,
+        ?int $discNumber = null,
+        ?int $durationMs = null,
         ?bool $explicit = null,
-        ?ExternalIDObject $external_ids = null,
-        ?ExternalURLObject $external_urls = null,
+        ExternalIDObject|array|null $externalIDs = null,
+        ExternalURLObject|array|null $externalURLs = null,
         ?string $href = null,
-        ?bool $is_local = null,
-        ?bool $is_playable = null,
-        ?LinkedTrackObject $linked_from = null,
+        ?bool $isLocal = null,
+        ?bool $isPlayable = null,
+        LinkedTrackObject|array|null $linkedFrom = null,
         ?string $name = null,
         ?int $popularity = null,
-        ?string $preview_url = null,
-        ?TrackRestrictionObject $restrictions = null,
-        ?int $track_number = null,
+        ?string $previewURL = null,
+        ?bool $published = null,
+        TrackRestrictionObject|array|null $restrictions = null,
+        ?int $trackNumber = null,
         Type|string|null $type = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $album && $obj->album = $album;
-        null !== $artists && $obj->artists = $artists;
-        null !== $available_markets && $obj->available_markets = $available_markets;
-        null !== $disc_number && $obj->disc_number = $disc_number;
-        null !== $duration_ms && $obj->duration_ms = $duration_ms;
-        null !== $explicit && $obj->explicit = $explicit;
-        null !== $external_ids && $obj->external_ids = $external_ids;
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $href && $obj->href = $href;
-        null !== $is_local && $obj->is_local = $is_local;
-        null !== $is_playable && $obj->is_playable = $is_playable;
-        null !== $linked_from && $obj->linked_from = $linked_from;
-        null !== $name && $obj->name = $name;
-        null !== $popularity && $obj->popularity = $popularity;
-        null !== $preview_url && $obj->preview_url = $preview_url;
-        null !== $restrictions && $obj->restrictions = $restrictions;
-        null !== $track_number && $obj->track_number = $track_number;
-        null !== $type && $obj['type'] = $type;
-        null !== $uri && $obj->uri = $uri;
+        null !== $id && $self['id'] = $id;
+        null !== $album && $self['album'] = $album;
+        null !== $artists && $self['artists'] = $artists;
+        null !== $availableMarkets && $self['availableMarkets'] = $availableMarkets;
+        null !== $discNumber && $self['discNumber'] = $discNumber;
+        null !== $durationMs && $self['durationMs'] = $durationMs;
+        null !== $explicit && $self['explicit'] = $explicit;
+        null !== $externalIDs && $self['externalIDs'] = $externalIDs;
+        null !== $externalURLs && $self['externalURLs'] = $externalURLs;
+        null !== $href && $self['href'] = $href;
+        null !== $isLocal && $self['isLocal'] = $isLocal;
+        null !== $isPlayable && $self['isPlayable'] = $isPlayable;
+        null !== $linkedFrom && $self['linkedFrom'] = $linkedFrom;
+        null !== $name && $self['name'] = $name;
+        null !== $popularity && $self['popularity'] = $popularity;
+        null !== $previewURL && $self['previewURL'] = $previewURL;
+        null !== $published && $self['published'] = $published;
+        null !== $restrictions && $self['restrictions'] = $restrictions;
+        null !== $trackNumber && $self['trackNumber'] = $trackNumber;
+        null !== $type && $self['type'] = $type;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,34 +255,36 @@ final class TrackObject implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The album on which the track appears. The album object includes a link in `href` to full information about the album.
+     *
+     * @param Album|AlbumShape $album
      */
-    public function withAlbum(Album $album): self
+    public function withAlbum(Album|array $album): self
     {
-        $obj = clone $this;
-        $obj->album = $album;
+        $self = clone $this;
+        $self['album'] = $album;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The artists who performed the track. Each artist object includes a link in `href` to more detailed information about the artist.
      *
-     * @param list<SimplifiedArtistObject> $artists
+     * @param list<SimplifiedArtistObject|SimplifiedArtistObjectShape> $artists
      */
     public function withArtists(array $artists): self
     {
-        $obj = clone $this;
-        $obj->artists = $artists;
+        $self = clone $this;
+        $self['artists'] = $artists;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -271,10 +294,10 @@ final class TrackObject implements BaseModel
      */
     public function withAvailableMarkets(array $availableMarkets): self
     {
-        $obj = clone $this;
-        $obj->available_markets = $availableMarkets;
+        $self = clone $this;
+        $self['availableMarkets'] = $availableMarkets;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,10 +305,10 @@ final class TrackObject implements BaseModel
      */
     public function withDiscNumber(int $discNumber): self
     {
-        $obj = clone $this;
-        $obj->disc_number = $discNumber;
+        $self = clone $this;
+        $self['discNumber'] = $discNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -293,10 +316,10 @@ final class TrackObject implements BaseModel
      */
     public function withDurationMs(int $durationMs): self
     {
-        $obj = clone $this;
-        $obj->duration_ms = $durationMs;
+        $self = clone $this;
+        $self['durationMs'] = $durationMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -304,32 +327,37 @@ final class TrackObject implements BaseModel
      */
     public function withExplicit(bool $explicit): self
     {
-        $obj = clone $this;
-        $obj->explicit = $explicit;
+        $self = clone $this;
+        $self['explicit'] = $explicit;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Known external IDs for the track.
+     *
+     * @param ExternalIDObject|ExternalIDObjectShape $externalIDs
      */
-    public function withExternalIDs(ExternalIDObject $externalIDs): self
+    public function withExternalIDs(ExternalIDObject|array $externalIDs): self
     {
-        $obj = clone $this;
-        $obj->external_ids = $externalIDs;
+        $self = clone $this;
+        $self['externalIDs'] = $externalIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Known external URLs for this track.
+     *
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
-        $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -337,10 +365,10 @@ final class TrackObject implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj->href = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -348,10 +376,10 @@ final class TrackObject implements BaseModel
      */
     public function withIsLocal(bool $isLocal): self
     {
-        $obj = clone $this;
-        $obj->is_local = $isLocal;
+        $self = clone $this;
+        $self['isLocal'] = $isLocal;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -359,21 +387,23 @@ final class TrackObject implements BaseModel
      */
     public function withIsPlayable(bool $isPlayable): self
     {
-        $obj = clone $this;
-        $obj->is_playable = $isPlayable;
+        $self = clone $this;
+        $self['isPlayable'] = $isPlayable;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Part of the response when [Track Relinking](/documentation/web-api/concepts/track-relinking) is applied, and the requested track has been replaced with different track. The track in the `linked_from` object contains information about the originally requested track.
+     *
+     * @param LinkedTrackObject|LinkedTrackObjectShape $linkedFrom
      */
-    public function withLinkedFrom(LinkedTrackObject $linkedFrom): self
+    public function withLinkedFrom(LinkedTrackObject|array $linkedFrom): self
     {
-        $obj = clone $this;
-        $obj->linked_from = $linkedFrom;
+        $self = clone $this;
+        $self['linkedFrom'] = $linkedFrom;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -381,10 +411,10 @@ final class TrackObject implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -392,10 +422,10 @@ final class TrackObject implements BaseModel
      */
     public function withPopularity(int $popularity): self
     {
-        $obj = clone $this;
-        $obj->popularity = $popularity;
+        $self = clone $this;
+        $self['popularity'] = $popularity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -403,21 +433,35 @@ final class TrackObject implements BaseModel
      */
     public function withPreviewURL(?string $previewURL): self
     {
-        $obj = clone $this;
-        $obj->preview_url = $previewURL;
+        $self = clone $this;
+        $self['previewURL'] = $previewURL;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
      * Included in the response when a content restriction is applied.
+     *
+     * @param TrackRestrictionObject|TrackRestrictionObjectShape $restrictions
      */
-    public function withRestrictions(TrackRestrictionObject $restrictions): self
-    {
-        $obj = clone $this;
-        $obj->restrictions = $restrictions;
+    public function withRestrictions(
+        TrackRestrictionObject|array $restrictions
+    ): self {
+        $self = clone $this;
+        $self['restrictions'] = $restrictions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -425,10 +469,10 @@ final class TrackObject implements BaseModel
      */
     public function withTrackNumber(int $trackNumber): self
     {
-        $obj = clone $this;
-        $obj->track_number = $trackNumber;
+        $self = clone $this;
+        $self['trackNumber'] = $trackNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -438,10 +482,10 @@ final class TrackObject implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -449,9 +493,9 @@ final class TrackObject implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

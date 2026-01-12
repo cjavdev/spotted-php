@@ -7,6 +7,7 @@ namespace Spotted;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 use Spotted\Core\BaseClient;
+use Spotted\Core\Util;
 use Spotted\Services\AlbumsService;
 use Spotted\Services\ArtistsService;
 use Spotted\Services\AudioAnalysisService;
@@ -24,6 +25,10 @@ use Spotted\Services\ShowsService;
 use Spotted\Services\TracksService;
 use Spotted\Services\UsersService;
 
+/**
+ * @phpstan-import-type NormalizedRequest from \Spotted\Core\BaseClient
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 class Client extends BaseClient
 {
     public string $clientID;
@@ -112,11 +117,15 @@ class Client extends BaseClient
      */
     public MarketsService $markets;
 
+    /**
+     * @param RequestOpts|null $requestOptions
+     */
     public function __construct(
         ?string $clientID = null,
         ?string $clientSecret = null,
         ?string $accessToken = null,
         ?string $baseUrl = null,
+        RequestOptions|array|null $requestOptions = null,
     ) {
         $this->clientID = (string) ($clientID ?? getenv('SPOTIFY_CLIENT_ID'));
         $this->clientSecret = (string) ($clientSecret ?? getenv('SPOTIFY_CLIENT_SECRET'));
@@ -124,19 +133,21 @@ class Client extends BaseClient
 
         $baseUrl ??= getenv('SPOTTED_BASE_URL') ?: 'https://api.spotify.com/v1';
 
-        $options = RequestOptions::with(
-            uriFactory: Psr17FactoryDiscovery::findUriFactory(),
-            streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
-            requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
-            transporter: Psr18ClientDiscovery::find(),
+        $options = RequestOptions::parse(
+            RequestOptions::with(
+                uriFactory: Psr17FactoryDiscovery::findUriFactory(),
+                streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
+                requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
+                transporter: Psr18ClientDiscovery::find(),
+            ),
+            $requestOptions,
         );
 
         parent::__construct(
-            // x-release-please-start-version
             headers: [
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
-                'User-Agent' => sprintf('spotted/PHP %s', '0.3.0'),
+                'User-Agent' => sprintf('spotted/PHP %s', VERSION),
                 'X-Stainless-Lang' => 'php',
                 'X-Stainless-Package-Version' => '0.3.0',
                 'X-Stainless-OS' => $this->getNormalizedOS(),
@@ -144,9 +155,8 @@ class Client extends BaseClient
                 'X-Stainless-Runtime' => 'php',
                 'X-Stainless-Runtime-Version' => phpversion(),
             ],
-            // x-release-please-end
             baseUrl: $baseUrl,
-            options: $options,
+            options: $options
         );
 
         $this->albums = new AlbumsService($this);
@@ -168,6 +178,12 @@ class Client extends BaseClient
     }
 
     /** @return array<string,string> */
+    protected function authHeaders(): array
+    {
+        return [...$this->bearerAuth(), ...$this->oauth2_0()];
+    }
+
+    /** @return array<string,string> */
     protected function bearerAuth(): array
     {
         return $this->accessToken ? [
@@ -179,5 +195,33 @@ class Client extends BaseClient
     protected function oauth2_0(): array
     {
         throw new \BadMethodCallException;
+    }
+
+    /**
+     * @internal
+     *
+     * @param string|list<string> $path
+     * @param array<string,mixed> $query
+     * @param array<string,string|int|list<string|int>|null> $headers
+     * @param RequestOpts|null $opts
+     *
+     * @return array{NormalizedRequest, RequestOptions}
+     */
+    protected function buildRequest(
+        string $method,
+        string|array $path,
+        array $query,
+        array $headers,
+        mixed $body,
+        RequestOptions|array|null $opts,
+    ): array {
+        return parent::buildRequest(
+            method: $method,
+            path: $path,
+            query: $query,
+            headers: [...$this->authHeaders(), ...$headers],
+            body: $body,
+            opts: $opts,
+        );
     }
 }

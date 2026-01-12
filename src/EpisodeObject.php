@@ -4,34 +4,42 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\EpisodeObject\ReleaseDatePrecision;
 
 /**
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ * @phpstan-import-type ShowBaseShape from \Spotted\ShowBase
+ * @phpstan-import-type EpisodeRestrictionObjectShape from \Spotted\EpisodeRestrictionObject
+ * @phpstan-import-type ResumePointObjectShape from \Spotted\ResumePointObject
+ *
  * @phpstan-type EpisodeObjectShape = array{
  *   id: string,
- *   audio_preview_url: string|null,
+ *   audioPreviewURL: string|null,
  *   description: string,
- *   duration_ms: int,
+ *   durationMs: int,
  *   explicit: bool,
- *   external_urls: ExternalURLObject,
+ *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
- *   html_description: string,
- *   images: list<ImageObject>,
- *   is_externally_hosted: bool,
- *   is_playable: bool,
+ *   htmlDescription: string,
+ *   images: list<ImageObject|ImageObjectShape>,
+ *   isExternallyHosted: bool,
+ *   isPlayable: bool,
  *   languages: list<string>,
  *   name: string,
- *   release_date: string,
- *   release_date_precision: value-of<ReleaseDatePrecision>,
- *   show: ShowBase,
+ *   releaseDate: string,
+ *   releaseDatePrecision: ReleaseDatePrecision|value-of<ReleaseDatePrecision>,
+ *   show: ShowBase|ShowBaseShape,
  *   type: 'episode',
  *   uri: string,
  *   language?: string|null,
- *   restrictions?: EpisodeRestrictionObject|null,
- *   resume_point?: ResumePointObject|null,
+ *   published?: bool|null,
+ *   restrictions?: null|EpisodeRestrictionObject|EpisodeRestrictionObjectShape,
+ *   resumePoint?: null|ResumePointObject|ResumePointObjectShape,
  * }
  */
 final class EpisodeObject implements BaseModel
@@ -44,13 +52,13 @@ final class EpisodeObject implements BaseModel
      *
      * @var 'episode' $type
      */
-    #[Api]
+    #[Required]
     public string $type = 'episode';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the episode.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -58,103 +66,103 @@ final class EpisodeObject implements BaseModel
      *
      * A URL to a 30 second preview (MP3 format) of the episode. `null` if not available.
      */
-    #[Api]
-    public ?string $audio_preview_url;
+    #[Required('audio_preview_url')]
+    public ?string $audioPreviewURL;
 
     /**
      * A description of the episode. HTML tags are stripped away from this field, use `html_description` field in case HTML tags are needed.
      */
-    #[Api]
+    #[Required]
     public string $description;
 
     /**
      * The episode length in milliseconds.
      */
-    #[Api]
-    public int $duration_ms;
+    #[Required('duration_ms')]
+    public int $durationMs;
 
     /**
      * Whether or not the episode has explicit content (true = yes it does; false = no it does not OR unknown).
      */
-    #[Api]
+    #[Required]
     public bool $explicit;
 
     /**
      * External URLs for this episode.
      */
-    #[Api]
-    public ExternalURLObject $external_urls;
+    #[Required('external_urls')]
+    public ExternalURLObject $externalURLs;
 
     /**
      * A link to the Web API endpoint providing full details of the episode.
      */
-    #[Api]
+    #[Required]
     public string $href;
 
     /**
      * A description of the episode. This field may contain HTML tags.
      */
-    #[Api]
-    public string $html_description;
+    #[Required('html_description')]
+    public string $htmlDescription;
 
     /**
      * The cover art for the episode in various sizes, widest first.
      *
      * @var list<ImageObject> $images
      */
-    #[Api(list: ImageObject::class)]
+    #[Required(list: ImageObject::class)]
     public array $images;
 
     /**
      * True if the episode is hosted outside of Spotify's CDN.
      */
-    #[Api]
-    public bool $is_externally_hosted;
+    #[Required('is_externally_hosted')]
+    public bool $isExternallyHosted;
 
     /**
      * True if the episode is playable in the given market. Otherwise false.
      */
-    #[Api]
-    public bool $is_playable;
+    #[Required('is_playable')]
+    public bool $isPlayable;
 
     /**
      * A list of the languages used in the episode, identified by their [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639) code.
      *
      * @var list<string> $languages
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $languages;
 
     /**
      * The name of the episode.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The date the episode was first released, for example `"1981-12-15"`. Depending on the precision, it might be shown as `"1981"` or `"1981-12"`.
      */
-    #[Api]
-    public string $release_date;
+    #[Required('release_date')]
+    public string $releaseDate;
 
     /**
      * The precision with which `release_date` value is known.
      *
-     * @var value-of<ReleaseDatePrecision> $release_date_precision
+     * @var value-of<ReleaseDatePrecision> $releaseDatePrecision
      */
-    #[Api(enum: ReleaseDatePrecision::class)]
-    public string $release_date_precision;
+    #[Required('release_date_precision', enum: ReleaseDatePrecision::class)]
+    public string $releaseDatePrecision;
 
     /**
      * The show on which the episode belongs.
      */
-    #[Api]
+    #[Required]
     public ShowBase $show;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the episode.
      */
-    #[Api]
+    #[Required]
     public string $uri;
 
     /**
@@ -162,20 +170,26 @@ final class EpisodeObject implements BaseModel
      *
      * The language used in the episode, identified by a [ISO 639](https://en.wikipedia.org/wiki/ISO_639) code. This field is deprecated and might be removed in the future. Please use the `languages` field instead.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $language;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * Included in the response when a content restriction is applied.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?EpisodeRestrictionObject $restrictions;
 
     /**
      * The user's most recent position in the episode. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
      */
-    #[Api(optional: true)]
-    public ?ResumePointObject $resume_point;
+    #[Optional('resume_point')]
+    public ?ResumePointObject $resumePoint;
 
     /**
      * `new EpisodeObject()` is missing required properties by the API.
@@ -184,20 +198,20 @@ final class EpisodeObject implements BaseModel
      * ```
      * EpisodeObject::with(
      *   id: ...,
-     *   audio_preview_url: ...,
+     *   audioPreviewURL: ...,
      *   description: ...,
-     *   duration_ms: ...,
+     *   durationMs: ...,
      *   explicit: ...,
-     *   external_urls: ...,
+     *   externalURLs: ...,
      *   href: ...,
-     *   html_description: ...,
+     *   htmlDescription: ...,
      *   images: ...,
-     *   is_externally_hosted: ...,
-     *   is_playable: ...,
+     *   isExternallyHosted: ...,
+     *   isPlayable: ...,
      *   languages: ...,
      *   name: ...,
-     *   release_date: ...,
-     *   release_date_precision: ...,
+     *   releaseDate: ...,
+     *   releaseDatePrecision: ...,
      *   show: ...,
      *   uri: ...,
      * )
@@ -236,57 +250,63 @@ final class EpisodeObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ImageObject> $images
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
+     * @param list<ImageObject|ImageObjectShape> $images
      * @param list<string> $languages
-     * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $release_date_precision
+     * @param ReleaseDatePrecision|value-of<ReleaseDatePrecision> $releaseDatePrecision
+     * @param ShowBase|ShowBaseShape $show
+     * @param EpisodeRestrictionObject|EpisodeRestrictionObjectShape|null $restrictions
+     * @param ResumePointObject|ResumePointObjectShape|null $resumePoint
      */
     public static function with(
         string $id,
-        ?string $audio_preview_url,
+        ?string $audioPreviewURL,
         string $description,
-        int $duration_ms,
+        int $durationMs,
         bool $explicit,
-        ExternalURLObject $external_urls,
+        ExternalURLObject|array $externalURLs,
         string $href,
-        string $html_description,
+        string $htmlDescription,
         array $images,
-        bool $is_externally_hosted,
-        bool $is_playable,
+        bool $isExternallyHosted,
+        bool $isPlayable,
         array $languages,
         string $name,
-        string $release_date,
-        ReleaseDatePrecision|string $release_date_precision,
-        ShowBase $show,
+        string $releaseDate,
+        ReleaseDatePrecision|string $releaseDatePrecision,
+        ShowBase|array $show,
         string $uri,
         ?string $language = null,
-        ?EpisodeRestrictionObject $restrictions = null,
-        ?ResumePointObject $resume_point = null,
+        ?bool $published = null,
+        EpisodeRestrictionObject|array|null $restrictions = null,
+        ResumePointObject|array|null $resumePoint = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->audio_preview_url = $audio_preview_url;
-        $obj->description = $description;
-        $obj->duration_ms = $duration_ms;
-        $obj->explicit = $explicit;
-        $obj->external_urls = $external_urls;
-        $obj->href = $href;
-        $obj->html_description = $html_description;
-        $obj->images = $images;
-        $obj->is_externally_hosted = $is_externally_hosted;
-        $obj->is_playable = $is_playable;
-        $obj->languages = $languages;
-        $obj->name = $name;
-        $obj->release_date = $release_date;
-        $obj['release_date_precision'] = $release_date_precision;
-        $obj->show = $show;
-        $obj->uri = $uri;
+        $self['id'] = $id;
+        $self['audioPreviewURL'] = $audioPreviewURL;
+        $self['description'] = $description;
+        $self['durationMs'] = $durationMs;
+        $self['explicit'] = $explicit;
+        $self['externalURLs'] = $externalURLs;
+        $self['href'] = $href;
+        $self['htmlDescription'] = $htmlDescription;
+        $self['images'] = $images;
+        $self['isExternallyHosted'] = $isExternallyHosted;
+        $self['isPlayable'] = $isPlayable;
+        $self['languages'] = $languages;
+        $self['name'] = $name;
+        $self['releaseDate'] = $releaseDate;
+        $self['releaseDatePrecision'] = $releaseDatePrecision;
+        $self['show'] = $show;
+        $self['uri'] = $uri;
 
-        null !== $language && $obj->language = $language;
-        null !== $restrictions && $obj->restrictions = $restrictions;
-        null !== $resume_point && $obj->resume_point = $resume_point;
+        null !== $language && $self['language'] = $language;
+        null !== $published && $self['published'] = $published;
+        null !== $restrictions && $self['restrictions'] = $restrictions;
+        null !== $resumePoint && $self['resumePoint'] = $resumePoint;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -294,10 +314,10 @@ final class EpisodeObject implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -305,10 +325,10 @@ final class EpisodeObject implements BaseModel
      */
     public function withAudioPreviewURL(?string $audioPreviewURL): self
     {
-        $obj = clone $this;
-        $obj->audio_preview_url = $audioPreviewURL;
+        $self = clone $this;
+        $self['audioPreviewURL'] = $audioPreviewURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -316,10 +336,10 @@ final class EpisodeObject implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -327,10 +347,10 @@ final class EpisodeObject implements BaseModel
      */
     public function withDurationMs(int $durationMs): self
     {
-        $obj = clone $this;
-        $obj->duration_ms = $durationMs;
+        $self = clone $this;
+        $self['durationMs'] = $durationMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -338,21 +358,24 @@ final class EpisodeObject implements BaseModel
      */
     public function withExplicit(bool $explicit): self
     {
-        $obj = clone $this;
-        $obj->explicit = $explicit;
+        $self = clone $this;
+        $self['explicit'] = $explicit;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * External URLs for this episode.
+     *
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
-        $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -360,10 +383,10 @@ final class EpisodeObject implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj->href = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -371,23 +394,23 @@ final class EpisodeObject implements BaseModel
      */
     public function withHTMLDescription(string $htmlDescription): self
     {
-        $obj = clone $this;
-        $obj->html_description = $htmlDescription;
+        $self = clone $this;
+        $self['htmlDescription'] = $htmlDescription;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The cover art for the episode in various sizes, widest first.
      *
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
-        $obj = clone $this;
-        $obj->images = $images;
+        $self = clone $this;
+        $self['images'] = $images;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -395,10 +418,10 @@ final class EpisodeObject implements BaseModel
      */
     public function withIsExternallyHosted(bool $isExternallyHosted): self
     {
-        $obj = clone $this;
-        $obj->is_externally_hosted = $isExternallyHosted;
+        $self = clone $this;
+        $self['isExternallyHosted'] = $isExternallyHosted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -406,10 +429,10 @@ final class EpisodeObject implements BaseModel
      */
     public function withIsPlayable(bool $isPlayable): self
     {
-        $obj = clone $this;
-        $obj->is_playable = $isPlayable;
+        $self = clone $this;
+        $self['isPlayable'] = $isPlayable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -419,10 +442,10 @@ final class EpisodeObject implements BaseModel
      */
     public function withLanguages(array $languages): self
     {
-        $obj = clone $this;
-        $obj->languages = $languages;
+        $self = clone $this;
+        $self['languages'] = $languages;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -430,10 +453,10 @@ final class EpisodeObject implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -441,10 +464,10 @@ final class EpisodeObject implements BaseModel
      */
     public function withReleaseDate(string $releaseDate): self
     {
-        $obj = clone $this;
-        $obj->release_date = $releaseDate;
+        $self = clone $this;
+        $self['releaseDate'] = $releaseDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -455,21 +478,23 @@ final class EpisodeObject implements BaseModel
     public function withReleaseDatePrecision(
         ReleaseDatePrecision|string $releaseDatePrecision
     ): self {
-        $obj = clone $this;
-        $obj['release_date_precision'] = $releaseDatePrecision;
+        $self = clone $this;
+        $self['releaseDatePrecision'] = $releaseDatePrecision;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The show on which the episode belongs.
+     *
+     * @param ShowBase|ShowBaseShape $show
      */
-    public function withShow(ShowBase $show): self
+    public function withShow(ShowBase|array $show): self
     {
-        $obj = clone $this;
-        $obj->show = $show;
+        $self = clone $this;
+        $self['show'] = $show;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -477,10 +502,10 @@ final class EpisodeObject implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -488,32 +513,47 @@ final class EpisodeObject implements BaseModel
      */
     public function withLanguage(string $language): self
     {
-        $obj = clone $this;
-        $obj->language = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
      * Included in the response when a content restriction is applied.
+     *
+     * @param EpisodeRestrictionObject|EpisodeRestrictionObjectShape $restrictions
      */
     public function withRestrictions(
-        EpisodeRestrictionObject $restrictions
+        EpisodeRestrictionObject|array $restrictions
     ): self {
-        $obj = clone $this;
-        $obj->restrictions = $restrictions;
+        $self = clone $this;
+        $self['restrictions'] = $restrictions;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The user's most recent position in the episode. Set if the supplied access token is a user token and has the scope 'user-read-playback-position'.
+     *
+     * @param ResumePointObject|ResumePointObjectShape $resumePoint
      */
-    public function withResumePoint(ResumePointObject $resumePoint): self
+    public function withResumePoint(ResumePointObject|array $resumePoint): self
     {
-        $obj = clone $this;
-        $obj->resume_point = $resumePoint;
+        $self = clone $this;
+        $self['resumePoint'] = $resumePoint;
 
-        return $obj;
+        return $self;
     }
 }

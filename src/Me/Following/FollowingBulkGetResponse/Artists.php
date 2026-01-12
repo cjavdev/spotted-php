@@ -5,18 +5,22 @@ declare(strict_types=1);
 namespace Spotted\Me\Following\FollowingBulkGetResponse;
 
 use Spotted\ArtistObject;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\Me\Following\FollowingBulkGetResponse\Artists\Cursors;
 
 /**
+ * @phpstan-import-type CursorsShape from \Spotted\Me\Following\FollowingBulkGetResponse\Artists\Cursors
+ * @phpstan-import-type ArtistObjectShape from \Spotted\ArtistObject
+ *
  * @phpstan-type ArtistsShape = array{
- *   cursors?: Cursors|null,
+ *   cursors?: null|Cursors|CursorsShape,
  *   href?: string|null,
- *   items?: list<ArtistObject>|null,
+ *   items?: list<ArtistObject|ArtistObjectShape>|null,
  *   limit?: int|null,
  *   next?: string|null,
+ *   published?: bool|null,
  *   total?: int|null,
  * }
  */
@@ -28,35 +32,41 @@ final class Artists implements BaseModel
     /**
      * The cursors used to find the next set of items.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Cursors $cursors;
 
     /**
      * A link to the Web API endpoint returning the full result of the request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
 
     /** @var list<ArtistObject>|null $items */
-    #[Api(list: ArtistObject::class, optional: true)]
+    #[Optional(list: ArtistObject::class)]
     public ?array $items;
 
     /**
      * The maximum number of items in the response (as set in the query or by default).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     /**
      * URL to the next page of items. ( `null` if none).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $next;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The total number of items available to return.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $total;
 
     public function __construct()
@@ -69,37 +79,42 @@ final class Artists implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ArtistObject> $items
+     * @param Cursors|CursorsShape|null $cursors
+     * @param list<ArtistObject|ArtistObjectShape>|null $items
      */
     public static function with(
-        ?Cursors $cursors = null,
+        Cursors|array|null $cursors = null,
         ?string $href = null,
         ?array $items = null,
         ?int $limit = null,
         ?string $next = null,
+        ?bool $published = null,
         ?int $total = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $cursors && $obj->cursors = $cursors;
-        null !== $href && $obj->href = $href;
-        null !== $items && $obj->items = $items;
-        null !== $limit && $obj->limit = $limit;
-        null !== $next && $obj->next = $next;
-        null !== $total && $obj->total = $total;
+        null !== $cursors && $self['cursors'] = $cursors;
+        null !== $href && $self['href'] = $href;
+        null !== $items && $self['items'] = $items;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $next && $self['next'] = $next;
+        null !== $published && $self['published'] = $published;
+        null !== $total && $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The cursors used to find the next set of items.
+     *
+     * @param Cursors|CursorsShape $cursors
      */
-    public function withCursors(Cursors $cursors): self
+    public function withCursors(Cursors|array $cursors): self
     {
-        $obj = clone $this;
-        $obj->cursors = $cursors;
+        $self = clone $this;
+        $self['cursors'] = $cursors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,21 +122,21 @@ final class Artists implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj->href = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<ArtistObject> $items
+     * @param list<ArtistObject|ArtistObjectShape> $items
      */
     public function withItems(array $items): self
     {
-        $obj = clone $this;
-        $obj->items = $items;
+        $self = clone $this;
+        $self['items'] = $items;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,10 +144,10 @@ final class Artists implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj->limit = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,10 +155,21 @@ final class Artists implements BaseModel
      */
     public function withNext(string $next): self
     {
-        $obj = clone $this;
-        $obj->next = $next;
+        $self = clone $this;
+        $self['next'] = $next;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -151,9 +177,9 @@ final class Artists implements BaseModel
      */
     public function withTotal(int $total): self
     {
-        $obj = clone $this;
-        $obj->total = $total;
+        $self = clone $this;
+        $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 }

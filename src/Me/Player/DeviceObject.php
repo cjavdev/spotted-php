@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type DeviceObjectShape = array{
  *   id?: string|null,
- *   is_active?: bool|null,
- *   is_private_session?: bool|null,
- *   is_restricted?: bool|null,
+ *   isActive?: bool|null,
+ *   isPrivateSession?: bool|null,
+ *   isRestricted?: bool|null,
  *   name?: string|null,
- *   supports_volume?: bool|null,
+ *   published?: bool|null,
+ *   supportsVolume?: bool|null,
  *   type?: string|null,
- *   volume_percent?: int|null,
+ *   volumePercent?: int|null,
  * }
  */
 final class DeviceObject implements BaseModel
@@ -28,50 +29,56 @@ final class DeviceObject implements BaseModel
     /**
      * The device ID. This ID is unique and persistent to some extent. However, this is not guaranteed and any cached `device_id` should periodically be cleared out and refetched as necessary.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $id;
 
     /**
      * If this device is the currently active device.
      */
-    #[Api(optional: true)]
-    public ?bool $is_active;
+    #[Optional('is_active')]
+    public ?bool $isActive;
 
     /**
      * If this device is currently in a private session.
      */
-    #[Api(optional: true)]
-    public ?bool $is_private_session;
+    #[Optional('is_private_session')]
+    public ?bool $isPrivateSession;
 
     /**
      * Whether controlling this device is restricted. At present if this is "true" then no Web API commands will be accepted by this device.
      */
-    #[Api(optional: true)]
-    public ?bool $is_restricted;
+    #[Optional('is_restricted')]
+    public ?bool $isRestricted;
 
     /**
      * A human-readable name for the device. Some devices have a name that the user can configure (e.g. \"Loudest speaker\") and some devices have a generic name associated with the manufacturer or device model.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * If this device can be used to set the volume.
      */
-    #[Api(optional: true)]
-    public ?bool $supports_volume;
+    #[Optional('supports_volume')]
+    public ?bool $supportsVolume;
 
     /**
      * Device type, such as "computer", "smartphone" or "speaker".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     /**
      * The current volume in percent.
      */
-    #[Api(nullable: true, optional: true)]
-    public ?int $volume_percent;
+    #[Optional('volume_percent', nullable: true)]
+    public ?int $volumePercent;
 
     public function __construct()
     {
@@ -85,26 +92,28 @@ final class DeviceObject implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?bool $is_active = null,
-        ?bool $is_private_session = null,
-        ?bool $is_restricted = null,
+        ?bool $isActive = null,
+        ?bool $isPrivateSession = null,
+        ?bool $isRestricted = null,
         ?string $name = null,
-        ?bool $supports_volume = null,
+        ?bool $published = null,
+        ?bool $supportsVolume = null,
         ?string $type = null,
-        ?int $volume_percent = null,
+        ?int $volumePercent = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $is_active && $obj->is_active = $is_active;
-        null !== $is_private_session && $obj->is_private_session = $is_private_session;
-        null !== $is_restricted && $obj->is_restricted = $is_restricted;
-        null !== $name && $obj->name = $name;
-        null !== $supports_volume && $obj->supports_volume = $supports_volume;
-        null !== $type && $obj->type = $type;
-        null !== $volume_percent && $obj->volume_percent = $volume_percent;
+        null !== $id && $self['id'] = $id;
+        null !== $isActive && $self['isActive'] = $isActive;
+        null !== $isPrivateSession && $self['isPrivateSession'] = $isPrivateSession;
+        null !== $isRestricted && $self['isRestricted'] = $isRestricted;
+        null !== $name && $self['name'] = $name;
+        null !== $published && $self['published'] = $published;
+        null !== $supportsVolume && $self['supportsVolume'] = $supportsVolume;
+        null !== $type && $self['type'] = $type;
+        null !== $volumePercent && $self['volumePercent'] = $volumePercent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +121,10 @@ final class DeviceObject implements BaseModel
      */
     public function withID(?string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +132,10 @@ final class DeviceObject implements BaseModel
      */
     public function withIsActive(bool $isActive): self
     {
-        $obj = clone $this;
-        $obj->is_active = $isActive;
+        $self = clone $this;
+        $self['isActive'] = $isActive;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +143,10 @@ final class DeviceObject implements BaseModel
      */
     public function withIsPrivateSession(bool $isPrivateSession): self
     {
-        $obj = clone $this;
-        $obj->is_private_session = $isPrivateSession;
+        $self = clone $this;
+        $self['isPrivateSession'] = $isPrivateSession;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +154,10 @@ final class DeviceObject implements BaseModel
      */
     public function withIsRestricted(bool $isRestricted): self
     {
-        $obj = clone $this;
-        $obj->is_restricted = $isRestricted;
+        $self = clone $this;
+        $self['isRestricted'] = $isRestricted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,10 +165,21 @@ final class DeviceObject implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -167,10 +187,10 @@ final class DeviceObject implements BaseModel
      */
     public function withSupportsVolume(bool $supportsVolume): self
     {
-        $obj = clone $this;
-        $obj->supports_volume = $supportsVolume;
+        $self = clone $this;
+        $self['supportsVolume'] = $supportsVolume;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +198,10 @@ final class DeviceObject implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj->type = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,9 +209,9 @@ final class DeviceObject implements BaseModel
      */
     public function withVolumePercent(?int $volumePercent): self
     {
-        $obj = clone $this;
-        $obj->volume_percent = $volumePercent;
+        $self = clone $this;
+        $self['volumePercent'] = $volumePercent;
 
-        return $obj;
+        return $self;
     }
 }

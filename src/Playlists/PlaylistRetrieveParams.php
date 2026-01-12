@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Playlists;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\PlaylistsService::retrieve()
  *
  * @phpstan-type PlaylistRetrieveParamsShape = array{
- *   additional_types?: string, fields?: string, market?: string
+ *   additionalTypes?: string|null, fields?: string|null, market?: string|null
  * }
  */
 final class PlaylistRetrieveParams implements BaseModel
@@ -29,8 +29,8 @@ final class PlaylistRetrieveParams implements BaseModel
      * _**Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future._<br/>
      * In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object.
      */
-    #[Api(optional: true)]
-    public ?string $additional_types;
+    #[Optional]
+    public ?string $additionalTypes;
 
     /**
      * Filters for the query: a comma-separated list of the
@@ -43,7 +43,7 @@ final class PlaylistRetrieveParams implements BaseModel
      * Fields can be excluded by prefixing them with an exclamation mark, for example:
      * `fields=tracks.items(track(name,href,album(!name,href)))`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fields;
 
     /**
@@ -54,7 +54,7 @@ final class PlaylistRetrieveParams implements BaseModel
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $market;
 
     public function __construct()
@@ -68,17 +68,17 @@ final class PlaylistRetrieveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $additional_types = null,
+        ?string $additionalTypes = null,
         ?string $fields = null,
-        ?string $market = null,
+        ?string $market = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additional_types && $obj->additional_types = $additional_types;
-        null !== $fields && $obj->fields = $fields;
-        null !== $market && $obj->market = $market;
+        null !== $additionalTypes && $self['additionalTypes'] = $additionalTypes;
+        null !== $fields && $self['fields'] = $fields;
+        null !== $market && $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,10 +88,10 @@ final class PlaylistRetrieveParams implements BaseModel
      */
     public function withAdditionalTypes(string $additionalTypes): self
     {
-        $obj = clone $this;
-        $obj->additional_types = $additionalTypes;
+        $self = clone $this;
+        $self['additionalTypes'] = $additionalTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class PlaylistRetrieveParams implements BaseModel
      */
     public function withFields(string $fields): self
     {
-        $obj = clone $this;
-        $obj->fields = $fields;
+        $self = clone $this;
+        $self['fields'] = $fields;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,9 +123,9 @@ final class PlaylistRetrieveParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj->market = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 }

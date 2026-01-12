@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\Me\Following\FollowingBulkGetResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,9 +38,10 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->bulkRetrieve(['type' => 'artist']);
+        $result = $this->client->me->following->bulkRetrieve();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FollowingBulkGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,9 +51,14 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->bulkRetrieve(['type' => 'artist']);
+        $result = $this->client->me->following->bulkRetrieve(
+            type: 'artist',
+            after: '0I2XqVXqHScXjHhk6AYYRe',
+            limit: 10
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FollowingBulkGetResponse::class, $result);
     }
 
     #[Test]
@@ -61,12 +68,13 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->check([
-            'ids' => '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
-            'type' => 'artist',
-        ]);
+        $result = $this->client->me->following->check(
+            ids: '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
+            type: 'artist',
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 
     #[Test]
@@ -76,12 +84,13 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->check([
-            'ids' => '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
-            'type' => 'artist',
-        ]);
+        $result = $this->client->me->following->check(
+            ids: '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
+            type: 'artist',
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 
     #[Test]
@@ -91,9 +100,10 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->follow(['ids' => ['string']]);
+        $result = $this->client->me->following->follow(ids: ['string']);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -103,9 +113,13 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->follow(['ids' => ['string']]);
+        $result = $this->client->me->following->follow(
+            ids: ['string'],
+            published: true
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -115,8 +129,9 @@ final class FollowingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->following->unfollow([]);
+        $result = $this->client->me->following->unfollow();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Tracks;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -15,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\TracksService::retrieve()
  *
- * @phpstan-type TrackRetrieveParamsShape = array{market?: string}
+ * @phpstan-type TrackRetrieveParamsShape = array{market?: string|null}
  */
 final class TrackRetrieveParams implements BaseModel
 {
@@ -31,7 +31,7 @@ final class TrackRetrieveParams implements BaseModel
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $market;
 
     public function __construct()
@@ -46,11 +46,11 @@ final class TrackRetrieveParams implements BaseModel
      */
     public static function with(?string $market = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $market && $obj->market = $market;
+        null !== $market && $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,9 +63,9 @@ final class TrackRetrieveParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj->market = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 }

@@ -7,51 +7,58 @@ namespace Spotted\Services\Me;
 use Spotted\ArtistObject;
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
-use Spotted\Me\Top\TopListTopArtistsParams;
-use Spotted\Me\Top\TopListTopTracksParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\TopContract;
 use Spotted\TrackObject;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class TopService implements TopContract
 {
     /**
+     * @api
+     */
+    public TopRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new TopRawService($client);
+    }
 
     /**
      * @api
      *
      * Get the current user's top artists based on calculated affinity.
      *
-     * @param array{
-     *   limit?: int, offset?: int, time_range?: string
-     * }|TopListTopArtistsParams $params
+     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param string $timeRange Over what time frame the affinities are computed. Valid values: `long_term` (calculated from ~1 year of data and including all new data as it becomes available), `medium_term` (approximately last 6 months), `short_term` (approximately last 4 weeks). Default: `medium_term`
+     * @param RequestOpts|null $requestOptions
      *
      * @return CursorURLPage<ArtistObject>
      *
      * @throws APIException
      */
     public function listTopArtists(
-        array|TopListTopArtistsParams $params,
-        ?RequestOptions $requestOptions = null,
+        int $limit = 20,
+        int $offset = 0,
+        string $timeRange = 'medium_term',
+        RequestOptions|array|null $requestOptions = null,
     ): CursorURLPage {
-        [$parsed, $options] = TopListTopArtistsParams::parseRequest(
-            $params,
-            $requestOptions,
+        $params = Util::removeNulls(
+            ['limit' => $limit, 'offset' => $offset, 'timeRange' => $timeRange]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'me/top/artists',
-            query: $parsed,
-            options: $options,
-            convert: ArtistObject::class,
-            page: CursorURLPage::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listTopArtists(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -59,31 +66,28 @@ final class TopService implements TopContract
      *
      * Get the current user's top tracks based on calculated affinity.
      *
-     * @param array{
-     *   limit?: int, offset?: int, time_range?: string
-     * }|TopListTopTracksParams $params
+     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param string $timeRange Over what time frame the affinities are computed. Valid values: `long_term` (calculated from ~1 year of data and including all new data as it becomes available), `medium_term` (approximately last 6 months), `short_term` (approximately last 4 weeks). Default: `medium_term`
+     * @param RequestOpts|null $requestOptions
      *
      * @return CursorURLPage<TrackObject>
      *
      * @throws APIException
      */
     public function listTopTracks(
-        array|TopListTopTracksParams $params,
-        ?RequestOptions $requestOptions = null
+        int $limit = 20,
+        int $offset = 0,
+        string $timeRange = 'medium_term',
+        RequestOptions|array|null $requestOptions = null,
     ): CursorURLPage {
-        [$parsed, $options] = TopListTopTracksParams::parseRequest(
-            $params,
-            $requestOptions,
+        $params = Util::removeNulls(
+            ['limit' => $limit, 'offset' => $offset, 'timeRange' => $timeRange]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'me/top/tracks',
-            query: $parsed,
-            options: $options,
-            convert: TrackObject::class,
-            page: CursorURLPage::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listTopTracks(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

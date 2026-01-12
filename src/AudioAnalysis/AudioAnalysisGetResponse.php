@@ -8,36 +8,39 @@ use Spotted\AudioAnalysis\AudioAnalysisGetResponse\Meta;
 use Spotted\AudioAnalysis\AudioAnalysisGetResponse\Section;
 use Spotted\AudioAnalysis\AudioAnalysisGetResponse\Segment;
 use Spotted\AudioAnalysis\AudioAnalysisGetResponse\Track;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
+ * @phpstan-import-type TimeIntervalObjectShape from \Spotted\AudioAnalysis\TimeIntervalObject
+ * @phpstan-import-type MetaShape from \Spotted\AudioAnalysis\AudioAnalysisGetResponse\Meta
+ * @phpstan-import-type SectionShape from \Spotted\AudioAnalysis\AudioAnalysisGetResponse\Section
+ * @phpstan-import-type SegmentShape from \Spotted\AudioAnalysis\AudioAnalysisGetResponse\Segment
+ * @phpstan-import-type TrackShape from \Spotted\AudioAnalysis\AudioAnalysisGetResponse\Track
+ *
  * @phpstan-type AudioAnalysisGetResponseShape = array{
- *   bars?: list<TimeIntervalObject>|null,
- *   beats?: list<TimeIntervalObject>|null,
- *   meta?: Meta|null,
- *   sections?: list<Section>|null,
- *   segments?: list<Segment>|null,
- *   tatums?: list<TimeIntervalObject>|null,
- *   track?: Track|null,
+ *   bars?: list<TimeIntervalObject|TimeIntervalObjectShape>|null,
+ *   beats?: list<TimeIntervalObject|TimeIntervalObjectShape>|null,
+ *   meta?: null|Meta|MetaShape,
+ *   published?: bool|null,
+ *   sections?: list<Section|SectionShape>|null,
+ *   segments?: list<Segment|SegmentShape>|null,
+ *   tatums?: list<TimeIntervalObject|TimeIntervalObjectShape>|null,
+ *   track?: null|Track|TrackShape,
  * }
  */
-final class AudioAnalysisGetResponse implements BaseModel, ResponseConverter
+final class AudioAnalysisGetResponse implements BaseModel
 {
     /** @use SdkModel<AudioAnalysisGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The time intervals of the bars throughout the track. A bar (or measure) is a segment of time defined as a given number of beats.
      *
      * @var list<TimeIntervalObject>|null $bars
      */
-    #[Api(list: TimeIntervalObject::class, optional: true)]
+    #[Optional(list: TimeIntervalObject::class)]
     public ?array $bars;
 
     /**
@@ -45,18 +48,24 @@ final class AudioAnalysisGetResponse implements BaseModel, ResponseConverter
      *
      * @var list<TimeIntervalObject>|null $beats
      */
-    #[Api(list: TimeIntervalObject::class, optional: true)]
+    #[Optional(list: TimeIntervalObject::class)]
     public ?array $beats;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * Sections are defined by large variations in rhythm or timbre, e.g. chorus, verse, bridge, guitar solo, etc. Each section contains its own descriptions of tempo, key, mode, time_signature, and loudness.
      *
      * @var list<Section>|null $sections
      */
-    #[Api(list: Section::class, optional: true)]
+    #[Optional(list: Section::class)]
     public ?array $sections;
 
     /**
@@ -64,7 +73,7 @@ final class AudioAnalysisGetResponse implements BaseModel, ResponseConverter
      *
      * @var list<Segment>|null $segments
      */
-    #[Api(list: Segment::class, optional: true)]
+    #[Optional(list: Segment::class)]
     public ?array $segments;
 
     /**
@@ -72,10 +81,10 @@ final class AudioAnalysisGetResponse implements BaseModel, ResponseConverter
      *
      * @var list<TimeIntervalObject>|null $tatums
      */
-    #[Api(list: TimeIntervalObject::class, optional: true)]
+    #[Optional(list: TimeIntervalObject::class)]
     public ?array $tatums;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Track $track;
 
     public function __construct()
@@ -88,112 +97,133 @@ final class AudioAnalysisGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TimeIntervalObject> $bars
-     * @param list<TimeIntervalObject> $beats
-     * @param list<Section> $sections
-     * @param list<Segment> $segments
-     * @param list<TimeIntervalObject> $tatums
+     * @param list<TimeIntervalObject|TimeIntervalObjectShape>|null $bars
+     * @param list<TimeIntervalObject|TimeIntervalObjectShape>|null $beats
+     * @param Meta|MetaShape|null $meta
+     * @param list<Section|SectionShape>|null $sections
+     * @param list<Segment|SegmentShape>|null $segments
+     * @param list<TimeIntervalObject|TimeIntervalObjectShape>|null $tatums
+     * @param Track|TrackShape|null $track
      */
     public static function with(
         ?array $bars = null,
         ?array $beats = null,
-        ?Meta $meta = null,
+        Meta|array|null $meta = null,
+        ?bool $published = null,
         ?array $sections = null,
         ?array $segments = null,
         ?array $tatums = null,
-        ?Track $track = null,
+        Track|array|null $track = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $bars && $obj->bars = $bars;
-        null !== $beats && $obj->beats = $beats;
-        null !== $meta && $obj->meta = $meta;
-        null !== $sections && $obj->sections = $sections;
-        null !== $segments && $obj->segments = $segments;
-        null !== $tatums && $obj->tatums = $tatums;
-        null !== $track && $obj->track = $track;
+        null !== $bars && $self['bars'] = $bars;
+        null !== $beats && $self['beats'] = $beats;
+        null !== $meta && $self['meta'] = $meta;
+        null !== $published && $self['published'] = $published;
+        null !== $sections && $self['sections'] = $sections;
+        null !== $segments && $self['segments'] = $segments;
+        null !== $tatums && $self['tatums'] = $tatums;
+        null !== $track && $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The time intervals of the bars throughout the track. A bar (or measure) is a segment of time defined as a given number of beats.
      *
-     * @param list<TimeIntervalObject> $bars
+     * @param list<TimeIntervalObject|TimeIntervalObjectShape> $bars
      */
     public function withBars(array $bars): self
     {
-        $obj = clone $this;
-        $obj->bars = $bars;
+        $self = clone $this;
+        $self['bars'] = $bars;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The time intervals of beats throughout the track. A beat is the basic time unit of a piece of music; for example, each tick of a metronome. Beats are typically multiples of tatums.
      *
-     * @param list<TimeIntervalObject> $beats
+     * @param list<TimeIntervalObject|TimeIntervalObjectShape> $beats
      */
     public function withBeats(array $beats): self
     {
-        $obj = clone $this;
-        $obj->beats = $beats;
+        $self = clone $this;
+        $self['beats'] = $beats;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|MetaShape $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
      * Sections are defined by large variations in rhythm or timbre, e.g. chorus, verse, bridge, guitar solo, etc. Each section contains its own descriptions of tempo, key, mode, time_signature, and loudness.
      *
-     * @param list<Section> $sections
+     * @param list<Section|SectionShape> $sections
      */
     public function withSections(array $sections): self
     {
-        $obj = clone $this;
-        $obj->sections = $sections;
+        $self = clone $this;
+        $self['sections'] = $sections;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Each segment contains a roughly conisistent sound throughout its duration.
      *
-     * @param list<Segment> $segments
+     * @param list<Segment|SegmentShape> $segments
      */
     public function withSegments(array $segments): self
     {
-        $obj = clone $this;
-        $obj->segments = $segments;
+        $self = clone $this;
+        $self['segments'] = $segments;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * A tatum represents the lowest regular pulse train that a listener intuitively infers from the timing of perceived musical events (segments).
      *
-     * @param list<TimeIntervalObject> $tatums
+     * @param list<TimeIntervalObject|TimeIntervalObjectShape> $tatums
      */
     public function withTatums(array $tatums): self
     {
-        $obj = clone $this;
-        $obj->tatums = $tatums;
+        $self = clone $this;
+        $self['tatums'] = $tatums;
 
-        return $obj;
+        return $self;
     }
 
-    public function withTrack(Track $track): self
+    /**
+     * @param Track|TrackShape $track
+     */
+    public function withTrack(Track|array $track): self
     {
-        $obj = clone $this;
-        $obj->track = $track;
+        $self = clone $this;
+        $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 }

@@ -5,53 +5,66 @@ declare(strict_types=1);
 namespace Spotted\Services\Me;
 
 use Spotted\Client;
-use Spotted\Core\Conversion\ListOf;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
-use Spotted\Me\Tracks\TrackCheckParams;
-use Spotted\Me\Tracks\TrackListParams;
 use Spotted\Me\Tracks\TrackListResponse;
-use Spotted\Me\Tracks\TrackRemoveParams;
-use Spotted\Me\Tracks\TrackSaveParams;
+use Spotted\Me\Tracks\TrackSaveParams\TimestampedID;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\TracksContract;
 
+/**
+ * @phpstan-import-type TimestampedIDShape from \Spotted\Me\Tracks\TrackSaveParams\TimestampedID
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class TracksService implements TracksContract
 {
     /**
+     * @api
+     */
+    public TracksRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new TracksRawService($client);
+    }
 
     /**
      * @api
      *
      * Get a list of the songs saved in the current Spotify user's 'Your Music' library.
      *
-     * @param array{limit?: int, market?: string, offset?: int}|TrackListParams $params
+     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     *   If a country code is specified, only content that is available in that market will be returned.<br/>
+     *   If a valid user access token is specified in the request header, the country associated with
+     *   the user account will take priority over this parameter.<br/>
+     *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
+     *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
+     * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param RequestOpts|null $requestOptions
      *
      * @return CursorURLPage<TrackListResponse>
      *
      * @throws APIException
      */
     public function list(
-        array|TrackListParams $params,
-        ?RequestOptions $requestOptions = null
+        int $limit = 20,
+        ?string $market = null,
+        int $offset = 0,
+        RequestOptions|array|null $requestOptions = null,
     ): CursorURLPage {
-        [$parsed, $options] = TrackListParams::parseRequest(
-            $params,
-            $requestOptions,
+        $params = Util::removeNulls(
+            ['limit' => $limit, 'market' => $market, 'offset' => $offset]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'me/tracks',
-            query: $parsed,
-            options: $options,
-            convert: TrackListResponse::class,
-            page: CursorURLPage::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -59,29 +72,23 @@ final class TracksService implements TracksContract
      *
      * Check if one or more tracks is already saved in the current Spotify user's 'Your Music' library.
      *
-     * @param array{ids: string}|TrackCheckParams $params
+     * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M`. Maximum: 50 IDs.
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<bool>
      *
      * @throws APIException
      */
     public function check(
-        array|TrackCheckParams $params,
-        ?RequestOptions $requestOptions = null
+        string $ids,
+        RequestOptions|array|null $requestOptions = null
     ): array {
-        [$parsed, $options] = TrackCheckParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = Util::removeNulls(['ids' => $ids]);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'me/tracks/contains',
-            query: $parsed,
-            options: $options,
-            convert: new ListOf('bool'),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->check(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -89,27 +96,23 @@ final class TracksService implements TracksContract
      *
      * Remove one or more tracks from the current user's 'Your Music' library.
      *
-     * @param array{ids?: list<string>}|TrackRemoveParams $params
+     * @param list<string> $ids A JSON array of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `["4iV5W9uYEdYUVa79Axb7Rh", "1301WleyT98MSxVHPZCA6M"]`<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._
+     * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function remove(
-        array|TrackRemoveParams $params,
-        ?RequestOptions $requestOptions = null
+        ?array $ids = null,
+        ?bool $published = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = TrackRemoveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = Util::removeNulls(['ids' => $ids, 'published' => $published]);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: 'me/tracks',
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->remove(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -117,31 +120,30 @@ final class TracksService implements TracksContract
      *
      * Save one or more tracks to the current user's 'Your Music' library.
      *
-     * @param array{
-     *   ids: list<string>,
-     *   timestamped_ids?: list<array{
-     *     id: string, added_at: string|\DateTimeInterface
-     *   }>,
-     * }|TrackSaveParams $params
+     * @param list<string> $ids A JSON array of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `["4iV5W9uYEdYUVa79Axb7Rh", "1301WleyT98MSxVHPZCA6M"]`<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `timestamped_ids` is present in the body, any IDs listed in the query parameters (deprecated) or the `ids` field in the body will be ignored._
+     * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
+     * @param list<TimestampedID|TimestampedIDShape> $timestampedIDs A JSON array of objects containing track IDs with their corresponding timestamps. Each object must include a track ID and an `added_at` timestamp. This allows you to specify when tracks were added to maintain a specific chronological order in the user's library.<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `timestamped_ids` is present in the body, any IDs listed in the query parameters (deprecated) or the `ids` field in the body will be ignored._
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function save(
-        array|TrackSaveParams $params,
-        ?RequestOptions $requestOptions = null
+        array $ids,
+        ?bool $published = null,
+        ?array $timestampedIDs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = TrackSaveParams::parseRequest(
-            $params,
-            $requestOptions,
+        $params = Util::removeNulls(
+            [
+                'ids' => $ids,
+                'published' => $published,
+                'timestampedIDs' => $timestampedIDs,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'put',
-            path: 'me/tracks',
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->save(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

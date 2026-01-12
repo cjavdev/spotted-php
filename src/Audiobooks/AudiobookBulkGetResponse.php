@@ -5,24 +5,24 @@ declare(strict_types=1);
 namespace Spotted\Audiobooks;
 
 use Spotted\Audiobooks\AudiobookBulkGetResponse\Audiobook;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type AudiobookBulkGetResponseShape = array{audiobooks: list<Audiobook>}
+ * @phpstan-import-type AudiobookShape from \Spotted\Audiobooks\AudiobookBulkGetResponse\Audiobook
+ *
+ * @phpstan-type AudiobookBulkGetResponseShape = array{
+ *   audiobooks: list<Audiobook|AudiobookShape>
+ * }
  */
-final class AudiobookBulkGetResponse implements BaseModel, ResponseConverter
+final class AudiobookBulkGetResponse implements BaseModel
 {
     /** @use SdkModel<AudiobookBulkGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<Audiobook> $audiobooks */
-    #[Api(list: Audiobook::class)]
+    #[Required(list: Audiobook::class)]
     public array $audiobooks;
 
     /**
@@ -49,25 +49,25 @@ final class AudiobookBulkGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Audiobook> $audiobooks
+     * @param list<Audiobook|AudiobookShape> $audiobooks
      */
     public static function with(array $audiobooks): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->audiobooks = $audiobooks;
+        $self['audiobooks'] = $audiobooks;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Audiobook> $audiobooks
+     * @param list<Audiobook|AudiobookShape> $audiobooks
      */
     public function withAudiobooks(array $audiobooks): self
     {
-        $obj = clone $this;
-        $obj->audiobooks = $audiobooks;
+        $self = clone $this;
+        $self['audiobooks'] = $audiobooks;
 
-        return $obj;
+        return $self;
     }
 }

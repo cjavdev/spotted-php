@@ -5,21 +5,26 @@ declare(strict_types=1);
 namespace Spotted;
 
 use Spotted\ArtistObject\Type;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type FollowersObjectShape from \Spotted\FollowersObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ *
  * @phpstan-type ArtistObjectShape = array{
  *   id?: string|null,
- *   external_urls?: ExternalURLObject|null,
- *   followers?: FollowersObject|null,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
+ *   followers?: null|FollowersObject|FollowersObjectShape,
  *   genres?: list<string>|null,
  *   href?: string|null,
- *   images?: list<ImageObject>|null,
+ *   images?: list<ImageObject|ImageObjectShape>|null,
  *   name?: string|null,
  *   popularity?: int|null,
- *   type?: value-of<Type>|null,
+ *   published?: bool|null,
+ *   type?: null|Type|value-of<Type>,
  *   uri?: string|null,
  * }
  */
@@ -31,19 +36,19 @@ final class ArtistObject implements BaseModel
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Known external URLs for this artist.
      */
-    #[Api(optional: true)]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * Information about the followers of the artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?FollowersObject $followers;
 
     /**
@@ -51,13 +56,13 @@ final class ArtistObject implements BaseModel
      *
      * @var list<string>|null $genres
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $genres;
 
     /**
      * A link to the Web API endpoint providing full details of the artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
 
     /**
@@ -65,33 +70,39 @@ final class ArtistObject implements BaseModel
      *
      * @var list<ImageObject>|null $images
      */
-    #[Api(list: ImageObject::class, optional: true)]
+    #[Optional(list: ImageObject::class)]
     public ?array $images;
 
     /**
      * The name of the artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The popularity of the artist. The value will be between 0 and 100, with 100 being the most popular. The artist's popularity is calculated from the popularity of all the artist's tracks.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $popularity;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The object type.
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the artist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()
@@ -104,36 +115,40 @@ final class ArtistObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $genres
-     * @param list<ImageObject> $images
-     * @param Type|value-of<Type> $type
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
+     * @param FollowersObject|FollowersObjectShape|null $followers
+     * @param list<string>|null $genres
+     * @param list<ImageObject|ImageObjectShape>|null $images
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
-        ?ExternalURLObject $external_urls = null,
-        ?FollowersObject $followers = null,
+        ExternalURLObject|array|null $externalURLs = null,
+        FollowersObject|array|null $followers = null,
         ?array $genres = null,
         ?string $href = null,
         ?array $images = null,
         ?string $name = null,
         ?int $popularity = null,
+        ?bool $published = null,
         Type|string|null $type = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $followers && $obj->followers = $followers;
-        null !== $genres && $obj->genres = $genres;
-        null !== $href && $obj->href = $href;
-        null !== $images && $obj->images = $images;
-        null !== $name && $obj->name = $name;
-        null !== $popularity && $obj->popularity = $popularity;
-        null !== $type && $obj['type'] = $type;
-        null !== $uri && $obj->uri = $uri;
+        null !== $id && $self['id'] = $id;
+        null !== $externalURLs && $self['externalURLs'] = $externalURLs;
+        null !== $followers && $self['followers'] = $followers;
+        null !== $genres && $self['genres'] = $genres;
+        null !== $href && $self['href'] = $href;
+        null !== $images && $self['images'] = $images;
+        null !== $name && $self['name'] = $name;
+        null !== $popularity && $self['popularity'] = $popularity;
+        null !== $published && $self['published'] = $published;
+        null !== $type && $self['type'] = $type;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,32 +156,37 @@ final class ArtistObject implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Known external URLs for this artist.
+     *
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
-        $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Information about the followers of the artist.
+     *
+     * @param FollowersObject|FollowersObjectShape $followers
      */
-    public function withFollowers(FollowersObject $followers): self
+    public function withFollowers(FollowersObject|array $followers): self
     {
-        $obj = clone $this;
-        $obj->followers = $followers;
+        $self = clone $this;
+        $self['followers'] = $followers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +196,10 @@ final class ArtistObject implements BaseModel
      */
     public function withGenres(array $genres): self
     {
-        $obj = clone $this;
-        $obj->genres = $genres;
+        $self = clone $this;
+        $self['genres'] = $genres;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,23 +207,23 @@ final class ArtistObject implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj->href = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Images of the artist in various sizes, widest first.
      *
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
-        $obj = clone $this;
-        $obj->images = $images;
+        $self = clone $this;
+        $self['images'] = $images;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +231,10 @@ final class ArtistObject implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -222,10 +242,21 @@ final class ArtistObject implements BaseModel
      */
     public function withPopularity(int $popularity): self
     {
-        $obj = clone $this;
-        $obj->popularity = $popularity;
+        $self = clone $this;
+        $self['popularity'] = $popularity;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -235,10 +266,10 @@ final class ArtistObject implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -246,9 +277,9 @@ final class ArtistObject implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

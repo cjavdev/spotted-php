@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Spotted\Users\Playlists;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ExternalURLObject;
 use Spotted\FollowersObject;
 use Spotted\ImageObject;
@@ -16,64 +14,68 @@ use Spotted\Users\Playlists\PlaylistNewResponse\Owner;
 use Spotted\Users\Playlists\PlaylistNewResponse\Tracks;
 
 /**
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type FollowersObjectShape from \Spotted\FollowersObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ * @phpstan-import-type OwnerShape from \Spotted\Users\Playlists\PlaylistNewResponse\Owner
+ * @phpstan-import-type TracksShape from \Spotted\Users\Playlists\PlaylistNewResponse\Tracks
+ *
  * @phpstan-type PlaylistNewResponseShape = array{
  *   id?: string|null,
  *   collaborative?: bool|null,
  *   description?: string|null,
- *   external_urls?: ExternalURLObject|null,
- *   followers?: FollowersObject|null,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
+ *   followers?: null|FollowersObject|FollowersObjectShape,
  *   href?: string|null,
- *   images?: list<ImageObject>|null,
+ *   images?: list<ImageObject|ImageObjectShape>|null,
  *   name?: string|null,
- *   owner?: Owner|null,
+ *   owner?: null|Owner|OwnerShape,
  *   published?: bool|null,
- *   snapshot_id?: string|null,
- *   tracks?: Tracks|null,
+ *   snapshotID?: string|null,
+ *   tracks?: null|Tracks|TracksShape,
  *   type?: string|null,
  *   uri?: string|null,
  * }
  */
-final class PlaylistNewResponse implements BaseModel, ResponseConverter
+final class PlaylistNewResponse implements BaseModel
 {
     /** @use SdkModel<PlaylistNewResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * `true` if the owner allows other users to modify the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $collaborative;
 
     /**
      * The playlist description. _Only returned for modified, verified playlists, otherwise_ `null`.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $description;
 
     /**
      * Known external URLs for this playlist.
      */
-    #[Api(optional: true)]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * Information about the followers of the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?FollowersObject $followers;
 
     /**
      * A link to the Web API endpoint providing full details of the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
 
     /**
@@ -81,49 +83,49 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
      *
      * @var list<ImageObject>|null $images
      */
-    #[Api(list: ImageObject::class, optional: true)]
+    #[Optional(list: ImageObject::class)]
     public ?array $images;
 
     /**
      * The name of the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The user who owns the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Owner $owner;
 
     /**
-     * The playlist's public/private status (if it is added to the user's profile): `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $published;
 
     /**
      * The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version.
      */
-    #[Api(optional: true)]
-    public ?string $snapshot_id;
+    #[Optional('snapshot_id')]
+    public ?string $snapshotID;
 
     /**
      * The tracks of the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Tracks $tracks;
 
     /**
      * The object type: "playlist".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()
@@ -136,42 +138,46 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ImageObject> $images
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
+     * @param FollowersObject|FollowersObjectShape|null $followers
+     * @param list<ImageObject|ImageObjectShape>|null $images
+     * @param Owner|OwnerShape|null $owner
+     * @param Tracks|TracksShape|null $tracks
      */
     public static function with(
         ?string $id = null,
         ?bool $collaborative = null,
         ?string $description = null,
-        ?ExternalURLObject $external_urls = null,
-        ?FollowersObject $followers = null,
+        ExternalURLObject|array|null $externalURLs = null,
+        FollowersObject|array|null $followers = null,
         ?string $href = null,
         ?array $images = null,
         ?string $name = null,
-        ?Owner $owner = null,
+        Owner|array|null $owner = null,
         ?bool $published = null,
-        ?string $snapshot_id = null,
-        ?Tracks $tracks = null,
+        ?string $snapshotID = null,
+        Tracks|array|null $tracks = null,
         ?string $type = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $collaborative && $obj->collaborative = $collaborative;
-        null !== $description && $obj->description = $description;
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $followers && $obj->followers = $followers;
-        null !== $href && $obj->href = $href;
-        null !== $images && $obj->images = $images;
-        null !== $name && $obj->name = $name;
-        null !== $owner && $obj->owner = $owner;
-        null !== $published && $obj->published = $published;
-        null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
-        null !== $tracks && $obj->tracks = $tracks;
-        null !== $type && $obj->type = $type;
-        null !== $uri && $obj->uri = $uri;
+        null !== $id && $self['id'] = $id;
+        null !== $collaborative && $self['collaborative'] = $collaborative;
+        null !== $description && $self['description'] = $description;
+        null !== $externalURLs && $self['externalURLs'] = $externalURLs;
+        null !== $followers && $self['followers'] = $followers;
+        null !== $href && $self['href'] = $href;
+        null !== $images && $self['images'] = $images;
+        null !== $name && $self['name'] = $name;
+        null !== $owner && $self['owner'] = $owner;
+        null !== $published && $self['published'] = $published;
+        null !== $snapshotID && $self['snapshotID'] = $snapshotID;
+        null !== $tracks && $self['tracks'] = $tracks;
+        null !== $type && $self['type'] = $type;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -179,10 +185,10 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -190,10 +196,10 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
      */
     public function withCollaborative(bool $collaborative): self
     {
-        $obj = clone $this;
-        $obj->collaborative = $collaborative;
+        $self = clone $this;
+        $self['collaborative'] = $collaborative;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,32 +207,37 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
      */
     public function withDescription(?string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Known external URLs for this playlist.
+     *
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
-        $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Information about the followers of the playlist.
+     *
+     * @param FollowersObject|FollowersObjectShape $followers
      */
-    public function withFollowers(FollowersObject $followers): self
+    public function withFollowers(FollowersObject|array $followers): self
     {
-        $obj = clone $this;
-        $obj->followers = $followers;
+        $self = clone $this;
+        $self['followers'] = $followers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,23 +245,23 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj->href = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Images for the playlist. The array may be empty or contain up to three images. The images are returned by size in descending order. See [Working with Playlists](/documentation/web-api/concepts/playlists). _**Note**: If returned, the source URL for the image (`url`) is temporary and will expire in less than a day._.
      *
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
-        $obj = clone $this;
-        $obj->images = $images;
+        $self = clone $this;
+        $self['images'] = $images;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -258,32 +269,34 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The user who owns the playlist.
+     *
+     * @param Owner|OwnerShape $owner
      */
-    public function withOwner(Owner $owner): self
+    public function withOwner(Owner|array $owner): self
     {
-        $obj = clone $this;
-        $obj->owner = $owner;
+        $self = clone $this;
+        $self['owner'] = $owner;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * The playlist's public/private status (if it is added to the user's profile): `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
     public function withPublished(bool $published): self
     {
-        $obj = clone $this;
-        $obj->published = $published;
+        $self = clone $this;
+        $self['published'] = $published;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -291,21 +304,23 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
      */
     public function withSnapshotID(string $snapshotID): self
     {
-        $obj = clone $this;
-        $obj->snapshot_id = $snapshotID;
+        $self = clone $this;
+        $self['snapshotID'] = $snapshotID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The tracks of the playlist.
+     *
+     * @param Tracks|TracksShape $tracks
      */
-    public function withTracks(Tracks $tracks): self
+    public function withTracks(Tracks|array $tracks): self
     {
-        $obj = clone $this;
-        $obj->tracks = $tracks;
+        $self = clone $this;
+        $self['tracks'] = $tracks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -313,10 +328,10 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj->type = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -324,9 +339,9 @@ final class PlaylistNewResponse implements BaseModel, ResponseConverter
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

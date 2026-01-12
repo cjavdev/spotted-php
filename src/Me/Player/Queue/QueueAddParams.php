@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player\Queue;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -14,7 +15,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Me\Player\QueueService::add()
  *
- * @phpstan-type QueueAddParamsShape = array{uri: string, device_id?: string}
+ * @phpstan-type QueueAddParamsShape = array{uri: string, deviceID?: string|null}
  */
 final class QueueAddParams implements BaseModel
 {
@@ -25,15 +26,15 @@ final class QueueAddParams implements BaseModel
     /**
      * The uri of the item to add to the queue. Must be a track or an episode uri.
      */
-    #[Api]
+    #[Required]
     public string $uri;
 
     /**
      * The id of the device this command is targeting. If
      * not supplied, the user's currently active device is the target.
      */
-    #[Api(optional: true)]
-    public ?string $device_id;
+    #[Optional]
+    public ?string $deviceID;
 
     /**
      * `new QueueAddParams()` is missing required properties by the API.
@@ -59,15 +60,15 @@ final class QueueAddParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $uri, ?string $device_id = null): self
+    public static function with(string $uri, ?string $deviceID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->uri = $uri;
+        $self['uri'] = $uri;
 
-        null !== $device_id && $obj->device_id = $device_id;
+        null !== $deviceID && $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +76,10 @@ final class QueueAddParams implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,9 +88,9 @@ final class QueueAddParams implements BaseModel
      */
     public function withDeviceID(string $deviceID): self
     {
-        $obj = clone $this;
-        $obj->device_id = $deviceID;
+        $self = clone $this;
+        $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 }

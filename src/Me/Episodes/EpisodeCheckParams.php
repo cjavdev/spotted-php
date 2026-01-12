@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Episodes;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -26,7 +26,7 @@ final class EpisodeCheckParams implements BaseModel
     /**
      * A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the episodes. Maximum: 50 IDs.
      */
-    #[Api]
+    #[Required]
     public string $ids;
 
     /**
@@ -55,11 +55,11 @@ final class EpisodeCheckParams implements BaseModel
      */
     public static function with(string $ids): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->ids = $ids;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,9 +67,9 @@ final class EpisodeCheckParams implements BaseModel
      */
     public function withIDs(string $ids): self
     {
-        $obj = clone $this;
-        $obj->ids = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 }

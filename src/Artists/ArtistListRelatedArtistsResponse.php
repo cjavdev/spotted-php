@@ -5,26 +5,24 @@ declare(strict_types=1);
 namespace Spotted\Artists;
 
 use Spotted\ArtistObject;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
+ * @phpstan-import-type ArtistObjectShape from \Spotted\ArtistObject
+ *
  * @phpstan-type ArtistListRelatedArtistsResponseShape = array{
- *   artists: list<ArtistObject>
+ *   artists: list<ArtistObject|ArtistObjectShape>
  * }
  */
-final class ArtistListRelatedArtistsResponse implements BaseModel, ResponseConverter
+final class ArtistListRelatedArtistsResponse implements BaseModel
 {
     /** @use SdkModel<ArtistListRelatedArtistsResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<ArtistObject> $artists */
-    #[Api(list: ArtistObject::class)]
+    #[Required(list: ArtistObject::class)]
     public array $artists;
 
     /**
@@ -51,25 +49,25 @@ final class ArtistListRelatedArtistsResponse implements BaseModel, ResponseConve
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ArtistObject> $artists
+     * @param list<ArtistObject|ArtistObjectShape> $artists
      */
     public static function with(array $artists): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->artists = $artists;
+        $self['artists'] = $artists;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<ArtistObject> $artists
+     * @param list<ArtistObject|ArtistObjectShape> $artists
      */
     public function withArtists(array $artists): self
     {
-        $obj = clone $this;
-        $obj->artists = $artists;
+        $self = clone $this;
+        $self['artists'] = $artists;
 
-        return $obj;
+        return $self;
     }
 }

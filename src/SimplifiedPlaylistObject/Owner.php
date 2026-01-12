@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\SimplifiedPlaylistObject;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
@@ -13,13 +13,16 @@ use Spotted\PlaylistUserObject\Type;
 /**
  * The user who owns the playlist.
  *
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ *
  * @phpstan-type OwnerShape = array{
  *   id?: string|null,
- *   external_urls?: ExternalURLObject|null,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
  *   href?: string|null,
- *   type?: value-of<Type>|null,
+ *   published?: bool|null,
+ *   type?: null|Type|value-of<Type>,
  *   uri?: string|null,
- *   display_name?: string|null,
+ *   displayName?: string|null,
  * }
  */
 final class Owner implements BaseModel
@@ -30,37 +33,43 @@ final class Owner implements BaseModel
     /**
      * The [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids) for this user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * A link to the Web API endpoint for this user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The object type.
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for this user.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     /**
      * The name displayed on the user's profile. `null` if not available.
      */
-    #[Api(nullable: true, optional: true)]
-    public ?string $display_name;
+    #[Optional('display_name', nullable: true)]
+    public ?string $displayName;
 
     public function __construct()
     {
@@ -72,26 +81,29 @@ final class Owner implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
-        ?ExternalURLObject $external_urls = null,
+        ExternalURLObject|array|null $externalURLs = null,
         ?string $href = null,
+        ?bool $published = null,
         Type|string|null $type = null,
         ?string $uri = null,
-        ?string $display_name = null,
+        ?string $displayName = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $href && $obj->href = $href;
-        null !== $type && $obj['type'] = $type;
-        null !== $uri && $obj->uri = $uri;
-        null !== $display_name && $obj->display_name = $display_name;
+        null !== $id && $self['id'] = $id;
+        null !== $externalURLs && $self['externalURLs'] = $externalURLs;
+        null !== $href && $self['href'] = $href;
+        null !== $published && $self['published'] = $published;
+        null !== $type && $self['type'] = $type;
+        null !== $uri && $self['uri'] = $uri;
+        null !== $displayName && $self['displayName'] = $displayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,18 +111,22 @@ final class Owner implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
-        $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+    /**
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
+     */
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +134,21 @@ final class Owner implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj->href = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -131,10 +158,10 @@ final class Owner implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +169,10 @@ final class Owner implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,9 +180,9 @@ final class Owner implements BaseModel
      */
     public function withDisplayName(?string $displayName): self
     {
-        $obj = clone $this;
-        $obj->display_name = $displayName;
+        $self = clone $this;
+        $self['displayName'] = $displayName;
 
-        return $obj;
+        return $self;
     }
 }

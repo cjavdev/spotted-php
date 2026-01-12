@@ -5,24 +5,24 @@ declare(strict_types=1);
 namespace Spotted\Chapters;
 
 use Spotted\Chapters\ChapterBulkGetResponse\Chapter;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ChapterBulkGetResponseShape = array{chapters: list<Chapter>}
+ * @phpstan-import-type ChapterShape from \Spotted\Chapters\ChapterBulkGetResponse\Chapter
+ *
+ * @phpstan-type ChapterBulkGetResponseShape = array{
+ *   chapters: list<Chapter|ChapterShape>
+ * }
  */
-final class ChapterBulkGetResponse implements BaseModel, ResponseConverter
+final class ChapterBulkGetResponse implements BaseModel
 {
     /** @use SdkModel<ChapterBulkGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<Chapter> $chapters */
-    #[Api(list: Chapter::class)]
+    #[Required(list: Chapter::class)]
     public array $chapters;
 
     /**
@@ -49,25 +49,25 @@ final class ChapterBulkGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Chapter> $chapters
+     * @param list<Chapter|ChapterShape> $chapters
      */
     public static function with(array $chapters): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->chapters = $chapters;
+        $self['chapters'] = $chapters;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Chapter> $chapters
+     * @param list<Chapter|ChapterShape> $chapters
      */
     public function withChapters(array $chapters): self
     {
-        $obj = clone $this;
-        $obj->chapters = $chapters;
+        $self = clone $this;
+        $self['chapters'] = $chapters;
 
-        return $obj;
+        return $self;
     }
 }

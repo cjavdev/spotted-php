@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Spotted\Search\SearchQueryResponse;
 
 use Spotted\AudiobookBase;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AudiobookBaseShape from \Spotted\AudiobookBase
+ *
  * @phpstan-type AudiobooksShape = array{
  *   href: string,
  *   limit: int,
@@ -17,7 +20,8 @@ use Spotted\Core\Contracts\BaseModel;
  *   offset: int,
  *   previous: string|null,
  *   total: int,
- *   items?: list<AudiobookBase>|null,
+ *   items?: list<AudiobookBase|AudiobookBaseShape>|null,
+ *   published?: bool|null,
  * }
  */
 final class Audiobooks implements BaseModel
@@ -28,42 +32,48 @@ final class Audiobooks implements BaseModel
     /**
      * A link to the Web API endpoint returning the full result of the request.
      */
-    #[Api]
+    #[Required]
     public string $href;
 
     /**
      * The maximum number of items in the response (as set in the query or by default).
      */
-    #[Api]
+    #[Required]
     public int $limit;
 
     /**
      * URL to the next page of items. ( `null` if none).
      */
-    #[Api]
+    #[Required]
     public ?string $next;
 
     /**
      * The offset of the items returned (as set in the query or by default).
      */
-    #[Api]
+    #[Required]
     public int $offset;
 
     /**
      * URL to the previous page of items. ( `null` if none).
      */
-    #[Api]
+    #[Required]
     public ?string $previous;
 
     /**
      * The total number of items available to return.
      */
-    #[Api]
+    #[Required]
     public int $total;
 
     /** @var list<AudiobookBase>|null $items */
-    #[Api(list: AudiobookBase::class, optional: true)]
+    #[Optional(list: AudiobookBase::class)]
     public ?array $items;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * `new Audiobooks()` is missing required properties by the API.
@@ -97,7 +107,7 @@ final class Audiobooks implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AudiobookBase> $items
+     * @param list<AudiobookBase|AudiobookBaseShape>|null $items
      */
     public static function with(
         string $href,
@@ -107,19 +117,21 @@ final class Audiobooks implements BaseModel
         ?string $previous,
         int $total,
         ?array $items = null,
+        ?bool $published = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->href = $href;
-        $obj->limit = $limit;
-        $obj->next = $next;
-        $obj->offset = $offset;
-        $obj->previous = $previous;
-        $obj->total = $total;
+        $self['href'] = $href;
+        $self['limit'] = $limit;
+        $self['next'] = $next;
+        $self['offset'] = $offset;
+        $self['previous'] = $previous;
+        $self['total'] = $total;
 
-        null !== $items && $obj->items = $items;
+        null !== $items && $self['items'] = $items;
+        null !== $published && $self['published'] = $published;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +139,10 @@ final class Audiobooks implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj->href = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +150,10 @@ final class Audiobooks implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj->limit = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,10 +161,10 @@ final class Audiobooks implements BaseModel
      */
     public function withNext(?string $next): self
     {
-        $obj = clone $this;
-        $obj->next = $next;
+        $self = clone $this;
+        $self['next'] = $next;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,10 +172,10 @@ final class Audiobooks implements BaseModel
      */
     public function withOffset(int $offset): self
     {
-        $obj = clone $this;
-        $obj->offset = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -171,10 +183,10 @@ final class Audiobooks implements BaseModel
      */
     public function withPrevious(?string $previous): self
     {
-        $obj = clone $this;
-        $obj->previous = $previous;
+        $self = clone $this;
+        $self['previous'] = $previous;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,20 +194,31 @@ final class Audiobooks implements BaseModel
      */
     public function withTotal(int $total): self
     {
-        $obj = clone $this;
-        $obj->total = $total;
+        $self = clone $this;
+        $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<AudiobookBase> $items
+     * @param list<AudiobookBase|AudiobookBaseShape> $items
      */
     public function withItems(array $items): self
     {
-        $obj = clone $this;
-        $obj->items = $items;
+        $self = clone $this;
+        $self['items'] = $items;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 }

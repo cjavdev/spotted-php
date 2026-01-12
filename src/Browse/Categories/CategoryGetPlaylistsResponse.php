@@ -4,33 +4,39 @@ declare(strict_types=1);
 
 namespace Spotted\Browse\Categories;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\PagingPlaylistObject;
 
 /**
+ * @phpstan-import-type PagingPlaylistObjectShape from \Spotted\PagingPlaylistObject
+ *
  * @phpstan-type CategoryGetPlaylistsResponseShape = array{
- *   message?: string|null, playlists?: PagingPlaylistObject|null
+ *   message?: string|null,
+ *   playlists?: null|PagingPlaylistObject|PagingPlaylistObjectShape,
+ *   published?: bool|null,
  * }
  */
-final class CategoryGetPlaylistsResponse implements BaseModel, ResponseConverter
+final class CategoryGetPlaylistsResponse implements BaseModel
 {
     /** @use SdkModel<CategoryGetPlaylistsResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * The localized message of a playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $message;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PagingPlaylistObject $playlists;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     public function __construct()
     {
@@ -41,17 +47,21 @@ final class CategoryGetPlaylistsResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PagingPlaylistObject|PagingPlaylistObjectShape|null $playlists
      */
     public static function with(
         ?string $message = null,
-        ?PagingPlaylistObject $playlists = null
+        PagingPlaylistObject|array|null $playlists = null,
+        ?bool $published = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $message && $obj->message = $message;
-        null !== $playlists && $obj->playlists = $playlists;
+        null !== $message && $self['message'] = $message;
+        null !== $playlists && $self['playlists'] = $playlists;
+        null !== $published && $self['published'] = $published;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,17 +69,31 @@ final class CategoryGetPlaylistsResponse implements BaseModel, ResponseConverter
      */
     public function withMessage(string $message): self
     {
-        $obj = clone $this;
-        $obj->message = $message;
+        $self = clone $this;
+        $self['message'] = $message;
 
-        return $obj;
+        return $self;
     }
 
-    public function withPlaylists(PagingPlaylistObject $playlists): self
+    /**
+     * @param PagingPlaylistObject|PagingPlaylistObjectShape $playlists
+     */
+    public function withPlaylists(PagingPlaylistObject|array $playlists): self
     {
-        $obj = clone $this;
-        $obj->playlists = $playlists;
+        $self = clone $this;
+        $self['playlists'] = $playlists;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 }

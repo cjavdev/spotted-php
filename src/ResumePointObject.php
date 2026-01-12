@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ResumePointObjectShape = array{
- *   fully_played?: bool|null, resume_position_ms?: int|null
+ *   fullyPlayed?: bool|null, published?: bool|null, resumePositionMs?: int|null
  * }
  */
 final class ResumePointObject implements BaseModel
@@ -21,14 +21,20 @@ final class ResumePointObject implements BaseModel
     /**
      * Whether or not the episode has been fully played by the user.
      */
-    #[Api(optional: true)]
-    public ?bool $fully_played;
+    #[Optional('fully_played')]
+    public ?bool $fullyPlayed;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The user's most recent position in the episode in milliseconds.
      */
-    #[Api(optional: true)]
-    public ?int $resume_position_ms;
+    #[Optional('resume_position_ms')]
+    public ?int $resumePositionMs;
 
     public function __construct()
     {
@@ -41,15 +47,17 @@ final class ResumePointObject implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?bool $fully_played = null,
-        ?int $resume_position_ms = null
+        ?bool $fullyPlayed = null,
+        ?bool $published = null,
+        ?int $resumePositionMs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fully_played && $obj->fully_played = $fully_played;
-        null !== $resume_position_ms && $obj->resume_position_ms = $resume_position_ms;
+        null !== $fullyPlayed && $self['fullyPlayed'] = $fullyPlayed;
+        null !== $published && $self['published'] = $published;
+        null !== $resumePositionMs && $self['resumePositionMs'] = $resumePositionMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +65,21 @@ final class ResumePointObject implements BaseModel
      */
     public function withFullyPlayed(bool $fullyPlayed): self
     {
-        $obj = clone $this;
-        $obj->fully_played = $fullyPlayed;
+        $self = clone $this;
+        $self['fullyPlayed'] = $fullyPlayed;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -68,9 +87,9 @@ final class ResumePointObject implements BaseModel
      */
     public function withResumePositionMs(int $resumePositionMs): self
     {
-        $obj = clone $this;
-        $obj->resume_position_ms = $resumePositionMs;
+        $self = clone $this;
+        $self['resumePositionMs'] = $resumePositionMs;
 
-        return $obj;
+        return $self;
     }
 }

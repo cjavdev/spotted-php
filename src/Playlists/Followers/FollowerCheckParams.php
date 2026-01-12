@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Playlists\Followers;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Playlists\FollowersService::check()
  *
- * @phpstan-type FollowerCheckParamsShape = array{ids?: string}
+ * @phpstan-type FollowerCheckParamsShape = array{ids?: string|null}
  */
 final class FollowerCheckParams implements BaseModel
 {
@@ -25,7 +25,7 @@ final class FollowerCheckParams implements BaseModel
     /**
      * **Deprecated** A single item list containing current user's [Spotify Username](/documentation/web-api/concepts/spotify-uris-ids). Maximum: 1 id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ids;
 
     public function __construct()
@@ -40,11 +40,11 @@ final class FollowerCheckParams implements BaseModel
      */
     public static function with(?string $ids = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $ids && $obj->ids = $ids;
+        null !== $ids && $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class FollowerCheckParams implements BaseModel
      */
     public function withIDs(string $ids): self
     {
-        $obj = clone $this;
-        $obj->ids = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 }

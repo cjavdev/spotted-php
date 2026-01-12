@@ -4,18 +4,25 @@ declare(strict_types=1);
 
 namespace Spotted\Services;
 
-use Spotted\Browse\BrowseGetFeaturedPlaylistsParams;
 use Spotted\Browse\BrowseGetFeaturedPlaylistsResponse;
-use Spotted\Browse\BrowseGetNewReleasesParams;
 use Spotted\Browse\BrowseGetNewReleasesResponse;
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\BrowseContract;
 use Spotted\Services\Browse\CategoriesService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class BrowseService implements BrowseContract
 {
+    /**
+     * @api
+     */
+    public BrowseRawService $raw;
+
     /**
      * @api
      */
@@ -26,6 +33,7 @@ final class BrowseService implements BrowseContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new BrowseRawService($client);
         $this->categories = new CategoriesService($client);
     }
 
@@ -36,29 +44,27 @@ final class BrowseService implements BrowseContract
      *
      * Get a list of Spotify featured playlists (shown, for example, on a Spotify player's 'Browse' tab).
      *
-     * @param array{
-     *   limit?: int, locale?: string, offset?: int
-     * }|BrowseGetFeaturedPlaylistsParams $params
+     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param string $locale The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1) language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning &quot;Spanish (Mexico)&quot;. Provide this parameter if you want the category strings returned in a particular language.<br/> _**Note**: if `locale` is not supplied, or if the specified language is not available, the category strings returned will be in the Spotify default language (American English)._
+     * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function getFeaturedPlaylists(
-        array|BrowseGetFeaturedPlaylistsParams $params,
-        ?RequestOptions $requestOptions = null,
+        int $limit = 20,
+        ?string $locale = null,
+        int $offset = 0,
+        RequestOptions|array|null $requestOptions = null,
     ): BrowseGetFeaturedPlaylistsResponse {
-        [$parsed, $options] = BrowseGetFeaturedPlaylistsParams::parseRequest(
-            $params,
-            $requestOptions,
+        $params = Util::removeNulls(
+            ['limit' => $limit, 'locale' => $locale, 'offset' => $offset]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'browse/featured-playlists',
-            query: $parsed,
-            options: $options,
-            convert: BrowseGetFeaturedPlaylistsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getFeaturedPlaylists(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -66,26 +72,22 @@ final class BrowseService implements BrowseContract
      *
      * Get a list of new album releases featured in Spotify (shown, for example, on a Spotify player’s “Browse” tab).
      *
-     * @param array{limit?: int, offset?: int}|BrowseGetNewReleasesParams $params
+     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param int $offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function getNewReleases(
-        array|BrowseGetNewReleasesParams $params,
-        ?RequestOptions $requestOptions = null,
+        int $limit = 20,
+        int $offset = 0,
+        RequestOptions|array|null $requestOptions = null,
     ): BrowseGetNewReleasesResponse {
-        [$parsed, $options] = BrowseGetNewReleasesParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = Util::removeNulls(['limit' => $limit, 'offset' => $offset]);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'browse/new-releases',
-            query: $parsed,
-            options: $options,
-            convert: BrowseGetNewReleasesResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getNewReleases(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

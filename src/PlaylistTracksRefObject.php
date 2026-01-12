@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PlaylistTracksRefObjectShape = array{
- *   href?: string|null, total?: int|null
+ *   href?: string|null, published?: bool|null, total?: int|null
  * }
  */
 final class PlaylistTracksRefObject implements BaseModel
@@ -21,13 +21,19 @@ final class PlaylistTracksRefObject implements BaseModel
     /**
      * A link to the Web API endpoint where full details of the playlist's tracks can be retrieved.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * Number of tracks in the playlist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $total;
 
     public function __construct()
@@ -40,14 +46,18 @@ final class PlaylistTracksRefObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $href = null, ?int $total = null): self
-    {
-        $obj = new self;
+    public static function with(
+        ?string $href = null,
+        ?bool $published = null,
+        ?int $total = null
+    ): self {
+        $self = new self;
 
-        null !== $href && $obj->href = $href;
-        null !== $total && $obj->total = $total;
+        null !== $href && $self['href'] = $href;
+        null !== $published && $self['published'] = $published;
+        null !== $total && $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +65,21 @@ final class PlaylistTracksRefObject implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj->href = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -66,9 +87,9 @@ final class PlaylistTracksRefObject implements BaseModel
      */
     public function withTotal(int $total): self
     {
-        $obj = clone $this;
-        $obj->total = $total;
+        $self = clone $this;
+        $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 }

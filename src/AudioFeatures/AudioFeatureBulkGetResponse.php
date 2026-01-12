@@ -5,34 +5,32 @@ declare(strict_types=1);
 namespace Spotted\AudioFeatures;
 
 use Spotted\AudioFeatures\AudioFeatureBulkGetResponse\AudioFeature;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
+ * @phpstan-import-type AudioFeatureShape from \Spotted\AudioFeatures\AudioFeatureBulkGetResponse\AudioFeature
+ *
  * @phpstan-type AudioFeatureBulkGetResponseShape = array{
- *   audio_features: list<AudioFeature>
+ *   audioFeatures: list<AudioFeature|AudioFeatureShape>
  * }
  */
-final class AudioFeatureBulkGetResponse implements BaseModel, ResponseConverter
+final class AudioFeatureBulkGetResponse implements BaseModel
 {
     /** @use SdkModel<AudioFeatureBulkGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    /** @var list<AudioFeature> $audio_features */
-    #[Api(list: AudioFeature::class)]
-    public array $audio_features;
+    /** @var list<AudioFeature> $audioFeatures */
+    #[Required('audio_features', list: AudioFeature::class)]
+    public array $audioFeatures;
 
     /**
      * `new AudioFeatureBulkGetResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AudioFeatureBulkGetResponse::with(audio_features: ...)
+     * AudioFeatureBulkGetResponse::with(audioFeatures: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -51,25 +49,25 @@ final class AudioFeatureBulkGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AudioFeature> $audio_features
+     * @param list<AudioFeature|AudioFeatureShape> $audioFeatures
      */
-    public static function with(array $audio_features): self
+    public static function with(array $audioFeatures): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->audio_features = $audio_features;
+        $self['audioFeatures'] = $audioFeatures;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<AudioFeature> $audioFeatures
+     * @param list<AudioFeature|AudioFeatureShape> $audioFeatures
      */
     public function withAudioFeatures(array $audioFeatures): self
     {
-        $obj = clone $this;
-        $obj->audio_features = $audioFeatures;
+        $self = clone $this;
+        $self['audioFeatures'] = $audioFeatures;
 
-        return $obj;
+        return $self;
     }
 }

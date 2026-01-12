@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Shows;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -14,7 +15,9 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\ShowsService::bulkRetrieve()
  *
- * @phpstan-type ShowBulkRetrieveParamsShape = array{ids: string, market?: string}
+ * @phpstan-type ShowBulkRetrieveParamsShape = array{
+ *   ids: string, market?: string|null
+ * }
  */
 final class ShowBulkRetrieveParams implements BaseModel
 {
@@ -25,7 +28,7 @@ final class ShowBulkRetrieveParams implements BaseModel
     /**
      * A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the shows. Maximum: 50 IDs.
      */
-    #[Api]
+    #[Required]
     public string $ids;
 
     /**
@@ -36,7 +39,7 @@ final class ShowBulkRetrieveParams implements BaseModel
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $market;
 
     /**
@@ -65,13 +68,13 @@ final class ShowBulkRetrieveParams implements BaseModel
      */
     public static function with(string $ids, ?string $market = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->ids = $ids;
+        $self['ids'] = $ids;
 
-        null !== $market && $obj->market = $market;
+        null !== $market && $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +82,10 @@ final class ShowBulkRetrieveParams implements BaseModel
      */
     public function withIDs(string $ids): self
     {
-        $obj = clone $this;
-        $obj->ids = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,9 +98,9 @@ final class ShowBulkRetrieveParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj->market = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 }

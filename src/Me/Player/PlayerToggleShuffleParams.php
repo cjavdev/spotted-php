@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -15,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::toggleShuffle()
  *
  * @phpstan-type PlayerToggleShuffleParamsShape = array{
- *   state: bool, device_id?: string
+ *   state: bool, deviceID?: string|null
  * }
  */
 final class PlayerToggleShuffleParams implements BaseModel
@@ -28,15 +29,15 @@ final class PlayerToggleShuffleParams implements BaseModel
      * **true** : Shuffle user's playback.<br/>
      * **false** : Do not shuffle user's playback.
      */
-    #[Api]
+    #[Required]
     public bool $state;
 
     /**
      * The id of the device this command is targeting. If
      * not supplied, the user's currently active device is the target.
      */
-    #[Api(optional: true)]
-    public ?string $device_id;
+    #[Optional]
+    public ?string $deviceID;
 
     /**
      * `new PlayerToggleShuffleParams()` is missing required properties by the API.
@@ -62,15 +63,15 @@ final class PlayerToggleShuffleParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(bool $state, ?string $device_id = null): self
+    public static function with(bool $state, ?string $deviceID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->state = $state;
+        $self['state'] = $state;
 
-        null !== $device_id && $obj->device_id = $device_id;
+        null !== $deviceID && $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +80,10 @@ final class PlayerToggleShuffleParams implements BaseModel
      */
     public function withState(bool $state): self
     {
-        $obj = clone $this;
-        $obj->state = $state;
+        $self = clone $this;
+        $self['state'] = $state;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,9 +92,9 @@ final class PlayerToggleShuffleParams implements BaseModel
      */
     public function withDeviceID(string $deviceID): self
     {
-        $obj = clone $this;
-        $obj->device_id = $deviceID;
+        $self = clone $this;
+        $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 }

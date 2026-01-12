@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Browse;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -16,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\BrowseService::getFeaturedPlaylists()
  *
  * @phpstan-type BrowseGetFeaturedPlaylistsParamsShape = array{
- *   limit?: int, locale?: string, offset?: int
+ *   limit?: int|null, locale?: string|null, offset?: int|null
  * }
  */
 final class BrowseGetFeaturedPlaylistsParams implements BaseModel
@@ -28,19 +28,19 @@ final class BrowseGetFeaturedPlaylistsParams implements BaseModel
     /**
      * The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     /**
      * The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1) language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning &quot;Spanish (Mexico)&quot;. Provide this parameter if you want the category strings returned in a particular language.<br/> _**Note**: if `locale` is not supplied, or if the specified language is not available, the category strings returned will be in the Spotify default language (American English)._.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locale;
 
     /**
      * The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $offset;
 
     public function __construct()
@@ -58,13 +58,13 @@ final class BrowseGetFeaturedPlaylistsParams implements BaseModel
         ?string $locale = null,
         ?int $offset = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $limit && $obj->limit = $limit;
-        null !== $locale && $obj->locale = $locale;
-        null !== $offset && $obj->offset = $offset;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $locale && $self['locale'] = $locale;
+        null !== $offset && $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,10 +72,10 @@ final class BrowseGetFeaturedPlaylistsParams implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj->limit = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +83,10 @@ final class BrowseGetFeaturedPlaylistsParams implements BaseModel
      */
     public function withLocale(string $locale): self
     {
-        $obj = clone $this;
-        $obj->locale = $locale;
+        $self = clone $this;
+        $self['locale'] = $locale;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,9 +94,9 @@ final class BrowseGetFeaturedPlaylistsParams implements BaseModel
      */
     public function withOffset(int $offset): self
     {
-        $obj = clone $this;
-        $obj->offset = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 }

@@ -12,6 +12,12 @@ use Spotted\TrackObject;
 
 /**
  * Information about the track or episode.
+ *
+ * @phpstan-import-type TrackObjectShape from \Spotted\TrackObject
+ * @phpstan-import-type EpisodeObjectShape from \Spotted\EpisodeObject
+ *
+ * @phpstan-type TrackVariants = TrackObject|EpisodeObject
+ * @phpstan-type TrackShape = TrackVariants|TrackObjectShape|EpisodeObjectShape
  */
 final class Track implements ConverterSource
 {

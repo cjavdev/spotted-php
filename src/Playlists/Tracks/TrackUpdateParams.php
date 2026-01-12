@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Playlists\Tracks;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -21,11 +21,12 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Playlists\TracksService::update()
  *
  * @phpstan-type TrackUpdateParamsShape = array{
- *   insert_before?: int,
- *   range_length?: int,
- *   range_start?: int,
- *   snapshot_id?: string,
- *   uris?: list<string>,
+ *   insertBefore?: int|null,
+ *   published?: bool|null,
+ *   rangeLength?: int|null,
+ *   rangeStart?: int|null,
+ *   snapshotID?: string|null,
+ *   uris?: list<string>|null,
  * }
  */
 final class TrackUpdateParams implements BaseModel
@@ -37,29 +38,35 @@ final class TrackUpdateParams implements BaseModel
     /**
      * The position where the items should be inserted.<br/>To reorder the items to the end of the playlist, simply set _insert_before_ to the position after the last item.<br/>Examples:<br/>To reorder the first item to the last position in a playlist with 10 items, set _range_start_ to 0, and _insert_before_ to 10.<br/>To reorder the last item in a playlist with 10 items to the start of the playlist, set _range_start_ to 9, and _insert_before_ to 0.
      */
-    #[Api(optional: true)]
-    public ?int $insert_before;
+    #[Optional('insert_before')]
+    public ?int $insertBefore;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The amount of items to be reordered. Defaults to 1 if not set.<br/>The range of items to be reordered begins from the _range_start_ position, and includes the _range_length_ subsequent items.<br/>Example:<br/>To move the items at index 9-10 to the start of the playlist, _range_start_ is set to 9, and _range_length_ is set to 2.
      */
-    #[Api(optional: true)]
-    public ?int $range_length;
+    #[Optional('range_length')]
+    public ?int $rangeLength;
 
     /**
      * The position of the first item to be reordered.
      */
-    #[Api(optional: true)]
-    public ?int $range_start;
+    #[Optional('range_start')]
+    public ?int $rangeStart;
 
     /**
      * The playlist's snapshot ID against which you want to make the changes.
      */
-    #[Api(optional: true)]
-    public ?string $snapshot_id;
+    #[Optional('snapshot_id')]
+    public ?string $snapshotID;
 
     /** @var list<string>|null $uris */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $uris;
 
     public function __construct()
@@ -72,24 +79,26 @@ final class TrackUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $uris
+     * @param list<string>|null $uris
      */
     public static function with(
-        ?int $insert_before = null,
-        ?int $range_length = null,
-        ?int $range_start = null,
-        ?string $snapshot_id = null,
+        ?int $insertBefore = null,
+        ?bool $published = null,
+        ?int $rangeLength = null,
+        ?int $rangeStart = null,
+        ?string $snapshotID = null,
         ?array $uris = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $insert_before && $obj->insert_before = $insert_before;
-        null !== $range_length && $obj->range_length = $range_length;
-        null !== $range_start && $obj->range_start = $range_start;
-        null !== $snapshot_id && $obj->snapshot_id = $snapshot_id;
-        null !== $uris && $obj->uris = $uris;
+        null !== $insertBefore && $self['insertBefore'] = $insertBefore;
+        null !== $published && $self['published'] = $published;
+        null !== $rangeLength && $self['rangeLength'] = $rangeLength;
+        null !== $rangeStart && $self['rangeStart'] = $rangeStart;
+        null !== $snapshotID && $self['snapshotID'] = $snapshotID;
+        null !== $uris && $self['uris'] = $uris;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +106,21 @@ final class TrackUpdateParams implements BaseModel
      */
     public function withInsertBefore(int $insertBefore): self
     {
-        $obj = clone $this;
-        $obj->insert_before = $insertBefore;
+        $self = clone $this;
+        $self['insertBefore'] = $insertBefore;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -108,10 +128,10 @@ final class TrackUpdateParams implements BaseModel
      */
     public function withRangeLength(int $rangeLength): self
     {
-        $obj = clone $this;
-        $obj->range_length = $rangeLength;
+        $self = clone $this;
+        $self['rangeLength'] = $rangeLength;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,10 +139,10 @@ final class TrackUpdateParams implements BaseModel
      */
     public function withRangeStart(int $rangeStart): self
     {
-        $obj = clone $this;
-        $obj->range_start = $rangeStart;
+        $self = clone $this;
+        $self['rangeStart'] = $rangeStart;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,10 +150,10 @@ final class TrackUpdateParams implements BaseModel
      */
     public function withSnapshotID(string $snapshotID): self
     {
-        $obj = clone $this;
-        $obj->snapshot_id = $snapshotID;
+        $self = clone $this;
+        $self['snapshotID'] = $snapshotID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,9 +161,9 @@ final class TrackUpdateParams implements BaseModel
      */
     public function withUris(array $uris): self
     {
-        $obj = clone $this;
-        $obj->uris = $uris;
+        $self = clone $this;
+        $self['uris'] = $uris;
 
-        return $obj;
+        return $self;
     }
 }

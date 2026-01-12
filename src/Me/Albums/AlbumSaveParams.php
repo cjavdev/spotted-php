@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Albums;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -14,7 +14,9 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Me\AlbumsService::save()
  *
- * @phpstan-type AlbumSaveParamsShape = array{ids?: list<string>}
+ * @phpstan-type AlbumSaveParamsShape = array{
+ *   ids?: list<string>|null, published?: bool|null
+ * }
  */
 final class AlbumSaveParams implements BaseModel
 {
@@ -27,8 +29,14 @@ final class AlbumSaveParams implements BaseModel
      *
      * @var list<string>|null $ids
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $ids;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     public function __construct()
     {
@@ -40,15 +48,16 @@ final class AlbumSaveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $ids
+     * @param list<string>|null $ids
      */
-    public static function with(?array $ids = null): self
+    public static function with(?array $ids = null, ?bool $published = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $ids && $obj->ids = $ids;
+        null !== $ids && $self['ids'] = $ids;
+        null !== $published && $self['published'] = $published;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -58,9 +67,20 @@ final class AlbumSaveParams implements BaseModel
      */
     public function withIDs(array $ids): self
     {
-        $obj = clone $this;
-        $obj->ids = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 }

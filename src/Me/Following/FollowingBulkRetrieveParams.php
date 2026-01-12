@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Following;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -15,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\FollowingService::bulkRetrieve()
  *
  * @phpstan-type FollowingBulkRetrieveParamsShape = array{
- *   type: 'artist', after?: string, limit?: int
+ *   type: 'artist', after?: string|null, limit?: int|null
  * }
  */
 final class FollowingBulkRetrieveParams implements BaseModel
@@ -29,19 +30,19 @@ final class FollowingBulkRetrieveParams implements BaseModel
      *
      * @var 'artist' $type
      */
-    #[Api]
+    #[Required]
     public string $type = 'artist';
 
     /**
      * The last artist ID retrieved from the previous request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $after;
 
     /**
      * The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     public function __construct()
@@ -56,12 +57,12 @@ final class FollowingBulkRetrieveParams implements BaseModel
      */
     public static function with(?string $after = null, ?int $limit = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $after && $obj->after = $after;
-        null !== $limit && $obj->limit = $limit;
+        null !== $after && $self['after'] = $after;
+        null !== $limit && $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +70,10 @@ final class FollowingBulkRetrieveParams implements BaseModel
      */
     public function withAfter(string $after): self
     {
-        $obj = clone $this;
-        $obj->after = $after;
+        $self = clone $this;
+        $self['after'] = $after;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +81,9 @@ final class FollowingBulkRetrieveParams implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj->limit = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 }

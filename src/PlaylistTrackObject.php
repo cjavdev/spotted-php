@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 use Spotted\PlaylistTrackObject\Track;
 
 /**
+ * @phpstan-import-type TrackVariants from \Spotted\PlaylistTrackObject\Track
+ * @phpstan-import-type PlaylistUserObjectShape from \Spotted\PlaylistUserObject
+ * @phpstan-import-type TrackShape from \Spotted\PlaylistTrackObject\Track
+ *
  * @phpstan-type PlaylistTrackObjectShape = array{
- *   added_at?: \DateTimeInterface|null,
- *   added_by?: PlaylistUserObject|null,
- *   is_local?: bool|null,
- *   track?: null|TrackObject|EpisodeObject,
+ *   addedAt?: \DateTimeInterface|null,
+ *   addedBy?: null|PlaylistUserObject|PlaylistUserObjectShape,
+ *   isLocal?: bool|null,
+ *   published?: bool|null,
+ *   track?: TrackShape|null,
  * }
  */
 final class PlaylistTrackObject implements BaseModel
@@ -25,25 +30,33 @@ final class PlaylistTrackObject implements BaseModel
     /**
      * The date and time the track or episode was added. _**Note**: some very old playlists may return `null` in this field._.
      */
-    #[Api(optional: true)]
-    public ?\DateTimeInterface $added_at;
+    #[Optional('added_at')]
+    public ?\DateTimeInterface $addedAt;
 
     /**
      * The Spotify user who added the track or episode. _**Note**: some very old playlists may return `null` in this field._.
      */
-    #[Api(optional: true)]
-    public ?PlaylistUserObject $added_by;
+    #[Optional('added_by')]
+    public ?PlaylistUserObject $addedBy;
 
     /**
      * Whether this track or episode is a [local file](/documentation/web-api/concepts/playlists/#local-files) or not.
      */
-    #[Api(optional: true)]
-    public ?bool $is_local;
+    #[Optional('is_local')]
+    public ?bool $isLocal;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * Information about the track or episode.
+     *
+     * @var TrackVariants|null $track
      */
-    #[Api(union: Track::class, optional: true)]
+    #[Optional(union: Track::class)]
     public TrackObject|EpisodeObject|null $track;
 
     public function __construct()
@@ -55,21 +68,26 @@ final class PlaylistTrackObject implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PlaylistUserObject|PlaylistUserObjectShape|null $addedBy
+     * @param TrackShape|null $track
      */
     public static function with(
-        ?\DateTimeInterface $added_at = null,
-        ?PlaylistUserObject $added_by = null,
-        ?bool $is_local = null,
-        TrackObject|EpisodeObject|null $track = null,
+        ?\DateTimeInterface $addedAt = null,
+        PlaylistUserObject|array|null $addedBy = null,
+        ?bool $isLocal = null,
+        ?bool $published = null,
+        TrackObject|array|EpisodeObject|null $track = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $added_at && $obj->added_at = $added_at;
-        null !== $added_by && $obj->added_by = $added_by;
-        null !== $is_local && $obj->is_local = $is_local;
-        null !== $track && $obj->track = $track;
+        null !== $addedAt && $self['addedAt'] = $addedAt;
+        null !== $addedBy && $self['addedBy'] = $addedBy;
+        null !== $isLocal && $self['isLocal'] = $isLocal;
+        null !== $published && $self['published'] = $published;
+        null !== $track && $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,21 +95,23 @@ final class PlaylistTrackObject implements BaseModel
      */
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
-        $obj = clone $this;
-        $obj->added_at = $addedAt;
+        $self = clone $this;
+        $self['addedAt'] = $addedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The Spotify user who added the track or episode. _**Note**: some very old playlists may return `null` in this field._.
+     *
+     * @param PlaylistUserObject|PlaylistUserObjectShape $addedBy
      */
-    public function withAddedBy(PlaylistUserObject $addedBy): self
+    public function withAddedBy(PlaylistUserObject|array $addedBy): self
     {
-        $obj = clone $this;
-        $obj->added_by = $addedBy;
+        $self = clone $this;
+        $self['addedBy'] = $addedBy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,20 +119,33 @@ final class PlaylistTrackObject implements BaseModel
      */
     public function withIsLocal(bool $isLocal): self
     {
-        $obj = clone $this;
-        $obj->is_local = $isLocal;
+        $self = clone $this;
+        $self['isLocal'] = $isLocal;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
      * Information about the track or episode.
+     *
+     * @param TrackShape $track
      */
-    public function withTrack(TrackObject|EpisodeObject $track): self
+    public function withTrack(TrackObject|array|EpisodeObject $track): self
     {
-        $obj = clone $this;
-        $obj->track = $track;
+        $self = clone $this;
+        $self['track'] = $track;
 
-        return $obj;
+        return $self;
     }
 }

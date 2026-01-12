@@ -4,35 +4,38 @@ declare(strict_types=1);
 
 namespace Spotted\Browse\Categories;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ImageObject;
 
 /**
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ *
  * @phpstan-type CategoryGetResponseShape = array{
- *   id: string, href: string, icons: list<ImageObject>, name: string
+ *   id: string,
+ *   href: string,
+ *   icons: list<ImageObject|ImageObjectShape>,
+ *   name: string,
+ *   published?: bool|null,
  * }
  */
-final class CategoryGetResponse implements BaseModel, ResponseConverter
+final class CategoryGetResponse implements BaseModel
 {
     /** @use SdkModel<CategoryGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * The [Spotify category ID](/documentation/web-api/concepts/spotify-uris-ids) of the category.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * A link to the Web API endpoint returning full details of the category.
      */
-    #[Api]
+    #[Required]
     public string $href;
 
     /**
@@ -40,14 +43,20 @@ final class CategoryGetResponse implements BaseModel, ResponseConverter
      *
      * @var list<ImageObject> $icons
      */
-    #[Api(list: ImageObject::class)]
+    #[Required(list: ImageObject::class)]
     public array $icons;
 
     /**
      * The name of the category.
      */
-    #[Api]
+    #[Required]
     public string $name;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * `new CategoryGetResponse()` is missing required properties by the API.
@@ -77,22 +86,25 @@ final class CategoryGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ImageObject> $icons
+     * @param list<ImageObject|ImageObjectShape> $icons
      */
     public static function with(
         string $id,
         string $href,
         array $icons,
-        string $name
+        string $name,
+        ?bool $published = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->href = $href;
-        $obj->icons = $icons;
-        $obj->name = $name;
+        $self['id'] = $id;
+        $self['href'] = $href;
+        $self['icons'] = $icons;
+        $self['name'] = $name;
 
-        return $obj;
+        null !== $published && $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -100,10 +112,10 @@ final class CategoryGetResponse implements BaseModel, ResponseConverter
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,23 +123,23 @@ final class CategoryGetResponse implements BaseModel, ResponseConverter
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj->href = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The category icon, in various sizes.
      *
-     * @param list<ImageObject> $icons
+     * @param list<ImageObject|ImageObjectShape> $icons
      */
     public function withIcons(array $icons): self
     {
-        $obj = clone $this;
-        $obj->icons = $icons;
+        $self = clone $this;
+        $self['icons'] = $icons;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,9 +147,20 @@ final class CategoryGetResponse implements BaseModel, ResponseConverter
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 }

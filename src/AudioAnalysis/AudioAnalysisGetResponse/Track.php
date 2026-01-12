@@ -4,38 +4,38 @@ declare(strict_types=1);
 
 namespace Spotted\AudioAnalysis\AudioAnalysisGetResponse;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TrackShape = array{
- *   analysis_channels?: int|null,
- *   analysis_sample_rate?: int|null,
- *   code_version?: float|null,
+ *   analysisChannels?: int|null,
+ *   analysisSampleRate?: int|null,
+ *   codeVersion?: float|null,
  *   codestring?: string|null,
  *   duration?: float|null,
- *   echoprint_version?: float|null,
+ *   echoprintVersion?: float|null,
  *   echoprintstring?: string|null,
- *   end_of_fade_in?: float|null,
+ *   endOfFadeIn?: float|null,
  *   key?: int|null,
- *   key_confidence?: float|null,
+ *   keyConfidence?: float|null,
  *   loudness?: float|null,
  *   mode?: int|null,
- *   mode_confidence?: float|null,
- *   num_samples?: int|null,
- *   offset_seconds?: int|null,
- *   rhythm_version?: float|null,
+ *   modeConfidence?: float|null,
+ *   numSamples?: int|null,
+ *   offsetSeconds?: int|null,
+ *   rhythmVersion?: float|null,
  *   rhythmstring?: string|null,
- *   sample_md5?: string|null,
- *   start_of_fade_out?: float|null,
- *   synch_version?: float|null,
+ *   sampleMd5?: string|null,
+ *   startOfFadeOut?: float|null,
+ *   synchVersion?: float|null,
  *   synchstring?: string|null,
  *   tempo?: float|null,
- *   tempo_confidence?: float|null,
- *   time_signature?: int|null,
- *   time_signature_confidence?: float|null,
- *   window_seconds?: int|null,
+ *   tempoConfidence?: float|null,
+ *   timeSignature?: int|null,
+ *   timeSignatureConfidence?: float|null,
+ *   windowSeconds?: int|null,
  * }
  */
 final class Track implements BaseModel
@@ -46,158 +46,158 @@ final class Track implements BaseModel
     /**
      * The number of channels used for analysis. If 1, all channels are summed together to mono before analysis.
      */
-    #[Api(optional: true)]
-    public ?int $analysis_channels;
+    #[Optional('analysis_channels')]
+    public ?int $analysisChannels;
 
     /**
      * The sample rate used to decode and analyze this track. May differ from the actual sample rate of this track available on Spotify.
      */
-    #[Api(optional: true)]
-    public ?int $analysis_sample_rate;
+    #[Optional('analysis_sample_rate')]
+    public ?int $analysisSampleRate;
 
     /**
      * A version number for the Echo Nest Musical Fingerprint format used in the codestring field.
      */
-    #[Api(optional: true)]
-    public ?float $code_version;
+    #[Optional('code_version')]
+    public ?float $codeVersion;
 
     /**
      * An [Echo Nest Musical Fingerprint (ENMFP)](https://academiccommons.columbia.edu/doi/10.7916/D8Q248M4) codestring for this track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $codestring;
 
     /**
      * Length of the track in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $duration;
 
     /**
      * A version number for the EchoPrint format used in the echoprintstring field.
      */
-    #[Api(optional: true)]
-    public ?float $echoprint_version;
+    #[Optional('echoprint_version')]
+    public ?float $echoprintVersion;
 
     /**
      * An [EchoPrint](https://github.com/spotify/echoprint-codegen) codestring for this track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $echoprintstring;
 
     /**
      * The time, in seconds, at which the track's fade-in period ends. If the track has no fade-in, this will be 0.0.
      */
-    #[Api(optional: true)]
-    public ?float $end_of_fade_in;
+    #[Optional('end_of_fade_in')]
+    public ?float $endOfFadeIn;
 
     /**
      * The key the track is in. Integers map to pitches using standard [Pitch Class notation](https://en.wikipedia.org/wiki/Pitch_class). E.g. 0 = C, 1 = C♯/D♭, 2 = D, and so on. If no key was detected, the value is -1.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $key;
 
     /**
      * The confidence, from 0.0 to 1.0, of the reliability of the `key`.
      */
-    #[Api(optional: true)]
-    public ?float $key_confidence;
+    #[Optional('key_confidence')]
+    public ?float $keyConfidence;
 
     /**
      * The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude). Values typically range between -60 and 0 db.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $loudness;
 
     /**
      * Mode indicates the modality (major or minor) of a track, the type of scale from which its melodic content is derived. Major is represented by 1 and minor is 0.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $mode;
 
     /**
      * The confidence, from 0.0 to 1.0, of the reliability of the `mode`.
      */
-    #[Api(optional: true)]
-    public ?float $mode_confidence;
+    #[Optional('mode_confidence')]
+    public ?float $modeConfidence;
 
     /**
      * The exact number of audio samples analyzed from this track. See also `analysis_sample_rate`.
      */
-    #[Api(optional: true)]
-    public ?int $num_samples;
+    #[Optional('num_samples')]
+    public ?int $numSamples;
 
     /**
      * An offset to the start of the region of the track that was analyzed. (As the entire track is analyzed, this should always be 0.).
      */
-    #[Api(optional: true)]
-    public ?int $offset_seconds;
+    #[Optional('offset_seconds')]
+    public ?int $offsetSeconds;
 
     /**
      * A version number for the Rhythmstring used in the rhythmstring field.
      */
-    #[Api(optional: true)]
-    public ?float $rhythm_version;
+    #[Optional('rhythm_version')]
+    public ?float $rhythmVersion;
 
     /**
      * A Rhythmstring for this track. The format of this string is similar to the Synchstring.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rhythmstring;
 
     /**
      * This field will always contain the empty string.
      */
-    #[Api(optional: true)]
-    public ?string $sample_md5;
+    #[Optional('sample_md5')]
+    public ?string $sampleMd5;
 
     /**
      * The time, in seconds, at which the track's fade-out period starts. If the track has no fade-out, this should match the track's length.
      */
-    #[Api(optional: true)]
-    public ?float $start_of_fade_out;
+    #[Optional('start_of_fade_out')]
+    public ?float $startOfFadeOut;
 
     /**
      * A version number for the Synchstring used in the synchstring field.
      */
-    #[Api(optional: true)]
-    public ?float $synch_version;
+    #[Optional('synch_version')]
+    public ?float $synchVersion;
 
     /**
      * A [Synchstring](https://github.com/echonest/synchdata) for this track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $synchstring;
 
     /**
      * The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $tempo;
 
     /**
      * The confidence, from 0.0 to 1.0, of the reliability of the `tempo`.
      */
-    #[Api(optional: true)]
-    public ?float $tempo_confidence;
+    #[Optional('tempo_confidence')]
+    public ?float $tempoConfidence;
 
     /**
      * An estimated time signature. The time signature (meter) is a notational convention to specify how many beats are in each bar (or measure). The time signature ranges from 3 to 7 indicating time signatures of "3/4", to "7/4".
      */
-    #[Api(optional: true)]
-    public ?int $time_signature;
+    #[Optional('time_signature')]
+    public ?int $timeSignature;
 
     /**
      * The confidence, from 0.0 to 1.0, of the reliability of the `time_signature`.
      */
-    #[Api(optional: true)]
-    public ?float $time_signature_confidence;
+    #[Optional('time_signature_confidence')]
+    public ?float $timeSignatureConfidence;
 
     /**
      * The length of the region of the track was analyzed, if a subset of the track was analyzed. (As the entire track is analyzed, this should always be 0.).
      */
-    #[Api(optional: true)]
-    public ?int $window_seconds;
+    #[Optional('window_seconds')]
+    public ?int $windowSeconds;
 
     public function __construct()
     {
@@ -210,63 +210,63 @@ final class Track implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $analysis_channels = null,
-        ?int $analysis_sample_rate = null,
-        ?float $code_version = null,
+        ?int $analysisChannels = null,
+        ?int $analysisSampleRate = null,
+        ?float $codeVersion = null,
         ?string $codestring = null,
         ?float $duration = null,
-        ?float $echoprint_version = null,
+        ?float $echoprintVersion = null,
         ?string $echoprintstring = null,
-        ?float $end_of_fade_in = null,
+        ?float $endOfFadeIn = null,
         ?int $key = null,
-        ?float $key_confidence = null,
+        ?float $keyConfidence = null,
         ?float $loudness = null,
         ?int $mode = null,
-        ?float $mode_confidence = null,
-        ?int $num_samples = null,
-        ?int $offset_seconds = null,
-        ?float $rhythm_version = null,
+        ?float $modeConfidence = null,
+        ?int $numSamples = null,
+        ?int $offsetSeconds = null,
+        ?float $rhythmVersion = null,
         ?string $rhythmstring = null,
-        ?string $sample_md5 = null,
-        ?float $start_of_fade_out = null,
-        ?float $synch_version = null,
+        ?string $sampleMd5 = null,
+        ?float $startOfFadeOut = null,
+        ?float $synchVersion = null,
         ?string $synchstring = null,
         ?float $tempo = null,
-        ?float $tempo_confidence = null,
-        ?int $time_signature = null,
-        ?float $time_signature_confidence = null,
-        ?int $window_seconds = null,
+        ?float $tempoConfidence = null,
+        ?int $timeSignature = null,
+        ?float $timeSignatureConfidence = null,
+        ?int $windowSeconds = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $analysis_channels && $obj->analysis_channels = $analysis_channels;
-        null !== $analysis_sample_rate && $obj->analysis_sample_rate = $analysis_sample_rate;
-        null !== $code_version && $obj->code_version = $code_version;
-        null !== $codestring && $obj->codestring = $codestring;
-        null !== $duration && $obj->duration = $duration;
-        null !== $echoprint_version && $obj->echoprint_version = $echoprint_version;
-        null !== $echoprintstring && $obj->echoprintstring = $echoprintstring;
-        null !== $end_of_fade_in && $obj->end_of_fade_in = $end_of_fade_in;
-        null !== $key && $obj->key = $key;
-        null !== $key_confidence && $obj->key_confidence = $key_confidence;
-        null !== $loudness && $obj->loudness = $loudness;
-        null !== $mode && $obj->mode = $mode;
-        null !== $mode_confidence && $obj->mode_confidence = $mode_confidence;
-        null !== $num_samples && $obj->num_samples = $num_samples;
-        null !== $offset_seconds && $obj->offset_seconds = $offset_seconds;
-        null !== $rhythm_version && $obj->rhythm_version = $rhythm_version;
-        null !== $rhythmstring && $obj->rhythmstring = $rhythmstring;
-        null !== $sample_md5 && $obj->sample_md5 = $sample_md5;
-        null !== $start_of_fade_out && $obj->start_of_fade_out = $start_of_fade_out;
-        null !== $synch_version && $obj->synch_version = $synch_version;
-        null !== $synchstring && $obj->synchstring = $synchstring;
-        null !== $tempo && $obj->tempo = $tempo;
-        null !== $tempo_confidence && $obj->tempo_confidence = $tempo_confidence;
-        null !== $time_signature && $obj->time_signature = $time_signature;
-        null !== $time_signature_confidence && $obj->time_signature_confidence = $time_signature_confidence;
-        null !== $window_seconds && $obj->window_seconds = $window_seconds;
+        null !== $analysisChannels && $self['analysisChannels'] = $analysisChannels;
+        null !== $analysisSampleRate && $self['analysisSampleRate'] = $analysisSampleRate;
+        null !== $codeVersion && $self['codeVersion'] = $codeVersion;
+        null !== $codestring && $self['codestring'] = $codestring;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $echoprintVersion && $self['echoprintVersion'] = $echoprintVersion;
+        null !== $echoprintstring && $self['echoprintstring'] = $echoprintstring;
+        null !== $endOfFadeIn && $self['endOfFadeIn'] = $endOfFadeIn;
+        null !== $key && $self['key'] = $key;
+        null !== $keyConfidence && $self['keyConfidence'] = $keyConfidence;
+        null !== $loudness && $self['loudness'] = $loudness;
+        null !== $mode && $self['mode'] = $mode;
+        null !== $modeConfidence && $self['modeConfidence'] = $modeConfidence;
+        null !== $numSamples && $self['numSamples'] = $numSamples;
+        null !== $offsetSeconds && $self['offsetSeconds'] = $offsetSeconds;
+        null !== $rhythmVersion && $self['rhythmVersion'] = $rhythmVersion;
+        null !== $rhythmstring && $self['rhythmstring'] = $rhythmstring;
+        null !== $sampleMd5 && $self['sampleMd5'] = $sampleMd5;
+        null !== $startOfFadeOut && $self['startOfFadeOut'] = $startOfFadeOut;
+        null !== $synchVersion && $self['synchVersion'] = $synchVersion;
+        null !== $synchstring && $self['synchstring'] = $synchstring;
+        null !== $tempo && $self['tempo'] = $tempo;
+        null !== $tempoConfidence && $self['tempoConfidence'] = $tempoConfidence;
+        null !== $timeSignature && $self['timeSignature'] = $timeSignature;
+        null !== $timeSignatureConfidence && $self['timeSignatureConfidence'] = $timeSignatureConfidence;
+        null !== $windowSeconds && $self['windowSeconds'] = $windowSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -274,10 +274,10 @@ final class Track implements BaseModel
      */
     public function withAnalysisChannels(int $analysisChannels): self
     {
-        $obj = clone $this;
-        $obj->analysis_channels = $analysisChannels;
+        $self = clone $this;
+        $self['analysisChannels'] = $analysisChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -285,10 +285,10 @@ final class Track implements BaseModel
      */
     public function withAnalysisSampleRate(int $analysisSampleRate): self
     {
-        $obj = clone $this;
-        $obj->analysis_sample_rate = $analysisSampleRate;
+        $self = clone $this;
+        $self['analysisSampleRate'] = $analysisSampleRate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -296,10 +296,10 @@ final class Track implements BaseModel
      */
     public function withCodeVersion(float $codeVersion): self
     {
-        $obj = clone $this;
-        $obj->code_version = $codeVersion;
+        $self = clone $this;
+        $self['codeVersion'] = $codeVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -307,10 +307,10 @@ final class Track implements BaseModel
      */
     public function withCodestring(string $codestring): self
     {
-        $obj = clone $this;
-        $obj->codestring = $codestring;
+        $self = clone $this;
+        $self['codestring'] = $codestring;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -318,10 +318,10 @@ final class Track implements BaseModel
      */
     public function withDuration(float $duration): self
     {
-        $obj = clone $this;
-        $obj->duration = $duration;
+        $self = clone $this;
+        $self['duration'] = $duration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -329,10 +329,10 @@ final class Track implements BaseModel
      */
     public function withEchoprintVersion(float $echoprintVersion): self
     {
-        $obj = clone $this;
-        $obj->echoprint_version = $echoprintVersion;
+        $self = clone $this;
+        $self['echoprintVersion'] = $echoprintVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -340,10 +340,10 @@ final class Track implements BaseModel
      */
     public function withEchoprintstring(string $echoprintstring): self
     {
-        $obj = clone $this;
-        $obj->echoprintstring = $echoprintstring;
+        $self = clone $this;
+        $self['echoprintstring'] = $echoprintstring;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -351,10 +351,10 @@ final class Track implements BaseModel
      */
     public function withEndOfFadeIn(float $endOfFadeIn): self
     {
-        $obj = clone $this;
-        $obj->end_of_fade_in = $endOfFadeIn;
+        $self = clone $this;
+        $self['endOfFadeIn'] = $endOfFadeIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -362,10 +362,10 @@ final class Track implements BaseModel
      */
     public function withKey(int $key): self
     {
-        $obj = clone $this;
-        $obj->key = $key;
+        $self = clone $this;
+        $self['key'] = $key;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -373,10 +373,10 @@ final class Track implements BaseModel
      */
     public function withKeyConfidence(float $keyConfidence): self
     {
-        $obj = clone $this;
-        $obj->key_confidence = $keyConfidence;
+        $self = clone $this;
+        $self['keyConfidence'] = $keyConfidence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -384,10 +384,10 @@ final class Track implements BaseModel
      */
     public function withLoudness(float $loudness): self
     {
-        $obj = clone $this;
-        $obj->loudness = $loudness;
+        $self = clone $this;
+        $self['loudness'] = $loudness;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -395,10 +395,10 @@ final class Track implements BaseModel
      */
     public function withMode(int $mode): self
     {
-        $obj = clone $this;
-        $obj->mode = $mode;
+        $self = clone $this;
+        $self['mode'] = $mode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -406,10 +406,10 @@ final class Track implements BaseModel
      */
     public function withModeConfidence(float $modeConfidence): self
     {
-        $obj = clone $this;
-        $obj->mode_confidence = $modeConfidence;
+        $self = clone $this;
+        $self['modeConfidence'] = $modeConfidence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -417,10 +417,10 @@ final class Track implements BaseModel
      */
     public function withNumSamples(int $numSamples): self
     {
-        $obj = clone $this;
-        $obj->num_samples = $numSamples;
+        $self = clone $this;
+        $self['numSamples'] = $numSamples;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -428,10 +428,10 @@ final class Track implements BaseModel
      */
     public function withOffsetSeconds(int $offsetSeconds): self
     {
-        $obj = clone $this;
-        $obj->offset_seconds = $offsetSeconds;
+        $self = clone $this;
+        $self['offsetSeconds'] = $offsetSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -439,10 +439,10 @@ final class Track implements BaseModel
      */
     public function withRhythmVersion(float $rhythmVersion): self
     {
-        $obj = clone $this;
-        $obj->rhythm_version = $rhythmVersion;
+        $self = clone $this;
+        $self['rhythmVersion'] = $rhythmVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -450,10 +450,10 @@ final class Track implements BaseModel
      */
     public function withRhythmstring(string $rhythmstring): self
     {
-        $obj = clone $this;
-        $obj->rhythmstring = $rhythmstring;
+        $self = clone $this;
+        $self['rhythmstring'] = $rhythmstring;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -461,10 +461,10 @@ final class Track implements BaseModel
      */
     public function withSampleMd5(string $sampleMd5): self
     {
-        $obj = clone $this;
-        $obj->sample_md5 = $sampleMd5;
+        $self = clone $this;
+        $self['sampleMd5'] = $sampleMd5;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -472,10 +472,10 @@ final class Track implements BaseModel
      */
     public function withStartOfFadeOut(float $startOfFadeOut): self
     {
-        $obj = clone $this;
-        $obj->start_of_fade_out = $startOfFadeOut;
+        $self = clone $this;
+        $self['startOfFadeOut'] = $startOfFadeOut;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -483,10 +483,10 @@ final class Track implements BaseModel
      */
     public function withSynchVersion(float $synchVersion): self
     {
-        $obj = clone $this;
-        $obj->synch_version = $synchVersion;
+        $self = clone $this;
+        $self['synchVersion'] = $synchVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -494,10 +494,10 @@ final class Track implements BaseModel
      */
     public function withSynchstring(string $synchstring): self
     {
-        $obj = clone $this;
-        $obj->synchstring = $synchstring;
+        $self = clone $this;
+        $self['synchstring'] = $synchstring;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -505,10 +505,10 @@ final class Track implements BaseModel
      */
     public function withTempo(float $tempo): self
     {
-        $obj = clone $this;
-        $obj->tempo = $tempo;
+        $self = clone $this;
+        $self['tempo'] = $tempo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -516,10 +516,10 @@ final class Track implements BaseModel
      */
     public function withTempoConfidence(float $tempoConfidence): self
     {
-        $obj = clone $this;
-        $obj->tempo_confidence = $tempoConfidence;
+        $self = clone $this;
+        $self['tempoConfidence'] = $tempoConfidence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -527,10 +527,10 @@ final class Track implements BaseModel
      */
     public function withTimeSignature(int $timeSignature): self
     {
-        $obj = clone $this;
-        $obj->time_signature = $timeSignature;
+        $self = clone $this;
+        $self['timeSignature'] = $timeSignature;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -539,10 +539,10 @@ final class Track implements BaseModel
     public function withTimeSignatureConfidence(
         float $timeSignatureConfidence
     ): self {
-        $obj = clone $this;
-        $obj->time_signature_confidence = $timeSignatureConfidence;
+        $self = clone $this;
+        $self['timeSignatureConfidence'] = $timeSignatureConfidence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -550,9 +550,9 @@ final class Track implements BaseModel
      */
     public function withWindowSeconds(int $windowSeconds): self
     {
-        $obj = clone $this;
-        $obj->window_seconds = $windowSeconds;
+        $self = clone $this;
+        $self['windowSeconds'] = $windowSeconds;
 
-        return $obj;
+        return $self;
     }
 }

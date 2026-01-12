@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Playlists\Tracks\TrackRemoveParams;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class Track implements BaseModel
     /**
      * Spotify URI.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()
@@ -34,11 +34,11 @@ final class Track implements BaseModel
      */
     public static function with(?string $uri = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $uri && $obj->uri = $uri;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class Track implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

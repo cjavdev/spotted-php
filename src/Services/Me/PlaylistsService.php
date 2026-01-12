@@ -6,18 +6,29 @@ namespace Spotted\Services\Me;
 
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\Util;
 use Spotted\CursorURLPage;
-use Spotted\Me\Playlists\PlaylistListParams;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Me\PlaylistsContract;
 use Spotted\SimplifiedPlaylistObject;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class PlaylistsService implements PlaylistsContract
 {
     /**
+     * @api
+     */
+    public PlaylistsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new PlaylistsRawService($client);
+    }
 
     /**
      * @api
@@ -25,29 +36,26 @@ final class PlaylistsService implements PlaylistsContract
      * Get a list of the playlists owned or followed by the current Spotify
      * user.
      *
-     * @param array{limit?: int, offset?: int}|PlaylistListParams $params
+     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param int $offset 'The index of the first playlist to return. Default:
+     * 0 (the first object). Maximum offset: 100.000\. Use with `limit` to get the
+     * next set of playlists.'
+     * @param RequestOpts|null $requestOptions
      *
      * @return CursorURLPage<SimplifiedPlaylistObject>
      *
      * @throws APIException
      */
     public function list(
-        array|PlaylistListParams $params,
-        ?RequestOptions $requestOptions = null
+        int $limit = 20,
+        int $offset = 0,
+        RequestOptions|array|null $requestOptions = null,
     ): CursorURLPage {
-        [$parsed, $options] = PlaylistListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = Util::removeNulls(['limit' => $limit, 'offset' => $offset]);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'me/playlists',
-            query: $parsed,
-            options: $options,
-            convert: SimplifiedPlaylistObject::class,
-            page: CursorURLPage::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

@@ -4,37 +4,43 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Shows;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ShowBase;
 
 /**
+ * @phpstan-import-type ShowBaseShape from \Spotted\ShowBase
+ *
  * @phpstan-type ShowListResponseShape = array{
- *   added_at?: \DateTimeInterface|null, show?: ShowBase|null
+ *   addedAt?: \DateTimeInterface|null,
+ *   published?: bool|null,
+ *   show?: null|ShowBase|ShowBaseShape,
  * }
  */
-final class ShowListResponse implements BaseModel, ResponseConverter
+final class ShowListResponse implements BaseModel
 {
     /** @use SdkModel<ShowListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The date and time the show was saved.
      * Timestamps are returned in ISO 8601 format as Coordinated Universal Time (UTC) with a zero offset: YYYY-MM-DDTHH:MM:SSZ.
      * If the time is imprecise (for example, the date/time of an album release), an additional field indicates the precision; see for example, release_date in an album object.
      */
-    #[Api(optional: true)]
-    public ?\DateTimeInterface $added_at;
+    #[Optional('added_at')]
+    public ?\DateTimeInterface $addedAt;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * Information about the show.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ShowBase $show;
 
     public function __construct()
@@ -46,17 +52,21 @@ final class ShowListResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ShowBase|ShowBaseShape|null $show
      */
     public static function with(
-        ?\DateTimeInterface $added_at = null,
-        ?ShowBase $show = null
+        ?\DateTimeInterface $addedAt = null,
+        ?bool $published = null,
+        ShowBase|array|null $show = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $added_at && $obj->added_at = $added_at;
-        null !== $show && $obj->show = $show;
+        null !== $addedAt && $self['addedAt'] = $addedAt;
+        null !== $published && $self['published'] = $published;
+        null !== $show && $self['show'] = $show;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,20 +76,33 @@ final class ShowListResponse implements BaseModel, ResponseConverter
      */
     public function withAddedAt(\DateTimeInterface $addedAt): self
     {
-        $obj = clone $this;
-        $obj->added_at = $addedAt;
+        $self = clone $this;
+        $self['addedAt'] = $addedAt;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
      * Information about the show.
+     *
+     * @param ShowBase|ShowBaseShape $show
      */
-    public function withShow(ShowBase $show): self
+    public function withShow(ShowBase|array $show): self
     {
-        $obj = clone $this;
-        $obj->show = $show;
+        $self = clone $this;
+        $self['show'] = $show;
 
-        return $obj;
+        return $self;
     }
 }

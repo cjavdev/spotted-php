@@ -4,26 +4,22 @@ declare(strict_types=1);
 
 namespace Spotted\Recommendations;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type RecommendationListAvailableGenreSeedsResponseShape = array{
  *   genres: list<string>
  * }
  */
-final class RecommendationListAvailableGenreSeedsResponse implements BaseModel, ResponseConverter
+final class RecommendationListAvailableGenreSeedsResponse implements BaseModel
 {
     /** @use SdkModel<RecommendationListAvailableGenreSeedsResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<string> $genres */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $genres;
 
     /**
@@ -54,11 +50,11 @@ final class RecommendationListAvailableGenreSeedsResponse implements BaseModel, 
      */
     public static function with(array $genres): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->genres = $genres;
+        $self['genres'] = $genres;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +62,9 @@ final class RecommendationListAvailableGenreSeedsResponse implements BaseModel, 
      */
     public function withGenres(array $genres): self
     {
-        $obj = clone $this;
-        $obj->genres = $genres;
+        $self = clone $this;
+        $self['genres'] = $genres;
 
-        return $obj;
+        return $self;
     }
 }

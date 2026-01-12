@@ -4,95 +4,106 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\EpisodeObject;
 use Spotted\Me\Player\PlayerGetStateResponse\Actions;
 use Spotted\Me\Player\PlayerGetStateResponse\Item;
 use Spotted\TrackObject;
 
 /**
+ * @phpstan-import-type ItemVariants from \Spotted\Me\Player\PlayerGetStateResponse\Item
+ * @phpstan-import-type ActionsShape from \Spotted\Me\Player\PlayerGetStateResponse\Actions
+ * @phpstan-import-type ContextObjectShape from \Spotted\Me\Player\ContextObject
+ * @phpstan-import-type DeviceObjectShape from \Spotted\Me\Player\DeviceObject
+ * @phpstan-import-type ItemShape from \Spotted\Me\Player\PlayerGetStateResponse\Item
+ *
  * @phpstan-type PlayerGetStateResponseShape = array{
- *   actions?: Actions|null,
- *   context?: ContextObject|null,
- *   currently_playing_type?: string|null,
- *   device?: DeviceObject|null,
- *   is_playing?: bool|null,
- *   item?: null|TrackObject|EpisodeObject,
- *   progress_ms?: int|null,
- *   repeat_state?: string|null,
- *   shuffle_state?: bool|null,
+ *   actions?: null|Actions|ActionsShape,
+ *   context?: null|ContextObject|ContextObjectShape,
+ *   currentlyPlayingType?: string|null,
+ *   device?: null|DeviceObject|DeviceObjectShape,
+ *   isPlaying?: bool|null,
+ *   item?: ItemShape|null,
+ *   progressMs?: int|null,
+ *   published?: bool|null,
+ *   repeatState?: string|null,
+ *   shuffleState?: bool|null,
  *   timestamp?: int|null,
  * }
  */
-final class PlayerGetStateResponse implements BaseModel, ResponseConverter
+final class PlayerGetStateResponse implements BaseModel
 {
     /** @use SdkModel<PlayerGetStateResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * Allows to update the user interface based on which playback actions are available within the current context.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Actions $actions;
 
     /**
      * A Context Object. Can be `null`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ContextObject $context;
 
     /**
      * The object type of the currently playing item. Can be one of `track`, `episode`, `ad` or `unknown`.
      */
-    #[Api(optional: true)]
-    public ?string $currently_playing_type;
+    #[Optional('currently_playing_type')]
+    public ?string $currentlyPlayingType;
 
     /**
      * The device that is currently active.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?DeviceObject $device;
 
     /**
      * If something is currently playing, return `true`.
      */
-    #[Api(optional: true)]
-    public ?bool $is_playing;
+    #[Optional('is_playing')]
+    public ?bool $isPlaying;
 
     /**
      * The currently playing track or episode. Can be `null`.
+     *
+     * @var ItemVariants|null $item
      */
-    #[Api(union: Item::class, optional: true)]
+    #[Optional(union: Item::class)]
     public TrackObject|EpisodeObject|null $item;
 
     /**
      * Progress into the currently playing track or episode. Can be `null`.
      */
-    #[Api(optional: true)]
-    public ?int $progress_ms;
+    #[Optional('progress_ms')]
+    public ?int $progressMs;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * off, track, context.
      */
-    #[Api(optional: true)]
-    public ?string $repeat_state;
+    #[Optional('repeat_state')]
+    public ?string $repeatState;
 
     /**
      * If shuffle is on or off.
      */
-    #[Api(optional: true)]
-    public ?bool $shuffle_state;
+    #[Optional('shuffle_state')]
+    public ?bool $shuffleState;
 
     /**
      * Unix Millisecond Timestamp when playback state was last changed (play, pause, skip, scrub, new song, etc.).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timestamp;
 
     public function __construct()
@@ -104,55 +115,66 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Actions|ActionsShape|null $actions
+     * @param ContextObject|ContextObjectShape|null $context
+     * @param DeviceObject|DeviceObjectShape|null $device
+     * @param ItemShape|null $item
      */
     public static function with(
-        ?Actions $actions = null,
-        ?ContextObject $context = null,
-        ?string $currently_playing_type = null,
-        ?DeviceObject $device = null,
-        ?bool $is_playing = null,
-        TrackObject|EpisodeObject|null $item = null,
-        ?int $progress_ms = null,
-        ?string $repeat_state = null,
-        ?bool $shuffle_state = null,
+        Actions|array|null $actions = null,
+        ContextObject|array|null $context = null,
+        ?string $currentlyPlayingType = null,
+        DeviceObject|array|null $device = null,
+        ?bool $isPlaying = null,
+        TrackObject|array|EpisodeObject|null $item = null,
+        ?int $progressMs = null,
+        ?bool $published = null,
+        ?string $repeatState = null,
+        ?bool $shuffleState = null,
         ?int $timestamp = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $actions && $obj->actions = $actions;
-        null !== $context && $obj->context = $context;
-        null !== $currently_playing_type && $obj->currently_playing_type = $currently_playing_type;
-        null !== $device && $obj->device = $device;
-        null !== $is_playing && $obj->is_playing = $is_playing;
-        null !== $item && $obj->item = $item;
-        null !== $progress_ms && $obj->progress_ms = $progress_ms;
-        null !== $repeat_state && $obj->repeat_state = $repeat_state;
-        null !== $shuffle_state && $obj->shuffle_state = $shuffle_state;
-        null !== $timestamp && $obj->timestamp = $timestamp;
+        null !== $actions && $self['actions'] = $actions;
+        null !== $context && $self['context'] = $context;
+        null !== $currentlyPlayingType && $self['currentlyPlayingType'] = $currentlyPlayingType;
+        null !== $device && $self['device'] = $device;
+        null !== $isPlaying && $self['isPlaying'] = $isPlaying;
+        null !== $item && $self['item'] = $item;
+        null !== $progressMs && $self['progressMs'] = $progressMs;
+        null !== $published && $self['published'] = $published;
+        null !== $repeatState && $self['repeatState'] = $repeatState;
+        null !== $shuffleState && $self['shuffleState'] = $shuffleState;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Allows to update the user interface based on which playback actions are available within the current context.
+     *
+     * @param Actions|ActionsShape $actions
      */
-    public function withActions(Actions $actions): self
+    public function withActions(Actions|array $actions): self
     {
-        $obj = clone $this;
-        $obj->actions = $actions;
+        $self = clone $this;
+        $self['actions'] = $actions;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * A Context Object. Can be `null`.
+     *
+     * @param ContextObject|ContextObjectShape $context
      */
-    public function withContext(ContextObject $context): self
+    public function withContext(ContextObject|array $context): self
     {
-        $obj = clone $this;
-        $obj->context = $context;
+        $self = clone $this;
+        $self['context'] = $context;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,21 +182,23 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
      */
     public function withCurrentlyPlayingType(string $currentlyPlayingType): self
     {
-        $obj = clone $this;
-        $obj->currently_playing_type = $currentlyPlayingType;
+        $self = clone $this;
+        $self['currentlyPlayingType'] = $currentlyPlayingType;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The device that is currently active.
+     *
+     * @param DeviceObject|DeviceObjectShape $device
      */
-    public function withDevice(DeviceObject $device): self
+    public function withDevice(DeviceObject|array $device): self
     {
-        $obj = clone $this;
-        $obj->device = $device;
+        $self = clone $this;
+        $self['device'] = $device;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,21 +206,23 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
      */
     public function withIsPlaying(bool $isPlaying): self
     {
-        $obj = clone $this;
-        $obj->is_playing = $isPlaying;
+        $self = clone $this;
+        $self['isPlaying'] = $isPlaying;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The currently playing track or episode. Can be `null`.
+     *
+     * @param ItemShape $item
      */
-    public function withItem(TrackObject|EpisodeObject $item): self
+    public function withItem(TrackObject|array|EpisodeObject $item): self
     {
-        $obj = clone $this;
-        $obj->item = $item;
+        $self = clone $this;
+        $self['item'] = $item;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -204,10 +230,21 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
      */
     public function withProgressMs(int $progressMs): self
     {
-        $obj = clone $this;
-        $obj->progress_ms = $progressMs;
+        $self = clone $this;
+        $self['progressMs'] = $progressMs;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -215,10 +252,10 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
      */
     public function withRepeatState(string $repeatState): self
     {
-        $obj = clone $this;
-        $obj->repeat_state = $repeatState;
+        $self = clone $this;
+        $self['repeatState'] = $repeatState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -226,10 +263,10 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
      */
     public function withShuffleState(bool $shuffleState): self
     {
-        $obj = clone $this;
-        $obj->shuffle_state = $shuffleState;
+        $self = clone $this;
+        $self['shuffleState'] = $shuffleState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -237,9 +274,9 @@ final class PlayerGetStateResponse implements BaseModel, ResponseConverter
      */
     public function withTimestamp(int $timestamp): self
     {
-        $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 }

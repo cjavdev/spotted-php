@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type PlayerGetDevicesResponseShape = array{devices: list<DeviceObject>}
+ * @phpstan-import-type DeviceObjectShape from \Spotted\Me\Player\DeviceObject
+ *
+ * @phpstan-type PlayerGetDevicesResponseShape = array{
+ *   devices: list<DeviceObject|DeviceObjectShape>
+ * }
  */
-final class PlayerGetDevicesResponse implements BaseModel, ResponseConverter
+final class PlayerGetDevicesResponse implements BaseModel
 {
     /** @use SdkModel<PlayerGetDevicesResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<DeviceObject> $devices */
-    #[Api(list: DeviceObject::class)]
+    #[Required(list: DeviceObject::class)]
     public array $devices;
 
     /**
@@ -48,25 +48,25 @@ final class PlayerGetDevicesResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DeviceObject> $devices
+     * @param list<DeviceObject|DeviceObjectShape> $devices
      */
     public static function with(array $devices): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->devices = $devices;
+        $self['devices'] = $devices;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<DeviceObject> $devices
+     * @param list<DeviceObject|DeviceObjectShape> $devices
      */
     public function withDevices(array $devices): self
     {
-        $obj = clone $this;
-        $obj->devices = $devices;
+        $self = clone $this;
+        $self['devices'] = $devices;
 
-        return $obj;
+        return $self;
     }
 }

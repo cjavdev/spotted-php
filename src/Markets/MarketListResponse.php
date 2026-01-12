@@ -4,24 +4,20 @@ declare(strict_types=1);
 
 namespace Spotted\Markets;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type MarketListResponseShape = array{markets?: list<string>|null}
  */
-final class MarketListResponse implements BaseModel, ResponseConverter
+final class MarketListResponse implements BaseModel
 {
     /** @use SdkModel<MarketListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<string>|null $markets */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $markets;
 
     public function __construct()
@@ -34,15 +30,15 @@ final class MarketListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $markets
+     * @param list<string>|null $markets
      */
     public static function with(?array $markets = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $markets && $obj->markets = $markets;
+        null !== $markets && $self['markets'] = $markets;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -50,9 +46,9 @@ final class MarketListResponse implements BaseModel, ResponseConverter
      */
     public function withMarkets(array $markets): self
     {
-        $obj = clone $this;
-        $obj->markets = $markets;
+        $self = clone $this;
+        $self['markets'] = $markets;
 
-        return $obj;
+        return $self;
     }
 }

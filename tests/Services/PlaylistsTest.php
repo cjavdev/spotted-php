@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\Playlists\PlaylistGetResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,9 +38,10 @@ final class PlaylistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->playlists->retrieve('3cEYpjA9oz9GiPac4AsH4n', []);
+        $result = $this->client->playlists->retrieve('3cEYpjA9oz9GiPac4AsH4n');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PlaylistGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,8 +51,9 @@ final class PlaylistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->playlists->update('3cEYpjA9oz9GiPac4AsH4n', []);
+        $result = $this->client->playlists->update('3cEYpjA9oz9GiPac4AsH4n');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

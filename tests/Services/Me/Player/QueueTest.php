@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\Me\Player\Queue\QueueGetResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,11 +38,12 @@ final class QueueTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->queue->add([
-            'uri' => 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh',
-        ]);
+        $result = $this->client->me->player->queue->add(
+            uri: 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh'
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -51,11 +53,13 @@ final class QueueTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->me->player->queue->add([
-            'uri' => 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh',
-        ]);
+        $result = $this->client->me->player->queue->add(
+            uri: 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh',
+            deviceID: '0d1841b0976bae2a3a310dd74c0f3df354899bc8',
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -67,6 +71,7 @@ final class QueueTest extends TestCase
 
         $result = $this->client->me->player->queue->get();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(QueueGetResponse::class, $result);
     }
 }

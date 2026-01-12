@@ -42,7 +42,8 @@ final class ImagesTest extends TestCase
             'file'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
@@ -54,6 +55,7 @@ final class ImagesTest extends TestCase
 
         $result = $this->client->playlists->images->list('3cEYpjA9oz9GiPac4AsH4n');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }

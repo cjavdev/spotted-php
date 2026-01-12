@@ -4,31 +4,39 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type AuthorObjectShape from \Spotted\AuthorObject
+ * @phpstan-import-type CopyrightObjectShape from \Spotted\CopyrightObject
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ * @phpstan-import-type NarratorObjectShape from \Spotted\NarratorObject
+ *
  * @phpstan-type AudiobookBaseShape = array{
  *   id: string,
- *   authors: list<AuthorObject>,
- *   available_markets: list<string>,
- *   copyrights: list<CopyrightObject>,
+ *   authors: list<AuthorObject|AuthorObjectShape>,
+ *   availableMarkets: list<string>,
+ *   copyrights: list<CopyrightObject|CopyrightObjectShape>,
  *   description: string,
  *   explicit: bool,
- *   external_urls: ExternalURLObject,
+ *   externalURLs: ExternalURLObject|ExternalURLObjectShape,
  *   href: string,
- *   html_description: string,
- *   images: list<ImageObject>,
+ *   htmlDescription: string,
+ *   images: list<ImageObject|ImageObjectShape>,
  *   languages: list<string>,
- *   media_type: string,
+ *   mediaType: string,
  *   name: string,
- *   narrators: list<NarratorObject>,
+ *   narrators: list<NarratorObject|NarratorObjectShape>,
  *   publisher: string,
- *   total_chapters: int,
+ *   totalChapters: int,
  *   type: 'audiobook',
  *   uri: string,
  *   edition?: string|null,
+ *   published?: bool|null,
  * }
  */
 final class AudiobookBase implements BaseModel
@@ -41,13 +49,13 @@ final class AudiobookBase implements BaseModel
      *
      * @var 'audiobook' $type
      */
-    #[Api]
+    #[Required]
     public string $type = 'audiobook';
 
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the audiobook.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -55,61 +63,61 @@ final class AudiobookBase implements BaseModel
      *
      * @var list<AuthorObject> $authors
      */
-    #[Api(list: AuthorObject::class)]
+    #[Required(list: AuthorObject::class)]
     public array $authors;
 
     /**
      * A list of the countries in which the audiobook can be played, identified by their [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code.
      *
-     * @var list<string> $available_markets
+     * @var list<string> $availableMarkets
      */
-    #[Api(list: 'string')]
-    public array $available_markets;
+    #[Required('available_markets', list: 'string')]
+    public array $availableMarkets;
 
     /**
      * The copyright statements of the audiobook.
      *
      * @var list<CopyrightObject> $copyrights
      */
-    #[Api(list: CopyrightObject::class)]
+    #[Required(list: CopyrightObject::class)]
     public array $copyrights;
 
     /**
      * A description of the audiobook. HTML tags are stripped away from this field, use `html_description` field in case HTML tags are needed.
      */
-    #[Api]
+    #[Required]
     public string $description;
 
     /**
      * Whether or not the audiobook has explicit content (true = yes it does; false = no it does not OR unknown).
      */
-    #[Api]
+    #[Required]
     public bool $explicit;
 
     /**
      * External URLs for this audiobook.
      */
-    #[Api]
-    public ExternalURLObject $external_urls;
+    #[Required('external_urls')]
+    public ExternalURLObject $externalURLs;
 
     /**
      * A link to the Web API endpoint providing full details of the audiobook.
      */
-    #[Api]
+    #[Required]
     public string $href;
 
     /**
      * A description of the audiobook. This field may contain HTML tags.
      */
-    #[Api]
-    public string $html_description;
+    #[Required('html_description')]
+    public string $htmlDescription;
 
     /**
      * The cover art for the audiobook in various sizes, widest first.
      *
      * @var list<ImageObject> $images
      */
-    #[Api(list: ImageObject::class)]
+    #[Required(list: ImageObject::class)]
     public array $images;
 
     /**
@@ -117,19 +125,19 @@ final class AudiobookBase implements BaseModel
      *
      * @var list<string> $languages
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $languages;
 
     /**
      * The media type of the audiobook.
      */
-    #[Api]
-    public string $media_type;
+    #[Required('media_type')]
+    public string $mediaType;
 
     /**
      * The name of the audiobook.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -137,32 +145,38 @@ final class AudiobookBase implements BaseModel
      *
      * @var list<NarratorObject> $narrators
      */
-    #[Api(list: NarratorObject::class)]
+    #[Required(list: NarratorObject::class)]
     public array $narrators;
 
     /**
      * The publisher of the audiobook.
      */
-    #[Api]
+    #[Required]
     public string $publisher;
 
     /**
      * The number of chapters in this audiobook.
      */
-    #[Api]
-    public int $total_chapters;
+    #[Required('total_chapters')]
+    public int $totalChapters;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the audiobook.
      */
-    #[Api]
+    #[Required]
     public string $uri;
 
     /**
      * The edition of the audiobook.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $edition;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * `new AudiobookBase()` is missing required properties by the API.
@@ -172,20 +186,20 @@ final class AudiobookBase implements BaseModel
      * AudiobookBase::with(
      *   id: ...,
      *   authors: ...,
-     *   available_markets: ...,
+     *   availableMarkets: ...,
      *   copyrights: ...,
      *   description: ...,
      *   explicit: ...,
-     *   external_urls: ...,
+     *   externalURLs: ...,
      *   href: ...,
-     *   html_description: ...,
+     *   htmlDescription: ...,
      *   images: ...,
      *   languages: ...,
-     *   media_type: ...,
+     *   mediaType: ...,
      *   name: ...,
      *   narrators: ...,
      *   publisher: ...,
-     *   total_chapters: ...,
+     *   totalChapters: ...,
      *   uri: ...,
      * )
      * ```
@@ -223,56 +237,59 @@ final class AudiobookBase implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AuthorObject> $authors
-     * @param list<string> $available_markets
-     * @param list<CopyrightObject> $copyrights
-     * @param list<ImageObject> $images
+     * @param list<AuthorObject|AuthorObjectShape> $authors
+     * @param list<string> $availableMarkets
+     * @param list<CopyrightObject|CopyrightObjectShape> $copyrights
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
+     * @param list<ImageObject|ImageObjectShape> $images
      * @param list<string> $languages
-     * @param list<NarratorObject> $narrators
+     * @param list<NarratorObject|NarratorObjectShape> $narrators
      */
     public static function with(
         string $id,
         array $authors,
-        array $available_markets,
+        array $availableMarkets,
         array $copyrights,
         string $description,
         bool $explicit,
-        ExternalURLObject $external_urls,
+        ExternalURLObject|array $externalURLs,
         string $href,
-        string $html_description,
+        string $htmlDescription,
         array $images,
         array $languages,
-        string $media_type,
+        string $mediaType,
         string $name,
         array $narrators,
         string $publisher,
-        int $total_chapters,
+        int $totalChapters,
         string $uri,
         ?string $edition = null,
+        ?bool $published = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->authors = $authors;
-        $obj->available_markets = $available_markets;
-        $obj->copyrights = $copyrights;
-        $obj->description = $description;
-        $obj->explicit = $explicit;
-        $obj->external_urls = $external_urls;
-        $obj->href = $href;
-        $obj->html_description = $html_description;
-        $obj->images = $images;
-        $obj->languages = $languages;
-        $obj->media_type = $media_type;
-        $obj->name = $name;
-        $obj->narrators = $narrators;
-        $obj->publisher = $publisher;
-        $obj->total_chapters = $total_chapters;
-        $obj->uri = $uri;
+        $self['id'] = $id;
+        $self['authors'] = $authors;
+        $self['availableMarkets'] = $availableMarkets;
+        $self['copyrights'] = $copyrights;
+        $self['description'] = $description;
+        $self['explicit'] = $explicit;
+        $self['externalURLs'] = $externalURLs;
+        $self['href'] = $href;
+        $self['htmlDescription'] = $htmlDescription;
+        $self['images'] = $images;
+        $self['languages'] = $languages;
+        $self['mediaType'] = $mediaType;
+        $self['name'] = $name;
+        $self['narrators'] = $narrators;
+        $self['publisher'] = $publisher;
+        $self['totalChapters'] = $totalChapters;
+        $self['uri'] = $uri;
 
-        null !== $edition && $obj->edition = $edition;
+        null !== $edition && $self['edition'] = $edition;
+        null !== $published && $self['published'] = $published;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -280,23 +297,23 @@ final class AudiobookBase implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The author(s) for the audiobook.
      *
-     * @param list<AuthorObject> $authors
+     * @param list<AuthorObject|AuthorObjectShape> $authors
      */
     public function withAuthors(array $authors): self
     {
-        $obj = clone $this;
-        $obj->authors = $authors;
+        $self = clone $this;
+        $self['authors'] = $authors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -306,23 +323,23 @@ final class AudiobookBase implements BaseModel
      */
     public function withAvailableMarkets(array $availableMarkets): self
     {
-        $obj = clone $this;
-        $obj->available_markets = $availableMarkets;
+        $self = clone $this;
+        $self['availableMarkets'] = $availableMarkets;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The copyright statements of the audiobook.
      *
-     * @param list<CopyrightObject> $copyrights
+     * @param list<CopyrightObject|CopyrightObjectShape> $copyrights
      */
     public function withCopyrights(array $copyrights): self
     {
-        $obj = clone $this;
-        $obj->copyrights = $copyrights;
+        $self = clone $this;
+        $self['copyrights'] = $copyrights;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -330,10 +347,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -341,21 +358,24 @@ final class AudiobookBase implements BaseModel
      */
     public function withExplicit(bool $explicit): self
     {
-        $obj = clone $this;
-        $obj->explicit = $explicit;
+        $self = clone $this;
+        $self['explicit'] = $explicit;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * External URLs for this audiobook.
+     *
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
-        $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -363,10 +383,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj->href = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -374,23 +394,23 @@ final class AudiobookBase implements BaseModel
      */
     public function withHTMLDescription(string $htmlDescription): self
     {
-        $obj = clone $this;
-        $obj->html_description = $htmlDescription;
+        $self = clone $this;
+        $self['htmlDescription'] = $htmlDescription;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The cover art for the audiobook in various sizes, widest first.
      *
-     * @param list<ImageObject> $images
+     * @param list<ImageObject|ImageObjectShape> $images
      */
     public function withImages(array $images): self
     {
-        $obj = clone $this;
-        $obj->images = $images;
+        $self = clone $this;
+        $self['images'] = $images;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -400,10 +420,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withLanguages(array $languages): self
     {
-        $obj = clone $this;
-        $obj->languages = $languages;
+        $self = clone $this;
+        $self['languages'] = $languages;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -411,10 +431,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withMediaType(string $mediaType): self
     {
-        $obj = clone $this;
-        $obj->media_type = $mediaType;
+        $self = clone $this;
+        $self['mediaType'] = $mediaType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -422,23 +442,23 @@ final class AudiobookBase implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The narrator(s) for the audiobook.
      *
-     * @param list<NarratorObject> $narrators
+     * @param list<NarratorObject|NarratorObjectShape> $narrators
      */
     public function withNarrators(array $narrators): self
     {
-        $obj = clone $this;
-        $obj->narrators = $narrators;
+        $self = clone $this;
+        $self['narrators'] = $narrators;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -446,10 +466,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withPublisher(string $publisher): self
     {
-        $obj = clone $this;
-        $obj->publisher = $publisher;
+        $self = clone $this;
+        $self['publisher'] = $publisher;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -457,10 +477,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withTotalChapters(int $totalChapters): self
     {
-        $obj = clone $this;
-        $obj->total_chapters = $totalChapters;
+        $self = clone $this;
+        $self['totalChapters'] = $totalChapters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -468,10 +488,10 @@ final class AudiobookBase implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -479,9 +499,20 @@ final class AudiobookBase implements BaseModel
      */
     public function withEdition(string $edition): self
     {
-        $obj = clone $this;
-        $obj->edition = $edition;
+        $self = clone $this;
+        $self['edition'] = $edition;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 }

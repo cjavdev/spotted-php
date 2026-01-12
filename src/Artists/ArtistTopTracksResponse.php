@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace Spotted\Artists;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\TrackObject;
 
 /**
- * @phpstan-type ArtistTopTracksResponseShape = array{tracks: list<TrackObject>}
+ * @phpstan-import-type TrackObjectShape from \Spotted\TrackObject
+ *
+ * @phpstan-type ArtistTopTracksResponseShape = array{
+ *   tracks: list<TrackObject|TrackObjectShape>
+ * }
  */
-final class ArtistTopTracksResponse implements BaseModel, ResponseConverter
+final class ArtistTopTracksResponse implements BaseModel
 {
     /** @use SdkModel<ArtistTopTracksResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<TrackObject> $tracks */
-    #[Api(list: TrackObject::class)]
+    #[Required(list: TrackObject::class)]
     public array $tracks;
 
     /**
@@ -49,25 +49,25 @@ final class ArtistTopTracksResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TrackObject> $tracks
+     * @param list<TrackObject|TrackObjectShape> $tracks
      */
     public static function with(array $tracks): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->tracks = $tracks;
+        $self['tracks'] = $tracks;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<TrackObject> $tracks
+     * @param list<TrackObject|TrackObjectShape> $tracks
      */
     public function withTracks(array $tracks): self
     {
-        $obj = clone $this;
-        $obj->tracks = $tracks;
+        $self = clone $this;
+        $self['tracks'] = $tracks;
 
-        return $obj;
+        return $self;
     }
 }

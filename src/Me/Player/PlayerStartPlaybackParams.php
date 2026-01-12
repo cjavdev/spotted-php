@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -15,11 +15,12 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::startPlayback()
  *
  * @phpstan-type PlayerStartPlaybackParamsShape = array{
- *   device_id?: string,
- *   context_uri?: string,
- *   offset?: array<string,mixed>,
- *   position_ms?: int,
- *   uris?: list<string>,
+ *   deviceID?: string|null,
+ *   contextUri?: string|null,
+ *   offset?: array<string,mixed>|null,
+ *   positionMs?: int|null,
+ *   published?: bool|null,
+ *   uris?: list<string>|null,
  * }
  */
 final class PlayerStartPlaybackParams implements BaseModel
@@ -31,16 +32,16 @@ final class PlayerStartPlaybackParams implements BaseModel
     /**
      * The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      */
-    #[Api(optional: true)]
-    public ?string $device_id;
+    #[Optional]
+    public ?string $deviceID;
 
     /**
      * Optional. Spotify URI of the context to play.
      * Valid contexts are albums, artists & playlists.
      * `{context_uri:"spotify:album:1Je1IMUlBXcx1Fz0WE7oPT"}`.
      */
-    #[Api(optional: true)]
-    public ?string $context_uri;
+    #[Optional('context_uri')]
+    public ?string $contextUri;
 
     /**
      * Optional. Indicates from where in the context playback should start. Only available when context_uri corresponds to an album or playlist object
@@ -49,14 +50,20 @@ final class PlayerStartPlaybackParams implements BaseModel
      *
      * @var array<string,mixed>|null $offset
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $offset;
 
     /**
      * Indicates from what position to start playback. Must be a positive number. Passing in a position that is greater than the length of the track will cause the player to start playing the next song.
      */
-    #[Api(optional: true)]
-    public ?int $position_ms;
+    #[Optional('position_ms')]
+    public ?int $positionMs;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * Optional. A JSON array of the Spotify track URIs to play.
@@ -64,7 +71,7 @@ final class PlayerStartPlaybackParams implements BaseModel
      *
      * @var list<string>|null $uris
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $uris;
 
     public function __construct()
@@ -77,25 +84,27 @@ final class PlayerStartPlaybackParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $offset
-     * @param list<string> $uris
+     * @param array<string,mixed>|null $offset
+     * @param list<string>|null $uris
      */
     public static function with(
-        ?string $device_id = null,
-        ?string $context_uri = null,
+        ?string $deviceID = null,
+        ?string $contextUri = null,
         ?array $offset = null,
-        ?int $position_ms = null,
+        ?int $positionMs = null,
+        ?bool $published = null,
         ?array $uris = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $device_id && $obj->device_id = $device_id;
-        null !== $context_uri && $obj->context_uri = $context_uri;
-        null !== $offset && $obj->offset = $offset;
-        null !== $position_ms && $obj->position_ms = $position_ms;
-        null !== $uris && $obj->uris = $uris;
+        null !== $deviceID && $self['deviceID'] = $deviceID;
+        null !== $contextUri && $self['contextUri'] = $contextUri;
+        null !== $offset && $self['offset'] = $offset;
+        null !== $positionMs && $self['positionMs'] = $positionMs;
+        null !== $published && $self['published'] = $published;
+        null !== $uris && $self['uris'] = $uris;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +112,10 @@ final class PlayerStartPlaybackParams implements BaseModel
      */
     public function withDeviceID(string $deviceID): self
     {
-        $obj = clone $this;
-        $obj->device_id = $deviceID;
+        $self = clone $this;
+        $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +125,10 @@ final class PlayerStartPlaybackParams implements BaseModel
      */
     public function withContextUri(string $contextUri): self
     {
-        $obj = clone $this;
-        $obj->context_uri = $contextUri;
+        $self = clone $this;
+        $self['contextUri'] = $contextUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +140,10 @@ final class PlayerStartPlaybackParams implements BaseModel
      */
     public function withOffset(array $offset): self
     {
-        $obj = clone $this;
-        $obj->offset = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +151,21 @@ final class PlayerStartPlaybackParams implements BaseModel
      */
     public function withPositionMs(int $positionMs): self
     {
-        $obj = clone $this;
-        $obj->position_ms = $positionMs;
+        $self = clone $this;
+        $self['positionMs'] = $positionMs;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -156,9 +176,9 @@ final class PlayerStartPlaybackParams implements BaseModel
      */
     public function withUris(array $uris): self
     {
-        $obj = clone $this;
-        $obj->uris = $uris;
+        $self = clone $this;
+        $self['uris'] = $uris;
 
-        return $obj;
+        return $self;
     }
 }

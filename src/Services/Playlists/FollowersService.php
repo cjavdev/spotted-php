@@ -5,26 +5,37 @@ declare(strict_types=1);
 namespace Spotted\Services\Playlists;
 
 use Spotted\Client;
-use Spotted\Core\Conversion\ListOf;
 use Spotted\Core\Exceptions\APIException;
-use Spotted\Playlists\Followers\FollowerCheckParams;
-use Spotted\Playlists\Followers\FollowerFollowParams;
+use Spotted\Core\Util;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Playlists\FollowersContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
+ */
 final class FollowersService implements FollowersContract
 {
     /**
+     * @api
+     */
+    public FollowersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new FollowersRawService($client);
+    }
 
     /**
      * @api
      *
      * Check to see if the current user is following a specified playlist.
      *
-     * @param array{ids?: string}|FollowerCheckParams $params
+     * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
+     * @param string $ids **Deprecated** A single item list containing current user's [Spotify Username](/documentation/web-api/concepts/spotify-uris-ids). Maximum: 1 id.
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<bool>
      *
@@ -32,22 +43,15 @@ final class FollowersService implements FollowersContract
      */
     public function check(
         string $playlistID,
-        array|FollowerCheckParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?string $ids = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array {
-        [$parsed, $options] = FollowerCheckParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = Util::removeNulls(['ids' => $ids]);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['playlists/%1$s/followers/contains', $playlistID],
-            query: $parsed,
-            options: $options,
-            convert: new ListOf('bool'),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->check($playlistID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -55,28 +59,23 @@ final class FollowersService implements FollowersContract
      *
      * Add the current user as a follower of a playlist.
      *
-     * @param array{public?: bool}|FollowerFollowParams $params
+     * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
+     * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function follow(
         string $playlistID,
-        array|FollowerFollowParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?bool $published = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = FollowerFollowParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = Util::removeNulls(['published' => $published]);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'put',
-            path: ['playlists/%1$s/followers', $playlistID],
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->follow($playlistID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -84,18 +83,18 @@ final class FollowersService implements FollowersContract
      *
      * Remove the current user as a follower of a playlist.
      *
+     * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function unfollow(
         string $playlistID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['playlists/%1$s/followers', $playlistID],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->unfollow($playlistID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

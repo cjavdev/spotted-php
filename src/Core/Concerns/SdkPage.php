@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace Spotted\Core\Concerns;
 
 use Spotted\Client;
+use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Conversion\Contracts\Converter;
 use Spotted\Core\Conversion\Contracts\ConverterSource;
 use Spotted\Core\Exceptions\APIStatusException;
 use Spotted\RequestOptions;
 
 /**
+ * @phpstan-import-type NormalizedRequest from \Spotted\Core\BaseClient
+ *
  * @internal
  *
  * @template Item
- *
- * @phpstan-import-type normalized_request from \Spotted\Core\BaseClient
  */
 trait SdkPage
 {
@@ -24,25 +25,13 @@ trait SdkPage
     private Client $client;
 
     /**
-     * normalized_request $request.
-     */
-    private array $request;
-
-    private RequestOptions $options;
-
-    /**
      * @return list<Item>
      */
     abstract public function getItems(): array;
 
     public function hasNextPage(): bool
     {
-        $items = $this->getItems();
-        if (empty($items)) {
-            return false;
-        }
-
-        return null != $this->nextRequest();
+        return !is_null($this->nextRequest());
     }
 
     /**
@@ -65,8 +54,12 @@ trait SdkPage
 
         [$req, $opts] = $next;
 
-        // @phpstan-ignore-next-line
-        return $this->client->request(...$req, convert: $this->convert, page: $this::class, options: $opts);
+        // @phpstan-ignore-next-line argument.type
+        /** @var BaseResponse<static> */
+        $response = $this->client->request(...$req, convert: $this->convert, page: $this::class, options: $opts);
+
+        // @phpstan-ignore-next-line return.type
+        return $response->parse();
     }
 
     /**
@@ -103,16 +96,7 @@ trait SdkPage
     /**
      * @internal
      *
-     * @param array<string, mixed> $data
-     *
-     * @return static<Item>
-     */
-    abstract public static function fromArray(array $data): static;
-
-    /**
-     * @internal
-     *
-     * @return array{normalized_request, RequestOptions}
+     * @return array{NormalizedRequest, RequestOptions}
      */
     abstract protected function nextRequest(): ?array;
 }

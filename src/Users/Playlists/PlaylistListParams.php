@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Users\Playlists;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -14,7 +14,9 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Users\PlaylistsService::list()
  *
- * @phpstan-type PlaylistListParamsShape = array{limit?: int, offset?: int}
+ * @phpstan-type PlaylistListParamsShape = array{
+ *   limit?: int|null, offset?: int|null
+ * }
  */
 final class PlaylistListParams implements BaseModel
 {
@@ -25,7 +27,7 @@ final class PlaylistListParams implements BaseModel
     /**
      * The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     /**
@@ -33,7 +35,7 @@ final class PlaylistListParams implements BaseModel
      * 0 (the first object). Maximum offset: 100.000\. Use with `limit` to get the
      * next set of playlists.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $offset;
 
     public function __construct()
@@ -48,12 +50,12 @@ final class PlaylistListParams implements BaseModel
      */
     public static function with(?int $limit = null, ?int $offset = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $limit && $obj->limit = $limit;
-        null !== $offset && $obj->offset = $offset;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $offset && $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -61,10 +63,10 @@ final class PlaylistListParams implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj->limit = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +76,9 @@ final class PlaylistListParams implements BaseModel
      */
     public function withOffset(int $offset): self
     {
-        $obj = clone $this;
-        $obj->offset = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 }

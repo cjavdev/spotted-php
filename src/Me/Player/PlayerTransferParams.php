@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -15,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::transfer()
  *
  * @phpstan-type PlayerTransferParamsShape = array{
- *   device_ids: list<string>, play?: bool
+ *   deviceIDs: list<string>, play?: bool|null, published?: bool|null
  * }
  */
 final class PlayerTransferParams implements BaseModel
@@ -27,23 +28,29 @@ final class PlayerTransferParams implements BaseModel
     /**
      * A JSON array containing the ID of the device on which playback should be started/transferred.<br/>For example:`{device_ids:["74ASZWbe4lXaubB36ztrGX"]}`<br/>_**Note**: Although an array is accepted, only a single device_id is currently supported. Supplying more than one will return `400 Bad Request`_.
      *
-     * @var list<string> $device_ids
+     * @var list<string> $deviceIDs
      */
-    #[Api(list: 'string')]
-    public array $device_ids;
+    #[Required('device_ids', list: 'string')]
+    public array $deviceIDs;
 
     /**
      * **true**: ensure playback happens on new device.<br/>**false** or not provided: keep the current playback state.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $play;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * `new PlayerTransferParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * PlayerTransferParams::with(device_ids: ...)
+     * PlayerTransferParams::with(deviceIDs: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -62,17 +69,21 @@ final class PlayerTransferParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $device_ids
+     * @param list<string> $deviceIDs
      */
-    public static function with(array $device_ids, ?bool $play = null): self
-    {
-        $obj = new self;
+    public static function with(
+        array $deviceIDs,
+        ?bool $play = null,
+        ?bool $published = null
+    ): self {
+        $self = new self;
 
-        $obj->device_ids = $device_ids;
+        $self['deviceIDs'] = $deviceIDs;
 
-        null !== $play && $obj->play = $play;
+        null !== $play && $self['play'] = $play;
+        null !== $published && $self['published'] = $published;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +93,10 @@ final class PlayerTransferParams implements BaseModel
      */
     public function withDeviceIDs(array $deviceIDs): self
     {
-        $obj = clone $this;
-        $obj->device_ids = $deviceIDs;
+        $self = clone $this;
+        $self['deviceIDs'] = $deviceIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,9 +104,20 @@ final class PlayerTransferParams implements BaseModel
      */
     public function withPlay(bool $play): self
     {
-        $obj = clone $this;
-        $obj->play = $play;
+        $self = clone $this;
+        $self['play'] = $play;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 }

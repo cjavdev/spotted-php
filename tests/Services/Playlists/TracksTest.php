@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\CursorURLPage;
+use Spotted\Playlists\Tracks\TrackAddResponse;
+use Spotted\Playlists\Tracks\TrackRemoveResponse;
+use Spotted\Playlists\Tracks\TrackUpdateResponse;
+use Spotted\PlaylistTrackObject;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,11 +43,11 @@ final class TracksTest extends TestCase
         }
 
         $result = $this->client->playlists->tracks->update(
-            '3cEYpjA9oz9GiPac4AsH4n',
-            []
+            '3cEYpjA9oz9GiPac4AsH4n'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TrackUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -52,12 +57,15 @@ final class TracksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->playlists->tracks->list(
-            '3cEYpjA9oz9GiPac4AsH4n',
-            []
-        );
+        $page = $this->client->playlists->tracks->list('3cEYpjA9oz9GiPac4AsH4n');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CursorURLPage::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PlaylistTrackObject::class, $item);
+        }
     }
 
     #[Test]
@@ -67,12 +75,10 @@ final class TracksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->playlists->tracks->add(
-            '3cEYpjA9oz9GiPac4AsH4n',
-            []
-        );
+        $result = $this->client->playlists->tracks->add('3cEYpjA9oz9GiPac4AsH4n');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TrackAddResponse::class, $result);
     }
 
     #[Test]
@@ -84,10 +90,11 @@ final class TracksTest extends TestCase
 
         $result = $this->client->playlists->tracks->remove(
             '3cEYpjA9oz9GiPac4AsH4n',
-            ['tracks' => [[]]]
+            tracks: [[]]
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TrackRemoveResponse::class, $result);
     }
 
     #[Test]
@@ -99,9 +106,12 @@ final class TracksTest extends TestCase
 
         $result = $this->client->playlists->tracks->remove(
             '3cEYpjA9oz9GiPac4AsH4n',
-            ['tracks' => [['uri' => 'uri']]]
+            tracks: [['uri' => 'uri']],
+            published: true,
+            snapshotID: 'snapshot_id',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TrackRemoveResponse::class, $result);
     }
 }

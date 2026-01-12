@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Tracks;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -15,8 +16,12 @@ use Spotted\Me\Tracks\TrackSaveParams\TimestampedID;
  *
  * @see Spotted\Services\Me\TracksService::save()
  *
+ * @phpstan-import-type TimestampedIDShape from \Spotted\Me\Tracks\TrackSaveParams\TimestampedID
+ *
  * @phpstan-type TrackSaveParamsShape = array{
- *   ids: list<string>, timestamped_ids?: list<TimestampedID>
+ *   ids: list<string>,
+ *   published?: bool|null,
+ *   timestampedIDs?: list<TimestampedID|TimestampedIDShape>|null,
  * }
  */
 final class TrackSaveParams implements BaseModel
@@ -30,16 +35,22 @@ final class TrackSaveParams implements BaseModel
      *
      * @var list<string> $ids
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $ids;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * A JSON array of objects containing track IDs with their corresponding timestamps. Each object must include a track ID and an `added_at` timestamp. This allows you to specify when tracks were added to maintain a specific chronological order in the user's library.<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `timestamped_ids` is present in the body, any IDs listed in the query parameters (deprecated) or the `ids` field in the body will be ignored._.
      *
-     * @var list<TimestampedID>|null $timestamped_ids
+     * @var list<TimestampedID>|null $timestampedIDs
      */
-    #[Api(list: TimestampedID::class, optional: true)]
-    public ?array $timestamped_ids;
+    #[Optional('timestamped_ids', list: TimestampedID::class)]
+    public ?array $timestampedIDs;
 
     /**
      * `new TrackSaveParams()` is missing required properties by the API.
@@ -66,17 +77,21 @@ final class TrackSaveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $ids
-     * @param list<TimestampedID> $timestamped_ids
+     * @param list<TimestampedID|TimestampedIDShape>|null $timestampedIDs
      */
-    public static function with(array $ids, ?array $timestamped_ids = null): self
-    {
-        $obj = new self;
+    public static function with(
+        array $ids,
+        ?bool $published = null,
+        ?array $timestampedIDs = null
+    ): self {
+        $self = new self;
 
-        $obj->ids = $ids;
+        $self['ids'] = $ids;
 
-        null !== $timestamped_ids && $obj->timestamped_ids = $timestamped_ids;
+        null !== $published && $self['published'] = $published;
+        null !== $timestampedIDs && $self['timestampedIDs'] = $timestampedIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,22 +101,33 @@ final class TrackSaveParams implements BaseModel
      */
     public function withIDs(array $ids): self
     {
-        $obj = clone $this;
-        $obj->ids = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
      * A JSON array of objects containing track IDs with their corresponding timestamps. Each object must include a track ID and an `added_at` timestamp. This allows you to specify when tracks were added to maintain a specific chronological order in the user's library.<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `timestamped_ids` is present in the body, any IDs listed in the query parameters (deprecated) or the `ids` field in the body will be ignored._.
      *
-     * @param list<TimestampedID> $timestampedIDs
+     * @param list<TimestampedID|TimestampedIDShape> $timestampedIDs
      */
     public function withTimestampedIDs(array $timestampedIDs): self
     {
-        $obj = clone $this;
-        $obj->timestamped_ids = $timestampedIDs;
+        $self = clone $this;
+        $self['timestampedIDs'] = $timestampedIDs;
 
-        return $obj;
+        return $self;
     }
 }

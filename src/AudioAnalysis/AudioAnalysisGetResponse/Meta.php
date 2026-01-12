@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Spotted\AudioAnalysis\AudioAnalysisGetResponse;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MetaShape = array{
- *   analysis_time?: float|null,
- *   analyzer_version?: string|null,
- *   detailed_status?: string|null,
- *   input_process?: string|null,
+ *   analysisTime?: float|null,
+ *   analyzerVersion?: string|null,
+ *   detailedStatus?: string|null,
+ *   inputProcess?: string|null,
  *   platform?: string|null,
- *   status_code?: int|null,
+ *   statusCode?: int|null,
  *   timestamp?: int|null,
  * }
  */
@@ -27,43 +27,43 @@ final class Meta implements BaseModel
     /**
      * The amount of time taken to analyze this track.
      */
-    #[Api(optional: true)]
-    public ?float $analysis_time;
+    #[Optional('analysis_time')]
+    public ?float $analysisTime;
 
     /**
      * The version of the Analyzer used to analyze this track.
      */
-    #[Api(optional: true)]
-    public ?string $analyzer_version;
+    #[Optional('analyzer_version')]
+    public ?string $analyzerVersion;
 
     /**
      * A detailed status code for this track. If analysis data is missing, this code may explain why.
      */
-    #[Api(optional: true)]
-    public ?string $detailed_status;
+    #[Optional('detailed_status')]
+    public ?string $detailedStatus;
 
     /**
      * The method used to read the track's audio data.
      */
-    #[Api(optional: true)]
-    public ?string $input_process;
+    #[Optional('input_process')]
+    public ?string $inputProcess;
 
     /**
      * The platform used to read the track's audio data.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $platform;
 
     /**
      * The return code of the analyzer process. 0 if successful, 1 if any errors occurred.
      */
-    #[Api(optional: true)]
-    public ?int $status_code;
+    #[Optional('status_code')]
+    public ?int $statusCode;
 
     /**
      * The Unix timestamp (in seconds) at which this track was analyzed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $timestamp;
 
     public function __construct()
@@ -77,25 +77,25 @@ final class Meta implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?float $analysis_time = null,
-        ?string $analyzer_version = null,
-        ?string $detailed_status = null,
-        ?string $input_process = null,
+        ?float $analysisTime = null,
+        ?string $analyzerVersion = null,
+        ?string $detailedStatus = null,
+        ?string $inputProcess = null,
         ?string $platform = null,
-        ?int $status_code = null,
+        ?int $statusCode = null,
         ?int $timestamp = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $analysis_time && $obj->analysis_time = $analysis_time;
-        null !== $analyzer_version && $obj->analyzer_version = $analyzer_version;
-        null !== $detailed_status && $obj->detailed_status = $detailed_status;
-        null !== $input_process && $obj->input_process = $input_process;
-        null !== $platform && $obj->platform = $platform;
-        null !== $status_code && $obj->status_code = $status_code;
-        null !== $timestamp && $obj->timestamp = $timestamp;
+        null !== $analysisTime && $self['analysisTime'] = $analysisTime;
+        null !== $analyzerVersion && $self['analyzerVersion'] = $analyzerVersion;
+        null !== $detailedStatus && $self['detailedStatus'] = $detailedStatus;
+        null !== $inputProcess && $self['inputProcess'] = $inputProcess;
+        null !== $platform && $self['platform'] = $platform;
+        null !== $statusCode && $self['statusCode'] = $statusCode;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class Meta implements BaseModel
      */
     public function withAnalysisTime(float $analysisTime): self
     {
-        $obj = clone $this;
-        $obj->analysis_time = $analysisTime;
+        $self = clone $this;
+        $self['analysisTime'] = $analysisTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class Meta implements BaseModel
      */
     public function withAnalyzerVersion(string $analyzerVersion): self
     {
-        $obj = clone $this;
-        $obj->analyzer_version = $analyzerVersion;
+        $self = clone $this;
+        $self['analyzerVersion'] = $analyzerVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Meta implements BaseModel
      */
     public function withDetailedStatus(string $detailedStatus): self
     {
-        $obj = clone $this;
-        $obj->detailed_status = $detailedStatus;
+        $self = clone $this;
+        $self['detailedStatus'] = $detailedStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class Meta implements BaseModel
      */
     public function withInputProcess(string $inputProcess): self
     {
-        $obj = clone $this;
-        $obj->input_process = $inputProcess;
+        $self = clone $this;
+        $self['inputProcess'] = $inputProcess;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class Meta implements BaseModel
      */
     public function withPlatform(string $platform): self
     {
-        $obj = clone $this;
-        $obj->platform = $platform;
+        $self = clone $this;
+        $self['platform'] = $platform;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class Meta implements BaseModel
      */
     public function withStatusCode(int $statusCode): self
     {
-        $obj = clone $this;
-        $obj->status_code = $statusCode;
+        $self = clone $this;
+        $self['statusCode'] = $statusCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,9 +169,9 @@ final class Meta implements BaseModel
      */
     public function withTimestamp(int $timestamp): self
     {
-        $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 }

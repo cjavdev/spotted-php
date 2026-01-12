@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace Spotted\Episodes;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\EpisodeObject;
 
 /**
- * @phpstan-type EpisodeBulkGetResponseShape = array{episodes: list<EpisodeObject>}
+ * @phpstan-import-type EpisodeObjectShape from \Spotted\EpisodeObject
+ *
+ * @phpstan-type EpisodeBulkGetResponseShape = array{
+ *   episodes: list<EpisodeObject|EpisodeObjectShape>
+ * }
  */
-final class EpisodeBulkGetResponse implements BaseModel, ResponseConverter
+final class EpisodeBulkGetResponse implements BaseModel
 {
     /** @use SdkModel<EpisodeBulkGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<EpisodeObject> $episodes */
-    #[Api(list: EpisodeObject::class)]
+    #[Required(list: EpisodeObject::class)]
     public array $episodes;
 
     /**
@@ -49,25 +49,25 @@ final class EpisodeBulkGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<EpisodeObject> $episodes
+     * @param list<EpisodeObject|EpisodeObjectShape> $episodes
      */
     public static function with(array $episodes): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->episodes = $episodes;
+        $self['episodes'] = $episodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<EpisodeObject> $episodes
+     * @param list<EpisodeObject|EpisodeObjectShape> $episodes
      */
     public function withEpisodes(array $episodes): self
     {
-        $obj = clone $this;
-        $obj->episodes = $episodes;
+        $self = clone $this;
+        $self['episodes'] = $episodes;
 
-        return $obj;
+        return $self;
     }
 }

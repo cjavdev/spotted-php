@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Search;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -20,10 +21,10 @@ use Spotted\Search\SearchQueryParams\Type;
  * @phpstan-type SearchQueryParamsShape = array{
  *   q: string,
  *   type: list<Type|value-of<Type>>,
- *   include_external?: IncludeExternal|value-of<IncludeExternal>,
- *   limit?: int,
- *   market?: string,
- *   offset?: int,
+ *   includeExternal?: null|IncludeExternal|value-of<IncludeExternal>,
+ *   limit?: int|null,
+ *   market?: string|null,
+ *   offset?: int|null,
  * }
  */
 final class SearchQueryParams implements BaseModel
@@ -43,7 +44,7 @@ final class SearchQueryParams implements BaseModel
      * The `isrc` and `track` filters can be used while searching tracks.<br />
      * The `upc`, `tag:new` and `tag:hipster` filters can only be used while searching albums. The `tag:new` filter will return albums released in the past two weeks and `tag:hipster` can be used to return only albums with the lowest 10% popularity.<br />
      */
-    #[Api]
+    #[Required]
     public string $q;
 
     /**
@@ -53,22 +54,22 @@ final class SearchQueryParams implements BaseModel
      *
      * @var list<value-of<Type>> $type
      */
-    #[Api(list: Type::class)]
+    #[Required(list: Type::class)]
     public array $type;
 
     /**
      * If `include_external=audio` is specified it signals that the client can play externally hosted audio content, and marks
      * the content as playable in the response. By default externally hosted audio content is marked as unplayable in the response.
      *
-     * @var value-of<IncludeExternal>|null $include_external
+     * @var value-of<IncludeExternal>|null $includeExternal
      */
-    #[Api(enum: IncludeExternal::class, optional: true)]
-    public ?string $include_external;
+    #[Optional(enum: IncludeExternal::class)]
+    public ?string $includeExternal;
 
     /**
      * The maximum number of results to return in each item type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $limit;
 
     /**
@@ -79,14 +80,14 @@ final class SearchQueryParams implements BaseModel
      *   _**Note**: If neither market or user country are provided, the content is considered unavailable for the client._<br/>
      *   Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/account/overview/).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $market;
 
     /**
      * The index of the first result to return. Use
      * with limit to get the next page of search results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $offset;
 
     /**
@@ -114,27 +115,27 @@ final class SearchQueryParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Type|value-of<Type>> $type
-     * @param IncludeExternal|value-of<IncludeExternal> $include_external
+     * @param IncludeExternal|value-of<IncludeExternal>|null $includeExternal
      */
     public static function with(
         string $q,
         array $type,
-        IncludeExternal|string|null $include_external = null,
+        IncludeExternal|string|null $includeExternal = null,
         ?int $limit = null,
         ?string $market = null,
         ?int $offset = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->q = $q;
-        $obj['type'] = $type;
+        $self['q'] = $q;
+        $self['type'] = $type;
 
-        null !== $include_external && $obj['include_external'] = $include_external;
-        null !== $limit && $obj->limit = $limit;
-        null !== $market && $obj->market = $market;
-        null !== $offset && $obj->offset = $offset;
+        null !== $includeExternal && $self['includeExternal'] = $includeExternal;
+        null !== $limit && $self['limit'] = $limit;
+        null !== $market && $self['market'] = $market;
+        null !== $offset && $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +151,10 @@ final class SearchQueryParams implements BaseModel
      */
     public function withQ(string $q): self
     {
-        $obj = clone $this;
-        $obj->q = $q;
+        $self = clone $this;
+        $self['q'] = $q;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +166,10 @@ final class SearchQueryParams implements BaseModel
      */
     public function withType(array $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +181,10 @@ final class SearchQueryParams implements BaseModel
     public function withIncludeExternal(
         IncludeExternal|string $includeExternal
     ): self {
-        $obj = clone $this;
-        $obj['include_external'] = $includeExternal;
+        $self = clone $this;
+        $self['includeExternal'] = $includeExternal;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,10 +192,10 @@ final class SearchQueryParams implements BaseModel
      */
     public function withLimit(int $limit): self
     {
-        $obj = clone $this;
-        $obj->limit = $limit;
+        $self = clone $this;
+        $self['limit'] = $limit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +208,10 @@ final class SearchQueryParams implements BaseModel
      */
     public function withMarket(string $market): self
     {
-        $obj = clone $this;
-        $obj->market = $market;
+        $self = clone $this;
+        $self['market'] = $market;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -219,9 +220,9 @@ final class SearchQueryParams implements BaseModel
      */
     public function withOffset(int $offset): self
     {
-        $obj = clone $this;
-        $obj->offset = $offset;
+        $self = clone $this;
+        $self['offset'] = $offset;
 
-        return $obj;
+        return $self;
     }
 }

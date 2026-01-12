@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace Spotted\Shows;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 use Spotted\ShowBase;
 
 /**
- * @phpstan-type ShowBulkGetResponseShape = array{shows: list<ShowBase>}
+ * @phpstan-import-type ShowBaseShape from \Spotted\ShowBase
+ *
+ * @phpstan-type ShowBulkGetResponseShape = array{
+ *   shows: list<ShowBase|ShowBaseShape>
+ * }
  */
-final class ShowBulkGetResponse implements BaseModel, ResponseConverter
+final class ShowBulkGetResponse implements BaseModel
 {
     /** @use SdkModel<ShowBulkGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<ShowBase> $shows */
-    #[Api(list: ShowBase::class)]
+    #[Required(list: ShowBase::class)]
     public array $shows;
 
     /**
@@ -49,25 +49,25 @@ final class ShowBulkGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ShowBase> $shows
+     * @param list<ShowBase|ShowBaseShape> $shows
      */
     public static function with(array $shows): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->shows = $shows;
+        $self['shows'] = $shows;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<ShowBase> $shows
+     * @param list<ShowBase|ShowBaseShape> $shows
      */
     public function withShows(array $shows): self
     {
-        $obj = clone $this;
-        $obj->shows = $shows;
+        $self = clone $this;
+        $self['shows'] = $shows;
 
-        return $obj;
+        return $self;
     }
 }

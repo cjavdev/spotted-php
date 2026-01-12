@@ -5,23 +5,23 @@ declare(strict_types=1);
 namespace Spotted\Browse;
 
 use Spotted\Browse\BrowseGetNewReleasesResponse\Albums;
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
-use Spotted\Core\Concerns\SdkResponse;
 use Spotted\Core\Contracts\BaseModel;
-use Spotted\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type BrowseGetNewReleasesResponseShape = array{albums: Albums}
+ * @phpstan-import-type AlbumsShape from \Spotted\Browse\BrowseGetNewReleasesResponse\Albums
+ *
+ * @phpstan-type BrowseGetNewReleasesResponseShape = array{
+ *   albums: Albums|AlbumsShape
+ * }
  */
-final class BrowseGetNewReleasesResponse implements BaseModel, ResponseConverter
+final class BrowseGetNewReleasesResponse implements BaseModel
 {
     /** @use SdkModel<BrowseGetNewReleasesResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public Albums $albums;
 
     /**
@@ -47,21 +47,26 @@ final class BrowseGetNewReleasesResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Albums|AlbumsShape $albums
      */
-    public static function with(Albums $albums): self
+    public static function with(Albums|array $albums): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->albums = $albums;
+        $self['albums'] = $albums;
 
-        return $obj;
+        return $self;
     }
 
-    public function withAlbums(Albums $albums): self
+    /**
+     * @param Albums|AlbumsShape $albums
+     */
+    public function withAlbums(Albums|array $albums): self
     {
-        $obj = clone $this;
-        $obj->albums = $albums;
+        $self = clone $this;
+        $self['albums'] = $albums;
 
-        return $obj;
+        return $self;
     }
 }

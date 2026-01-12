@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ImageObjectShape = array{
- *   height: int|null, url: string, width: int|null
+ *   height: int|null, url: string, width: int|null, published?: bool|null
  * }
  */
 final class ImageObject implements BaseModel
@@ -21,20 +22,26 @@ final class ImageObject implements BaseModel
     /**
      * The image height in pixels.
      */
-    #[Api]
+    #[Required]
     public ?int $height;
 
     /**
      * The source URL of the image.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**
      * The image width in pixels.
      */
-    #[Api]
+    #[Required]
     public ?int $width;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * `new ImageObject()` is missing required properties by the API.
@@ -60,15 +67,21 @@ final class ImageObject implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?int $height, string $url, ?int $width): self
-    {
-        $obj = new self;
+    public static function with(
+        ?int $height,
+        string $url,
+        ?int $width,
+        ?bool $published = null
+    ): self {
+        $self = new self;
 
-        $obj->height = $height;
-        $obj->url = $url;
-        $obj->width = $width;
+        $self['height'] = $height;
+        $self['url'] = $url;
+        $self['width'] = $width;
 
-        return $obj;
+        null !== $published && $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -76,10 +89,10 @@ final class ImageObject implements BaseModel
      */
     public function withHeight(?int $height): self
     {
-        $obj = clone $this;
-        $obj->height = $height;
+        $self = clone $this;
+        $self['height'] = $height;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +100,10 @@ final class ImageObject implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj->url = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,9 +111,20 @@ final class ImageObject implements BaseModel
      */
     public function withWidth(?int $width): self
     {
-        $obj = clone $this;
-        $obj->width = $width;
+        $self = clone $this;
+        $self['width'] = $width;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 }

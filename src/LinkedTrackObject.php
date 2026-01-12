@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace Spotted;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
+ *
  * @phpstan-type LinkedTrackObjectShape = array{
  *   id?: string|null,
- *   external_urls?: ExternalURLObject|null,
+ *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
  *   href?: string|null,
+ *   published?: bool|null,
  *   type?: string|null,
  *   uri?: string|null,
  * }
@@ -25,31 +28,37 @@ final class LinkedTrackObject implements BaseModel
     /**
      * The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Known external URLs for this track.
      */
-    #[Api(optional: true)]
-    public ?ExternalURLObject $external_urls;
+    #[Optional('external_urls')]
+    public ?ExternalURLObject $externalURLs;
 
     /**
      * A link to the Web API endpoint providing full details of the track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $href;
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    #[Optional]
+    public ?bool $published;
 
     /**
      * The object type: "track".
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the track.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()
@@ -61,23 +70,27 @@ final class LinkedTrackObject implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
      */
     public static function with(
         ?string $id = null,
-        ?ExternalURLObject $external_urls = null,
+        ExternalURLObject|array|null $externalURLs = null,
         ?string $href = null,
+        ?bool $published = null,
         ?string $type = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $external_urls && $obj->external_urls = $external_urls;
-        null !== $href && $obj->href = $href;
-        null !== $type && $obj->type = $type;
-        null !== $uri && $obj->uri = $uri;
+        null !== $id && $self['id'] = $id;
+        null !== $externalURLs && $self['externalURLs'] = $externalURLs;
+        null !== $href && $self['href'] = $href;
+        null !== $published && $self['published'] = $published;
+        null !== $type && $self['type'] = $type;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,21 +98,24 @@ final class LinkedTrackObject implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Known external URLs for this track.
+     *
+     * @param ExternalURLObject|ExternalURLObjectShape $externalURLs
      */
-    public function withExternalURLs(ExternalURLObject $externalURLs): self
-    {
-        $obj = clone $this;
-        $obj->external_urls = $externalURLs;
+    public function withExternalURLs(
+        ExternalURLObject|array $externalURLs
+    ): self {
+        $self = clone $this;
+        $self['externalURLs'] = $externalURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +123,21 @@ final class LinkedTrackObject implements BaseModel
      */
     public function withHref(string $href): self
     {
-        $obj = clone $this;
-        $obj->href = $href;
+        $self = clone $this;
+        $self['href'] = $href;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     */
+    public function withPublished(bool $published): self
+    {
+        $self = clone $this;
+        $self['published'] = $published;
+
+        return $self;
     }
 
     /**
@@ -118,10 +145,10 @@ final class LinkedTrackObject implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj->type = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +156,9 @@ final class LinkedTrackObject implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\Recommendations\RecommendationGetResponse;
+use Spotted\Recommendations\RecommendationListAvailableGenreSeedsResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,9 +39,10 @@ final class RecommendationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->recommendations->get([]);
+        $result = $this->client->recommendations->get();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RecommendationGetResponse::class, $result);
     }
 
     #[Test]
@@ -51,6 +54,10 @@ final class RecommendationsTest extends TestCase
 
         $result = $this->client->recommendations->listAvailableGenreSeeds();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            RecommendationListAvailableGenreSeedsResponse::class,
+            $result
+        );
     }
 }

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Spotted\Me\Player;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
+use Spotted\Core\Attributes\Required;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -15,7 +16,7 @@ use Spotted\Core\Contracts\BaseModel;
  * @see Spotted\Services\Me\PlayerService::setRepeatMode()
  *
  * @phpstan-type PlayerSetRepeatModeParamsShape = array{
- *   state: string, device_id?: string
+ *   state: string, deviceID?: string|null
  * }
  */
 final class PlayerSetRepeatModeParams implements BaseModel
@@ -30,15 +31,15 @@ final class PlayerSetRepeatModeParams implements BaseModel
      * **context** will repeat the current context.<br/>
      * **off** will turn repeat off.
      */
-    #[Api]
+    #[Required]
     public string $state;
 
     /**
      * The id of the device this command is targeting. If
      * not supplied, the user's currently active device is the target.
      */
-    #[Api(optional: true)]
-    public ?string $device_id;
+    #[Optional]
+    public ?string $deviceID;
 
     /**
      * `new PlayerSetRepeatModeParams()` is missing required properties by the API.
@@ -64,15 +65,15 @@ final class PlayerSetRepeatModeParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $state, ?string $device_id = null): self
+    public static function with(string $state, ?string $deviceID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->state = $state;
+        $self['state'] = $state;
 
-        null !== $device_id && $obj->device_id = $device_id;
+        null !== $deviceID && $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +84,10 @@ final class PlayerSetRepeatModeParams implements BaseModel
      */
     public function withState(string $state): self
     {
-        $obj = clone $this;
-        $obj->state = $state;
+        $self = clone $this;
+        $self['state'] = $state;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,9 +96,9 @@ final class PlayerSetRepeatModeParams implements BaseModel
      */
     public function withDeviceID(string $deviceID): self
     {
-        $obj = clone $this;
-        $obj->device_id = $deviceID;
+        $self = clone $this;
+        $self['deviceID'] = $deviceID;
 
-        return $obj;
+        return $self;
     }
 }

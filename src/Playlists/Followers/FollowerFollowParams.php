@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Spotted\Playlists\Followers;
 
-use Spotted\Core\Attributes\Api;
+use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
@@ -14,7 +14,7 @@ use Spotted\Core\Contracts\BaseModel;
  *
  * @see Spotted\Services\Playlists\FollowersService::follow()
  *
- * @phpstan-type FollowerFollowParamsShape = array{public?: bool}
+ * @phpstan-type FollowerFollowParamsShape = array{published?: bool|null}
  */
 final class FollowerFollowParams implements BaseModel
 {
@@ -23,10 +23,10 @@ final class FollowerFollowParams implements BaseModel
     use SdkParams;
 
     /**
-     * Defaults to `true`. If `true` the playlist will be included in user's public playlists (added to profile), if `false` it will remain private. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
-    #[Api(optional: true)]
-    public ?bool $public;
+    #[Optional]
+    public ?bool $published;
 
     public function __construct()
     {
@@ -38,23 +38,23 @@ final class FollowerFollowParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?bool $public = null): self
+    public static function with(?bool $published = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $public && $obj->public = $public;
+        null !== $published && $self['published'] = $published;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * Defaults to `true`. If `true` the playlist will be included in user's public playlists (added to profile), if `false` it will remain private. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
+     * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
-    public function withPublic(bool $public): self
+    public function withPublished(bool $published): self
     {
-        $obj = clone $this;
-        $obj->public = $public;
+        $self = clone $this;
+        $self['published'] = $published;
 
-        return $obj;
+        return $self;
     }
 }
