@@ -1,5 +1,86 @@
 # Changelog
 
+## 0.4.0 (2026-01-12)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/cjavdev/spotted-php/compare/v0.3.0...v0.4.0)
+
+### ⚠ BREAKING CHANGES
+
+* replace special flag type `omittable` with just `null`
+* use aliases for phpstan types
+* use camel casing for all class properties
+* use camel casing for all class properties
+
+### Features
+
+* add `BaseResponse` class for accessing raw responses ([5d30f40](https://github.com/cjavdev/spotted-php/commit/5d30f40cfe85670049e24587075638ee17a82835))
+* add `BaseResponse` class for accessing raw responses ([9dfdfe0](https://github.com/cjavdev/spotted-php/commit/9dfdfe05ff38541d39af89f88dd510bae8c7c367))
+* add idempotency header support ([7a9c27e](https://github.com/cjavdev/spotted-php/commit/7a9c27e2e7438a58e81936dcb482b8219633fb86))
+* allow both model class instances and arrays in setters ([9b49855](https://github.com/cjavdev/spotted-php/commit/9b49855fa778885dec685b6c199c56cba61fbcb6))
+* allow both model class instances and arrays in setters ([f587ace](https://github.com/cjavdev/spotted-php/commit/f587aceaf09cc7deed54aa26efef1a9d0c695ae3))
+* **api:** manual updates ([c1fbae7](https://github.com/cjavdev/spotted-php/commit/c1fbae724d7dbdd1209e22402b6ff7cd5e1454f3))
+* **api:** manual updates ([b6f1b13](https://github.com/cjavdev/spotted-php/commit/b6f1b1369642d1fa4764f1434c2fa0062a2f7f3f))
+* **api:** manual updates ([2de9f0c](https://github.com/cjavdev/spotted-php/commit/2de9f0cd1cbb45c656ab0227f0f4fd8b80465597))
+* **api:** manual updates ([71ec217](https://github.com/cjavdev/spotted-php/commit/71ec21708535a226ad6b8a047be0eb2330c09d02))
+* **api:** manual updates ([43ec835](https://github.com/cjavdev/spotted-php/commit/43ec83512ea32e0e3a476ac6fb9b0fd3f150431b))
+* **api:** manual updates ([fc9ddb8](https://github.com/cjavdev/spotted-php/commit/fc9ddb8d5e69c225479c27d76c4224e91e8cda62))
+* **api:** manual updates ([cd30403](https://github.com/cjavdev/spotted-php/commit/cd30403cb9720cd0bab74b056addc8d85a527ddd))
+* **api:** manual updates ([ec6d2ae](https://github.com/cjavdev/spotted-php/commit/ec6d2aeaca07b89c1908605d3d0a158e3803fe67))
+* **api:** manual updates ([3929562](https://github.com/cjavdev/spotted-php/commit/392956235112faffd81e6f4b2e33d876d90faadb))
+* **api:** manual updates ([d3c80ca](https://github.com/cjavdev/spotted-php/commit/d3c80caf4e61361ee4d31d62bb050133cd5cc203))
+* **api:** manual updates ([14e98de](https://github.com/cjavdev/spotted-php/commit/14e98de17180b22772477f71546d9af4f26b3646))
+* **api:** Update readme titles. ([42ab39c](https://github.com/cjavdev/spotted-php/commit/42ab39c7f5ca164851825104cf551450133816ba))
+* **api:** Update readme titles. ([e34bf53](https://github.com/cjavdev/spotted-php/commit/e34bf539c98622eead7be0e648e03bb071380750))
+* better support for pagination mechanisms ([b230320](https://github.com/cjavdev/spotted-php/commit/b2303209942b4ee36e8244c6c6f0fa028e41099e))
+* better support for pagination mechanisms ([3c58600](https://github.com/cjavdev/spotted-php/commit/3c58600a1f0d60d700c6299a33618e79e9229148))
+* improved phpstan type annotations ([0d8dfb7](https://github.com/cjavdev/spotted-php/commit/0d8dfb7b830d505f0cdafa84aee6606b2506e3a0))
+* replace special flag type `omittable` with just `null` ([32cf1af](https://github.com/cjavdev/spotted-php/commit/32cf1af90f31c4ce18b6c7d19b6560bb13dd44a2))
+* simplify and make the phpstan types more consistent ([06744f7](https://github.com/cjavdev/spotted-php/commit/06744f7b4f9defe8b79a2d98bf0372daad296453))
+* split out services into normal & raw types ([458daea](https://github.com/cjavdev/spotted-php/commit/458daeade7caf4a26bdfa933c3712d2d7e54e1de))
+* split out services into normal & raw types ([cea94ef](https://github.com/cjavdev/spotted-php/commit/cea94ef7ade0933ff6b641cad79268ee7f5ab586))
+* support unwrapping envelopes ([d83e7c2](https://github.com/cjavdev/spotted-php/commit/d83e7c2b656d55e4e55976dfabe7497bb3b0d430))
+* use aliases for phpstan types ([14e5d2d](https://github.com/cjavdev/spotted-php/commit/14e5d2d5d9ce2ef985ba58b96aec1babe95b145a))
+* use camel casing for all class properties ([7c239a2](https://github.com/cjavdev/spotted-php/commit/7c239a2807ff585c23944e054c8623641eaa7575))
+* use camel casing for all class properties ([ea145b0](https://github.com/cjavdev/spotted-php/commit/ea145b039ed286a2b059920d184ee1a3c98e0e8e))
+
+
+### Bug Fixes
+
+* a number of serialization errors ([f872f24](https://github.com/cjavdev/spotted-php/commit/f872f244236dc7354d2720524a0a751fa80539e7))
+* correctly serialize dates ([ae99d35](https://github.com/cjavdev/spotted-php/commit/ae99d35370a56beaf5595920d9a4c268a7f04459))
+* support arrays in query param construction ([081b6e2](https://github.com/cjavdev/spotted-php/commit/081b6e2a450af79e4a29dc0980fd3d0d0004b9c5))
+
+
+### Chores
+
+* add git attributes and composer lock file ([84789e4](https://github.com/cjavdev/spotted-php/commit/84789e4c2d9efd5c9d4583c0d13342661d5525e7))
+* be more targeted in suppressing superfluous linter warnings ([5bc27f4](https://github.com/cjavdev/spotted-php/commit/5bc27f409abeb5e90892a651e457fa78402c45a9))
+* be more targeted in suppressing superfluous linter warnings ([39b3925](https://github.com/cjavdev/spotted-php/commit/39b3925a84036685a677abade1a974761ea923a3))
+* better support for phpstan ([3534bf3](https://github.com/cjavdev/spotted-php/commit/3534bf340d510e6d8d90cd77455cf96c814ed930))
+* better support for phpstan ([c0b0423](https://github.com/cjavdev/spotted-php/commit/c0b0423c4747ba284789807ea34a051dadd099ba))
+* ensure constant values are marked as optional in array types ([c976602](https://github.com/cjavdev/spotted-php/commit/c97660246650ffb262883878b7180af54691dcda))
+* ensure constant values are marked as optional in array types ([22948f7](https://github.com/cjavdev/spotted-php/commit/22948f78211ab32102ab03f21bd47a58ae60d06f))
+* formatting ([170d25f](https://github.com/cjavdev/spotted-php/commit/170d25f9d835bd28b02606a6d638be7c864dab01))
+* formatting ([ba6ca82](https://github.com/cjavdev/spotted-php/commit/ba6ca825ec8c593a8320f5281054013b4ae0484a))
+* **internal:** add a basic client test ([ae4aecc](https://github.com/cjavdev/spotted-php/commit/ae4aecc9a957dee6cebbb235f369660ffa7efd00))
+* **internal:** codegen related update ([6877221](https://github.com/cjavdev/spotted-php/commit/6877221761a72e9fdfba85f90ed0a4df14be00ee))
+* **internal:** codegen related update ([cae132d](https://github.com/cjavdev/spotted-php/commit/cae132deca870da5d53336717028869786ebeb4a))
+* **internal:** codegen related update ([a3b630e](https://github.com/cjavdev/spotted-php/commit/a3b630e7267dcbd2a0406541b05b5489aa4672fc))
+* **internal:** codegen related update ([f24a9c6](https://github.com/cjavdev/spotted-php/commit/f24a9c64d651b327ffdc2250c664d00468d72993))
+* **internal:** codegen related update ([d3c0063](https://github.com/cjavdev/spotted-php/commit/d3c00634b004b04e1e2ca9f6c160f9ab76807966))
+* **internal:** codegen related update ([9dc7838](https://github.com/cjavdev/spotted-php/commit/9dc7838d47e35ff27205f3d621a46603a1d897e4))
+* **internal:** codegen related update ([9a2fbec](https://github.com/cjavdev/spotted-php/commit/9a2fbec7a4fe869c0316bbf96c16b21450a4faf6))
+* **internal:** codegen related update ([d35e5dd](https://github.com/cjavdev/spotted-php/commit/d35e5dd1175ca6b91152e00199914747eb9d26ee))
+* **internal:** improve pagination tests ([19d6709](https://github.com/cjavdev/spotted-php/commit/19d670941f988ee5fdec23d3968c0ba03c3acfd9))
+* **internal:** improve pagination tests ([7b952c4](https://github.com/cjavdev/spotted-php/commit/7b952c4a499d1fa96684986493f5d4b5c17625e5))
+* **internal:** refactor auth by moving concern from base client into client ([503f249](https://github.com/cjavdev/spotted-php/commit/503f249baa6052f2e93af5f02ad6f501cac1414e))
+* switch from `#[Api(optional: true|false)]` to `#[Required]|#[Optional]` for annotations ([ff912ce](https://github.com/cjavdev/spotted-php/commit/ff912ce6dc6e007871d21d2cc07d2b6af9b4e8fb))
+* switch from `#[Api(optional: true|false)]` to `#[Required]|#[Optional]` for annotations ([1a0c86c](https://github.com/cjavdev/spotted-php/commit/1a0c86c31a4a9cd2fe072c7793ed3405d3650e47))
+* use `$self = clone $this;` instead of `$obj = clone $this;` ([e0994ad](https://github.com/cjavdev/spotted-php/commit/e0994ad5696b93260090334afbd56c5261a8ba75))
+* use `$self = clone $this;` instead of `$obj = clone $this;` ([27ae21e](https://github.com/cjavdev/spotted-php/commit/27ae21e65e88d32cfd3c8b199d25cd1212935be6))
+* use non-trivial test assertions ([fabf4f1](https://github.com/cjavdev/spotted-php/commit/fabf4f1bc523fedd113bdd81caab56e7295109bf))
+* use non-trivial test assertions ([3b66014](https://github.com/cjavdev/spotted-php/commit/3b66014cba5e798a7b2383051ddcec09f877b94a))
+
 ## 0.3.0 (2025-11-27)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/cjavdev/spotted-php/compare/v0.2.0...v0.3.0)
