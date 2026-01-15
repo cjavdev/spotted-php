@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.5.0 (2026-01-15)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/cjavdev/spotted-php/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** manual updates ([adfc2ff](https://github.com/cjavdev/spotted-php/commit/adfc2ff3fe8b46f8f39fade6f81c85c02b1c08ee))
+* **api:** turn off oauth ([b9141b9](https://github.com/cjavdev/spotted-php/commit/b9141b96e2f128be4bfe3374082951caba74c36b))
+
+
+### Bug Fixes
+
+* typos in README.md ([601d48a](https://github.com/cjavdev/spotted-php/commit/601d48a0b1aa147c3c2013631547114d8cb1885f))
+
+
+### Chores
+
+* **internal:** codegen related update ([652146b](https://github.com/cjavdev/spotted-php/commit/652146b303b3802d4448e045b078cd140b4efea0))
+* **internal:** codegen related update ([1700197](https://github.com/cjavdev/spotted-php/commit/1700197f760943ec8c63f836e51679e1b3220534))
+* **readme:** remove beta warning now that we're in ga ([c1007a2](https://github.com/cjavdev/spotted-php/commit/c1007a2d1dac41ba8f63603b3306c59a5f160d2b))
+* remove custom code ([8d8fc93](https://github.com/cjavdev/spotted-php/commit/8d8fc936e84034a3318f4951bc2993d7c46017c7))
+
 ## 0.4.0 (2026-01-12)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/cjavdev/spotted-php/compare/v0.3.0...v0.4.0)
