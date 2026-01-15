@@ -6,7 +6,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [spotted.stldocs.com](https://spotted.stldocs.com?docs).
+The REST API documentation can be found on [spotted.cjav.dev](https://spotted.cjav.dev).
 
 ## Installation
 
