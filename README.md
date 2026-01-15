@@ -29,8 +29,8 @@ Parameters with a default value must be set by name.
 use Spotted\Client;
 
 $client = new Client(
-  clientID: getenv('SPOTIFY_CLIENT_ID') ?: 'My Client ID',
-  clientSecret: getenv('SPOTIFY_CLIENT_SECRET') ?: 'My Client Secret',
+  accessToken: 'My Access Token',
+  accessToken: getenv('SPOTIFY_ACCESS_TOKEN') ?: 'My Access Token',
 );
 
 $album = $client->albums->retrieve('4aawyAB9vmqN3uQ7FjRGTy');
@@ -57,8 +57,8 @@ This library provides auto-paginating iterators with each list response, so you 
 use Spotted\Client;
 
 $client = new Client(
-  clientID: getenv('SPOTIFY_CLIENT_ID') ?: 'My Client ID',
-  clientSecret: getenv('SPOTIFY_CLIENT_SECRET') ?: 'My Client Secret',
+  accessToken: 'My Access Token',
+  accessToken: getenv('SPOTIFY_ACCESS_TOKEN') ?: 'My Access Token',
 );
 
 $page = $client->shows->listEpisodes('showid', limit: 10, offset: 20);
@@ -129,7 +129,9 @@ You can use the `maxRetries` option to configure or disable this:
 use Spotted\Client;
 
 // Configure the default for all requests:
-$client = new Client(requestOptions: ['maxRetries' => 0]);
+$client = new Client(
+  accessToken: 'My Access Token', requestOptions: ['maxRetries' => 0]
+);
 
 // Or, configure per-request:
 $result = $client->albums->retrieve(

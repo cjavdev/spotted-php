@@ -26,15 +26,10 @@ use Spotted\Services\TracksService;
 use Spotted\Services\UsersService;
 
 /**
- * @phpstan-import-type NormalizedRequest from \Spotted\Core\BaseClient
  * @phpstan-import-type RequestOpts from \Spotted\RequestOptions
  */
 class Client extends BaseClient
 {
-    public string $clientID;
-
-    public string $clientSecret;
-
     public string $accessToken;
 
     /**
@@ -121,14 +116,10 @@ class Client extends BaseClient
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
-        ?string $clientID = null,
-        ?string $clientSecret = null,
         ?string $accessToken = null,
         ?string $baseUrl = null,
         RequestOptions|array|null $requestOptions = null,
     ) {
-        $this->clientID = (string) ($clientID ?? getenv('SPOTIFY_CLIENT_ID'));
-        $this->clientSecret = (string) ($clientSecret ?? getenv('SPOTIFY_CLIENT_SECRET'));
         $this->accessToken = (string) ($accessToken ?? getenv('SPOTIFY_ACCESS_TOKEN'));
 
         $baseUrl ??= getenv('SPOTTED_BASE_URL') ?: 'https://api.spotify.com/v1';
@@ -175,53 +166,5 @@ class Client extends BaseClient
         $this->audioAnalysis = new AudioAnalysisService($this);
         $this->recommendations = new RecommendationsService($this);
         $this->markets = new MarketsService($this);
-    }
-
-    /** @return array<string,string> */
-    protected function authHeaders(): array
-    {
-        return [...$this->bearerAuth(), ...$this->oauth2_0()];
-    }
-
-    /** @return array<string,string> */
-    protected function bearerAuth(): array
-    {
-        return $this->accessToken ? [
-            'Authorization' => "Bearer {$this->accessToken}",
-        ] : [];
-    }
-
-    /** @return array<string,string> */
-    protected function oauth2_0(): array
-    {
-        throw new \BadMethodCallException;
-    }
-
-    /**
-     * @internal
-     *
-     * @param string|list<string> $path
-     * @param array<string,mixed> $query
-     * @param array<string,string|int|list<string|int>|null> $headers
-     * @param RequestOpts|null $opts
-     *
-     * @return array{NormalizedRequest, RequestOptions}
-     */
-    protected function buildRequest(
-        string $method,
-        string|array $path,
-        array $query,
-        array $headers,
-        mixed $body,
-        RequestOptions|array|null $opts,
-    ): array {
-        return parent::buildRequest(
-            method: $method,
-            path: $path,
-            query: $query,
-            headers: [...$this->authHeaders(), ...$headers],
-            body: $body,
-            opts: $opts,
-        );
     }
 }

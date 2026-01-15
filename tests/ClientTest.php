@@ -28,8 +28,7 @@ class ClientTest extends TestCase
 
         $client = new \Spotted\Client(
             baseUrl: 'http://localhost',
-            clientID: 'My Client ID',
-            clientSecret: 'My Client Secret',
+            accessToken: 'My Access Token',
             requestOptions: ['transporter' => $transporter],
         );
 

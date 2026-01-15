@@ -23,11 +23,7 @@ final class ShowsTest extends TestCase
         parent::setUp();
 
         $testUrl = getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
-        $client = new Client(
-            clientID: 'My Client ID',
-            clientSecret: 'My Client Secret',
-            baseUrl: $testUrl,
-        );
+        $client = new Client(accessToken: 'My Access Token', baseUrl: $testUrl);
 
         $this->client = $client;
     }
