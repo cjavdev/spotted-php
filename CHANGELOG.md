@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.1 (2026-01-15)
+
+Full Changelog: [v0.6.0...v0.6.1](https://github.com/cjavdev/spotted-php/compare/v0.6.0...v0.6.1)
+
+### Chores
+
+* remove custom code ([2ea90a3](https://github.com/cjavdev/spotted-php/commit/2ea90a3e6c56644d944c876bcf66974cb10124b6))
+
 ## 0.6.0 (2026-01-15)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/cjavdev/spotted-php/compare/v0.5.0...v0.6.0)
