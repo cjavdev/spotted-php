@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.2 (2026-01-17)
+
+Full Changelog: [v0.6.1...v0.6.2](https://github.com/cjavdev/spotted-php/compare/v0.6.1...v0.6.2)
+
+### Chores
+
+* **internal:** minor test script reformatting ([f91ce91](https://github.com/cjavdev/spotted-php/commit/f91ce918d060e4919bb53eba69e0c4eba7b54cc3))
+* **internal:** update `actions/checkout` version ([9e27b79](https://github.com/cjavdev/spotted-php/commit/9e27b796a228ff7f57559c6d9bbc01599b811641))
+
 ## 0.6.1 (2026-01-15)
 
 Full Changelog: [v0.6.0...v0.6.1](https://github.com/cjavdev/spotted-php/compare/v0.6.0...v0.6.1)
