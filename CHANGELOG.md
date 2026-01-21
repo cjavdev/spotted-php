@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.3 (2026-01-21)
+
+Full Changelog: [v0.6.2...v0.6.3](https://github.com/cjavdev/spotted-php/compare/v0.6.2...v0.6.3)
+
+### Chores
+
+* **internal:** update phpstan comments ([65e581c](https://github.com/cjavdev/spotted-php/commit/65e581c51a05cb17aa98c30a66ec69d858338e18))
+
 ## 0.6.2 (2026-01-17)
 
 Full Changelog: [v0.6.1...v0.6.2](https://github.com/cjavdev/spotted-php/compare/v0.6.1...v0.6.2)
