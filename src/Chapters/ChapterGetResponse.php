@@ -504,6 +504,19 @@ final class ChapterGetResponse implements BaseModel
     }
 
     /**
+     * The object type.
+     *
+     * @param 'episode' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
      * The [Spotify URI](/documentation/web-api/concepts/spotify-uris-ids) for the chapter.
      */
     public function withUri(string $uri): self

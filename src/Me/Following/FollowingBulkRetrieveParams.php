@@ -66,6 +66,19 @@ final class FollowingBulkRetrieveParams implements BaseModel
     }
 
     /**
+     * The ID type: currently only `artist` is supported.
+     *
+     * @param 'artist' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
      * The last artist ID retrieved from the previous request.
      */
     public function withAfter(string $after): self
