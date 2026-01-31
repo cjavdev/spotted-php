@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.1 (2026-01-31)
+
+Full Changelog: [v0.7.0...v0.7.1](https://github.com/cjavdev/spotted-php/compare/v0.7.0...v0.7.1)
+
+### Bug Fixes
+
+* used redirect count instead of retry count in base client ([a5220ed](https://github.com/cjavdev/spotted-php/commit/a5220ed506cdae4ac96214ebaec66f7d2ac07580))
+
 ## 0.7.0 (2026-01-31)
 
 Full Changelog: [v0.6.3...v0.7.0](https://github.com/cjavdev/spotted-php/compare/v0.6.3...v0.7.0)
