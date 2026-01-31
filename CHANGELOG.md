@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.7.0 (2026-01-31)
+
+Full Changelog: [v0.6.3...v0.7.0](https://github.com/cjavdev/spotted-php/compare/v0.6.3...v0.7.0)
+
+### Features
+
+* add setters to constant parameters ([6a29aa5](https://github.com/cjavdev/spotted-php/commit/6a29aa5c44a590ce63319d0b5e65e7cf5a6cf252))
+
+
+### Chores
+
+* **internal:** ignore stainless-internal artifacts ([1aaba84](https://github.com/cjavdev/spotted-php/commit/1aaba84a02639b9b51a8866594e9c8161c146312))
+
 ## 0.6.3 (2026-01-21)
 
 Full Changelog: [v0.6.2...v0.6.3](https://github.com/cjavdev/spotted-php/compare/v0.6.2...v0.6.3)
