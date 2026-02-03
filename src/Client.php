@@ -121,9 +121,13 @@ class Client extends BaseClient
         ?string $baseUrl = null,
         RequestOptions|array|null $requestOptions = null,
     ) {
-        $this->accessToken = (string) ($accessToken ?? getenv('SPOTIFY_ACCESS_TOKEN'));
+        $this->accessToken = (string) ($accessToken ?? Util::getenv(
+            'SPOTIFY_ACCESS_TOKEN'
+        ));
 
-        $baseUrl ??= getenv('SPOTTED_BASE_URL') ?: 'https://api.spotify.com/v1';
+        $baseUrl ??= Util::getenv(
+            'SPOTTED_BASE_URL'
+        ) ?: 'https://api.spotify.com/v1';
 
         $options = RequestOptions::parse(
             RequestOptions::with(
