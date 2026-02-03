@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.8.0 (2026-02-03)
+
+Full Changelog: [v0.7.1...v0.8.0](https://github.com/cjavdev/spotted-php/compare/v0.7.1...v0.8.0)
+
+### Features
+
+* use `$_ENV` aware getenv helper ([c4f0a76](https://github.com/cjavdev/spotted-php/commit/c4f0a764758b35672a9cc53c64abf174e156601f))
+
+
+### Chores
+
+* **internal:** php cs fixer should not be memory limited ([b64c741](https://github.com/cjavdev/spotted-php/commit/b64c741a02eddfb1e671b7bab2956ba61646671a))
+
 ## 0.7.1 (2026-01-31)
 
 Full Changelog: [v0.7.0...v0.7.1](https://github.com/cjavdev/spotted-php/compare/v0.7.0...v0.7.1)
