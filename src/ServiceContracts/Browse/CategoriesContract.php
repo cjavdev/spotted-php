@@ -17,6 +17,8 @@ use Spotted\RequestOptions;
 interface CategoriesContract
 {
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $categoryID the [Spotify category ID](/documentation/web-api/concepts/spotify-uris-ids) for the category
@@ -32,6 +34,8 @@ interface CategoriesContract
     ): CategoryGetResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.

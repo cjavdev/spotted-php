@@ -13,6 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get Spotify catalog information for multiple albums identified by their Spotify IDs.
  *
+ * @deprecated
  * @see Spotted\Services\AlbumsService::bulkRetrieve()
  *
  * @phpstan-type AlbumBulkRetrieveParamsShape = array{

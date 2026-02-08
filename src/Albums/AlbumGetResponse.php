@@ -79,7 +79,9 @@ final class AlbumGetResponse implements BaseModel
     public string $albumType;
 
     /**
-     * The markets in which the album is available: [ISO 3166-1 alpha-2 country codes](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). _**NOTE**: an album is considered available in a market when at least 1 of its tracks is available in that market._.
+     * @deprecated
+     *
+     * The markets in which the album is available: [ISO 3166-1 alpha-2 country codes](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). _**NOTE**: an album is considered available in a market when at least 1 of its tracks is available in that market._
      *
      * @var list<string> $availableMarkets
      */
@@ -155,7 +157,9 @@ final class AlbumGetResponse implements BaseModel
     public ?array $copyrights;
 
     /**
-     * Known external IDs for the album.
+     * @deprecated
+     *
+     * Known external IDs for the album
      */
     #[Optional('external_ids')]
     public ?ExternalIDObject $externalIDs;
@@ -171,12 +175,16 @@ final class AlbumGetResponse implements BaseModel
     public ?array $genres;
 
     /**
-     * The label associated with the album.
+     * @deprecated
+     *
+     * The label associated with the album
      */
     #[Optional]
     public ?string $label;
 
     /**
+     * @deprecated
+     *
      * The popularity of the album. The value will be between 0 and 100, with 100 being the most popular.
      */
     #[Optional]

@@ -13,6 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get Spotify catalog information for several audiobook chapters identified by their Spotify IDs. Chapters are only available within the US, UK, Canada, Ireland, New Zealand and Australia markets.
  *
+ * @deprecated
  * @see Spotted\Services\ChaptersService::bulkRetrieve()
  *
  * @phpstan-type ChapterBulkRetrieveParamsShape = array{

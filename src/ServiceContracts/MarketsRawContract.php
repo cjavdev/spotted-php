@@ -15,6 +15,8 @@ use Spotted\RequestOptions;
 interface MarketsRawContract
 {
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param RequestOpts|null $requestOptions

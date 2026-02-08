@@ -39,6 +39,8 @@ interface AudiobooksRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|AudiobookBulkRetrieveParams $params

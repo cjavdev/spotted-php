@@ -36,6 +36,8 @@ interface ChaptersRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|ChapterBulkRetrieveParams $params

@@ -23,6 +23,8 @@ final class MarketsRawService implements MarketsRawContract
     public function __construct(private Client $client) {}
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get the list of markets where Spotify is available.
