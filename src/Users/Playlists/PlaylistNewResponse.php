@@ -111,7 +111,7 @@ final class PlaylistNewResponse implements BaseModel
     public ?string $snapshotID;
 
     /**
-     * The tracks of the playlist.
+     * The tracks of the playlist. _**Note**: This field is only available for playlists owned by the current user._.
      */
     #[Optional]
     public ?Tracks $tracks;
@@ -311,7 +311,7 @@ final class PlaylistNewResponse implements BaseModel
     }
 
     /**
-     * The tracks of the playlist.
+     * The tracks of the playlist. _**Note**: This field is only available for playlists owned by the current user._.
      *
      * @param Tracks|TracksShape $tracks
      */

@@ -12,6 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get a single category used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
  *
+ * @deprecated
  * @see Spotted\Services\Browse\CategoriesService::retrieve()
  *
  * @phpstan-type CategoryRetrieveParamsShape = array{locale?: string|null}

@@ -23,6 +23,8 @@ final class UsersRawService implements UsersRawContract
     public function __construct(private Client $client) {}
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get public profile information about a Spotify user.

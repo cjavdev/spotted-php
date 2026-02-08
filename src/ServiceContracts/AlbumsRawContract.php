@@ -38,6 +38,8 @@ interface AlbumsRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|AlbumBulkRetrieveParams $params

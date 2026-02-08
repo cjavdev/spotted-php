@@ -63,6 +63,8 @@ final class AudiobooksRawService implements AudiobooksRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get Spotify catalog information for several audiobooks identified by their Spotify IDs. Audiobooks are only available within the US, UK, Canada, Ireland, New Zealand and Australia markets.

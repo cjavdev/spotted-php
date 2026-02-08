@@ -46,12 +46,16 @@ final class ArtistObject implements BaseModel
     public ?ExternalURLObject $externalURLs;
 
     /**
-     * Information about the followers of the artist.
+     * @deprecated
+     *
+     * Information about the followers of the artist
      */
     #[Optional]
     public ?FollowersObject $followers;
 
     /**
+     * @deprecated
+     *
      * A list of the genres the artist is associated with. If not yet classified, the array is empty.
      *
      * @var list<string>|null $genres
@@ -80,6 +84,8 @@ final class ArtistObject implements BaseModel
     public ?string $name;
 
     /**
+     * @deprecated
+     *
      * The popularity of the artist. The value will be between 0 and 100, with 100 being the most popular. The artist's popularity is calculated from the popularity of all the artist's tracks.
      */
     #[Optional]

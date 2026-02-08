@@ -61,6 +61,8 @@ final class EpisodesService implements EpisodesContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get Spotify catalog information for several episodes based on their Spotify IDs.

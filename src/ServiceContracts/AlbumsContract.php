@@ -37,6 +37,8 @@ interface AlbumsContract
     ): AlbumGetResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the albums. Maximum: 20 IDs.

@@ -32,7 +32,11 @@ final class PlaylistsService implements PlaylistsContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
+     *
+     * **Deprecated**: Use [Create Playlist](/documentation/web-api/reference/create-playlist) instead.
      *
      * Create a playlist for a Spotify user. (The playlist will be empty until
      * you [add tracks](/documentation/web-api/reference/add-tracks-to-playlist).)
@@ -71,6 +75,8 @@ final class PlaylistsService implements PlaylistsContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get a list of the playlists owned or followed by a Spotify user.

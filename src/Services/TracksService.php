@@ -62,6 +62,8 @@ final class TracksService implements TracksContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get Spotify catalog information for multiple tracks based on their Spotify IDs.

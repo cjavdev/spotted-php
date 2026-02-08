@@ -34,6 +34,8 @@ interface BrowseContract
     ): BrowseGetFeaturedPlaylistsResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.

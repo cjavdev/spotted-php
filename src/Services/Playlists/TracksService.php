@@ -89,6 +89,8 @@ final class TracksService implements TracksContract
      *
      * Get full details of the items of a playlist owned by a Spotify user.
      *
+     * **Note**: This endpoint is only accessible for playlists owned by the current user.
+     *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param string $additionalTypes A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`.<br/>
      * _**Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future._<br/>

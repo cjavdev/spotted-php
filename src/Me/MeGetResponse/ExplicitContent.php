@@ -11,6 +11,8 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * The user's explicit content settings. _This field is only available when the current user has granted access to the [user-read-private](/documentation/web-api/concepts/scopes/#list-of-scopes) scope._.
  *
+ * @deprecated
+ *
  * @phpstan-type ExplicitContentShape = array{
  *   filterEnabled?: bool|null, filterLocked?: bool|null, published?: bool|null
  * }

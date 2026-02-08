@@ -55,6 +55,8 @@ final class ArtistsService implements ArtistsContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get Spotify catalog information for several artists based on their Spotify IDs.
@@ -77,6 +79,8 @@ final class ArtistsService implements ArtistsContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get Spotify catalog information about an artist's albums.
@@ -84,7 +88,7 @@ final class ArtistsService implements ArtistsContract
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist
      * @param string $includeGroups A comma-separated list of keywords that will be used to filter the response. If not supplied, all album types will be returned. <br/>
      * Valid values are:<br/>- `album`<br/>- `single`<br/>- `appears_on`<br/>- `compilation`<br/>For example: `include_groups=album,single`.
-     * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param int $limit The maximum number of items to return. Default: 5. Minimum: 1. Maximum: 10.
      * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
      *   If a country code is specified, only content that is available in that market will be returned.<br/>
      *   If a valid user access token is specified in the request header, the country associated with
@@ -101,7 +105,7 @@ final class ArtistsService implements ArtistsContract
     public function listAlbums(
         string $id,
         ?string $includeGroups = null,
-        int $limit = 20,
+        int $limit = 5,
         ?string $market = null,
         int $offset = 0,
         RequestOptions|array|null $requestOptions = null,
@@ -144,6 +148,8 @@ final class ArtistsService implements ArtistsContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get Spotify catalog information about an artist's top tracks by country.

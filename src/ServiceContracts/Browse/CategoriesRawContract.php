@@ -21,6 +21,8 @@ use Spotted\RequestOptions;
 interface CategoriesRawContract
 {
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $categoryID the [Spotify category ID](/documentation/web-api/concepts/spotify-uris-ids) for the category
@@ -38,6 +40,8 @@ interface CategoriesRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|CategoryListParams $params

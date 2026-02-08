@@ -68,6 +68,8 @@ final class TrackObject implements BaseModel
     public ?array $artists;
 
     /**
+     * @deprecated
+     *
      * A list of the countries in which the track can be played, identified by their [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code.
      *
      * @var list<string>|null $availableMarkets
@@ -94,7 +96,9 @@ final class TrackObject implements BaseModel
     public ?bool $explicit;
 
     /**
-     * Known external IDs for the track.
+     * @deprecated
+     *
+     * Known external IDs for the track
      */
     #[Optional('external_ids')]
     public ?ExternalIDObject $externalIDs;
@@ -124,6 +128,8 @@ final class TrackObject implements BaseModel
     public ?bool $isPlayable;
 
     /**
+     * @deprecated
+     *
      * Part of the response when [Track Relinking](/documentation/web-api/concepts/track-relinking) is applied, and the requested track has been replaced with different track. The track in the `linked_from` object contains information about the originally requested track.
      */
     #[Optional('linked_from')]
@@ -136,7 +142,9 @@ final class TrackObject implements BaseModel
     public ?string $name;
 
     /**
-     * The popularity of the track. The value will be between 0 and 100, with 100 being the most popular.<br/>The popularity of a track is a value between 0 and 100, with 100 being the most popular. The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.<br/>Generally speaking, songs that are being played a lot now will have a higher popularity than songs that were played a lot in the past. Duplicate tracks (e.g. the same track from a single and an album) are rated independently. Artist and album popularity is derived mathematically from track popularity. _**Note**: the popularity value may lag actual popularity by a few days: the value is not updated in real time._.
+     * @deprecated
+     *
+     * The popularity of the track. The value will be between 0 and 100, with 100 being the most popular.<br/>The popularity of a track is a value between 0 and 100, with 100 being the most popular. The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.<br/>Generally speaking, songs that are being played a lot now will have a higher popularity than songs that were played a lot in the past. Duplicate tracks (e.g. the same track from a single and an album) are rated independently. Artist and album popularity is derived mathematically from track popularity. _**Note**: the popularity value may lag actual popularity by a few days: the value is not updated in real time._
      */
     #[Optional]
     public ?int $popularity;

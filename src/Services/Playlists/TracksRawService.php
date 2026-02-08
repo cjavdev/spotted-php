@@ -84,6 +84,8 @@ final class TracksRawService implements TracksRawContract
      *
      * Get full details of the items of a playlist owned by a Spotify user.
      *
+     * **Note**: This endpoint is only accessible for playlists owned by the current user.
+     *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array{
      *   additionalTypes?: string,

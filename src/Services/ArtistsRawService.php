@@ -57,6 +57,8 @@ final class ArtistsRawService implements ArtistsRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get Spotify catalog information for several artists based on their Spotify IDs.
@@ -88,6 +90,8 @@ final class ArtistsRawService implements ArtistsRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get Spotify catalog information about an artist's albums.
@@ -154,6 +158,8 @@ final class ArtistsRawService implements ArtistsRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get Spotify catalog information about an artist's top tracks by country.

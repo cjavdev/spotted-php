@@ -36,6 +36,8 @@ interface TracksRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|TrackBulkRetrieveParams $params
