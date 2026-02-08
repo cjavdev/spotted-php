@@ -36,6 +36,8 @@ final class UsersService implements UsersContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get public profile information about a Spotify user.

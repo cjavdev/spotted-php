@@ -14,6 +14,8 @@ use Spotted\RequestOptions;
 interface MarketsContract
 {
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param RequestOpts|null $requestOptions

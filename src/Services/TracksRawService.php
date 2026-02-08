@@ -61,6 +61,8 @@ final class TracksRawService implements TracksRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get Spotify catalog information for multiple tracks based on their Spotify IDs.

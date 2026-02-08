@@ -38,6 +38,8 @@ interface ShowsContract
     ): ShowGetResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the shows. Maximum: 50 IDs.

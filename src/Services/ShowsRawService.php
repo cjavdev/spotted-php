@@ -64,6 +64,8 @@ final class ShowsRawService implements ShowsRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get Spotify catalog information for several shows based on their Spotify IDs.

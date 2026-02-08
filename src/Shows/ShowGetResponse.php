@@ -61,6 +61,8 @@ final class ShowGetResponse implements BaseModel
     public string $id;
 
     /**
+     * @deprecated
+     *
      * A list of the countries in which the show can be played, identified by their [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code.
      *
      * @var list<string> $availableMarkets
@@ -138,7 +140,9 @@ final class ShowGetResponse implements BaseModel
     public string $name;
 
     /**
-     * The publisher of the show.
+     * @deprecated
+     *
+     * The publisher of the show
      */
     #[Required]
     public string $publisher;

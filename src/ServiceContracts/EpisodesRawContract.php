@@ -35,6 +35,8 @@ interface EpisodesRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|EpisodeBulkRetrieveParams $params

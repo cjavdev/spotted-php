@@ -12,6 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get Spotify catalog information about an artist's top tracks by country.
  *
+ * @deprecated
  * @see Spotted\Services\ArtistsService::topTracks()
  *
  * @phpstan-type ArtistTopTracksParamsShape = array{market?: string|null}

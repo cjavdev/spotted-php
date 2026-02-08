@@ -11,10 +11,13 @@ use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
+ * **Deprecated**: Use [Create Playlist](/documentation/web-api/reference/create-playlist) instead.
+ *
  * Create a playlist for a Spotify user. (The playlist will be empty until
  * you [add tracks](/documentation/web-api/reference/add-tracks-to-playlist).)
  * Each user is generally limited to a maximum of 11000 playlists.
  *
+ * @deprecated
  * @see Spotted\Services\Users\PlaylistsService::create()
  *
  * @phpstan-type PlaylistCreateParamsShape = array{

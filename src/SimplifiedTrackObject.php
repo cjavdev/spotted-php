@@ -55,6 +55,8 @@ final class SimplifiedTrackObject implements BaseModel
     public ?array $artists;
 
     /**
+     * @deprecated
+     *
      * A list of the countries in which the track can be played, identified by their [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code.
      *
      * @var list<string>|null $availableMarkets
@@ -105,6 +107,8 @@ final class SimplifiedTrackObject implements BaseModel
     public ?bool $isPlayable;
 
     /**
+     * @deprecated
+     *
      * Part of the response when [Track Relinking](/documentation/web-api/concepts/track-relinking/) is applied and is only part of the response if the track linking, in fact, exists. The requested track has been replaced with a different track. The track in the `linked_from` object contains information about the originally requested track.
      */
     #[Optional('linked_from')]

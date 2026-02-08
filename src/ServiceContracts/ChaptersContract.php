@@ -36,6 +36,8 @@ interface ChaptersContract
     ): ChapterGetResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=0IsXVP0JmcB2adSE338GkK,3ZXb8FKZGU0EHALYX6uCzU`. Maximum: 50 IDs.

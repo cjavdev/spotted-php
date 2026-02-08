@@ -62,6 +62,8 @@ final class AlbumsService implements AlbumsContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get Spotify catalog information for multiple albums identified by their Spotify IDs.

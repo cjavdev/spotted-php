@@ -33,6 +33,8 @@ final class CategoriesService implements CategoriesContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get a single category used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
@@ -57,6 +59,8 @@ final class CategoriesService implements CategoriesContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).

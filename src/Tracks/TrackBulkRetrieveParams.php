@@ -13,6 +13,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get Spotify catalog information for multiple tracks based on their Spotify IDs.
  *
+ * @deprecated
  * @see Spotted\Services\TracksService::bulkRetrieve()
  *
  * @phpstan-type TrackBulkRetrieveParamsShape = array{

@@ -60,6 +60,8 @@ final class EpisodesRawService implements EpisodesRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get Spotify catalog information for several episodes based on their Spotify IDs.

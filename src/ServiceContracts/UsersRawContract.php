@@ -15,6 +15,8 @@ use Spotted\Users\UserGetProfileResponse;
 interface UsersRawContract
 {
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $userID the user's [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids)

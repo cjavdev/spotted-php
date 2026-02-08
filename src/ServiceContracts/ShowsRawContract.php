@@ -39,6 +39,8 @@ interface ShowsRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|ShowBulkRetrieveParams $params

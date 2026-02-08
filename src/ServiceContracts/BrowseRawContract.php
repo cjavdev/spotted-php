@@ -35,6 +35,8 @@ interface BrowseRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|BrowseGetNewReleasesParams $params

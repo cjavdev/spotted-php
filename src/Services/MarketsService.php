@@ -29,6 +29,8 @@ final class MarketsService implements MarketsContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Get the list of markets where Spotify is available.

@@ -12,6 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get Spotify catalog information about an artist's albums.
  *
+ * @deprecated
  * @see Spotted\Services\ArtistsService::listAlbums()
  *
  * @phpstan-type ArtistListAlbumsParamsShape = array{
@@ -35,7 +36,7 @@ final class ArtistListAlbumsParams implements BaseModel
     public ?string $includeGroups;
 
     /**
-     * The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * The maximum number of items to return. Default: 5. Minimum: 1. Maximum: 10.
      */
     #[Optional]
     public ?int $limit;
@@ -96,7 +97,7 @@ final class ArtistListAlbumsParams implements BaseModel
     }
 
     /**
-     * The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
+     * The maximum number of items to return. Default: 5. Minimum: 1. Maximum: 10.
      */
     public function withLimit(int $limit): self
     {

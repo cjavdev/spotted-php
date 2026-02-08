@@ -19,6 +19,8 @@ use Spotted\Users\Playlists\PlaylistNewResponse;
 interface PlaylistsRawContract
 {
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $userID the user's [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids)
@@ -36,6 +38,8 @@ interface PlaylistsRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $userID the user's [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids)

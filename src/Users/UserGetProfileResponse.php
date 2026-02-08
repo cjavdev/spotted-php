@@ -53,7 +53,9 @@ final class UserGetProfileResponse implements BaseModel
     public ?ExternalURLObject $externalURLs;
 
     /**
-     * Information about the followers of this user.
+     * @deprecated
+     *
+     * Information about the followers of this user
      */
     #[Optional]
     public ?FollowersObject $followers;
