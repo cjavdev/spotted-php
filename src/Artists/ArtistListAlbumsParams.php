@@ -12,7 +12,6 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Get Spotify catalog information about an artist's albums.
  *
- * @deprecated
  * @see Spotted\Services\ArtistsService::listAlbums()
  *
  * @phpstan-type ArtistListAlbumsParamsShape = array{

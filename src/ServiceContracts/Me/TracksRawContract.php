@@ -50,6 +50,8 @@ interface TracksRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|TrackRemoveParams $params
@@ -65,6 +67,8 @@ interface TracksRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|TrackSaveParams $params

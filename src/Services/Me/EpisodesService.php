@@ -92,6 +92,8 @@ final class EpisodesService implements EpisodesContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Remove one or more episodes from the current user's library.<br/>
@@ -117,6 +119,8 @@ final class EpisodesService implements EpisodesContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Save one or more episodes to the current user's library.<br/>

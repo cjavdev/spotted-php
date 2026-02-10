@@ -12,6 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Save one or more audiobooks to the current Spotify user's library.
  *
+ * @deprecated
  * @see Spotted\Services\Me\AudiobooksService::save()
  *
  * @phpstan-type AudiobookSaveParamsShape = array{ids: string}

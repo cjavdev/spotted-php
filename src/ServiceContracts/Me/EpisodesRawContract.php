@@ -50,6 +50,8 @@ interface EpisodesRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|EpisodeRemoveParams $params
@@ -65,6 +67,8 @@ interface EpisodesRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|EpisodeSaveParams $params

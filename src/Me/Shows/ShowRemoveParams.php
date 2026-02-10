@@ -12,6 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Delete one or more shows from current Spotify user's library.
  *
+ * @deprecated
  * @see Spotted\Services\Me\ShowsService::remove()
  *
  * @phpstan-type ShowRemoveParamsShape = array{
