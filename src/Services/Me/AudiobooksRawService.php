@@ -92,6 +92,8 @@ final class AudiobooksRawService implements AudiobooksRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Remove one or more audiobooks from the Spotify user's library.
@@ -123,6 +125,8 @@ final class AudiobooksRawService implements AudiobooksRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Save one or more audiobooks to the current Spotify user's library.

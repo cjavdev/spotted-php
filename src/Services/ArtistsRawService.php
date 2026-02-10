@@ -90,8 +90,6 @@ final class ArtistsRawService implements ArtistsRawContract
     }
 
     /**
-     * @deprecated
-     *
      * @api
      *
      * Get Spotify catalog information about an artist's albums.

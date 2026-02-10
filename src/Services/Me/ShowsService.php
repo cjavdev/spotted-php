@@ -81,6 +81,8 @@ final class ShowsService implements ShowsContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Delete one or more shows from current Spotify user's library.
@@ -106,6 +108,8 @@ final class ShowsService implements ShowsContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Save one or more shows to current Spotify user's library.

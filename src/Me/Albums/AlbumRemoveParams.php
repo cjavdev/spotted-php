@@ -12,6 +12,7 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Remove one or more albums from the current user's 'Your Music' library.
  *
+ * @deprecated
  * @see Spotted\Services\Me\AlbumsService::remove()
  *
  * @phpstan-type AlbumRemoveParamsShape = array{

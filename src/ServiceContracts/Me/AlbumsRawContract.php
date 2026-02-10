@@ -50,6 +50,8 @@ interface AlbumsRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|AlbumRemoveParams $params
@@ -65,6 +67,8 @@ interface AlbumsRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|AlbumSaveParams $params

@@ -90,6 +90,8 @@ final class AlbumsService implements AlbumsContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Remove one or more albums from the current user's 'Your Music' library.
@@ -114,6 +116,8 @@ final class AlbumsService implements AlbumsContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Save one or more albums to the current user's 'Your Music' library.
