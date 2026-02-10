@@ -47,8 +47,6 @@ interface ArtistsContract
     ): ArtistBulkGetResponse;
 
     /**
-     * @deprecated
-     *
      * @api
      *
      * @param string $id the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the artist

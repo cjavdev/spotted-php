@@ -47,6 +47,8 @@ interface ShowsContract
     ): array;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param list<string> $ids A JSON array of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids).
@@ -63,6 +65,8 @@ interface ShowsContract
     ): mixed;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param list<string> $ids A JSON array of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids).

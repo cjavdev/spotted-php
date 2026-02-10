@@ -92,6 +92,8 @@ final class TracksService implements TracksContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Remove one or more tracks from the current user's 'Your Music' library.
@@ -116,6 +118,8 @@ final class TracksService implements TracksContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Save one or more tracks to the current user's 'Your Music' library.

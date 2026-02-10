@@ -50,6 +50,8 @@ interface ShowsRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|ShowRemoveParams $params
@@ -65,6 +67,8 @@ interface ShowsRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|ShowSaveParams $params

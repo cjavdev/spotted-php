@@ -50,6 +50,8 @@ interface AudiobooksRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|AudiobookRemoveParams $params
@@ -65,6 +67,8 @@ interface AudiobooksRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|AudiobookSaveParams $params

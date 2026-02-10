@@ -79,8 +79,6 @@ final class ArtistsService implements ArtistsContract
     }
 
     /**
-     * @deprecated
-     *
      * @api
      *
      * Get Spotify catalog information about an artist's albums.

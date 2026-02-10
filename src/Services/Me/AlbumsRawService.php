@@ -92,6 +92,8 @@ final class AlbumsRawService implements AlbumsRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Remove one or more albums from the current user's 'Your Music' library.
@@ -123,6 +125,8 @@ final class AlbumsRawService implements AlbumsRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Save one or more albums to the current user's 'Your Music' library.

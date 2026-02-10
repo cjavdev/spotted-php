@@ -14,6 +14,7 @@ use Spotted\Me\Tracks\TrackSaveParams\TimestampedID;
 /**
  * Save one or more tracks to the current user's 'Your Music' library.
  *
+ * @deprecated
  * @see Spotted\Services\Me\TracksService::save()
  *
  * @phpstan-import-type TimestampedIDShape from \Spotted\Me\Tracks\TrackSaveParams\TimestampedID
