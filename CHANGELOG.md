@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.0 (2026-02-12)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/cjavdev/spotted-php/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* **api:** api update ([4691fbf](https://github.com/cjavdev/spotted-php/commit/4691fbfc0c78db5e031fe576cdee71e631e28b9f))
+
 ## 0.10.0 (2026-02-10)
 
 Full Changelog: [v0.9.0...v0.10.0](https://github.com/cjavdev/spotted-php/compare/v0.9.0...v0.10.0)
