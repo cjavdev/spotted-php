@@ -13,6 +13,8 @@ use Spotted\RequestOptions;
 interface FollowersContract
 {
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
@@ -30,6 +32,8 @@ interface FollowersContract
     ): array;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
@@ -45,6 +49,8 @@ interface FollowersContract
     ): mixed;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist

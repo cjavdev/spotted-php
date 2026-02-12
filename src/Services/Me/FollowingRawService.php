@@ -62,9 +62,13 @@ final class FollowingRawService implements FollowingRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Check to see if the current user is following one or more artists or other Spotify users.
+     *
+     * **Note:** This endpoint is deprecated. Use [Check User's Saved Items](/documentation/web-api/reference/check-library-contains) instead.
      *
      * @param array{
      *   ids: string, type: Type|value-of<Type>
@@ -95,9 +99,13 @@ final class FollowingRawService implements FollowingRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Add the current user as a follower of one or more artists or other Spotify users.
+     *
+     * **Note:** This endpoint is deprecated. Use [Save Items to Library](/documentation/web-api/reference/save-library-items) instead.
      *
      * @param array{ids: list<string>, published?: bool}|FollowingFollowParams $params
      * @param RequestOpts|null $requestOptions
@@ -126,9 +134,13 @@ final class FollowingRawService implements FollowingRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Remove the current user as a follower of one or more artists or other Spotify users.
+     *
+     * **Note:** This endpoint is deprecated. Use [Remove Items from Library](/documentation/web-api/reference/remove-library-items) instead.
      *
      * @param array{
      *   ids?: list<string>, published?: bool

@@ -10,8 +10,11 @@ use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
+ * **Deprecated:** Use [Add Items to Playlist](/documentation/web-api/reference/add-items-to-playlist) instead.
+ *
  * Add one or more items to a user's playlist.
  *
+ * @deprecated
  * @see Spotted\Services\Playlists\TracksService::add()
  *
  * @phpstan-type TrackAddParamsShape = array{

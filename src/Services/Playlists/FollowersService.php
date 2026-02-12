@@ -29,9 +29,13 @@ final class FollowersService implements FollowersContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Check to see if the current user is following a specified playlist.
+     *
+     * **Note:** This endpoint is deprecated. Use [Check User's Saved Items](/documentation/web-api/reference/check-library-contains) instead.
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param string $ids **Deprecated** A single item list containing current user's [Spotify Username](/documentation/web-api/concepts/spotify-uris-ids). Maximum: 1 id.
@@ -55,9 +59,13 @@ final class FollowersService implements FollowersContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Add the current user as a follower of a playlist.
+     *
+     * **Note:** This endpoint is deprecated. Use [Save Items to Library](/documentation/web-api/reference/save-library-items) instead.
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
@@ -79,9 +87,13 @@ final class FollowersService implements FollowersContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Remove the current user as a follower of a playlist.
+     *
+     * **Note:** This endpoint is deprecated. Use [Remove Items from Library](/documentation/web-api/reference/remove-library-items) instead.
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param RequestOpts|null $requestOptions

@@ -12,6 +12,9 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Check if one or more audiobooks are already saved in the current Spotify user's library.
  *
+ * **Note:** This endpoint is deprecated. Use [Check User's Saved Items](/documentation/web-api/reference/check-library-contains) instead.
+ *
+ * @deprecated
  * @see Spotted\Services\Me\AudiobooksService::check()
  *
  * @phpstan-type AudiobookCheckParamsShape = array{ids: string}

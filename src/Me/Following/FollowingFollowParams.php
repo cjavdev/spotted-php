@@ -13,6 +13,9 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Add the current user as a follower of one or more artists or other Spotify users.
  *
+ * **Note:** This endpoint is deprecated. Use [Save Items to Library](/documentation/web-api/reference/save-library-items) instead.
+ *
+ * @deprecated
  * @see Spotted\Services\Me\FollowingService::follow()
  *
  * @phpstan-type FollowingFollowParamsShape = array{

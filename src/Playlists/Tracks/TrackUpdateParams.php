@@ -10,6 +10,8 @@ use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
+ * **Deprecated:** Use [Update Playlist Items](/documentation/web-api/reference/reorder-or-replace-playlists-items) instead.
+ *
  * Either reorder or replace items in a playlist depending on the request's parameters.
  * To reorder items, include `range_start`, `insert_before`, `range_length` and `snapshot_id` in the request's body.
  * To replace items, include `uris` as either a query parameter or in the request's body.
@@ -18,6 +20,7 @@ use Spotted\Core\Contracts\BaseModel;
  * **Note**: Replace and reorder are mutually exclusive operations which share the same endpoint, but have different parameters.
  * These operations can't be applied together in a single request.
  *
+ * @deprecated
  * @see Spotted\Services\Playlists\TracksService::update()
  *
  * @phpstan-type TrackUpdateParamsShape = array{

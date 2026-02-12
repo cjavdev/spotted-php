@@ -10,6 +10,7 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\ExternalURLObject;
 use Spotted\FollowersObject;
 use Spotted\ImageObject;
+use Spotted\Playlists\PlaylistGetResponse\Items;
 use Spotted\Playlists\PlaylistGetResponse\Owner;
 use Spotted\Playlists\PlaylistGetResponse\Tracks;
 
@@ -17,6 +18,7 @@ use Spotted\Playlists\PlaylistGetResponse\Tracks;
  * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
  * @phpstan-import-type FollowersObjectShape from \Spotted\FollowersObject
  * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
+ * @phpstan-import-type ItemsShape from \Spotted\Playlists\PlaylistGetResponse\Items
  * @phpstan-import-type OwnerShape from \Spotted\Playlists\PlaylistGetResponse\Owner
  * @phpstan-import-type TracksShape from \Spotted\Playlists\PlaylistGetResponse\Tracks
  *
@@ -28,6 +30,7 @@ use Spotted\Playlists\PlaylistGetResponse\Tracks;
  *   followers?: null|FollowersObject|FollowersObjectShape,
  *   href?: string|null,
  *   images?: list<ImageObject|ImageObjectShape>|null,
+ *   items?: null|Items|ItemsShape,
  *   name?: string|null,
  *   owner?: null|Owner|OwnerShape,
  *   published?: bool|null,
@@ -87,6 +90,12 @@ final class PlaylistGetResponse implements BaseModel
     public ?array $images;
 
     /**
+     * The items of the playlist. _**Note**: This field is only available for playlists owned by the current user or playlists the user is a collaborator of._.
+     */
+    #[Optional]
+    public ?Items $items;
+
+    /**
      * The name of the playlist.
      */
     #[Optional]
@@ -111,7 +120,9 @@ final class PlaylistGetResponse implements BaseModel
     public ?string $snapshotID;
 
     /**
-     * The tracks of the playlist. _**Note**: This field is only available for playlists owned by the current user._.
+     * @deprecated
+     *
+     * **Deprecated:** Use `items` instead. The tracks of the playlist.
      */
     #[Optional]
     public ?Tracks $tracks;
@@ -141,6 +152,7 @@ final class PlaylistGetResponse implements BaseModel
      * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
      * @param FollowersObject|FollowersObjectShape|null $followers
      * @param list<ImageObject|ImageObjectShape>|null $images
+     * @param Items|ItemsShape|null $items
      * @param Owner|OwnerShape|null $owner
      * @param Tracks|TracksShape|null $tracks
      */
@@ -152,6 +164,7 @@ final class PlaylistGetResponse implements BaseModel
         FollowersObject|array|null $followers = null,
         ?string $href = null,
         ?array $images = null,
+        Items|array|null $items = null,
         ?string $name = null,
         Owner|array|null $owner = null,
         ?bool $published = null,
@@ -169,6 +182,7 @@ final class PlaylistGetResponse implements BaseModel
         null !== $followers && $self['followers'] = $followers;
         null !== $href && $self['href'] = $href;
         null !== $images && $self['images'] = $images;
+        null !== $items && $self['items'] = $items;
         null !== $name && $self['name'] = $name;
         null !== $owner && $self['owner'] = $owner;
         null !== $published && $self['published'] = $published;
@@ -265,6 +279,19 @@ final class PlaylistGetResponse implements BaseModel
     }
 
     /**
+     * The items of the playlist. _**Note**: This field is only available for playlists owned by the current user or playlists the user is a collaborator of._.
+     *
+     * @param Items|ItemsShape $items
+     */
+    public function withItems(Items|array $items): self
+    {
+        $self = clone $this;
+        $self['items'] = $items;
+
+        return $self;
+    }
+
+    /**
      * The name of the playlist.
      */
     public function withName(string $name): self
@@ -311,7 +338,7 @@ final class PlaylistGetResponse implements BaseModel
     }
 
     /**
-     * The tracks of the playlist. _**Note**: This field is only available for playlists owned by the current user._.
+     * **Deprecated:** Use `items` instead. The tracks of the playlist.
      *
      * @param Tracks|TracksShape $tracks
      */

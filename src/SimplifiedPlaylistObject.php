@@ -12,8 +12,8 @@ use Spotted\SimplifiedPlaylistObject\Owner;
 /**
  * @phpstan-import-type ExternalURLObjectShape from \Spotted\ExternalURLObject
  * @phpstan-import-type ImageObjectShape from \Spotted\ImageObject
- * @phpstan-import-type OwnerShape from \Spotted\SimplifiedPlaylistObject\Owner
  * @phpstan-import-type PlaylistTracksRefObjectShape from \Spotted\PlaylistTracksRefObject
+ * @phpstan-import-type OwnerShape from \Spotted\SimplifiedPlaylistObject\Owner
  *
  * @phpstan-type SimplifiedPlaylistObjectShape = array{
  *   id?: string|null,
@@ -22,6 +22,7 @@ use Spotted\SimplifiedPlaylistObject\Owner;
  *   externalURLs?: null|ExternalURLObject|ExternalURLObjectShape,
  *   href?: string|null,
  *   images?: list<ImageObject|ImageObjectShape>|null,
+ *   items?: null|PlaylistTracksRefObject|PlaylistTracksRefObjectShape,
  *   name?: string|null,
  *   owner?: null|Owner|OwnerShape,
  *   published?: bool|null,
@@ -75,6 +76,12 @@ final class SimplifiedPlaylistObject implements BaseModel
     public ?array $images;
 
     /**
+     * A collection containing a link ( `href` ) to the Web API endpoint where full details of the playlist's items can be retrieved, along with the `total` number of items in the playlist. Note, a track object may be `null`. This can happen if a track is no longer available.
+     */
+    #[Optional]
+    public ?PlaylistTracksRefObject $items;
+
+    /**
      * The name of the playlist.
      */
     #[Optional]
@@ -99,7 +106,9 @@ final class SimplifiedPlaylistObject implements BaseModel
     public ?string $snapshotID;
 
     /**
-     * A collection containing a link ( `href` ) to the Web API endpoint where full details of the playlist's tracks can be retrieved, along with the `total` number of tracks in the playlist. Note, a track object may be `null`. This can happen if a track is no longer available.
+     * @deprecated
+     *
+     * **Deprecated:** Use `items` instead. A collection containing a link ( `href` ) to the Web API endpoint where full details of the playlist's tracks can be retrieved, along with the `total` number of tracks in the playlist. Note, a track object may be `null`. This can happen if a track is no longer available.
      */
     #[Optional]
     public ?PlaylistTracksRefObject $tracks;
@@ -128,6 +137,7 @@ final class SimplifiedPlaylistObject implements BaseModel
      *
      * @param ExternalURLObject|ExternalURLObjectShape|null $externalURLs
      * @param list<ImageObject|ImageObjectShape>|null $images
+     * @param PlaylistTracksRefObject|PlaylistTracksRefObjectShape|null $items
      * @param Owner|OwnerShape|null $owner
      * @param PlaylistTracksRefObject|PlaylistTracksRefObjectShape|null $tracks
      */
@@ -138,6 +148,7 @@ final class SimplifiedPlaylistObject implements BaseModel
         ExternalURLObject|array|null $externalURLs = null,
         ?string $href = null,
         ?array $images = null,
+        PlaylistTracksRefObject|array|null $items = null,
         ?string $name = null,
         Owner|array|null $owner = null,
         ?bool $published = null,
@@ -154,6 +165,7 @@ final class SimplifiedPlaylistObject implements BaseModel
         null !== $externalURLs && $self['externalURLs'] = $externalURLs;
         null !== $href && $self['href'] = $href;
         null !== $images && $self['images'] = $images;
+        null !== $items && $self['items'] = $items;
         null !== $name && $self['name'] = $name;
         null !== $owner && $self['owner'] = $owner;
         null !== $published && $self['published'] = $published;
@@ -237,6 +249,19 @@ final class SimplifiedPlaylistObject implements BaseModel
     }
 
     /**
+     * A collection containing a link ( `href` ) to the Web API endpoint where full details of the playlist's items can be retrieved, along with the `total` number of items in the playlist. Note, a track object may be `null`. This can happen if a track is no longer available.
+     *
+     * @param PlaylistTracksRefObject|PlaylistTracksRefObjectShape $items
+     */
+    public function withItems(PlaylistTracksRefObject|array $items): self
+    {
+        $self = clone $this;
+        $self['items'] = $items;
+
+        return $self;
+    }
+
+    /**
      * The name of the playlist.
      */
     public function withName(string $name): self
@@ -283,7 +308,7 @@ final class SimplifiedPlaylistObject implements BaseModel
     }
 
     /**
-     * A collection containing a link ( `href` ) to the Web API endpoint where full details of the playlist's tracks can be retrieved, along with the `total` number of tracks in the playlist. Note, a track object may be `null`. This can happen if a track is no longer available.
+     * **Deprecated:** Use `items` instead. A collection containing a link ( `href` ) to the Web API endpoint where full details of the playlist's tracks can be retrieved, along with the `total` number of tracks in the playlist. Note, a track object may be `null`. This can happen if a track is no longer available.
      *
      * @param PlaylistTracksRefObject|PlaylistTracksRefObjectShape $tracks
      */

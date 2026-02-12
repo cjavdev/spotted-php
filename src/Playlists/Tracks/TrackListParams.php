@@ -10,10 +10,11 @@ use Spotted\Core\Concerns\SdkParams;
 use Spotted\Core\Contracts\BaseModel;
 
 /**
+ * **Deprecated:** Use [Get Playlist Items](/documentation/web-api/reference/get-playlists-items) instead.
+ *
  * Get full details of the items of a playlist owned by a Spotify user.
  *
- * **Note**: This endpoint is only accessible for playlists owned by the current user.
- *
+ * @deprecated
  * @see Spotted\Services\Playlists\TracksService::list()
  *
  * @phpstan-type TrackListParamsShape = array{

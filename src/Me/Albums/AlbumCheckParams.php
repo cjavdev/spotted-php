@@ -12,6 +12,9 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Check if one or more albums is already saved in the current Spotify user's 'Your Music' library.
  *
+ * **Note:** This endpoint is deprecated. Use [Check User's Saved Items](/documentation/web-api/reference/check-library-contains) instead.
+ *
+ * @deprecated
  * @see Spotted\Services\Me\AlbumsService::check()
  *
  * @phpstan-type AlbumCheckParamsShape = array{ids: string}

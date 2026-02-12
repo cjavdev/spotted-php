@@ -12,6 +12,8 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Delete one or more shows from current Spotify user's library.
  *
+ * **Note:** This endpoint is deprecated. Use [Remove Items from Library](/documentation/web-api/reference/remove-library-items) instead.
+ *
  * @deprecated
  * @see Spotted\Services\Me\ShowsService::remove()
  *

@@ -7,17 +7,21 @@ namespace Spotted;
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Concerns\SdkModel;
 use Spotted\Core\Contracts\BaseModel;
+use Spotted\PlaylistTrackObject\Item;
 use Spotted\PlaylistTrackObject\Track;
 
 /**
+ * @phpstan-import-type ItemVariants from \Spotted\PlaylistTrackObject\Item
  * @phpstan-import-type TrackVariants from \Spotted\PlaylistTrackObject\Track
  * @phpstan-import-type PlaylistUserObjectShape from \Spotted\PlaylistUserObject
+ * @phpstan-import-type ItemShape from \Spotted\PlaylistTrackObject\Item
  * @phpstan-import-type TrackShape from \Spotted\PlaylistTrackObject\Track
  *
  * @phpstan-type PlaylistTrackObjectShape = array{
  *   addedAt?: \DateTimeInterface|null,
  *   addedBy?: null|PlaylistUserObject|PlaylistUserObjectShape,
  *   isLocal?: bool|null,
+ *   item?: ItemShape|null,
  *   published?: bool|null,
  *   track?: TrackShape|null,
  * }
@@ -46,13 +50,23 @@ final class PlaylistTrackObject implements BaseModel
     public ?bool $isLocal;
 
     /**
+     * Information about the track or episode.
+     *
+     * @var ItemVariants|null $item
+     */
+    #[Optional(union: Item::class)]
+    public TrackObject|EpisodeObject|null $item;
+
+    /**
      * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
     #[Optional]
     public ?bool $published;
 
     /**
-     * Information about the track or episode.
+     * @deprecated
+     *
+     * **Deprecated:** Use `item` instead. Information about the track or episode.
      *
      * @var TrackVariants|null $track
      */
@@ -70,12 +84,14 @@ final class PlaylistTrackObject implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param PlaylistUserObject|PlaylistUserObjectShape|null $addedBy
+     * @param ItemShape|null $item
      * @param TrackShape|null $track
      */
     public static function with(
         ?\DateTimeInterface $addedAt = null,
         PlaylistUserObject|array|null $addedBy = null,
         ?bool $isLocal = null,
+        TrackObject|array|EpisodeObject|null $item = null,
         ?bool $published = null,
         TrackObject|array|EpisodeObject|null $track = null,
     ): self {
@@ -84,6 +100,7 @@ final class PlaylistTrackObject implements BaseModel
         null !== $addedAt && $self['addedAt'] = $addedAt;
         null !== $addedBy && $self['addedBy'] = $addedBy;
         null !== $isLocal && $self['isLocal'] = $isLocal;
+        null !== $item && $self['item'] = $item;
         null !== $published && $self['published'] = $published;
         null !== $track && $self['track'] = $track;
 
@@ -126,6 +143,19 @@ final class PlaylistTrackObject implements BaseModel
     }
 
     /**
+     * Information about the track or episode.
+     *
+     * @param ItemShape $item
+     */
+    public function withItem(TrackObject|array|EpisodeObject $item): self
+    {
+        $self = clone $this;
+        $self['item'] = $item;
+
+        return $self;
+    }
+
+    /**
      * The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists).
      */
     public function withPublished(bool $published): self
@@ -137,7 +167,7 @@ final class PlaylistTrackObject implements BaseModel
     }
 
     /**
-     * Information about the track or episode.
+     * **Deprecated:** Use `item` instead. Information about the track or episode.
      *
      * @param TrackShape $track
      */
