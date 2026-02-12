@@ -57,9 +57,13 @@ final class AudiobooksService implements AudiobooksContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Check if one or more audiobooks are already saved in the current Spotify user's library.
+     *
+     * **Note:** This endpoint is deprecated. Use [Check User's Saved Items](/documentation/web-api/reference/check-library-contains) instead.
      *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
      * @param RequestOpts|null $requestOptions
@@ -87,6 +91,8 @@ final class AudiobooksService implements AudiobooksContract
      *
      * Remove one or more audiobooks from the Spotify user's library.
      *
+     * **Note:** This endpoint is deprecated. Use [Remove Items from Library](/documentation/web-api/reference/remove-library-items) instead.
+     *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
      * @param RequestOpts|null $requestOptions
      *
@@ -110,6 +116,8 @@ final class AudiobooksService implements AudiobooksContract
      * @api
      *
      * Save one or more audiobooks to the current Spotify user's library.
+     *
+     * **Note:** This endpoint is deprecated. Use [Save Items to Library](/documentation/web-api/reference/save-library-items) instead.
      *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `ids=18yVqkdbdRvS24c0Ilj2ci,1HGw3J3NxZO1TP1BTtVhpZ`. Maximum: 50 IDs.
      * @param RequestOpts|null $requestOptions

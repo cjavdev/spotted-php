@@ -11,17 +11,15 @@ use Spotted\EpisodeObject;
 use Spotted\TrackObject;
 
 /**
- * **Deprecated:** Use `item` instead. Information about the track or episode.
- *
- * @deprecated
+ * Information about the track or episode.
  *
  * @phpstan-import-type TrackObjectShape from \Spotted\TrackObject
  * @phpstan-import-type EpisodeObjectShape from \Spotted\EpisodeObject
  *
- * @phpstan-type TrackVariants = TrackObject|EpisodeObject
- * @phpstan-type TrackShape = TrackVariants|TrackObjectShape|EpisodeObjectShape
+ * @phpstan-type ItemVariants = TrackObject|EpisodeObject
+ * @phpstan-type ItemShape = ItemVariants|TrackObjectShape|EpisodeObjectShape
  */
-final class Track implements ConverterSource
+final class Item implements ConverterSource
 {
     use SdkUnion;
 

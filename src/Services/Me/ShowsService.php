@@ -57,9 +57,13 @@ final class ShowsService implements ShowsContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Check if one or more shows is already saved in the current Spotify user's library.
+     *
+     * **Note:** This endpoint is deprecated. Use [Check User's Saved Items](/documentation/web-api/reference/check-library-contains) instead.
      *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the shows. Maximum: 50 IDs.
      * @param RequestOpts|null $requestOptions
@@ -87,6 +91,8 @@ final class ShowsService implements ShowsContract
      *
      * Delete one or more shows from current Spotify user's library.
      *
+     * **Note:** This endpoint is deprecated. Use [Remove Items from Library](/documentation/web-api/reference/remove-library-items) instead.
+     *
      * @param list<string> $ids A JSON array of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids).
      * A maximum of 50 items can be specified in one request. *Note: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored.*
      * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
@@ -113,6 +119,8 @@ final class ShowsService implements ShowsContract
      * @api
      *
      * Save one or more shows to current Spotify user's library.
+     *
+     * **Note:** This endpoint is deprecated. Use [Save Items to Library](/documentation/web-api/reference/save-library-items) instead.
      *
      * @param list<string> $ids A JSON array of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids).
      * A maximum of 50 items can be specified in one request. *Note: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored.*

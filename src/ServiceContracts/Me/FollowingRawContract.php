@@ -34,6 +34,8 @@ interface FollowingRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|FollowingCheckParams $params
@@ -49,6 +51,8 @@ interface FollowingRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|FollowingFollowParams $params
@@ -64,6 +68,8 @@ interface FollowingRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|FollowingUnfollowParams $params
