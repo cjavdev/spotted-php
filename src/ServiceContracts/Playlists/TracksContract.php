@@ -20,6 +20,8 @@ use Spotted\RequestOptions;
 interface TracksContract
 {
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
@@ -45,6 +47,8 @@ interface TracksContract
     ): TrackUpdateResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
@@ -84,6 +88,8 @@ interface TracksContract
     ): CursorURLPage;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
@@ -103,6 +109,8 @@ interface TracksContract
     ): TrackAddResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist

@@ -12,8 +12,11 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\Playlists\Tracks\TrackRemoveParams\Track;
 
 /**
+ * **Deprecated:** Use [Remove Playlist Items](/documentation/web-api/reference/remove-items-playlist) instead.
+ *
  * Remove one or more items from a user's playlist.
  *
+ * @deprecated
  * @see Spotted\Services\Playlists\TracksService::remove()
  *
  * @phpstan-import-type TrackShape from \Spotted\Playlists\Tracks\TrackRemoveParams\Track

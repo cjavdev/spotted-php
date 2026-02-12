@@ -11,7 +11,9 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\PlaylistTrackObject;
 
 /**
- * The tracks of the playlist. _**Note**: This field is only available for playlists owned by the current user._.
+ * **Deprecated:** Use `items` instead. The tracks of the playlist.
+ *
+ * @deprecated
  *
  * @phpstan-import-type PlaylistTrackObjectShape from \Spotted\PlaylistTrackObject
  *

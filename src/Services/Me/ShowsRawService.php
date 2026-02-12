@@ -61,9 +61,13 @@ final class ShowsRawService implements ShowsRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Check if one or more shows is already saved in the current Spotify user's library.
+     *
+     * **Note:** This endpoint is deprecated. Use [Check User's Saved Items](/documentation/web-api/reference/check-library-contains) instead.
      *
      * @param array{ids: string}|ShowCheckParams $params
      * @param RequestOpts|null $requestOptions
@@ -98,6 +102,8 @@ final class ShowsRawService implements ShowsRawContract
      *
      * Delete one or more shows from current Spotify user's library.
      *
+     * **Note:** This endpoint is deprecated. Use [Remove Items from Library](/documentation/web-api/reference/remove-library-items) instead.
+     *
      * @param array{ids?: list<string>, published?: bool}|ShowRemoveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -130,6 +136,8 @@ final class ShowsRawService implements ShowsRawContract
      * @api
      *
      * Save one or more shows to current Spotify user's library.
+     *
+     * **Note:** This endpoint is deprecated. Use [Save Items to Library](/documentation/web-api/reference/save-library-items) instead.
      *
      * @param array{ids?: list<string>, published?: bool}|ShowSaveParams $params
      * @param RequestOpts|null $requestOptions

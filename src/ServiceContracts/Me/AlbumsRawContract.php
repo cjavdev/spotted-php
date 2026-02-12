@@ -35,6 +35,8 @@ interface AlbumsRawContract
     ): BaseResponse;
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|AlbumCheckParams $params

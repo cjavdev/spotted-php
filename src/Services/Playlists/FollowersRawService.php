@@ -25,9 +25,13 @@ final class FollowersRawService implements FollowersRawContract
     public function __construct(private Client $client) {}
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Check to see if the current user is following a specified playlist.
+     *
+     * **Note:** This endpoint is deprecated. Use [Check User's Saved Items](/documentation/web-api/reference/check-library-contains) instead.
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array{ids?: string}|FollowerCheckParams $params
@@ -58,9 +62,13 @@ final class FollowersRawService implements FollowersRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Add the current user as a follower of a playlist.
+     *
+     * **Note:** This endpoint is deprecated. Use [Save Items to Library](/documentation/web-api/reference/save-library-items) instead.
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param array{published?: bool}|FollowerFollowParams $params
@@ -91,9 +99,13 @@ final class FollowersRawService implements FollowersRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Remove the current user as a follower of a playlist.
+     *
+     * **Note:** This endpoint is deprecated. Use [Remove Items from Library](/documentation/web-api/reference/remove-library-items) instead.
      *
      * @param string $playlistID the [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
      * @param RequestOpts|null $requestOptions

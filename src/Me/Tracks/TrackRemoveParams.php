@@ -12,6 +12,8 @@ use Spotted\Core\Contracts\BaseModel;
 /**
  * Remove one or more tracks from the current user's 'Your Music' library.
  *
+ * **Note:** This endpoint is deprecated. Use [Remove Items from Library](/documentation/web-api/reference/remove-library-items) instead.
+ *
  * @deprecated
  * @see Spotted\Services\Me\TracksService::remove()
  *

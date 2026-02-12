@@ -33,8 +33,7 @@ final class EpisodesService implements EpisodesContract
     /**
      * @api
      *
-     * Get a list of the episodes saved in the current Spotify user's library.<br/>
-     * This API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
+     * Get a list of the episodes saved in the current Spotify user's library.
      *
      * @param int $limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      * @param string $market An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
@@ -67,10 +66,13 @@ final class EpisodesService implements EpisodesContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
-     * Check if one or more episodes is already saved in the current Spotify user's 'Your Episodes' library.<br/>
-     * This API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer)..
+     * Check if one or more episodes is already saved in the current Spotify user's 'Your Episodes' library.
+     *
+     * **Note:** This endpoint is deprecated. Use [Check User's Saved Items](/documentation/web-api/reference/check-library-contains) instead.
      *
      * @param string $ids A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the episodes. Maximum: 50 IDs.
      * @param RequestOpts|null $requestOptions
@@ -96,8 +98,9 @@ final class EpisodesService implements EpisodesContract
      *
      * @api
      *
-     * Remove one or more episodes from the current user's library.<br/>
-     * This API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
+     * Remove one or more episodes from the current user's library.
+     *
+     * **Note:** This endpoint is deprecated. Use [Remove Items from Library](/documentation/web-api/reference/remove-library-items) instead.
      *
      * @param list<string> $ids A JSON array of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). <br/>A maximum of 50 items can be specified in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._
      * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)
@@ -123,8 +126,9 @@ final class EpisodesService implements EpisodesContract
      *
      * @api
      *
-     * Save one or more episodes to the current user's library.<br/>
-     * This API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
+     * Save one or more episodes to the current user's library.
+     *
+     * **Note:** This endpoint is deprecated. Use [Save Items to Library](/documentation/web-api/reference/save-library-items) instead.
      *
      * @param list<string> $ids A JSON array of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). <br/>A maximum of 50 items can be specified in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._
      * @param bool $published The playlist's public/private status (if it should be added to the user's profile or not): `true` the playlist will be public, `false` the playlist will be private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](/documentation/web-api/concepts/playlists)

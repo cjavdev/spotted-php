@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Spotted\Users\Playlists\PlaylistNewResponse;
+namespace Spotted\Playlists\PlaylistGetResponse;
 
 use Spotted\Core\Attributes\Optional;
 use Spotted\Core\Attributes\Required;
@@ -11,13 +11,11 @@ use Spotted\Core\Contracts\BaseModel;
 use Spotted\PlaylistTrackObject;
 
 /**
- * **Deprecated:** Use `items` instead. The tracks of the playlist.
- *
- * @deprecated
+ * The items of the playlist. _**Note**: This field is only available for playlists owned by the current user or playlists the user is a collaborator of._.
  *
  * @phpstan-import-type PlaylistTrackObjectShape from \Spotted\PlaylistTrackObject
  *
- * @phpstan-type TracksShape = array{
+ * @phpstan-type ItemsShape = array{
  *   href: string,
  *   limit: int,
  *   next: string|null,
@@ -28,9 +26,9 @@ use Spotted\PlaylistTrackObject;
  *   published?: bool|null,
  * }
  */
-final class Tracks implements BaseModel
+final class Items implements BaseModel
 {
-    /** @use SdkModel<TracksShape> */
+    /** @use SdkModel<ItemsShape> */
     use SdkModel;
 
     /**
@@ -80,11 +78,11 @@ final class Tracks implements BaseModel
     public ?bool $published;
 
     /**
-     * `new Tracks()` is missing required properties by the API.
+     * `new Items()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Tracks::with(
+     * Items::with(
      *   href: ..., limit: ..., next: ..., offset: ..., previous: ..., total: ...
      * )
      * ```
@@ -92,7 +90,7 @@ final class Tracks implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Tracks)
+     * (new Items)
      *   ->withHref(...)
      *   ->withLimit(...)
      *   ->withNext(...)

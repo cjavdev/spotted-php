@@ -61,9 +61,13 @@ final class AlbumsRawService implements AlbumsRawContract
     }
 
     /**
+     * @deprecated
+     *
      * @api
      *
      * Check if one or more albums is already saved in the current Spotify user's 'Your Music' library.
+     *
+     * **Note:** This endpoint is deprecated. Use [Check User's Saved Items](/documentation/web-api/reference/check-library-contains) instead.
      *
      * @param array{ids: string}|AlbumCheckParams $params
      * @param RequestOpts|null $requestOptions
@@ -98,6 +102,8 @@ final class AlbumsRawService implements AlbumsRawContract
      *
      * Remove one or more albums from the current user's 'Your Music' library.
      *
+     * **Note:** This endpoint is deprecated. Use [Remove Items from Library](/documentation/web-api/reference/remove-library-items) instead.
+     *
      * @param array{ids?: list<string>, published?: bool}|AlbumRemoveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -130,6 +136,8 @@ final class AlbumsRawService implements AlbumsRawContract
      * @api
      *
      * Save one or more albums to the current user's 'Your Music' library.
+     *
+     * **Note:** This endpoint is deprecated. Use [Save Items to Library](/documentation/web-api/reference/save-library-items) instead.
      *
      * @param array{ids?: list<string>, published?: bool}|AlbumSaveParams $params
      * @param RequestOpts|null $requestOptions
