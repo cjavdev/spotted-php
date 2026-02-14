@@ -6,6 +6,8 @@ namespace Spotted\Artists\ArtistListAlbumsResponse;
 
 /**
  * This field describes the relationship between the artist and the album.
+ *
+ * @deprecated
  */
 enum AlbumGroup: string
 {
