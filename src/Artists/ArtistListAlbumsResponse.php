@@ -61,7 +61,9 @@ final class ArtistListAlbumsResponse implements BaseModel
     public string $id;
 
     /**
-     * This field describes the relationship between the artist and the album.
+     * @deprecated
+     *
+     * This field describes the relationship between the artist and the album
      *
      * @var value-of<AlbumGroup> $albumGroup
      */

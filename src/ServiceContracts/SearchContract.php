@@ -49,7 +49,7 @@ interface SearchContract
         string $q,
         array $type,
         IncludeExternal|string|null $includeExternal = null,
-        int $limit = 20,
+        int $limit = 5,
         ?string $market = null,
         int $offset = 0,
         RequestOptions|array|null $requestOptions = null,
