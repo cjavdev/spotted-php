@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.12.1 (2026-02-20)
+
+Full Changelog: [v0.12.0...v0.12.1](https://github.com/cjavdev/spotted-php/compare/v0.12.0...v0.12.1)
+
+### Chores
+
+* **internal:** remove mock server code ([c89e96e](https://github.com/cjavdev/spotted-php/commit/c89e96e245833553cd3c1226e10dc4c4d6560405))
+* **release:** add packagist trigger on published release ([9706875](https://github.com/cjavdev/spotted-php/commit/9706875ef252a589e23bc9654b31b5aca31796c5))
+* **test:** update skip reason message ([89b8ccd](https://github.com/cjavdev/spotted-php/commit/89b8ccd214092bea1cb3673b85a3611bcef8857a))
+* update mock server docs ([6dc2caa](https://github.com/cjavdev/spotted-php/commit/6dc2caae48c6beebc812e376f9a4fd16acccc7a4))
+
 ## 0.12.0 (2026-02-14)
 
 Full Changelog: [v0.11.0...v0.12.0](https://github.com/cjavdev/spotted-php/compare/v0.11.0...v0.12.0)
