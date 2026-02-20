@@ -31,7 +31,7 @@ final class ImagesTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server doesn\'t support application/binary responses');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->playlists->images->update(
