@@ -34,7 +34,7 @@ final class TopTest extends TestCase
     public function testListTopArtists(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->me->top->listTopArtists();
@@ -52,7 +52,7 @@ final class TopTest extends TestCase
     public function testListTopTracks(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->me->top->listTopTracks();

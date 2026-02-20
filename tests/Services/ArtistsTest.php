@@ -37,7 +37,7 @@ final class ArtistsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->artists->retrieve('0TnOYISbd1XYRBk9myaseg');
@@ -50,7 +50,7 @@ final class ArtistsTest extends TestCase
     public function testBulkRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->artists->bulkRetrieve(
@@ -65,7 +65,7 @@ final class ArtistsTest extends TestCase
     public function testBulkRetrieveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->artists->bulkRetrieve(
@@ -80,7 +80,7 @@ final class ArtistsTest extends TestCase
     public function testListAlbums(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->artists->listAlbums('0TnOYISbd1XYRBk9myaseg');
@@ -98,7 +98,7 @@ final class ArtistsTest extends TestCase
     public function testListRelatedArtists(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->artists->listRelatedArtists(
@@ -113,7 +113,7 @@ final class ArtistsTest extends TestCase
     public function testTopTracks(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->artists->topTracks('0TnOYISbd1XYRBk9myaseg');
