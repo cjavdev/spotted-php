@@ -32,7 +32,7 @@ final class PlaylistsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->playlists->retrieve('3cEYpjA9oz9GiPac4AsH4n');
@@ -45,7 +45,7 @@ final class PlaylistsTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->playlists->update('3cEYpjA9oz9GiPac4AsH4n');

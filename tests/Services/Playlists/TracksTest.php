@@ -36,7 +36,7 @@ final class TracksTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->playlists->tracks->update(
@@ -51,7 +51,7 @@ final class TracksTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->playlists->tracks->list('3cEYpjA9oz9GiPac4AsH4n');
@@ -69,7 +69,7 @@ final class TracksTest extends TestCase
     public function testAdd(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->playlists->tracks->add('3cEYpjA9oz9GiPac4AsH4n');
@@ -82,7 +82,7 @@ final class TracksTest extends TestCase
     public function testRemove(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->playlists->tracks->remove(
@@ -98,7 +98,7 @@ final class TracksTest extends TestCase
     public function testRemoveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->playlists->tracks->remove(

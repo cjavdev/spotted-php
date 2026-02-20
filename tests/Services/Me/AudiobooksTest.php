@@ -33,7 +33,7 @@ final class AudiobooksTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->me->audiobooks->list();
@@ -51,7 +51,7 @@ final class AudiobooksTest extends TestCase
     public function testCheck(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->audiobooks->check(
@@ -66,7 +66,7 @@ final class AudiobooksTest extends TestCase
     public function testCheckWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->audiobooks->check(
@@ -81,7 +81,7 @@ final class AudiobooksTest extends TestCase
     public function testRemove(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->audiobooks->remove(
@@ -96,7 +96,7 @@ final class AudiobooksTest extends TestCase
     public function testRemoveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->audiobooks->remove(
@@ -111,7 +111,7 @@ final class AudiobooksTest extends TestCase
     public function testSave(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->audiobooks->save(
@@ -126,7 +126,7 @@ final class AudiobooksTest extends TestCase
     public function testSaveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->audiobooks->save(

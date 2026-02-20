@@ -31,7 +31,7 @@ final class FollowersTest extends TestCase
     public function testCheck(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->playlists->followers->check(
@@ -46,7 +46,7 @@ final class FollowersTest extends TestCase
     public function testFollow(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->playlists->followers->follow(
@@ -61,7 +61,7 @@ final class FollowersTest extends TestCase
     public function testUnfollow(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->playlists->followers->unfollow(

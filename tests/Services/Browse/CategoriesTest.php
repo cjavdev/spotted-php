@@ -35,7 +35,7 @@ final class CategoriesTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->browse->categories->retrieve('dinner');
@@ -48,7 +48,7 @@ final class CategoriesTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->browse->categories->list();
@@ -66,7 +66,7 @@ final class CategoriesTest extends TestCase
     public function testGetPlaylists(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->browse->categories->getPlaylists('dinner');

@@ -32,7 +32,7 @@ final class FollowingTest extends TestCase
     public function testBulkRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->following->bulkRetrieve();
@@ -45,7 +45,7 @@ final class FollowingTest extends TestCase
     public function testBulkRetrieveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->following->bulkRetrieve(
@@ -62,7 +62,7 @@ final class FollowingTest extends TestCase
     public function testCheck(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->following->check(
@@ -78,7 +78,7 @@ final class FollowingTest extends TestCase
     public function testCheckWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->following->check(
@@ -94,7 +94,7 @@ final class FollowingTest extends TestCase
     public function testFollow(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->following->follow(ids: ['string']);
@@ -107,7 +107,7 @@ final class FollowingTest extends TestCase
     public function testFollowWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->following->follow(
@@ -123,7 +123,7 @@ final class FollowingTest extends TestCase
     public function testUnfollow(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->following->unfollow();

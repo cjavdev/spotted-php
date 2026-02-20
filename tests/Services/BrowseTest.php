@@ -33,7 +33,7 @@ final class BrowseTest extends TestCase
     public function testGetFeaturedPlaylists(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->browse->getFeaturedPlaylists();
@@ -46,7 +46,7 @@ final class BrowseTest extends TestCase
     public function testGetNewReleases(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->browse->getNewReleases();

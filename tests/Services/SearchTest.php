@@ -32,7 +32,7 @@ final class SearchTest extends TestCase
     public function testQuery(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->search->query(
@@ -48,7 +48,7 @@ final class SearchTest extends TestCase
     public function testQueryWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->search->query(

@@ -33,7 +33,7 @@ final class RecommendationsTest extends TestCase
     public function testGet(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->recommendations->get();
@@ -46,7 +46,7 @@ final class RecommendationsTest extends TestCase
     public function testListAvailableGenreSeeds(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->recommendations->listAvailableGenreSeeds();
