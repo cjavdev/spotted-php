@@ -35,7 +35,7 @@ final class AlbumsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->albums->retrieve('4aawyAB9vmqN3uQ7FjRGTy');
@@ -48,7 +48,7 @@ final class AlbumsTest extends TestCase
     public function testBulkRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->albums->bulkRetrieve(
@@ -63,7 +63,7 @@ final class AlbumsTest extends TestCase
     public function testBulkRetrieveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->albums->bulkRetrieve(
@@ -79,7 +79,7 @@ final class AlbumsTest extends TestCase
     public function testListTracks(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->albums->listTracks('4aawyAB9vmqN3uQ7FjRGTy');
