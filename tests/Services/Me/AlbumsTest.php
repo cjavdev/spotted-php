@@ -33,7 +33,7 @@ final class AlbumsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->me->albums->list();
@@ -51,7 +51,7 @@ final class AlbumsTest extends TestCase
     public function testCheck(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->albums->check(
@@ -66,7 +66,7 @@ final class AlbumsTest extends TestCase
     public function testCheckWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->albums->check(
@@ -81,7 +81,7 @@ final class AlbumsTest extends TestCase
     public function testRemove(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->albums->remove();
@@ -94,7 +94,7 @@ final class AlbumsTest extends TestCase
     public function testSave(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->albums->save();

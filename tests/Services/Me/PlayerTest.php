@@ -36,7 +36,7 @@ final class PlayerTest extends TestCase
     public function testGetCurrentlyPlaying(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->getCurrentlyPlaying();
@@ -49,7 +49,7 @@ final class PlayerTest extends TestCase
     public function testGetDevices(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->getDevices();
@@ -62,7 +62,7 @@ final class PlayerTest extends TestCase
     public function testGetState(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->getState();
@@ -75,7 +75,7 @@ final class PlayerTest extends TestCase
     public function testListRecentlyPlayed(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->me->player->listRecentlyPlayed();
@@ -93,7 +93,7 @@ final class PlayerTest extends TestCase
     public function testPausePlayback(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->pausePlayback();
@@ -106,7 +106,7 @@ final class PlayerTest extends TestCase
     public function testSeekToPosition(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->seekToPosition(positionMs: 25000);
@@ -119,7 +119,7 @@ final class PlayerTest extends TestCase
     public function testSeekToPositionWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->seekToPosition(
@@ -135,7 +135,7 @@ final class PlayerTest extends TestCase
     public function testSetRepeatMode(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->setRepeatMode(state: 'context');
@@ -148,7 +148,7 @@ final class PlayerTest extends TestCase
     public function testSetRepeatModeWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->setRepeatMode(
@@ -164,7 +164,7 @@ final class PlayerTest extends TestCase
     public function testSetVolume(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->setVolume(volumePercent: 50);
@@ -177,7 +177,7 @@ final class PlayerTest extends TestCase
     public function testSetVolumeWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->setVolume(
@@ -193,7 +193,7 @@ final class PlayerTest extends TestCase
     public function testSkipNext(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->skipNext();
@@ -206,7 +206,7 @@ final class PlayerTest extends TestCase
     public function testSkipPrevious(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->skipPrevious();
@@ -219,7 +219,7 @@ final class PlayerTest extends TestCase
     public function testStartPlayback(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->startPlayback();
@@ -232,7 +232,7 @@ final class PlayerTest extends TestCase
     public function testToggleShuffle(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->toggleShuffle(state: true);
@@ -245,7 +245,7 @@ final class PlayerTest extends TestCase
     public function testToggleShuffleWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->toggleShuffle(
@@ -261,7 +261,7 @@ final class PlayerTest extends TestCase
     public function testTransfer(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->transfer(
@@ -276,7 +276,7 @@ final class PlayerTest extends TestCase
     public function testTransferWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->me->player->transfer(

@@ -13,7 +13,7 @@ The REST API documentation can be found on [spotted.cjav.dev](https://spotted.cj
 <!-- x-release-please-start-version -->
 
 ```
-composer require "cjavdev/spotted 0.12.0"
+composer require "cjavdev/spotted 0.12.1"
 ```
 
 <!-- x-release-please-end -->

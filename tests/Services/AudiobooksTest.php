@@ -35,7 +35,7 @@ final class AudiobooksTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->audiobooks->retrieve('7iHfbu1YPACw6oZPAFJtqe');
@@ -48,7 +48,7 @@ final class AudiobooksTest extends TestCase
     public function testBulkRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->audiobooks->bulkRetrieve(
@@ -63,7 +63,7 @@ final class AudiobooksTest extends TestCase
     public function testBulkRetrieveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->audiobooks->bulkRetrieve(
@@ -79,7 +79,7 @@ final class AudiobooksTest extends TestCase
     public function testListChapters(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->audiobooks->listChapters('7iHfbu1YPACw6oZPAFJtqe');
