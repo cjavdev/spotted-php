@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.13.0 (2026-03-06)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/cjavdev/spotted-php/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **api:** api update ([44f2be6](https://github.com/cjavdev/spotted-php/commit/44f2be641a2a3c86e3c72bb345fe27ab3bf3aa33))
+
+
+### Chores
+
+* **internal:** codegen related update ([d32065b](https://github.com/cjavdev/spotted-php/commit/d32065be8c54bd914bb5652c08845194c78f7b51))
+* **internal:** remove mock server code ([c89e96e](https://github.com/cjavdev/spotted-php/commit/c89e96e245833553cd3c1226e10dc4c4d6560405))
+* **internal:** upgrade phpunit ([5a917a9](https://github.com/cjavdev/spotted-php/commit/5a917a93c7185783343136a94a4f813a1d6cc314))
+* **release:** add packagist trigger on published release ([9706875](https://github.com/cjavdev/spotted-php/commit/9706875ef252a589e23bc9654b31b5aca31796c5))
+* **test:** update skip reason message ([89b8ccd](https://github.com/cjavdev/spotted-php/commit/89b8ccd214092bea1cb3673b85a3611bcef8857a))
+* update mock server docs ([6dc2caa](https://github.com/cjavdev/spotted-php/commit/6dc2caae48c6beebc812e376f9a4fd16acccc7a4))
+
 ## 0.12.0 (2026-02-14)
 
 Full Changelog: [v0.11.0...v0.12.0](https://github.com/cjavdev/spotted-php/compare/v0.11.0...v0.12.0)
