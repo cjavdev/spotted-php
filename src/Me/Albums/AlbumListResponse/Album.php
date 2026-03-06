@@ -159,9 +159,7 @@ final class Album implements BaseModel
     public ?array $copyrights;
 
     /**
-     * @deprecated
-     *
-     * Known external IDs for the album
+     * Known external IDs for the album.
      */
     #[Optional('external_ids')]
     public ?ExternalIDObject $externalIDs;

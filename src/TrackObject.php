@@ -96,9 +96,7 @@ final class TrackObject implements BaseModel
     public ?bool $explicit;
 
     /**
-     * @deprecated
-     *
-     * Known external IDs for the track
+     * Known external IDs for the track.
      */
     #[Optional('external_ids')]
     public ?ExternalIDObject $externalIDs;
