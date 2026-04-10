@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.13.1 (2026-03-31)
+
+Full Changelog: [v0.13.0...v0.13.1](https://github.com/cjavdev/spotted-php/compare/v0.13.0...v0.13.1)
+
+### Chores
+
+* **internal:** tweak CI branches ([ff0b748](https://github.com/cjavdev/spotted-php/commit/ff0b748e16791fb69b537a5a7defef4a9f373822))
+
 ## 0.13.0 (2026-03-06)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/cjavdev/spotted-php/compare/v0.12.0...v0.13.0)
