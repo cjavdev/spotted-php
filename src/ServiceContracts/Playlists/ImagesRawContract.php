@@ -6,6 +6,7 @@ namespace Spotted\ServiceContracts\Playlists;
 
 use Spotted\Core\Contracts\BaseResponse;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\FileParam;
 use Spotted\ImageObject;
 use Spotted\RequestOptions;
 
@@ -18,7 +19,7 @@ interface ImagesRawContract
      * @api
      *
      * @param string $playlistID path param: The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
-     * @param string $body body param: Base64 encoded JPEG image data, maximum payload size is 256 KB
+     * @param string|FileParam $body body param: Base64 encoded JPEG image data, maximum payload size is 256 KB
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
@@ -27,7 +28,7 @@ interface ImagesRawContract
      */
     public function update(
         string $playlistID,
-        string $body,
+        string|FileParam $body,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
