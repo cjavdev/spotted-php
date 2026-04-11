@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.13.2 (2026-04-11)
+
+Full Changelog: [v0.13.1...v0.13.2](https://github.com/cjavdev/spotted-php/compare/v0.13.1...v0.13.2)
+
+### Bug Fixes
+
+* **client:** properly generate file params ([c941a43](https://github.com/cjavdev/spotted-php/commit/c941a438d07f9b7303d5179971b5ebae23dd3904))
+
 ## 0.13.1 (2026-03-31)
 
 Full Changelog: [v0.13.0...v0.13.1](https://github.com/cjavdev/spotted-php/compare/v0.13.0...v0.13.1)
