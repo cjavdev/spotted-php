@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Spotted\Client;
+use Spotted\Core\FileParam;
 use Spotted\Core\Util;
 use Tests\UnsupportedMockTests;
 
@@ -36,7 +37,7 @@ final class ImagesTest extends TestCase
 
         $result = $this->client->playlists->images->update(
             '3cEYpjA9oz9GiPac4AsH4n',
-            'file'
+            FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

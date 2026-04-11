@@ -6,6 +6,7 @@ namespace Spotted\Services\Playlists;
 
 use Spotted\Client;
 use Spotted\Core\Exceptions\APIException;
+use Spotted\Core\FileParam;
 use Spotted\ImageObject;
 use Spotted\RequestOptions;
 use Spotted\ServiceContracts\Playlists\ImagesContract;
@@ -34,14 +35,14 @@ final class ImagesService implements ImagesContract
      * Replace the image used to represent a specific playlist.
      *
      * @param string $playlistID path param: The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) of the playlist
-     * @param string $body body param: Base64 encoded JPEG image data, maximum payload size is 256 KB
+     * @param string|FileParam $body body param: Base64 encoded JPEG image data, maximum payload size is 256 KB
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $playlistID,
-        string $body,
+        string|FileParam $body,
         RequestOptions|array|null $requestOptions = null,
     ): string {
         // @phpstan-ignore-next-line argument.type
