@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.13.4 (2026-04-18)
+
+Full Changelog: [v0.13.3...v0.13.4](https://github.com/cjavdev/spotted-php/compare/v0.13.3...v0.13.4)
+
+### Bug Fixes
+
+* populate enum-typed properties with enum instances ([be45f6c](https://github.com/cjavdev/spotted-php/commit/be45f6c2ee20ab387ec472c243d60d5efec63bcb))
+
 ## 0.13.3 (2026-04-18)
 
 Full Changelog: [v0.13.2...v0.13.3](https://github.com/cjavdev/spotted-php/compare/v0.13.2...v0.13.3)
