@@ -5,5 +5,5 @@ declare(strict_types=1);
 namespace Spotted;
 
 // x-release-please-start-version
-const VERSION = '0.13.3';
+const VERSION = '0.13.4';
 // x-release-please-end
