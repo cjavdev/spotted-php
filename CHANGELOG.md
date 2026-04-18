@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.13.3 (2026-04-18)
+
+Full Changelog: [v0.13.2...v0.13.3](https://github.com/cjavdev/spotted-php/compare/v0.13.2...v0.13.3)
+
+### Bug Fixes
+
+* **client:** resolve serialization issue with unions and enums ([7733a4a](https://github.com/cjavdev/spotted-php/commit/7733a4a4cba98e5463c9b6a4aeab503829e673a9))
+
 ## 0.13.2 (2026-04-11)
 
 Full Changelog: [v0.13.1...v0.13.2](https://github.com/cjavdev/spotted-php/compare/v0.13.1...v0.13.2)
