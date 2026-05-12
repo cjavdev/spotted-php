@@ -7,6 +7,7 @@ namespace Spotted;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 use Spotted\Core\BaseClient;
+use Spotted\Core\Implementation\StreamingHttpClient;
 use Spotted\Core\Util;
 use Spotted\Services\AlbumsService;
 use Spotted\Services\ArtistsService;
@@ -138,6 +139,11 @@ class Client extends BaseClient
             ),
             $requestOptions,
         );
+
+        if (is_null($options->streamingTransporter)) {
+            assert(!is_null($options->transporter));
+            $options->streamingTransporter = new StreamingHttpClient($options->transporter);
+        }
 
         /** @var array<string, string|null> $headers */
         $headers = [
