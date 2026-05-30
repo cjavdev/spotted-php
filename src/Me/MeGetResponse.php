@@ -20,6 +20,7 @@ use Spotted\Me\MeGetResponse\ExplicitContent;
  *
  * @phpstan-type MeGetResponseShape = array{
  *   id?: string|null,
+ *   accountID?: string|null,
  *   country?: string|null,
  *   displayName?: string|null,
  *   email?: string|null,
@@ -40,10 +41,16 @@ final class MeGetResponse implements BaseModel
     use SdkModel;
 
     /**
-     * The [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids) for the user.
+     * The [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids) for the user. Do not use this field for account linking — use `account_id` instead, which is immutable.
      */
     #[Optional]
     public ?string $id;
+
+    /**
+     * A public, immutable, pseudoanonymous identifier for the user's account. Use this field for account linking rather than the `id` field, as it is stable and will not change over the lifetime of the account.
+     */
+    #[Optional('account_id')]
+    public ?string $accountID;
 
     /**
      * @deprecated
@@ -146,6 +153,7 @@ final class MeGetResponse implements BaseModel
      */
     public static function with(
         ?string $id = null,
+        ?string $accountID = null,
         ?string $country = null,
         ?string $displayName = null,
         ?string $email = null,
@@ -162,6 +170,7 @@ final class MeGetResponse implements BaseModel
         $self = new self;
 
         null !== $id && $self['id'] = $id;
+        null !== $accountID && $self['accountID'] = $accountID;
         null !== $country && $self['country'] = $country;
         null !== $displayName && $self['displayName'] = $displayName;
         null !== $email && $self['email'] = $email;
@@ -179,12 +188,23 @@ final class MeGetResponse implements BaseModel
     }
 
     /**
-     * The [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids) for the user.
+     * The [Spotify user ID](/documentation/web-api/concepts/spotify-uris-ids) for the user. Do not use this field for account linking — use `account_id` instead, which is immutable.
      */
     public function withID(string $id): self
     {
         $self = clone $this;
         $self['id'] = $id;
+
+        return $self;
+    }
+
+    /**
+     * A public, immutable, pseudoanonymous identifier for the user's account. Use this field for account linking rather than the `id` field, as it is stable and will not change over the lifetime of the account.
+     */
+    public function withAccountID(string $accountID): self
+    {
+        $self = clone $this;
+        $self['accountID'] = $accountID;
 
         return $self;
     }
