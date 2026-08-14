@@ -16,6 +16,7 @@ use Spotted\Core\Conversion\Contracts\ConverterSource;
 use Spotted\Core\Exceptions\APIConnectionException;
 use Spotted\Core\Exceptions\APIStatusException;
 use Spotted\Core\Implementation\RawResponse;
+use Spotted\Core\Implementation\StreamingHttpClient;
 use Spotted\RequestOptions;
 
 /**
@@ -249,7 +250,13 @@ abstract class BaseClient
         $err = null;
 
         try {
-            $rsp = $transporter->sendRequest($req);
+            if ($transporter instanceof StreamingHttpClient) {
+                $rsp = $transporter->sendRequest($req, timeout: $opts->timeout);
+            } elseif (is_a($transporter, '\GuzzleHttp\Client')) {
+                $rsp = $transporter->send($req, ['timeout' => $opts->timeout]);
+            } else {
+                $rsp = $transporter->sendRequest($req);
+            }
         } catch (ClientExceptionInterface $e) {
             $err = $e;
         }
