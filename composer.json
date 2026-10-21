@@ -21,7 +21,7 @@
       "phpstan/extension-installer": true
     },
     "platform": {
-      "php": "8.3"
+      "php": "8.5.12"
     },
     "preferred-install": "dist",
     "sort-packages": true
